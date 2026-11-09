@@ -1,0 +1,20 @@
+/* DeepPet V8.76: alignment-only correction. Preserve ALL V8.75 palette tokens. */
+/* Heart & breathing: status badges align with their heading, not the numeric row. */
+.dp-owner-deep.deep-theme-heart .dp75-vital-top .dp75-vital-right{
+  padding-top:0!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+}
+.dp-owner-deep.deep-theme-heart .dp75-vital-top .dp75-vital-right>.dp75-risk{
+  margin:-2px auto 0!important;
+}
+/* HRV period and daily statuses align horizontally with the HRV title as well. */
+.dp-owner-deep.deep-theme-heart .dp75-hrv-head>.dp75-risk{
+  margin:-1px auto 0!important;
+  align-self:start!important;
+}
+/* Only /100 is neutral gray; the actual ring and score colors remain untouched. */
+.dp-owner-deep.deep-theme-heart .dp75-heart-rhythm .dp-status-score .stat-inner small{
+  color:#9aa4b1!important;
+  -webkit-text-fill-color:#9aa4b1!important;
+}
