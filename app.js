@@ -3,7 +3,7 @@
 (function(){'use strict';
  const bands=[{min:90,key:'happy',color:'#66e7aa'},{min:80,key:'calm',color:'#6ac0ff'},{min:60,key:'soft',color:'#ffbc68'},{min:0,key:'sad',color:'#ff8592'}];
  window.DeepPetStaticHeart=Object.freeze({
-  version:'8.60',
+  version:'8.66',
   measurementSeconds:60,
   source:'simulated-demo-until-collar-sdk-connected',
   levels:bands,

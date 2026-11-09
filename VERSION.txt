@@ -1,1 +1,2 @@
-DeepPet V8.63 — uploaded original five-image onboarding, no overlays
+DeepPet V8.66 — Deep results-first, demo priority alerts, corrected pet breeds
+2026-11-09

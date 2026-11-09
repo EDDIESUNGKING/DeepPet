@@ -1,0 +1,231 @@
+{
+  "New_Pet_before_after": {
+    "before": {
+      "entry": "首次心跳时刻 · 60 秒\n第一次测量约 60 秒，完成后显示模拟结果\n开始首次测量",
+      "hasScore": false,
+      "empty": true,
+      "tour": 0
+    },
+    "after": {
+      "entry": "心跳时刻\n查看上次测量结果，不需要再次等待\n查看心跳时刻",
+      "hasScore": true,
+      "scoreText": "首次测量结果 · 模拟数据\n健康状态\n83\nHRV · RMSSD\n38.6ms\n心率\n82BPM\n呼吸\n20/min\n\n这是本次 60 秒首次测量的模拟结果，尚未形成日常趋势与 14 天基准。"
+    },
+    "pass": true
+  },
+  "Existing_15": {
+    "pass": true,
+    "rows": [
+      {
+        "i": 0,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 1,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 2,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 3,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 4,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 5,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 6,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 7,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 8,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 9,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 10,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 11,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 12,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 13,
+        "firstCTA": 0,
+        "heart": true
+      },
+      {
+        "i": 14,
+        "firstCTA": 0,
+        "heart": true
+      }
+    ]
+  },
+  "Deworm_weight_pet_isolation": {
+    "pass": true,
+    "test": {
+      "first": 1,
+      "ok": true,
+      "found": true,
+      "isolated": true,
+      "shown": "新增驱虫记录\n驱虫品牌／产品\n驱虫类型\n体内外驱虫\n体外驱虫\n体内驱虫\n驱虫日期\n下次提醒日期\n使用时体重 · kg\n用量记录（选填）\n备注（选填）\n体重区间: 20–<40 kg · 按体重选择对应规格，用量以产品包装为准。\n保存记录"
+    }
+  },
+  "Deep_5_periods_historical_date": {
+    "pass": true,
+    "rows": [
+      {
+        "days": 1,
+        "selected": "2026-11-09",
+        "title": "Select a day\n11/09/2026",
+        "tab": "Day"
+      },
+      {
+        "days": 3,
+        "selected": "2026-11-09",
+        "title": "Period · 11/07/2026 – 11/09/2026\nChoose a day",
+        "tab": "3D"
+      },
+      {
+        "days": 7,
+        "selected": "2026-11-09",
+        "title": "Period · 11/03/2026 – 11/09/2026\nChoose a day",
+        "tab": "7D"
+      },
+      {
+        "days": 14,
+        "selected": "2026-11-09",
+        "title": "Period · 10/27/2026 – 11/09/2026\nChoose a day",
+        "tab": "14D"
+      },
+      {
+        "days": 30,
+        "selected": "2026-11-09",
+        "title": "Period · 10/11/2026 – 11/09/2026\nChoose a day",
+        "tab": "30D"
+      },
+      {
+        "days": 1,
+        "selected": "2026-10-16",
+        "title": "Select a day\n10/16/2026",
+        "tab": "Day"
+      }
+    ]
+  },
+  "Language_score_identical": {
+    "pass": true,
+    "rows": [
+      {
+        "lang": "zh",
+        "score": 95,
+        "rhythm": 85,
+        "home": "今日状态 深入分析 健康管理 我的",
+        "upcoming": [
+          "2026-11-10",
+          "2026-11-30",
+          "2026-12-05"
+        ]
+      },
+      {
+        "lang": "zht",
+        "score": 95,
+        "rhythm": 85,
+        "home": "今日狀態 深入分析 健康管理 我的",
+        "upcoming": [
+          "2026-11-10",
+          "2026-11-30",
+          "2026-12-05"
+        ]
+      },
+      {
+        "lang": "en",
+        "score": 95,
+        "rhythm": 85,
+        "home": "Home Deep Health Me",
+        "upcoming": [
+          "2026-11-10",
+          "2026-11-30",
+          "2026-12-05"
+        ]
+      },
+      {
+        "lang": "ko",
+        "score": 95,
+        "rhythm": 85,
+        "home": "오늘 상태 심층 분석 건강 관리 마이",
+        "upcoming": [
+          "2026-11-10",
+          "2026-11-30",
+          "2026-12-05"
+        ]
+      }
+    ]
+  },
+  "Runtime_errors": [],
+  "main_tab_4_languages_3_widths": {
+    "checked": 48,
+    "widths_px": [
+      320,
+      375,
+      430
+    ],
+    "languages": [
+      "zh",
+      "zht",
+      "en",
+      "ko"
+    ],
+    "views": [
+      "home",
+      "deep",
+      "health",
+      "me"
+    ],
+    "unintentional_horizontal_overflow": 0,
+    "javascript_exceptions": 0,
+    "result": "passed (inline-source Chromium DOM; image network was not tested)"
+  },
+  "onboarding": {
+    "source_images_unchanged": true,
+    "translation_work": "deferred at user request",
+    "pages": 5
+  },
+  "scope_limitations": [
+    "Four-language generic text coverage beyond changed labels was not exhaustively human-reviewed",
+    "Live device SDK, production GPS, push reminders and Netlify public URL were not tested",
+    "Actual hosted assets and iPhone Safari not end-to-end tested",
+    "Dose amounts are recorded only; never calculated or recommended"
+  ]
+}

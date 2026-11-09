@@ -1,0 +1,2041 @@
+{
+  "results": [
+    {
+      "lang": "en",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Luna",
+          "left": 274,
+          "right": 27,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 359,
+          "right": 112,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 444,
+          "right": 197,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 529,
+          "right": 282,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 614,
+          "right": 367,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 699,
+          "right": 452,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 784,
+          "right": 537,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 869,
+          "right": 622,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 954,
+          "right": 707,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1039,
+          "right": 792,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1124,
+          "right": 877,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1209,
+          "right": 962,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1294,
+          "right": 1047,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1379,
+          "right": 1132,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\nAdd pet",
+          "left": 1464,
+          "right": 1217,
+          "shellW": 320
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "Daily summary\n· Nov 9\n95\n/100\nPhysiological status score\nMy health measures look",
+          "client": 294,
+          "scroll": 416,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI estimate · Multi-signal trends\nAI biological age\n5.2 yr\n+0.2 yr · Estimate ",
+          "client": 294,
+          "scroll": 339,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "en",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\nAlaskan Malamute · 5 yr · 34 kg\nDeepPet Bluetooth\nID · DP-210001\nManage pet",
+          "client": 294,
+          "scroll": 344,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zh",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Luna",
+          "left": 274,
+          "right": 27,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 359,
+          "right": 112,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 444,
+          "right": 197,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 529,
+          "right": 282,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 614,
+          "right": 367,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 699,
+          "right": 452,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 784,
+          "right": 537,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 869,
+          "right": 622,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 954,
+          "right": 707,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1039,
+          "right": 792,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1124,
+          "right": 877,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1209,
+          "right": 962,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1294,
+          "right": 1047,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1379,
+          "right": 1132,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n新增",
+          "left": 1464,
+          "right": 1217,
+          "shellW": 320
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "今日总结\n· 11月9日\n95\n/100\n生理状态评分\n我今天的健康表现很亮眼。今天的活动状态尤其不错。\n心肺 · 睡眠 · 精力\n85\n/100\n身体节奏分数",
+          "client": 294,
+          "scroll": 416,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 推算 · 多维度健康趋势\nAI 生理年龄\n5.2 岁\n+0.2 岁 · 估算年龄较实际年龄大\n实际年龄\n5.0岁\n\n综合多项生理与日常趋势，观察我的身",
+          "client": 294,
+          "scroll": 339,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zh",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n阿拉斯加雪橇犬 · 5 岁 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n管理与切换宠物\n编辑资料\n更换头像",
+          "client": 294,
+          "scroll": 344,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zht",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Luna",
+          "left": 274,
+          "right": 27,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 359,
+          "right": 112,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 444,
+          "right": 197,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 529,
+          "right": 282,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 614,
+          "right": 367,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 699,
+          "right": 452,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 784,
+          "right": 537,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 869,
+          "right": 622,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 954,
+          "right": 707,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1039,
+          "right": 792,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1124,
+          "right": 877,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1209,
+          "right": 962,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1294,
+          "right": 1047,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1379,
+          "right": 1132,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n新增",
+          "left": 1464,
+          "right": 1217,
+          "shellW": 320
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "今日總結\n· 11月9日\n95\n/100\n生理狀態評分\n我今天的健康表現很亮眼。今天的活動狀態尤其不錯。\n心肺 · 睡眠 · 精力\n85\n/100\n身體節奏分數",
+          "client": 294,
+          "scroll": 416,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 推算 · 多維度健康趨勢\nAI 生理年齡\n5.2 歲\n+0.2 歲 · 估算年齡較實際年齡大\n實際年齡\n5.0歲\n\n綜合多項生理與日常趨勢，觀察我的身",
+          "client": 294,
+          "scroll": 339,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zht",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n阿拉斯加雪橇犬 · 5 歲 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n管理與切換寵物\n編輯資料\n更換頭像",
+          "client": 294,
+          "scroll": 344,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "ko",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Luna",
+          "left": 274,
+          "right": 27,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 359,
+          "right": 112,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 444,
+          "right": 197,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 529,
+          "right": 282,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 614,
+          "right": 367,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 699,
+          "right": 452,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 784,
+          "right": 537,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 869,
+          "right": 622,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 954,
+          "right": 707,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1039,
+          "right": 792,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1124,
+          "right": 877,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1209,
+          "right": 962,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1294,
+          "right": 1047,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1379,
+          "right": 1132,
+          "shellW": 320
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n추가",
+          "left": 1464,
+          "right": 1217,
+          "shellW": 320
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "오늘의 요약\n· 11월 9일\n95\n/100\n생리 상태 점수\n오늘 건강 지표가 특히 좋아요.오늘 활동 상태가 특히 좋아요.\n심폐 · 수면 · 활력",
+          "client": 294,
+          "scroll": 416,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 추정 · 다차원 건강 추세\nAI 생체 나이\n5.2 세\n+0.2 세 · 추정 나이가 실제보다 높음\n실제 나이\n5.0세\n\n다양한 생체·생활",
+          "client": 294,
+          "scroll": 339,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "ko",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 320,
+      "shellWidth": 320,
+      "docWidth": 320,
+      "bodyWidth": 320,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n알래스칸 말라뮤트 · 5 세 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n반려동물 관리\n프로필 편집\n사진 ",
+          "client": 294,
+          "scroll": 344,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "en",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 364,
+          "right": 62,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 449,
+          "right": 147,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 534,
+          "right": 232,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 619,
+          "right": 317,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 704,
+          "right": 402,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 789,
+          "right": 487,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 874,
+          "right": 572,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 959,
+          "right": 657,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1044,
+          "right": 742,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1129,
+          "right": 827,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1214,
+          "right": 912,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1299,
+          "right": 997,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1384,
+          "right": 1082,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\nAdd pet",
+          "left": 1469,
+          "right": 1167,
+          "shellW": 375
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "Daily summary\n· Nov 9\n95\n/100\nPhysiological status score\nMy health measures look",
+          "client": 339,
+          "scroll": 461,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI estimate · Multi-signal trends\nAI biological age\n5.2 yr\n+0.2 yr · Estimate ",
+          "client": 339,
+          "scroll": 384,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "en",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\nAlaskan Malamute · 5 yr · 34 kg\nDeepPet Bluetooth\nID · DP-210001\nManage pet",
+          "client": 339,
+          "scroll": 389,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zh",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 364,
+          "right": 62,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 449,
+          "right": 147,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 534,
+          "right": 232,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 619,
+          "right": 317,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 704,
+          "right": 402,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 789,
+          "right": 487,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 874,
+          "right": 572,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 959,
+          "right": 657,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1044,
+          "right": 742,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1129,
+          "right": 827,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1214,
+          "right": 912,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1299,
+          "right": 997,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1384,
+          "right": 1082,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n新增",
+          "left": 1469,
+          "right": 1167,
+          "shellW": 375
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "今日总结\n· 11月9日\n95\n/100\n生理状态评分\n我今天的健康表现很亮眼。今天的活动状态尤其不错。\n心肺 · 睡眠 · 精力\n85\n/100\n身体节奏分数",
+          "client": 339,
+          "scroll": 461,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 推算 · 多维度健康趋势\nAI 生理年龄\n5.2 岁\n+0.2 岁 · 估算年龄较实际年龄大\n实际年龄\n5.0岁\n\n综合多项生理与日常趋势，观察我的身",
+          "client": 339,
+          "scroll": 384,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zh",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n阿拉斯加雪橇犬 · 5 岁 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n管理与切换宠物\n编辑资料\n更换头像",
+          "client": 339,
+          "scroll": 389,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zht",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 364,
+          "right": 62,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 449,
+          "right": 147,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 534,
+          "right": 232,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 619,
+          "right": 317,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 704,
+          "right": 402,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 789,
+          "right": 487,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 874,
+          "right": 572,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 959,
+          "right": 657,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1044,
+          "right": 742,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1129,
+          "right": 827,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1214,
+          "right": 912,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1299,
+          "right": 997,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1384,
+          "right": 1082,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n新增",
+          "left": 1469,
+          "right": 1167,
+          "shellW": 375
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "今日總結\n· 11月9日\n95\n/100\n生理狀態評分\n我今天的健康表現很亮眼。今天的活動狀態尤其不錯。\n心肺 · 睡眠 · 精力\n85\n/100\n身體節奏分數",
+          "client": 339,
+          "scroll": 461,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 推算 · 多維度健康趨勢\nAI 生理年齡\n5.2 歲\n+0.2 歲 · 估算年齡較實際年齡大\n實際年齡\n5.0歲\n\n綜合多項生理與日常趨勢，觀察我的身",
+          "client": 339,
+          "scroll": 384,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zht",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n阿拉斯加雪橇犬 · 5 歲 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n管理與切換寵物\n編輯資料\n更換頭像",
+          "client": 339,
+          "scroll": 389,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "ko",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 364,
+          "right": 62,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 449,
+          "right": 147,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 534,
+          "right": 232,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 619,
+          "right": 317,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 704,
+          "right": 402,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 789,
+          "right": 487,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 874,
+          "right": 572,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 959,
+          "right": 657,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1044,
+          "right": 742,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1129,
+          "right": 827,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1214,
+          "right": 912,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1299,
+          "right": 997,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1384,
+          "right": 1082,
+          "shellW": 375
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n추가",
+          "left": 1469,
+          "right": 1167,
+          "shellW": 375
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "오늘의 요약\n· 11월 9일\n95\n/100\n생리 상태 점수\n오늘 건강 지표가 특히 좋아요.오늘 활동 상태가 특히 좋아요.\n심폐 · 수면 · 활력",
+          "client": 339,
+          "scroll": 461,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 추정 · 다차원 건강 추세\nAI 생체 나이\n5.2 세\n+0.2 세 · 추정 나이가 실제보다 높음\n실제 나이\n5.0세\n\n다양한 생체·생활",
+          "client": 339,
+          "scroll": 384,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "ko",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 375,
+      "shellWidth": 375,
+      "docWidth": 375,
+      "bodyWidth": 375,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n알래스칸 말라뮤트 · 5 세 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n반려동물 관리\n프로필 편집\n사진 ",
+          "client": 339,
+          "scroll": 389,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "en",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 376,
+          "right": 19,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 464,
+          "right": 107,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 552,
+          "right": 195,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 640,
+          "right": 283,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 728,
+          "right": 371,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 816,
+          "right": 459,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 904,
+          "right": 547,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 992,
+          "right": 635,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1080,
+          "right": 723,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1168,
+          "right": 811,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1256,
+          "right": 899,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1344,
+          "right": 987,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1432,
+          "right": 1075,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\nAdd pet",
+          "left": 1520,
+          "right": 1163,
+          "shellW": 430
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "Daily summary\n· Nov 9\n95\n/100\nPhysiological status score\nMy health measures look",
+          "client": 394,
+          "scroll": 516,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI estimate · Multi-signal trends\nAI biological age\n5.2 yr\n+0.2 yr · Estimate ",
+          "client": 394,
+          "scroll": 439,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "en",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\nAlaskan Malamute · 5 yr · 34 kg\nDeepPet Bluetooth\nID · DP-210001\nManage pet",
+          "client": 394,
+          "scroll": 444,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zh",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 376,
+          "right": 19,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 464,
+          "right": 107,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 552,
+          "right": 195,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 640,
+          "right": 283,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 728,
+          "right": 371,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 816,
+          "right": 459,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 904,
+          "right": 547,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 992,
+          "right": 635,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1080,
+          "right": 723,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1168,
+          "right": 811,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1256,
+          "right": 899,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1344,
+          "right": 987,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1432,
+          "right": 1075,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n新增",
+          "left": 1520,
+          "right": 1163,
+          "shellW": 430
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "今日总结\n· 11月9日\n95\n/100\n生理状态评分\n我今天的健康表现很亮眼。今天的活动状态尤其不错。\n心肺 · 睡眠 · 精力\n85\n/100\n身体节奏分数",
+          "client": 394,
+          "scroll": 516,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 推算 · 多维度健康趋势\nAI 生理年龄\n5.2 岁\n+0.2 岁 · 估算年龄较实际年龄大\n实际年龄\n5.0岁\n\n综合多项生理与日常趋势，观察我的身",
+          "client": 394,
+          "scroll": 439,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zh",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n阿拉斯加雪橇犬 · 5 岁 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n管理与切换宠物\n编辑资料\n更换头像",
+          "client": 394,
+          "scroll": 444,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zht",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 376,
+          "right": 19,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 464,
+          "right": 107,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 552,
+          "right": 195,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 640,
+          "right": 283,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 728,
+          "right": 371,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 816,
+          "right": 459,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 904,
+          "right": 547,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 992,
+          "right": 635,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1080,
+          "right": 723,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1168,
+          "right": 811,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1256,
+          "right": 899,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1344,
+          "right": 987,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1432,
+          "right": 1075,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n新增",
+          "left": 1520,
+          "right": 1163,
+          "shellW": 430
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "今日總結\n· 11月9日\n95\n/100\n生理狀態評分\n我今天的健康表現很亮眼。今天的活動狀態尤其不錯。\n心肺 · 睡眠 · 精力\n85\n/100\n身體節奏分數",
+          "client": 394,
+          "scroll": 516,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 推算 · 多維度健康趨勢\nAI 生理年齡\n5.2 歲\n+0.2 歲 · 估算年齡較實際年齡大\n實際年齡\n5.0歲\n\n綜合多項生理與日常趨勢，觀察我的身",
+          "client": 394,
+          "scroll": 439,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "zht",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n阿拉斯加雪橇犬 · 5 歲 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n管理與切換寵物\n編輯資料\n更換頭像",
+          "client": 394,
+          "scroll": 444,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "ko",
+      "view": "home",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Coco",
+          "left": 376,
+          "right": 19,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Leo",
+          "left": 464,
+          "right": 107,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Poppy",
+          "left": 552,
+          "right": 195,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nori",
+          "left": 640,
+          "right": 283,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Miso",
+          "left": 728,
+          "right": 371,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Mochi",
+          "left": 816,
+          "right": 459,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Kiki",
+          "left": 904,
+          "right": 547,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Max",
+          "left": 992,
+          "right": 635,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Rex",
+          "left": 1080,
+          "right": 723,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Bella",
+          "left": 1168,
+          "right": 811,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Dodo",
+          "left": 1256,
+          "right": 899,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Snowy",
+          "left": 1344,
+          "right": 987,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill ",
+          "text": "Nana",
+          "left": 1432,
+          "right": 1075,
+          "shellW": 430
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pet-pill pet-add-pill",
+          "text": "＋\n추가",
+          "left": 1520,
+          "right": 1163,
+          "shellW": 430
+        }
+      ],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card summary-card dp-combined-summary dp-aurora-summary",
+          "text": "오늘의 요약\n· 11월 9일\n95\n/100\n생리 상태 점수\n오늘 건강 지표가 특히 좋아요.오늘 활동 상태가 특히 좋아요.\n심폐 · 수면 · 활력",
+          "client": 394,
+          "scroll": 516,
+          "overflow": "hidden"
+        },
+        {
+          "tag": "SECTION",
+          "cls": "card age-card age-card-featured",
+          "text": "✦\nAI 추정 · 다차원 건강 추세\nAI 생체 나이\n5.2 세\n+0.2 세 · 추정 나이가 실제보다 높음\n실제 나이\n5.0세\n\n다양한 생체·생활",
+          "client": 394,
+          "scroll": 439,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    },
+    {
+      "lang": "ko",
+      "view": "me",
+      "cat": 0,
+      "days": 1,
+      "width": 430,
+      "shellWidth": 430,
+      "docWidth": 430,
+      "bodyWidth": 430,
+      "out": [],
+      "clipped": [
+        {
+          "tag": "SECTION",
+          "cls": "card profile-hero",
+          "text": "Milo\n알래스칸 말라뮤트 · 5 세 · 34 kg\nDeepPet Bluetooth\nID · DP-210001\n반려동물 관리\n프로필 편집\n사진 ",
+          "client": 394,
+          "scroll": 444,
+          "overflow": "hidden"
+        }
+      ],
+      "tabs": [],
+      "range": []
+    }
+  ],
+  "errors": []
+}

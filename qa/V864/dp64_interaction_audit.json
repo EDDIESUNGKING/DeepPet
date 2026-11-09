@@ -1,0 +1,274 @@
+{
+  "tests": [
+    {
+      "lang": "en",
+      "dog": 0,
+      "pet": "Milo",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "Sleep Status",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 0
+    },
+    {
+      "lang": "en",
+      "dog": 1,
+      "pet": "Luna",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "Sleep Status",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 0
+    },
+    {
+      "lang": "en",
+      "dog": 5,
+      "pet": "Nori",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "Sleep Status",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 0
+    },
+    {
+      "lang": "en",
+      "dog": 7,
+      "pet": "Mochi",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "Sleep Status",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 0
+    },
+    {
+      "lang": "en",
+      "dog": 10,
+      "pet": "Rex",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "Sleep Status",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 0
+    },
+    {
+      "lang": "en",
+      "dog": 14,
+      "pet": "Nana",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "Sleep Status",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 0
+    },
+    {
+      "lang": "zh",
+      "dog": 0,
+      "pet": "Milo",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠状态",
+      "plots": 4,
+      "cjk": 396,
+      "hangul": 0
+    },
+    {
+      "lang": "zh",
+      "dog": 1,
+      "pet": "Luna",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠状态",
+      "plots": 4,
+      "cjk": 478,
+      "hangul": 0
+    },
+    {
+      "lang": "zh",
+      "dog": 5,
+      "pet": "Nori",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠状态",
+      "plots": 4,
+      "cjk": 400,
+      "hangul": 0
+    },
+    {
+      "lang": "zh",
+      "dog": 7,
+      "pet": "Mochi",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠状态",
+      "plots": 4,
+      "cjk": 488,
+      "hangul": 0
+    },
+    {
+      "lang": "zh",
+      "dog": 10,
+      "pet": "Rex",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠状态",
+      "plots": 4,
+      "cjk": 492,
+      "hangul": 0
+    },
+    {
+      "lang": "zh",
+      "dog": 14,
+      "pet": "Nana",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠状态",
+      "plots": 4,
+      "cjk": 483,
+      "hangul": 0
+    },
+    {
+      "lang": "zht",
+      "dog": 0,
+      "pet": "Milo",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠狀態",
+      "plots": 4,
+      "cjk": 396,
+      "hangul": 0
+    },
+    {
+      "lang": "zht",
+      "dog": 1,
+      "pet": "Luna",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠狀態",
+      "plots": 4,
+      "cjk": 478,
+      "hangul": 0
+    },
+    {
+      "lang": "zht",
+      "dog": 5,
+      "pet": "Nori",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠狀態",
+      "plots": 4,
+      "cjk": 400,
+      "hangul": 0
+    },
+    {
+      "lang": "zht",
+      "dog": 7,
+      "pet": "Mochi",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠狀態",
+      "plots": 4,
+      "cjk": 488,
+      "hangul": 0
+    },
+    {
+      "lang": "zht",
+      "dog": 10,
+      "pet": "Rex",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠狀態",
+      "plots": 4,
+      "cjk": 492,
+      "hangul": 0
+    },
+    {
+      "lang": "zht",
+      "dog": 14,
+      "pet": "Nana",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "睡眠狀態",
+      "plots": 4,
+      "cjk": 483,
+      "hangul": 0
+    },
+    {
+      "lang": "ko",
+      "dog": 0,
+      "pet": "Milo",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "수면 상태",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 395
+    },
+    {
+      "lang": "ko",
+      "dog": 1,
+      "pet": "Luna",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "수면 상태",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 466
+    },
+    {
+      "lang": "ko",
+      "dog": 5,
+      "pet": "Nori",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "수면 상태",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 397
+    },
+    {
+      "lang": "ko",
+      "dog": 7,
+      "pet": "Mochi",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "수면 상태",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 471
+    },
+    {
+      "lang": "ko",
+      "dog": 10,
+      "pet": "Rex",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "수면 상태",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 473
+    },
+    {
+      "lang": "ko",
+      "dog": 14,
+      "pet": "Nana",
+      "ok": true,
+      "prior_day": true,
+      "sleep_label": "수면 상태",
+      "plots": 4,
+      "cjk": 0,
+      "hangul": 468
+    }
+  ],
+  "errors": [],
+  "manual_language": {
+    "lang": "zh",
+    "override": true,
+    "pet": 14
+  }
+}
