@@ -1,0 +1,23 @@
+/* DeepPet V8.71 – one owner-friendly risk hierarchy across Deep categories. */
+.dp71-card{margin:13px 0;border-radius:17px;border:1px solid #d9e8f3;background:linear-gradient(145deg,#f8fbff,#fff);padding:15px;min-width:0;max-width:100%;overflow:hidden}
+.dp71-mainhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;min-width:0}
+.dp71-mainhead>div{flex:1;min-width:0}.dp71-mainhead h3,.dp71-night-link h3{font-size:15px;line-height:1.4;margin:0 0 5px;color:#284c68}.dp71-mainhead p{font-size:11px;color:#668096;margin:0;line-height:1.55}
+.dp71-risk,.dp71-mini-status{font-size:10px;font-weight:750;line-height:1.25;padding:6px 8px;border-radius:99px;display:inline-block;text-align:center;white-space:normal;max-width:130px}
+.dp71-risk.normal,.dp71-mini-status.normal,.dp71-advice.normal{color:#197b58;background:#ebf9f1;border:1px solid #bfe9d1}
+.dp71-risk.low,.dp71-mini-status.low,.dp71-advice.low{color:#286fc5;background:#edf5ff;border:1px solid #c2dcf9}
+.dp71-risk.medium,.dp71-mini-status.medium,.dp71-advice.medium{color:#955c12;background:#fff3e1;border:1px solid #f4d9ad}
+.dp71-risk.high,.dp71-mini-status.high,.dp71-advice.high{color:#aa374d;background:#fff0f2;border:1px solid #f5c6cf}
+.dp71-risk.missing,.dp71-mini-status.missing,.dp71-advice.missing{color:#657789;background:#f2f5f8;border:1px solid #dae1e8}
+.dp71-hrv-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:13px}
+.dp71-hrv-metric{padding:12px 10px;border-radius:12px;background:white;border:1px solid #e1ebf4;min-width:0}
+.dp71-hrv-top{display:flex;justify-content:space-between;align-items:baseline;gap:5px;flex-wrap:wrap}.dp71-hrv-top b{color:#3b5974;font-size:12px}.dp71-hrv-top strong{font-size:18px;color:#315a80;font-weight:800;white-space:nowrap}.dp71-hrv-top small{font-size:10px;color:#6c7d91;font-weight:500}
+.dp71-mini-status{margin:5px 0}.dp71-hrv-metric p{color:#596f81;line-height:1.6;font-size:11px;margin:6px 0}.dp71-hrv-metric>small{display:block;font-size:10px;color:#718396;line-height:1.55}
+.dp71-advice{padding:11px 12px;border-radius:12px;margin-top:11px;font-size:11px;line-height:1.6}.dp71-advice b{display:block;font-size:12px}.dp71-advice p{margin:5px 0}.dp71-advice small{font-size:10px;display:block;opacity:.82}.dp71-caveat{font-size:10px;color:#8192a3;line-height:1.5;display:block;margin-top:9px}
+.dp71-night-link{border-color:#d0e9df;background:linear-gradient(145deg,#f1fbf7,#f9fffd)}.dp71-night-facts{margin-top:12px;padding:8px 10px;border-radius:11px;background:white;border:1px solid #dcefe8}.dp71-night-facts p{font-size:11px;color:#395b54;line-height:1.6;margin:5px 0}.dp71-night-next,.dp71-night-link>p{font-size:11px;line-height:1.6;color:#52746c;margin:10px 0 0}.dp71-night-link>small{color:#77928a;font-size:10px}
+.dp71-energy-explain{border-radius:12px;padding:12px;margin:11px 0;background:linear-gradient(135deg,#f1f7ff,#eaf9ff);border:1px solid #d6e8fa}.dp71-energy-explain b{color:#2a6b99;font-size:12px}.dp71-energy-explain p,.dp71-period-energy{margin:6px 0;font-size:11px;color:#446f8d;line-height:1.65}.dp71-recovery-delta{font-size:11px;margin:6px 0;color:#65809f}
+.dp71-paired-score .dp71-risk{font-size:10px!important;border-width:1px!important}
+.dp71-paired-score .dp69-score-aside{align-items:flex-end}
+.dp-owner-activity .dp-energy-score-panel .dp-vital-heading>div:first-child,
+.dp-owner-activity .dp-recovery-score-panel .dp-vital-heading>div:first-child{min-width:0}
+.dp71-card .dp71-mainhead h3{font-weight:750}
+@media(max-width:360px){.dp71-hrv-items{gap:6px}.dp71-hrv-metric{padding:10px 7px}.dp71-hrv-top strong{font-size:16px}.dp71-risk{max-width:108px}}

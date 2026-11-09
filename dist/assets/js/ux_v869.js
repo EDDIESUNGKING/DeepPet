@@ -67,7 +67,7 @@ const oldDay=dpOwnerDayDetail;
 dpOwnerDayDetail=function(kind,cp,row){const root=dom(oldDay(kind,cp,row));if(!validDaySample(row,row.idx).valid)return html(root);const scores=dpOwnerDayScores(row,true),overall=kind===0?scores.heart:kind===1?scores.sleep:scores.energyActivity;
  if(kind===0){const grade=Math.max(dp66VitalGrade(row,'heart'),dp66VitalGrade(row,'breath'));statusRight(root.querySelector('.dp-owner-status-heading'),overall,grade,T('心跳、呼吸分別按當日記錄比較，詳見下方關注時段。','Heart and breathing are reviewed separately against the day’s readings.','심박과 호흡은 해당 날짜 기록을 기준으로 따로 평가합니다.'));vitalCards(root,row);updateRhythmCard(root,row);}
  else if(kind===1){statusRight(root.querySelector('.dp-owner-status-heading'),overall,dp66Grade(overall),reasonSleep(row,overall));root.querySelector('.dp66-status-alert')?.remove();}
- else {statusRight(root.querySelector('.dp-owner-status-heading'),overall,dp66Grade(overall),T('以下依精力、活動與兩分鐘心率恢復，分別列出相對近期平均的變化。','Energy, movement and two-minute recovery are each compared with recent valid days below.','활력·활동·2분 회복을 최근 유효 기록과 각각 비교합니다.'));
+ else {statusRight(root.querySelector('.dp-owner-status-heading'),overall,dp66Grade(overall),T('以下依精力、活動與兩分鐘心率恢復，分別列出相對近期平均的變化。','Energy, movement and two-minute recovery are each compared with recent valid days below.','활력·회복·2분 회복을 최근 유효 기록과 각각 비교합니다.'));
    for(const [sel,k] of [['.dp-energy-score-panel','energy'],['.dp-activity-score-panel','activity'],['.dp-recovery-score-panel','recovery']])subPanel(root.querySelector(sel),scores[k],causeMetric(row,k,scores[k]));
    root.querySelector('.dp-owner-activity > .dp-owner-status-inner > .dp66-inline-risk')?.remove();
  }

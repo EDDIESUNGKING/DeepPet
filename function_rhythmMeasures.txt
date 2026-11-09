@@ -1,0 +1,129 @@
+function rhythmMeasures(record,base){const clamp=(x,min=35,max=98)=>Math.round(Math.max(min,Math.min(max,x)));
+ const s=(record.sdnn-base.sd)/Math.max(1,base.sd),r=(record.rmssd-base.rm)/Math.max(1,base.rm),h=(record.nvgr-base.hr)/Math.max(1,base.hr);
+ const recover=clamp(85+100*(.32*s+.52*r-.16*h));
+ const calm=clamp(86+100*(.15*s+.45*r-.40*h));
+ const stable=clamp(90-70*(.43*Math.abs(s)+.37*Math.abs(r)+.20*Math.abs(h)));
+ // Higher load = more deviation in the direction of increased HR / reduced variability.
+ const load=clamp(22+130*(.45*Math.max(0,h)+.35*Math.max(0,-r)+.20*Math.max(0,-s)),5,93);
+ return {recover,calm,stable,load,s,r,h};}
+function rhythmData(){const all=demoRecords(state.dog),base=rhythmicBaseline(all),values=all.map((row,i)=>{
+ const group=animalGroupReference(currentDog(),all),available=Math.min(observationDays(),i+1),raw=all.slice(Math.max(0,i+1-14),i+1);
+ const personal={sd:meanOf(raw,'sdnn',group.sd),rm:meanOf(raw,'rmssd',group.rm),hr:meanOf(raw,'nvgr',group.hr)};
+ const w=available>=14?.7:0,ref={sd:group.sd*(1-w)+personal.sd*w,rm:group.rm*(1-w)+personal.rm*w,hr:group.hr*(1-w)+personal.hr*w};
+ return rhythmMeasures(row,ref);
+ });return {rows:all,base,values,today:values.at(-1)};}
+function rhythmPositiveValue(key,m){return key==='load'?Math.max(0,Math.min(100,100-m.load)):m[key];}
+function rhythmCompositeScore(m=rhythmData().today){return Math.round((rhythmPositiveValue('calm',m)+rhythmPositiveValue('load',m)+rhythmPositiveValue('stable',m))/3);}
+function rhythmHistory(days=7,key='recover'){return rhythmData().values.slice(-days).map(x=>x[key]);}
+function rhythmLabel(key){
+ const names={recover:['今日恢復力','Recovery readiness','오늘 회복 상태'],calm:['放鬆與平穩度','Calm and steady','편안함과 안정감'],load:['負荷調節表現','Body load balance','신체 부담 조절'],stable:['心搏節奏穩定度','Heartbeat rhythm stability','심박 리듬 안정도']};
+ return label3(...(names[key]||names.recover));
+}
+
+function rhythmStatus(key,num){
+ if(key==='load')return num<=10?label3('很穩定','Very steady','매우 안정'):num<=20?label3('調節良好','Balanced well','조절 양호'):num<=40?label3('稍需留意','Worth watching','조금 주의'):label3('需要多留意','Needs attention','주의 필요');
+ return num>=90?label3('很穩定','Very steady','매우 안정'):num>=80?label3('接近平常','Near usual','평소와 비슷'):num>=60?label3('稍需留意','Worth watching','관찰 필요'):label3('需要多留意','Needs attention','주의 필요');
+}
+
+function rhythmColor(key,num){return scoreScheme(key==='load'?100-num:num);}
+
+function rhythmReason(key,val){const delta=(val.r*100).toFixed(0),high=val.recover>=80;
+ if(key==='recover')return high?label3('我今天的心搏變化大致接近平常，可以繼續維持熟悉的活動節奏。','My heartbeat variation is close to usual today. I can stay with my regular routine.','오늘 심박 변화가 평소와 비슷해요.'):label3('我今天的心搏節奏與平常有點不同，可以讓我多休息並繼續觀察。','My heartbeat rhythm differs somewhat today. A little more rest and observation may help.','오늘 심박 패턴이 평소와 달라요. 조금 쉬어볼까요?');
+ if(key==='calm')return val.calm>=80?label3('我在安靜時的心搏調節接近平常，呈現較平穩的身體狀態。','My quiet-time heartbeat regulation looks fairly steady today.','쉬는 동안 심박 조절이 비교적 안정적이에요.'):label3('我的心搏節奏比平常更起伏，建議看看活動、環境和休息背景。','My beat-to-beat pattern differs today. Check activity, environment and rest.','오늘 심박 리듬이 평소와 달라요.');
+ if(key==='load')return val.load<35?label3('今天沒有明顯高於平常的生理負荷訊號。','No clear increase in physiological load relative to usual.','평소보다 부담이 커졌다는 신호는 뚜렷하지 않아요.'):label3('最近的心率與心搏變異同時偏離平常，值得觀察休息與活動的安排。','Heart rate and variability shifted together; review rest and activity patterns.','심박과 변동이 함께 달라졌어요.');
+ return val.stable>=80?label3('最近心搏調節的整體表現相對一致。','Overall beat-to-beat regulation looks fairly consistent.','최근 심박 조절 흐름이 비교적 일정해요.'):label3('最近的心搏節奏比平常多一些變動，值得比較幾天的趨勢。','Beat-to-beat regulation has fluctuated more than usual recently.','최근 심박 리듬 변화가 조금 커졌어요.');}
+function rhythmAction(val){return val.load>=50||val.recover<70?label3('今天可以安排更溫和的活動，若持續明顯偏離平常或出現症狀，請詢問獸醫。','Consider a gentler routine today; contact a vet if changes persist or symptoms appear.','오늘은 활동을 조금 줄이고 변화가 지속되면 수의사와 상담하세요.'):label3('照平常節奏活動，明天再看看恢復曲線有沒有保持穩定。','Keep the usual routine and check tomorrow whether the trend stays steady.','평소 리듬을 유지하고 내일 추세를 다시 확인하세요.');}
+function rhythmMiniChart(key='recover',days=7,height=115){
+ const raw=rhythmHistory(days,key),rows=dayRowsWithIndex(days),sized=rows.map((row,i)=>({date:row.date,value:raw[raw.length-rows.length+i],valid:validDaySample(row,row.idx).valid})),valid=sized.filter(x=>x.valid),vals=valid.map(x=>x.value),color=rhythmColor(key,vals.at(-1)??50).color;if(vals.length<2)return `<p class="notices">${label3('有效觀察不足，尚無法畫出節奏趨勢','Not enough valid days for rhythm trend','유효 데이터 부족')}</p>`;
+ const W=330,H=height,l=26,r=2,t=13,b=24,lo=Math.min(...vals)-7,hi=Math.max(...vals)+7;
+ const ratios=valid.map(row=>dateRatio(row.date,iso(dateAdd(localDate(),1-days)),iso(localDate()))),xy=vals.map((v,i)=>[l+ratios[i]*(W-l-r),t+(hi-v)/(hi-lo)*(H-t-b)]),line=xy.map((p,i)=>`${i?'L':'M'}${p[0]} ${p[1]}`).join(' ');
+ const axes=[0,.5,1].map(f=>`<line x1="${l}" y1="${t+f*(H-t-b)}" x2="${W-r}" y2="${t+f*(H-t-b)}" stroke="#e8edf3"/><text x="${l-6}" y="${t+f*(H-t-b)+4}" text-anchor="end" fill="#a1a8b6" font-size="10">${Math.round(hi-(hi-lo)*f)}</text>`).join('');
+ const svg=`<svg class="rhythm-curve" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(rhythmLabel(key))}">${axes}<path d="${line}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round"/>${xy.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.8" fill="${color}"/>`).join('')}<text x="${l}" y="${H-4}" fill="#98a1b0" font-size="10">${days}D</text><text x="${W-r}" y="${H-4}" text-anchor="end" fill="#98a1b0" font-size="10">${label3('今日','Today','오늘')}</text></svg>`;
+ const dates=valid.map(r=>r.date);
+ return inspectSvg(svg,vals,{kind:key,unit:'/100',dates,color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:xy.map(p=>p[1]),xRatios:ratios,compact:true});
+}
+
+
+function rhythmDetailModal(){
+ if(!signalQuality().valid)return `<div class="rhythm-unavailable-dialog">${qualityInline()}</div>`;
+ const m=rhythmData().today,total=rhythmCompositeScore(m),keys=['calm','load','stable'];
+ const values=keys.map(k=>({key:k,score:rhythmPositiveValue(k,m)}));
+ const strong=values.filter(v=>v.score>=80).sort((a,b)=>b.score-a.score);
+ const attention=values.filter(v=>v.score<80).sort((a,b)=>a.score-b.score);
+ const note={
+ calm:label3('安靜時的身體反應比較平穩，代表近期的放鬆狀態較好。','Quiet-time responses are steadier, suggesting better calmness.','쉬는 동안 생리 반응이 안정적이며 편안함이 좋아요.'),
+ load:label3('活動與休息後的身體調節比較平順，負荷適應表現較好。','Responses to activity and rest are better balanced.','활동과 휴식 후 조절 상태가 더 안정적이에요.'),
+ stable:label3('心搏節奏接近牠的平常模式，整體變化比較一致。','Heartbeat rhythm is close to its usual pattern.','심박 리듬이 평소 패턴과 비슷해요.')};
+ const weak={
+ calm:label3('放鬆與平穩度較低，請看看最近活動、環境與休息有沒有變化。','Calmness is below usual; review activity, environment and rest.','안정도가 낮아요. 활동과 휴식을 확인하세요.'),
+ load:label3('負荷調節分數偏低，可留意活動後恢復和近期休息安排。','Body-load balance is lower; review recovery and rest.','부담 조절 점수가 낮아요. 회복과 휴식을 확인하세요.'),
+ stable:label3('心搏節奏近期較不一致，請到心肺狀態查看詳細趨勢。','Heartbeat rhythm is less consistent; review heart trends.','심박 리듬 변화가 커져 심폐 추세를 확인하세요.')};
+ const target=k=>k==='stable'?label3('心肺狀態','Heart & breathing','심폐 상태'):label3('精力與活動','Activity & energy','활동과 활력');
+ const findings=(items,positive)=>items.map(v=>`<button class="summary-finding ${positive?'good':'concern'} dp-rhythm-finding" data-action="rhythm-to-deep" data-key="${v.key}" title="${esc(target(v.key))}"><span class="finding-mark">${positive?'✓':'!'}</span><span>${positive?note[v.key]:weak[v.key]}</span>${vicon('chev',15)}</button>`).join('');
+ return `<div class="summary-detail-v44 dp-rhythm-summary"><p class="summary-detail-lead"><strong>${label3('身體節奏分數','Body rhythm score','몸의 리듬 점수')}：${total} /100</strong><br>${label3('由放鬆、負荷調節及心搏節奏三項表現組成；每項分數越高，表示相對自己的平常狀態越好。','Made up of calmness, load balance and heartbeat stability. Higher means more favorable relative to usual.','안정, 부담 조절, 심박 리듬 세 요소를 종합하며 높을수록 평소 대비 좋아요.')}</p>
+ <div class="summary-three-rings">${values.map(v=>`<button class="summary-ring-item" data-action="rhythm-to-deep" data-key="${v.key}" data-hint="${esc(rhythmLabel(v.key))} · ${v.score}/100 · ${esc(target(v.key))}" aria-label="${esc(rhythmLabel(v.key))} ${v.score}/100 · ${esc(target(v.key))}"><span class="summary-ring-label">${rhythmLabel(v.key)}</span>${scoreRing(v.score)}<span class="summary-ring-status" style="color:${scoreScheme(v.score).color}">${scoreLabel(v.score)} · ${target(v.key)} ›</span></button>`).join('')}</div>
+ <section class="summary-detail-section"><h3>${label3('表現較好的地方','What looks good','좋은 부분')}</h3>${strong.length?findings(strong,true):`<div class="summary-finding neutral">${label3('目前沒有明顯突出的項目，建議先看最近幾天的變化。','No clear strong area yet; review the recent days.','뚜렷하게 좋은 항목이 아직 없어요.')}</div>`}</section>
+ <section class="summary-detail-section"><h3>${label3('需要關注的地方','What needs attention','주의할 부분')}</h3>${attention.length?findings(attention,false):`<div class="summary-finding neutral">${label3('三項表現目前都相對平穩，繼續維持熟悉的日常節奏。','All three look steady. Keep the usual routine.','세 가지 상태가 모두 비교적 안정적이에요.')}</div>`}</section>
+ <p class="notices">${label3('點擊任一圓形分數，可直接查看該項在 Deep 的詳細趨勢。','Tap any ring to view its detailed trend in Deep.','원을 눌러 Deep에서 해당 추세를 확인하세요.')}</p></div>`;
+}
+
+function technicalBasisNote(kind='rhythm'){return ''}
+function sleepPatternForDay(dayIndex){
+ // Demo data: make the half-hour timeline and nightly duration share the same
+ // daily rest estimate. This is QUIET REST, not EEG-confirmed sleep staging.
+ const row=demoRecords(state.dog)[Math.min(29,Math.max(0,dayIndex))],stableDayNumber=Math.floor(Date.parse(row.date+'T12:00:00Z')/86400000),seed=(stableDayNumber%131)*17+state.dog*11;
+ const slots=Array(48).fill('awake'),night=Array(32).fill('awake');
+ const bed=2+(seed%4),dayVariation=[-5,3,-3,4,-4,1,0][Math.abs(stableDayNumber+state.dog*3)%7],target=Math.max(4,Math.min(29,Math.round(Number(row.sleep||8.6)*2)+dayVariation));
+ const available=32-bed,interruptionCount=Math.min(3,1+(seed%3),Math.max(0,available-target));
+ const duration=Math.min(available,target+interruptionCount);
+ for(let i=bed;i<bed+duration;i++)night[i]='sleep';
+ const positions=[];
+ for(let j=0;j<interruptionCount;j++){
+  const start=bed+2,end=bed+duration-2;
+  if(end<start)break;
+  let index=start+((seed*3+j*7)%(end-start+1));
+  for(let z=0;z<=end-start&&positions.includes(index);z++)index=start+(index-start+1)%(end-start+1);
+  if(!positions.includes(index)){positions.push(index);night[index]='awake';}
+ }
+ for(let i=0;i<32;i++)slots[(40+i)%48]=night[i];
+ return {bed,asleepSlots:night.filter(v=>v==='sleep').length,slots,row};
+}
+function nightSlotSequence(dayIndex){const pat=sleepPatternForDay(dayIndex);return Array.from({length:32},(_,i)=>pat.slots[(40+i)%48]);}
+function nightMinuteSequence(dayIndex){const slots=nightSlotSequence(dayIndex);return Array.from({length:960},(_,minute)=>slots[Math.floor(minute/30)]==='sleep'?1:0);}
+function nightRestHours(dayIndex){return nightSlotSequence(dayIndex).filter(x=>x==='sleep').length/2;}
+function sleepMatrix(period=1){
+ const count=Math.min(period,observationDays(),30),start=30-count;
+ const data=demoRecords(state.dog),rows=Array.from({length:count},(_,i)=>{const idx=start+i,rec=data[idx],valid=validDaySample(rec,idx).valid;return {idx,date:rec.date,valid,slots:valid?nightSlotSequence(idx):[]};});
+ const expanded=period<7||!!state.sleepMatrixExpanded,visible=expanded?rows:rows.slice(-3),validNights=rows.filter(x=>x.valid).length;
+ const labels=Array.from({length:8},(_,i)=>`${String((20+i*2)%24).padStart(2,'0')}:00`);
+ return `<div class="sleep-matrix-wrap ${period>=7&&!expanded?'sleep-stack-preview':''}"><div class="sleep-matrix-title"><strong>${period===1?label3('昨晚睡眠時段','Last night’s sleep','지난밤 수면 시간'):label3(`最近 ${period} 天睡眠情況`,`Sleep each night · ${period} days`,`최근 ${period}일 수면 상황`)}</strong>${period>=7?`<span class="pill purple">${label3(`${validNights}/${count} 晚有效`,`${validNights}/${count} valid nights`,`${validNights}/${count}박 유효`)}</span>`:''}</div><div class="sleep-matrix-head">${labels.map(l=>`<span>${l}</span>`).join('')}</div><div class="sleep-matrix-rows">${visible.map(r=>`<button type="button" class="sleep-matrix-row sleep-date-button ${r.valid?'':'sleep-date-missing'}" ${r.valid?`data-action="sleep-date-detail" data-day="${r.idx}"`:'disabled'}><span class="sleep-day-label">${period===1?label3('昨夜','Last night','지난밤'):dpFullDate(r.date)}</span><span class="sleep-cells">${r.valid?r.slots.map(s=>`<i class="${s}"></i>`).join(''):`<span class="sleep-missing-label">${label3('無有效紀錄','No valid reading','유효 기록 없음')}</span>`}</span></button>`).join('')}</div>${period>=7?`<button class="sleep-expand-action" data-action="sleep-matrix-toggle">${expanded?label3('收合逐夜紀錄','Collapse nights','밤별 기록 접기'):label3(`展開查看全部 ${count} 晚`,`View all ${count} nights`,`전체 ${count}박 보기`)}</button>`:''}<div class="sleep-legend"><span><i class="sleep"></i>${label3('睡眠與休息','Sleep & rest','수면 및 휴식')}</span><span><i class="awake"></i>${label3('活動','Movement','움직임')}</span></div></div>`;
+}
+function sleepDateDetail(){const idx=Math.max(0,Math.min(29,Number(state.sleepSelectedDay??29))),row=demoRecords(state.dog)[idx],slots=nightSlotSequence(idx),hrs=slots.filter(v=>v==='sleep').length*.5;const wake=dpNightSleepStats(idx).wakes;return `<div class="sleep-date-modal"><h3>${dpFullDate(row.date)}</h3><div class="metric-grid"><div class="metric"><label>${label3('休息時間','Rest time','휴식 시간')}</label><b>${hrs.toFixed(1)} h</b></div><div class="metric"><label>${label3('活動／清醒區間','Awake periods','깨어 있는 구간')}</label><b>${wake}</b></div></div>${sleepMatrixDate(idx)}<p class="dp-conclusion">${label3('點選色塊可查看對應的時間和狀態。','Tap a segment to see the time and state.','시간대를 눌러 상태를 확인하세요.')}</p></div>`;}
+function sleepMatrixDate(idx){
+ const slots=nightSlotSequence(idx),first=slots[0],start=label3('將滑鼠移到綠色／灰色時間段即可查看時間與狀態','Hover over the green/gray slots to see each interval','초록색/회색 구간에 커서를 올려 시간과 상태를 확인하세요');
+ return `<div class="dp-sleep-slot-widget"><div class="sleep-date-timeline" role="group" aria-label="${label3('20:00至次日12:00的每半小時安靜休息及活動狀態','Estimated quiet rest and movement, half-hour bins from 20:00 to 12:00','20:00-12:00 추정 휴식/움직임')}">${slots.map((v,i)=>`<button type="button" class="${v}" data-action="sleep-slot" data-day="${idx}" data-slot="${i}" aria-label="${dpTime((1200+i*30)%1440)} ${v==='sleep'?label3('睡眠與休息','Sleep & rest','수면 및 휴식'):label3('活動／非休息','Movement / not quiet rest','움직임／휴식 아님')}" title="${dpTime((1200+i*30)%1440)}"></button>`).join('')}</div><div class="dp-sleep-scrub-track" style="--sleep-scrub:1.5625%"><span class="dp-sleep-scrub-fill"></span><i class="dp-sleep-scrub-handle"></i></div><div class="sleep-slot-reading" aria-live="polite">${start}</div></div>`;
+}
+function lastNightStats(){
+ const slots=nightSlotSequence(29);let onsetIndex=-1,interrupts=0,everRested=false,afterRestAwake=false;
+ for(let j=0;j<slots.length;j++){
+  const resting=slots[j]==='sleep';
+  if(resting){if(onsetIndex<0)onsetIndex=j;if(everRested&&afterRestAwake)interrupts++;everRested=true;afterRestAwake=false;}
+  else if(everRested)afterRestAwake=true;
+ }
+ const fmt=j=>minuteClock((20*60+Math.max(0,j)*30)%1440);
+ return {onset:onsetIndex<0?'—':fmt(onsetIndex),interrupts,restHours:nightRestHours(29),score:dpTodayUnifiedScores().sleep,valid:signalQuality().valid};
+}
+function lastNightCard(compact=false){
+ const n=lastNightStats(),valid=n.valid;
+ const label=valid?(n.interrupts>=3?label3('推估休息有幾次中斷，請觀察近期趨勢。','Estimated rest had several interruptions; compare recent nights.','추정 휴식이 여러 번 중단되었어요. 최근 추세를 확인하세요.'):label3('昨夜推估休息相對連續；不代表已測出睡眠分期。','Estimated rest looked fairly continuous; this does not determine sleep stages.','추정 휴식이 비교적 이어졌으나 수면 단계 측정은 아닙니다.')):qualityMessage();
+ return `<div class="night-quick"><div><small>${label3('推估開始休息','Estimated rest start','추정 휴식 시작')}</small><b>${valid?n.onset:'—'}</b></div><div><small>${label3('推估中斷','Estimated interruptions','추정 중단')}</small><b>${valid?n.interrupts:'—'}</b></div>${compact?'':`<div><small>${label3('推估休息時間','Estimated quiet rest','추정 휴식 시간')}</small><b>${valid?n.restHours.toFixed(1)+' h':'—'}</b></div>`}</div><div class="night-verdict"><b>${label3('昨夜觀察摘要','Last night’s observations','지난밤 관찰 요약')}</b><p>${label}</p></div><p class="sleep-estimate-caveat">${label3('夜間休息及中斷情況已整理完成。','Overnight rest and interruptions are summarized.','야간 휴식과 중단 시간을 정리했어요.')}</p>`;
+}
+function sleepSummaryCard(){const days=state.range;
+ const daily=days===1;
+ return `<div class="rest-assessment simplified-rest">${daily?deepTimeChart('restState','#2e9d70',label3('夜間休息與活動','Night rest & movement','야간 휴식·활동')):''}${days>=14?deepTimeChart('restState','#2e9d70',label3('每日休息時數趨勢','Daily resting hours','일별 휴식 시간 추세')):''}${sleepMatrix(days)}${daily?lastNightCard(true):''}</div>`;
+}
+function ageTrendCard(compact=false){const rows=validDailyRecords(observationDays());if(rows.length<3)return `<div class="age-trend-panel chart-pending"><b>${label3('生理年齡長期趨勢仍在累積','Biological age trend is building','생체 나이 추세 수집 중')}</b><p>${label3('目前有效觀察日不足，先顯示當前模型估算，累積更多資料後再顯示可比較的趨勢。','Not enough observation days for a meaningful age trend. A provisional estimate remains available.','관찰일이 부족해 장기 추세는 아직 표시하지 않습니다.')}</p></div>`;const v=rows.map(x=>x.bio),now=v.at(-1),first=v[0],w=340,h=compact?134:180,top=15,left=31,right=2,bottom=26,min=Math.floor((Math.min(...v)-.065)*10)/10,max=Math.ceil((Math.max(...v)+.065)*10)/10,unit=max-min||.3;
+ const ratios=rows.map(row=>dateRatio(row.date,rows[0].date,rows.at(-1).date)),x=i=>left+ratios[i]*(w-left-right), y=n=>top+(1-(n-min)/unit)*(h-top-bottom);
+ const pts=v.map((n,i)=>[x(i),y(n)]),line=pts.map((p,i)=>`${i?'L':'M'}${p[0]} ${p[1]}`).join(' '),grid=[0,1,2,3,4].map(j=>{const vv=min+(max-min)*j/4,yy=y(vv);return `<line x1="${left}" y1="${yy}" x2="${w-right}" y2="${yy}" stroke="#e5e8f3"/><text x="2" y="${yy+3}" font-size="10" fill="#8e92a6">${vv.toFixed(1)}</text>`}).join('');
+ const dots=pts.filter((_,i)=>i%4===0||i===29).map(([px,py])=>`<circle cx="${px}" cy="${py}" r="2.4" fill="#7160d9"/>`).join('');
+ const svg=`<svg class="age-science-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="30-day biological age trend">${grid}<path d="${line}" fill="none" stroke="#7866e5" stroke-width="2.6" stroke-linecap="round"/>${dots}<text x="${left}" y="${h-4}" font-size="10" fill="#8e92a6">${dpFullDate(rows[0].date)}</text><text x="${w-right}" y="${h-4}" font-size="10" text-anchor="end" fill="#8e92a6">${dpFullDate(rows.at(-1).date)}</text></svg>`;return `<div class="age-trend-panel"><div class="row spread"><b>${label3(`${rows.length} 天生理年齡估算趨勢`,`${rows.length}-day biological age estimate`,`${rows.length}일 생체 나이 추정 추세`)}</b><span class="age-change">${now-first>=0?'+':''}${(now-first).toFixed(2)} ${t('years')}</span></div>${inspectSvg(svg,v,{kind:'bio',unit:t('years'),dates:rows.map(r=>r.date),color:'#7866e5',left,right,top,bottom,width:w,height:h,yCoords:pts.map(p=>p[1]),xRatios:ratios,compact:true})}<div class="chart-footnote">${label3('近30天生理年齡變化趨勢。
