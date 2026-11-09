@@ -1,0 +1,200 @@
+/* DeepPet V8.74: integrated overview narrative without an empty score-height row. */
+.dp-owner-deep .dp74-overview-head{
+  display:flow-root!important;align-items:unset!important;justify-content:unset!important;
+  gap:0!important;width:100%;min-height:0!important;margin-bottom:6px!important;
+}
+.dp-owner-deep .dp74-overview-head>.dp74-overview-copy{
+  display:contents!important;flex:none!important;min-width:0!important;
+}
+.dp-owner-deep .dp74-overview-head>.dp74-overview-score{
+  float:right!important;clear:right!important;display:flex!important;flex-direction:column!important;
+  align-items:center!important;text-align:center!important;justify-content:flex-start!important;
+  width:94px!important;max-width:94px!important;min-width:0!important;
+  margin:5px 0 8px 13px!important;padding:0!important;height:auto!important;
+}
+.dp-owner-deep .dp74-overview-head>.dp74-overview-score.dp-status-score{
+  display:block!important;height:90px!important;
+}
+.dp-owner-deep .dp74-overview-head>.dp74-overview-score .dp-status-score{
+  flex:0 0 auto!important;margin:0 auto!important;
+}
+/* Same hierarchy on Day / 7D / 30D across all three Deep sections. */
+.dp-owner-deep .dp74-overview-head h2{
+  font-size:21px!important;font-weight:800!important;letter-spacing:-.35px!important;
+  line-height:1.28!important;margin:0 0 9px!important;padding:0!important;
+  break-after:avoid;
+}
+.dp-owner-deep .dp74-overview-head .dp-heart-overall-verdict,
+.dp-owner-deep .dp74-overview-head>.dp74-overview-copy>p:first-of-type{
+  font-size:17px!important;font-weight:850!important;line-height:1.38!important;
+  margin:0 0 7px!important;padding:0!important;letter-spacing:0!important;
+}
+.dp-owner-deep .dp74-overview-head .dp73-narrative{
+  display:block!important;margin:5px 0 0!important;padding:0!important;
+  width:auto!important;min-height:0!important;gap:0!important;clear:none!important;
+}
+.dp-owner-deep .dp74-overview-head .dp73-summary-line{
+  display:block!important;font-size:12px!important;line-height:1.64!important;
+  margin:0 0 7px!important;padding:0!important;white-space:normal!important;
+  overflow-wrap:anywhere;
+}
+.dp-owner-deep .dp74-overview-head .dp73-summary-line:last-child{margin-bottom:0!important}
+.dp-owner-deep .dp74-overview-head .dp69-grade,.dp-owner-deep .dp74-overview-head .dp71-risk{
+  align-self:center!important;margin-top:3px!important;max-width:92px!important;
+}
+/* Heart + breathing vital cards: title at upper left, measurement slightly lower on right. */
+.deep-theme-heart .dp66-vital-top{align-items:flex-start!important;justify-content:space-between!important;flex-wrap:nowrap!important;gap:8px!important}
+.deep-theme-heart .dp66-vital-top>b{align-self:flex-start!important;margin:0!important;padding:0!important;line-height:1.3!important;font-size:15px!important}
+.deep-theme-heart .dp69-vital-aside{align-self:flex-start!important;padding-top:11px!important;min-width:0!important}
+.deep-theme-heart .dp69-vital-aside>strong{margin:0!important;line-height:1.1!important}
+.deep-theme-heart .dp-vital-heading{align-items:flex-start!important}
+.deep-theme-heart .dp-vital-heading>div:first-child>b{margin:0 0 8px!important;padding:0!important}
+.deep-theme-heart .dp-vital-heading>div:first-child>strong{margin:4px 0 0!important}
+/* Status labels get the section theme, scores inside dotted rings keep grade colors. */
+.deep-theme-heart .dp74-overview-head h2,
+.deep-theme-heart .dp74-overview-head .dp-heart-overall-verdict,
+.deep-theme-heart .dp74-overview-head .dp73-summary-line,
+.deep-theme-heart .dp68-period-heart h3,
+.deep-theme-heart .dp66-vital-top>b,
+.deep-theme-heart .dp-vital-heading b,
+.deep-theme-heart .dp66-rhythm-short>div>b,
+.deep-theme-heart .dp66-rhythm-short>div>p,
+.deep-theme-heart .dp66-rhythm-short>div>p strong,
+.deep-theme-heart .dp68-rhythm-chart .dp68-rhythm-head b,
+.deep-theme-heart .dp73-rhythm-trend,
+.deep-theme-heart .dp66-vital>p,
+.deep-theme-heart .dp-vital-panel>.dp-owner-subsummary,
+.deep-theme-heart .dp-vital-heading strong:not(.dp-status-score strong),
+.deep-theme-heart .dp-owner-chart-box>b {color:#a94366!important}
+.deep-theme-heart .dp69-grade,.deep-theme-heart .dp66-risk-label,
+.deep-theme-heart .dp66-grade-badge,
+.deep-theme-heart .dp71-risk,.deep-theme-heart .dp71-mini-status{
+  background:#ffe9f0!important;color:#a63a60!important;border-color:#f1bfcf!important;
+}
+.deep-theme-heart .dp66-rhythm-short,
+.deep-theme-heart .dp68-rhythm-chart,
+.deep-theme-heart .dp71-card,
+.deep-theme-heart .dp71-hrv-metric,
+.deep-theme-heart .dp71-advice,
+.deep-theme-heart .dp71-hrv-items>div,
+.deep-theme-heart .dp-hrv-visible,
+.deep-theme-heart .dp-hrv-pair>div,
+.deep-theme-heart .dp-owner-chart-box{
+  background:#fff7fa!important;border-color:#f0d4df!important;
+}
+.deep-theme-heart .dp71-mainhead h3,.deep-theme-heart .dp71-mainhead p,
+.deep-theme-heart .dp71-hrv-top b,.deep-theme-heart .dp71-hrv-top strong,
+.deep-theme-heart .dp71-hrv-top small,.deep-theme-heart .dp71-hrv-metric p,
+.deep-theme-heart .dp71-hrv-metric>small,.deep-theme-heart .dp71-card>small,
+.deep-theme-heart .dp71-advice b,.deep-theme-heart .dp71-advice p,
+.deep-theme-heart .dp71-advice small,
+.deep-theme-heart .dp-owner-hrv-line b,
+.deep-theme-heart .dp-hrv-pair b,
+.deep-theme-heart .dp-hrv-pair strong,
+.deep-theme-heart .dp-hrv-pair p,
+.deep-theme-heart .dp-hrv-visible h3,
+.deep-theme-heart .dp-hrv-visible>small,
+.deep-theme-heart .dp-hrv-pair small,
+.deep-theme-heart .dp-owner-chart-note,
+.deep-theme-heart .dp68-period-lead,
+.deep-theme-heart .dp-vital-feedback,
+.deep-theme-heart .dp66-rhythm-short small{color:#98516b!important}
+/* Older rainbow risks were accidentally bleeding into the cardio visual language. */
+.deep-theme-heart .dp68-risk-count,
+.deep-theme-heart .dp68-risk-day,
+.deep-theme-heart .dp69-window,
+.deep-theme-heart .dp66-risk-panel,
+.deep-theme-heart .dp69-no-alert{
+  border-color:#f1c6d4!important;background:#fff1f6!important;color:#a43d61!important;
+}
+.deep-theme-heart .dp68-risk-count b,
+.deep-theme-heart .dp68-risk-count small,
+.deep-theme-heart .dp68-risk-day b,
+.deep-theme-heart .dp68-risk-day span{color:#a43d61!important}
+.deep-theme-heart .dp68-risk-day i,
+.deep-theme-heart .dp69-legend i{background:#cf6b8a!important}
+.deep-theme-heart .dp66-rhythm-short .stat-inner,
+.deep-theme-heart .dp68-rhythm-chart .stat-inner,
+.deep-theme-heart .dp70-rhythm-score-ring .stat-inner{
+  background:transparent!important;background-color:transparent!important;
+  border:0!important;box-shadow:none!important;
+}
+/* All yellow/green score-label backplates removed; the numeric score itself may retain status hue. */
+.deep-theme-heart .dp66-rhythm-short .dp69-grade,
+.deep-theme-heart .dp68-rhythm-chart .dp69-grade,
+.deep-theme-heart .dp66-rhythm-short .dp66-grade-badge{background:#ffe9f0!important;border-color:#f1c6d4!important;color:#a43d61!important}
+/* Other sections keep their own category visual language. */
+.deep-theme-sleep .dp74-overview-head h2,
+.deep-theme-sleep .dp74-overview-head .dp-heart-overall-verdict,
+.deep-theme-sleep .dp74-overview-head .dp73-summary-line{color:#207c55!important}
+.deep-theme-activity .dp74-overview-head h2,
+.deep-theme-activity .dp74-overview-head .dp-heart-overall-verdict,
+.deep-theme-activity .dp74-overview-head .dp73-summary-line{color:#296cac!important}
+/* Energy panels: use immediate interpretations; do not repeat placeholder descriptions. */
+.dp-owner-deep .dp-vital-heading .dp74-metric-interpretation{margin:5px 0 0!important}
+.dp-owner-deep .dp-energy-score-panel>.dp-owner-subsummary,
+.dp-owner-deep .dp-activity-score-panel>.dp-owner-subsummary,
+.dp-owner-deep .dp-recovery-score-panel>.dp-owner-subsummary,
+.dp-owner-deep .dp-energy-period-panel>.dp-owner-subsummary{display:none!important}
+.dp-owner-deep .dp74-rhythm-card{height:auto!important;min-height:0!important;align-content:start!important}
+.dp-owner-deep .dp74-rhythm-card>p{margin:8px 0!important;line-height:1.65!important}
+/* Me: more breathing room below the icon/title, actual age closer to the estimate. */
+.dp73-age-hero .dp73-age-figures{
+  display:grid!important;grid-template-columns:minmax(0,185px) minmax(90px,1fr)!important;
+  justify-content:start!important;align-items:end!important;gap:14px!important;
+  margin:17px 0 8px!important;max-width:324px!important;
+}
+.dp73-age-hero .dp73-estimated{flex:none!important;min-width:0!important}
+.dp73-age-hero .dp73-age-comparison{
+  max-width:none!important;text-align:left!important;padding:0 0 5px!important;
+  justify-self:start!important;min-width:0!important;
+}
+.dp73-age-hero .dp73-age-comparison .dp73-difference{margin-top:7px!important}
+@media(max-width:375px){
+ .dp-owner-deep .dp74-overview-head>.dp74-overview-score{width:79px!important;max-width:79px!important;margin-left:9px!important}
+ .dp-owner-deep .dp74-overview-head h2{font-size:19px!important}
+ .dp73-age-hero .dp73-age-figures{grid-template-columns:minmax(0,54%) minmax(0,1fr)!important;gap:8px!important}
+ .dp73-age-hero .dp73-estimated strong{font-size:55px!important}
+ .dp73-age-hero .dp73-age-comparison b{font-size:15px!important}
+}
+
+/* Final V8.74 polishing: correct day and period verdicts with the same bold type. */
+.dp-owner-deep .dp74-overview-head .dp74-overview-verdict{
+ font-size:17px!important;font-weight:850!important;line-height:1.38!important;
+ letter-spacing:0!important;margin:0 0 7px!important;padding:0!important;
+}
+.deep-theme-heart .dp74-overview-head .dp74-overview-verdict{color:#a94366!important}
+.deep-theme-sleep .dp74-overview-head .dp74-overview-verdict{color:#207c55!important}
+.deep-theme-activity .dp74-overview-head .dp74-overview-verdict{color:#296cac!important}
+.deep-theme-heart .dp872-vital-cue{background:#c25477!important;color:#fff!important;border-color:#ffedf2!important}
+/* Both day and 7/30-day relaxation panels place their interpretation directly below the title. */
+.dp-owner-deep .dp74-rhythm-flowhead{
+ display:flow-root!important;align-items:unset!important;gap:0!important;
+ min-height:0!important;clear:both!important;margin-bottom:8px!important;
+}
+.dp-owner-deep .dp74-rhythm-flowhead>.dp74-rhythm-flow-score{
+ float:right!important;clear:right!important;display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:flex-start!important;
+ width:94px!important;max-width:94px!important;min-width:0!important;
+ margin:1px 0 5px 12px!important;padding:0!important;text-align:center!important;
+}
+.dp-owner-deep .dp74-rhythm-flowhead>b{
+ display:block!important;font-size:15px!important;line-height:1.35!important;
+ font-weight:800!important;padding:0!important;margin:0 0 8px!important;
+}
+.dp-owner-deep .dp74-rhythm-flowhead>p{
+ display:block!important;font-size:12px!important;line-height:1.64!important;
+ margin:0 0 7px!important;padding:0!important;color:#376fac!important;
+}
+.dp-owner-deep .dp74-rhythm-flowhead>.dp74-rhythm-flow-score .dp69-grade{margin-top:3px!important}
+.dp-owner-deep .dp74-relaxation-advice{margin-top:9px!important;padding:10px 12px!important}
+.dp-owner-deep .dp74-relaxation-advice>p{margin:0 0 5px!important}
+.dp-owner-deep .dp74-relaxation-advice>small{margin:0!important}
+.dp-owner-deep .dp74-rhythm-card{background:#f7fbff!important;border-color:#d8e7fa!important}
+.dp-owner-deep .dp74-relaxation-advice{background:#edf5ff!important;border-color:#d0e3fa!important;color:#346da6!important}
+.dp-owner-deep .dp74-relaxation-advice :is(p,small){color:#446f9e!important}
+@media(max-width:375px){
+ .dp-owner-deep .dp74-rhythm-flowhead>.dp74-rhythm-flow-score{width:80px!important;max-width:80px!important;margin-left:9px!important}
+}
+
+.dp-owner-deep .dp74-rhythm-flowhead>.dp74-rhythm-footnote{display:block!important;font-size:11px!important;line-height:1.55!important;color:#5a84ae!important;margin:2px 0 0!important;padding:0!important}

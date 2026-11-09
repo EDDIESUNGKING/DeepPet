@@ -1,2 +1,2 @@
-DeepPet V8.73
-Based on V8.72 full source; onboarding, Deep insight copy/layout, Me age, Health order, navigation fixes.
+DeepPet V8.74
+Based on V8.73 complete project. Corrected Deep summary layout, 1/7/30-day unified heading typography, heart/HRV rose theme, heart/breath metric vertical hierarchy, relaxation panel and Me estimated-age spacing.
