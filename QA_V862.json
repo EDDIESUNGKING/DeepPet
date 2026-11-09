@@ -1,0 +1,41 @@
+{
+  "version": "8.62",
+  "base": "8.61",
+  "onboarding_pages": [
+    "four dogs",
+    "alaskan malamute",
+    "golden retriever",
+    "poodle",
+    "french bulldog"
+  ],
+  "locales_tested": [
+    "en",
+    "zh",
+    "zht",
+    "ko"
+  ],
+  "extra_locale_with_real_screens": "ja",
+  "mobile_430x930_4x5": "pass",
+  "small_mobile_375x667_4x5": "pass",
+  "native_app_screenshot_assets_4x5": "pass",
+  "scene_assets_5": "pass",
+  "one_pagination_group": "pass",
+  "exactly_one_active_dot": "pass",
+  "no_embedded_pagination_in_scenes": "pass",
+  "heading_vs_phone_collision_test": "pass",
+  "phone_vs_features_collision_test": "pass",
+  "mouse_horizontal_swipe_4_locales": "pass",
+  "get_started_enters_original_app_4_locales": "pass",
+  "original_app_15_pet_render_smoke": "pass",
+  "original_home_deep_health_me_render_smoke": "pass",
+  "deworming_entry_still_present": "pass",
+  "javascript_browser_errors": 0,
+  "netlify_node_build": "pass",
+  "zip_integrity": "pending",
+  "caveats": [
+    "Browser testing loaded same HTML/CSS/JS through in-memory document to bypass local navigation restrictions.",
+    "Not tested on live Netlify or physical iPhone.",
+    "Original APP contains simulated measurements, GPS demo, and incomplete SDK/cloud connections.",
+    "Scene backgrounds are marketing artwork from prior versions, not CAD-verified hardware renders."
+  ]
+}

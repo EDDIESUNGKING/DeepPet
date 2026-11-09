@@ -1,0 +1,38 @@
+{
+  "version": "V8.49",
+  "source": "DeepPet V8.48, all prior files retained",
+  "file_checks": {
+    "v848_files_retained": 113,
+    "javascript_syntax_checks": 7,
+    "embedded_local_references_present": true,
+    "independent_pet_mp4_assets": 15,
+    "mp4_metadata_readable": 15
+  },
+  "validated_by_chromium_inline_css_js": {
+    "home_Milo_today_status": 95,
+    "home_Milo_today_body_rhythm": 85,
+    "home_Milo_today_combined": 90,
+    "14_valid_day_health_mean": 93.57142857142857,
+    "14_valid_day_rhythm_mean": 84.35714285714286,
+    "14_day_combined_rounded": 89,
+    "14_day_dotted_circle": 54,
+    "14_day_color_blue": "#2f6fe4",
+    "weekly_headline": "本周回顾",
+    "weekly_daily_bars": 7,
+    "monthly_headline": "本月回顾",
+    "monthly_daily_bars": 30,
+    "both_no_formula_section": true,
+    "both_no_HRV_trends_section": true,
+    "all_15_pet_period_views_render_without_js_errors": true,
+    "Health_home_duplicate_old_recap_entry_removed": true,
+    "chromium_page_errors": 0
+  },
+  "not_tested": [
+    "Public Netlify deployment / live URL. Local localhost navigation was blocked by execution environment.",
+    "Full click-through testing for every pre-existing app feature. The V8.49 changes were regression-tested for the 14-day and weekly/monthly summary screens."
+  ],
+  "limitations": [
+    "All physiological data remain simulated.",
+    "15 retained motion MP4s are local pixel-warp animations, not high-fidelity AI image-to-video."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": "V8.60",
+  "date": "2026-11-08",
+  "verified": {
+    "source_from": "V8.59 complete original site",
+    "five_latest_posters": "replaced using 5 newest supplied visual files",
+    "five_locale_poster_sets": "25/25 encoded and decoded at 720x1280",
+    "all_local_index_dependencies": 16,
+    "missing_dependencies": [],
+    "all_js_syntax": "pass via node --check",
+    "netlify_static_build": "node build.mjs passed",
+    "pet_deworming_demos": "15/15 distinct by product and date",
+    "deworming_add_edit_pet_isolation_next_reminder_validation": "Node VM unit tests passed",
+    "phone_language_mapping": "Node VM tests passed for zh-CN zh-SG zh-TW zh-Hant-HK en-US ko-KR ja-JP"
+  },
+  "not_verified": [
+    "Real browser interaction: Chromium navigations were blocked by system administrator on http and file protocols; browser tests did not complete.",
+    "Public Netlify hosting and iPhone Safari not tested.",
+    "Entire old application module regression not re-tested.",
+    "Miniature phone screenshots inside five original English posters remain printed in English (marketing copy and control buttons are localized).",
+    "iOS push notifications for deworming reminders are not implemented; reminders are displayed in-app.",
+    "No automatic deworming dosage: brand/product and pet weight must be checked against veterinarian/product label."
+  ]
+}

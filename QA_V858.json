@@ -1,0 +1,76 @@
+{
+  "version": "V8.58",
+  "date": "2026-11-08",
+  "scope": "Netlify-ready full existing DeepPet site + targeted New Pet first-read flow",
+  "tests": [
+    {
+      "name": "Existing pets 15/15 home switch and heart open",
+      "status": "pass",
+      "method": "Chromium inline document with routed local assets",
+      "detail": "15 pets selected through UI; all 15 full-screen source images naturalWidth=600 and individual scores; all 15 clocks hidden"
+    },
+    {
+      "name": "Existing pet photo isolation",
+      "status": "pass",
+      "detail": "Milo 95, Coco 38, Leo 22, Nana 53, others match mapped current demo score URLs"
+    },
+    {
+      "name": "Individual face-centered home assets",
+      "status": "pass_visual",
+      "detail": "15 individually cropped 900x697 clear JPEG assets; browser snapshots reviewed as contact sheet; source photo files have no baked labels"
+    },
+    {
+      "name": "Legacy blank profile remains",
+      "status": "pass",
+      "detail": "Selected blank profile remains empty; bottom Heart Moments opens name+photo setup dialog"
+    },
+    {
+      "name": "Blank profile name and photo required",
+      "status": "pass",
+      "detail": "Submission without name/photo blocked and shows validation; successful upload creates own custom pet and starts countdown"
+    },
+    {
+      "name": "New Pet no data before measurement",
+      "status": "pass",
+      "detail": "New Pet visible as separate pet with name+photo and no physiological summary"
+    },
+    {
+      "name": "New Pet first 60s measurement",
+      "status": "pass_virtual_clock",
+      "detail": "Clock shown until 60s; after virtual >60s score 95, RMSSD 93, HR83, RR20 for sample demo; reveal transitions blur(13px) to none (verified via 2.3s real-time CSS wait)"
+    },
+    {
+      "name": "Countdown caption and waves non-overlap",
+      "status": "pass",
+      "detail": "At 390x844 UI: caption bottom 699px, waveform starts 716px"
+    },
+    {
+      "name": "After closing first result home data",
+      "status": "pass",
+      "detail": "Four simulated metrics displayed; reopen shows score immediately and countdown hidden"
+    },
+    {
+      "name": "No per-pet first-user CTA",
+      "status": "pass",
+      "detail": "Selector [data-action=heart-first-time-demo] count 0 on existing pets"
+    },
+    {
+      "name": "Main JS syntax",
+      "status": "pass",
+      "detail": "node --check on 7 existing JS files and app.js"
+    },
+    {
+      "name": "Netlify static build",
+      "status": "pass",
+      "detail": "node build.mjs copies all site files to dist, including new home image assets"
+    }
+  ],
+  "not_verified": [
+    "Public Netlify URL; iOS Safari real-device download",
+    "Real collar SDK data and physiological accuracy",
+    "AI image-to-image generation for new pet expressive photo",
+    "Full end-to-end retest of every legacy non-heart subfeature",
+    "Browser storage persistence after navigation on real HTTPS origin (local Chromium security policy blocked navigation; in-session state passed)"
+  ],
+  "notes": "Browser tests used about:blank document injection and local route fulfillment because this environment blocks localhost/file navigation. Do not claim successful public Netlify end-to-end tests."
+}

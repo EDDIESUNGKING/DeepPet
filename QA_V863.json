@@ -1,0 +1,92 @@
+{
+  "version": "V8.63",
+  "base_source": "DeepPet_V8_62_Full_Netlify.zip",
+  "note": "Uses uploaded PNG files byte-for-byte. Only CSS/JS for onboarding changed; preexisting APP source code preserved.",
+  "sequence": [
+    "4 dogs",
+    "Alaskan Malamute",
+    "Golden Retriever",
+    "Poodle",
+    "French Bulldog"
+  ],
+  "content_mode": "one full image per slide; no new visible text or controls",
+  "image_assets": [
+    {
+      "page": 1,
+      "source_upload_name": "DeepPet_ Beyond Monitoring-1(1).png",
+      "asset": "assets/onboarding/approved_exact_images/page_01.png",
+      "width": 941,
+      "height": 1672,
+      "bytes": 3133974,
+      "sha256": "804c1e287427738730f81b5791c81fcde79e1398a6c03fb4b1f989470927e59c"
+    },
+    {
+      "page": 2,
+      "source_upload_name": "DeepPet_ Beyond Monitoring(2).png",
+      "asset": "assets/onboarding/approved_exact_images/page_02.png",
+      "width": 941,
+      "height": 1672,
+      "bytes": 2905613,
+      "sha256": "f16ae7619c5b482f789e48c47ba55bded127d048038118aee8c1760be03bfde9"
+    },
+    {
+      "page": 3,
+      "source_upload_name": "DeepPet AI Care Companion(2).png",
+      "asset": "assets/onboarding/approved_exact_images/page_03.png",
+      "width": 941,
+      "height": 1672,
+      "bytes": 2892261,
+      "sha256": "595cb45c85a63f14953eaf0b3ea2d03a31e8ae932484ffaafaca966a110c875b"
+    },
+    {
+      "page": 4,
+      "source_upload_name": "DeepPet™_ Know Their Normal(1).png",
+      "asset": "assets/onboarding/approved_exact_images/page_04.png",
+      "width": 941,
+      "height": 1672,
+      "bytes": 2937402,
+      "sha256": "066ba269064988e57cfb56a640e305547ff704003a56938671043ddc06dc7629"
+    },
+    {
+      "page": 5,
+      "source_upload_name": "DeepPet 全球4G宠物定位广告-5(1).png",
+      "asset": "assets/onboarding/approved_exact_images/page_05.png",
+      "width": 941,
+      "height": 1672,
+      "bytes": 2963908,
+      "sha256": "ee7740eeab59d64b4ad3bf50857ee384d06a8003da63284f1cd6b2abedfd44be"
+    }
+  ],
+  "caveats": [
+    "Supplied five images contain their own English text and their own visual dots and button; they are not translated.",
+    "Image aspect ratio 941:1672. Taller phones use matching dark padding rather than cropping image text.",
+    "Health and GPS in the legacy app are still demo/simulated and not live SDK."
+  ],
+  "tests": {
+    "zip_integrity": "passed in final repackage",
+    "file_preservation": "all 332 V8.62 ZIP paths preserved; app JS unchanged byte-for-byte",
+    "png_exact_sha256": "all 5 images exact copy; hashes listed per asset",
+    "static_build": "node build.mjs succeeded and dist includes all five images",
+    "js_syntax_checks": "onboarding.js, app.js, app_01/02/03/04, deworming.js passed node --check",
+    "embedded_chromium_test": {
+      "reason": "navigation to local server was blocked by test environment administrator, therefore original PNGs were embedded as data URIs for Chromium browser exercise",
+      "screen_sizes": [
+        "430x930",
+        "375x667",
+        "430x760"
+      ],
+      "image_decoding": "15/15 pages across three screen sizes have natural dimensions 941x1672",
+      "no_html_text_over_image": "15/15 cases with visibleText empty and all legacy extra intro components removed",
+      "pagination": "5 invisible target zones; one active page; dot click checks passed at three sizes",
+      "keyboard_and_get_started": "passed 3 sizes; only fifth page starts app",
+      "mouse_drag": "passed both left and right on 430x930",
+      "app_injected_script_check": "all 8 main JS files injected in headless Chromium with storage stub; original Home rendered ~1640 characters and was still present after Get Started; no runtime JS errors",
+      "errors": []
+    },
+    "not_tested": [
+      "Actual Netlify public URL",
+      "iPhone Safari",
+      "Every preexisting nested feature end-to-end"
+    ]
+  }
+}

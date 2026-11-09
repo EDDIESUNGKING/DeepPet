@@ -1,0 +1,44 @@
+{
+  "version": "8.59",
+  "base": "DeepPet V8.58 original source files retained",
+  "assets": {
+    "pages": 5,
+    "order": [
+      "five-pet collection",
+      "Alaskan Malamute Deep analysis",
+      "Labrador health management",
+      "Poodle physiological age / long-term trends",
+      "running French Bulldog worldwide 4G LTE"
+    ],
+    "brand": "DeepPet",
+    "first_four_no_get_started": true,
+    "fifth_only_get_started": true
+  },
+  "tests_run": {
+    "source_file_preservation": "245/245 prior file paths retained",
+    "original_modified_files": [
+      "VERSION.txt",
+      "build.mjs",
+      "index.html"
+    ],
+    "javascript_syntax": "Node syntax checks performed",
+    "static_build": "node build.mjs succeeded",
+    "intro_browser": "6 groups passed using self-contained DOM (Chromium) incl 4 touch swipes, start, internal click, fresh document, desktop width",
+    "browsers": [
+      "Chromium via about:blank inlined assets test"
+    ]
+  },
+  "behavior": {
+    "each_new_document_load": "always begins intro page one",
+    "get_started": "only fifth, removes overlay in current document",
+    "internal_navigation": "does not recreate intro",
+    "no_storage_flag": true
+  },
+  "not_verified": [
+    "Real public Netlify deployment not executed",
+    "Real HTTP reload blocked by test environment; fresh document initialization tested",
+    "Original V8.58 functional regressions not fully rerun",
+    "Production mobile Safari not tested"
+  ],
+  "data": "Existing demo physiological data remains synthetic; V8.58 functionality copied unchanged"
+}

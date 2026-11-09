@@ -1,0 +1,131 @@
+{
+  "version": "8.57",
+  "test_mode": "Chromium set_content with original site JS and CSS inlined solely to bypass test environment localhost restrictions; assets served via Playwright route. Production files are external and unchanged by this test setup.",
+  "locales": {
+    "zh": {
+      "entry": "◷\n新用户 · 60 秒心跳倒数体验\n点这里直接预览全屏测量动画，不影响现有数据\n→",
+      "countdown_label": "心跳时刻",
+      "caption": "正在采集心跳、呼吸与 HRV 数据\n持续积累有效数据，能让健康趋势判断更加稳定",
+      "good": true
+    },
+    "zht": {
+      "entry": "◷\n新用戶 · 60 秒心跳倒數體驗\n點這裡直接預覽全螢幕測量動畫，不影響現有資料\n→",
+      "countdown_label": "心跳時刻",
+      "caption": "正在收集心跳、呼吸與 HRV 資料\n持續累積有效資料，能讓健康趨勢判斷更加穩定",
+      "good": true
+    },
+    "en": {
+      "entry": "◷\nFirst-time user · 60-second countdown\nPreview the full-screen measurement; existing data stays unchanged\n→",
+      "countdown_label": "Heart Moment",
+      "caption": "Collecting heart rhythm, breathing and HRV data\nMore valid readings over time can improve trend estimates",
+      "good": true
+    },
+    "ko": {
+      "entry": "◷\n첫 사용자 · 60초 카운트다운 체험\n전체 화면 측정을 미리보기 · 기존 데이터는 유지됩니다\n→",
+      "countdown_label": "심장 박동 순간",
+      "caption": "심박, 호흡, HRV 데이터를 수집하고 있어요\n유효한 데이터가 더 쌓이면 건강 추세 분석이 안정될 수 있어요",
+      "good": true
+    }
+  },
+  "demo_pets": [
+    {
+      "name": "Milo",
+      "photo": "00_Milo_95_happy.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Luna",
+      "photo": "01_Luna_84_calm.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Coco",
+      "photo": "02_Coco_38_sad.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Leo",
+      "photo": "03_Leo_22_sad.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Poppy",
+      "photo": "04_Poppy_80_calm.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Nori",
+      "photo": "05_Nori_98_happy.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Miso",
+      "photo": "06_Miso_77_soft.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Mochi",
+      "photo": "07_Mochi_35_sad.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Kiki",
+      "photo": "08_Kiki_17_sad.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Max",
+      "photo": "09_Max_87_calm.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Rex",
+      "photo": "10_Rex_38_sad.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Bella",
+      "photo": "11_Bella_97_happy.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Dodo",
+      "photo": "12_Dodo_61_soft.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Snowy",
+      "photo": "13_Snowy_84_calm.jpg",
+      "fullScreen": true
+    },
+    {
+      "name": "Nana",
+      "photo": "14_Nana_53_sad.jpg",
+      "fullScreen": true
+    }
+  ],
+  "file_check": {},
+  "initial_countdown": {
+    "scoreHidden": true,
+    "time": "01:00",
+    "waveVisible": true
+  },
+  "completion": {
+    "clockHidden": true,
+    "resultVisible": true,
+    "score": "95",
+    "subtitleHidden": true,
+    "errorHint": ""
+  },
+  "PNG_export": {
+    "status": "pass",
+    "filename": "DeepPet_Milo_HeartMoment.png",
+    "bytes": 1633477
+  },
+  "existing_user": {
+    "instantResult": true,
+    "score": "95"
+  },
+  "page_errors": [],
+  "desktop_width": 430
+}

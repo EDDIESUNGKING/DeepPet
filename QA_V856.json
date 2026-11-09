@@ -1,0 +1,30 @@
+{
+  "version": "DeepPet V8.56",
+  "scope": "Clean 15 static demo pet portraits and full-screen Heart Moment regression",
+  "verification_method": "Python Playwright Chromium with local scripts/assets inlined to bypass browser filesystem/network admin restrictions; Node JS syntax and Netlify build command",
+  "results": {
+    "demo_portraits": "15/15 image files present; JPEG 600x1000; clean backgrounds (no baked labels or artificial blurred top/bottom)",
+    "demo_scores": "15/15 score labels match demo pet selection",
+    "heartbeat_view": "15/15 phone 390x844 Heart Moment images loaded, computed filter=none, object-fit=cover, overlay visible",
+    "home_to_heart": "15/15 clicked original Heart Moments button and entered directly",
+    "close_button": "15/15 closed Heart Moment overlay",
+    "png_download": "1/1 representative Chrome download produced playable PNG (Milo)",
+    "languages": {
+      "zh": "pass",
+      "zht": "pass",
+      "en": "pass",
+      "ko": "pass"
+    },
+    "desktop": "1440x900 viewport produced centered phone-size 430px Heart Moment; no blur",
+    "js_syntax": "all active JavaScript files node --check pass",
+    "build": "node build.mjs produced dist/ with 15 demo portraits; cleaned dist before ZIP to avoid duplicate deploy roots",
+    "zip": "ZIP integrity and SHA-256 manifest verified"
+  },
+  "constraints": [
+    "15 portraits are demonstration images and not guaranteed identities of previously named pets; breed and appearance may differ for swapped examples",
+    "This does not confirm AI image generation of four genuine expressions for arbitrary new user-uploaded pet photos: requires configured Netlify function and remote model service",
+    "Demo scores, heart-rate, respiration and HRV readings are simulated; not real collar data or veterinary assessments",
+    "Public Netlify and iOS Safari have not been tested; existing legacy pages were not all re-tested end to end",
+    "The preview photo montage places test-only labels outside separate JPEG photos; JPEGs contain no baked-in text"
+  ]
+}
