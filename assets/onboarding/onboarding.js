@@ -28,6 +28,25 @@
  }
  function finish(){
   if(current!==4||lock)return;lock=true;
+  // Every Get Started opens the FIRST showcase pet (Milo), not the
+  // last pet saved in this browser. Do not clear any pet's saved data.
+  // A render is mandatory: removing the intro alone kept stale Luna DOM.
+  try {
+   if(typeof dpActivatePet==='function' && dpActivatePet(0)){
+    state.tab='home';state.detail=null;state.modal='';
+    render(true);
+   } else if(typeof state!=='undefined'){
+    state.dog=0;state.emptyPreview=false;state.tab='home';
+    state.detail=null;state.modal='';
+    if(typeof render==='function')render(true);
+   }
+  } catch(err){
+   console.error('DeepPet introduction initialization failed',err);
+   if(typeof state!=='undefined'){
+    state.dog=0;state.tab='home';state.detail=null;state.modal='';
+    if(typeof render==='function')render(true);
+   }
+  }
   document.body.classList.remove('dp-intro-active');
   root.remove();
   if(app)app.removeAttribute('inert');

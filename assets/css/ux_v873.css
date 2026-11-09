@@ -1,0 +1,47 @@
+/* DeepPet V8.73: no empty score layouts; legible color-family summaries. */
+.dp73-narrative{display:grid;gap:7px;margin:11px 0 14px;width:100%;min-width:0}
+.dp73-summary-line{font-size:12px!important;line-height:1.72!important;color:#50667c!important;margin:0!important;overflow-wrap:anywhere;white-space:normal}
+.dp-owner-deep .dp-owner-status-card,.dp-owner-deep .dp-owner-period-card,.dp68-period-heart{height:auto!important;min-height:0!important}
+.dp-owner-deep .dp-owner-status-inner,.dp-owner-deep .dp-owner-period-card{align-content:start!important}
+.dp-owner-deep .dp-owner-status-heading h2,.dp-owner-deep .dp-heart-period-overall h2,.dp-owner-deep .dp-sleep-period-score-head h2,.dp68-period-overall h2{margin:0 0 8px!important}
+.dp-owner-deep .dp-owner-status-heading .dp-heart-overall-verdict,.dp-owner-deep .dp-heart-period-overall .dp-heart-overall-verdict,.dp-owner-deep .dp-sleep-period-score-head .dp-heart-overall-verdict{margin-top:9px!important;line-height:1.45!important}
+.dp-owner-deep .dp-owner-status-heading,.dp-owner-deep .dp-heart-period-overall,.dp-owner-deep .dp-sleep-period-score-head,.dp-owner-deep .dp68-period-overall{margin-bottom:4px!important}
+.dp73-metric-summary{font-size:12px!important;line-height:1.65!important;margin:11px 0!important;color:#526c88!important;min-height:0!important}
+.dp-owner-deep .dp-vital-panel,.dp-owner-deep .dp68-rhythm-chart{min-height:0!important;height:auto!important;align-self:stretch}
+.dp-owner-deep .dp-vital-panel>p:empty,.dp-owner-deep .dp-owner-period-card>p:empty{display:none!important}
+/* Sleep titles and narrative always use the green sleep visual language. Separate graded alerts remain truthful. */
+.deep-theme-sleep .dp-owner-status-heading h2,.deep-theme-sleep .dp-sleep-period-score-head h2,
+.deep-theme-sleep .dp-heart-overall-verdict,.deep-theme-sleep .dp-owner-status-heading .dp-heart-overall-verdict,
+.deep-theme-sleep .dp-sleep-period-score-head .dp-heart-overall-verdict,
+.deep-theme-sleep .dp73-summary-line,.deep-theme-sleep .dp-owner-period-card>p{color:#287e59!important}
+/* Score numbers must align geometrically with the dotted-ring center at all widths. */
+.dp70-rhythm-score-ring,.dp73-centered-ring{position:relative!important;display:block!important;width:84px!important;height:84px!important;flex:0 0 84px!important;transform:none!important}
+.dp70-rhythm-score-ring>.dp-status-score{display:block!important;position:relative!important;width:84px!important;height:84px!important;margin:0!important;padding:0!important}
+.dp70-rhythm-score-ring .dp-uniform-dot-svg{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;transform:none!important}
+.dp70-rhythm-score-ring .stat-inner{position:absolute!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%)!important;width:auto!important;height:auto!important;min-width:0!important;margin:0!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;flex-direction:column!important;line-height:1!important}
+.dp70-rhythm-score-ring .stat-inner b{line-height:1!important;margin:0!important;letter-spacing:0!important}
+.dp70-rhythm-score-ring .stat-inner small{line-height:1!important;margin-top:3px!important}
+@media(max-width:350px){.dp70-rhythm-score-ring,.dp73-centered-ring,.dp70-rhythm-score-ring>.dp-status-score{width:72px!important;height:72px!important;flex-basis:72px!important}}
+/* Home's two high-priority ratings gain an original decorative waveform, not a busy photographic background. */
+.dp68-summary.dp-aurora-summary.summary-card .dp-summary-lanes .dp-summary-lane{isolation:isolate;position:relative!important;overflow:hidden!important;box-shadow:0 12px 24px rgba(42,108,145,.11)!important;border-width:1px!important}
+.dp68-summary.dp-aurora-summary.summary-card .dp-summary-lanes .dp-summary-lane.dp-health-lane{background:radial-gradient(circle at 81% 13%,#bff6d9 0,transparent 43%),linear-gradient(145deg,#eafbf1 0%,#f5fffc 67%,#def7ed 100%)!important;border-color:#c6e9d7!important}
+.dp68-summary.dp-aurora-summary.summary-card .dp-summary-lanes .dp-summary-lane.dp-rhythm-lane{background:radial-gradient(circle at 76% 14%,#c8e3ff 0,transparent 45%),linear-gradient(145deg,#eaf4ff 0%,#f4faff 65%,#dcecff 100%)!important;border-color:#cbdef7!important}
+.dp68-summary .dp-summary-lane::before{content:''!important;display:block!important;position:absolute;z-index:0;inset:auto -19px 4% -19px;height:64px;opacity:.19;pointer-events:none;background-position:center;background-repeat:no-repeat;background-size:100% 100%;transform:rotate(-7deg)}
+.dp68-summary .dp-health-lane::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 70'%3E%3Cpath d='M0 35h56l13 -18 18 42 24 -55 22 42 11 -11h29l9 -12 15 25 15 -14h108' fill='none' stroke='%232ca577' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.dp68-summary .dp-rhythm-lane::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 70'%3E%3Cpath d='M0 33h39q17 -26 34 0t34 0t34 0t34 0t34 0t34 0h77' fill='none' stroke='%234587dd' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")}
+.dp68-summary .dp-summary-lane>*{position:relative;z-index:1}
+.dp68-summary .dp-summary-lane .dp-lane-copy strong,.dp68-summary .dp-summary-lane .dp-dot-meter-center strong{color:#1f3447!important;text-shadow:0 1px 0 #ffffffab}
+/* Me's age should be immediately useful and should not take two clicks. */
+.dp73-age-hero{position:relative;isolation:isolate;overflow:hidden;width:100%;text-align:left;display:block;margin:12px 0;border:1px solid #7383d1!important;border-radius:20px;padding:17px!important;background:radial-gradient(circle at 86% 18%,#8090e3aa,transparent 46%),linear-gradient(135deg,#273162 0%,#4356a7 63%,#697bc1 100%)!important;color:white!important;box-shadow:0 12px 27px #334ca52b;min-height:0!important;height:auto!important}
+.dp73-age-hero::before{content:'✧';font-size:145px;line-height:1;position:absolute;right:-10px;top:-47px;color:white;opacity:.075;z-index:-1;pointer-events:none}
+.dp73-age-head{display:flex;align-items:center;gap:10px}.dp73-age-head>div{flex:1;min-width:0}.dp73-age-head b{font-size:16px;display:block;line-height:1.4}.dp73-age-head small,.dp73-estimated small,.dp73-age-comparison small{font-size:11px;display:block;color:#d5e2ff;line-height:1.5}.dp73-age-icon{border:1px solid #ffffff5c;border-radius:12px;padding:9px;background:#ffffff24;display:grid;place-items:center}.dp73-age-chevron{color:#d5e9ff}
+.dp73-age-figures{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:5px 0 9px}.dp73-estimated{flex:1;min-width:0}.dp73-estimated strong{display:block;font-weight:850;font-size:66px;line-height:1.05;letter-spacing:-2.5px;color:white;font-variant-numeric:tabular-nums;white-space:nowrap}.dp73-estimated strong em{font-size:16px;font-style:normal;font-weight:600;letter-spacing:0;margin-left:5px;color:#d7e6ff}.dp73-age-comparison{text-align:right;max-width:39%;padding-bottom:5px}.dp73-age-comparison b{font-size:17px;display:block;font-weight:750;white-space:nowrap}.dp73-difference{display:inline-block;font-size:13px;padding:5px 10px;margin-top:7px;border-radius:99px;background:#ffffff2d;border:1px solid #ffffff69;font-weight:750;white-space:nowrap}
+.dp73-age-why{font-size:11px;line-height:1.65;margin:8px 0;color:#e6eeff}.dp73-age-detail-label{font-size:11px;line-height:1.6;font-weight:700;color:#fff;display:block;margin-top:9px}
+.dp-age-full .dp-age-explanation{margin-top:12px}.dp-age-full .age-modal-big>div:first-child strong{font-size:42px}
+@media(max-width:360px){.dp73-estimated strong{font-size:54px}.dp73-age-comparison b{font-size:14px}.dp73-age-hero{padding:14px!important}}
+/* Use the open space to the left of each 84px score ring for the actual explanation. */
+.dp-owner-deep .dp-vital-heading .dp73-metric-head-copy{align-self:stretch!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:8px!important;flex:1;min-width:0}
+.dp-owner-deep .dp-vital-heading .dp73-metric-head-copy .dp73-metric-summary{margin:2px 0 0!important;line-height:1.65!important;font-size:12px!important;color:#536d87!important;max-width:100%}
+.dp-owner-deep .dp-energy-score-panel,.dp-owner-deep .dp-energy-period-panel{min-height:0!important;padding-bottom:12px!important}
+.dp-owner-deep .dp-energy-score-panel>.dp66-inline-risk,.dp-owner-deep .dp-energy-period-panel>.dp66-inline-risk{margin-top:7px!important}
+.dp-owner-deep .dp68-rhythm-chart .dp73-rhythm-trend{margin:7px 0 9px!important;font-size:12px!important;line-height:1.6!important;color:#597189!important}

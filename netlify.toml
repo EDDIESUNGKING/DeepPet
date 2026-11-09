@@ -12,3 +12,9 @@
   for = "/assets/demo_score_portraits/*"
   [headers.values]
     Cache-Control = "public, max-age=3600"
+
+# HTML must revalidate when a new app build is deployed.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

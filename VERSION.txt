@@ -1,2 +1,2 @@
-DeepPet V8.66 — Deep results-first, demo priority alerts, corrected pet breeds
-2026-11-09
+DeepPet V8.73
+Based on V8.72 full source; onboarding, Deep insight copy/layout, Me age, Health order, navigation fixes.
