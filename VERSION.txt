@@ -1,1 +1,1 @@
-DeepPet V8.76 — Alignment and HRV four-tier status update; V8.75 colors retained.
+DeepPet Version 8.80 — V8.76 color restoration + clearer navigation.
