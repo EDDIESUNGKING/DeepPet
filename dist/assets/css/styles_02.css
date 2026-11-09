@@ -1,0 +1,15 @@
+
+#dp-story-card:has(.dp-review-hero){background:#f5f6fa!important;color:#20233d!important;padding:22px 16px 35px!important;max-height:100dvh!important}
+#dp-story-card:has(.dp-review-hero)>h2{font-size:23px!important;font-weight:850!important;letter-spacing:-.7px;padding:10px 6px 4px!important}
+#dp-story-card:has(.dp-review-hero) #dp-story-body{padding:0 1px 24px!important}
+#dp-story-card:has(.dp-review-hero) #dp-review-tabs{background:#e9eaf2!important;border-radius:18px!important;padding:5px!important;margin:10px 0 16px!important;gap:4px!important}
+#dp-story-card:has(.dp-review-hero) #dp-review-tabs button{border-radius:14px!important;font-weight:800!important;padding:13px 4px!important}
+#dp-story-card:has(.dp-review-hero) .dp-review-hero{background:radial-gradient(circle at 90% 8%,#a1b9ff88,transparent 38%),linear-gradient(125deg,#171b44 0%,#4643a0 65%,#7462cc 100%)!important;border-radius:27px!important;padding:28px 24px!important;box-shadow:0 16px 35px #34337d38!important;position:relative!important;overflow:hidden!important;margin-top:16px!important}
+#dp-story-card:has(.dp-review-hero) .dp-review-hero:after{content:'✦';position:absolute;right:24px;top:12px;font-size:60px;color:#ffffff27}
+#dp-story-card:has(.dp-review-hero) .dp-review-score{font-size:78px!important;letter-spacing:-4px!important;line-height:1.18!important}
+#dp-story-card:has(.dp-review-hero) .dp-review-highlight{background:#fff!important;border:1px solid #e8e9f4!important;box-shadow:0 6px 18px #2529560c!important;border-radius:22px!important;padding:19px!important}
+#dp-story-card:has(.dp-review-hero) .dp-review-story{background:linear-gradient(130deg,#e7e6ff,#f7eaff)!important;border:1px solid #e5dcff!important;border-radius:22px!important;padding:19px!important}
+#dp-story-card:has(.dp-review-hero) .dp-story-chart{background:#fff!important;border-radius:20px!important;padding:13px 9px 0!important;overflow:hidden!important}
+#dp-story-card:has(.dp-review-hero) .dp-bar-col{gap:3px!important}
+#dp-story-card:has(.dp-review-hero) .dp-bar-col i{border-radius:7px 7px 0 0!important;background:linear-gradient(0deg,#5658c7,#6bd2b8)!important}
+#dp-story-card:has(.dp-review-hero) button{transition:filter .2s}

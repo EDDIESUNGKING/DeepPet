@@ -1,0 +1,91 @@
+/* DeepPet V8.68 UX – prominent preventive care, glanceable daily scores. */
+.dp68-summary.dp-aurora-summary.summary-card{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin-top:14px!important}
+.dp68-summary .summary-top{padding:0 3px 9px}
+.dp68-summary .dp-summary-lanes{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-items:stretch!important}
+.dp68-summary .dp-summary-lane{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:center!important;text-align:center!important;gap:8px!important;margin:0!important;border-radius:22px!important;border:0!important;background:#f1f2f4!important;padding:13px 8px 14px!important;min-width:0!important;min-height:218px!important;box-shadow:none!important}
+.dp68-summary .dp-summary-lane::before{display:none!important}
+.dp68-summary .dp-lane-meter{margin:0!important;flex:0 0 auto!important;display:flex!important;justify-content:center!important;align-items:center!important;min-width:0!important;width:100%!important}
+.dp68-summary .dp-dotted-meter{position:relative!important;display:block!important;width:120px!important;height:120px!important;flex:none!important;max-width:100%!important;margin:0 auto!important;background:transparent!important;border:0!important}
+.dp68-summary .dp-dotted-meter svg{width:100%!important;height:100%!important;position:absolute!important;inset:0!important}
+.dp68-summary .dp-dot-meter-center{position:absolute!important;inset:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important}
+.dp68-summary .dp-dot-meter-center strong{font-size:34px!important;line-height:1!important;font-weight:850!important}
+.dp68-summary .dp-dot-meter-center small{font-size:12px!important}
+.dp68-summary .dp-lane-copy{display:flex!important;flex-direction:column!important;align-items:center!important;gap:5px!important;width:100%!important;min-width:0!important}
+.dp68-summary .dp-lane-copy strong{font-size:16px!important;line-height:1.25!important;color:#222932!important;font-weight:800!important}
+.dp68-summary .dp-lane-copy small{font-size:11px!important;font-weight:500!important;color:#717b87!important;line-height:1.4!important;overflow-wrap:anywhere!important;white-space:normal!important}
+/* Distinct hero banner; the cardiopulmonary illustration is a decoration, not embedded text. */
+.dp68-prevent-button.dp67-home-card{display:flex!important;position:relative!important;overflow:hidden!important;isolation:isolate;background:linear-gradient(118deg,#0c3657,#155f77 60%,#19859b)!important;color:#fff!important;min-height:155px!important;padding:21px 18px!important;border:1px solid #36a9b9!important;box-shadow:0 12px 26px rgba(10,71,102,.19)!important;text-align:left!important;border-radius:21px!important;gap:10px!important}
+.dp68-prevent-button::before{content:'';position:absolute;inset:-40%;background:radial-gradient(circle at 82% 35%,#53e6e650,transparent 34%),radial-gradient(circle at 15% 88%,#58a8ed48,transparent 45%);pointer-events:none;z-index:-1}
+.dp68-cardio-art{position:absolute;right:-24px;top:6px;width:205px;height:150px;opacity:.38;z-index:0;pointer-events:none}
+.dp68-prevent-body{position:relative;z-index:1;min-width:0;flex:1;padding-right:36px}
+.dp68-prevent-eyebrow{display:inline-block;background:#ffffff25;border:1px solid #ffffff38;border-radius:30px;padding:4px 9px;font-size:10px;color:#d6f8fa;font-weight:650;letter-spacing:.03em}
+.dp68-prevent-body b{display:block;color:#fff!important;font-size:22px!important;font-weight:850!important;margin:9px 0 8px;line-height:1.22}
+.dp68-prevent-body p{color:#def8fc!important;font-size:12px!important;line-height:1.45!important;margin:0 0 10px!important}
+.dp68-prevent-body small{display:block;color:#b9dee5!important;font-size:10px!important;line-height:1.4!important}
+.dp68-prevent-arrow{position:relative;z-index:1;align-self:center;flex:none;color:#f2fcff}
+.dp68-prevent-main .dp67-hero{border-radius:19px!important}
+.dp68-watch-intro{padding:18px 16px 11px;background:#fff;border-radius:18px;margin:12px 0 9px;border:1px solid #dfedf2}
+.dp68-watch-intro>b{display:block;font-size:16px;color:#254960;line-height:1.45}
+.dp68-watch-intro p{font-size:12px;line-height:1.65;color:#667d8b;margin:8px 0}
+.dp68-watch-count{display:inline-block;color:#177d88;font-size:11px;background:#eaf7f7;padding:5px 9px;border-radius:18px;font-weight:800}
+.dp68-watch-list{display:grid;gap:10px}
+.dp68-watch-card{background:var(--card-bg,#fff);border:1px solid var(--line,#e5e9ed);border-radius:17px;padding:14px 14px 12px;box-shadow:0 5px 13px #19283c07;min-width:0}
+.dp68-watch-card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.dp68-watch-card-head span{width:29px;height:29px;border-radius:10px;flex:none;display:grid;place-items:center;background:#e8f7f7;color:#087e91;font-weight:850;font-size:12px}
+.dp68-watch-card h3{color:#26495a;font-size:14px;line-height:1.4;margin:0;overflow-wrap:anywhere}
+.dp68-watch-copy{border-top:1px solid #eaf0f4;padding-top:9px}
+.dp68-watch-copy b{display:block;font-size:11px;color:#167a84;margin:8px 0 4px}
+.dp68-watch-copy p,.dp68-watch-card>p{font-size:12px;line-height:1.65;color:#536476;margin:0 0 9px;overflow-wrap:anywhere}
+.dp68-prevent-note{font-size:11px;line-height:1.6;color:#61717f;padding:10px;margin:11px 0;background:#f1f7fa;border-radius:11px}
+.dp68-expand-watch,.dp68-more,.dp68-period-trends{max-width:100%;border-radius:13px;border:1px solid #d9e8ee;background:#f7fbfd;overflow:hidden;margin-top:10px}
+.dp68-expand-watch>summary,.dp68-more>summary,.dp68-period-trends>summary{padding:12px 13px;font-size:12px;font-weight:800;color:#25768c;cursor:pointer;list-style-position:inside}
+.dp68-expand-watch .dp68-watch-card{margin:8px}
+.dp68-more{margin:8px 3px}.dp68-more .care-action{background:white;max-width:100%}
+.dp68-independent-care{margin-top:10px;padding:0!important;overflow:hidden;max-width:100%}
+.dp68-independent-care .health-item{border:0!important;width:100%;margin:0;border-radius:inherit;min-width:0!important}
+.dp68-food-link{background:#fffaf0!important;border-radius:10px!important;min-width:0}
+.dp68-age-me{position:relative;overflow:hidden;background:linear-gradient(130deg,#f0efff 0%,#f2f8ff 66%,#fff 100%);border:1px solid #deddf7;padding:0!important;border-radius:19px}
+.dp68-age-me::before{content:'✦';font-size:100px;position:absolute;right:-8px;top:-29px;opacity:.08;color:#5a4dc5;pointer-events:none}
+.dp68-age-me>details>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:16px 12px;position:relative;min-width:0}
+.dp68-age-me>details>summary::-webkit-details-marker{display:none}
+.dp68-age-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;color:#6258cd;background:#e1dfff;flex:none}
+.dp68-age-text{min-width:0;flex:1}.dp68-age-text b{display:block;font-size:13px;line-height:1.35;color:#34335d}.dp68-age-text small{display:block;font-size:10px;line-height:1.35;color:#7c79a5;margin-top:5px;white-space:normal}
+.dp68-age-me>details>summary>strong{font-size:21px;color:#594ac3;white-space:nowrap}.dp68-age-me>details>summary>strong small{font-size:10px}
+.dp68-age-expanded{border-top:1px solid #e0def0;padding:13px;max-width:100%;overflow:hidden}
+.dp68-age-expanded p{font-size:11px;line-height:1.5;color:#63708a}
+.dp68-me-heart{margin:11px 0!important}
+/* Deep period daily cards (no default charts). */
+.dp68-period-overall{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
+.dp68-period-overall>div{min-width:0;flex:1}.dp68-period-overall h2{font-size:17px;line-height:1.3;margin:0;color:#795169}
+.dp68-period-overall p{font-size:12px;line-height:1.5;color:#8b7586}.dp68-period-overall .dp-status-score{flex:none;width:86px;height:86px}
+.dp68-period-heart h3{font-size:15px;color:#684d5d;margin:17px 0 7px}
+.dp68-period-lead{font-size:12px;line-height:1.55;color:#697889;margin:6px 0 12px}
+.dp68-risk-counts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;max-width:100%}
+.dp68-risk-count{min-width:0;border-radius:12px;background:#f5f8fb;border:1px solid #e2eaf0;padding:10px 5px;text-align:center}
+.dp68-risk-count>b{display:block;font-size:25px;line-height:1.2;font-weight:850;color:var(--risk-color,#2c8596)}
+.dp68-risk-count>small{display:block;font-size:10px;line-height:1.4;margin-top:4px;color:#627188;word-wrap:break-word}
+.dp68-risk-0{--risk-color:#149d73;--risk-bg:#e9f9f0}.dp68-risk-1{--risk-color:#3683ed;--risk-bg:#eaf2ff}.dp68-risk-2{--risk-color:#dc9125;--risk-bg:#fff5e2}.dp68-risk-3{--risk-color:#c54b58;--risk-bg:#fff0f0}.dp68-risk--1{--risk-color:#aeb2c2;--risk-bg:#f3f4f7}
+.dp68-risk-calendar{display:grid;gap:7px;margin:12px 0 14px;max-width:100%}
+.dp68-risk-calendar.is-week{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dp68-risk-calendar.is-month{grid-template-columns:repeat(5,minmax(0,1fr))}
+.dp68-risk-day{min-width:0;min-height:66px;padding:8px 3px;border:1px solid color-mix(in srgb,var(--risk-color) 32%,#eef1f5);border-radius:12px;background:var(--risk-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:#405466;text-align:center}
+.dp68-risk-day b{font-size:11px;font-variant-numeric:tabular-nums}.dp68-risk-day i{display:block;width:8px;height:8px;border-radius:50%;background:var(--risk-color)}.dp68-risk-day span{font-size:10px;line-height:1.25;font-weight:750;color:var(--risk-color);overflow-wrap:anywhere}
+.dp68-period-avg{font-size:12px;line-height:1.6;background:#f9fafe;border-radius:10px;padding:9px;color:#526782;overflow-wrap:anywhere}
+.dp68-period-avg b{color:#30425c}.dp68-period-trends{margin-top:12px}.dp68-period-trends .dp-owner-chart-box{padding:10px 7px}
+.dp68-data-disclaimer{font-size:10px;color:#82909f;line-height:1.6;margin-top:10px}
+.dp68-rhythm-period{display:grid;gap:11px;margin-top:12px}
+.dp68-rhythm-chart{margin:0!important;min-width:0;padding:15px!important}
+.dp68-rhythm-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:0}
+.dp68-rhythm-head b{font-size:14px;line-height:1.35;color:#39567e;min-width:0;overflow-wrap:anywhere}
+.dp68-rhythm-score{display:flex;flex-direction:column;align-items:flex-end;flex:none;font-size:24px;font-weight:850;line-height:1;color:#3776c0;min-width:39px}
+.dp68-rhythm-score small{font-size:10px;color:#6e89a9;margin-top:3px}
+.dp68-rhythm-chart p{font-size:11px;color:#687e9a;margin:8px 0 10px}
+.dp68-rhythm-chart .dp-owner-chart-box{max-width:100%;overflow:hidden;padding:2px}
+.dp68-rhythm-chart .dp-owner-chart-box svg{max-width:100%}
+.dp66-rhythm-item .dp68-rhythm-head{margin-bottom:4px}.dp66-rhythm-item .dp68-grade-inline{display:inline-block;margin:5px 0}
+@media(max-width:350px){.dp68-summary .dp-summary-lane{min-height:195px!important;padding:9px 5px 11px!important}.dp68-summary .dp-dotted-meter{width:97px!important;height:97px!important}.dp68-summary .dp-dot-meter-center strong{font-size:29px!important}.dp68-summary .dp-lane-copy strong{font-size:14px!important}.dp68-summary .dp-lane-copy small{font-size:9px!important}.dp68-risk-count{padding:8px 3px}.dp68-risk-count small{font-size:9px}.dp68-risk-calendar.is-month{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* Stronger specificity than the legacy blue aurora card style. */
+.dp68-summary.dp-aurora-summary.summary-card .dp-summary-lanes .dp-summary-lane{background:#f1f2f4!important;border:0!important}
+.dp68-blank-heart{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fff7fa;color:#8d4663;border:1px solid #edd3de;padding:14px}
+.dp68-blank-heart>b{font-size:14px;white-space:nowrap}.dp68-blank-heart>span{font-size:11px;color:#9e6679;min-width:0;flex:1}
