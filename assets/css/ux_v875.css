@@ -1,0 +1,122 @@
+/* DeepPet V8.75 — single alignment scale for all Deep states.
+   Main rings 100px, sub rings 84px. Digits share a 27px standard.
+   Labels are horizontally centered below the ring with a visible 8px gap. */
+.dp-owner-deep{--dp75-main:100px;--dp75-sub:84px;--dp75-rail:106px}
+.dp-owner-deep .dp74-overview-head>.dp74-overview-score.dp75-overview-aside{
+ width:var(--dp75-rail)!important;max-width:var(--dp75-rail)!important;min-width:var(--dp75-rail)!important;
+ height:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:flex-start!important;margin:4px 0 8px 11px!important;float:right!important;clear:right!important;
+ padding:0!important;box-sizing:border-box!important;gap:0!important;text-align:center!important;
+}
+.dp-owner-deep .dp75-overview-aside .dp-status-score.dp75-main-ring,
+.dp-owner-deep .dp74-overview-head .dp75-main-ring,
+.dp-owner-deep .dp74-overview-head .stat-bubble.dp75-main-ring{
+ width:var(--dp75-main)!important;height:var(--dp75-main)!important;
+ min-width:var(--dp75-main)!important;max-width:var(--dp75-main)!important;
+ min-height:var(--dp75-main)!important;max-height:var(--dp75-main)!important;
+ flex:none!important;margin:0 auto!important;transform:none!important;
+}
+.dp-owner-deep .dp75-main-ring .stat-inner,
+.dp-owner-deep .dp75-small-ring .stat-inner{position:absolute!important;inset:0!important;margin:auto!important;transform:none!important;width:72%!important;height:72%!important;}
+.dp-owner-deep .dp75-main-ring .stat-inner b,.dp-owner-deep .dp75-small-ring .stat-inner b{
+ font-size:27px!important;font-weight:820!important;line-height:1.03!important;
+}
+.dp-owner-deep .dp75-main-ring .stat-inner small,.dp-owner-deep .dp75-small-ring .stat-inner small{font-size:10px!important;line-height:1!important;}
+.dp-owner-deep .dp75-main-ring svg,.dp-owner-deep .dp75-small-ring svg{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ display:block!important;overflow:visible!important;
+}
+.dp-owner-deep .dp75-overview-aside>.dp75-risk,
+.dp-owner-deep .dp75-overview-aside>.dp69-grade{margin:8px auto 0!important;align-self:center!important;position:static!important;}
+.dp-owner-deep .dp75-risk{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;position:static!important;
+ min-height:24px!important;max-width:104px!important;
+ width:max-content!important;border-radius:999px!important;padding:4px 9px!important;
+ font-size:10px!important;font-weight:780!important;line-height:1.2!important;
+ white-space:nowrap!important;text-align:center!important;letter-spacing:0!important;
+ box-shadow:none!important;flex:none!important;
+}
+/* Original graded palette: no longer override by the current tab color. */
+.dp-owner-deep .dp75-risk.dp75-risk-normal{color:#167d55!important;background:#e6f8ef!important;border:1px solid #b9e5ce!important}
+.dp-owner-deep .dp75-risk.dp75-risk-low{color:#266bbd!important;background:#e9f2ff!important;border:1px solid #b9d5f7!important}
+.dp-owner-deep .dp75-risk.dp75-risk-medium{color:#985c10!important;background:#fff3df!important;border:1px solid #f0d4a3!important}
+.dp-owner-deep .dp75-risk.dp75-risk-high{color:#ad374a!important;background:#ffedf1!important;border:1px solid #f0bdc9!important}
+.dp-owner-deep .dp75-risk.dp75-risk-missing{color:#75818e!important;background:#eef2f5!important;border:1px solid #d7e0e8!important}
+/* V8.74 forced all cardio risk tiles and warnings pink. Reinstate risk-tier colors. */
+.deep-theme-heart .dp68-risk-count.dp68-risk-0,.deep-theme-heart .dp68-risk-day.dp68-risk-0{--risk-color:#149d73!important;--risk-bg:#e9f9f0!important}
+.deep-theme-heart .dp68-risk-count.dp68-risk-1,.deep-theme-heart .dp68-risk-day.dp68-risk-1{--risk-color:#3683ed!important;--risk-bg:#eaf2ff!important}
+.deep-theme-heart .dp68-risk-count.dp68-risk-2,.deep-theme-heart .dp68-risk-day.dp68-risk-2{--risk-color:#dc9125!important;--risk-bg:#fff5e2!important}
+.deep-theme-heart .dp68-risk-count.dp68-risk-3,.deep-theme-heart .dp68-risk-day.dp68-risk-3{--risk-color:#c54b58!important;--risk-bg:#fff0f0!important}
+.deep-theme-heart .dp68-risk-count.dp68-risk--1,.deep-theme-heart .dp68-risk-day.dp68-risk--1{--risk-color:#aeb2c2!important;--risk-bg:#f3f4f7!important}
+.deep-theme-heart .dp68-risk-count,.deep-theme-heart .dp68-risk-day{
+ background:var(--risk-bg,#f3f4f7)!important;color:var(--risk-color,#637484)!important;
+ border-color:color-mix(in srgb,var(--risk-color,#aeb2c2) 30%,#e6eaf0)!important;
+}
+.deep-theme-heart .dp68-risk-count b,.deep-theme-heart .dp68-risk-count small,
+.deep-theme-heart .dp68-risk-day b,.deep-theme-heart .dp68-risk-day span{color:var(--risk-color,#637484)!important}
+.deep-theme-heart .dp68-risk-day i{background:var(--risk-color,#aeb2c2)!important}
+.deep-theme-heart .dp872-vital-cue{background:#db8b23!important;color:white!important;border:1px solid white!important}
+.deep-theme-heart .dp68-risk-day.dp68-risk-2 .dp872-vital-cue,
+.deep-theme-heart .dp68-risk-day.dp68-risk-3 .dp872-vital-cue{background:#ba374b!important}
+/* Heart and breathing numeric values go UNDER their top-left headings. */
+.dp-owner-deep.deep-theme-heart .dp66-vital-top.dp75-vital-top{
+ display:grid!important;grid-template-columns:minmax(0,1fr) var(--dp75-rail)!important;
+ gap:8px!important;align-items:start!important;min-height:66px!important;
+}
+.dp-owner-deep .dp75-vital-left{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.dp-owner-deep.deep-theme-heart .dp75-vital-left>b{display:block!important;font-size:15px!important;line-height:1.3!important;color:#ad4d6a!important;margin:0!important}
+.dp-owner-deep.deep-theme-heart .dp75-vital-left>strong{font-size:24px!important;line-height:1.1!important;font-weight:820!important;color:#34506d!important;margin:0!important;letter-spacing:-.35px}
+.dp-owner-deep .dp75-vital-right{display:flex!important;align-items:center!important;justify-content:center!important;width:var(--dp75-rail)!important;min-width:0!important;max-width:none!important;padding-top:38px!important}
+.dp-owner-deep .dp75-vital-right .dp75-risk{margin:0 auto!important;}
+/* HRV grade uses the same horizontal rail center as the two vital statuses. */
+.dp-owner-deep.deep-theme-heart .dp75-hrv-head{display:grid!important;grid-template-columns:minmax(0,1fr) var(--dp75-rail)!important;gap:7px!important;align-items:start!important}
+.dp-owner-deep.deep-theme-heart .dp75-hrv-head>.dp75-risk{justify-self:center!important;margin:35px auto 0!important}
+/* Consistent sub-metric rings (energy, recovery, rhythm). */
+.dp-owner-deep .dp75-metric-aside{width:var(--dp75-rail)!important;min-width:var(--dp75-rail)!important;max-width:var(--dp75-rail)!important;display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:0!important}
+.dp-owner-deep .dp75-small-ring,
+.dp-owner-deep .dp70-rhythm-score-ring.dp73-centered-ring,
+.dp-owner-deep .dp70-rhythm-score-ring.dp73-centered-ring>.dp75-small-ring{
+ width:var(--dp75-sub)!important;height:var(--dp75-sub)!important;
+ min-width:var(--dp75-sub)!important;max-width:var(--dp75-sub)!important;
+ min-height:var(--dp75-sub)!important;max-height:var(--dp75-sub)!important;
+ flex:none!important;margin:0 auto!important;transform:none!important;
+}
+.dp-owner-deep .dp75-metric-aside>.dp75-risk,.dp-owner-deep .dp75-rhythm-aside>.dp75-risk,
+.dp-owner-deep .dp75-heart-rhythm-aside>.dp75-risk{align-self:center!important;margin:8px auto 0!important}
+.dp-owner-deep .dp75-rhythm-aside,.dp-owner-deep .dp75-heart-rhythm-aside{
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ text-align:center!important;width:var(--dp75-rail)!important;max-width:var(--dp75-rail)!important;
+ min-width:var(--dp75-rail)!important;gap:0!important;margin:0!important;
+}
+.dp-owner-deep .dp75-heart-rhythm,
+.dp-owner-deep .dp75-heart-rhythm .dp68-rhythm-head{background:#fff8fb!important;border-color:#f2d8e1!important}
+.dp-owner-deep .dp75-heart-rhythm b,
+.dp-owner-deep .dp75-heart-rhythm h3{background:transparent!important;background-color:transparent!important}
+.dp-owner-deep .dp75-heart-rhythm :is(.dp-status-score,.stat-inner,.score-core,.dp70-rhythm-score-ring){background:transparent!important;background-color:transparent!important;box-shadow:none!important;border-color:transparent!important}
+.dp-owner-deep .dp75-heart-rhythm .dp-status-score:before,
+.dp-owner-deep .dp75-heart-rhythm .dp-status-score:after{background:transparent!important;box-shadow:none!important}
+/* Avoid score rings or right-side score columns leaking into the main text. */
+.dp-owner-deep .dp74-overview-head>.dp74-overview-copy{min-width:0!important}
+.dp-owner-deep .dp74-rhythm-flowhead{min-height:0!important}
+.dp-owner-deep .dp75-nearby-icon{display:inline-flex;align-items:center;justify-content:center}
+.garden-entry-icon.dp75-nearby-icon{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+.garden-entry-icon.dp75-nearby-icon img{display:block;width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 3px 8px #e788ab33)}
+.garden-top{position:relative!important;padding-right:63px!important}
+.dp75-garden-logo{position:absolute;right:0;top:2px;width:54px;height:54px;object-fit:contain;}
+@media(max-width:375px){
+ .dp-owner-deep{--dp75-main:94px;--dp75-sub:80px;--dp75-rail:98px}
+ .dp-owner-deep .dp75-vital-left>strong{font-size:22px!important}
+ .dp-owner-deep .dp75-risk{font-size:9px!important;padding:4px 6px!important}
+}
+/* Pixel-accurate column normalization (430px view: target status center x≈343px). */
+.dp-owner-deep.deep-theme-heart .dp75-vital-right{transform:translateX(16px)!important}
+.dp-owner-deep.deep-theme-heart .dp75-hrv-head>.dp75-risk{transform:translateX(16px)!important}
+.dp-owner-deep.deep-theme-activity .dp75-metric-aside{transform:translateX(13px)!important}
+.dp-owner-deep.deep-theme-activity .dp66-rhythm-item .dp75-rhythm-aside{transform:translateX(7px)!important}
+.dp-owner-deep.deep-theme-activity .dp68-rhythm-chart .dp75-rhythm-aside{transform:translateX(-7px)!important}
+.dp-owner-deep.deep-theme-activity .dp-heart-period-overall>.dp75-overview-aside{transform:translateX(4px)!important}
+/* The heartbeat stability caption and score have no yellow backplate; risk tiers remain visible. */
+.dp-owner-deep.deep-theme-heart .dp75-heart-rhythm .dp75-heart-rhythm-aside .dp75-small-ring,
+.dp-owner-deep.deep-theme-heart .dp75-heart-rhythm .dp75-heart-rhythm-aside .stat-inner,
+.dp-owner-deep.deep-theme-heart .dp75-heart-rhythm .dp75-heart-rhythm-aside .score-core{background:transparent!important;background-image:none!important;box-shadow:none!important}

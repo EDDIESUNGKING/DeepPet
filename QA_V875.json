@@ -1,0 +1,32 @@
+{
+  "version": "8.75",
+  "checks": {
+    "30_day_calendar_example": [
+      {
+        "cl": "dp68-risk-day dp68-risk-0",
+        "bg": "rgb(233, 249, 240)"
+      },
+      {
+        "cl": "dp68-risk-day dp68-risk-1",
+        "bg": "rgb(234, 242, 255)"
+      },
+      {
+        "cl": "dp68-risk-day dp68-risk-2",
+        "bg": "rgb(255, 245, 226)"
+      },
+      {
+        "cl": "dp68-risk-day dp68-risk-1",
+        "bg": "rgb(234, 242, 255)"
+      }
+    ],
+    "narrow_phone_375px": 6,
+    "new_nearby_icon": true,
+    "garden_logo_rendered": true,
+    "garden_modal_visible": true,
+    "zh_language_x_three_tabs_x_three_ranges": 9,
+    "two_pets_x_three_day_tabs": 6
+  },
+  "bad": [],
+  "runtime_errors": [],
+  "scope_note": "Smoke checks: 9 Chinese Deep combinations + 6 pet combinations + 6 narrow-phone combinations, plus Nearby icon and modal. Not exhaustive real-hardware, cloud, location, adoption or store-purchase testing."
+}
