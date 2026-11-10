@@ -1,0 +1,25 @@
+DeepPet V9.03 — navigation and score audit
+
+FOUND IN THE PREVIOUS VERSION AND CORRECTED:
+1. The Nearby Pets entry used a modal instead of a standalone screen. Nearby Pets now has its own screen with back navigation to the exact previous main tab.
+2. The old Messages tab contained the friends list and friend requests. Messages now contains conversation records only, and Friends contains requests plus the friend list.
+3. Chats left the main Today/Deep/Health/Me bottom navigation visible. Chat is now an independent full-height page with the main bottom nav hidden.
+4. Chat displayed a three-dot menu with a simulate-recipient-reply option. That menu was removed from the UI.
+5. Chat back previously reopened the nearby pet modal. Back now returns to the standalone Nearby Pets -> Messages view. A public profile opened from chat also returns to chat.
+6. Map/list users pressing Message on a not-yet-friend pet could be redirected to an old popup. This now opens a standalone public profile; cross-user messaging still requires an accepted friend request.
+7. After the heartbeat-stability card moved into the four-card heart section, the Home rhythm shortcut pointed at an old card selector. It now scrolls to the fourth card and temporarily outlines it in red. The calm shortcut continues to select the corresponding Energy & Recovery card.
+8. The heart/breath waveform standalone detail retained the main bottom navigation. This detail now hides it and returns directly to Deep.
+9. The AI Age detail title and redundant lower Back to Me button were inconsistent. Title is now AI estimated biological age, and only the upper-left back control remains.
+10. Three-day and 14-day analysis period controls were absent despite prior multi-period requests. They have been restored in Deep alongside Day, 7-day and 30-day.
+11. HRV multi-period analysis previously lacked an explicit period-average score; and the heart composite did not average all four visible metrics. Four card values and all composites now come from the same valid score sources.
+
+BROWSER TESTED:
+- 135-language/pet/category/period Deep render combinations (3 languages x 3 pets x 3 tabs x 5 periods) passed, and a separate 36-case score/geometry test passed.
+- Heart 4-card and Energy 3-card arithmetic consistency, four white heart cards, 96px primary rings, and 7-/30-day HRV scores checked.
+- Nearby Pets: Map / List / Messages / Friends; friend chat; standalone public profiles; chat/profile/nearby back; Age title/back; heartbeat waveform and back; rhythm shortcuts with temporary red highlight. Tested paths reported no browser errors.
+- Full 300-case stress run was attempted twice and timed out; it is not considered passed.
+
+REMAINING LIMITATIONS / NOT END-TO-END VERIFIED:
+- 15 example pets, sample GPS positions, messages and score values are mock data. True cross-phone friend requests/chat need account and messaging backend. New-friend requests and the search/QR pairing workflows have not been tested on multiple devices.
+- Actual BCG/HRV streams, two-minute recovery validity, algorithm reliability and clinical sensitivity are not verified. Four-grade categories are demonstration trend labels, not veterinary diagnostic thresholds.
+- All possible health-record editor, file import, payment, pairing, phone camera, microphone and hardware flows have NOT been fully tested end-to-end. No claim of a comprehensive all-button QA is made.

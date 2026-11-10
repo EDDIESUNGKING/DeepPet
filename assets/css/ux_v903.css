@@ -1,0 +1,70 @@
+/* DeepPet V9.03: unified score rings and four-card heart analysis. */
+.dp-owner-deep{--dp75-main:96px;--dp75-sub:84px;--dp75-rail:108px}
+.dp-owner-deep .dp903-overview{padding:16px 14px;background:#fffafb;border-color:#efdce3}
+.dp-owner-deep .dp903-overview-head{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:10px;align-items:start}
+.dp-owner-deep .dp903-overview-copy{min-width:0;display:flex;flex-direction:column;gap:4px}
+.dp-owner-deep .dp903-overview-copy h2{font-size:20px;line-height:1.3;color:#a84468;margin:0}
+.dp-owner-deep .dp903-overview-copy h3{font-size:16px;line-height:1.38;color:#a84468;margin:0;font-weight:750}
+.dp-owner-deep .dp903-overview-copy>p{font-size:11.8px;line-height:1.7;color:#78586a;margin:4px 0 0;font-weight:400}
+.dp-owner-deep .dp903-score-col{display:flex;align-items:center;flex-direction:column;gap:7px;text-align:center;justify-content:start;width:108px;min-width:108px;max-width:108px;flex:none}
+.dp-owner-deep .dp903-score-col .dp-status-score{margin:0 auto!important;width:84px!important;height:84px!important;min-width:84px!important;min-height:84px!important;max-width:84px!important;max-height:84px!important;flex:none!important}
+.dp-owner-deep .dp903-score-col.main .dp-status-score{width:96px!important;height:96px!important;min-width:96px!important;min-height:96px!important;max-width:96px!important;max-height:96px!important}
+.dp-owner-deep .dp903-score-col .dp-status-score svg{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+.dp-owner-deep .dp903-score-col .dp-status-score .stat-inner{position:absolute!important;inset:0!important;margin:auto!important;width:72%!important;height:72%!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:column!important}
+.dp-owner-deep .dp903-score-col .stat-inner b{font-size:27px!important;font-weight:820!important;line-height:1.1!important}
+.dp-owner-deep .dp903-score-col .stat-inner small{font-size:10px!important;line-height:1!important;color:#959cac!important}
+.dp-owner-deep .dp903-score-col.main .stat-inner b{font-size:30px!important}
+.dp-owner-deep .dp903-grade{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:5px 10px;min-height:23px;border:1px solid transparent;font-size:10.5px;font-weight:730;line-height:1.2;white-space:nowrap}
+.dp-owner-deep .dp903-score-col.normal .dp903-grade{color:#168058;background:#e6f5ec;border-color:#c8e7d4}
+.dp-owner-deep .dp903-score-col.light .dp903-grade{color:#2f6fe4;background:#eaf1ff;border-color:#cdddff}
+.dp-owner-deep .dp903-score-col.medium .dp903-grade{color:#ae6e1f;background:#fff2de;border-color:#f0dcb8}
+.dp-owner-deep .dp903-score-col.high .dp903-grade{color:#c44750;background:#ffecef;border-color:#efc3ca}
+.dp-owner-deep .dp903-score-col.none .dp903-grade{color:#7c8895;background:#f0f2f5;border-color:#dfe5eb}
+.dp-owner-deep .dp903-no-score{width:84px;height:84px;border:2px dashed #c5ceda;border-radius:50%;display:grid;place-items:center;color:#8a95a3;font-size:26px}
+.dp-owner-deep .dp903-metric-list{display:flex;flex-direction:column;gap:11px;margin-top:12px}
+.dp-owner-deep .dp903-metric-card{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:9px 10px;align-items:start;background:#fff!important;border:1px solid #eadfe6;border-radius:16px;padding:14px 12px;box-shadow:0 2px 10px rgba(90,52,70,.027)}
+.dp-owner-deep .dp903-metric-left{display:flex;flex-direction:column;gap:5px;min-width:0}
+.dp-owner-deep .dp903-metric-left h3{color:#a64767;font-size:15px;font-weight:750;margin:0;line-height:1.33}
+.dp-owner-deep .dp903-metric-left p{font-size:11.5px;line-height:1.62;color:#695c70;font-weight:400;margin:0;overflow-wrap:anywhere}
+.dp-owner-deep .dp903-metric-card>.dp903-open-wave,.dp-owner-deep .dp903-metric-card>.dp903-expand,.dp-owner-deep .dp903-metric-card>.dp903-beat-help{grid-column:1/-1;margin:0}
+.dp-owner-deep .dp903-open-wave{display:block;width:100%;text-align:left;border:1px solid #efdde7;border-radius:11px;padding:10px 13px;background:#fff8fb;color:#aa4a6c;font-size:12px;font-weight:730}
+.dp-owner-deep .dp903-expand,.dp-owner-deep .dp903-beat-help{border:1px solid #e9e5ea;border-radius:11px;background:#fffdfd;overflow:hidden}
+.dp-owner-deep .dp903-expand summary,.dp-owner-deep .dp903-beat-help summary{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;cursor:pointer;list-style:none;color:#a75877;font-size:12px;font-weight:730}
+.dp-owner-deep .dp903-expand summary::-webkit-details-marker,.dp-owner-deep .dp903-beat-help summary::-webkit-details-marker{display:none}
+.dp-owner-deep .dp903-expand summary::after,.dp-owner-deep .dp903-beat-help summary::after{content:'⌄';color:#ac7c92}
+.dp-owner-deep .dp903-expand-body{padding:0 9px 10px}
+.dp-owner-deep .dp903-beat-help p{margin:0;padding:0 12px 12px;font-size:11.5px;line-height:1.7;color:#705a66}
+.dp-owner-deep .dp903-score-method{margin:12px 2px 0;font-size:10.5px;line-height:1.7;color:#8c8290}
+/* Common *main* ring size, even for legacy sleep/energy score headers. */
+.dp-owner-deep .dp901-health-score .dp901-overall-head .dp901-score-col .dp-status-score,
+.dp-owner-deep .dp901-health-score .dp901-overall-head .dp903-score-col.main .dp-status-score,
+.dp-owner-deep .dp74-overview-head .dp75-main-ring,
+.dp-owner-deep .dp-owner-status-heading .dp903-main-ring,
+.dp-owner-deep .dp-sleep-period-score-head .dp903-main-ring,
+.dp-owner-deep .dp-heart-period-overall .dp903-main-ring{
+  width:96px!important;height:96px!important;min-width:96px!important;min-height:96px!important;
+  max-width:96px!important;max-height:96px!important;flex:none!important;
+}
+.dp-owner-deep .dp901-health-score .dp901-overall-head .dp901-score-col .stat-inner b,
+.dp-owner-deep .dp903-main-ring .stat-inner b{font-size:30px!important}
+/* Standalone nearby pets and chat: the app's bottom nav cannot remain on top. */
+#app:has(.dp903-garden-page) .app-main,
+#app:has(.dp903-profile-page) .app-main,
+#app:has(.dp-chat-page) .app-main{bottom:0!important;inset:0!important;padding-bottom:env(safe-area-inset-bottom,0px)}
+.dp903-garden-page,.dp903-profile-page{min-height:100%;background:#f7f8fc}
+.dp903-garden-page .garden-overview{margin-top:15px}
+.dp903-garden-tabs{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important;max-width:100%!important}
+.dp903-garden-tabs>button{min-width:0!important;padding:11px 3px!important;font-size:11px!important;white-space:nowrap!important}
+.dp903-garden-page .dp-social-inbox{display:none}
+.dp903-friends-page .dp-social-inbox{display:grid;padding:13px 0}
+.dp903-friends-heading{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:14px 0 7px}
+.dp903-friends-heading h3{font-size:16px;color:#384c68;margin:0}
+.dp903-add-friend{border:1px solid #ded4f4;border-radius:11px;padding:10px 11px;color:#6955c0;background:#f2edff;font-size:12px;font-weight:740}
+.dp903-garden-page .garden-inbox{padding-bottom:20px}
+.dp903-profile-page .dp-social-public{padding:15px}
+.dp-chat-page{height:100%;min-height:100%;display:flex;flex-direction:column;padding-top:max(8px,env(safe-area-inset-top));padding-bottom:0}
+.dp-chat-page>.dp-independent-head{flex:none}
+.dp-chat-page>.chat-screen{flex:1;min-height:0;display:flex;flex-direction:column}
+@media(max-width:380px){.dp-owner-deep .dp903-overview-head,.dp-owner-deep .dp903-metric-card{grid-template-columns:minmax(0,1fr) 99px;gap:8px}.dp-owner-deep .dp903-score-col{min-width:99px;width:99px;max-width:99px}.dp-owner-deep .dp903-metric-left p{font-size:11px}.dp903-garden-tabs>button{font-size:10px!important}}
+
+#app:has(.dp90-wave-page) .app-main{bottom:0!important;inset:0!important}
