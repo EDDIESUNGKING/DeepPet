@@ -1,0 +1,144 @@
+{
+  "results": [
+    {
+      "case": "饮食：新增、数据保存、重新进入、编辑",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "饮食：删除取消保护和确认删除",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "用药：新增、重进、编辑、删除",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "疫苗：新增、编辑、删除",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "额外记录：新增、编辑、删除取消与确认",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "恢复情况：开始、打卡、修改、删除保护",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "体检报告：新增、编辑检测值、删除",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "宠物独立性：饮食数据不会串宠物",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "浏览器存储：保存后数据写入本地存储",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "饮食目标：编辑入口可打开",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "疫苗接种状态：取消保护、确认变更",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "用药记录：标记服用按钮",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "饮食目标：无效值拒绝、保存、取消重置、确认重置",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "驱虫：新增、编辑、删除保护",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "药物服用：二次确认取消/保存",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "疫苗改期：历史无效日期拒绝、有效日期保存",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "记录：保存后恢复状态/重新进入可读",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "体检报告：必填项验证/保存",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "用药：必填、剂量上下限保护",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "额外记录：必填项保护",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "js_errors": [],
+  "actions_exercised": [
+    "add-meal",
+    "care-plan-checkin",
+    "care-plan-delete-checkin",
+    "care-plan-edit-checkin",
+    "care-plan-start",
+    "choose-import",
+    "deworm-delete",
+    "deworm-edit",
+    "dose-confirm-cancel",
+    "dose-confirm-save",
+    "dose-mark",
+    "food-edit",
+    "meal-edit-save",
+    "med-add",
+    "med-delete-ask",
+    "med-delete-confirm",
+    "med-edit",
+    "med-edit-save",
+    "note-add",
+    "note-delete",
+    "note-edit",
+    "report-delete",
+    "report-delete-confirm",
+    "report-edit",
+    "report-edit-save",
+    "reset-food-target",
+    "save-food",
+    "save-import",
+    "upload-report",
+    "vax-add",
+    "vax-delete",
+    "vax-delete-confirm",
+    "vax-edit",
+    "vax-edit-save",
+    "vax-reschedule",
+    "vax-reschedule-save",
+    "vax-toggle"
+  ]
+}

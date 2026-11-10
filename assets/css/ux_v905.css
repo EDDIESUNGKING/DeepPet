@@ -1,0 +1,119 @@
+/* DeepPet V9.05 — visual hierarchy, daily calendars, chart inspectability */
+/* Main score stays at the V9.04 size; secondary scores are intentionally smaller. */
+.dp-owner-deep .dp903-score-col.sub .dp-status-score,
+.dp-owner-deep .dp901-metric-card .dp903-score-col.sub .dp-status-score,
+.dp-owner-deep .dp901-metric-card .dp901-score-col .dp-status-score,
+.dp-owner-deep .dp75-small-ring,
+.dp-owner-deep .dp-vital-panel .dp-status-score:not(.dp903-main-ring){
+  width:72px!important;height:72px!important;min-width:72px!important;min-height:72px!important;max-width:72px!important;max-height:72px!important;flex:0 0 72px!important;
+}
+.dp-owner-deep .dp903-score-col.sub .stat-inner b,
+.dp-owner-deep .dp901-metric-card .dp903-score-col.sub .stat-inner b,
+.dp-owner-deep .dp901-metric-card .dp901-score-col .stat-inner b,
+.dp-owner-deep .dp75-small-ring .stat-inner b{font-size:22px!important;line-height:1.1!important}
+.dp-owner-deep .dp903-score-col.main .dp-status-score,
+.dp-owner-deep .dp901-overall-head .dp903-score-col.main .dp-status-score,
+.dp-owner-deep .dp905-sleep-head .dp-status-score{width:84px!important;height:84px!important;min-width:84px!important;min-height:84px!important;max-width:84px!important;max-height:84px!important}
+.dp-owner-deep .dp903-score-col.main .stat-inner b,
+.dp-owner-deep .dp901-overall-head .dp903-score-col.main .stat-inner b{font-size:27px!important}
+/* Two body rhythm options fill the full row rather than leaving a third slot empty. */
+.dp-rhythm-summary .summary-three-rings.dp90-two-rings,
+.dp-rhythm-summary .dp905-two-rings,
+.dp902-rhythm-detail .dp90-two-rings{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;width:100%!important}
+.dp-rhythm-summary .dp90-two-rings>.summary-ring-item{width:100%!important;max-width:none!important;min-width:0!important;border:1px solid #e7e5ef!important;border-radius:17px!important;padding:13px 7px!important;background:#fff!important}
+.dp-rhythm-summary .dp90-two-rings .summary-ring-label{min-height:34px;text-align:center;font-size:12px!important;line-height:1.35}
+/* Calendar and detail layout, compact but tappable. */
+.dp905-page{min-height:100%;background:#f7f9fc;padding-bottom:28px}
+.dp905-page .dp-independent-head{margin-bottom:14px}
+.dp905-period-lead{background:linear-gradient(140deg,#fff8fa,#fff)!important;border-color:#efdae4!important}
+.dp905-period-lead h2,.dp905-sleep-summary h2,.dp905-overview h2,.dp905-all-watch h2{margin:0;color:#3b5274;font-size:18px}
+.dp905-period-lead p,.dp905-sleep-summary p,.dp905-overview p,.dp905-energy-calendar p{margin:9px 0 0;font-size:12px;color:#66768e;line-height:1.7;font-weight:400}
+.dp905-calendar-panel{border-color:#e1e9f4!important;padding:14px 11px!important}
+.dp905-cal-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.dp905-cal-head h3{font-size:15px;margin:0;color:#3c607d}
+.dp905-cal-head small{color:#77869e;font-size:10px}
+.dp905-cal-help{font-size:11.3px!important;line-height:1.6;color:#687b93;margin:9px 1px 13px!important}
+.dp905-weekdays,.dp905-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.dp905-weekdays{margin-bottom:7px}
+.dp905-weekdays span{text-align:center;font-size:10px;color:#8995a6}
+.dp905-cal-day{min-width:0;min-height:61px;border:1px solid #e5eaf1;border-radius:10px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 2px;gap:2px;color:#4e5f73;position:relative}
+.dp905-cal-day:active{transform:scale(.97)}
+.dp905-cal-day:focus-visible{outline:2px solid #4b83c1;outline-offset:1px}
+.dp905-cal-day small{font-size:8px;color:#98a4b3}
+.dp905-cal-day strong{font-size:13px;font-weight:780;line-height:1.1}
+.dp905-cal-day i{width:7px;height:7px;border-radius:50%;background:#3b7de0;margin-top:1px}
+.dp905-cal-day.medium i{background:#d68c2e}
+.dp905-cal-day.high i{background:#d9534f}
+.dp905-cal-day.light{border-color:#dbe8fd}
+.dp905-cal-day.medium{border-color:#f2dcc1}
+.dp905-cal-day.high{border-color:#f2ccd0}
+.dp905-cal-normal,.dp905-cal-missing{font-size:10px;color:#5caa83}
+.dp905-cal-missing{color:#a4adbb}
+.dp905-calendar-legend{display:flex;gap:10px;flex-wrap:wrap;margin:12px 1px 0;color:#748298;font-size:10px}
+.dp905-calendar-legend span{display:inline-flex;gap:5px;align-items:center}
+.dp905-calendar-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3b7de0}
+.dp905-calendar-legend .medium{background:#d68c2e}.dp905-calendar-legend .high{background:#d9534f}
+.dp905-sim-note{font-size:10.5px!important;line-height:1.65!important;color:#8790a0!important;margin:11px 1px 0!important}
+.dp905-overview,.dp905-zoom,.dp905-sleep-day{background:#fff!important;border-color:#e0e8f2!important}
+.dp905-overview h2{margin-bottom:10px}
+.dp905-signal-svg,.dp905-daily-trend{display:block;width:100%;height:auto;overflow:visible}
+.dp905-day-stats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.dp905-day-stats span{padding:9px 11px;border-radius:10px;border:1px solid #e0e8f1;background:#f7faff;color:#64748a;font-size:11px}
+.dp905-day-stats b{color:#366b9e;font-variant-numeric:tabular-nums}
+.dp905-section-title{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.dp905-section-title span{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:#eaf1fa;color:#4175a5;font-size:12px;font-weight:800}
+.dp905-section-title h3{margin:0;color:#3d5473;font-size:15px}
+.dp905-event-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0 13px}
+.dp905-event-button{min-width:0;border:1px solid #e9dfe6;border-radius:11px;background:#fff9fb;color:#96586f;padding:9px 3px;display:flex;flex-direction:column;align-items:center;gap:5px}
+.dp905-event-button.active{background:#fff0f4;border-color:#d96681}
+.dp905-event-button b{font-size:12px}.dp905-event-button small{font-size:10px}
+.dp905-key-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.dp905-key-values>div{background:#f7f9fc;padding:9px 10px;border:1px solid #e4eaf2;border-radius:12px;min-width:0}
+.dp905-key-values>div:first-child{grid-column:span 2}
+.dp905-key-values small{display:block;font-size:10px;color:#8894a6;margin-bottom:5px}
+.dp905-key-values b{font-size:12px;color:#386898;font-variant-numeric:tabular-nums}
+.dp905-sleep-head{display:grid;grid-template-columns:minmax(0,1fr) 95px;gap:8px;align-items:start}
+.dp905-sleep-head .dp-status-score{margin-left:auto!important}
+.dp905-sleep-day h3{font-size:13px;color:#498567;margin:14px 0 8px}
+.dp905-sleep-day .dp-owner-sleep-wave svg{max-width:100%}
+.dp905-energy-calendar h3{font-size:15px;color:#44739e;margin:0}
+.dp905-energy-calendar .dp905-daily-trend{margin:12px 0 0}
+/* Home: show action titles in place, reveal More only when necessary. */
+.dp905-prevent-home{background:linear-gradient(145deg,#fff9fb,#fff)!important;border-color:#eedde5!important}
+.dp905-prev-head{display:flex;align-items:center;gap:11px}
+.dp905-prev-head>span{display:grid;place-items:center;font-size:21px;color:#a64c6a;width:43px;height:43px;border-radius:14px;background:#fceaf1}
+.dp905-prev-head small{font-size:10px;letter-spacing:.08em;color:#a4778a}
+.dp905-prev-head h3{margin:2px 0 0;color:#a34465;font-size:16px}
+.dp905-prevent-home>p{font-size:11px;color:#8690a0;margin:7px 0 11px}
+.dp905-prevent-home h4{font-size:13px;margin:8px 0;color:#405c75}
+.dp905-priority{width:100%;border:1px solid #e9e5ee;border-radius:11px;background:#fff;display:flex;gap:9px;align-items:center;text-align:left;padding:11px 12px;margin-top:7px;color:#566985}
+.dp905-priority>span:first-child{color:#b34d72;font-size:12px;font-weight:820}
+.dp905-priority>b{flex:1;font-size:12px;color:#465b71;line-height:1.55}
+.dp905-priority>span:last-child{color:#9d8ba5}
+.dp905-more{width:100%;margin-top:10px;background:#f3edf9;color:#785db4;border:1px solid #e4d8f2;border-radius:11px;padding:11px;font-size:12px;font-weight:700}
+.dp905-all-watch{padding:16px 14px}
+/* Weekly/monthly: all dates scroll on an inspectable axis, with exact score on tap/hover. */
+.dp905-review-chart{margin:14px 0 17px;padding:12px 7px 10px;background:#f8fbff;border:1px solid #e7edf5;border-radius:16px}
+.dp905-curve-caption{font-size:11.5px;color:#546b88;font-weight:750;margin:0 5px 9px}
+.dp905-plot-scroll{overflow-x:auto;overflow-y:hidden;max-width:100%;scrollbar-color:#c4d8ed transparent;scrollbar-width:thin}
+.dp905-plot-scroll svg rect[data-action]{cursor:pointer;outline:none}
+.dp905-point-reading{font-size:12px;font-weight:680;color:#396fa2;padding:9px 12px;margin-top:6px;border-radius:10px;background:#eff5fc}
+/* Keep profile feature label and supporting line centered as one unit. */
+.dp-profile-social-plus .grow,.garden-entry .grow,.dp-garden-entry .grow{text-align:center!important;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#app:has(.dp905-page) .app-main{bottom:0!important;inset:0!important;padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(max-width:380px){.dp905-calendar-grid,.dp905-weekdays{gap:3px}.dp905-cal-day{min-height:55px;padding:4px 1px}.dp905-cal-day strong{font-size:12px}.dp905-day-stats span{padding:7px}}
+
+.dp905-milo-demo{border-color:#f0d9e0!important;background:#fffafb!important}
+.dp905-milo-heading{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:12px}
+.dp905-milo-heading b{color:#a74467;font-size:14px}
+.dp905-milo-heading small{font-size:10px;color:#986e7e}
+.dp905-milo-item{display:flex;width:100%;text-align:left;align-items:center;gap:9px;background:#fff;border:1px solid #efe5eb;border-radius:12px;padding:10px 9px;margin-bottom:7px;color:#56718c}
+.dp905-milo-item>span:nth-child(2){flex:1;min-width:0}
+.dp905-milo-item b{display:block;font-size:12px}
+.dp905-milo-item small{display:block;margin-top:4px;font-size:10px;line-height:1.4;color:#8190a0}
+.dp905-milo-risk{padding:5px 7px;border-radius:99px;font-size:10px;font-weight:750;white-space:nowrap}
+.dp905-milo-risk.light{background:#eaf2ff;color:#3473cb}
+.dp905-milo-risk.medium{background:#fff3e2;color:#bf7f26}
+.dp905-milo-demo>p{color:#8b90a2;font-size:10px;line-height:1.6;margin:9px 0 0}
+
+.dp905-day-detail-link{display:block;width:100%;text-align:left;border:1px solid #e0e6f0;background:#f8faff;border-radius:13px;padding:13px 14px;margin:11px 0 0;font-size:12px;color:#3971a5;font-weight:750}
