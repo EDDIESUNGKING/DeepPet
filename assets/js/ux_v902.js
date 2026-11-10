@@ -3,7 +3,7 @@
 'use strict';
 const L=(a,b,c,d,e)=>state.lang==='zh'?b:state.lang==='en'?c:state.lang==='ko'?d:state.lang==='ja'?(e||c):a;
 const tier=s=>s>=90?'normal':s>=80?'light':s>=60?'medium':'high';
-const scoreName=s=>s>=90?L('正常','正常','Normal','정상','正常'):s>=80?L('輕風險','轻风险','Low Risk','가벼운 주의','軽度注意'):s>=60?L('中風險','中风险','Middle Risk','중간 주의','中程度注意'):L('高風險','高风险','High Risk','높은 주의','高度注意');
+const scoreName=s=>s>=90?L('正常','正常','Normal','정상','正常'):s>=80?L('輕風險','轻风险','Low concern','가벼운 주의','軽度注意'):s>=60?L('中風險','中风险','Moderate concern','중간 주의','中程度注意'):L('高風險','高风险','High concern','높은 주의','高度注意');
 // Reflow paragraphs into the LEFT column beside each score; no empty left rectangles.
 function repairEnergyLayout(markup){
  const wrap=document.createElement('div');wrap.innerHTML=markup;

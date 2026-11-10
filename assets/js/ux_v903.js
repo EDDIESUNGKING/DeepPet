@@ -7,8 +7,8 @@ const finite=v=>v===null||v===undefined||v===''||!Number.isFinite(Number(v))?nul
 const avg=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
 const avgScore=a=>a.length?Math.round(avg(a)):null;
 const safe=(v,n=0)=>finite(v)===null?'—':Number(v).toFixed(n);
-const grade=s=>s===null?L('資料不足','数据不足','Insufficient data','자료 부족','データ不足'):s>=90?L('健康','健康','Healthy','건강','健康'):s>=80?L('輕風險','轻风险','Low Risk','가벼운 주의','軽度注意'):s>=60?L('中風險','中风险','Middle Risk','중간 주의','中程度注意'):L('高風險','高风险','High Risk','높은 주의','高度注意');
-const verdict=s=>s===null?L('資料不足','数据不足','Insufficient data','자료 부족','データ不足'):s>=90?L('健康','健康','Healthy','건강','健康'):s>=80?L('輕風險','轻风险','Low Risk','낮은 위험','低リスク'):s>=60?L('中風險','中风险','Middle Risk','중간 위험','中リスク'):L('高風險','高风险','High Risk','높은 위험','高リスク');
+const grade=s=>s===null?L('資料不足','数据不足','Insufficient data','자료 부족','データ不足'):s>=90?L('正常','正常','Normal','정상','正常'):s>=80?L('輕風險','轻风险','Low concern','가벼운 주의','軽度注意'):s>=60?L('中風險','中风险','Moderate concern','중간 주의','中程度注意'):L('高風險','高风险','High concern','높은 주의','高度注意');
+const verdict=s=>s===null?L('資料不足','数据不足','Insufficient data','자료 부족','データ不足'):s>=90?L('表現很好','表现很好','Doing great','매우 좋아요','良好'):s>=80?L('狀態穩定','状态稳定','Looking steady','안정적이에요','安定'):s>=60?L('稍微留意','稍微留意','Keep an eye on it','주의 필요','注意'):L('需要多留意','需要多留意','Needs attention','주의가 필요해요','要注意');
 const tier=s=>s===null?'none':s>=90?'normal':s>=80?'light':s>=60?'medium':'high';
 const color=s=>s===null?'#a9b0bd':scoreScheme(s).color;
 const complete=a=>a.every(x=>finite(x)!==null);

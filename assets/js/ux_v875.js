@@ -8,9 +8,9 @@ const numeric=n=>n===null||n===undefined||n===''?null:(Number.isFinite(Number(n)
 const tier=n=>n===null?'missing':n>=90?'normal':n>=80?'low':n>=60?'medium':'high';
 const statusName=n=>{
  const labels={
-  zht:['健康','輕風險','中風險','高風險','資料不足'],
-  zh:['健康','轻风险','中风险','高风险','数据不足'],
-  en:['Healthy','Low Risk','Middle Risk','High Risk','Insufficient data'],
+  zht:['正常','輕風險','中風險','高風險','資料不足'],
+  zh:['正常','轻风险','中风险','高风险','数据不足'],
+  en:['Normal','Low concern','Moderate concern','High concern','Insufficient data'],
   ko:['정상','경미한 위험','중간 위험','높은 위험','자료 부족'],
   ja:['正常','軽度リスク','中度リスク','高リスク','データ不足']
  };
