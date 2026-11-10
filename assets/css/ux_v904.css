@@ -1,0 +1,56 @@
+/* DeepPet 9.04: identical Deep rings, compact category navigation, and wave review. */
+.dp-owner-deep{--dp75-main:84px!important;--dp75-sub:84px!important}
+.dp-owner-deep .dp903-score-col.main .dp-status-score,
+.dp-owner-deep .dp903-score-col.sub .dp-status-score,
+.dp-owner-deep .dp901-health-score .dp901-overall-head .dp901-score-col .dp-status-score,
+.dp-owner-deep .dp901-health-score .dp901-overall-head .dp903-score-col.main .dp-status-score,
+.dp-owner-deep .dp74-overview-head .dp75-main-ring,
+.dp-owner-deep .dp-owner-status-heading .dp903-main-ring,
+.dp-owner-deep .dp-owner-status-heading .dp-status-score,
+.dp-owner-deep .dp-sleep-period-score-head .dp903-main-ring,
+.dp-owner-deep .dp-heart-period-overall .dp903-main-ring,
+.dp-owner-deep .dp75-overview-aside .dp-status-score,
+.dp-owner-deep .dp901-score-col .dp-status-score,
+.dp-owner-deep .dp903-no-score{
+  width:84px!important;height:84px!important;
+  min-width:84px!important;min-height:84px!important;
+  max-width:84px!important;max-height:84px!important;
+  flex:0 0 84px!important;
+}
+.dp-owner-deep .dp903-score-col .stat-inner b,
+.dp-owner-deep .dp903-score-col.main .stat-inner b,
+.dp-owner-deep .dp901-score-col .stat-inner b,
+.dp-owner-deep .dp901-health-score .dp901-overall-head .dp901-score-col .stat-inner b,
+.dp-owner-deep .dp903-main-ring .stat-inner b,
+.dp-owner-deep .dp75-main-ring .stat-inner b{font-size:27px!important;line-height:1.1!important}
+.dp-owner-deep .dp904-hrv-help{grid-column:1/-1;margin-top:2px;font-size:11.4px;line-height:1.7;color:#735b68;background:#fff9fb;border:1px solid #f0e2e9;border-radius:11px;padding:10px 12px}
+.dp-owner-deep .dp904-hrv-help b{color:#a64767}
+.dp-owner-deep .segment{max-width:100%}
+.dp-owner-deep .seg-btn{min-height:34px;font-size:12px}
+.dp904-wave-page{padding-bottom:25px;background:#f6f8fc;min-height:100%}
+.dp904-wave-pet{display:flex;justify-content:space-between;color:#718094;font-size:12px;margin:10px 0 12px}
+.dp904-wave-pet strong{color:#344a67;font-size:13px}
+.dp904-wave-card{background:#fff!important;border:1px solid #e1e8f1!important;border-radius:18px;padding:15px 13px;margin:12px 0}
+.dp904-wave-title{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.dp904-wave-title h3{color:#2e506d;font-size:15px;margin:0;line-height:1.4}
+.dp904-step{display:grid;place-items:center;width:30px;height:30px;flex:none;border-radius:10px;background:#eaf0fa;color:#3d6f9e;font-size:12px;font-weight:780}
+.dp904-wave-card .mini-live-card{width:100%;margin:0;border:1px solid #e7ecf2;background:#f8fafc}
+.dp904-wave-card canvas[data-stream]{height:110px;width:100%;max-width:100%;display:block}
+.dp904-small-note{font-size:11px;line-height:1.7;color:#748398;margin:10px 0 0}
+.dp904-date-strip{display:flex;gap:5px;overflow-x:auto;margin:4px 0 10px;scrollbar-width:none}
+.dp904-date-button{flex:1 0 auto;border:1px solid #dee6f0;background:#f6f8fc;color:#657991;border-radius:10px;padding:8px 7px;font-size:10px}
+.dp904-date-button.active{background:#dbeafd;color:#285f9c;border-color:#bdd8f3;font-weight:740}
+.dp904-trend-svg{width:100%;height:auto;display:block;overflow:visible}
+.dp904-events{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}
+.dp904-event-choice{border:1px solid #e3d9e3;border-radius:11px;background:#fff9fb;padding:9px 4px;display:flex;flex-direction:column;gap:4px;align-items:center;color:#a45e75}
+.dp904-event-choice.active{border-color:#de7182;background:#fff0f3;box-shadow:inset 0 0 0 1px #e69aa8}
+.dp904-event-choice b{font-size:12px}
+.dp904-event-choice span{font-size:10px}
+.dp904-focus-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.dp904-focus-values>div{background:#f6f9fd;border:1px solid #e5edf4;padding:10px 9px;border-radius:12px;min-width:0}
+.dp904-focus-values>div:first-child{grid-column:1/-1}
+.dp904-focus-values small{display:block;color:#7f8b9d;font-size:10px;margin-bottom:6px}
+.dp904-focus-values b{display:block;font-size:14px;color:#315f95;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.dp904-warning{font-size:11px;line-height:1.75;color:#87717b;margin:12px 4px}
+
+.dp904-breed-note{border-color:#f1e3d6!important;background:#fffaf4!important}.dp904-breed-note b{font-size:12px;color:#946837}.dp904-breed-note p{font-size:11.5px;line-height:1.7;color:#806c57;margin:8px 0 0}

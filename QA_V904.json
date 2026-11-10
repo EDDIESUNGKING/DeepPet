@@ -1,0 +1,92 @@
+{
+  "version": "9.04",
+  "checks": {
+    "geometry_cat_0": [
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "93"
+      },
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "95"
+      },
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "95"
+      },
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "95"
+      },
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "88"
+      }
+    ],
+    "geometry_cat_1": [
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "93"
+      }
+    ],
+    "geometry_cat_2": [
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "92"
+      },
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "99"
+      },
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "87"
+      },
+      {
+        "w": 84,
+        "h": 84,
+        "font": "27px",
+        "score": "90"
+      }
+    ],
+    "deep_cases": 27,
+    "pet_cases": 9,
+    "wave": {
+      "detail": "dp90-waveform",
+      "n": 3,
+      "canvas": true,
+      "dayBtns": 7,
+      "events": 3,
+      "nav": false
+    },
+    "live_canvas": {
+      "w": 342,
+      "h": 102
+    }
+  },
+  "timing": {
+    "script_parse_seconds": 0.559,
+    "deep_render_median_ms": 30.5,
+    "deep_render_p90_ms": 39.1
+  },
+  "issues": [],
+  "pageerrors": []
+}

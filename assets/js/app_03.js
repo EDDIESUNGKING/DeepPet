@@ -178,12 +178,12 @@ function mountLiveWaves(){
   if(activeWaveFrame!=null){cancelAnimationFrame(activeWaveFrame);activeWaveFrame=null;}
   if(selectedBlank()||isFreePet())return;
   const modalKind=state.modal==='live-heart'?'heart':state.modal==='live-breath'?'breath':null;
-  if(state.tab!=='home'&&!modalKind)return;
+  if(state.tab!=='home'&&!modalKind&&!(state.tab==='deep'&&state.detail==='dp90-waveform'))return;
   const pet=currentDog(),epoch=performance.now(),offset=liveWaveClock,seed=state.dog+1;
   let last=0;
   function frame(now){
     const currentModalKind=state.modal==='live-heart'?'heart':state.modal==='live-breath'?'breath':null;
-    if(state.tab!=='home'&&!currentModalKind){activeWaveFrame=null;return;}
+    if(state.tab!=='home'&&!currentModalKind&&!(state.tab==='deep'&&state.detail==='dp90-waveform')){activeWaveFrame=null;return;}
     if(now-last>32){
       last=now;
       const elapsed=offset+(now-epoch)/1000;liveWaveClock=elapsed;
@@ -198,7 +198,7 @@ function mountLiveWaves(){
       if(steps){const stage=Math.max(0,elapsed+seed*1.47),activeSeconds=Math.floor(stage/17)*10+Math.min(stage%17,10);steps.textContent=String(Math.floor(activeSeconds*1.65));}
       if(label)label.textContent=activity?label3('活動中','Moving','활동 중'):label3('休息中','Resting','휴식 중');
       if(currentMotion)currentMotion.textContent=activity?label3('活動中','Moving','활동 중'):label3('休息中','Resting','휴식 중');
-      if(state.tab==='home'&&state.liveExpanded){
+      if((state.tab==='home'&&state.liveExpanded)||(state.tab==='deep'&&state.detail==='dp90-waveform')){
         for(const canvas of document.querySelectorAll('#app canvas[data-stream]')) drawStreaming(canvas,canvas.dataset.stream,elapsed,pet);
       }
       if(currentModalKind){const canvas=document.querySelector('#overlay-root canvas[data-stream]');if(canvas)drawStreaming(canvas,currentModalKind,elapsed,pet);}
@@ -961,7 +961,10 @@ function bioEstimateFromSignals(record,d,index){
  const longTerm=0.06*Math.sin(index*.23+d.age*.15);
  return +Math.max(.1,d.bio + Math.max(-.23,Math.min(.23,delta)) + longTerm).toFixed(2);
 }
+let dp904RenderCache=new Map();
 function demoRecords(dogIndex){
+ const dp904Key=`records:${dogIndex}`;
+ if(dp904RenderCache.has(dp904Key))return dp904RenderCache.get(dp904Key);
  // Upgrade only the bundled example sensor snapshots, not personally entered records.
  if(dogIndex<dogs.length && state.dpShowcaseScenarioVersion!==833){
   state.dpDemoDailySnapshots??={};
@@ -1007,6 +1010,7 @@ function demoRecords(dogIndex){
  const cutoff=iso(dateAdd(localDate(),-65));
  for(const key of Object.keys(snapshots))if(key<cutoff)delete snapshots[key];
  if(newRows)persist();
+ dp904RenderCache.set(dp904Key,out);
  return out;
 }
 function currentBioAge(){return demoRecords(state.dog).at(-1).bio;}
@@ -1482,12 +1486,12 @@ function rhythmMeasures(record,base){const clamp=(x,min=35,max=98)=>Math.round(M
  // Higher load = more deviation in the direction of increased HR / reduced variability.
  const load=clamp(22+130*(.45*Math.max(0,h)+.35*Math.max(0,-r)+.20*Math.max(0,-s)),5,93);
  return {recover,calm,stable,load,s,r,h};}
-function rhythmData(){const all=demoRecords(state.dog),base=rhythmicBaseline(all),values=all.map((row,i)=>{
+function rhythmData(){const dp904Key=`rhythm:${state.dog}`;if(dp904RenderCache.has(dp904Key))return dp904RenderCache.get(dp904Key);const all=demoRecords(state.dog),base=rhythmicBaseline(all),values=all.map((row,i)=>{
  const group=animalGroupReference(currentDog(),all),available=Math.min(observationDays(),i+1),raw=all.slice(Math.max(0,i+1-14),i+1);
  const personal={sd:meanOf(raw,'sdnn',group.sd),rm:meanOf(raw,'rmssd',group.rm),hr:meanOf(raw,'nvgr',group.hr)};
  const w=available>=14?.7:0,ref={sd:group.sd*(1-w)+personal.sd*w,rm:group.rm*(1-w)+personal.rm*w,hr:group.hr*(1-w)+personal.hr*w};
  return rhythmMeasures(row,ref);
- });return {rows:all,base,values,today:values.at(-1)};}
+ });const result={rows:all,base,values,today:values.at(-1)};dp904RenderCache.set(dp904Key,result);return result;}
 function rhythmPositiveValue(key,m){return key==='load'?Math.max(0,Math.min(100,100-m.load)):m[key];}
 function rhythmCompositeScore(m=rhythmData().today){return Math.round((rhythmPositiveValue('calm',m)+rhythmPositiveValue('load',m)+rhythmPositiveValue('stable',m))/3);}
 function rhythmHistory(days=7,key='recover'){return rhythmData().values.slice(-days).map(x=>x[key]);}
@@ -3109,9 +3113,9 @@ function dpAllNightsPage(){
  const rows=dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid);
  return `<div class="app-pad dp-all-nights-page deep-themed deep-theme-sleep"><div class="dp-independent-head"><button data-action="owner-all-nights-back">←</button><b>${label3('全部睡眠紀錄','All sleep records','전체 수면 기록')}</b></div><div class="dp-night-page-info">${label3(`最近${days}天 · ${rows.length}晚`,`Last ${days} days · ${rows.length} nights`,`최근 ${days}일 · ${rows.length}일`)}</div>${dpOwnerMultiNightTimelines(rows,days,true)}<div class="footer-space"></div></div>`;
 }
-function deepView(){if(![1,3,7,14,30].includes(state.range))state.range=7;const n=state.deepType,labels=[t('heartCategory'),t('sleepCategory'),t('activeCategory')],cp=[{accent:'#cf6684',bg:'#fff7f9',border:'#f2dce4',contrast:'#af5874'},{accent:'#52a97d',bg:'#f7fdf9',border:'#e6f3ea',contrast:'#347e60'},{accent:'#4387dc',bg:'#f2f7ff',border:'#d8e7ff',contrast:'#306da8'}][n],days=state.range,record=deepDateRows().find(x=>x.date===deepChosenDate()),tabs=[vicon('heart',20),vicon('moon',20),vicon('activity',20)];
+function deepView(){if(![1,7,30].includes(state.range))state.range=7;const n=state.deepType,labels=[t('heartCategory'),t('sleepCategory'),t('activeCategory')],cp=[{accent:'#cf6684',bg:'#fff7f9',border:'#f2dce4',contrast:'#af5874'},{accent:'#52a97d',bg:'#f7fdf9',border:'#e6f3ea',contrast:'#347e60'},{accent:'#4387dc',bg:'#f2f7ff',border:'#d8e7ff',contrast:'#306da8'}][n],days=state.range,record=deepDateRows().find(x=>x.date===deepChosenDate()),tabs=[vicon('heart',20),vicon('moon',20),vicon('activity',20)];
  if(state.detail==='sleep-all-nights')return dpAllNightsPage();
- return `<div class="app-pad deep-themed deep-theme-${n===0?'heart':n===1?'sleep':'activity'} dp-owner-deep" style="--deep-accent:${cp.accent};--deep-soft:${cp.bg};--deep-border:${cp.border};--deep-contrast:${cp.contrast}">${bigHeader(t('deep'))}<div class="tabs">${labels.map((l,i)=>`<button class="tab ${n===i?'active':''}" data-action="deep-category" data-index="${i}" style="${n===i?`background:${cp.bg};color:${cp.contrast};border-color:${cp.border}`:''}"><span class="tab-icon">${tabs[i]}${dpDeepFlags().includes(i)?dpFlagDot(dpTodayDeepItems().find(x=>x.index===i)?.detail||tr('這項狀態需要留意','Needs attention','확인 필요')):''}</span>${l}</button>`).join('')}</div>${dpDeepIssueHeader(n)}<div class="segment">${[1,3,7,14,30].map(k=>`<button class="seg-btn ${days===k?'active':''}" data-action="range" data-value="${k}">${k===1?label3('單日','Day','하루'):label3(`${k}天`,`${k}D`,`${k}일`)}</button>`).join('')}</div>${deepDatePicker()}${days>1?`<p class="dp-range-quality">${label3(`最近${days}天 · ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length}個有效記錄日`,`Last ${days} days · ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length} valid recording days`,`최근 ${days}일 · 유효 기록 ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length}일`)}</p>`:''}${days===1?(record?dpOwnerDayDetail(n,cp,record):''):dpOwnerPeriodDetail(n,cp,days)}${(days===1?(record&&validDaySample(record,record.idx).valid):dayRowsWithIndex(days).some(r=>validDaySample(r,r.idx).valid))?(n===0?'':dpMetricUsageNotes(n)):''}<div class="footer-space"></div></div>`;
+ return `<div class="app-pad deep-themed deep-theme-${n===0?'heart':n===1?'sleep':'activity'} dp-owner-deep" style="--deep-accent:${cp.accent};--deep-soft:${cp.bg};--deep-border:${cp.border};--deep-contrast:${cp.contrast}">${bigHeader(t('deep'))}<div class="tabs">${labels.map((l,i)=>`<button class="tab ${n===i?'active':''}" data-action="deep-category" data-index="${i}" style="${n===i?`background:${cp.bg};color:${cp.contrast};border-color:${cp.border}`:''}"><span class="tab-icon">${tabs[i]}${dpDeepFlags().includes(i)?dpFlagDot(dpTodayDeepItems().find(x=>x.index===i)?.detail||tr('這項狀態需要留意','Needs attention','확인 필요')):''}</span>${l}</button>`).join('')}</div>${dpDeepIssueHeader(n)}<div class="segment">${[1,7,30].map(k=>`<button class="seg-btn ${days===k?'active':''}" data-action="range" data-value="${k}">${k===1?label3('單日','Day','하루'):label3(`${k}天`,`${k}D`,`${k}일`)}</button>`).join('')}</div>${deepDatePicker()}${days>1?`<p class="dp-range-quality">${label3(`最近${days}天 · ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length}個有效記錄日`,`Last ${days} days · ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length} valid recording days`,`최근 ${days}일 · 유효 기록 ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length}일`)}</p>`:''}${days===1?(record?dpOwnerDayDetail(n,cp,record):''):dpOwnerPeriodDetail(n,cp,days)}${(days===1?(record&&validDaySample(record,record.idx).valid):dayRowsWithIndex(days).some(r=>validDaySample(r,r.idx).valid))?(n===0?'':dpMetricUsageNotes(n)):''}<div class="footer-space"></div></div>`;
 }
 function dpUpcomingCareItems(){
  if(selectedBlank()||dp58FreshPet())return [];
@@ -3550,7 +3554,7 @@ ${dpOwnerBaselineMe()}
  <div class="section-head"><h2 class="section-title">${t('myDevice')}</h2></div>${deviceCenter()}
 <button class="card store-entry" data-action="shop-open"><div class="store-icon store-icon-large">${shopIllustrationSVG()}</div><div class="grow"><b>${tr('DeepPet 商城','DeepPet Store','DeepPet 스토어')}</b><span>${tr('立即選購','Shop now','바로 구매')}</span><small>${tr('查看健康項圈、選擇版本及訂閱方案','Explore health collars, models and service plans','건강 목걸이, 모델 및 요금제 보기')}</small></div>${vicon('chev',19)}</button>
  <button class="card garden-entry dp-garden-entry" data-action="garden-detail">${dpUnreadCount()?`<span class="dp-garden-notify">${dpFlagDot(tr('有新訊息','New messages','새 메시지'))} ${dpUnreadCount()} ${tr('則未讀','unread','읽지 않음')}</span>`:''}<div class="garden-entry-top"><div><div class="garden-title-big">${tr('附近寵物','Nearby pets','주변 반려동물')}</div><p>${tr('在互動地圖上認識附近的寵物，查看公開檔案並傳送訊息。','Explore the interactive map, public pet profiles and chats.','인터랙티브 지도에서 주변 반려동물을 만나고 메시지를 보내세요.')}</p></div><span class="garden-entry-icon">${vicon('garden',34)}</span></div><div class="garden-entry-chips"><span class="pill purple">${tr('互動地圖','Interactive map','인터랙티브 지도')}</span></div></button><section class="card flat care-menu">${panel(vicon('users',22),t('family'),tr('邀請家人一起照顧','Share care with family','가족과 함께 돌보기'),'family-detail')}</section>
-<div class="section-head"><h2 class="section-title">${t('setting')}</h2></div><section class="card flat care-menu">${panel(vicon('bell',22),t('alerts'),tr('健康、用藥與接種提醒','Health, medicine and vaccine alerts','건강·투약·예방접종 알림'),'alerts')}${panel(vicon('settings',22),t('language'),state.lang==='zht'?'繁體中文':state.lang==='zh'?'简体中文':state.lang==='en'?'English':state.lang==='ja'?'日本語':'한국어','language-detail')}${panel(vicon('shield',22),t('privacy'),tr('資料來源與位置分享','Data sources and location sharing','데이터와 위치 공유'),'privacy-detail')}</section><div class="app-build-version">DeepPet · Version 9.03</div><div class="footer-space"></div></div>`}
+<div class="section-head"><h2 class="section-title">${t('setting')}</h2></div><section class="card flat care-menu">${panel(vicon('bell',22),t('alerts'),tr('健康、用藥與接種提醒','Health, medicine and vaccine alerts','건강·투약·예방접종 알림'),'alerts')}${panel(vicon('settings',22),t('language'),state.lang==='zht'?'繁體中文':state.lang==='zh'?'简体中文':state.lang==='en'?'English':state.lang==='ja'?'日本語':'한국어','language-detail')}${panel(vicon('shield',22),t('privacy'),tr('資料來源與位置分享','Data sources and location sharing','데이터와 위치 공유'),'privacy-detail')}</section><div class="app-build-version">DeepPet · Version 9.04</div><div class="footer-space"></div></div>`}
 function bottomNav(){
  const deep=dpDeepFlags().length,health=dpDueCount(),me=dpUnreadCount();
  return `<nav class="bottom-nav" aria-label="Primary navigation">${[['home','home'],['deep','deep'],['health','health'],['me','me']].map(([k,ic])=>{
@@ -3606,7 +3610,7 @@ async function dpCopySocial(value){
  catch{window.prompt(label3('請複製','Copy this','복사하세요'),value);}
 }
 function dpPublicStandAloneView(){if(state.dpExternalPublic?.invalid)return `<div class="dp-social-external"><div class="dp-social-external-head"><b>DeepPet</b></div><p class="notices">${label3('公開寵物連結已失效，無法查看資料。請向主人索取新的 QR Code。','This public profile link is invalid. Ask the owner for a fresh QR code.','공개 프로필 링크가 유효하지 않습니다. 보호자에게 새로운 QR 코드를 요청하세요.')}</p></div>`;return `<div class="dp-social-external"><div class="dp-social-external-head"><b>DeepPet</b><span>${label3('公開寵物檔案','Public pet profile','반려동물 공개 프로필')}</span></div>${dpPublicCardContent(state.dpExternalPublic)}<p class="dp-social-muted">${label3('這是訪客專用的公開檔案頁。查看完畢後可關閉此頁。','This is a visitor-only public profile. Close this page when finished.','방문자용 공개 프로필입니다. 확인 후 이 페이지를 닫아 주세요.')}</p><p class="notices">${label3('這是公開資料預覽，沒有任何心肺、Deep、健康、用藥或 GPS 權限。','This public view does not grant access to Deep, health, medications or GPS.','공개 프로필에는 심층, 건강, 투약, GPS 접근 권한이 없습니다.')}</p></div>`;}
-function render(reset=false){document.documentElement.lang=state.lang==='zht'?'zh-Hant':state.lang==='zh'?'zh-Hans':state.lang==='ko'?'ko':state.lang==='ja'?'ja':'en';plotRegistry=[];persist();const app=$('#app');const sc=$('.app-main');const pos=sc?.scrollTop||0;const currentView=state.dpExternalPublic?dpPublicStandAloneView():(state.tab==='home'&&state.detail==='today-all')?dpTodayMorePage():(state.tab==='me'&&state.detail==='age-detail')?dpAgeFullPage():(state.tab==='me'&&state.detail==='baseline-page')?dpBaselineStandalonePage():(state.tab==='me'&&state.detail==='chat')?chatFullPage():(state.tab==='health'&&state.detail==='vet-report')?vetFullPage():(state.tab==='me'&&['store','store-checkout','store-payment','store-success'].includes(state.detail))?storeFullPage():selectedBlank()?(state.tab==='home'?blankHomeView():state.tab==='deep'?blankDeepView():state.tab==='health'?blankHealthView():blankMeView()):dp58FreshPet()?(state.tab==='home'?dp58FreshHome():dp58FreshEmptyTab()):isFreePet()?(state.tab==='home'?freeCareHomeView():state.tab==='deep'?freeCareDeepView():state.tab==='health'?freeCareHealthView():freeCareMeView()):(state.tab==='home'?homeView():state.tab==='deep'?deepView():state.tab==='health'?healthView():meView());const enhancedView=currentView;const layout=`<main class="app-main" id="main-scroll">${enhancedView}</main>${state.dpExternalPublic?'':bottomNav()}`;app.innerHTML=state.lang==='zht'?toTraditional(layout):state.lang==='zh'?toSimplified(layout):layout;$('#main-scroll').scrollTop=reset?0:pos;setupPetStrip();renderModal();if(state.tab==='me'&&state.detail==='chat'){const log=document.querySelector('.dp-chat-history');if(log)log.scrollTop=log.scrollHeight;}mountLiveWaves();}
+function render(reset=false){dp904RenderCache=new Map();document.documentElement.lang=state.lang==='zht'?'zh-Hant':state.lang==='zh'?'zh-Hans':state.lang==='ko'?'ko':state.lang==='ja'?'ja':'en';plotRegistry=[];persist();const app=$('#app');const sc=$('.app-main');const pos=sc?.scrollTop||0;const currentView=state.dpExternalPublic?dpPublicStandAloneView():(state.tab==='home'&&state.detail==='today-all')?dpTodayMorePage():(state.tab==='me'&&state.detail==='age-detail')?dpAgeFullPage():(state.tab==='me'&&state.detail==='baseline-page')?dpBaselineStandalonePage():(state.tab==='me'&&state.detail==='chat')?chatFullPage():(state.tab==='health'&&state.detail==='vet-report')?vetFullPage():(state.tab==='me'&&['store','store-checkout','store-payment','store-success'].includes(state.detail))?storeFullPage():selectedBlank()?(state.tab==='home'?blankHomeView():state.tab==='deep'?blankDeepView():state.tab==='health'?blankHealthView():blankMeView()):dp58FreshPet()?(state.tab==='home'?dp58FreshHome():dp58FreshEmptyTab()):isFreePet()?(state.tab==='home'?freeCareHomeView():state.tab==='deep'?freeCareDeepView():state.tab==='health'?freeCareHealthView():freeCareMeView()):(state.tab==='home'?homeView():state.tab==='deep'?deepView():state.tab==='health'?healthView():meView());const enhancedView=currentView;const layout=`<main class="app-main" id="main-scroll">${enhancedView}</main>${state.dpExternalPublic?'':bottomNav()}`;app.innerHTML=state.lang==='zht'?toTraditional(layout):state.lang==='zh'?toSimplified(layout):layout;$('#main-scroll').scrollTop=reset?0:pos;setupPetStrip();renderModal();if(state.tab==='me'&&state.detail==='chat'){const log=document.querySelector('.dp-chat-history');if(log)log.scrollTop=log.scrollHeight;}mountLiveWaves();}
 function shareInviteCode(d=currentDog()){
  const name=(d.name||'PET').replace(/[^a-z0-9]/ig,'').toUpperCase().slice(0,6)||'PET';
  return 'DP-'+String(state.dog+1).padStart(2,'0')+'-'+name;
@@ -3881,7 +3885,7 @@ function onAction(target){const action=target.dataset.action;if(!action)return;
  case 'night-to-deep':state.deepType=1;navTo('deep');break;
  case 'open-report':navTo('health','reports');break;
  case 'deep-category':state.deepType=+target.dataset.index;state.range=1;state.deepSelectedDate=iso(localDate());state.sleepMatrixExpanded=false;state.detail=null;state.chartPoint=-1;navTo('deep');break;
- case 'range':state.sleepMatrixExpanded=false;state.range=+target.dataset.value;if(state.range===1)state.deepSelectedDate=deepChosenDate();state.chartPoint=-1;render();break;
+ case 'range':state.sleepMatrixExpanded=false;state.range=[1,7,30].includes(+target.dataset.value)?+target.dataset.value:7;if(state.range===1)state.deepSelectedDate=deepChosenDate();state.chartPoint=-1;render();break;
  case 'deep-select-day':state.range=1;state.deepSelectedDate=deepChosenDate();state.chartPoint=-1;render(true);break;
  case 'deep-day-view':state.range=1;state.deepSelectedDate=String(target.dataset.date||iso(localDate()));state.chartPoint=-1;render(true);break;
  case 'deep-day-jump':state.range=1;state.deepSelectedDate=iso(dateAdd(localDate(),Number(target.dataset.days)||0));state.chartPoint=-1;render(true);break;

@@ -1,0 +1,163 @@
+{
+  "version": "9.03",
+  "issues": [],
+  "errors": [],
+  "routes": {
+    "rhythm_to_heart": {
+      "tab": "deep",
+      "detail": null,
+      "modal": "",
+      "nav": true,
+      "chat": false,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": true,
+      "title": null
+    },
+    "rhythm_to_calm": {
+      "tab": "deep",
+      "detail": null,
+      "modal": "",
+      "nav": true,
+      "chat": false,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": true,
+      "title": null
+    },
+    "heart_wave": {
+      "tab": "deep",
+      "detail": "dp90-waveform",
+      "modal": "",
+      "nav": false,
+      "chat": false,
+      "garden": false,
+      "profile": false,
+      "wave": true,
+      "highlight": false,
+      "title": "心跳趋势与变化位置"
+    },
+    "wave_back": {
+      "tab": "deep",
+      "detail": null,
+      "modal": "",
+      "nav": true,
+      "chat": false,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": null
+    },
+    "pet_profile": {
+      "tab": "me",
+      "detail": "dp903-profile",
+      "modal": "",
+      "nav": false,
+      "chat": false,
+      "garden": false,
+      "profile": true,
+      "wave": false,
+      "highlight": false,
+      "title": "宠物公开档案"
+    },
+    "pet_profile_back": {
+      "tab": "me",
+      "detail": "dp903-garden",
+      "modal": "",
+      "nav": false,
+      "chat": false,
+      "garden": true,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": "附近的宠物"
+    },
+    "friend_chat": {
+      "tab": "me",
+      "detail": "chat",
+      "modal": "",
+      "nav": false,
+      "chat": true,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": "Luna"
+    },
+    "chat_profile": {
+      "tab": "me",
+      "detail": "dp903-profile",
+      "modal": "",
+      "nav": false,
+      "chat": false,
+      "garden": false,
+      "profile": true,
+      "wave": false,
+      "highlight": false,
+      "title": "宠物公开档案"
+    },
+    "chat_profile_back": {
+      "tab": "me",
+      "detail": "chat",
+      "modal": "",
+      "nav": false,
+      "chat": true,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": "Luna"
+    },
+    "chat_to_inbox": {
+      "tab": "me",
+      "detail": "dp903-garden",
+      "modal": "",
+      "nav": false,
+      "chat": false,
+      "garden": true,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": "附近的宠物"
+    },
+    "garden_to_me": {
+      "tab": "me",
+      "detail": null,
+      "modal": "",
+      "nav": true,
+      "chat": false,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": null
+    },
+    "age_detail": {
+      "tab": "me",
+      "detail": "age-detail",
+      "modal": "",
+      "nav": true,
+      "chat": false,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": "AI推算生理年龄"
+    },
+    "age_back": {
+      "tab": "me",
+      "detail": null,
+      "modal": "",
+      "nav": true,
+      "chat": false,
+      "garden": false,
+      "profile": false,
+      "wave": false,
+      "highlight": false,
+      "title": null
+    }
+  }
+}

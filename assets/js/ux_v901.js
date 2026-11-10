@@ -136,6 +136,7 @@ dpOwnerPeriodDetail=function(kind,cp,days){
 };
 // Avatar preload so the small profile image in Me doesn't flash or load slowly.
 const avatarCache=new Set();
+function fastAvatarSource(url){return typeof url==='string'&&url.includes('assets/demo_score_portraits/')&&url.endsWith('.jpg')?url.slice(0,-4)+'_thumb.webp':url;}
 function preload(src){
   if(!src||avatarCache.has(src))return;
   avatarCache.add(src);
@@ -148,11 +149,11 @@ function preload(src){
 function primeAvatars(){
   try{
     const dog=currentDog?.();
-    if(dog?.photo)preload(dog.photo);
-    (typeof allPets==='function'?allPets():[]).slice(0,16).forEach(p=>p?.photo&&preload(p.photo));
+    if(dog?.photo)preload(fastAvatarSource(dog.photo));
+    (typeof allPets==='function'?allPets():[]).slice(0,4).forEach(p=>p?.photo&&preload(fastAvatarSource(p.photo)));
     document.querySelectorAll('img.pet-avatar, img.story-avatar, .profile-hero img.pet-avatar, .pet-avatar-tap img').forEach(img=>{
       const src=img.currentSrc||img.src;
-      if(src)preload(src);
+      if(src)preload(fastAvatarSource(src));
       img.loading='eager';
       img.decoding='async';
       img.fetchPriority='high';
