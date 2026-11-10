@@ -1,0 +1,54 @@
+/* DeepPet V9.0: semantic correction only — retain V8.80 colors and navigation. */
+.dp90-energy-view .dp90-description,.dp90-period-story p,.dp90-wave-page p{font-weight:400!important;font-size:12.5px;line-height:1.75;color:#586679;margin:9px 0 12px}
+.dp90-energy-view .dp90-period-story{padding:8px 0 7px;display:grid;gap:4px}
+.dp90-energy-view .dp90-period-story p{margin:3px 0;font-weight:400!important}
+.dp90-energy-view .dp90-three-card{margin:13px 0;background:#fff;border:1px solid #dde9fa;border-radius:16px;padding:15px 13px;box-shadow:0 3px 11px rgba(41,78,130,.025)}
+.dp90-energy-view .dp90-three-card>.dp-vital-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:9px}
+.dp90-energy-view .dp90-three-card>.dp-vital-heading>div:first-child b{display:block;color:#326ca6;font-size:14px;font-weight:700;margin-top:3px}
+.dp90-energy-view .dp90-three-card>.dp-vital-heading>.dp90-indicator{flex-shrink:0}
+.dp90-energy-view .dp90-indicator{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;min-width:104px}
+.dp90-energy-view .dp90-indicator .dp-status-score{margin:0 auto}
+.dp90-indicator .dp90-status{display:inline-flex;align-items:center;justify-content:center;min-height:23px;border-radius:999px;padding:4px 11px;font-size:11px;font-weight:750;white-space:nowrap}
+.dp90-indicator.normal .dp90-status,.dp90-grade.normal{background:#e7f7ee;color:#218a5b}
+.dp90-indicator.light .dp90-status,.dp90-grade.light{background:#e9f1ff;color:#2f6fe4}
+.dp90-indicator.medium .dp90-status,.dp90-grade.medium{background:#fff0de;color:#b77a25}
+.dp90-indicator.high .dp90-status,.dp90-grade.high{background:#fff0f0;color:#d34d4c}
+.dp90-energy-view .dp90-indicator.major{min-width:106px}
+.dp90-energy-view .dp90-recovery-numbers{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}
+.dp90-energy-view .dp90-recovery-numbers span{background:#f5f8fc;border:1px solid #dfe7f1;border-radius:9px;padding:9px 11px;font-size:11px;color:#63748c}
+.dp90-energy-view .dp90-recovery-numbers b{color:#386a9f}
+.dp90-energy-view .dp66-expand{margin:9px 0 0}
+.dp90-energy-view .dp-owner-status-heading{align-items:flex-start}
+.dp90-energy-view .dp-owner-status-inner>.dp90-description{margin-top:5px}
+.dp90-beat-help{margin:12px 0 0;border-top:1px solid #e9d8e0;padding-top:10px;color:#8f3e59}
+.dp90-beat-help summary{font-size:12px;font-weight:650;cursor:pointer}
+.dp90-beat-help p{font-weight:400;font-size:11.5px;line-height:1.7;color:#766a76}
+.dp90-only-three .dp-metric-note-row{padding-top:11px;padding-bottom:11px}
+.dp90-calm-card .dp90-two-col{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dp90-calm-card .dp90-two-col p{font-size:12px;line-height:1.65;color:#718199;font-weight:400}
+.dp90-wave-buttons{display:flex;gap:9px;flex-wrap:wrap}.dp90-wave-buttons button{flex:1;border-radius:12px}
+.dp90-two-rings{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dp90-rhythm-detail .dp90-description{font-size:13px;font-weight:400;line-height:1.75;color:#697182}
+.dp90-wave-page .dp-independent-head{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+.dp90-wave-page .dp-independent-head>b{font-size:17px}
+.dp90-wave-pet{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;color:#8791a1;font-size:11px}
+.dp90-wave-pet b{color:#614b59;font-size:17px}
+.dp90-wave-overview,.dp90-wave-plot-card{padding:17px 15px}
+.dp90-wave-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dp90-wave-title h2{font-size:15px;margin:0;color:#663f56}
+.dp90-grade{border-radius:99px;padding:5px 9px;font-size:11px;font-weight:750;white-space:nowrap}
+.dp90-time{font-size:20px;color:#b74567;font-weight:800;font-variant-numeric:tabular-nums;padding:15px 0 13px}
+.dp90-wave-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.dp90-wave-values>div{min-width:0;border-radius:13px;padding:12px 7px;background:#fff6f8;border:1px solid #efdce4}
+.dp90-wave-values small{display:block;font-size:10px;color:#8d6678;line-height:1.4;min-height:30px}
+.dp90-wave-values strong{display:block;margin-top:6px;font-size:17px;color:#9e3558;font-variant-numeric:tabular-nums}
+.dp90-wave-values em{font-style:normal;font-weight:500;font-size:10px}
+.dp90-wave-plot-card h3{font-size:14px;color:#853950;margin-bottom:8px}
+.dp90-signal-plot{width:100%;height:auto;display:block;margin:14px 0 6px;overflow:visible}
+.dp90-wave-legend{display:flex;gap:9px;flex-wrap:wrap;font-size:10px;color:#8990a1}
+.dp90-breed-alert{padding:17px;margin:14px 0;background:#fff9f2;border:1px solid #f4deba;border-radius:16px}
+.dp90-breed-alert h3{font-size:14px;color:#a76b22;margin:0 0 8px}.dp90-breed-alert p{color:#846a4b}
+.dp90-breed-note{padding:14px;border-radius:13px;background:#f4f8fb;color:#67788a;font-size:12px;line-height:1.65;margin:13px 0}
+.dp90-wave-safety{background:#fff8f5;border-color:#f3e0d6}.dp90-wave-safety b{color:#ac594e;font-size:13px}
+.dp90-demo-warning{padding:13px;border-radius:13px;background:#f2f4f8;color:#738093!important;font-size:11px!important}
+@media(max-width:385px){.dp90-wave-values{gap:4px}.dp90-wave-values strong{font-size:15px}.dp90-wave-values>div{padding:10px 5px}.dp90-indicator{min-width:83px!important}}

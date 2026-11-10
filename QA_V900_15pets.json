@@ -1,0 +1,112 @@
+{
+  "cases": 60,
+  "issues": [],
+  "errors": [],
+  "pet_scores": [
+    {
+      "name": "Milo",
+      "rhythm": 89,
+      "expected": 89,
+      "phys": 93,
+      "two": true
+    },
+    {
+      "name": "Luna",
+      "rhythm": 83,
+      "expected": 83,
+      "phys": 85,
+      "two": true
+    },
+    {
+      "name": "Coco",
+      "rhythm": 65,
+      "expected": 65,
+      "phys": 39,
+      "two": true
+    },
+    {
+      "name": "Leo",
+      "rhythm": 57,
+      "expected": 57,
+      "phys": 33,
+      "two": true
+    },
+    {
+      "name": "Poppy",
+      "rhythm": 88,
+      "expected": 88,
+      "phys": 84,
+      "two": true
+    },
+    {
+      "name": "Nori",
+      "rhythm": 87,
+      "expected": 87,
+      "phys": 95,
+      "two": true
+    },
+    {
+      "name": "Miso",
+      "rhythm": 88,
+      "expected": 88,
+      "phys": 78,
+      "two": true
+    },
+    {
+      "name": "Mochi",
+      "rhythm": 79,
+      "expected": 79,
+      "phys": 45,
+      "two": true
+    },
+    {
+      "name": "Kiki",
+      "rhythm": 54,
+      "expected": 54,
+      "phys": 27,
+      "two": true
+    },
+    {
+      "name": "Max",
+      "rhythm": 89,
+      "expected": 89,
+      "phys": 89,
+      "two": true
+    },
+    {
+      "name": "Rex",
+      "rhythm": 68,
+      "expected": 68,
+      "phys": 47,
+      "two": true
+    },
+    {
+      "name": "Bella",
+      "rhythm": 89,
+      "expected": 89,
+      "phys": 95,
+      "two": true
+    },
+    {
+      "name": "Dodo",
+      "rhythm": 87,
+      "expected": 87,
+      "phys": 63,
+      "two": true
+    },
+    {
+      "name": "Snowy",
+      "rhythm": 87,
+      "expected": 87,
+      "phys": 81,
+      "two": true
+    },
+    {
+      "name": "Nana",
+      "rhythm": 65,
+      "expected": 65,
+      "phys": 62,
+      "two": true
+    }
+  ]
+}
