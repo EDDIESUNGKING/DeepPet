@@ -19,8 +19,13 @@
   stage.style.width=`${Math.floor(941*scale)}px`;
   stage.style.height=`${Math.floor(1672*scale)}px`;
  }
+ function loadSlide(i){
+  const img=slides[i]?.querySelector('img[data-src]');
+  if(img){img.src=img.dataset.src;img.removeAttribute('data-src');img.decoding='async';}
+ }
  function go(num){
   current=Math.min(4,Math.max(0,Number(num)||0));
+  loadSlide(current);loadSlide(Math.min(4,current+1));
   rail.style.transform=`translate3d(-${current*100}%,0,0)`;
   start.hidden=current!==4;
   slides.forEach((slide,i)=>slide.setAttribute('aria-hidden',i===current?'false':'true'));
@@ -42,10 +47,17 @@
    }
   } catch(err){
    console.error('DeepPet introduction initialization failed',err);
-   if(typeof state!=='undefined'){
-    state.dog=0;state.tab='home';state.detail=null;state.modal='';
-    if(typeof render==='function')render(true);
-   }
+   try {
+    if(typeof state!=='undefined'){
+     state.dog=0;state.emptyPreview=false;state.tab='home';state.detail=null;state.modal='';
+     if(typeof render==='function')render(true);
+    }
+   } catch(retryErr){console.error('DeepPet retry failed',retryErr);}
+  }
+  // Never dismiss the introduction into a silent blank screen.
+  const ready=!!app?.querySelector('.app-main') && (app.innerText||'').trim().length>35;
+  if(!ready && app){
+   app.innerHTML='<div class="dp-boot-error" role="alert" style="padding:60px 25px;color:#413568;text-align:center;line-height:1.8"><h2>DeepPet 无法完成启动</h2><p>部分程式或储存资料未能正确载入。请重新载入页面。</p><button type="button" style="background:#6856ce;border:0;color:white;border-radius:12px;padding:13px 20px;font-weight:bold" onclick="location.reload()">重新载入 / Retry</button></div>';
   }
   document.body.classList.remove('dp-intro-active');
   root.remove();

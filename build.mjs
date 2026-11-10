@@ -1,6 +1,22 @@
-/* Build DeepPet static frontend into dist/. Netlify bundles functions separately. */
-import {cp,rm,mkdir,copyFile} from 'node:fs/promises';
+/* DeepPet V9.08: bundle identical source files in the original order to reduce requests and startup render cost. */
+import {readFile,writeFile,mkdir,rm,copyFile,cp} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const src=await readFile('index.source.html','utf8');
+const cssPaths=[...src.matchAll(/<link\s+[^>]*href="([^"]+\.css(?:\?[^"]*)?)"[^>]*rel="stylesheet"[^>]*\/?>/g)].map(m=>m[1].split('?')[0]);
+const jsPaths=[...src.matchAll(/<script\s+src="([^"]+\.js(?:\?[^"]*)?)"\s*><\/script>/g)].map(m=>m[1].split('?')[0]);
+if(cssPaths.length<12||jsPaths.length<16)throw new Error(`Missing files: css=${cssPaths.length}, js=${jsPaths.length}`);
+const cssParts=await Promise.all(cssPaths.map(async x=>`/* ${x} */\n`+await readFile(x,'utf8')));
+const jsParts=await Promise.all(jsPaths.map(async x=>`\n;/* ${x} */\n`+await readFile(x,'utf8')));
+const cssBundle=cssParts.join('\n'),jsBundle=jsParts.join('\n');
+const cssHash=createHash('sha256').update(cssBundle).digest('hex').slice(0,12), jsHash=createHash('sha256').update(jsBundle).digest('hex').slice(0,12);
+const cssName=`assets/css/deeppet-v908-${cssHash}.css`,jsName=`assets/js/deeppet-v908-${jsHash}.js`;
+await writeFile(cssName,cssBundle);await writeFile(jsName,jsBundle);
+let html=src.replace(/<link\s+[^>]*href="([^"]+\.css(?:\?[^"]*)?)"[^>]*rel="stylesheet"[^>]*\/?>/g,'').replace(/<script\s+src="([^"]+\.js(?:\?[^"]*)?)"\s*><\/script>/g,'');
+html=html.replace('</head>',`<link href="${cssName}" rel="stylesheet"/></head>`);
+html=html.replace('</body>',`<script src="${jsName}"></script>\n<script>window.addEventListener('error',function(e){if(e.target?.tagName==='SCRIPT'){var shell=document.getElementById('app');if(shell&&!shell.querySelector('.app-main')){var el=document.getElementById('dp-safe-start-message');if(el)el.textContent='启动资源载入失败。请点击重新载入。';}}},true);if(!window.__DeepPetOnboarding){var root=document.getElementById('dp-intro-root'),dots=root?.querySelectorAll('[data-intro-dot]'),start=root?.querySelector('.dp-intro-start-zone'),rail=root?.querySelector('.dp-intro-rail');if(root&&dots&&start){dots.forEach((b,i)=>b.addEventListener('click',()=>{rail.style.transform='translate3d(-'+(i*100)+'%,0,0)';start.hidden=i!==4}));start.addEventListener('click',()=>{root.remove();document.body.classList.remove('dp-intro-active');var shell=document.getElementById('app');if(shell&&!shell.querySelector('.app-main')){shell.innerHTML='<div role="alert" style="padding:60px 20px;text-align:center;line-height:1.8"><h2>DeepPet 启动失败</h2><p>应用程序未能完整载入。请重新载入。</p><button style="background:#6856ce;color:white;border:0;border-radius:10px;padding:12px 18px" onclick="location.reload()">重新载入 / Retry</button></div>';}});}}<\/script></body>`);
+await writeFile('index.html',html);
 await rm('dist',{recursive:true,force:true});await mkdir('dist',{recursive:true});
 for(const file of ['index.html','app.js','breed-catalog.js','styles.css'])await copyFile(file,`dist/${file}`);
 await cp('assets','dist/assets',{recursive:true});
-console.log('DeepPet V9.06 static site copied to dist/');
+console.log(`DeepPet V9.08: ${cssPaths.length} CSS and ${jsPaths.length} JS source files bundled`);
+console.log(`Bundles: ${cssName} (${cssBundle.length} chars); ${jsName} (${jsBundle.length} chars)`);

@@ -7,7 +7,7 @@ const safe=(v,d=0)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':N
 const avg=arr=>arr.length?arr.reduce((s,x)=>s+x,0)/arr.length:null;
 const avgScore=arr=>arr.length?dpOwnerQualityValue(avg(arr)):null;
 const scoreTheme=s=>s===null?'none':s>=90?'normal':s>=80?'light':s>=60?'medium':'high';
-const gradeText=s=>s===null?tx('資料不足','数据不足','Insufficient data','데이터 부족','データ不足'):s>=90?tx('正常','正常','Normal','정상','正常'):s>=80?tx('輕風險','轻风险','Low concern','가벼운 주의','軽度注意'):s>=60?tx('中風險','中风险','Moderate concern','중간 주의','中程度注意'):tx('高風險','高风险','High concern','높은 주의','高度注意');
+const gradeText=s=>s===null?tx('資料不足','数据不足','Insufficient data','데이터 부족','データ不足'):s>=90?tx('健康','健康','Healthy','건강','健康'):s>=80?tx('輕風險','轻风险','Low Risk','가벼운 주의','軽度注意'):s>=60?tx('中風險','中风险','Middle Risk','중간 주의','中程度注意'):tx('高風險','高风险','High Risk','높은 주의','高度注意');
 const statusText=s=>s===null?tx('資料不足','数据不足','Insufficient data','데이터 부족','データ不足'):s>=90?tx('表現很好','表现很好','Doing great','매우 좋아요','とても良好'):s>=80?tx('狀態穩定','状态稳定','Looking steady','안정적이에요','安定しています'):s>=60?tx('稍微留意','稍微留意','Keep an eye on it','조금 살펴봐요','少し注意'):tx('需要多留意','需要多留意','Needs attention','주의가 필요해요','注意が必要');
 function scoreCol(score,color){
   const theme=scoreTheme(score), ring=score===null?'<div class="dp90-unavailable">—</div>':dpDeepDottedScore(score,color||scoreScheme(score).color);

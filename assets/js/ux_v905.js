@@ -16,7 +16,7 @@ function rowFor(date){const i=demoRecords(state.dog).findIndex(x=>x.date===date)
 function dayScore(row,metric){if(!isValid(row))return null;const s=dpOwnerDayScores(row,true);if(metric==='heart')return dpOwnerVitalScore(row,'heart');if(metric==='breath')return dpOwnerVitalScore(row,'breath');if(metric==='sleep')return s.sleep;if(metric==='energy')return s.energy;return null;}
 function dayGrade(row,metric){const score=dayScore(row,metric);return score===null?'none':score>=90?'normal':score>=80?'light':score>=60?'medium':'high';}
 function metricLabel(metric){return ({heart:T('心跳狀況','心跳状况','Heart rate','심박','心拍'),breath:T('呼吸狀況','呼吸状况','Breathing','호흡','呼吸'),sleep:T('睡眠狀態','睡眠状态','Sleep & rest','수면','睡眠'),energy:T('精力情況','精力情况','Energy status','활력','活力')})[metric]||metric;}
-const ratingText=score=>score===null?T('無有效記錄','无有效记录','No valid reading','유효 데이터 없음','有効な記録なし'):score>=90?T('正常','正常','Normal','정상','正常'):score>=80?T('輕風險','轻风险','Low concern','경미한 주의','軽度注意'):score>=60?T('中風險','中风险','Moderate concern','중간 주의','中程度注意'):T('高風險','高风险','High concern','높은 주의','高度注意');
+const ratingText=score=>score===null?T('資料不足','数据不足','Insufficient data','자료 부족','データ不足'):score>=90?T('健康','健康','Healthy','건강','健康'):score>=80?T('輕風險','轻风险','Low Risk','낮은 위험','低リスク'):score>=60?T('中風險','中风险','Middle Risk','중간 위험','中リスク'):T('高風險','高风险','High Risk','높은 위험','高リスク');
 function trendEvents(kind, date){
  const series=dpSignals(date,[kind])?.[kind];if(!Array.isArray(series)||!series.length)return [];
  const existing=dpEventsFor(date).filter(x=>Number.isFinite(x.minute)).map(x=>({minute:Math.max(0,Math.min(1439,Math.floor(x.minute))),priority:Number(x.score)||0}));
@@ -43,16 +43,23 @@ function yChart(raw,events,minute,kind,whole=false){
  const markers=events.filter(p=>p.minute>=a&&p.minute<=b).map(p=>`<circle cx="${x(p.minute)}" cy="${y(raw[p.minute])}" r="${whole?8:12}" fill="#fff5f6" stroke="#e65c68" stroke-width="2.5"/><circle cx="${x(p.minute)}" cy="${y(raw[p.minute])}" r="3" fill="#e65c68"/>`).join('');
  return `<svg class="dp905-signal-svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${e(metricLabel(kind))}">${ygrid}<path d="${curve}" fill="none" stroke="${kind==='heart'?'#bd5073':kind==='breath'?'#4388bf':'#497dbb'}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${markers}${ticks}</svg>`;
 }
+function inspectChart(svg,metric,date,start,end,unit){
+ return `<div class="dp908-inspect-chart" data-metric="${metric}" data-date="${date}" data-start="${start}" data-end="${end}" data-unit="${e(unit)}" tabindex="0" role="group" aria-label="${e(metricLabel(metric))}">${svg}<div class="dp908-chart-readout" aria-live="polite">${T('移動滑鼠或點擊曲線，讀取當時時間與數值','移动鼠标或点击曲线，读取对应时间与数值','Hover or tap the chart to inspect the exact demo time and value','그래프에서 시간과 값을 확인하세요','グラフから時間と値を確認')}</div></div>`;
+}
 function panelTitle(n,title){return `<div class="dp905-section-title"><span>${n}</span><h3>${title}</h3></div>`;}
 function detailBack(label=''){return `<header class="dp-independent-head"><button data-action="dp905-detail-back" aria-label="Back">←</button><b>${label}</b></header>`;}
 function calendar(rows,metric){
  const list=rows.map(row=>({row,score:dayScore(row,metric)}));
- const bad=list.filter(x=>x.score!==null&&x.score<90).length;
+ const flagged=list.filter(x=>x.score!==null&&x.score<90).length;
  const wd=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
- const start=list[0]?.row.date;const weekday=start?((new Date(start+'T12:00:00').getDay()+6)%7):0;
+ const first=list[0]?.row.date,weekday=first?((new Date(first+'T12:00:00').getDay()+6)%7):0;
  const blank=Array.from({length:weekday},()=>'<span class="dp905-cal-empty" aria-hidden="true"></span>').join('');
- const cells=list.map(({row,score})=>{const grade=dayGrade(row,metric),marked=score!==null&&score<90;return `<button class="dp905-cal-day ${grade}" data-action="dp905-date-open" data-kind="${metric}" data-date="${row.date}" title="${row.date} ${ratingText(score)}" aria-label="${row.date} ${ratingText(score)}"><small>${row.date.slice(5,7)}/${row.date.slice(8)}</small><strong>${row.date.slice(8)}</strong>${marked?'<i aria-hidden="true"></i>':score===null?'<span class="dp905-cal-missing">—</span>':'<span class="dp905-cal-normal">✓</span>'}</button>`;}).join('');
- return `<section class="card dp905-calendar-panel"><div class="dp905-cal-head"><h3>${T('逐日查看','逐日查看','Daily review','일별 확인','日別確認')}</h3><small>${bad} ${T('天有需回看的變化','天有需回看的变化','days flagged for review','일 주의 표시','日間の確認項目')}</small></div><p class="dp905-cal-help">${T('有變化的日期標記色點；正常日期不標風險點。點擊日期進入獨立詳情頁。','有变化的日期标记色点；正常日期不标风险点。点击日期进入独立详情页。','Marked dates have changes worth reviewing. Select a date for a full-screen detail page.','주의가 필요한 날짜에 점이 표시됩니다.','変化のあった日付に点が表示されます。')}</p><div class="dp905-calendar"><div class="dp905-weekdays">${wd.map(w=>`<span>${w}</span>`).join('')}</div><div class="dp905-calendar-grid">${blank}${cells}</div></div><div class="dp905-calendar-legend"><span><i class="low"></i>${T('輕風險','轻风险','Low concern','낮음','軽度')}</span><span><i class="medium"></i>${T('中風險','中风险','Moderate concern','보통','中度')}</span><span><i class="high"></i>${T('高風險','高风险','High concern','높음','高')}</span></div><p class="dp905-sim-note">${modalWarning()}</p></section>`;
+ const cells=list.map(({row,score})=>{
+  const grade=dayGrade(row,metric),mark=score===null?'—':score>=90?'✓':'•';
+  return `<button class="dp905-cal-day dp908-solid-day ${grade}" data-action="dp905-date-open" data-kind="${metric}" data-date="${row.date}" data-score="${score===null?'':score}" title="${row.date} ${ratingText(score)}${score===null?'':` ${score}/100`}" aria-label="${row.date} ${ratingText(score)} ${score===null?'':score+'/100'}"><small>${row.date.slice(5,7)}/${row.date.slice(8)}</small><strong>${row.date.slice(8)}</strong><span class="dp908-day-mark" aria-hidden="true">${mark}</span></button>`;
+ }).join('');
+ const legend=[['normal',T('健康','健康','Healthy','건강','健康')],['light',T('輕風險','轻风险','Low Risk','낮은 위험','低リスク')],['medium',T('中風險','中风险','Middle Risk','중간 위험','中リスク')],['high',T('高風險','高风险','High Risk','높은 위험','高リスク')]].map(([k,label])=>`<span><i class="${k}"></i>${label}</span>`).join('');
+ return `<section class="card dp905-calendar-panel dp908-calendar-panel"><div class="dp905-cal-head"><h3>${T('逐日查看','逐日查看','Daily review','일별 확인','日別確認')}</h3><small>${flagged} ${T('天需要回看','天需要回看','days flagged','일 주의','日間に確認')}</small></div><p class="dp905-cal-help">${T('整格顏色對應健康等級；點擊日期進入當日詳情。','整格颜色代表健康等级，点击日期查看当天详情。','Each date uses its full grade color. Select any day to open detailed readings.','각 날짜의 색상은 상태를 표시합니다.','色は健康状態を表し、日付を選択できます。')}</p><div class="dp905-calendar"><div class="dp905-weekdays">${wd.map(w=>`<span>${w}</span>`).join('')}</div><div class="dp905-calendar-grid">${blank}${cells}</div></div><div class="dp905-calendar-legend dp908-four-legend">${legend}</div><p class="dp905-sim-note">${modalWarning()}</p></section>`;
 }
 function wavePeriod(){
  const range=[7,30].includes(Number(state.range))?Number(state.range):7,metric=state.dp90WaveKind==='breath'?'breath':'heart';
@@ -64,7 +71,7 @@ function dayDetail(metric,date){
  if(!isValid(row)||!Array.isArray(raw)||raw.length!==1440)return `<div class="app-pad dp905-page">${detailBack(metricLabel(metric))}<section class="card">${T('當日有效數據不足','当天有效数据不足','Insufficient data for this date','자료 부족','データ不足')}</section></div>`;
  const s=dayScore(row,metric),events=s!==null&&s<90?trendEvents(dataMetric,date):[],chosen=events.length?events[Math.max(0,Math.min(events.length-1,Number(state.dp905PickedEvent)||0))]:null,unit=metric==='heart'?'bpm':metric==='breath'?T('次／分','次／分','/min','회/분','回／分'):'%';
  const mean=avg(raw.filter(Number.isFinite)),list=events.map((p,i)=>`<button data-action="dp905-event-pick" data-index="${i}" class="dp905-event-button ${p.minute===chosen?.minute?'active':''}"><b>${toMinute(p.minute)}</b><small>${val(raw[p.minute],1)} ${unit}</small></button>`).join('');
- return `<div class="app-pad dp905-page">${detailBack(metricLabel(metric)+' · '+dateTitle(date))}<section class="card dp905-overview"><h2>${date} ${metricLabel(metric)}</h2><div class="dp905-day-stats"><span>${T('當日平均','当日平均','Daily mean','일 평균','日平均')} <b>${val(mean,1)} ${unit}</b></span><span>${T('值得回看','值得回看','Review points','확인 시간','確認箇所')} <b>${events.length}</b></span></div><p>${T('圖中紅圈為示範變化時段，並非臨床確診的異常。','图中红圈为示范变化时段，并非临床确诊的异常。','Red circles mark demo changes, not clinically confirmed anomalies.','빨간 원은 데모 변화입니다.','赤丸はデモの変化です。')}</p>${yChart(raw,events,chosen?.minute??720,dataMetric,true)}</section>${chosen?`<section class="card dp905-zoom">${panelTitle('02',T('選擇需要放大的時段','选择需要放大的时段','Choose a time to zoom','확대 시간 선택','拡大する時間帯'))}<div class="dp905-event-row">${list}</div>${yChart(raw,events,chosen.minute,dataMetric,false)}<div class="dp905-key-values"><div><small>${T('日期時間','日期时间','Exact demo time','일시','日時')}</small><b>${date} ${toMinute(chosen.minute)}</b></div><div><small>${metricLabel(metric)}</small><b>${val(raw[chosen.minute],1)} ${unit}</b></div><div><small>${T('當日參考均值','当日参考均值','Daily reference','일 기준','当日基準')}</small><b>${val(mean,1)} ${unit}</b></div></div><p class="dp905-sim-note">${T('以上為逐分鐘示範資料；真實項圈 SDK、偵測門檻與獸醫驗證尚未整合。','以上为逐分钟示范数据；真实项圈 SDK、检测阈值与兽医验证尚未整合。','Simulated minute readings, not sensor-validated event detection.','데모 자료입니다.','シミュレーションデータです.')}</p></section>`:`<section class="card dp905-no-event">${T('這一天沒有需優先標記的變化，全天趨勢仍可查看。','这一天没有需要优先标记的变化，全天趋势仍可查看。','No change is flagged for this day. The daily trend remains available.','이날은 표시할 주의 변화가 없습니다.','この日は注意すべき変化がありません。')}</section>`}</div>`;
+ return `<div class="app-pad dp905-page">${detailBack(metricLabel(metric)+' · '+dateTitle(date))}<section class="card dp905-overview"><h2>${date} ${metricLabel(metric)}</h2><div class="dp905-day-stats"><span>${T('當日平均','当日平均','Daily mean','일 평균','日平均')} <b>${val(mean,1)} ${unit}</b></span><span>${T('值得回看','值得回看','Review points','확인 시간','確認箇所')} <b>${events.length}</b></span></div><p>${T('圖中紅圈為示範變化時段，並非臨床確診的異常。','图中红圈为示范变化时段，并非临床确诊的异常。','Red circles mark demo changes, not clinically confirmed anomalies.','빨간 원은 데모 변화입니다.','赤丸はデモの変化です。')}</p>${inspectChart(yChart(raw,events,chosen?.minute??720,dataMetric,true),metric,date,0,1439,unit)}</section>${chosen?`<section class="card dp905-zoom">${panelTitle('02',T('選擇需要放大的時段','选择需要放大的时段','Choose a time to zoom','확대 시간 선택','拡大する時間帯'))}<div class="dp905-event-row">${list}</div>${inspectChart(yChart(raw,events,chosen.minute,dataMetric,false),metric,date,Math.max(0,chosen.minute-30),Math.min(raw.length-1,chosen.minute+30),unit)}<div class="dp905-key-values"><div><small>${T('日期時間','日期时间','Exact demo time','일시','日時')}</small><b>${date} ${toMinute(chosen.minute)}</b></div><div><small>${metricLabel(metric)}</small><b>${val(raw[chosen.minute],1)} ${unit}</b></div><div><small>${T('當日參考均值','当日参考均值','Daily reference','일 기준','当日基準')}</small><b>${val(mean,1)} ${unit}</b></div></div><p class="dp905-sim-note">${T('以上為逐分鐘示範資料；真實項圈 SDK、偵測門檻與獸醫驗證尚未整合。','以上为逐分钟示范数据；真实项圈 SDK、检测阈值与兽医验证尚未整合。','Simulated minute readings, not sensor-validated event detection.','데모 자료입니다.','シミュレーションデータです.')}</p></section>`:`<section class="card dp905-no-event">${T('這一天沒有需優先標記的變化，全天趨勢仍可查看。','这一天没有需要优先标记的变化，全天趋势仍可查看。','No change is flagged for this day. The daily trend remains available.','이날은 표시할 주의 변화가 없습니다.','この日は注意すべき変化がありません。')}</section>`}</div>`;
 }
 function sleepPeriod(cp,days){
  const rows=dayRowsWithIndex(days).filter(r=>r);const valid=rows.filter(isValid),s=valid.map(r=>dpOwnerDayScores(r,true).sleep).filter(Number.isFinite),total=s.length?Math.round(avg(s)):null;
@@ -74,7 +81,7 @@ function sleepPeriod(cp,days){
 function sleepDay(date){
  const row=rowFor(date);if(!row||!isValid(row))return `<div class="app-pad dp905-page">${detailBack(metricLabel('sleep'))}<section class="card">${T('有效記錄不足','有效记录不足','Insufficient valid data','자료 부족','データ不足')}</section></div>`;
  const stats=dpNightSleepStats(row.idx),s=dayScore(row,'sleep');
- return `<div class="app-pad dp905-page">${detailBack(metricLabel('sleep')+' · '+dateTitle(date))}<section class="card dp905-sleep-day"><div class="dp905-sleep-head"><div><h2>${date} ${metricLabel('sleep')}</h2><p>${ratingText(s)}</p></div>${dpDeepDottedScore(s,scoreScheme(s).color)}</div><div class="dp905-day-stats"><span>${T('睡眠與休息','睡眠与休息','Sleep & rest','수면·휴식','睡眠と休息')} <b>${dpMinutesText(stats.minutes)}</b></span><span>${T('夜間中斷','夜间中断','Interruptions','중단','中断')} <b>${stats.wakes}</b></span></div><h3>${T('當晚休息時間軸','当晚休息时间轴','Night timeline','야간 시간대','夜間の時間軸')}</h3>${dpOwnerSleepWave(row)}${sleepMatrixDate(row.idx)}<p class="dp905-sim-note">${T('項圈動靜推估安靜休息，不能以此診斷深睡、REM 或疾病。','项圈动静估算安静休息，不能据此诊断深睡、REM 或疾病。','Rest inferred from movement; this does not establish true REM/deep sleep or a diagnosis.','움직임을 통한 휴식 추정입니다.','動静から休息を推定しています。')}</p></section></div>`;
+ return `<div class="app-pad dp905-page">${detailBack(metricLabel('sleep')+' · '+dateTitle(date))}<section class="card dp905-sleep-day"><div class="dp905-sleep-head"><div><h2>${date} ${metricLabel('sleep')}</h2><p>${ratingText(s)}</p></div>${dpDeepDottedScore(s,scoreScheme(s).color)}</div><div class="dp905-day-stats"><span>${T('睡眠與休息','睡眠与休息','Sleep & rest','수면·휴식','睡眠と休息')} <b>${dpMinutesText(stats.minutes)}</b></span><span>${T('夜間中斷','夜间中断','Interruptions','중단','中断')} <b>${stats.wakes}</b></span></div><h3>${T('當晚休息時間軸','当晚休息时间轴','Night timeline','야간 시간대','夜間の時間軸')}</h3><div class="dp-owner-sleep-timeline dp908-synced-sleep">${dpOwnerSleepWave(row)}${sleepMatrixDate(row.idx)}</div><p class="dp905-sim-note">${T('項圈動靜推估安靜休息，不能以此診斷深睡、REM 或疾病。','项圈动静估算安静休息，不能据此诊断深睡、REM 或疾病。','Rest inferred from movement; this does not establish true REM/deep sleep or a diagnosis.','움직임을 통한 휴식 추정입니다.','動静から休息を推定しています。')}</p></section></div>`;
 }
 function dailyTrend(rows,metric){
  const pts=rows.map(r=>({date:r.date,score:dayScore(r,metric)}));
@@ -84,21 +91,34 @@ function dailyTrend(rows,metric){
  const yticks=[0,25,50,75,100].map(n=>`<line x1="${L}" x2="${W-R}" y1="${y(n)}" y2="${y(n)}" stroke="#e6ebf2"/><text x="${L-4}" y="${y(n)+3}" text-anchor="end" font-size="9" fill="#8c96a7">${n}</text>`).join('');
  const xticks=pts.map((p,i)=>i===0||i===pts.length-1||(pts.length<=7)||i%7===0?`<text x="${x(i)}" y="${H-9}" text-anchor="${i===0?'start':i===pts.length-1?'end':'middle'}" font-size="9" fill="#7d8fa5">${dateTitle(p.date)}</text>`:'').join('');
  const dots=valid.map(p=>`<circle cx="${x(p.i)}" cy="${y(p.score)}" r="3.5" fill="#fff" stroke="#4388c7" stroke-width="1.8"><title>${p.date} ${p.score}/100</title></circle>`).join('');
- return `<svg class="dp905-daily-trend" viewBox="0 0 ${W} ${H}" role="img" aria-label="${metricLabel(metric)}">${yticks}<path d="${poly}" fill="none" stroke="#4388c7" stroke-width="2.8" stroke-linecap="round"/>${dots}${xticks}</svg>`;
+ const payload=encodeURIComponent(JSON.stringify(pts.map(p=>({date:p.date,score:p.score}))));
+ return `<div class="dp908-daily-inspector" data-daily-points="${payload}" tabindex="0" role="group" aria-label="${metricLabel(metric)}"><svg class="dp905-daily-trend" viewBox="0 0 ${W} ${H}" role="img" aria-label="${metricLabel(metric)}">${yticks}<path d="${poly}" fill="none" stroke="#4388c7" stroke-width="2.8" stroke-linecap="round"/>${dots}${xticks}</svg><div class="dp908-chart-readout" aria-live="polite">${T('滑鼠移動或點擊曲線查看逐日分數','移动鼠标或点击曲线查看每日分数','Hover or tap for each day’s exact score','일별 점수를 확인하세요','日別点数を確認')}</div></div>`;
 }
 const oldPeriod=dpOwnerPeriodDetail;
 dpOwnerPeriodDetail=function(kind,cp,days){
  if(kind===1&&[7,30].includes(Number(days)))return sleepPeriod(cp,days);
  const original=oldPeriod(kind,cp,days);
  if(kind!==2||![7,30].includes(Number(days)))return original;
- const rows=dayRowsWithIndex(days);
- return original+`<section class="card dp905-energy-calendar"><h3>${T('精力期間變化','精力期间变化','Energy over time','활력 추세','期間の活力推移')}</h3><p>${T('精力按日比較，點擊下方日曆查看全天趨勢及標記時段；恢復情況仍查看原有的兩分鐘下降曲線。','精力按日比较，点击下方日历查看全天趋势与标记时段；恢复情况仍查看原有两分钟下降曲线。','Energy uses a daily calendar; recovery keeps the existing two-minute HR-drop curve.','활력은 일별 달력으로 확인하며 회복은 2분 곡선을 유지합니다.','活力は日別カレンダーで確認し、回復は2分間曲線のままです。')}</p>${dailyTrend(rows,'energy')}</section>${calendar(rows,'energy')}`;
+ const root=document.createElement('div');root.innerHTML=original;
+ const panel=root.querySelector('.dp901-metric-card,.dp903-metric-card[data-dp903-metric="energy"]');
+ if(panel){
+   const details=panel.querySelector('details.dp901-expand,details.dp66-expand,details.dp903-expand');
+   if(details)details.remove();
+   panel.insertAdjacentHTML('beforeend',`<button class="dp905-day-detail-link dp908-energy-period-open" data-action="dp908-energy-period-open">${T('查看詳細數據','查看详细数据','View detailed data','상세 데이터','詳細データを見る')} ›</button>`);
+ }
+ return root.innerHTML;
 };
+function energyCalendarPage(){
+ const range=[7,30].includes(Number(state.range))?Number(state.range):7;
+ const rows=dayRowsWithIndex(range);
+ return `<div class="app-pad dp905-page dp908-energy-calendar-page">${detailBack(T('精力情況','精力情况','Energy status','활력','活力')+' · '+range+T('天','天',' days','일','日'))}<section class="card dp905-energy-calendar"><h3>${T('期間精力分數趨勢','期间精力分数趋势','Period energy scores','기간 활력','期間の活力')}</h3><p>${T('每天的精力分數直接取當天有效記錄，不使用隨機數據。選擇日曆日期可查看全天強度與放大的變化時段。','每日精力分数来自当天有效记录，不采用随机数据。点选日历日期查看全天曲线及放大时段。','Scores come from each day’s valid records. Select a calendar date to see the full-day trend and zoomed changes.','날짜별 활력 기록입니다.','日別の有効データを表示します。')}</p>${dailyTrend(rows,'energy')}</section>${calendar(rows,'energy')}</div>`;
+}
 // Four-card heart analysis: one link per heart/breathing metric, in each period.
 const baseDeep=deepView;
 deepView=function(){
  if(state.detail==='dp905-sleep-day')return sleepDay(state.dp905ChosenDate);
  if(state.detail==='dp905-energy-day')return dayDetail('energy',state.dp905ChosenDate);
+ if(state.detail==='dp908-energy-calendar')return energyCalendarPage();
  if(state.detail==='dp90-waveform'){
    if([7,30].includes(Number(state.dp905WaveRange))&&state.dp905WaveMode!=='day')return wavePeriod();
    if(state.dp905WaveMode==='day')return dayDetail(state.dp90WaveKind==='breath'?'breath':'heart',state.dp905ChosenDate||state.dp90WaveDate);
@@ -142,7 +162,7 @@ const oldHealth=healthView;
 healthView=function(){if(state.detail==='dp905-watch-all')return watchAllPage();return oldHealth();};
 // Calendar and prevention detail screens have their own back controls; remove the main tabs.
 const oldBottom=bottomNav;
-bottomNav=function(){if((state.tab==='deep'&&['dp905-sleep-day','dp905-energy-day'].includes(state.detail))||(state.tab==='health'&&state.detail==='dp905-watch-all'))return '';return oldBottom();};
+bottomNav=function(){if((state.tab==='deep'&&['dp905-sleep-day','dp905-energy-day','dp908-energy-calendar'].includes(state.detail))||(state.tab==='health'&&state.detail==='dp905-watch-all'))return '';return oldBottom();};
 // Show all y-axis values and exact date-score pairs for weekly and monthly reviews.
 dpReviewPeriodCurve=function(series,color,title,dates){
  const n=series.length;if(!n)return '';
@@ -161,7 +181,8 @@ dpReviewPeriodCurve=function(series,color,title,dates){
 const originalAction=onAction;
 onAction=function(target){
  const a=target?.dataset?.action;
- if(a==='dp905-energy-day-link'){state.dp905ChosenDate=deepChosenDate();state.dp905PickedEvent=0;state.modal='';state.tab='deep';state.deepType=2;state.detail='dp905-energy-day';render(true);return;}
+ if(a==='dp908-energy-period-open'){state.detail='dp908-energy-calendar';state.modal='';state.tab='deep';state.deepType=2;render(true);return;}
+ if(a==='dp905-energy-day-link'){state.dp905OriginDetail=null;state.dp905ChosenDate=deepChosenDate();state.dp905PickedEvent=0;state.modal='';state.tab='deep';state.deepType=2;state.detail='dp905-energy-day';render(true);return;}
  if(a==='dp905-milo-alert'){state.modal='';state.tab='deep';state.deepType=0;state.range=1;state.dp905WaveRange=1;state.dp905WaveMode='single';state.detail='dp90-waveform';state.dp90WaveKind=target.dataset.kind==='breath'?'breath':'heart';state.dp90WaveDate=demoRecords(state.dog).at(-1)?.date||iso(localDate());state.dp904WaveSelected=0;render(true);return;}
  if(a==='dp905-watch-more'){state.tab='health';state.detail='dp905-watch-all';state.modal='';render(true);return;}
  if(a==='dp905-review-point'){
@@ -183,6 +204,8 @@ onAction=function(target){
  }
  if(a==='dp905-event-pick'){state.dp905PickedEvent=Number(target.dataset.index)||0;render(false);return;}
  if(a==='dp905-detail-back'){
+  if(state.detail==='dp905-energy-day'&&state.dp905OriginDetail==='dp908-energy-calendar'){state.detail='dp908-energy-calendar';render(true);return;}
+  if(state.detail==='dp908-energy-calendar'){state.detail=null;render(true);return;}
   if(state.tab==='health'&&state.detail==='dp905-watch-all'){state.detail=null;render(true);return;}
   if(state.detail==='dp90-waveform'&&state.dp905WaveMode==='day'){
    state.dp905WaveMode='period';state.dp905ChosenDate=null;state.dp904WaveSelected=0;render(true);return;
@@ -198,7 +221,7 @@ dp66UrgentHome=function(){
  if(state.dog!==0)return priorUrgent();
  const row=demoRecords(0).at(-1),date=row?.date||iso(localDate());
  const demoTime=kind=>{const t=dp66DemoPeak(date,kind)?.time;return /^\d{2}:\d{2}$/.test(t||'')?t:(kind==='heart'?'17:30':'10:40');};
- const item=(kind,level,summary)=>`<button data-action="dp905-milo-alert" data-kind="${kind}" class="dp905-milo-item"><span class="dp905-milo-risk ${level}">${level==='light'?T('輕風險','轻风险','Low concern','낮은 주의','軽度'):T('中風險','中风险','Moderate concern','중간 주의','中程度')}</span><span><b>${metricLabel(kind)} · ${demoTime(kind)}</b><small>${summary}</small></span><span>›</span></button>`;
+ const item=(kind,level,summary)=>`<button data-action="dp905-milo-alert" data-kind="${kind}" class="dp905-milo-item"><span class="dp905-milo-risk ${level}">${level==='light'?T('輕風險','轻风险','Low Risk','낮은 주의','軽度'):T('中風險','中风险','Middle Risk','중간 주의','中程度')}</span><span><b>${metricLabel(kind)} · ${demoTime(kind)}</b><small>${summary}</small></span><span>›</span></button>`;
  return `<section class="card dp905-milo-demo"><div class="dp905-milo-heading"><b>${T('今日即時變化提醒','今日即时变化提醒','Today’s changes','오늘의 변화','今日の変化')}</b><small>${T('Milo 示範資料','Milo 示范数据','Milo demo','Milo 데모','Miloデモ')}</small></div>${item('breath','light',T('活動後呼吸變化，先回看當時活動與氣溫。','活动后呼吸变化，建议先核对活动和气温。','Post-activity breathing change; check movement and heat.','활동 후 호흡 변화를 확인하세요.','運動後の呼吸変化を確認。'))}${item('heart','medium',T('心率短暫偏離平常，建議檢查佩戴與活動干擾。','心率短暂偏离平常，建议检查佩戴和活动干扰。','Brief heart-rate deviation; review fit and movement.','심박 변화와 착용 상태를 확인하세요.','心拍変化と装着状態を確認。'))}<p>${modalWarning()}</p></section>`;
 };
 // Hook keyboard and touch on the chart hit rectangles without costly page rebuilds.
