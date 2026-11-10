@@ -1,0 +1,42 @@
+{
+  "errors": [],
+  "findings": {
+    "modal": {
+      "title": "两项身体节奏指标",
+      "summary": "身体节奏分数：89/100\n\n仅由「放松与平稳度」及「心搏节奏稳定度」两项平均组成。\n\n放松与平稳度\n90\n/100\n正常 ›\n心搏节奏稳定度\n88\n/100\n轻风险 ›\n表现较好的地方\n✓\n放松与平稳度 · 90/100 · 正常\n\n安静时心搏与 HRV 趋势较接近这只宠物的平常基准。\n\n›\n需要关注的地方\n!\n心搏节奏稳定度 · 88/100 · 轻风险\n\n心搏间隔的近期变化值得回看，先排除活动与信号干扰。\n\n›\n\n以上为个体趋势模型展示，不能单独用于疾病诊断。",
+      "sections": [
+        "表现较好的地方",
+        "需要关注的地方"
+      ],
+      "items": [
+        {
+          "name": "放松与平稳度90/100正常 ›",
+          "key": "calm"
+        },
+        {
+          "name": "心搏节奏稳定度88/100轻风险 ›",
+          "key": "stable"
+        }
+      ]
+    },
+    "jump_stable": {
+      "tab": "deep",
+      "cat": 0,
+      "modal": "",
+      "selected": true,
+      "visible": true,
+      "top": 578.1875,
+      "scrollTop": 761
+    },
+    "jump_calm": {
+      "tab": "deep",
+      "cat": 2,
+      "modal": "",
+      "selected": true,
+      "visible": true,
+      "top": 522.09375,
+      "scrollTop": 400
+    }
+  },
+  "issues": []
+}

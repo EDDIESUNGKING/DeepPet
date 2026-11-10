@@ -1,0 +1,78 @@
+/* DeepPet V9.02: remove structural voids, shrink rhythm caption, consistent navigation. */
+.dp-owner-deep .dp902-flow .dp901-overall-head,
+.dp-owner-deep .dp902-flow .dp901-card-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 108px!important;
+  align-items:start!important;
+  gap:10px!important;
+  min-height:0!important;
+  margin-bottom:0!important;
+}
+.dp-owner-deep .dp902-flow .dp901-overall-copy,
+.dp-owner-deep .dp902-flow .dp901-card-copy{min-width:0!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important}
+.dp-owner-deep .dp902-flow .dp901-overall-copy h2,
+.dp-owner-deep .dp902-flow .dp901-card-copy h3{margin:0 0 5px!important;padding:0!important;line-height:1.32!important}
+.dp-owner-deep .dp902-flow .dp901-overall-verdict{margin:0 0 4px!important;font-weight:700!important;line-height:1.35!important}
+.dp-owner-deep .dp902-flow .dp901-overall-copy>.dp901-overall-desc,
+.dp-owner-deep .dp902-flow .dp901-card-copy>.dp901-metric-desc{
+  display:block!important;position:static!important;
+  margin:4px 0 0!important;padding:0!important;
+  font-size:12px!important;line-height:1.64!important;font-weight:400!important;
+  color:#5c6e85!important;overflow-wrap:anywhere;
+}
+.dp-owner-deep .dp902-flow .dp901-period-notes{display:grid;gap:7px;margin:6px 0 0!important}
+.dp-owner-deep .dp902-flow .dp901-overall-copy .dp901-period-notes p{
+  margin:0!important;padding:0!important;font-size:11.5px!important;
+  line-height:1.58!important;color:#5c6e85!important;font-weight:400!important
+}
+.dp-owner-deep .dp902-flow .dp901-metric-card{
+  margin-top:12px!important;padding:13px 13px 12px!important;
+  min-height:0!important;
+}
+.dp-owner-deep .dp902-flow .dp901-score-col{min-width:104px!important;width:104px!important;align-items:center!important;justify-content:flex-start!important;gap:6px!important;flex:none!important}
+.dp-owner-deep .dp902-flow .dp901-score-col .dp-status-score{margin:0 auto!important}
+.dp-owner-deep .dp902-flow .dp901-meta-row{margin:8px 0 0!important}
+.dp-owner-deep .dp902-flow .dp901-expand{margin:9px 0 0!important}
+.dp-owner-deep .dp901-rhythm-card .dp901-rhythm-head{
+  display:grid!important;grid-template-columns:minmax(0,1fr) 108px!important;
+  align-items:start!important;gap:10px!important;
+}
+.dp-owner-deep .dp901-rhythm-card .dp901-rhythm-copy{
+  display:flex!important;flex-direction:column!important;justify-content:flex-start!important;
+  min-width:0!important;
+}
+.dp-owner-deep .dp901-rhythm-card .dp901-rhythm-copy h3{font-size:17px!important;line-height:1.35!important;margin:0 0 6px!important}
+.dp-owner-deep .dp901-rhythm-card .dp901-rhythm-desc{
+  font-size:11.5px!important;line-height:1.58!important;font-weight:400!important;
+  margin:2px 0 0!important;padding:0!important;color:#9b6076!important;
+  overflow-wrap:anywhere!important;
+}
+.dp-owner-deep .dp901-rhythm-card .dp901-rhythm-help{margin-top:9px!important}
+.dp-owner-deep .dp901-rhythm-card .dp901-rhythm-help summary{font-size:12px!important;line-height:1.55!important}
+.dp-owner-deep .dp901-rhythm-card .dp901-rhythm-help p{font-size:11.5px!important;line-height:1.6!important}
+.bottom-nav .nav-button,
+.bottom-nav .nav-button.active,
+.bottom-nav .nav-button:not(.active),
+.bottom-nav .nav-button>span:last-child{
+  font-weight:400!important;
+}
+/* A temporary, clearly traceable red frame shown only after tapping a rhythm subscore. */
+.dp-owner-deep .dp902-jump-highlight{
+  outline:3px solid #ed4155!important;outline-offset:2px!important;
+  border-radius:17px!important;
+  box-shadow:0 0 0 6px rgba(237,65,85,.12),0 5px 18px rgba(237,65,85,.11)!important;
+  transition:outline-color .18s,box-shadow .18s;
+}
+.dp902-rhythm-detail .summary-detail-section{margin-top:15px!important}
+.dp902-rhythm-detail .summary-detail-section h3{font-size:14px!important}
+.dp902-rhythm-detail .summary-finding{font-size:12px!important;line-height:1.65!important}
+@media(max-width:375px){
+  .dp-owner-deep .dp902-flow .dp901-overall-head,
+  .dp-owner-deep .dp902-flow .dp901-card-head,
+  .dp-owner-deep .dp901-rhythm-card .dp901-rhythm-head{
+    grid-template-columns:minmax(0,1fr) 94px!important;gap:8px!important;
+  }
+  .dp-owner-deep .dp902-flow .dp901-score-col{min-width:94px!important;width:94px!important}
+  .dp-owner-deep .dp902-flow .dp901-overall-copy>.dp901-overall-desc,
+  .dp-owner-deep .dp902-flow .dp901-card-copy>.dp901-metric-desc{font-size:11.5px!important;line-height:1.6!important}
+}
