@@ -7,7 +7,7 @@ const mean=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:null;
 const avgScore=a=>a.length?dpOwnerQualityValue(mean(a)):null;
 const safe=(v,d=0)=>v===null||v===undefined||!Number.isFinite(Number(v))?'—':Number(v).toFixed(d);
 const es=x=>typeof esc==='function'?esc(String(x)):String(x);
-const grade=s=>s===null?L('資料不足','数据不足','Insufficient data','데이터 부족','データ不足'):s>=90?L('正常','正常','Normal','정상','正常'):s>=80?L('輕風險','轻风险','Low concern','가벼운 주의','軽度注意'):s>=60?L('中風險','中风险','Moderate concern','중간 주의','中程度注意'):L('高風險','高风险','High concern','높은 주의','高度注意');
+const grade=s=>s===null?L('資料不足','数据不足','Insufficient data','데이터 부족','データ不足'):s>=90?L('健康','健康','Healthy','건강','健康'):s>=80?L('低風險','低风险','Mild','가벼운 주의','軽度注意'):s>=60?L('中風險','中风险','Moderate','중간 주의','中程度注意'):L('高風險','高风险','Risk','높은 주의','高度注意');
 const themeClass=s=>s===null?'none':s>=90?'normal':s>=80?'light':s>=60?'medium':'high';
 const panelScore=(n,large=false)=>n===null?`<div class="dp90-unavailable">—</div>`:`<div class="dp90-indicator ${themeClass(n)}${large?' major':''}">${dpDeepDottedScore(n,'#4387dc')}<span class="dp90-status">${grade(n)}</span></div>`;
 

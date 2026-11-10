@@ -8,9 +8,9 @@ const numeric=n=>n===null||n===undefined||n===''?null:(Number.isFinite(Number(n)
 const tier=n=>n===null?'missing':n>=90?'normal':n>=80?'low':n>=60?'medium':'high';
 const statusName=n=>{
  const labels={
-  zht:['正常','輕風險','中風險','高風險','資料不足'],
-  zh:['正常','轻风险','中风险','高风险','数据不足'],
-  en:['Normal','Low concern','Moderate concern','High concern','Insufficient data'],
+  zht:['健康','低風險','中風險','高風險','資料不足'],
+  zh:['健康','低风险','中风险','高风险','数据不足'],
+  en:['Healthy','Mild','Moderate','Risk','Insufficient data'],
   ko:['정상','경미한 위험','중간 위험','높은 위험','자료 부족'],
   ja:['正常','軽度リスク','中度リスク','高リスク','データ不足']
  };
@@ -60,7 +60,7 @@ function alignHeartVitals(root){
   const st=/資料不足|数据不足|no data|insufficient|데이터 부족|データ不足/.test(txt)?'missing':
    cls?(['normal','low','medium','high'][Number(cls.at(-1))]||'missing'):
    /高風險|高风险|high/.test(txt)?'high':/中風險|中风险|moderate/.test(txt)?'medium':
-   /輕風險|轻风险|low|mild/.test(txt)?'low':'normal';
+   /低風險|低风险|low|mild/.test(txt)?'low':'normal';
   grade.classList.add('dp75-risk','dp75-risk-'+st);
   const rank={normal:95,low:85,medium:70,high:45,missing:null};grade.textContent=statusName(rank[st]);
  });

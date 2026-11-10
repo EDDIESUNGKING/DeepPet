@@ -11,7 +11,7 @@ const avg=a=>a.length?a.reduce((p,c)=>p+Number(c),0)/a.length:null;
 const pct=(v,r)=>r>0?Math.abs((v-r)/r):null;
 const safe=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
 const scoreCls=n=>n===null?'missing':n>=90?'normal':n>=80?'low':n>=60?'medium':'high';
-const severity=n=>n===null?L('資料不足','数据不足','More data needed','데이터 부족'):n>=90?L('正常','正常','Normal','정상'):n>=80?L('輕度留意','轻度留意','Mild change','가벼운 변화'):n>=60?L('中度留意','中度留意','Moderate change','중간 변화'):L('需要優先留意','需要优先留意','Priority change','우선 확인 필요');
+const severity=n=>n===null?L('資料不足','数据不足','More data needed','데이터 부족'):n>=90?L('健康','健康','Healthy','정상'):n>=80?L('低風險','低风险','Mild','가벼운 변화'):n>=60?L('中風險','中风险','Moderate','중간 변화'):L('高風險','高风险','Risk','우선 확인 필요');
 const guidance=(v,context)=>{
  const head=context==='hrv'?L('心搏變異','心搏变异','heart-rate variability','심박변이도'):context==='rest'?L('夜間狀態','夜间状态','overnight patterns','야간 상태'):L('心肺或恢復','心肺或恢复','heart, breathing or recovery','심폐 또는 회복');
  if(v===null)return L('先累積足夠、同樣條件下的有效記錄，不做風險推斷。','先积累足够、同样条件下的有效记录，不做风险推断。','Build enough valid readings under comparable conditions before interpreting change.','비교 가능한 조건에서 충분한 유효 기록을 먼저 확보하세요.');
@@ -57,7 +57,7 @@ function hrvPeriodCard(rows,days){
  const changes=items.map(x=>x.change).filter(x=>Number.isFinite(x));
  const maxDeviation=changes.length?Math.max(...changes.map(x=>Math.abs(x))):null;
  const periodScore=maxDeviation===null?null:maxDeviation<=.15?95:maxDeviation<=.25?85:maxDeviation<=.40?70:45;
- const periodLabel=periodScore===null?'—':periodScore>=90?L('正常','正常','Normal','정상','正常'):periodScore>=80?L('輕風險','轻风险','Low concern','경미한 위험','軽度リスク'):periodScore>=60?L('中風險','中风险','Moderate concern','중간 위험','中度リスク'):L('高風險','高风险','High concern','높은 위험','高リスク');
+ const periodLabel=periodScore===null?'—':periodScore>=90?L('健康','健康','Healthy','정상','正常'):periodScore>=80?L('低風險','低风险','Mild','경미한 위험','軽度リスク'):periodScore>=60?L('中風險','中风险','Moderate','중간 위험','中度リスク'):L('高風險','高风险','Risk','높은 위험','高リスク');
  return `<section class="card dp71-card dp71-hrv"><div class="dp71-mainhead"><div><h3>HRV · ${L('期間心搏變異觀察','期间心搏变异观察','HRV during this period','기간 심박변이도')}</h3><p>${L(`過去 ${days} 天的有效日平均，並比較期間前後半段`, `过去 ${days} 天的有效日平均，并比较期间前后半段`,`${days}-day valid-reading averages; first half vs second half`,`최근 ${days}일 평균과 기간 전후반 비교`)}</p></div><span class="dp71-risk ${scoreCls(periodScore)}">${periodLabel}</span></div><div class="dp71-hrv-items">${items.map(x=>`<div class="dp71-hrv-metric"><div class="dp71-hrv-top"><b>${x.title}</b><strong>${x.overall===null?'—':fmt(x.overall,1)} <small>ms</small></strong></div><p>${x.desc}</p><small>${x.change===null?L('比較資料不足','比较资料不足','Insufficient comparison','비교 자료 부족'):L(`前後半段相差 ${fmt(Math.abs(x.change*100),0)}%`, `前后半段相差 ${fmt(Math.abs(x.change*100),0)}%`,`${fmt(Math.abs(x.change*100),0)}% change between halves`,`전후반 차이 ${fmt(Math.abs(x.change*100),0)}%`)}</small></div>`).join('')}</div><p class="dp71-caveat">${L('這是期間比較，不是固定疾病門檻；需用相同量測條件與訊號品質來解讀。', '这是期间比较，不是固定疾病门槛；需用相同测量条件与信号质量来解读。','This is a within-period comparison, not a disease threshold; use consistent recording conditions.','기간 내 비교이며 질환 기준값이 아닙니다. 동일 조건의 기록이 필요합니다.')}</p></section>`;
 }
 const nightCache=new Map();

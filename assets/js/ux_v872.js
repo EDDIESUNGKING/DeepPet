@@ -7,7 +7,7 @@
  const fragment=markup=>{const t=document.createElement('template');t.innerHTML=markup;return t.content;};
  const serialize=node=>{const el=document.createElement('div');el.appendChild(node);return el.innerHTML;};
  const grade=n=>n==null||!Number.isFinite(Number(n))?-1:Number(n)>=90?0:Number(n)>=80?1:Number(n)>=60?2:3;
- const dayNames=()=>state.lang==='en'?['Normal','Mild','Moderate','High']:state.lang==='ko'?['정상','경미','주의','높음']:state.lang==='zh'?['正常','轻度','中度','高度']:['正常','輕度','中度','高度'];
+ const dayNames=()=>state.lang==='en'?['Healthy','Mild','Moderate','Risk']:state.lang==='ko'?['정상','경미','주의','높음']:state.lang==='zh'?['健康','低风险','中风险','高风险']:['健康','低風險','中風險','高風險'];
  const dayTag=()=>L('單項心肺變化提醒','單項心肺變化提醒','Specific vital needs review','단일 심폐 지표 확인 필요');
 
  // The Deep header's alert was ALWAYS computed for today. Never place it above

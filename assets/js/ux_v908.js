@@ -2,9 +2,9 @@
 (function(){
 'use strict';
 const labels={
- zh:{good:'健康',low:'轻风险',mid:'中风险',high:'高风险'},
- zht:{good:'健康',low:'輕風險',mid:'中風險',high:'高風險'},
- en:{good:'Healthy',low:'Low Risk',mid:'Middle Risk',high:'High Risk'},
+ zh:{good:'健康',low:'低风险',mid:'中风险',high:'高风险'},
+ zht:{good:'健康',low:'低風險',mid:'中風險',high:'高風險'},
+ en:{good:'Healthy',low:'Mild',mid:'Moderate',high:'Risk'},
  ko:{good:'건강',low:'낮은 위험',mid:'중간 위험',high:'높은 위험'},
  ja:{good:'健康',low:'低リスク',mid:'中リスク',high:'高リスク'}
 };
@@ -18,8 +18,8 @@ function statusLabels(root){
  '狀態穩定':'low','状态稳定':'low','Looking steady':'low',
  '稍微留意':'mid','Keep an eye on it':'mid',
  '需要多留意':'high','Needs attention':'high',
- 'Low concern':'low','Moderate concern':'mid','High concern':'high',
- '轻风险':'low','輕風險':'low','中风险':'mid','中風險':'mid','高风险':'high','高風險':'high'
+ 'Mild':'low','Moderate':'mid','Risk':'high',
+ '低风险':'low','低風險':'low','轻风险':'low','輕風險':'low','中风险':'mid','中風險':'mid','高风险':'high','高風險':'high'
  };
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
  let node;

@@ -1,0 +1,27 @@
+/* DeepPet V9.09 – simple, immediately legible labels and data-first detail cards */
+.dp909-brief{display:grid;gap:6px;margin:8px 0 2px;font-size:11.5px;line-height:1.65;color:#64738a;font-weight:400}
+.dp909-brief p{margin:0!important;line-height:1.65!important;font-weight:400!important}
+.dp909-brief b{font-weight:760;color:#46627c}
+.dp909-what{margin:10px 0;padding:11px 12px;border-radius:12px;border:1px solid #dce8f6;background:#f5f9ff;display:flex;align-items:flex-start;gap:9px;color:#506d8a;font-size:12px;line-height:1.7}
+.dp909-what .dp909-what-icon{flex:0 0 24px;display:grid;place-items:center;background:#dceafb;color:#2d6aaf;border-radius:8px;font-size:13px;font-weight:800;height:24px}
+.dp909-what p{margin:0!important}
+.dp909-what b{font-weight:760;color:#326da1}
+.dp909-day-note{background:linear-gradient(110deg,#f2f8ff,#fff9f5);border-color:#dfebfa}
+.dp909-title-accent{color:#417cba;font-weight:700}
+.dp-today-more-button,.dp905-more,.dp70-watch-more>summary,.dp909-more{display:flex!important;width:max-content!important;max-width:100%!important;justify-content:center;align-items:center;margin:13px auto 5px!important;text-align:center!important;}
+.dp909-full-tasks .dp-today-list{display:grid;gap:10px}
+.dp909-full-tasks .dp-today-action{width:100%}
+.dp909-back-tasks{margin:0 0 10px;border:1px solid #dce5fa;color:#4075b3;background:#f4f8fe;padding:9px 13px;border-radius:11px;font-weight:700;font-size:12px;display:flex;gap:7px;align-items:center}
+.dp905-milo-heading>small,.demo-ribbon,.dp905-sim-note,.dp70-prevention-note,.dp68-prevent-note,.dp905-milo-demo>p.dp905-sim-note{display:none!important}
+.dp904-wave-page .dp904-warning{display:none!important}
+.dp909-inline-label{padding:5px 10px;background:#f3f8fe;border:1px solid #e2eafb;border-radius:999px;color:#58728d;font-size:11px;font-weight:680;max-width:max-content}
+.dp909-source-info{border-radius:11px;background:#f8f9fc;border:1px solid #e2e7ef;color:#83909f;font-size:11px;line-height:1.55;padding:10px 12px;margin:12px 0}
+.dp909-simplify-card .dp70-feedback-history{display:none!important}
+.dp909-simplify-card .dp70-feedback-card{border:1px solid #e5edf7;background:#fff}
+.dp909-simplify-card .dp70-feedback-card .dp70-feedback-submit{margin-top:12px}
+.garden-top .garden-kicker,.garden-top h3,.garden-top p,.garden-top .dp75-garden-logo{position:static!important;margin-left:auto!important;margin-right:auto!important;text-align:center!important}
+.garden-overview .garden-top{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;min-height:128px!important;padding:13px 15px!important;text-align:center!important;gap:5px}
+.garden-top .dp75-garden-logo{height:36px!important;width:36px!important;object-fit:contain!important}
+.garden-overview .garden-top h3{max-width:320px;font-size:17px;line-height:1.4}
+.garden-overview .garden-top p{max-width:340px;margin:2px auto 0!important;line-height:1.55}
+@media(max-width:370px){.dp909-brief{font-size:11px}.dp909-what{padding:10px;font-size:11.5px}}
