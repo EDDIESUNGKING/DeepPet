@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Pet photo not uploaded">
+  <rect width="240" height="240" rx="32" fill="#f2f2f6"/>
+  <g fill="#b2afc2">
+    <ellipse cx="77" cy="90" rx="16" ry="22" transform="rotate(-18 77 90)"/>
+    <ellipse cx="116" cy="74" rx="16" ry="22" transform="rotate(-5 116 74)"/>
+    <ellipse cx="158" cy="81" rx="16" ry="22" transform="rotate(15 158 81)"/>
+    <ellipse cx="184" cy="115" rx="14" ry="19" transform="rotate(28 184 115)"/>
+    <path d="M121 111c-17 0-25 11-35 26-7 10-20 12-20 32 0 19 14 29 31 29 13 0 17-7 27-7 9 0 16 7 29 7 21 0 34-13 34-30 0-18-13-22-23-37-12-17-24-20-43-20Z"/>
+  </g>
+</svg>
