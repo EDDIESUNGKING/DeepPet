@@ -1,5 +1,5 @@
-# Direct, prebuilt static site. The ZIP root is the website root.
-# File-based settings override an obsolete Netlify UI build command.
+# DeepPet: one permanently stable GitHub -> Netlify root layout.
+# Upload ALL four root entries to GitHub, without nested source/dist folders.
 [build]
   command = "echo DeepPet static site ready"
   publish = "."
