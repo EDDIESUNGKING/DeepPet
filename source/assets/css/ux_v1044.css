@@ -1,5 +1,0 @@
-/* V10.44 keeps the original Me > Collar fit reminder toggle and its
-   original loose-fit preview. A second scenario shares the same visual. */
-.dp926-wear-card .dp1044-wear-test{margin-top:7px;background:#f5f7fc;border-color:#e1e5ef;color:#4e6686}
-.dp926-wear-card .dp926-wear-row .dp926-switch{flex:0 0 auto;min-width:46px}
-.dp926-wear-card .dp926-test:focus-visible,.dp926-wear-card .dp926-switch:focus-visible{outline:3px solid #59a9ff;outline-offset:3px}

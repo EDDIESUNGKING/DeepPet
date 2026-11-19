@@ -1,9 +1,0 @@
-/* V10.05 score source dates: small metadata within existing cards. */
-#app .dp105-score-stamp{display:block;margin-top:3px;font-size:10px;line-height:1.25;font-weight:500;letter-spacing:0;opacity:.74;color:#5c7186;white-space:normal;overflow-wrap:anywhere}
-#app .dp-lane-copy>.dp105-score-stamp{font-size:10px;margin-top:1px;color:#49657b;opacity:.9}
-#app .dp903-score-col>.dp105-score-stamp,#app .dp901-score-col>.dp105-score-stamp{font-size:9px;max-width:118px;line-height:1.35;text-align:center}
-#app .dp-vital-heading .dp105-score-stamp,#app .dp905-sleep-head .dp105-score-stamp{font-size:10px;text-align:left}
-#overlay-root .summary-ring-item>.dp105-score-stamp{display:block;margin-top:6px;font-size:10px;line-height:1.35;font-weight:500;color:#5c7186;opacity:.86;white-space:normal}
-.dp105-score-lineage-meta,.dp105-modal-period{font-size:12px;line-height:1.55;color:#51677e}
-.dp105-baseline-context{line-height:1.7;margin:12px 0;color:#4c6074}
-.dp-signal-assistant .dp-signal-status.dp105-refit{color:#bb5b18;background:#fff1dd;border-color:#f1d9aa}

@@ -1,5 +1,0 @@
-/* V8.72: distinguish a single vital alert from the daily composite status. */
-.dp68-risk-day {position:relative;}
-.dp872-vital-cue {position:absolute;top:3px;right:4px;display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:50%;background:#cf7b14;color:white;font-size:10px;font-weight:750;line-height:1;}
-.dp872-chart-warning{display:block;padding:8px 5px 1px;font-size:11px;line-height:1.45;color:#64758a;}
-.dp872-gapped-chart svg{width:100%;height:auto;display:block;}
