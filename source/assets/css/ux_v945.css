@@ -1,0 +1,7 @@
+/* DeepPet V9.45 owner-only daily summary. Synthetic gallery layout untouched. */
+.dp945-measured-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.dp945-measured-item{min-width:0;border-radius:16px;background:#f5f8fe;border:1px solid #e2e9f3;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:13px 8px;gap:4px;text-align:center}
+.dp945-measured-item small{font-size:12px;line-height:1.35;color:#667794;font-weight:500}
+.dp945-measured-item strong{font-size:clamp(31px,8vw,43px);line-height:1.05;font-weight:750;font-variant-numeric:tabular-nums;letter-spacing:-.035em}
+.dp945-measured-item strong+small{font-size:10px;color:#8795aa}
+@media(max-width:360px){.dp945-measured-summary{gap:8px}.dp945-measured-item{padding:10px 5px}.dp945-measured-item small{font-size:11px}}

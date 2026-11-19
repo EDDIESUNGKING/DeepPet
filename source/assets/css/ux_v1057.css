@@ -1,0 +1,44 @@
+/* DeepPet V10.57 — honest unpaired state and compact store disclosure. */
+#app .dp-device-unpaired-art{
+ display:flex;align-items:center;justify-content:center;
+ width:100%;height:100%;border-radius:10px;
+ color:#77879a;background:#f1f5f8;
+}
+#app .dp-device-unpaired-art svg{width:30px;height:30px;max-width:65%;max-height:65%;}
+#app .device-modal-summary .pair-picked .dp-device-unpaired-art{
+ flex:0 0 94px;width:94px;height:72px;border:1px solid #e2e8f0;
+}
+#app .dp1057-shop-conditions{
+ margin:8px 0 14px;padding:0 12px;border:1px solid #e3e9f2;
+ border-radius:12px;background:#f8fbfd;overflow:hidden;
+}
+#app .dp1057-shop-conditions>summary{
+ list-style:none;display:flex;align-items:center;justify-content:space-between;
+ min-height:42px;gap:10px;cursor:pointer;font-size:13px;font-weight:670;
+ line-height:1.4;color:#385873;
+}
+#app .dp1057-shop-conditions>summary::-webkit-details-marker{display:none;}
+#app .dp1057-shop-conditions>summary span{
+ font-size:20px;line-height:1;transition:transform .18s ease;
+}
+#app .dp1057-shop-conditions[open]>summary span{transform:rotate(90deg);}
+#app .dp1057-shop-conditions>p{
+ margin:0 0 10px;font-size:12px;line-height:1.7;color:#546778;
+ overflow-wrap:anywhere;
+}
+#app .dp1057-plan-math{margin:8px 0 0;border-top:1px solid #ecedf3;}
+#app .dp1057-plan-math>summary{
+ display:flex;align-items:center;justify-content:space-between;
+ min-height:38px;gap:8px;list-style:none;cursor:pointer;
+ font-size:12px;font-weight:620;color:#59728c;
+}
+#app .dp1057-plan-math>summary::-webkit-details-marker{display:none;}
+#app .dp1057-plan-math>summary span{font-size:19px;line-height:1;}
+#app .dp1057-plan-math[open]>summary span{transform:rotate(90deg);}
+#app .dp1057-plan-math>p{font-size:11.5px;line-height:1.65;color:#536b7f;margin:0 0 9px;}
+@media(max-width:359px){
+ #app .device-modal-summary .pair-picked .dp-device-unpaired-art{
+  flex-basis:75px;width:75px;height:66px;
+ }
+ #app .dp1057-shop-conditions{margin-inline:0;}
+}

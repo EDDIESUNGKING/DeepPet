@@ -1,0 +1,14 @@
+/* V9.99: surgical visual repairs; existing card hierarchy and scoring stay intact. */
+.dp-summary-lane .dp-lane-copy>strong{display:flex;align-items:center;flex-wrap:wrap;gap:7px;line-height:1.35}
+.dp999-daily-delta{display:inline-flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;font-size:11px;font-weight:750;line-height:1.25;letter-spacing:0;padding:3px 7px;border-radius:99px;border:1px solid transparent;font-variant-numeric:tabular-nums}
+.dp999-daily-delta.up{color:#18835b;background:#e9f7ef;border-color:#c4e9d6}
+.dp999-daily-delta.down{color:#bb4e42;background:#fff0ed;border-color:#f1cdc7}
+.dp999-daily-delta.same{color:#66798b;background:#f1f5f9;border-color:#e0e6ed}
+.dp-upcoming-care .dp999-more{margin:8px auto 0;width:100%;text-align:center;min-width:0;border-top:1px solid #e7edf3;padding-top:9px}
+.dp-upcoming-care .dp999-more>summary{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;list-style:none;min-width:118px;padding:8px 14px;border-radius:99px;color:#3777ab;background:#f0f7fc;font-size:12px;font-weight:650}
+.dp-upcoming-care .dp999-more>summary::-webkit-details-marker{display:none}
+.dp-upcoming-care .dp999-more[open]>summary{margin-bottom:8px}
+.dp-upcoming-care .dp999-more-rows{display:grid;gap:0;text-align:left;width:100%}
+.dp-heart-poster-frame{position:relative;isolation:isolate;aspect-ratio:3/5}
+.dp-heart-poster-frame>.dp-heart-photo-backdrop{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0;pointer-events:none}
+.dp-heart-poster-frame>.dp-heart-poster-svg{position:relative;z-index:1}

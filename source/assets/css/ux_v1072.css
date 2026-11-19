@@ -1,0 +1,69 @@
+/* DeepPet V10.72: the same compact pale-yellow diet card for every pet. */
+#app .dp1070-health-page .dp1063-care-list>.dp1072-food{
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+ gap:11px!important;width:100%!important;min-height:77px!important;height:auto!important;max-height:none!important;
+ padding:13px 15px!important;margin:0!important;box-sizing:border-box!important;
+ background:linear-gradient(120deg,#fff5c5 0%,#fffaf0 80%)!important;
+ border:1px solid #f1dd83!important;border-radius:18px!important;
+ box-shadow:0 5px 16px rgba(154,124,47,.05)!important;
+ text-align:left!important;color:#534626!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.dp1072-food .dp1072-food-icon{
+ display:grid!important;place-items:center!important;flex:0 0 43px!important;
+ width:43px!important;height:43px!important;border-radius:12px!important;
+ background:#fff0a0!important;color:#a37d21!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.dp1072-food .dp1072-food-copy{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+ justify-content:center!important;gap:4px!important;flex:1 1 auto!important;min-width:0!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.dp1072-food .dp1072-food-title{
+ display:block!important;margin:0!important;font-size:15px!important;line-height:1.35!important;
+ font-weight:680!important;color:#584729!important;white-space:normal!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.dp1072-food .dp1072-food-subtitle{
+ display:block!important;font-size:11px!important;line-height:1.35!important;
+ font-weight:400!important;color:#927b49!important;white-space:normal!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.dp1072-food .dp1072-food-calories{
+ display:block!important;flex:0 0 auto!important;max-width:34%!important;
+ font-size:17px!important;line-height:1.3!important;font-weight:750!important;
+ color:#765d2e!important;text-align:right!important;white-space:normal!important;overflow-wrap:break-word!important;
+}
+/* Recovery and extra records reuse identical markup and exact box metrics. */
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1072-uniform-care{
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ gap:13px!important;box-sizing:border-box!important;min-height:76px!important;
+ padding:13px 0!important;margin:0!important;background:transparent!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1072-uniform-care .thumb{
+ display:grid!important;place-items:center!important;flex:0 0 49px!important;
+ width:49px!important;height:49px!important;border-radius:14px!important;
+ color:#7660ca!important;margin:0!important;padding:0!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1072-uniform-care .thumb>svg{
+ width:23px!important;height:23px!important;display:block!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1072-uniform-care .grow{
+ display:flex!important;flex:1 1 auto!important;flex-direction:column!important;
+ align-items:flex-start!important;justify-content:center!important;gap:4px!important;
+ min-width:0!important;text-align:left!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1072-uniform-care .lbl{
+ display:block!important;font-size:13px!important;line-height:1.35!important;
+ font-weight:540!important;margin:0!important;color:inherit!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1072-uniform-care .hint{
+ display:block!important;font-size:11px!important;line-height:1.4!important;
+ font-weight:400!important;margin:0!important;color:#748091!important;
+ white-space:normal!important;
+}
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1072-uniform-care>svg{
+ display:block!important;flex:0 0 19px!important;width:19px!important;height:19px!important;
+ margin-left:auto!important;color:#9da6b5!important;
+}
+@media(max-width:350px){
+ #app .dp1070-health-page .dp1063-care-list>.dp1072-food{gap:8px!important;padding:12px!important}
+ #app .dp1070-health-page .dp1063-care-list>.dp1072-food .dp1072-food-icon{width:38px!important;height:38px!important;flex-basis:38px!important}
+ #app .dp1070-health-page .dp1063-care-list>.dp1072-food .dp1072-food-calories{font-size:15px!important}
+}

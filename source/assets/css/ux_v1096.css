@@ -1,0 +1,48 @@
+/* DeepPet V10.96: identical Home To-do header and bounded Exam-only ring. */
+#app .dp-today-focus.dp1001-empty-todos{
+ padding:17px 15px 18px!important;
+}
+#app .dp-today-focus.dp1001-empty-todos>.row .focus-eyebrow,
+#app .dp-today-focus.dp1001-empty-todos>.row .focus-eyebrow svg{
+ color:#8d573b!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col{
+ width:90px!important;max-width:90px!important;min-width:90px!important;
+ grid-template-columns:90px!important;grid-template-rows:70px auto!important;
+ justify-items:center!important;align-items:start!important;overflow:hidden!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score{
+ box-sizing:border-box!important;position:relative!important;inset:auto!important;
+ display:grid!important;place-items:center!important;flex:0 0 70px!important;
+ width:70px!important;height:70px!important;min-width:70px!important;min-height:70px!important;
+ max-width:70px!important;max-height:70px!important;
+ padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;
+ box-shadow:none!important;background:transparent!important;overflow:hidden!important;
+ isolation:isolate!important;text-align:center!important;transform:none!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score .dp1096-exam-dots{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:70px!important;height:70px!important;max-width:70px!important;max-height:70px!important;
+ overflow:hidden!important;transform:none!important;pointer-events:none!important;z-index:0!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score-value{
+ display:flex!important;position:relative!important;z-index:1!important;
+ flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ line-height:1.04!important;color:inherit!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score-value strong{
+ font-size:24px!important;font-weight:800!important;line-height:1!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score-value small{
+ font-size:10px!important;font-weight:600!important;line-height:1.2!important;margin-top:2px!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score.healthy{color:#24a56c!important}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score.mild{color:#2f6fe4!important}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score.moderate{color:#d58b2d!important}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score.risk{color:#d9534f!important}
+#app .dp1075-health-page .dp1075-exam .dp1096-exam-score.none{color:#8c98a9!important}
+@media(max-width:380px){
+ #app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col{
+  width:80px!important;max-width:80px!important;min-width:80px!important;grid-template-columns:80px!important;
+ }
+}

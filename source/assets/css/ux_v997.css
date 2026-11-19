@@ -1,0 +1,23 @@
+/* DeepPet V9.97: readable, phone-width health-history category filters. */
+.dp997-history-filters{
+ display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:thin;
+ overscroll-behavior-x:contain;padding:4px 1px 10px;margin:7px 0 1px;
+ -webkit-overflow-scrolling:touch;
+}
+.dp997-history-filter{
+ flex:0 0 auto;min-height:41px;display:inline-flex;align-items:center;gap:7px;
+ white-space:nowrap;border:1px solid #dce5f2;border-radius:999px;
+ background:#fff;color:#4e617b;font-size:12px;line-height:1.25;font-weight:600;
+ padding:8px 11px;cursor:pointer;
+}
+.dp997-history-filter span{
+ color:#6b7890;background:#f2f5fa;padding:2px 6px;border-radius:999px;
+ font-size:11px;font-variant-numeric:tabular-nums;
+}
+.dp997-history-filter.active{
+ color:#fff;background:#5d6ac6;border-color:#5d6ac6;
+ box-shadow:0 3px 9px #4b60bb25;
+}
+.dp997-history-filter.active span{background:#ffffff2b;color:#fff;}
+.dp997-history-filter:focus-visible{outline:3px solid #8ca5e7;outline-offset:2px;}
+@media(max-width:375px){.dp997-history-filters{gap:5px}.dp997-history-filter{padding:8px 9px;font-size:11.5px}}

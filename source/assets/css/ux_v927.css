@@ -1,0 +1,5 @@
+/* V9.27: actionable but non-diagnostic priority change summary. */
+.dp927-priority-alert{width:100%;display:flex;flex-direction:column;gap:7px;text-align:left;background:#fff5f3;border:1.5px solid #e9a6a0;color:#9e3439;padding:13px 15px;border-radius:17px;margin:12px 0;line-height:1.48;cursor:pointer;box-sizing:border-box}
+.dp927-priority-alert strong{font-size:13px;font-weight:800}.dp927-priority-alert small{font-size:11px;color:#844a4c;line-height:1.55}
+.dp921-sheet .dp921-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:600px){.dp921-sheet .dp921-fields{grid-template-columns:repeat(4,minmax(0,1fr))}}

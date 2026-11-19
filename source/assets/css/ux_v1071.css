@@ -1,0 +1,55 @@
+/* DeepPet V10.71 — shared measured/unmeasured components. */
+#app .dp1071-exam{background:linear-gradient(145deg,#f5f8ff,#fff)!important;border:1px solid #e4e6f1!important;border-radius:20px!important;padding:17px!important;box-shadow:0 8px 24px rgba(48,52,83,.045)!important;color:#28334d!important;overflow:visible!important}
+#app .dp1071-exam .dp916-between{display:grid!important;grid-template-columns:minmax(0,1fr) 90px!important;align-items:start!important;gap:10px!important}
+#app .dp1071-exam .dp1071-exam-copy{min-width:0!important}
+#app .dp1071-exam .dp1071-exam-heading{display:flex!important;gap:10px!important;align-items:flex-start!important}
+#app .dp1071-exam .dp1071-exam-heading>.dp914-report-illustration{display:grid!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;border-radius:13px!important;flex-shrink:0!important;background:#e3edf9!important;color:#3475b5!important}
+#app .dp1071-exam .dp1071-exam-heading>div{min-width:0!important;flex:1!important}
+#app .dp1071-exam .dp1071-exam-heading h3{margin:0 0 5px!important;font-size:18px!important;font-weight:760!important;line-height:1.4!important;color:#273e61!important}
+#app .dp1071-exam .dp1071-exam-heading p{font-size:11.5px!important;line-height:1.6!important;margin:0!important;color:#697b93!important;overflow-wrap:break-word!important}
+#app .dp1071-exam .dp1071-exam-score-col{width:90px!important;min-width:90px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:6px!important;text-align:center!important}
+#app .dp1071-exam .dp1071-exam-score-col>.dp916-large-score{width:70px!important;height:70px!important;min-width:70px!important;flex:0 0 70px!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:0 auto!important;box-sizing:border-box!important;border-radius:50%!important;font-size:24px!important}
+#app .dp1071-exam .dp1071-no-exam-score{border-color:#b9c9db!important;color:#8b9db0!important;font-size:23px!important}
+#app .dp1071-exam .dp1071-exam-status{display:block!important;width:100%!important;max-width:100%!important;text-align:center!important;white-space:normal!important;overflow-wrap:break-word!important;font-size:11px!important;line-height:1.4!important;font-weight:650!important;color:#677b93!important;margin:0!important;padding:0!important;position:static!important;transform:none!important}
+#app .dp1071-exam .dp1071-exam-status.healthy{color:#138357!important}
+#app .dp1071-exam .dp1071-exam-status.mild{color:#2669c7!important}
+#app .dp1071-exam .dp1071-exam-status.moderate{color:#a87015!important}
+#app .dp1071-exam .dp1071-exam-status.risk{color:#c2434a!important}
+#app .dp1071-exam .dp916-meter-caption{margin-top:10px!important}
+#app .dp1071-exam .dp916-primary{display:inline-flex;align-items:center;justify-content:center;gap:4px;font-size:12px!important}
+#app .dp1071-exam .dp916-actions{margin-top:13px!important}
+/* Restore the populated Milo food-card palette for every state. */
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food{background:linear-gradient(135deg,#eeeafe,#fff 72%)!important;border:1px solid #e5defa!important;border-radius:18px!important;padding:17px 15px 15px!important;min-height:120px!important;max-height:none!important;color:#38354f!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-illustration{width:48px!important;height:48px!important;background:linear-gradient(135deg,#eee5ff,#dfd7fb)!important;color:#7964d1!important;border-radius:15px!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-feature-main{margin-top:18px!important;display:flex!important;justify-content:space-between!important;align-items:baseline!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-feature-main strong{font-size:26px!important;font-weight:780!important;line-height:1.2!important;letter-spacing:-1px!important;color:#38354f!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-pct{background:#f5f2ff!important;color:#6452ce!important;font-size:14px!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-pct:empty{display:none!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-feature-sub,#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-feature-foot{color:#817b9b!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-progress{background:#e2dff1!important;height:9px!important;margin:9px 0 7px!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1071-food .food-progress i{background:linear-gradient(90deg,#7565d9,#bda9f2)!important}
+#app .dp1070-health-page .dp1063-care-list>.care-menu{padding-top:3px!important;padding-bottom:3px!important}
+#app .dp1070-health-page .dp1063-care-list>.care-menu .dp1071-shared-row{min-height:76px!important;padding:13px 0!important;gap:13px!important;align-items:center!important}
+#app .dp1070-health-page .dp1063-care-list .dp1071-shared-row .grow{gap:0!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;flex-direction:column!important}
+#app .dp1070-health-page .dp1063-care-list .dp1071-shared-row .lbl{margin:0!important;font-size:13px!important;font-weight:540!important;line-height:1.35!important}
+#app .dp1070-health-page .dp1063-care-list .dp1071-shared-row .hint{margin:4px 0 0!important;font-size:11px!important;font-weight:400!important;line-height:1.4!important}
+#app .dp1070-health-page .dp1063-care-list .dp1071-shared-row .thumb{width:49px!important;height:49px!important;border-radius:14px!important;flex:0 0 49px!important;color:#7660ca!important}
+/* Numerically proportional rings: 54 SVG dots, not a fixed dotted border. */
+#app .dp1068-detail-ring.dp1071-dotted{position:relative!important;isolation:isolate!important;width:86px!important;height:86px!important;border:0!important;background:transparent!important;box-shadow:none!important;display:grid!important;place-items:center!important;flex-shrink:0!important}
+#app .dp1068-detail-ring.dp1071-dotted>.dp-uniform-dot-svg{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;overflow:visible!important;pointer-events:none!important}
+#app .dp1068-detail-ring.dp1071-dotted>.stat-inner{position:absolute!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;width:100%!important;height:100%!important;background:transparent!important}
+#app .dp1068-detail-ring.dp1071-dotted .stat-inner b{font-size:26px!important;line-height:1.05!important;font-weight:820!important}
+#app .dp1068-detail-ring.dp1071-dotted .stat-inner small{font-size:9px!important;color:#7c8392!important}
+#app .dp1068-detail-score .dp1068-detail-risk{width:86px!important;text-align:center!important;margin:2px 0 9px auto!important}
+/* Exactly one inline chevron on the immediately following text position. */
+#app .dp1071-one-arrow{display:inline-flex!important;gap:3px!important;align-items:center!important;justify-content:flex-start!important;flex-wrap:nowrap!important;text-align:left!important}
+#app .dp1071-one-arrow::before,#app .dp1071-one-arrow::after{content:none!important;display:none!important}
+#app .dp1071-one-arrow>.dp1071-inline-arrow{position:static!important;display:inline-block!important;float:none!important;transform:none!important;font-size:17px!important;font-weight:450!important;line-height:1!important;flex:none!important}
+/* Analytic narratives are normal weight; labels and score numerals remain bold. */
+#app .dp-owner-deep .dp903-metric-left>p,#app .dp-owner-deep .dp901-metric-card>.dp901-metric-desc,
+#app .dp-owner-deep .dp901-period-notes p,#app .dp-owner-deep .dp1052-sleep-reason,
+#app .dp-owner-deep .dp1051-sleep-full-reason,#app .dp-owner-deep .dp1068-risk-description,
+#app .dp-owner-deep .dp901-inline-note,#app .dp-owner-deep .dp1048-sleep-conclusion,
+#app .dp-owner-deep .dp1068-rhythm-composition{font-weight:400!important}
+#app .dp1001-empty-todos .focus-eyebrow{display:inline-flex!important;align-items:center!important;gap:6px!important}
+@media(max-width:360px){#app .dp1071-exam .dp916-between{grid-template-columns:minmax(0,1fr) 80px!important;gap:8px!important}#app .dp1071-exam .dp1071-exam-score-col{width:80px!important;min-width:80px!important}#app .dp1068-detail-ring.dp1071-dotted{width:75px!important;height:75px!important}#app .dp1068-detail-score .dp1068-detail-risk{width:75px!important}}

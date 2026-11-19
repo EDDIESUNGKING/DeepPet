@@ -1,0 +1,133 @@
+/* DeepPet V10.46 — one primary-meter geometry on every Deep time range.
+   Keep theme-color headings separate from health-risk score coloring. */
+.dp-owner-deep .dp1046-primary-head,
+.dp-owner-deep .dp905-sleep-summary>.dp905-sleep-head.dp1046-primary-head,
+.dp905-sleep-day>.dp905-sleep-head.dp1046-primary-head{
+ display:flex!important;flex-direction:row!important;align-items:flex-start!important;
+ justify-content:space-between!important;gap:10px!important;min-width:0!important;
+ min-height:153px!important;overflow:visible!important;grid-template-columns:none!important;
+}
+.dp-owner-deep .dp1046-primary-head>div:first-child:not(.dp1046-primary-stack),
+.dp905-sleep-day>.dp1046-primary-head>div:first-child:not(.dp1046-primary-stack){
+ min-width:0!important;flex:1 1 0!important;grid-column:auto!important;grid-row:auto!important;
+}
+.dp-owner-deep .dp1046-primary-head>.dp1046-primary-stack,
+.dp905-sleep-day .dp1046-primary-head>.dp1046-primary-stack{
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:flex-start!important;gap:9px!important;order:2!important;
+ flex:0 0 116px!important;width:116px!important;min-width:116px!important;
+ max-width:116px!important;min-height:141px!important;
+ padding:0!important;margin:0 0 0 auto!important;text-align:center!important;
+ position:relative!important;inset:auto!important;transform:none!important;
+ grid-column:auto!important;grid-row:auto!important;overflow:visible!important;
+}
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score,
+.dp905-sleep-day .dp1046-primary-stack>.dp-status-score{
+ display:block!important;position:relative!important;inset:auto!important;
+ top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
+ transform:none!important;float:none!important;order:0!important;flex:0 0 108px!important;
+ width:108px!important;height:108px!important;min-width:108px!important;min-height:108px!important;
+ max-width:108px!important;max-height:108px!important;margin:0 auto!important;
+ padding:0!important;box-sizing:border-box!important;text-align:center!important;
+}
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score>svg,
+.dp905-sleep-day .dp1046-primary-stack>.dp-status-score>svg{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;margin:0!important;
+}
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score .stat-inner,
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score .dp-dot-meter-center,
+.dp905-sleep-day .dp1046-primary-stack>.dp-status-score .stat-inner{
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:center!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;margin:0!important;padding:0!important;
+ top:0!important;left:0!important;right:0!important;bottom:0!important;
+ transform:none!important;text-align:center!important;gap:1px!important;
+}
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score .stat-inner b,
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score .dp-dot-meter-center strong,
+.dp905-sleep-day .dp1046-primary-stack>.dp-status-score .stat-inner b{
+ display:block!important;position:static!important;transform:none!important;
+ font-size:34px!important;font-weight:800!important;line-height:1!important;
+ letter-spacing:-.8px!important;margin:0!important;padding:0!important;
+ color:var(--sc,var(--score-color,#21855f))!important;font-variant-numeric:tabular-nums;
+}
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score .stat-inner small,
+.dp-owner-deep .dp1046-primary-stack>.dp-status-score .dp-dot-meter-center small,
+.dp905-sleep-day .dp1046-primary-stack>.dp-status-score .stat-inner small{
+ display:block!important;font-size:10px!important;line-height:1.2!important;
+ font-weight:650!important;margin:0!important;color:#738296!important;
+ position:static!important;transform:none!important;
+}
+/* Secondary sleep scores keep their smaller ring size but share genuine
+   geometric centering, regardless of source layout or selected time range. */
+.dp-owner-deep .dp-status-score .stat-inner,
+.dp-owner-deep .dp-status-score .dp-dot-meter-center{
+ position:absolute!important;inset:0!important;top:0!important;left:0!important;
+ width:100%!important;height:100%!important;box-sizing:border-box!important;
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:center!important;text-align:center!important;transform:none!important;
+ margin:0!important;
+}
+.dp-owner-deep .dp1046-primary-stack>.dp1040-status,
+.dp905-sleep-day .dp1046-primary-stack>.dp1040-status{
+ order:2!important;flex:none!important;position:static!important;inset:auto!important;
+ transform:none!important;margin:0 auto!important;max-width:116px!important;
+ white-space:nowrap!important;line-height:1.2!important;
+}
+/* The sleep overview is a HORIZONTAL title-plus-ring row, never a tall grid.
+   Green is the section theme; blue/orange/red score numbers keep their tier. */
+.dp-owner-deep.deep-theme-sleep .dp1046-primary-head h2,
+.dp-owner-deep .dp905-sleep-summary .dp905-sleep-head h2,
+.dp905-sleep-day .dp905-sleep-head h2{color:#28774f!important;line-height:1.32!important;margin:0 0 7px!important;}
+.dp-owner-deep.deep-theme-sleep .dp1046-primary-head p,
+.dp-owner-deep .dp905-sleep-summary .dp905-sleep-head p,
+.dp905-sleep-day .dp905-sleep-head p{font-size:12px!important;color:#527564!important;line-height:1.5!important;}
+.dp905-sleep-day .dp905-day-stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;}
+.dp905-sleep-day .dp-owner-sleep-timeline{width:100%!important;min-width:0!important;overflow-x:auto!important;}
+.dp905-sleep-day .dp-owner-sleep-timeline svg{max-width:100%!important;height:auto!important;}
+/* Visible device battery NUMERIC value lives outside a nested button. */
+.device-center .dp1046-device-battery-row{
+ display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:wrap!important;
+ margin:10px 0 2px!important;padding:9px 12px!important;border-radius:12px!important;
+ background:#edf9f4!important;border:1px solid #c6ead8!important;
+ font-size:12px!important;font-weight:680!important;color:#34725b!important;
+}
+.device-center .dp1046-battery-icon{font-size:16px!important;color:#22a66a!important;line-height:1!important;}
+.device-center .dp1046-battery-number{font-size:17px!important;font-weight:850!important;
+ color:#139b5d!important;letter-spacing:.1px!important;font-variant-numeric:tabular-nums!important;}
+.device-center .dp1046-battery-pending{font-size:13px!important;color:#667b8e!important;}
+.device-center .dp1046-device-battery-row small{font-size:10px!important;color:#617d70!important;}
+/* An actual 14-valid-day score trace, including its numeric points and axes. */
+.dp70-baseline-hero.dp-owner-baseline-me{min-height:169px!important;overflow:visible!important;}
+.dp70-baseline-hero .grow{min-width:0!important;overflow:visible!important;}
+.dp70-baseline-hero .dp1046-baseline-spark{
+ display:block!important;width:min(100%,244px)!important;height:63px!important;
+ min-height:63px!important;max-width:100%!important;margin:5px 0 0!important;
+ overflow:visible!important;opacity:1!important;visibility:visible!important;
+}
+.dp70-baseline-hero .dp70-baseline-chart-caption{margin-top:9px!important;font-weight:720!important;color:#367994!important;}
+/* Period details share a fixed per-pet 30-day axis, preserve the 7-day suffix
+   verbatim, and do not hide real missing-value dates. */
+.dp1046-trend{width:100%;max-width:100%;margin:11px 0 14px;border:1px solid #dce7f6;
+ border-radius:13px;padding:10px 8px 8px;background:#fbfdff;overflow:hidden;}
+.dp1046-trend-title{display:flex;align-items:center;justify-content:space-between;gap:9px;
+ font-size:12px;line-height:1.35;color:#405d83;margin:0 3px 5px;}
+.dp1046-trend-title b{font-size:12px;color:#376394;font-weight:760;}
+.dp1046-trend-title span{font-size:10px;color:#71849a;white-space:nowrap;}
+.dp1046-trend svg{width:100%;height:auto;display:block;overflow:visible;}
+.dp1046-trend-empty,.dp1046-trend-gaps{display:block;font-size:11px;line-height:1.6;color:#667e96;}
+.dp905-energy-calendar .dp1046-trend+.dp1046-trend{margin-top:9px;}
+.dp-upcoming-care .dp999-more>summary{list-style:none!important;text-decoration:none!important;
+ border-bottom:none!important;appearance:none!important;-webkit-appearance:none!important;}
+.dp-upcoming-care .dp999-more>summary::marker{content:''!important;font-size:0!important;}
+.dp-upcoming-care .dp999-more>summary::-webkit-details-marker{display:none!important;}
+.dp-upcoming-care .dp999-more>summary::after,
+.dp-upcoming-care .dp999-more>summary::before{display:none!important;content:none!important;}
+@media(max-width:350px){
+ .dp-owner-deep .dp1046-primary-head,
+ .dp-owner-deep .dp905-sleep-summary>.dp905-sleep-head.dp1046-primary-head,
+ .dp905-sleep-day>.dp905-sleep-head.dp1046-primary-head{gap:5px!important;}
+ .dp-owner-deep .dp1046-primary-head>div:first-child:not(.dp1046-primary-stack) h2,
+ .dp905-sleep-day>.dp1046-primary-head>div:first-child:not(.dp1046-primary-stack) h2{font-size:18px!important;}
+}

@@ -1,0 +1,19 @@
+/* V10.65: one evidence-first card, genuinely measured per-second points. */
+.dp1065-evidence-card{border:1px solid #f2bed0;background:linear-gradient(135deg,#fff7fa,#fff);padding:16px!important;margin:12px 0 16px}
+.dp1065-tag{color:#b42452;font-size:12px;font-weight:750;letter-spacing:.02em}
+.dp1065-evidence-card h2{font-size:17px;line-height:1.42;margin:7px 0 5px;color:#6e1538;font-weight:800}
+.dp1065-evidence-card>time{display:block;color:#735b70;font-size:12px;font-variant-numeric:tabular-nums}
+.dp1065-reference{font-size:12px;color:#5a6675;line-height:1.55;margin:9px 0}
+.dp1065-reference span{color:#777;font-weight:400}
+.dp1065-measured-plot{background:#fff;border:1px solid #f0e3e8;border-radius:12px;margin:10px 0;padding:9px}
+.dp1065-plot-title{font-size:12px;font-weight:700;color:#3c4c61;margin-bottom:5px}
+.dp1065-measured-plot svg{width:100%;height:auto;display:block;overflow:visible}
+.dp1065-measured-plot svg text{fill:#536274;font-size:11px;font-weight:500}
+.dp1065-measured-trace{fill:none;stroke:#db477c;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.dp1065-base-line{stroke:#8b9aa9;stroke-width:1.4;stroke-dasharray:5 4}
+.dp1065-event-halo{fill:#fff;stroke:#be1e55;stroke-width:3}
+.dp1065-event-dot{fill:#be1e55}
+.dp1065-disclosure{font-size:12px;color:#637185;margin-top:11px;border-top:1px solid #f3dce4;padding-top:9px}
+.dp1065-disclosure summary{cursor:pointer;font-weight:700;list-style:disclosure-closed}
+.dp1065-disclosure p{line-height:1.55;margin:8px 0 0}
+.dp1065-unavailable{color:#886977;font-size:12px;margin:7px 0}

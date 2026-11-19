@@ -1,0 +1,21 @@
+/* V10.35: small battery and priority cues inside existing modules only. */
+.home-hero-poster.dp58-centered-hero{position:relative}
+.dp1035-battery{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:11px;line-height:1.35;letter-spacing:.01em}
+.dp1035-battery strong{font-size:inherit;font-weight:700}
+.dp1035-battery-icon{display:inline-flex;align-items:center;width:19px;height:10px;border:1.4px solid currentColor;border-radius:3px;padding:1.6px;position:relative;flex:none}
+.dp1035-battery-icon::after{content:'';position:absolute;right:-3.5px;top:2px;width:2px;height:3px;border-radius:0 2px 2px 0;background:currentColor}
+.dp1035-battery-icon i{display:block;min-width:0;height:100%;border-radius:1px;background:currentColor;max-width:100%}
+.dp1035-battery-top{position:absolute;top:13px;right:14px;z-index:3;color:#fff;padding:7px 10px;border-radius:24px;background:rgba(22,34,46,.52);border:1px solid rgba(255,255,255,.48);backdrop-filter:blur(8px);box-shadow:0 3px 8px #10162320}
+.dp1035-battery-top.dp1035-battery-low{color:#ffd0c0}
+.dp1035-battery-top.dp1035-battery-medium{color:#ffdf9b}
+.device-center .dp1035-battery-device{margin-top:7px;color:#cdf6e5;padding:4px 8px;border:1px solid #b2e4dc59;background:#102f4259;border-radius:14px;width:max-content;max-width:100%}
+.device-center .dp1035-battery-device.dp1035-battery-low{color:#ffbbab}
+.device-center .dp1035-battery-device.dp1035-battery-medium{color:#ffe0a9}
+.device-center .dp1035-battery-device strong{font-size:11px}
+.dp-today-focus .dp-today-list>.dp-today-action:first-child{border-color:color-mix(in srgb,var(--tone,#81b0ca) 37%,#e5eaf0);box-shadow:inset 3px 0 0 var(--tone,#81b0ca),0 5px 18px #173f650c}
+.dp-today-focus .dp-today-list>.dp-today-action:first-child .ai-suggestion-top,
+.dp-today-more-page .dp-today-list>.dp-today-action:first-child .ai-suggestion-top{position:relative;padding-top:20px}
+.dp1035-priority-tag{position:absolute;top:0;left:0;font-size:10px;line-height:15px;font-weight:750;letter-spacing:.02em;color:#316e79;background:#e8f6f6;border-radius:5px;padding:1px 6px}
+.dp1030-today-care[data-context]::before{content:attr(data-context);display:inline-block;align-self:flex-start;font-size:9px;font-weight:650;line-height:1.4;color:#567d70;background:#e8f5ec;padding:2px 7px;border-radius:6px}
+@media(max-width:360px){.dp1035-battery-top{top:10px;right:9px;padding:5px 7px;font-size:10px}.device-center .dp1035-battery-device strong{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.dp1035-battery,.dp1035-priority-tag{animation:none!important;transition:none!important}}

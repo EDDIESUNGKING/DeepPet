@@ -1,0 +1,22 @@
+/* V10.49: observational note is visually neutral when today's heart score is healthy. */
+#app .dp-deep-alert-reasons.dp1049-steady-cardio{
+ border-color:#d9eae3!important;border-left-color:#4aab81!important;
+ background:#fbfefc!important;
+}
+#app .dp1049-steady-cardio .dp-deep-alert-heading{color:#307d5a!important;}
+#app .dp1049-steady-cardio .dp-deep-alert-lines p svg{color:#3e9d72!important;}
+/* More remains centered, with no fake underline/chevron. */
+#app .dp-upcoming-care .dp1049-upcoming-more{
+ display:block;width:max-content;max-width:100%;margin:12px auto 2px;
+ padding:7px 18px;border:0;background:transparent;color:#5367ab;
+ font-size:13px;font-weight:760;line-height:1.4;text-decoration:none;cursor:pointer;
+}
+#app .dp1049-upcoming-context{color:#64788c;font-size:12px;line-height:1.7;margin:12px 2px 14px;}
+#app .dp1049-upcoming-list{padding:3px 10px;}
+#app .dp1049-upcoming-list .dp-upcoming-action{width:100%;}
+/* Match the universal green / blue / orange / red score tier colors. */
+.vet-lab-status.dp1049-lab-healthy{background:#e3f6e9!important;color:#177d4b!important;}
+.vet-lab-status.dp1049-lab-mild{background:#e8f0ff!important;color:#316bcc!important;}
+.vet-lab-status.dp1049-lab-moderate{background:#fff0df!important;color:#b26a19!important;}
+.vet-lab-status.dp1049-lab-risk{background:#ffe8e7!important;color:#c54242!important;}
+.vet-lab-status.dp1049-lab-pending{background:#f0f2f5!important;color:#637084!important;}

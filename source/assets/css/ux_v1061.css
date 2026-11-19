@@ -1,0 +1,10 @@
+/* Stage one: an immediate, legible message about monitoring cadence. */
+.dp1037-tour .dp1061-feature-hero{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:10px;margin:4px 0 12px}
+.dp1037-tour .dp1061-feature{display:flex;flex-direction:column;justify-content:center;gap:3px;border:1px solid #d7e7f8;background:linear-gradient(140deg,#eaf6ff,#f9fbff);padding:12px 12px;border-radius:14px;min-width:0}
+.dp1037-tour .dp1061-feature:first-child{background:linear-gradient(140deg,#e8fcf3,#f6fffb);border-color:#ccefe0}
+.dp1037-tour .dp1061-feature strong{font-size:26px;letter-spacing:-.75px;line-height:1.15;color:#167bcd;font-variant-numeric:tabular-nums}
+.dp1037-tour .dp1061-feature:first-child strong{color:#068f6a}
+.dp1037-tour .dp1061-feature small{font-size:11.5px;line-height:1.35;color:#475974;font-weight:700}
+.dp1037-tour .dp1061-feature-note{font-size:12.3px!important;line-height:1.64!important;max-width:45ch;color:#4b5c71!important}
+.dp1037-tour .dp1061-feature-note b{color:#167bcd;font-weight:800}
+@media(max-width:355px){.dp1037-tour .dp1061-feature-hero{gap:7px}.dp1037-tour .dp1061-feature{padding:10px 8px}.dp1037-tour .dp1061-feature strong{font-size:22px}}

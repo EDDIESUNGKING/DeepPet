@@ -1,0 +1,5820 @@
+'use strict';
+/* DeepPet V8.64 – exhibition case variety, independently seeded pet histories; all sensor data are simulations. */
+const $=(s,root=document)=>root.querySelector(s);
+const dpCannedTranslations={"關節營養補充品":["Joint support supplement","관절 영양제"],"益生菌":["Probiotic","유산균"],"皮膚營養補充品":["Skin supplement","피부 영양제"],"獸醫建議營養品":["Vet-recommended supplement","수의사 권장 영양제"],"關節支持":["Joint support","관절 보조제"],"毛球管理":["Hairball support","헤어볼 관리제"],"魚油":["Fish oil","생선 오일"],"腸胃營養品":["Digestive supplement","장 건강 보조제"],"心臟營養支持":["Heart support supplement","심장 건강 보조제"],"眼部營養支持":["Eye health supplement","눈 건강 보조제"],"腸胃支持":["Digestive support","소화 건강 보조제"],"營養補充品":["Supplement","영양 보조제"],"狂犬病疫苗":["Rabies vaccine","광견병 예방접종"],"年度核心疫苗":["Annual core vaccine","연례 기본 예방접종"],"綜合疫苗":["Combination vaccine","종합 예방접종"],"DeepPet 日常飼料":["DeepPet daily kibble","DeepPet 데일리 사료"],"活動":["Activity","활동"],"飲食":["Nutrition","식사"],"休息":["Rest","휴식"],"體重":["Weight","체중"],"其他":["Other","기타"],"今天的散步意願較平常高。":["More interested in walking today.","오늘은 평소보다 산책을 더 좋아했어요."],"今天吃完了三餐。":["Finished all three meals today.","오늘 세 끼를 모두 먹었어요."],"今天下午休息時間較多。":["Rested longer this afternoon.","오늘 오후에 더 오래 쉬었어요."],"已記錄近期體重。":["Updated the latest weight record.","최근 체중 기록을 업데이트했어요."],"今天狀態較平穩。":["Condition was steadier today.","오늘 상태가 더 안정적이었어요."],"今天活動後比較早休息。":["Rested earlier after activity today.","오늘 활동 후 일찍 쉬었어요."],"食慾與平時接近。":["Appetite was close to usual.","식욕은 평소와 비슷했어요."],"早上有短暫不安。":["A brief unsettled spell this morning.","아침에 잠시 불안한 모습이 있었어요."],"今天夜間休息較少。":["Had less night rest today.","오늘 밤 휴식이 평소보다 짧았어요."],"活動安排改在傍晚。":["Moved activity time to the evening.","활동 시간을 저녁으로 바꾸었어요."],"今天外出後較疲倦。":["Seemed more tired after going out.","오늘 외출 후 더 피곤해 보였어요."],"最近精神良好。":["Energy has been good recently.","최근 활력이 좋아요."],"睡前比較活躍。":["Was more active before bedtime.","잠자기 전에 더 활발했어요."],"今天有新的食物記錄。":["Recorded a new food today.","오늘 새로운 음식을 기록했어요."],"今天安排了定期檢查。":["Scheduled a routine checkup today.","오늘 정기검진 일정을 잡았어요."]};
+// V8.64: translate demo care entries too, not only the surrounding menu labels.
+// These exact example-record values remain in Traditional Chinese in stored demo data;
+// displaying them never mutates the underlying per-pet record.
+Object.assign(dpCannedTranslations,{
+ '腸胃益生菌':['Digestive probiotic','장 건강 유산균'],
+ '毛球營養支持':['Hairball support supplement','헤어볼 관리 영양제'],
+ '犬核心綜合疫苗':['Canine core combination vaccine','반려견 기본 종합 예방접종'],
+ '貓核心綜合疫苗':['Feline core combination vaccine','반려묘 기본 종합 예방접종'],
+ '定期健康檢查':['Routine health checkup','정기 건강검진'],
+ '生化與血液檢查':['Blood chemistry and blood count','혈액 생화학 및 혈구 검사'],
+ '健康追蹤檢查':['Follow-up health checkup','건강 추적 검진'],
+ '今日加強針複查':['Booster vaccination follow-up','추가 예방접종 재확인'],
+ '紅血球指標':['Red blood cell markers','적혈구 지표'],
+ '發炎相關指標':['Inflammation-related markers','염증 관련 지표'],
+ '活動後恢復觀察':['Post-activity recovery observation','활동 후 회복 관찰'],
+ '傍晚的活動節奏比平常穩定。':['Evening activity was steadier than usual.','저녁 활동이 평소보다 안정적이었어요.'],
+ '今天進食量與往常有差別，已記錄。':['Food intake differed from usual today; logged.','오늘 식사량이 평소와 달라 기록했어요.'],
+ '最近幾晚醒來次數變多，持續觀察。':['More nighttime awakenings over recent nights; continue monitoring.','최근 며칠 밤에 더 자주 깨어나 계속 관찰 중이에요.'],
+ '散步後需要多休息一段時間。':['Needed more rest than usual after a walk.','산책 후 평소보다 더 쉬어야 했어요.'],
+ '今日完成例行的健康照護。':['Routine care completed today.','오늘 일상적인 건강 관리를 마쳤어요.'],
+ '食慾良好，進食速度比平常快。':['Good appetite; ate faster than usual.','식욕은 좋지만 평소보다 빨리 먹었어요.'],
+ '下午長時間安靜休息。':['Rested quietly for an extended period this afternoon.','오후에 오랫동안 조용히 쉬었어요.'],
+ '玩耍時比較活躍，晚間早些休息。':['More active during play; rested earlier in the evening.','놀이 중 더 활발했고 저녁에는 일찍 쉬었어요.'],
+ '今天散步意願變少。':['Less willing to go for a walk today.','오늘 산책을 덜 하려고 했어요.'],
+ '下午看起來比較疲倦，需要持續觀察。':['Seemed more tired this afternoon; continue monitoring.','오후에 더 피곤해 보여 계속 관찰이 필요해요.'],
+ '今天散步意願變少，下午看起來比較疲倦，需要持續觀察。':['Less willing to walk and more tired this afternoon; continue monitoring.','오늘 산책 의욕이 떨어지고 오후에 피곤해 보여 계속 관찰 중이에요.'],
+ '精力':['Energy','활력'],
+ '活動':['Activity','활동'],
+ '飲食':['Diet','식사'],
+ '休息':['Rest','휴식'],
+ '其他':['Other','기타']
+});
+function dpL10nSample(v){if(typeof v!=='string'||typeof state==='undefined')return v;if(state.lang==='zh')return toSimplified(v);if(state.lang==='zht')return toTraditional(v);if(state.lang==='ja'){const translated=(typeof JA_PHRASES!=='undefined'&&JA_PHRASES[v]);if(translated)return translated;const m=dpCannedTranslations[v];return m?m[0]:v;}if(!['en','ko'].includes(state.lang))return v;const m=dpCannedTranslations[v];return m?m[state.lang==='en'?0:1]:v;}
+
+const esc=s=>String(dpL10nSample(s??'')).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const TR_MAP={
+ '页':'頁','总':'總','体':'體','关':'關','这':'這','还':'還','个':'個','会':'會','说':'說','图':'圖','时':'時','动':'動','态':'態','点':'點','实':'實','现':'現','据':'據','并':'並','处':'處','为':'為','医':'醫','种':'種','药':'藥','饮':'飲','录':'錄','报':'報','检':'檢','测':'測','项':'項','拟':'擬','维':'維','级':'級','边':'邊','觉':'覺','览':'覽','设':'設','备':'備','网':'網','开':'開','闭':'閉','语':'語','隐':'隱','私':'私','护':'護','时':'時','钟':'鐘','门':'門','档':'檔','况':'況','异':'異','阅':'閱','宠':'寵','猫':'貓','画':'畫','饲':'飼','馈':'饋','后':'後','台':'臺','门':'門','齐':'齊','资':'資','历':'歷','复':'復','际':'際','导':'導','标':'標','层':'層','荐':'薦','话':'話','额':'額','昼':'晝','紧':'緊','张':'張','图':'圖','顺':'順','显':'顯','听':'聽','预':'預','约':'約','应':'應','择':'擇','补':'補','疗':'療','颜':'顏','变':'變','饥':'飢','么':'麼','师':'師','线':'線','选':'選','学':'學','围':'圍','项':'項','样':'樣','风':'風','释':'釋','担':'擔','块':'塊','导':'導','虽':'雖','发':'發','夹':'夾','缩':'縮','蓝':'藍','车':'車','门':'門','两':'兩','餐':'餐','于':'於','层':'層','将':'將','摄':'攝','写':'寫','确':'確','输':'輸','带':'帶','远':'遠','较':'較','邻':'鄰','产':'產','评':'評','虑':'慮','画':'畫','归':'歸','触':'觸','达':'達','话':'話','诊':'診','稳':'穩','坏':'壞','夠':'夠'};
+
+Object.assign(TR_MAP,{'结':'結','状':'狀','与':'與','头':'頭','运':'運','长':'長','详':'詳','监':'監','数':'數','对':'對','经':'經','过':'過','见':'見','尽':'盡','满':'滿','钟':'鐘','设':'設','连':'連','线':'線','发':'發','优':'優','约':'約','应':'應','虑':'慮','从':'從','进':'進','组':'組','纯':'純','总':'總','灵':'靈','写':'寫','办':'辦','够':'夠','订':'訂','载':'載','项':'項','来':'來','为':'為','种':'種','类':'類','体':'體','岁':'歲','难':'難','测':'測','较':'較','认':'認','团':'團','查':'查','奖':'獎','业':'業','转':'轉','护':'護','样':'樣','远':'遠','实':'實','区':'區','画':'畫','关':'關','张':'張','标':'標','档':'檔','选':'選','项':'項','览':'覽','检':'檢','医':'醫','够':'夠','药':'藥','数':'數','价':'價','并':'並','时':'時','来':'來','讯':'訊','录':'錄','项':'項','录':'錄','记':'記','还':'還','频':'頻','异':'異','险':'險','钟':'鐘','分':'分','视':'視','领':'領','调':'調','说':'說','既':'既','如':'如','风':'風','达':'達','间':'間','确':'確','声':'聲','错':'錯','别':'別','疗':'療','摄':'攝','岁':'歲'});
+Object.assign(TR_MAP,{"规": "規", "换": "換", "请": "請", "当": "當", "联": "聯", "范": "範", "称": "稱", "划": "劃", "决": "決", "厂": "廠", "挡": "擋", "扰": "擾", "们": "們", "呗": "唄", "吧": "吧", "别": "別", "准": "準", "没": "沒", "温": "溫", "台": "臺", "预": "預", "简": "簡", "审": "審", "认": "認"});
+function toTraditional(input){return String(input??'').split('').map(ch=>TR_MAP[ch]||ch).join('')}
+Object.assign(TR_MAP,{'园':'園','简':'簡','询':'詢','务':'務','览':'覽','栏':'欄','净':'淨','灵':'靈','颗':'顆','颜':'顏','贪':'貪','叠':'疊','荐':'薦','医':'醫','连':'連','离':'離','众':'眾','质':'質','领':'領','订':'訂','预':'預','须':'須','缘':'緣','几':'幾','处':'處','阴':'陰','阳':'陽','属':'屬','阵':'陣','开':'開','热':'熱','刚':'剛','写':'寫','显':'顯','沟':'溝','鉴':'鑑','势':'勢','围':'圍','挡':'擋','专':'專','动':'動'});
+Object.assign(TR_MAP,{'龄':'齡','专':'專','汇':'匯','复':'復','较':'較','声':'聲','头':'頭','体':'體','况':'況','结':'結','达':'達','预':'預','踪':'蹤','励':'勵','项':'項','稳':'穩','划':'劃','营':'營','齐':'齊','紧':'緊','检':'檢','彻':'徹','环':'環','证':'證','汇':'匯','虑':'慮','认':'認','劳':'勞','语':'語','闻':'聞','习':'習','与':'與','龄':'齡','并':'並','终':'終','趋':'趨','须':'須','疗':'療','纯':'純','现':'現','习':'習','责':'責','绿':'綠','够':'夠','优':'優','账':'帳','项':'項'});
+Object.assign(TR_MAP,{'离':'離','计':'計','划':'劃','断':'斷','义':'義','属':'屬','养':'養','况':'況','题':'題','键':'鍵','迟':'遲','剂':'劑','频':'頻','项':'項','应':'應','议':'議','轻':'輕','检':'檢','较':'較','试':'試','绑':'綁','云':'雲','费':'費','购':'購','卖':'賣','选':'選','际':'際','另':'另','钻':'鑽','爱':'愛','灵':'靈','电':'電','兽':'獸','续':'續','码':'碼','户':'戶','见':'見'});
+const SIMPLIFY_MAP={...Object.fromEntries(Object.entries(TR_MAP).map(([simplified,traditional])=>[traditional,simplified])),
+ '購':'购','買':'买','賣':'卖','詢':'询','請':'请','訊':'讯','綁':'绑','雲':'云','證':'证','雖':'虽','沒':'没','須':'须','質':'质','無':'无','單':'单','給':'给','傳':'传','覺':'觉','靜':'静','斷':'断','標':'标','屬':'属','難':'难','讓':'让','該':'该','隻':'只','歡':'欢','覓':'觅','經':'经','雜':'杂','錢':'钱','機':'机','顯':'显','錄':'录','處':'处','價':'价','費':'费','樓':'楼','圓':'圆','專':'专','鐘':'钟','觀':'观','會':'会','圖':'图','點':'点','連':'连','額':'额','訊':'讯','間':'间','規':'规','則':'则','輸':'输','寫':'写','儲':'储','備':'备','複':'复','進':'进','譯':'译','範':'范','實':'实','幫':'帮','練':'练','優':'优','動':'动','態':'态','詞':'词','聯':'联','臺':'台','關':'关','測':'测','貓':'猫','寵':'宠','飼':'饲','應':'应','為':'为','個':'个','數':'数','據':'据','節':'节','裝':'装','啟':'启','歸':'归','類':'类','顧':'顾','賴':'赖','確':'确','資':'资','擇':'择','點':'点','夠':'够','轉':'转','發':'发','後':'后','還':'还','訊':'讯','檢':'检','藥':'药','醫':'医','異':'异'};
+Object.assign(SIMPLIFY_MAP,{'週':'周','憶':'忆','麼':'么','歸':'归','紀':'纪','續':'续','較':'较','顆':'颗','誌':'志','於':'于','長':'长','覺':'觉','慣':'惯','衛':'卫','憂':'忧','鍵':'键','韻':'韵','辦':'办'});
+Object.assign(SIMPLIFY_MAP,{'準':'准','與':'与','確':'确','說':'说','顯':'显','熱':'热','貝':'贝','聽':'听','髮':'发','軟':'软','驗':'验','儀':'仪','測':'测','頻':'频','進':'进','緊':'紧','劃':'划','譜':'谱','階':'阶','職':'职','飼':'饲','憶':'忆','塊':'块','顏':'颜','範':'范','儲':'储','願':'愿','薦':'荐','寬':'宽','輕':'轻','響':'响','環':'环','壓':'压','鴿':'鸽','鹼':'碱','總':'总','較':'较','訊':'讯','牠':'它','條':'条','腸':'肠','觀':'观','驅':'驱','術':'术','魚':'鱼'});
+Object.assign(SIMPLIFY_MAP,{"並":"并","亞":"亚","來":"来","個":"个","們":"们","傑":"杰","備":"备","傳":"传","僅":"仅","價":"价","儀":"仪","優":"优","儲":"储","內":"内","兩":"两","冊":"册","凱":"凯","別":"别","刪":"删","則":"则","剛":"刚","劃":"划","劑":"剂","動":"动","務":"务","勞":"劳","勢":"势","勵":"励","匯":"汇","區":"区","參":"参","問":"问","啟":"启","單":"单","嘗":"尝","國":"国","圍":"围","園":"园","圓":"圆","圖":"图","團":"团","報":"报","場":"场","塊":"块","壓":"压","壞":"坏","夠":"够","夾":"夹","媽":"妈","學":"学","實":"实","審":"审","寫":"写","寬":"宽","寵":"宠","將":"将","專":"专","尋":"寻","對":"对","導":"导","層":"层","屬":"属","島":"岛","師":"师","帳":"帐","帶":"带","幫":"帮","幾":"几","庫":"库","廠":"厂","張":"张","強":"强","彈":"弹","彙":"汇","後":"后","從":"从","復":"复","徹":"彻","惡":"恶","愛":"爱","態":"态","慣":"惯","慮":"虑","慶":"庆","慾":"欲","憂":"忧","憑":"凭","憶":"忆","應":"应","戶":"户","捲":"卷","掃":"扫","採":"采","換":"换","摺":"折","擇":"择","擊":"击","擋":"挡","擔":"担","據":"据","擬":"拟","擾":"扰","攝":"摄","數":"数","斷":"断","於":"于","時":"时","晝":"昼","暫":"暂","曆":"历","會":"会","東":"东","條":"条","業":"业","構":"构","樂":"乐","樓":"楼","標":"标","樣":"样","機":"机","檔":"档","檢":"检","檻":"槛","欄":"栏","權":"权","歡":"欢","歲":"岁","歷":"历","歸":"归","決":"决","沒":"没","況":"况","淨":"净","測":"测","準":"准","溝":"沟","溫":"温","滾":"滚","滿":"满","濃":"浓","濟":"济","瀏":"浏","灣":"湾","為":"为","無":"无","熱":"热","營":"营","爾":"尔","狀":"状","獅":"狮","獎":"奖","獨":"独","獵":"猎","獸":"兽","現":"现","瑪":"玛","環":"环","產":"产","畫":"画","異":"异","當":"当","疊":"叠","療":"疗","發":"发","盡":"尽","監":"监","眾":"众","確":"确","碼":"码","種":"种","稱":"称","積":"积","穩":"稳","筆":"笔","節":"节","範":"范","簡":"简","籤":"签","紀":"纪","約":"约","紅":"红","納":"纳","紐":"纽","純":"纯","級":"级","細":"细","終":"终","組":"组","結":"结","絕":"绝","絡":"络","給":"给","統":"统","綁":"绑","經":"经","綜":"综","綠":"绿","維":"维","網":"网","緊":"紧","緒":"绪","線":"线","緣":"缘","編":"编","緬":"缅","練":"练","緹":"缇","縮":"缩","總":"总","繪":"绘","繳":"缴","繼":"继","續":"续","羅":"罗","義":"义","習":"习","聖":"圣","聞":"闻","聯":"联","聲":"声","職":"职","聽":"听","腸":"肠","膽":"胆","臘":"腊","臨":"临","臺":"台","與":"与","舊":"旧","茲":"兹","華":"华","蒐":"搜","薦":"荐","薩":"萨","藍":"蓝","藥":"药","蘇":"苏","蘭":"兰","處":"处","虛":"虚","號":"号","衛":"卫","補":"补","裝":"装","裡":"里","製":"制","複":"复","見":"见","規":"规","覓":"觅","視":"视","覺":"觉","覽":"览","觀":"观","觸":"触","訂":"订","計":"计","訊":"讯","記":"记","設":"设","許":"许","診":"诊","註":"注","評":"评","詞":"词","詢":"询","試":"试","話":"话","該":"该","詳":"详","誌":"志","認":"认","語":"语","誤":"误","說":"说","調":"调","請":"请","論":"论","諮":"谘","諾":"诺","證":"证","識":"识","譜":"谱","譯":"译","議":"议","護":"护","讀":"读","變":"变","讓":"让","貓":"猫","貝":"贝","負":"负","貪":"贪","責":"责","貴":"贵","買":"买","費":"费","貼":"贴","資":"资","賓":"宾","賣":"卖","質":"质","賴":"赖","購":"购","趨":"趋","蹤":"踪","車":"车","軟":"软","軸":"轴","較":"较","載":"载","輕":"轻","輯":"辑","輸":"输","轉":"转","辦":"办","這":"这","連":"连","週":"周","進":"进","運":"运","過":"过","達":"达","遠":"远","適":"适","遲":"迟","選":"选","還":"还","邊":"边","邏":"逻","鄰":"邻","醫":"医","釋":"释","鈉":"钠","鈣":"钙","鉀":"钾","銷":"销","錄":"录","錢":"钱","錯":"错","鍵":"键","鎖":"锁","鐘":"钟","鑑":"鉴","鑽":"钻","長":"长","門":"门","閉":"闭","開":"开","間":"间","閱":"阅","關":"关","陣":"阵","陰":"阴","陽":"阳","階":"阶","際":"际","隨":"随","險":"险","隱":"隐","隻":"只","雖":"虽","雙":"双","雜":"杂","離":"离","難":"难","雲":"云","電":"电","靈":"灵","靜":"静","韓":"韩","韻":"韵","響":"响","頁":"页","項":"项","順":"顺","須":"须","預":"预","頓":"顿","領":"领","頭":"头","頻":"频","顆":"颗","題":"题","額":"额","顏":"颜","願":"愿","類":"类","顧":"顾","顯":"显","風":"风","飢":"饥","飲":"饮","飼":"饲","養":"养","饋":"馈","馬":"马","騎":"骑","驗":"验","體":"体","髮":"发","鬆":"松","鬥":"斗","鴿":"鸽","鹼":"碱","麼":"么","黃":"黄","點":"点","齊":"齐","齡":"龄"});
+function toSimplified(input){return String(input??'').split('').map(ch=>SIMPLIFY_MAP[ch]||ch).join('')}
+
+function petAvatar(name,emoji,b1,b2){const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${b1}"/><stop offset="1" stop-color="${b2}"/></linearGradient></defs><rect width="240" height="240" rx="56" fill="url(#g)"/><circle cx="120" cy="102" r="58" fill="#fff" fill-opacity=".26"/><text x="120" y="132" text-anchor="middle" font-size="78">${emoji}</text><rect x="34" y="166" width="172" height="36" rx="18" fill="#ffffff" fill-opacity=".88"/><text x="120" y="190" text-anchor="middle" font-size="19" font-family="Arial" fill="#413a64">${name}</text></svg>`;return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg)}
+function breedText(p){return state.lang==='en'||state.lang==='ja'?(p.breed.en||p.breed.zh):state.lang==='ko'?(p.breed.ko||p.breed.en||p.breed.zh):state.lang==='zht'?(p.breed.zht||toTraditional(p.breed.zh)):p.breed.zh}
+// V5.3: consistent, ID-backed searchable breed selectors for add and edit flows.
+// The international standardized label is used as a fallback for uncommon breeds
+// without an established verified translation. Searches work across all 4 languages.
+function breedOptions(species){return BREED_CATALOG[species==='cat'?'cat':'dog']||[]}
+function breedMatch(entry,str){
+ const norm=x=>String(x||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s\-–—_()\/.,]+/g,'');
+ const q=norm(str);return !q||[entry.en,entry.zh,entry.zht,entry.ko,...(entry.aliases||[])].some(x=>norm(x).includes(q));
+}
+function breedDisplay(entry){return entry?.[state.lang]||entry?.en||'';}
+function breedFind(species,text){const q=String(text||'').trim().toLocaleLowerCase();return breedOptions(species).find(entry=>[entry.en,entry.zh,entry.zht,entry.ko,...entry.aliases].some(v=>String(v).trim().toLocaleLowerCase()===q));}
+function breedFindRecord(species,breed){if(!breed)return null;return breedFind(species,breed.en)||breedFind(species,breed.zh)||breedFind(species,breed.zht)||breedFind(species,breed.ko);}
+function breedByKey(species,key){return breedOptions(species).find(x=>x.id===key)||null;}
+function breedSelector(prefix,species,breed){
+ const selected=breedFindRecord(species,breed);const label=selected?breedDisplay(selected):'';
+ return `<label class="form-label" for="${prefix}BreedSearch">${label3('品種（從清單選擇）','Breed (choose from list)','품종 (목록에서 선택)')}</label>
+ <div class="breed-selector" data-breed-prefix="${prefix}">
+  <div class="breed-search-field">${vicon('search',18)}<input id="${prefix}BreedSearch" class="form-control breed-search-input" autocomplete="off" autocorrect="off" spellcheck="false" aria-controls="${prefix}BreedOptions" aria-autocomplete="list" aria-expanded="false" role="combobox" value="${esc(label)}" placeholder="${label3('輸入品種關鍵字搜尋…','Search a dog or cat breed…','품종 검색어를 입력하세요…')}"/></div>
+  <input id="${prefix}BreedKey" type="hidden" value="${selected?.id||''}"/>
+  <div id="${prefix}BreedOptions" class="breed-options" role="listbox" hidden></div>
+  <div class="breed-hint">${label3('請點選下方搜尋結果；可選「混種／未知品種」，不用自行建立品種。','Select a result below, or choose Mixed / Unknown.','검색 결과에서 선택하세요. 믹스 / 품종 미상도 선택할 수 있습니다.')}</div>
+ </div>`;
+}
+function breedRenderOptions(prefix,query=''){
+ const species=document.getElementById(prefix==='pet'?'petSpeciesInput':'addPetSpecies')?.value||'dog';
+ const holder=document.getElementById(prefix+'BreedOptions'),field=document.getElementById(prefix+'BreedSearch');if(!holder||!field)return;
+ const q=String(query).trim();let matches=breedOptions(species).filter(x=>breedMatch(x,q));
+ matches.sort((a,b)=>{
+   const norm=x=>String(x||'').toLocaleLowerCase().replace(/[\s-]/g,'');const qn=norm(q);
+   const rank=x=>{const vals=[x.en,x.zh,x.zht,x.ko,...x.aliases].map(norm);return !qn?0:vals.includes(qn)?0:vals.some(y=>y.startsWith(qn))?1:2};
+   return rank(a)-rank(b)||(breedDisplay(a)).localeCompare(breedDisplay(b),state.lang==='ko'?'ko':state.lang==='en'?'en':'zh');
+ });
+ const all=matches.length,visible=matches.slice(0,q?70:45);
+ holder.innerHTML=visible.length?visible.map(e=>`<button type="button" role="option" class="breed-option" data-breed-choice="${e.id}" data-prefix="${prefix}"><span>${esc(breedDisplay(e))}</span>${breedDisplay(e)!==e.en?`<small>${esc(e.en)}</small>`:''}</button>`).join('')+ (all>visible.length?`<p class="breed-more">${label3(`共 ${all} 個結果；請繼續輸入縮小範圍`,`Showing ${visible.length} of ${all}. Type to narrow results.`,`전체 ${all}개 · 검색어로 좁혀 주세요`)}</p>`:''):`<p class="breed-no-result">${label3('無相符品種。可搜尋英文名稱，或選「混種／未知品種」。','No match. Try the English name, or choose Mixed / Unknown.','검색 결과 없음. 영어 이름이나 믹스/미상을 검색하세요.')}</p>`;
+ holder.hidden=false;field.setAttribute('aria-expanded','true');
+}
+function breedCloseOptions(prefix){const holder=document.getElementById(prefix+'BreedOptions'),field=document.getElementById(prefix+'BreedSearch');if(holder)holder.hidden=true;if(field)field.setAttribute('aria-expanded','false');}
+function breedPick(prefix,key){const species=document.getElementById(prefix==='pet'?'petSpeciesInput':prefix+'Species')?.value||'dog';const chosen=breedByKey(species,key);if(!chosen)return;const field=document.getElementById(prefix+'BreedSearch'),hidden=document.getElementById(prefix+'BreedKey');if(field)field.value=breedDisplay(chosen);if(hidden)hidden.value=chosen.id;breedCloseOptions(prefix);}
+function breedSelected(prefix,species){const key=document.getElementById(prefix+'BreedKey')?.value;return breedByKey(species,key);}
+function breedIsSelected(prefix,species){const selected=breedSelected(prefix,species),value=document.getElementById(prefix+'BreedSearch')?.value;return selected&&value===breedDisplay(selected);}
+function breedInvalid(){toast(label3('請從清單選擇品種（可選混種／未知）','Please choose a breed from the list (including Mixed / Unknown).','품종을 목록에서 선택하세요 (믹스/미상 포함).'));}
+
+// Imported/legacy fields can be strings. Only a finite 0–100 reading is a
+// score; an empty field, whitespace or out-of-range number is unavailable.
+function dpScoreValue(value){if((typeof value!=='number'&&typeof value!=='string')||(typeof value==='string'&&!value.trim()))return null;const n=Number(value);return Number.isFinite(n)&&n>=0&&n<=100?n:null;}
+function scoreScheme(raw){const n=dpScoreValue(raw);if(n===null)return {color:'#7d8795',bg:'#f2f4f7',soft:'#e9edf1',tone:'unavailable'};return n>=90?{color:'#24a56c',bg:'#ecf8f0',soft:'#d9f2e4',tone:'excellent'}:n>=80?{color:'#2f6fe4',bg:'#edf4ff',soft:'#dbe8ff',tone:'good'}:n>=60?{color:'#d58b2d',bg:'#fff4e6',soft:'#ffe4bf',tone:'watch'}:{color:'#d9534f',bg:'#ffefef',soft:'#ffd8d7',tone:'risk'}}
+function activityText(){const d=currentDog(),a=d.score?.[2];if(selectedBlank()||d.dpFreshPet||d.freeCare||!Number.isFinite(a))return 'N/A';if(state.lang==='en') return a>=88?'Relaxed':a>=70?'Active':'Needs rest'; if(state.lang==='ko') return a>=88?'안정':a>=70?'활동 중':'주의 필요'; if(state.lang==='ja') return a>=88?'安静':a>=70?'活動中':'休息が必要'; return state.lang==='zht'?(a>=88?'休息中':a>=70?'活動中':'需要留意'):(a>=88?'休息中':a>=70?'活动中':'需要留意')}
+function smoothPath(points){if(points.length<2)return ''; let d=`M ${points[0][0]} ${points[0][1]}`; for(let i=0;i<points.length-1;i++){const p0=points[i-1]||points[i],p1=points[i],p2=points[i+1],p3=points[i+2]||p2; const cp1x=p1[0]+(p2[0]-p0[0])/6, cp1y=p1[1]+(p2[1]-p0[1])/6; const cp2x=p2[0]-(p3[0]-p1[0])/6, cp2y=p2[1]-(p3[1]-p1[1])/6; d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2[0]} ${p2[1]}`;} return d}
+function liveSeries(kind,seed=0){
+ return Array.from({length:160},(_,i)=>kind==='heart'?bcgSample(i/20,80,seed):kind==='breath'?breathingSample(i/20,18,seed):motionSample(i/20,seed));
+}
+
+// BCG-like and respiratory waveforms for UI preview, generated continuously in-browser.
+// This is not ECG or a factory SDK signal. Time is in seconds, 8s sliding window.
+let activeWaveFrame = null;
+let liveWaveClock = 0;
+let liveWaveOffset = 0;
+let waveWasPlaying = false;
+const gs=(x,center,width)=>Math.exp(-0.5*Math.pow((x-center)/width,2));
+function bcgSample(t,rate,seed){
+  // Ballistocardiographic-style H-I-J-K-L complex; NOT an ECG P/QRS/T waveform.
+  const localBeat = ((t*(rate/60) + 0.03*Math.sin(t*.22+seed*.6))%1+1)%1;
+  const shape = .12*gs(localBeat,.09,.072) - .19*gs(localBeat,.20,.066) +
+    .78*gs(localBeat,.34,.092) - .30*gs(localBeat,.48,.08) +
+    .17*gs(localBeat,.65,.105) - .035*gs(localBeat,.8,.12);
+  const baseline = .035*Math.sin(2*Math.PI*t*.31 + seed*.7);
+  const texture = .005*Math.sin(t*8.7+seed*.9)+.004*Math.sin(t*13.1+seed);
+  return shape+baseline+texture;
+}
+function breathingSample(t,rpm,seed){
+  const phase = 2*Math.PI*(rpm/60*t + .014*Math.sin(t*.07+seed));
+  return .72*Math.sin(phase-.65)+.12*Math.sin(2*phase+.4)+.04*Math.cos(t*1.6+seed);
+}
+function motionSample(t,seed){
+  const cycle=(t+seed*1.47)%17;
+  return cycle<10 ? .58*Math.sin(t*11.8)+.3*Math.sin(t*20.7)+.13*Math.sin(t*6.2) : .06*Math.sin(t*2.5);
+}
+function liveActivity(t,seed){return ((t+seed*1.47)%17)<10}
+function drawStreaming(canvas,kind,elapsed,pet){
+  if(!canvas)return;
+  const box=canvas.getBoundingClientRect(),w=Math.max(240,box.width||310),h=102;
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){
+    canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+  }
+  const ctx=canvas.getContext('2d'); if(!ctx)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle='#e8edf5';ctx.lineWidth=1;
+  for(let x=0;x<w;x+=w/7){ctx.beginPath();ctx.moveTo(x,5);ctx.lineTo(x,h-8);ctx.stroke()}
+  for(let y=18;y<h;y+=27){ctx.beginPath();ctx.moveTo(2,y);ctx.lineTo(w-2,y);ctx.stroke()}
+  const seed=state.dog+1;
+  let color,amplitude,offset,fn;
+  if(kind==='heart'){
+    color='#ed5177'; amplitude=44;offset=h*.61;
+    fn=t=>bcgSample(t,pet.hr,seed);
+  }else if(kind==='breath'){
+    color='#3282eb';amplitude=32;offset=h*.49;
+    fn=t=>breathingSample(t,pet.rr,seed);
+  }else{
+    color=scoreScheme(pet.score[2]).color;amplitude=31;offset=h*.50;
+    fn=t=>motionSample(t,seed);
+  }
+  const duration=8, samples=160; // 20Hz SDK display grid: 8 seconds x 20 samples
+  const positions=[];
+  for(let j=0;j<samples;j++){
+    const xpos=j/(samples-1)*w;
+    const t=elapsed-(samples-1-j)/20;
+    const val=fn(t);
+    positions.push([xpos,offset-val*amplitude]);
+  }
+  ctx.beginPath();ctx.lineWidth=2.35;ctx.strokeStyle=color;
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.moveTo(positions[0][0],positions[0][1]);
+  for(let i=0;i<positions.length-1;i++){
+    const a=positions[i],b=positions[i+1];
+    ctx.quadraticCurveTo(a[0],a[1],(a[0]+b[0])/2,(a[1]+b[1])/2);
+  }
+  ctx.lineTo(positions[positions.length-1][0],positions[positions.length-1][1]);ctx.stroke();
+  const [lastX,lastY]=positions[positions.length-1];
+  ctx.beginPath();ctx.arc(lastX-2,lastY,3,0,2*Math.PI);ctx.fillStyle=color;ctx.fill();
+}
+function mountLiveWaves(){
+  if(activeWaveFrame!=null){cancelAnimationFrame(activeWaveFrame);activeWaveFrame=null;}
+  if(selectedBlank()||isFreePet())return;
+  const modalKind=state.modal==='live-heart'?'heart':state.modal==='live-breath'?'breath':null;
+  if(state.tab!=='home'&&!modalKind&&!(state.tab==='deep'&&state.detail==='dp90-waveform'))return;
+  const pet=currentDog(),epoch=performance.now(),offset=liveWaveClock,seed=state.dog+1;
+  let last=0;
+  function frame(now){
+    const currentModalKind=state.modal==='live-heart'?'heart':state.modal==='live-breath'?'breath':null;
+    if(state.tab!=='home'&&!currentModalKind&&!(state.tab==='deep'&&state.detail==='dp90-waveform')){activeWaveFrame=null;return;}
+    if(now-last>32){
+      last=now;
+      const elapsed=offset+(now-epoch)/1000;liveWaveClock=elapsed;
+      const heartVal=Math.round(pet.hr+3*Math.sin(elapsed*1.05+seed));
+      const breathVal=Math.round(pet.rr+2*Math.sin(elapsed*.72+seed));
+      const activity=liveActivity(elapsed,seed);
+      const hr=document.querySelector('[data-live-hr]'),rr=document.querySelector('[data-live-rr]'),steps=document.querySelector('[data-live-steps]'),label=document.querySelector('[data-live-activity]'),currentMotion=document.querySelector('[data-current-activity]'),currentHr=document.querySelector('[data-current-hr]'),currentRr=document.querySelector('[data-current-rr]');
+      if(currentHr)currentHr.textContent=signalQuality().valid?String(heartVal):'—';
+      if(currentRr)currentRr.textContent=signalQuality().valid?String(breathVal):'—';
+      if(hr)hr.textContent=String(heartVal);
+      if(rr)rr.textContent=String(breathVal);
+      if(steps){const stage=Math.max(0,elapsed+seed*1.47),activeSeconds=Math.floor(stage/17)*10+Math.min(stage%17,10);steps.textContent=String(Math.floor(activeSeconds*1.65));}
+      if(label)label.textContent=activity?label3('活動中','Moving','활동 중'):label3('休息中','Resting','휴식 중');
+      if(currentMotion)currentMotion.textContent=activity?label3('活動中','Moving','활동 중'):label3('休息中','Resting','휴식 중');
+      if((state.tab==='home'&&state.liveExpanded)||(state.tab==='deep'&&state.detail==='dp90-waveform')){
+        for(const canvas of document.querySelectorAll('#app canvas[data-stream]')) drawStreaming(canvas,canvas.dataset.stream,elapsed,pet);
+      }
+      if(currentModalKind){const canvas=document.querySelector('#overlay-root canvas[data-stream]');if(canvas)drawStreaming(canvas,currentModalKind,elapsed,pet);}
+    }
+    activeWaveFrame=requestAnimationFrame(frame);
+  }
+  activeWaveFrame=requestAnimationFrame(frame);
+}
+function streamingPanel(kind,accent,title,n){return `<div class="mini-live-card live-stream-card"><div class="row spread"><div class="mini-live-title">${title}</div><span class="stream-live-pill"><i></i>${kind==='heart'?`<strong data-live-hr>${n}</strong> bpm`:kind==='breath'?`<strong data-live-rr>${n}</strong> /min`:`<strong data-live-activity>${label3('活動中','Moving','활동 중')}</strong>`}</span></div><canvas class="stream-canvas" data-stream="${kind}" aria-label="${esc(title)}"></canvas><div class="row spread"><span class="subtitle">${label3('最近 8 秒 · 滾動波形','Latest 8 seconds · scrolling waveform','최근 8초 · 이동하는 파형')}</span><span class="stream-wave-key" style="color:${accent}">●</span></div></div>`}
+
+function waveSvg(values,color,height=96){const W=320,H=height,pad=12,mn=Math.min(...values)-2,mx=Math.max(...values)+2; const pts=values.map((v,i)=>[pad+i*((W-pad*2)/(values.length-1)), H-pad-((v-mn)/(mx-mn))*(H-pad*2)]); const grid=[0.2,0.4,0.6,0.8].map(r=>`<line x1="${pad}" y1="${r*(H-pad*2)+pad}" x2="${W-pad}" y2="${r*(H-pad*2)+pad}" stroke="#ebedf5"/>`).join(''); const vgrid=[0.2,0.4,0.6,0.8].map(r=>`<line x1="${r*(W-pad*2)+pad}" y1="${pad}" x2="${r*(W-pad*2)+pad}" y2="${H-pad}" stroke="#f1f2f8"/>`).join(''); return `<svg class="live-wave" viewBox="0 0 ${W} ${H}" aria-hidden="true">${grid}${vgrid}<path d="${smoothPath(pts)}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>` }
+function fencePolygonSvg(points){if(!Array.isArray(points)||points.length<3)return '';const clean=points.filter(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)).slice(0,160);if(clean.length<3)return '';return `<polygon points="${clean.map(p=>`${Math.round(p[0])},${Math.round(p[1])}`).join(' ')}" fill="#7564df26" stroke="#6b50d8" stroke-width="3.2" stroke-linejoin="round"/>`}
+// V5.4: one illustrated coordinate space drives both the My-page map and the editable fence.
+// No real GPS access exists in this browser demo; the owner can deliberately simulate a crossing.
+const DEFAULT_GEO_FENCE=[[80,47],[270,47],[295,171],[89,194]];
+const GEO_SCENARIOS={inside:[179,124],edge:[267,132],outside:[325,209],return:[181,118]};
+function geoLocale(zh,en,ko){return label3(zh,en,ko)}
+function currentGeoPoint(){const raw=state.geoPositionsByPet?.[String(state.dog)];return Array.isArray(raw?.point)&&raw.point.length===2&&raw.point.every(Number.isFinite)?raw.point:[179,124]}
+function savedGeoFence(){const p=state.geoFencesByPet?.[String(state.dog)];return Array.isArray(p)?p:[]}
+function currentGeoFence(){const p=savedGeoFence();return p.length>=3?p:DEFAULT_GEO_FENCE}
+function saveGeoFence(points){state.geoFencesByPet??={};state.geoFencesByPet[String(state.dog)]=points.map(p=>[Math.round(p[0]),Math.round(p[1])])}
+function currentGeoSelection(){
+ const last=state.geoPositionsByPet?.[String(state.dog)]?.sample;
+ const status=geoStatus();
+ if(status==='outside'&&last!=='outside')return '';
+ if(status==='inside'&&last==='outside')return '';
+ return ['inside','outside','return'].includes(last)?last:'';
+}
+function geoPointInside(point,polygon){
+ if(!Array.isArray(point)||!Array.isArray(polygon)||polygon.length<3)return false;
+ let inside=false;
+ for(let i=0,j=polygon.length-1;i<polygon.length;j=i++){
+  const [xi,yi]=polygon[i],[xj,yj]=polygon[j];
+  const crossed=((yi>point[1])!==(yj>point[1]))&&(point[0]<(xj-xi)*(point[1]-yi)/(yj-yi)+xi);
+  if(crossed)inside=!inside;
+ }
+ return inside;
+}
+function gpsForCurrentPet(){
+ // Global connected/deviceType can be stale during pet selection or callbacks.
+ // A 4G device belongs to one pet-specific saved pairing, never to whichever
+ // pet happens to be selected when a map action arrives.
+ const paired=state.devicesByPet?.[String(state.dog)];
+ return !!(!state.emptyPreview&&state.connected===true&&state.deviceType==='4g'&&
+  typeof state.connectedId==='string'&&state.connectedId.length>2&&
+  paired?.connected===true&&paired.deviceType==='4g'&&paired.connectedId===state.connectedId);
+}
+function geoHasActiveFence(){return !!(gpsForCurrentPet()&&state.gpsEnabled&&state.geofenceEnabled&&savedGeoFence().length>=3)}
+function geoStatus(){
+ // A permission toggle or illustrative map coordinate is not GPS evidence.
+ const actual=state.dog>=dogs.length||currentDog().dpFixtureInvalidated;
+ const sample=state.geoPositionsByPet?.[String(state.dog)];
+ if(actual&&sample?.source!=='verified-4g-gps')return 'unknown';
+ return geoHasActiveFence()?(geoPointInside(currentGeoPoint(),currentGeoFence())?'inside':'outside'):'inactive';
+}
+function geoAlertRows(){return (state.geoAlertsByPet?.[String(state.dog)]||[]).slice(0,20)}
+function geoDemoPoint(kind){
+ const polygon=currentGeoFence();
+ if(kind==='inside'||kind==='return'){
+  const preferred=GEO_SCENARIOS[kind];if(geoPointInside(preferred,polygon))return [...preferred];
+  const xs=polygon.map(p=>p[0]),ys=polygon.map(p=>p[1]);
+  const cx=(Math.min(...xs)+Math.max(...xs))/2,cy=(Math.min(...ys)+Math.max(...ys))/2;
+  const found=[];
+  for(let y=10;y<=230;y+=9)for(let x=10;x<=350;x+=9)if(geoPointInside([x,y],polygon))found.push([x,y]);
+  found.sort((a,b)=>(a[0]-cx)**2+(a[1]-cy)**2-(b[0]-cx)**2-(b[1]-cy)**2);
+  return found[0]||null;
+ }
+ if(kind==='outside'){
+  const options=[[325,209],[350,220],[10,220],[350,10],[10,10],[1,1]];
+  return options.find(pt=>!geoPointInside(pt,polygon))||null;
+ }
+ if(kind==='edge')return GEO_SCENARIOS.edge;
+ return null;
+}
+function geoMoveScenario(kind){
+ // The illustrated movement buttons exist exclusively for the bundled
+ // investor fixtures. A real owner's collar must provide verified telemetry.
+ if(state.dog>=dogs.length||currentDog().dpFixtureInvalidated)return null;
+ const next=geoDemoPoint(kind);if(!next||!state.gpsEnabled||!gpsForCurrentPet())return;
+ const previous=currentGeoPoint(),fence=currentGeoFence(),wasInside=geoPointInside(previous,fence),nowInside=geoPointInside(next,fence);
+ const moveTime=Date.now();state.geoPositionsByPet??={};state.geoPositionsByPet[String(state.dog)]={point:[...next],time:moveTime,sample:kind};
+ if(geoHasActiveFence()&&wasInside&&!nowInside){
+  state.geoAlertsByPet??={};const key=String(state.dog);
+  (state.geoAlertsByPet[key]??=[]).unshift({id:`gps-${moveTime}`,pet:currentDog().name,time:moveTime,type:'exit',source:'demo'});
+  state.geoAlertsByPet[key]=state.geoAlertsByPet[key].slice(0,20);
+ }
+ return {exit:geoHasActiveFence()&&wasInside&&!nowInside,returned:geoHasActiveFence()&&!wasInside&&nowInside};
+}
+function geoMapSvg(editable=false){
+ const point=currentGeoPoint(),active=geoHasActiveFence(),poly=(editable&&state.fenceEditMode)?(state.fenceDraft||[]):active?savedGeoFence():[],status=geoStatus(),outside=status==='outside';
+ const pointSet=poly.map(([x,y])=>`${Math.round(x)},${Math.round(y)}`).join(' '),name=esc(currentDog().name.slice(0,12));
+ const actual=state.dog>=dogs.length||currentDog().dpFixtureInvalidated;
+ const showPetPoint=!actual||state.geoPositionsByPet?.[String(state.dog)]?.source==='verified-4g-gps';
+ return `<svg class="geo-preview-map${editable?' fence-map-svg':''}" ${editable?'id="fenceCanvas"':''} viewBox="0 0 360 240" role="img" aria-label="${editable?geoLocale('在地圖上手繪電子圍欄','Draw a geofence on the map','지도에 안전 구역 그리기'):geoLocale('寵物位置與電子圍欄示範地圖','Demo map of pet location and geofence','반려동물 위치와 안전 구역 데모 지도')}">
+ <rect width="360" height="240" fill="#f0f5f0"/>
+ <path d="M0 75Q80 47 160 84T370 66 M-12 196Q120 141 370 196 M93 -8Q109 111 76 255 M282 -10Q247 108 301 253" fill="none" stroke="#fff" stroke-width="25"/>
+ <path d="M0 75Q80 47 160 84T370 66 M-12 196Q120 141 370 196 M93 -8Q109 111 76 255 M282 -10Q247 108 301 253" fill="none" stroke="#d5dfd9" stroke-width="2"/>
+ <path d="M145 5Q214 2 219 60L181 96L137 63Z" fill="#d1ebd8"/>
+ <path d="M9 125L57 108L74 154L29 170Z" fill="#d0e5f0"/>
+ <path d="M308 2L358 13L358 78L333 83Z" fill="#ccebd9"/>
+ <g fill="#8fa09b" font-family="Arial,sans-serif" font-size="11"><text x="167" y="44">Park</text><text x="17" y="179">Park Rd.</text><text x="228" y="222">Pet Lane</text></g>
+ <g ${editable?'id="fenceSavedGeometry"':''}>${poly.length>=3?`<polygon data-geo-fence points="${pointSet}" fill="${active?(outside?'#f59a5722':'#7967df25'):'#9c8fb914'}" stroke="${active?(outside?'#da754a':'#7865da'):'#a59ac4'}" stroke-width="${active?'3':'2'}" stroke-dasharray="${active?'':'7 6'}" stroke-linejoin="round"/>`:''}</g>
+ ${editable?'<g id="fenceDraftGeometry"></g>':''}
+ ${showPetPoint?`<circle cx="${point[0]}" cy="${point[1]}" r="19" fill="${outside?'#f19a6e':'#8e85ee'}" opacity=".24"/>
+ <circle data-geo-pet cx="${point[0]}" cy="${point[1]}" r="15" fill="white" stroke="${outside?'#d85a46':'#5d53c8'}" stroke-width="2.4"/><defs><clipPath id="${editable?'dpGeoPetEditor':'dpGeoPetMap'}"><circle cx="${point[0]}" cy="${point[1]}" r="12.6"/></clipPath></defs><image href="${esc(currentDog().photo)}" x="${point[0]-12.6}" y="${point[1]-12.6}" width="25.2" height="25.2" preserveAspectRatio="xMidYMid slice" clip-path="url(#${editable?'dpGeoPetEditor':'dpGeoPetMap'})"/>
+ <path d="M${point[0]+16} ${point[1]-21}H${Math.min(348,point[0]+99)}" stroke="${outside?'#d85a46':'#5d53c8'}" stroke-width="1.8"/>
+ <rect x="${Math.max(8,Math.min(263,point[0]+13))}" y="${Math.max(5,point[1]-44)}" width="87" height="25" rx="11" fill="${outside?'#c94c40':'#5149b3'}"/>
+ <text x="${Math.max(8,Math.min(263,point[0]+13))+43.5}" y="${Math.max(5,point[1]-44)+17}" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="11" font-weight="700">${name}</text>`:''}
+ </svg>`;
+}
+function mapCard(mode='page'){
+ const actual=state.dog>=dogs.length||currentDog().dpFixtureInvalidated;
+ if(actual&&state.geoPositionsByPet?.[String(state.dog)]?.source!=='verified-4g-gps'){
+  return `<div class="geo-inline dp946-gps-awaiting" data-geo-panel="${mode}"><div class="geo-inline-head"><strong>${esc(currentDog().name)} · ${geoLocale('目前位置','Current position','현재 위치')}</strong><span>N/A</span></div><div class="dp936-chart-na">${geoLocale('等待 4G 項圈回傳經驗證的定位資料','Awaiting verified 4G collar location','검증된 4G GPS 위치 수신 대기')}</div></div>`;
+ }
+ const status=geoStatus(),active=geoHasActiveFence(),outside=status==='outside',pet=esc(currentDog().name),selected=currentGeoSelection();const lastGeoEvent=geoAlertRows()[0],lastPointTime=state.geoPositionsByPet?.[String(state.dog)]?.time,justRecordedExit=!!(lastGeoEvent&&lastGeoEvent.time===lastPointTime);
+ const time=state.geoPositionsByPet?.[String(state.dog)]?.time;
+ const stamp=time?new Date(time).toLocaleTimeString(state.lang==='ko'?'ko-KR':state.lang==='en'?'en-US':'zh-TW',{hour:'2-digit',minute:'2-digit'}):geoLocale('剛開始演示','Demo started','데모 시작');
+ const headline=active?(outside?geoLocale('已超出電子圍欄','Outside safe zone','안전 구역 밖'):geoLocale('位於安全區域內','Inside safe zone','안전 구역 안')):geoLocale('電子圍欄尚未啟用','Geofence not enabled','안전 구역이 꺼져 있어요');
+ return `<div class="geo-inline ${outside?'geo-escaped':''}" data-geo-panel="${mode}">
+ <div class="geo-inline-head"><strong>${pet} · ${geoLocale('目前位置','Current position','현재 위치')}</strong><span class="geo-demo-badge">${geoLocale('模擬 GPS','GPS DEMO','GPS 데모')}</span></div>
+ <div class="geo-map-stage">${geoMapSvg()}<div class="geo-map-watermark">${geoLocale('示意地圖 · 非真實定位','Illustration · not a real location','예시 지도 · 실제 위치 아님')}</div></div>
+ <div class="geo-position-status ${outside?'outside':active?'inside':'inactive'}"><span class="geo-position-dot"></span><div><b>${headline}</b><small>${geoLocale('位置更新','Position update','위치 갱신')}: ${stamp} · ${geoLocale('離線示範資料','Offline demo data','오프라인 데모 데이터')}</small></div></div>
+ ${outside?`<div class="geo-exit-alert" role="status">${vicon('bell',18)} <span>${justRecordedExit?geoLocale('越界事件已儲存到提醒中心（本機示範，非推播）。','Exit event saved to local reminders (not a push notification).','이탈 기록이 로컬 알림에 저장됨 (푸시 아님).'):geoLocale('目前在圍欄外；只有由內向外穿越邊界時才新增提醒。','Currently outside; a new alert requires crossing outward from inside.','현재 구역 밖이며 내부에서 밖으로 이동해야 새 알림이 기록됩니다.')}</span></div>`:''}
+ <div class="geo-map-actions" role="group" aria-label="${geoLocale('定位模擬控制','Location simulation controls','위치 시뮬레이션 조작')}">
+ ${[['inside',geoLocale('區域內','Inside','안쪽')],['outside',geoLocale('測試越界','Test exit','이탈 시험')],['return',geoLocale('返回區域','Return','돌아오기')]].map(([kind,text])=>`<button type="button" class="${selected===kind?'is-selected':''}" data-action="gps-sim-position" data-pos="${kind}" aria-pressed="${selected===kind}">${selected===kind?'<span class="geo-action-check" aria-hidden="true">✓</span>':''}${text}</button>`).join('')}
+ </div>
+ ${!active?`<p class="geo-mini-note">${geoLocale('電子圍欄已關閉；地圖只顯示寵物位置。','Geofence is off; only your pet’s position is shown.','전자 울타리가 꺼져 있으며 반려동물 위치만 표시됩니다.')}</p>`:''}
+ </div>`;
+}
+
+// Single authoritative catalog, approved product photos and commercial terms.
+// 4G = owner image ONE; Bluetooth = owner image TWO. Keep the two distinct.
+// Battery values are unverified design targets, not measured guarantees.
+const DP_DEVICE_CATALOG=Object.freeze({
+ bt:Object.freeze({key:'bt',id:'DP-BT',name:'DeepPet Bluetooth',image:'assets/product/deeppet-collar-bluetooth.png',price:189,
+  gps:false,esim:false,requiresPlan:false,batteryTarget:'over5',sync:'nearby'}),
+ '4g':Object.freeze({key:'4g',id:'DP-4G',name:'DeepPet 4G + GPS',image:'assets/product/deeppet-collar-4g-gps.png',price:229,
+  gps:true,esim:true,requiresPlan:true,batteryTarget:'2to3',sync:'remote',monthly:5,yearly:49})
+});
+const DP_DEVICE=(kind)=>DP_DEVICE_CATALOG[kind==='4g'?'4g':'bt'];
+const COLLARS=Object.freeze({g4:DP_DEVICE_CATALOG['4g'].image,bt:DP_DEVICE_CATALOG.bt.image});
+const SHOP=Object.freeze(Object.values(DP_DEVICE_CATALOG).map(x=>Object.freeze({key:x.key,id:x.id,name:x.name,price:x.price,img:x.image})));
+
+function collarCard(kind){const is4g=kind==='4g'; const product=DP_DEVICE(kind);const title=state.lang==='en'?(is4g?'DeepPet 4G + GPS':'DeepPet Bluetooth Health'):(state.lang==='ko'?(is4g?'DeepPet 4G + GPS':'DeepPet 블루투스 건강형'):(is4g?'DeepPet 4G + GPS':'DeepPet 藍牙健康版')); const desc=state.lang==='en'?(is4g?'Remote location and geofence (subscription required)':'Health monitoring and nearby sync only'):(state.lang==='ko'?(is4g?'원격 위치 및 전자 울타리 (구독 필요)':'건강 측정과 근거리 동기화 전용'):(is4g?'遠端定位與電子圍欄（需訂閱）':'健康監測與近距離同步')); return `<button class="collar-option ${state.connectChoice===kind?'active':''}" data-action="pick-collar" data-type="${kind}"><img src="${esc(product.image)}" alt="${esc(title)}"/><div class="grow"><div class="strong md">${title}</div><div class="subtitle">${desc}</div></div><span class="pill ${is4g?'purple':'ok'}">${is4g?'4G':'BT'}</span></button>`}
+function connectSteps(){const s=state.connectStage||0; const labels=state.connectChoice==='4g'?[label3('1 開啟 4G 項圈','1 Power on the 4G collar','1 4G 목걸이 전원 켜기'),label3('2 確認 4G 訊號與 eSIM','2 Confirm 4G signal and eSIM','2 4G 신호와 eSIM 확인'),label3('3 DeepPet 搜尋附近 4G 項圈','3 DeepPet searches nearby 4G collars','3 주변 4G 목걸이 검색'),label3('4 完成配對並開始同步','4 Pairing complete and sync starts','4 연결 완료 및 동기화 시작')]:[label3('1 開啟藍牙項圈','1 Power on the Bluetooth collar','1 블루투스 목걸이 전원 켜기'),label3('2 開啟手機藍牙並靠近裝置','2 Turn on phone Bluetooth and bring it nearby','2 휴대폰 블루투스를 켜고 가까이 두기'),label3('3 DeepPet 搜尋附近藍牙項圈','3 DeepPet searches nearby Bluetooth collars','3 주변 블루투스 목걸이 검색'),label3('4 完成配對並開始同步','4 Pairing complete and sync starts','4 연결 완료 및 동기화 시작')]; return `<div class="connect-steps">${labels.map((txt,i)=>`<div class="connect-step ${s>i?'done':''} ${s===i?'current':''}"><i>${s>i?'✓':i+1}</i><span>${txt}</span></div>`).join('')}</div>`}
+
+
+
+const DP_HEART_POSTER_PHOTOS={
+  'assets/embedded_posters/c70737eea2cd.jpg':'assets/embedded_posters/e5ad26b4ca98.jpg',
+  'assets/embedded_posters/9436a6713c02.jpg':'assets/embedded_posters/e61ae0abeb2d.jpg',
+  'assets/embedded_posters/7865a3b43438.jpg':'assets/embedded_posters/87ffcd15c6b5.jpg',
+  'assets/embedded_posters/7c08f6ba0710.jpg':'assets/embedded_posters/9341f0fd1f67.jpg',
+  'assets/embedded_posters/66ccdc5bbcbf.jpg':'assets/embedded_posters/92023d5ddeda.jpg',
+  'assets/embedded_posters/d56e671d9754.jpg':'assets/embedded_posters/ac7a36791ad8.jpg',
+  'assets/embedded_posters/2808c11db6bd.jpg':'assets/embedded_posters/9a40fc118a08.jpg',
+  'assets/embedded_posters/bce1b7d9f913.jpg':'assets/embedded_posters/ac9020feb570.jpg',
+  'assets/embedded_posters/cc590a3c3220.jpg':'assets/embedded_posters/04bac8afbab7.jpg',
+  'assets/embedded_posters/0d16ec7373a1.jpg':'assets/embedded_posters/b069c92f9496.jpg'
+};
+
+const dogs=[
+ {name:'Milo',species:'dog',breed:{zh:'阿拉斯加雪橇犬',zht:'阿拉斯加雪橇犬',en:'Alaskan Malamute',ko:'알래스칸 말라뮤트'},age:5,weight:34.0,photo:'assets/demo_score_portraits/00_Milo_95_happy.jpg',score:[94,93,99],bio:5.2,hr:66,rr:18,rest:12.9,recovery:28,normalRecovery:27,target:1220},
+ {name:'Luna',species:'dog',breed:{zh:'金毛寻回犬',zht:'金毛尋回犬',en:'Golden Retriever',ko:'골든 리트리버'},age:4,weight:28.0,photo:'assets/demo_score_portraits/01_Luna_84_calm.jpg',score:[82,86,84],bio:4.1,hr:68,rr:19,rest:12.8,recovery:29,normalRecovery:28,target:1100},
+ {name:'Coco',species:'dog',breed:{zh:'比格犬',zht:'米格魯',en:'Beagle',ko:'비글'},age:3,weight:10.3,photo:'assets/demo_score_portraits/02_Coco_38_sad.jpg',score:[47,39,28],bio:3.2,hr:78,rr:22,rest:11.8,recovery:36,normalRecovery:30,target:650},
+ {name:'Leo',species:'dog',breed:{zh:'巴哥犬',zht:'巴哥犬',en:'Pug',ko:'퍼그'},age:4,weight:5.8,photo:'assets/demo_score_portraits/03_Leo_Pug_v1002.jpg',score:[20,29,17],bio:4.8,hr:92,rr:27,rest:10.9,recovery:45,normalRecovery:33,target:460},
+ {name:'Poppy',species:'dog',breed:{zh:'德国牧羊犬',zht:'德國牧羊犬',en:'German Shepherd',ko:'저먼 셰퍼드'},age:6,weight:48.0,photo:'assets/demo_score_portraits/04_Poppy_80_calm.jpg',score:[95,83,61],bio:6.5,hr:70,rr:20,rest:13.4,recovery:34,normalRecovery:29,target:1480},
+ {name:'Nori',species:'cat',breed:{zh:'布偶猫',zht:'布偶貓',en:'Ragdoll',ko:'랙돌'},age:2,weight:4.6,photo:'assets/demo_score_portraits/05_Nori_98_happy.jpg',score:[99,98,97],bio:1.9,hr:132,rr:24,rest:15.2,recovery:19,normalRecovery:20,target:280},
+ {name:'Miso',species:'cat',breed:{zh:'英短猫',zht:'英短貓',en:'British Shorthair',ko:'브리티시 쇼트헤어'},age:5,weight:4.8,photo:'assets/demo_score_portraits/06_Miso_77_soft.jpg',score:[70,78,83],bio:4.6,hr:126,rr:22,rest:14.8,recovery:23,normalRecovery:22,target:305},
+ {name:'Mochi',species:'cat',breed:{zh:'孟加拉猫',zht:'孟加拉貓',en:'Bengal',ko:'벵갈'},age:3,weight:5.5,photo:'assets/demo_score_portraits/07_Mochi_35_sad.jpg',score:[35,48,23],bio:3.4,hr:137,rr:27,rest:12.6,recovery:37,normalRecovery:30,target:320},
+ {name:'Kiki',species:'cat',breed:{zh:'苏格兰折耳猫',zht:'蘇格蘭折耳貓',en:'Scottish Fold',ko:'스코티시 폴드'},age:4,weight:3.9,photo:'assets/demo_score_portraits/08_Kiki_17_sad.jpg',score:[12,21,18],bio:4.7,hr:144,rr:31,rest:10.8,recovery:42,normalRecovery:33,target:250},
+ {name:'Max',species:'cat',breed:{zh:'波斯猫',zht:'波斯貓',en:'Persian',ko:'페르시안'},age:4,weight:4.5,photo:'assets/demo_score_portraits/09_Max_87_calm.jpg',score:[88,94,80],bio:4.0,hr:124,rr:22,rest:15.0,recovery:25,normalRecovery:23,target:290},
+ {name:'Rex',species:'dog',breed:{zh:'罗威纳犬',zht:'羅威納犬',en:'Rottweiler',ko:'로트바일러'},age:10,weight:38.5,photo:'assets/demo_score_portraits/10_Rex_38_sad.jpg',score:[38, 54, 22],bio:10.8,hr:83,rr:24,rest:11.5,recovery:43,normalRecovery:29,target:1260},
+ {name:'Bella',species:'dog',breed:{zh:'金毛寻回犬',zht:'金毛尋回犬',en:'Golden Retriever',ko:'골든 리트리버'},age:2,weight:23.8,photo:'assets/demo_score_portraits/11_Bella_97_happy.jpg',score:[98, 97, 96],bio:1.8,hr:63,rr:16,rest:13.8,recovery:18,normalRecovery:21,target:1050},
+ {name:'Dodo',species:'dog',breed:{zh:'柴犬',zht:'柴犬',en:'Shiba Inu',ko:'시바견'},age:8,weight:11.5,photo:'assets/demo_score_portraits/12_Dodo_61_soft.jpg',score:[61, 42, 79],bio:8.5,hr:81,rr:24,rest:10.8,recovery:34,normalRecovery:29,target:690},
+ {name:'Snowy',species:'dog',breed:{zh:'金毛寻回犬',zht:'金毛尋回犬',en:'Golden Retriever',ko:'골든 리트리버'},age:1,weight:24.8,photo:'assets/demo_score_portraits/13_Snowy_Golden_v1002.jpg',score:[91, 66, 96],bio:1.1,hr:83,rr:22,rest:12.0,recovery:21,normalRecovery:23,target:1050},
+ {name:'Nana',species:'cat',breed:{zh:'英国短毛猫',zht:'英國短毛貓',en:'British Shorthair',ko:'브리티시 쇼트헤어'},age:12,weight:4.2,photo:'assets/demo_score_portraits/14_Nana_53_sad.jpg',score:[53, 72, 35],bio:12.6,hr:148,rr:30,rest:14.2,recovery:33,normalRecovery:24,target:270},
+];
+
+// V8.33 exhibition fixtures. Every profile is an independent, deterministic demo case;
+// physiological values are illustrative, never clinical reference ranges.
+const DP_SHOWCASE_CASES=[
+ //     activity ratio, HR variation, RR variation, rest variation, RMSSD, SDNN, trend size, phase
+ {a:1.10,h:2.6,b:1.3,r:.60,rm:61,sd:83,v:1.10,phase:0.1},  // Milo: broadly excellent
+ {a:.81,h:4.0,b:2.3,r:1.3,rm:41,sd:55,v:1.55,phase:.6},  // Luna: good but short baseline
+ {a:1.46,h:8.0,b:5.5,r:2.15,rm:21,sd:30,v:2.15,phase:1.2}, // Coco: overactive, strained
+ {a:.49,h:9.0,b:6.0,r:2.6,rm:10,sd:17,v:2.7,phase:2.1},  // Leo: very low across domains
+ {a:.67,h:4.0,b:2.5,r:1.8,rm:37,sd:51,v:1.8,phase:3.2}, // Poppy: heart strong, energy lower
+ {a:1.18,h:2.4,b:1.1,r:.55,rm:60,sd:55,v:1.0,phase:4.0},  // Nori: high feline resting HRV without human-style values
+ {a:.74,h:4.6,b:2.6,r:1.4,rm:36,sd:52,v:1.8,phase:4.8},  // Miso: mid-range
+ {a:1.67,h:8.2,b:6.4,r:2.5,rm:17,sd:25,v:2.4,phase:5.4}, // Mochi: high activity low rest
+ {a:.34,h:10.5,b:7.0,r:2.75,rm:9,sd:15,v:2.8,phase:6.3}, // Kiki: extreme low all
+ {a:.93,h:3.4,b:2.1,r:1.05,rm:46,sd:48,v:1.3,phase:7.0}, // Max: good feline resting HRV, mixed energy
+ {a:.39,h:8.8,b:5.2,r:2.3,rm:14,sd:21,v:2.3,phase:7.8}, // Rex: older very low
+ {a:1.24,h:2.0,b:1.0,r:.50,rm:69,sd:89,v:.95,phase:8.2}, // Bella: all excellent
+ {a:1.31,h:6.9,b:5.0,r:2.0,rm:26,sd:36,v:2.0,phase:9.3}, // Dodo: uneven dimensions
+ {a:1.59,h:5.7,b:3.6,r:1.8,rm:34,sd:49,v:2.0,phase:10.4},// Snowy: energetic, sleep mixed
+ {a:.46,h:8.1,b:5.8,r:2.45,rm:12,sd:19,v:2.5,phase:11.2} // Nana: senior low/mixed
+];
+
+const LANG={
+ zh:{home:'今日',deep:'深入分析',health:'健康管理',me:'我的',demo:'交互演示 · 所有监测数据均为模拟',notLive:'非真实设备数据',current:'现在的状态',waiting:'最近有效读数',connected:'已连接（演示）',heartRate:'心率',breath:'呼吸',activity:'活动',resting:'休息中',active:'活动中',lastSync:'最近同步',battery:'电量',today:'今日总结',score:'健康状态',storyTag:'我今天想告诉你',viewEvidence:'查看数据依据',attention:'需要关注',attentionAll:'另外的提醒',bioAge:'生理年龄',aiAge:'AI 生理年龄',actualAge:'实际年龄',years:'岁',vsAge:'比实际年龄高',trend:'近14天趋势',ageBasis:'了解估算依据',suggestions:'AI 专属建议',suggBasis:'结合品种、年龄、体重及有效监测数据',viewAll:'查看全部',collapse:'收起',overview:'健康概览',night:'Night Guardian · 昨夜守护',nightView:'查看昨夜报告',moment:'Heart Moments · 心跳时刻',momentText:'把我们珍贵的心跳时刻留在一张卡片里。',createMoment:'制作心跳卡片',week:'最近7天',day:'天',days:'天',personal:'14 天基準',heartCategory:'心肺状态',sleepCategory:'睡眠状态',activeCategory:'精力与恢复',details:'查看详细数据',dateRange:'日期范围',heartInsight:'我今天的心跳与呼吸大致接近平常，也会一起参考 HRV 状态。',sleepInsight:'我昨晚安静休息的时间与平常接近。',activeInsight:'我今天活动后，需要比平常多一点恢复时间。',average:'平均',range:'范围',effective:'有效数据覆盖',noSensor:'数据质量不足时不显示可信分数',aiInterpret:'AI 数据解读',aboutBaseline:'优先与这只宠物近 14 天的平常状态比较，而不是只看一个固定范围。',advanced:'详细统计（进阶）',min:'最低',max:'最高',dataPoints:'有效数据点',careToday:'今天需要处理的事',food:'饮食目标',med:'用药记录',reports:'体检报告',vaccines:'疫苗记录',notes:'额外记录',foodHint:'每日热量、喂食量和进食记录',medHint:'今天的用药、服用状态及疗程',reportsHint:'化验结果、健康和需要关注',vaccineHint:'接种安排及到期提醒',notesHint:'快速记录今天不一样的事情',foodDaily:'每日热量目标',logged:'已记录',foodRemaining:'今日剩余',foodGrams:'每日建议食量',foodDensity:'食物热量密度',kcal100:'kcal / 100g',meal:'记录食物',addMeal:'添加进食记录',editTarget:'修改饮食目标',foodExplain:'建议量以已确认的每日目标及食物能量密度换算，非自动医疗处方。',dailyMed:'今天的用药安排',nextDose:'下一次用药',taken:'已服用',pending:'待服用',skip:'略过',undo:'撤回',addMedicine:'新增药物',medHistory:'用药历史',medExplain:'提醒不代表已经服药。数据变化与用药时间的关联不等于药物因果。',normal:'健康',attentionCount:'需要关注',review:'需要关注',reportLatest:'最近体检报告',reportSubtitle:'体检项目与判读结果',openReport:'查看检查项目',uploadReport:'上传新报告',reportNotice:'缺少明确可比依据的项目应标记为待核实，不计入健康或异常。',noFiles:'本演示不会自动解析真实医疗报告',vaxUpcoming:'下一次接种安排',daysTo:'距离预约',vaxHistory:'接种记录',addVax:'新增接种',vaxExplain:'实际疫苗计划请以兽医建议和当地规定为准。',quickNote:'今天有什么不一样？',notePlaceholder:'添加简单说明（可选）',saveNote:'保存这条记录',noteHistory:'最近记录',noteChips:['食欲变化','睡眠变化','比平常少动','刚看过兽医','肠胃状况','其他'],petProfile:'宠物档案',managePets:'管理与切换宠物',myDevice:'我的设备',garden:'宠物花园',gardenHint:'附近宠物社交（自愿加入）',family:'家庭共享',alerts:'提醒与通知',language:'语言 / Language',privacy:'隐私与数据说明',setting:'应用设置',device:'设备',deviceType:'设备版本',bluetooth:'Bluetooth 健康版',cellular:'4G 定位版',connect:'模拟连接',disconnect:'断开模拟连接',gardenOpt:'选择加入宠物花园',gardenOff:'默认关闭位置共享。尚无真实用户时不会显示虚构邻居。',join:'同意加入演示花园',leave:'退出花园',gardenDemo:'演示社群 · 非附近真实宠物',petSwitch:'切换宠物',view:'查看',close:'关闭',save:'保存',cancel:'取消',ok:'确定',done:'完成',share:'保存图片',preview:'预览',healthCare:'健康管理',weight:'体重',date:'日期',foodNow:'今日已吃',petDetails:'宠物信息',breed:'品种',age:'年龄',allGood:'目前沒有需要優先關注的變化。',reportShare:'导出兽医摘要',exported:'已生成演示摘要',disclaimer:'演示版：所有生理读数、分数、医疗记录和 AI 文案均为模拟，用于评估 UI/UX，不用于诊疗。',inputError:'请输入有效数值',saved:'已保存',later:'操作已更新',uploadHint:'已选择文件（演示版仅记录文件名，不进行诊断）。'},
+ en:{home:'Home',deep:'Deep',health:'Health',me:'Me',demo:'Interactive demo · All sensor readings are simulated',notLive:'Not real device data',current:'Current status',waiting:'Last available reading',connected:'Connected (demo)',heartRate:'Heart rate',breath:'Breathing',activity:'Activity',resting:'Resting',active:'Active',lastSync:'Last synced',battery:'Battery',today:'Daily summary',score:'Health status',storyTag:'What I want to tell you',viewEvidence:'See evidence',attention:'Needs attention',attentionAll:'More alerts',bioAge:'Biological Age',aiAge:'AI biological age',actualAge:'Actual age',years:'yr',vsAge:'Above actual age by',trend:'Last 14-day trend',ageBasis:'How this is estimated',suggestions:'AI guidance for this pet',suggBasis:'Based on this pet’s breed, age, weight and valid trends',viewAll:'View all',collapse:'Collapse',overview:'Health overview',night:'Night Guardian',nightView:'View last night',moment:'Heart Moments',momentText:'Save a memorable heartbeat moment in a photo card.',createMoment:'Create a heart card',week:'Past 7 days',day:'day',days:'days',personal:'14-day baseline',heartCategory:'Heart & Breathing',sleepCategory:'Sleep Status',activeCategory:'Energy & Recovery',details:'View detailed data',dateRange:'Date range',heartInsight:'Today’s heartbeat and breathing are close to usual, with HRV status shown alongside.',sleepInsight:'I rested quietly for about my usual amount of time.',activeInsight:'I needed a little more recovery time after activity.',average:'Average',range:'Range',effective:'Valid data coverage',noSensor:'No trusted score with insufficient data',aiInterpret:'AI interpretation',aboutBaseline:'Compare with this pet’s last 14-day usual pattern, not only a generic range.',advanced:'Detailed statistics',min:'Min',max:'Max',dataPoints:'Valid data points',careToday:'What needs doing today',food:'Food Target',med:'Medication Records',reports:'Reports',vaccines:'Vaccination Record',notes:'Extra Notes',foodHint:'Daily energy and feeding plan',medHint:'Doses, reminders and course history',reportsHint:'Healthy and concerning results',vaccineHint:'Appointments and vaccination history',notesHint:'Quickly log what changed today',foodDaily:'Daily calorie target',logged:'Logged',foodRemaining:'Remaining today',foodGrams:'Suggested daily food',foodDensity:'Food energy density',kcal100:'kcal / 100g',meal:'Log food',addMeal:'Add meal',editTarget:'Edit target',foodExplain:'Amount is calculated from confirmed calories and food density, not a medical prescription.',dailyMed:'Today’s schedule',nextDose:'Next dose',taken:'Taken',pending:'Due',skip:'Skip',undo:'Undo',addMedicine:'Add medicine',medHistory:'Medication history',medExplain:'Reminder acknowledgement is not proof of taking medication. Timing correlation does not prove cause.',normal:'Healthy',attentionCount:'Needs attention',review:'Needs attention',reportLatest:'Latest exam report',reportSubtitle:'Exam items and review results',openReport:'View test results',uploadReport:'Upload report',reportNotice:'Review imported values before classifying results.',noFiles:'Demo does not interpret real medical files',vaxUpcoming:'Upcoming vaccination',daysTo:'Days until visit',vaxHistory:'Vaccination history',addVax:'Add vaccine',vaxExplain:'Confirm schedules with a veterinarian and local rules.',quickNote:'Anything different today?',notePlaceholder:'Add a short description (optional)',saveNote:'Save note',noteHistory:'Recent notes',noteChips:['Appetite change','Sleep change','Less active','Visited vet','Digestion','Other'],petProfile:'Pet profile',managePets:'Manage pets',myDevice:'My device',garden:'Pet Garden',gardenHint:'Opt-in nearby pet community',family:'Family sharing',alerts:'Alerts & reminders',language:'Language',privacy:'Privacy & data',setting:'App settings',device:'Device',deviceType:'Device version',bluetooth:'Bluetooth Health',cellular:'4G + GPS',connect:'Connect demo',disconnect:'Disconnect demo',gardenOpt:'Join Pet Garden (opt-in)',gardenOff:'Location sharing is off. No fake nearby members are shown.',join:'Join demo garden',leave:'Leave garden',gardenDemo:'Demo members, not real nearby pets',petSwitch:'Switch pet',view:'View',close:'Close',save:'Save',cancel:'Cancel',ok:'OK',done:'Done',share:'Save image',preview:'Preview',healthCare:'Care management',weight:'Weight',date:'Date',foodNow:'Logged today',petDetails:'Pet details',breed:'Breed',age:'Age',allGood:'No priority concerns right now.',reportShare:'Export vet brief',exported:'Demo report created',disclaimer:'Demo only: all sensor readings, scores, medical records, and AI text are simulated and are not medical advice.',inputError:'Enter valid numbers',saved:'Saved',later:'Updated',uploadHint:'File selected. Demo only saves its name; no clinical interpretation.'},
+ ko:{home:'오늘 상태',deep:'심층 분석',health:'건강 관리',me:'마이',demo:'체험용 · 모든 센서 데이터는 시뮬레이션',notLive:'실제 기기 데이터가 아닙니다',current:'현재 상태',waiting:'마지막 유효 측정',connected:'연결됨 (데모)',heartRate:'심박수',breath:'호흡',activity:'활동',resting:'휴식 중',active:'활동 중',lastSync:'마지막 동기화',battery:'배터리',today:'오늘의 요약',score:'건강 상태',storyTag:'오늘 제가 하고 싶은 말',viewEvidence:'근거 보기',attention:'주의 필요',attentionAll:'다른 알림',bioAge:'생체 나이',aiAge:'AI 생체 나이',actualAge:'실제 나이',years:'세',vsAge:'실제 나이보다',trend:'최근 14일 추이',ageBasis:'산출 근거',suggestions:'AI 맞춤 조언',suggBasis:'품종·나이·체중 및 유효 데이터 기반',viewAll:'전체 보기',collapse:'접기',overview:'건강 개요',night:'Night Guardian · 야간 모니터링',nightView:'지난밤 보기',moment:'Heart Moments · 심장 박동 순간',momentText:'소중한 심장 박동 순간을 사진으로 남겨요.',createMoment:'하트 카드 만들기',week:'최근 7일',day:'일',days:'일',personal:'14일 기준',heartCategory:'심폐 상태',sleepCategory:'수면 상태',activeCategory:'에너지 및 활동',details:'자세한 데이터',dateRange:'날짜 범위',heartInsight:'오늘 심박과 호흡은 평소와 비슷하며 HRV 상태도 함께 보여줘요.',sleepInsight:'평소와 비슷한 시간 동안 편히 쉬었어요.',activeInsight:'활동 후 회복에 평소보다 시간이 더 걸렸어요.',average:'평균',range:'범위',effective:'유효 데이터 비율',noSensor:'데이터 부족 시 점수 계산 안 함',aiInterpret:'AI 해석',aboutBaseline:'평균값보다 이 반려동물의 최근 14일 기준과 비교해요.',advanced:'상세 통계',min:'최소',max:'최대',dataPoints:'유효 데이터',careToday:'오늘 돌볼 일',food:'식사 목표',med:'투약 기록',reports:'검사 보고서',vaccines:'예방접종',notes:'추가 메모',foodHint:'열량 및 식사량 관리',medHint:'투약 계획과 완료 여부',reportsHint:'정상 및 주의 결과',vaccineHint:'예방접종 예약과 이력',notesHint:'오늘의 변화 간단히 기록',foodDaily:'일일 열량 목표',logged:'기록됨',foodRemaining:'오늘 남은 양',foodGrams:'권장 식사량',foodDensity:'사료 열량 밀도',kcal100:'kcal / 100g',meal:'식사 기록',addMeal:'식사 추가',editTarget:'목표 수정',foodExplain:'양은 열량 목표와 사료 열량으로 환산하며 의료 처방이 아닙니다.',dailyMed:'오늘의 투약',nextDose:'다음 투약',taken:'복용함',pending:'예정',skip:'건너뜀',undo:'취소',addMedicine:'약 추가',medHistory:'투약 이력',medExplain:'알림 확인은 복용의 증거가 아닙니다. 시간적 연관은 인과관계가 아닙니다.',normal:'정상',attentionCount:'주의',review:'주의 필요',reportLatest:'최근 검사 결과',reportSubtitle:'검사 항목 및 검토 결과',openReport:'검사 결과 보기',uploadReport:'보고서 업로드',reportNotice:'7개 항목의 참고범위가 확인되지 않았습니다. 정상 또는 이상으로 자동 판단하지 마세요.',noFiles:'데모는 실제 의료문서를 해석하지 않습니다',vaxUpcoming:'예정된 접종',daysTo:'예약까지',vaxHistory:'접종 이력',addVax:'접종 추가',vaxExplain:'접종 일정은 수의사에게 확인하세요.',quickNote:'오늘 달라진 점이 있나요?',notePlaceholder:'간단한 설명 (선택)',saveNote:'메모 저장',noteHistory:'최근 메모',noteChips:['식욕 변화','수면 변화','활동 감소','동물병원 방문','소화 상태','기타'],petProfile:'반려동물 프로필',managePets:'반려동물 관리',myDevice:'내 기기',garden:'Pet Garden',gardenHint:'선택형 근처 반려동물 커뮤니티',family:'가족 공유',alerts:'알림',language:'언어',privacy:'정보 보호',setting:'설정',device:'기기',deviceType:'기기 버전',bluetooth:'블루투스 건강 버전',cellular:'4G + GPS',connect:'데모 연결',disconnect:'연결 해제',gardenOpt:'Pet Garden 참여',gardenOff:'위치 공유는 기본적으로 꺼져 있습니다. 가상 이웃은 표시하지 않습니다.',join:'데모 정원 참여',leave:'나가기',gardenDemo:'실제 근처 사용자 아님',petSwitch:'반려동물 변경',view:'보기',close:'닫기',save:'저장',cancel:'취소',ok:'확인',done:'완료',share:'이미지 저장',preview:'미리보기',healthCare:'건강 관리',weight:'체중',date:'날짜',foodNow:'오늘 섭취량',petDetails:'프로필 상세',breed:'품종',age:'나이',allGood:'지금은 우선 확인할 사항이 없어요.',reportShare:'수의사용 요약 내보내기',exported:'데모 보고서 생성됨',disclaimer:'데모: 모든 생체 수치, 점수, 의료 기록 및 AI 문구는 가상이며 진료에 사용할 수 없습니다.',inputError:'올바른 값을 입력하세요',saved:'저장됨',later:'업데이트됨',uploadHint:'파일 선택됨. 데모는 파일명만 저장하며 의료 해석은 하지 않습니다.'}
+};
+// Japanese interface pass. Untranslated long-form clinical notes temporarily retain their English fallback.
+const JA_UI={home:'ホーム',deep:'Deep',health:'健康',me:'マイページ',today:'今日のまとめ',score:'健康状態',current:'現在の状態',waiting:'最新の記録',connected:'接続済み（デモ）',heartRate:'心拍数',breath:'呼吸',activity:'活動',resting:'安静',active:'活動中',lastSync:'最終同期',battery:'バッテリー',aiAge:'AI生理年齢',bioAge:'生理年齢',actualAge:'実年齢',years:'歳',ageBasis:'推定根拠を見る',viewEvidence:'根拠を確認',deep:'Deep',heartCategory:'心肺の状態',sleepCategory:'睡眠の状態',activeCategory:'元気と活動',details:'詳しいデータ',dateRange:'期間',day:'日',days:'日',average:'平均',range:'範囲',careToday:'今日の対応事項',food:'食事目標',med:'服薬記録',reports:'健康診断レポート',vaccines:'ワクチン記録',notes:'追加記録',personal:'14日間の基準',healthCare:'健康管理',managePets:'ペットの管理',myDevice:'マイデバイス',language:'言語',device:'デバイス',bluetooth:'Bluetooth健康版',cellular:'4G位置情報版',connect:'接続',disconnect:'切断',view:'表示',close:'閉じる',save:'保存',cancel:'キャンセル',ok:'確認',done:'完了',weight:'体重',age:'年齢',date:'日付',petProfile:'ペット情報',petDetails:'ペット情報',breed:'品種',editTarget:'目標を変更',meal:'食事記録',addMeal:'食事を追加',normal:'健康',review:'要確認',pending:'未確認',taken:'服用済み',skip:'スキップ',undo:'元に戻す',shop:'ストア',foodDaily:'1日のカロリー目標',addMedicine:'薬を追加',addVax:'ワクチンを追加',reportShare:'獣医師向け要約を作成',alert:'通知',score:'健康スコア'};
+const JA_EXTRA={
+ demo:'操作デモ・センサーデータはすべてシミュレーションです',notLive:'実際の機器データではありません',storyTag:'今日伝えたいこと',attention:'要確認',attentionAll:'その他の通知',vsAge:'実年齢との差',trend:'過去14日間の傾向',suggestions:'AIからのアドバイス',suggBasis:'品種・年齢・体重・測定傾向から推定',viewAll:'すべて見る',collapse:'閉じる',overview:'健康概要',night:'昨夜の記録',nightView:'昨夜の報告を見る',moment:'心拍の思い出',momentText:'心拍の瞬間を写真に残しましょう',createMoment:'心拍カードを作る',week:'過去7日間',heartInsight:'心拍と呼吸の状態を確認しましょう',sleepInsight:'昨夜の安静時間を確認しましょう',activeInsight:'活動後の回復状態を確認しましょう',effective:'有効測定率',noSensor:'データ不足のためスコアを表示できません',aiInterpret:'AIによる解説',aboutBaseline:'同じペットの過去14日間を基準に比較します',advanced:'詳細な統計',min:'最低',max:'最高',dataPoints:'有効データ数',foodHint:'食事目標と食事記録',medHint:'服薬予定と記録',reportsHint:'検査結果を確認',vaccineHint:'接種予定と履歴',notesHint:'日々の変化を記録',logged:'記録済み',foodRemaining:'今日の残り',foodGrams:'1日の推奨量',foodDensity:'フードのエネルギー密度',editTarget:'食事目標を変更',foodExplain:'食事目標は診断や処方ではありません',dailyMed:'今日の服薬予定',nextDose:'次の服薬',medHistory:'服薬履歴',medExplain:'服薬の確認は実際の服用を証明するものではありません',attentionCount:'要確認',reportLatest:'最新の健康診断',reportSubtitle:'検査項目と確認結果',openReport:'検査項目を見る',uploadReport:'検査結果を追加',reportNotice:'検査値は獣医師と確認してください',noFiles:'デモは医療レポートを自動診断しません',vaxUpcoming:'次のワクチン',daysTo:'予約までの日数',vaxHistory:'予防接種履歴',vaxExplain:'ワクチン計画は獣医師に確認してください',quickNote:'今日いつもと違うことは？',notePlaceholder:'メモを入力（任意）',saveNote:'記録を保存',noteHistory:'過去の記録',noteChips:['食欲の変化','睡眠の変化','活動が少ない','動物病院に行った','消化の状態','その他'],garden:'ペットガーデン',gardenHint:'近くのペットとの交流（任意）',family:'家族と共有',alerts:'通知とリマインダー',privacy:'プライバシーとデータ',setting:'アプリ設定',deviceType:'デバイスの種類',gardenOpt:'ペットガーデンに参加',gardenOff:'位置情報の共有はオフです',join:'参加する',leave:'退出する',gardenDemo:'交流デモ（実際の近隣ユーザーではありません）',petSwitch:'ペットを切り替え',share:'画像を保存',preview:'プレビュー',foodNow:'今日の食事量',allGood:'今のところ優先的な注意事項はありません',exported:'デモレポートを作成しました',disclaimer:'デモ：生理データ・スコア・医療記録はシミュレーションです。診断には使用できません',inputError:'正しい値を入力してください',saved:'保存しました',later:'更新しました',uploadHint:'ファイル名のみ保存しました（診断は行いません）'
+};
+Object.assign(LANG,{ja:{...LANG.en,...JA_UI,...JA_EXTRA},zht:{...LANG.zh,home:'今日狀態',deep:'深入分析',health:'健康管理',me:'我的',today:'今日總結',score:'健康狀態',sleepCategory:'睡眠狀態',heartCategory:'心肺狀態',activeCategory:'精力與恢復狀態',careToday:'今日待辦'}});
+const JA_PHRASES={
+ '心肺綜合狀態':'心肺の総合状態','睡眠情況':'睡眠の状態','精力與恢復狀態':'元気と活動の総合状態','心搏變異觀察指標':'心拍変動指標',
+ '心搏間隔的整體變化':'心拍間隔の全体的な変化','相鄰心搏間隔的短期變化':'隣り合う心拍間隔の短期変動',
+ '每晚睡眠與休息總時長':'毎晩の睡眠・休息の合計時間','睡眠與休息／活動時間軸':'睡眠・休息／活動の時間軸','睡眠與休息':'睡眠・休息',
+ '精力情況':'元気の状態','活動情況':'活動の状態','兩分鐘心率恢復':'2分間の心拍回復','各項分數測算依據與指標解釋':'各スコアの算出根拠と指標の説明',
+ '推估評分':'推定スコア','全天活動強度變化':'一日の活動強度の変化','分時精力推估':'時間帯別の元気の推定',
+ '心肺狀態':'心肺の状態','表現很好':'とても良い','狀態穩定':'安定','稍微留意':'少し注意','需要多留意':'注意が必要',
+ '生理狀態評分':'生理状態スコア','今日生理狀態評分':'今日の生理状態スコア','身體節奏評分':'身体リズムスコア','心肺 · 睡眠 · 精力':'心肺 · 睡眠 · 活力','放鬆 · 負荷 · 心搏節奏':'リラックス · 負荷 · 心拍リズム','生理狀態評分包含哪些項目？':'生理状態スコアの構成','最近14個有效監測日 · 兩項評分的綜合平均':'直近14有効測定日の総合平均','已累積有效監測日 · 兩項評分的綜合平均':'現時点の有効測定日の総合平均',
+ '新增寵物':'ペットを追加','確定':'確認','連接項圈':'首輪を接続','連接項圈 · 搜尋附近設備':'首輪を接続・デバイス検索','14天健康基準':'14日間の健康基準','最近14個日曆日的記錄':'最近14日間の有効な測定日','今日的2分鐘心率恢復':'今日の2分間心拍回復','健康分數':'健康スコア','資料階段':'データ段階','已建立':'設定済み','建立中':'作成中','今日最值得知道':'今日の注目ポイント','More · 查看全部':'もっと見る','返回首頁':'ホームへ戻る','返回':'戻る','選擇要搜尋的項圈類型':'検索する首輪を選択','開始搜尋選定項圈':'検索を開始','配對項圈':'首輪をペアリング','開始配對':'ペアリング開始','選擇付款方式':'お支払い方法','收件資料':'配送先情報','收件人姓名':'受取人氏名','電子郵件':'メールアドレス','電話號碼':'電話番号','國家或地區':'国・地域','選擇國家':'国を選択','城市':'市区町村','郵遞區號':'郵便番号','送貨地址':'住所','確認模擬付款':'デモ注文を確定','取消':'キャンセル','保存':'保存','活動後兩分鐘心率恢復曲線':'活動後2分間の心拍回復','今日總結':'今日のまとめ','指標解釋與判讀備註':'指標の説明と注意事項','醫學觀察備註':'医学的な観察上の注意','下一步':'次へ','今日':'今日','3天':'3日間','7天':'7日間','14天':'14日間','30天':'30日間','上傳新報告':'新しいレポートを追加','歷史體檢報告':'過去の健康診断','新增體檢報告':'健康診断を追加','一鍵生成獸醫就診摘要':'獣医師向け要約を作成'};
+const t=k=>{const language=LANG[state.lang]||LANG.zh;const value=Object.prototype.hasOwnProperty.call(language,k)?language[k]:Object.prototype.hasOwnProperty.call(LANG.zh,k)?LANG.zh[k]:k;return state.lang==='zht'?(Array.isArray(value)?value.map(toTraditional):typeof value==='string'?toTraditional(value):value):value;};
+window.JA_PHRASES=JA_PHRASES;
+// V9.69 owner workflows: keep newly introduced privacy and recovery copy in
+// Japanese too, even where older sections still use English fallbacks.
+Object.assign(JA_PHRASES,{
+ '空白檔案沒有寵物身分或邀請碼。請先建立寵物檔案。':'空のプロフィールには招待コードがありません。先にペットを登録してください。',
+ '目前僅提供本機授權流程體驗，不會讓其他手機或帳號實際查看健康資料。':'この権限設定は端末内の体験版です。他の端末やアカウントへ健康記録は共有されません。',
+ '空白檔案尚無寵物健康資料':'空のプロフィールにはペットの健康記録がありません',
+ '建立寵物檔案後，可在這裡管理各隻寵物自己的資料與權限。':'ペットを登録すると、それぞれの記録と権限を管理できます。',
+ '現階段所有自行輸入的紀錄僅保存在本機瀏覽器；尚未開放跨裝置家庭共享。':'入力した記録はこのブラウザにのみ保存され、端末間の家族共有には対応していません。',
+ '請先建立寵物檔案':'先にペットを登録してください',
+ '本機加入申請已建立，尚未傳送到其他裝置':'端末内の申請を保存しました。他の端末には送信されません。',
+ '已記錄本機授權示例；跨裝置共享尚未開放':'端末内の承認を保存しました。端末間共有はまだ利用できません。',
+ '已拒絕本機請求':'端末内の申請を拒否しました',
+ '已撤銷本機授權示例':'端末内の承認を取り消しました',
+ '正式版連接帳號服務後，才可由飼主授權共享；目前僅供本機體驗。':'アカウント連携後に所有者の承認による共有が可能になります。現在は端末内の体験版です。',
+ '此邀請碼只供本機流程體驗，不能跨裝置加入。':'この招待コードは端末内の体験版専用です。他の端末では使用できません。',
+ '本機授權示例':'端末内の承認例','本機模擬授權，尚未共享資料':'端末内の承認プレビューのみで、記録は共有されていません。',
+ '本機家庭授權體驗':'端末内の家族共有プレビュー',
+ '開始新一輪觀察會把目前紀錄存入歷史，確定繼續嗎？':'現在の観察記録を履歴に保存して、新しい観察を開始しますか？',
+ '觀察原因':'観察の理由','精神':'元気','食慾':'食欲','休息':'休息'
+});
+function localDate(){const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
+function dateAdd(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
+function iso(d){const x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10);}
+function dpFullDate(date){const s=typeof date==='string'?date:iso(date);if(!/^\d{4}-\d{2}-\d{2}$/.test(s))return s;const [y,m,d]=s.split('-');return state.lang==='en'?`${m}/${d}/${y}`:state.lang==='ko'?`${y}.${m}.${d}`:state.lang==='ja'?`${y}/${m}/${d}`:`${y}/${m}/${d}`;}
+function fmtDate(d,short=false){return new Intl.DateTimeFormat((state.lang==='zht')?'zh-TW':(state.lang==='zh')?'zh-CN':state.lang==='ko'?'ko-KR':state.lang==='ja'?'ja-JP':'en-US',{month:'short',day:'numeric',...(short?{}:{year:'numeric'})}).format(d);}
+function dayDiff(target){const a=new Date(`${target}T12:00:00`),b=localDate();return Math.round((a-new Date(b.getFullYear(),b.getMonth(),b.getDate(),12))/86400000);}
+const initial={petExtras:[],fencePolygon:[],fenceDraft:[],geoFencesByPet:{},geoPositionsByPet:{},geoAlertsByPet:{},gpsDeviceOwner:null,tourStep:0,carePlans:{},behaviorLogs:{},behaviorKind:'activity',behaviorState:'yes',focusExpanded:false,vetDays:7,petOverrides:{},settings:{notifyMed:true,notifyVax:true,notifyHealth:true,notifyFence:true},gardenWaves:0,gardenFollow:[],foodLogsByDay:{},tab:'home',detail:null,dog:0,lang:'zht',deepType:0,range:1,deepSelectedDate:null,connected:false,deviceType:null,connectedName:'',connectedId:'',pairType:null,pairStage:0,pairSelected:'',shopCart:[],shopSelection:'bt',shopPlan:'yearly',subscriptionActive:false,gardenSelected:null,gardenMode:'map',deviceSearchCount:0,activeReport:0,gardenVisible:false,connectSearch:'',gardenMessages:{},familyPermissions:{},connectStage:0,connectChoice:'bt',garden:false,gardenMode:'map',gpsEnabled:false,geofenceEnabled:false,baselineDaysByPet:{},signalQualityByPet:{},showAllRec:false,foodLog:{},foodTarget:{},foodDensity:360,foodDensities:{},mealItems:{},meds:[{id:'m1',name:'Omega-3',time:'09:00',status:'pending'},{id:'m2',name:'Joint Support',time:'20:00',status:'pending'}],notes:[],vax:[],reportUploads:[],modal:'',chartPoint:-1};
+let stored={};try{stored=JSON.parse((localStorage.getItem('deeppet-v36-local')||localStorage.getItem('deeppet-v35-local'))||'{}')||{};}catch{}
+// Keep the exact value this tab opened. Another tab must not silently replace
+// this tab's source data while it edits a different pet or health record.
+let dpPersistLastRaw=null;
+try{dpPersistLastRaw=localStorage.getItem('deeppet-v36-local');}catch{}
+let state={...initial,...stored,tourStep:0,tab:'home',detail:null,modal:'',chartPoint:-1};
+// A fresh app session always opens on Home. Do not restore yesterday as the
+// next default Deep "Today" merely because its date was persisted in storage.
+// Explicit history choices remain intact during the SAME open session.
+state.deepSelectedDate=iso(localDate());
+state.dp1007DayManuallyChosen=false;
+// Saved values from earlier releases must not revive unsupported trend windows
+// or leave the veterinary summary with no visibly selected date tab.
+state.range=[1,7,30].includes(Number(state.range))?Number(state.range):7;
+state.vetDays=[1,7,30].includes(Number(state.vetDays))?Number(state.vetDays):7;
+state.healthSummaryDays=[7,30].includes(Number(state.healthSummaryDays))?Number(state.healthSummaryDays):7;
+if(!Array.isArray(state.petExtras))state.petExtras=[];
+// V9.64 showroom contract: the 15 bundled pet slots ALWAYS remain showcase
+// identities, even after editing their profiles or uploading portraits.
+// Older V9.63 storage flags must be healed without losing owner-entered rows.
+if(state.petOverrides&&typeof state.petOverrides==='object'){
+ for(let galleryIndex=0;galleryIndex<dogs.length;galleryIndex++){
+  const saved=state.petOverrides[galleryIndex];
+  if(!saved||typeof saved!=='object')continue;
+  if(saved.dpFixtureInvalidated||saved.dpFreshPet||saved.freeCare){
+   state.petOverrides[galleryIndex]={...saved,dpFixtureInvalidated:false,dpFreshPet:false,freeCare:false};
+  }
+ }
+}
+// V8.60: phone/browser UI locale, unless manually selected in settings.
+function dpSystemLanguage(){
+ const raw=(navigator.languages&&navigator.languages.length?navigator.languages[0]:navigator.language)||'en';
+ const k=String(raw).replace(/_/g,'-').toLowerCase();
+ if(k.startsWith('zh'))return (/hant|^zh-(tw|hk|mo)/.test(k))?'zht':'zh';
+ if(k.startsWith('ko'))return 'ko';
+ if(k.startsWith('ja'))return 'ja';
+ return 'en';
+}
+if(!state.dpLanguageUserOverride)state.lang=dpSystemLanguage();
+if(!['zh','zht','en','ko','ja'].includes(state.lang))state.lang='en';
+document.documentElement.lang=({zht:'zh-Hant',zh:'zh-Hans',en:'en',ko:'ko',ja:'ja'})[state.lang]||'en';
+
+delete state.signalQualityByPet;
+const firstEverLaunch=Object.keys(stored).length===0;
+// A display name is never proof that an owner-created profile is disposable.
+// Older releases deleted every saved "Raffi"/"拉菲" by name on reload, shifting
+// index-keyed medication, food and examination records onto another pet.
+// Preserve all persisted identities and their stable indexes across upgrades.
+function dpPreservePetExtras(extras){return Array.isArray(extras)?extras:[];}
+state.petExtras=dpPreservePetExtras(state.petExtras);
+// V8.58: one standalone first-time pet. Original blank profile remains unchanged.
+state.petExtras??=[];
+if(!state.petExtras.some(p=>p&&p.dpFreshDemo===true)){
+ state.petExtras.push({dpFreshDemo:true,dpFreshPet:true,freeCare:true,name:'Lucky',species:'dog',publicId:dpSecureId(),
+ breed:{zh:'柴犬',zht:'柴犬',en:'Shiba Inu',ko:'시바견',ja:'柴犬'},age:2,weight:9,heightCm:null,dpPhotoConfirmed:false,
+ photo:'assets/new_pet_shiba_v1002.jpg',score:[0,0,0],bio:null,hr:null,rr:null,rest:null,recovery:null,
+ target:null});
+}
+// Investor-only showcase: preserve the 15 independent monitored demonstration pets.
+// New Pet is a profile-only example, not an actual account registration flow.
+// Upgrade untouched legacy fixtures without overwriting investor edits.
+for(let extraIndex=0;extraIndex<state.petExtras.length;extraIndex++){
+ const p=state.petExtras[extraIndex];
+ if(!p?.dpFreshDemo)continue;
+ // Intentional profile-only showcase: avatar/name/species/breed/age/weight;
+ // NO sensor readings, laboratory reports or health scores. Separate from Blank.
+ // Keep any profile the investor or engineer deliberately edited unchanged.
+ if(!p.dpUserProfileSaved){
+  if(!p.name||/^(空白檔案|空白档案|Blank|New Pet|新寵物|新宠物)$/i.test(String(p.name).trim()))p.name='Lucky';
+  p.species='dog';p.breed={zh:'柴犬',zht:'柴犬',en:'Shiba Inu',ko:'시바견',ja:'柴犬'};p.age=2;p.weight=9;p.heightCm=null;p.dpPhotoConfirmed=false;
+ }
+ // Versioned portrait avoids stale Saint Bernard cache from earlier demos.
+ // Do not replace a real owner-uploaded photo or a deliberately edited pet.
+ if(!p.dpUserProfileSaved&&(!p.photo||p.photo==='assets/new_pet_demo_photo.jpg'))p.photo='assets/new_pet_shiba_v1002.jpg';
+ const oldOverride=state.petOverrides?.[String(dogs.length+extraIndex)];
+ // Legacy localStorage can still contain an incomplete, unsaved override.
+ // currentDog() merges that override *over* this complete Lucky fixture, so
+ // simply repairing the base pet above was not enough for Home or Me.
+ // Only migrate the untouched showcase profile: never overwrite an owner-saved
+ // profile or an owner-confirmed photograph.
+ if(!p.dpUserProfileSaved&&oldOverride&&!oldOverride.dpUserProfileSaved){
+  oldOverride.name='Lucky';oldOverride.species='dog';
+  oldOverride.breed={zh:'柴犬',zht:'柴犬',en:'Shiba Inu',ko:'시바견',ja:'柴犬'};
+  oldOverride.age=2;oldOverride.weight=9;
+  if(!oldOverride.dpPhotoConfirmed&&(!oldOverride.photo||oldOverride.photo==='assets/new_pet_demo_photo.jpg'))oldOverride.photo='assets/new_pet_shiba_v1002.jpg';
+ }
+ if(!p.dpUserProfileSaved&&oldOverride?.photo==='assets/new_pet_demo_photo.jpg')oldOverride.photo='assets/new_pet_shiba_v1002.jpg';
+ // A preloaded placeholder name was never an owner-authored pet identity.
+ if(!p.dpUserProfileSaved&&oldOverride&&!oldOverride.dpUserProfileSaved&&/^(New Pet|新寵物|新宠物|空白檔案|空白档案)$/i.test(String(oldOverride.name||'').trim()))oldOverride.name='Lucky';
+ // A previously accepted 20 Hz day turns this stock gallery profile into an
+ // actual monitored profile. Never reset its sensor state on every page load.
+ // The V9.44 unconditional reset made a real pet disappear after refresh.
+ const id=String(dogs.length+extraIndex);
+ const rows=state.dpVerifiedDaysByPet?.[id]||[];
+ // This migration runs before the scoring module loads, so validate the
+ // persisted day with the same full wear/time/sampling contract as ingest.
+ // A stray 20 Hz label or a partly filled quality object is not evidence.
+ const hasAcceptedDay=rows.some(r=>{
+  const q=r?.quality,day=String(r?.date||'');
+  if(r?.source!=='20hz-waveform'||!/^(?:\d{4})-(?:\d{2})-(?:\d{2})$/.test(day)||!q||q.motionInterference===true)return false;
+  if(![undefined,null,'','continuous','scheduled'].includes(q.samplingMode)||!['heartValid','respValid','wearValid','signalValid','timeContinuityValid'].every(k=>q[k]===true))return false;
+  if(!Number.isFinite(q.observedSeconds)||q.observedSeconds<900||q.observedSeconds>86400||!Number.isFinite(q.observedDayFraction)||Math.abs(q.observedDayFraction-q.observedSeconds/86400)>1e-5)return false;
+  if(q.samplingMode==='scheduled'&&(!Number.isFinite(q.scheduledSeconds)||q.scheduledSeconds<1800||q.scheduledSeconds>86400||q.observedSeconds>q.scheduledSeconds))return false;
+  const expected=Math.min(1,q.observedSeconds/(q.samplingMode==='scheduled'?q.scheduledSeconds:86400));
+  return Number.isFinite(q.timeCoverage)&&q.timeCoverage>=.5&&Math.abs(q.timeCoverage-expected)<1e-5&&!Number.isNaN(Date.parse(day+'T12:00:00Z'))&&new Date(day+'T12:00:00Z').toISOString().slice(0,10)===day;
+ });
+ // Reconcile on every launch. An old override must never trap an accepted
+ // 20 Hz owner day in the no-data UI after the original migration ran.
+ if(hasAcceptedDay){p.dpFreshPet=false;p.freeCare=false;if(oldOverride){oldOverride.dpFreshPet=false;oldOverride.freeCare=false;}}
+ if(!p.dpFreshStatusMigrated945){
+  if(!hasAcceptedDay&&!p.dpUserProfileSaved){p.dpFreshPet=true;p.freeCare=true;}
+  // A manually saved profile may have deliberately transitioned out of the
+  // profile-only state; never revoke it during an unrelated gallery migration.
+  p.dpFreshStatusMigrated945=true;
+ }
+}
+state.demoGallery=true; // Presentation version: all 15 demonstration pets always visible.
+// Language/settings persistence is not evidence that a user registered a pet.
+// A settings-only browser must start at Blank too. Keep an explicitly selected
+// gallery/empty identity on return visits, and preserve every real owner pet.
+const hasOwnerCreatedPet=state.petExtras.some(p=>p&&!p.dpFreshDemo);
+const explicitlySelectedPet=state.dpPetSelectionMade===true||Number(state.dpPetEpoch)>0;
+const awaitingFirstProfile=!hasOwnerCreatedPet&&!explicitlySelectedPet;
+state.emptyPreview=firstEverLaunch||awaitingFirstProfile?true:!!state.emptyPreview;
+if(firstEverLaunch||awaitingFirstProfile){state.dog=0;state.demoGallery=true;}
+// The pet list may have changed since an old browser session.  Never let a
+// stale index resolve to an empty identity and render another pet's scores.
+const dpRestoredDogIndex=Number(state.dog);
+state.dog=Number.isInteger(dpRestoredDogIndex)&&dpRestoredDogIndex>=0&&dpRestoredDogIndex<dogs.length+state.petExtras.length?dpRestoredDogIndex:0;
+// One-time upgrade from the blank-first V8.23 demonstration: restore Milo without erasing a genuine user-created pet.
+if(state.presentationGalleryVersion!==825){if(state.emptyPreview&&!(state.petExtras||[]).length){state.emptyPreview=false;state.dog=0;}state.presentationGalleryVersion=825;}
+
+// Previously auto-paired demo devices were not real authorizations. Revoke
+// them rather than carrying an invented Bluetooth or GPS identity forward.
+if(state.v52DemoPaired||/^DP-(?:BT|4G)(?:-\d+)?$/.test(String(state.connectedId||''))){
+ state.connected=false;state.deviceType=null;state.connectedId='';state.connectedName='';state.gpsEnabled=false;state.geofenceEnabled=false;
+ state.v52DemoPaired=false;
+}
+state.v52DemoPairInitialized=true;
+
+// V8.23: isolate collar pairing by pet, including first-time blank profiles.
+state.gardenVisibleByPet??={};
+if(!state.dpGardenPrivacyMigrated831){
+ // An old global toggle never grants consent to every pet. Attribute it only to the pet that was active.
+ if(state.gardenVisible===true)state.gardenVisibleByPet[String(state.dog)]=true;
+ state.dpGardenPrivacyMigrated831=true;
+}
+state.gardenVisible=!!state.gardenVisibleByPet[String(state.dog)];
+function dpLoadPrivacy(index){state.gardenVisible=!!state.gardenVisibleByPet?.[String(index)];}
+function dpSavePrivacy(){state.gardenVisibleByPet??={};state.gardenVisibleByPet[String(state.dog)]=!!state.gardenVisible;}
+state.devicesByPet??={};
+// Re-opened tabs have saved pairing metadata but NO evidence that the radio
+// session is still alive. This map exists only for the current JS runtime.
+const dpLiveConnectedIds=new Map();
+if(!state.deviceMapInitialized){
+ if(state.connected&&state.connectedId)state.devicesByPet[String(state.dog)]={connected:true,deviceType:state.deviceType,connectedName:state.connectedName,connectedId:state.connectedId,gpsEnabled:!!state.gpsEnabled};
+ state.deviceMapInitialized=true;
+}
+for(const [id,d] of Object.entries(state.devicesByPet||{}))if(/^DP-(?:BT|4G)(?:-\d+)?$/.test(String(d?.connectedId||''))){state.devicesByPet[id]={connected:false,deviceType:null,connectedName:'',connectedId:'',gpsEnabled:false,geofenceEnabled:false};}
+// V10.42 gallery defaults. These are explicitly presentation-only fixtures,
+// never proofs of a live radio session or of genuine sensor measurements.
+// Respect any stored pairing/unpairing choice, including "not worn"; only
+// initialize preset showcase profiles with no record at all.
+for(let i=0;i<Math.min(15,dogs.length);i++){
+ const key=String(i);
+ const existing=state.devicesByPet[key];
+ // First V10.42 migration replaces the old default "unpaired" gallery, but
+ // never overrides a real or explicitly selected device. Subsequent loads
+ // respect a person's deliberate disconnect/not-worn choice.
+ if(existing&&(state.dp1042GallerySeeded||existing.connected===true||existing.dpExplicitUnpaired===true))continue;
+ const type=[1,3,6,9,12,14].includes(i)?'4g':'bt';
+ const id=`DP-VIRTUAL-${type==='4g'?'4G':'BT'}-${String(i+101).padStart(3,'0')}`;
+ state.devicesByPet[key]={connected:true,deviceType:type,connectedId:id,
+  connectedName:`DeepPet ${type==='4g'?'4G + GPS':'Bluetooth'} ${String(i+1).padStart(2,'0')}`,
+  gpsEnabled:type==='4g',geofenceEnabled:false,dpPresentationOnly:true};
+}
+state.dp1042GallerySeeded=true;
+for(const [key,d] of Object.entries(state.devicesByPet)){
+ if(d?.connected===true&&/^DP-VIRTUAL-(BT|4G)-\d{3}$/.test(String(d.connectedId||'')))
+  dpLiveConnectedIds.set(key,d.connectedId);
+}
+function dpRememberDevice(){state.devicesByPet??={};const key=String(state.dog),id=state.connectedId||'';
+ if(state.connected===true&&id)dpLiveConnectedIds.set(key,id);else dpLiveConnectedIds.delete(key);
+ state.devicesByPet[key]={connected:!!state.connected,deviceType:state.deviceType||null,connectedName:state.connectedName||'',connectedId:id,gpsEnabled:!!state.gpsEnabled,geofenceEnabled:!!state.geofenceEnabled,
+  dpPresentationOnly:/^DP-VIRTUAL-(BT|4G)-\d{3}$/.test(id)};}
+function dpLoadDevice(index){const key=String(index),d=state.devicesByPet?.[key];
+ state.connected=!!(d?.connected&&d.connectedId&&dpLiveConnectedIds.get(key)===d.connectedId);
+ state.deviceType=d?.deviceType||null;state.connectedName=d?.connectedName||'';state.connectedId=d?.connectedId||'';
+ state.gpsEnabled=!!state.connected&&!!d?.gpsEnabled&&d.deviceType==='4g';
+ state.geofenceEnabled=!!state.connected&&!!d?.geofenceEnabled&&state.gpsEnabled;}
+// Persisted pairing metadata must NEVER authenticate a fresh telemetry upload.
+// Only a device actually connected in this running page can do that.
+window.DeepPetLiveRadioSession=Object.freeze({matches:(index,id)=>
+ Number.isInteger(index)&&!!id&&dpLiveConnectedIds.get(String(index))===id&&
+ state.dog===index&&state.connected===true&&state.connectedId===id&&
+ state.devicesByPet?.[String(index)]?.connected===true});
+// V5.1: demo baseline history is now pet-specific. Retire V5.0 test-stage overrides once.
+if(state.demoBaselineSeedVersion!==939){state.baselineDaysByPet={};state.demoBaselineSeedVersion=939;}
+
+if(state.connected&&state.deviceType==='4g'&&state.gpsDeviceOwner==null)state.gpsDeviceOwner=state.dog;
+// Upgrade older single-zone V5.5 saves without attributing its fence to other pets.
+if(!state.geoFenceMigrated56){state.geoFencesByPet??={};const owner=String(state.gpsDeviceOwner??state.dog);if(Array.isArray(state.fencePolygon)&&state.fencePolygon.length>=3&&!(owner in state.geoFencesByPet))state.geoFencesByPet[owner]=state.fencePolygon.map(p=>[...p]);state.geoFenceMigrated56=true;}
+if(!state.connected||state.deviceType!=='4g'||!state.gpsEnabled){state.gpsEnabled=false;state.geofenceEnabled=false;}
+function persist(){try{
+ if(!state.emptyPreview){dpRememberDevice();dpSavePrivacy();dpSavePetWorkspace();}
+ const {modal,tab,detail,chartPoint,tourStep,signalQualityByPet,dpPublicCandidate,dpExternalPublic,dpFoundPet,dpFriendQuery,...s}=state;
+ const next=JSON.stringify(s),latest=localStorage.getItem('deeppet-v36-local');
+ // Prevent silent lost updates across two open tabs. A refresh is required
+ // before this tab may take ownership of the newer browser-local records.
+ if(latest!==dpPersistLastRaw&&latest!==next){
+  if(!window.__dpStorageConflictNotice){window.__dpStorageConflictNotice=true;requestAnimationFrame(()=>toast(label3('另一個分頁已有更新。請重新載入再修改，以免覆蓋健康紀錄。','Another tab has updated your records. Reload before editing to avoid overwriting them.','다른 탭에서 기록이 변경되었습니다. 덮어쓰지 않도록 새로고침 후 수정하세요.')));}
+  return false;
+ }
+ // Rendering the same screen must not repeatedly write identical records.
+ if(latest!==next)localStorage.setItem('deeppet-v36-local',next);
+ dpPersistLastRaw=next;window.__dpStorageConflictNotice=false;window.__dpStorageNotice=false;return true;
+}catch(e){if(!window.__dpStorageNotice){window.__dpStorageNotice=true;requestAnimationFrame(()=>toast(label3('本機儲存失敗，變更可能無法保留。請檢查瀏覽器儲存空間。','Local save failed. Changes may not persist; check browser storage.','로컬 저장에 실패했습니다. 브라우저 저장 공간을 확인해 주세요.')));}return false;}}
+
+// An owner record must not silently appear saved when browser storage is full.
+// Snapshot only the touched pet's JSON data, never the complete 15-pet gallery,
+// photos or the other pets' independent records. The editor remains open on failure.
+function dpCareSnapshot(paths){return paths.map(([bucket,key])=>{
+ const collection=state[bucket],exists=!!collection&&Object.prototype.hasOwnProperty.call(collection,key);
+ return {bucket,key,exists,value:exists?JSON.parse(JSON.stringify(collection[key])):undefined};
+});}
+function dpCareRestore(snapshot){for(const {bucket,key,exists,value} of snapshot){
+ if(exists){state[bucket]??={};state[bucket][key]=value;}
+ else if(state[bucket])delete state[bucket][key];
+}}
+function dpCareCommit(paths,mutate){const snapshot=dpCareSnapshot(paths);try{mutate();}catch(e){dpCareRestore(snapshot);throw e;}if(persist())return true;dpCareRestore(snapshot);return false;}
+// Permissions and request queues live at the root, not in per-pet dictionaries.
+// Roll them back as a group if the browser rejects the write; otherwise the
+// screen would claim that access was granted or revoked without saving it.
+function dpRootCommit(keys,mutate){const snapshot=keys.map(key=>({key,exists:Object.prototype.hasOwnProperty.call(state,key),value:Object.prototype.hasOwnProperty.call(state,key)?JSON.parse(JSON.stringify(state[key])):undefined}));
+ const restore=()=>{for(const {key,exists,value} of snapshot){if(exists)state[key]=value;else delete state[key];}};
+ try{mutate();}catch(e){restore();throw e;}if(persist())return true;restore();return false;}
+function dpGpsCommit(mutate,paths=[]){const snapshot=dpCareSnapshot([['devicesByPet',String(state.dog)],...paths]);
+ const old={gpsEnabled:state.gpsEnabled,geofenceEnabled:state.geofenceEnabled,gpsDeviceOwner:state.gpsDeviceOwner,gardenGpsDemo:state.gardenGpsDemo};
+ try{mutate();}catch(e){dpCareRestore(snapshot);Object.assign(state,old);throw e;}
+ if(persist())return true;dpCareRestore(snapshot);Object.assign(state,old);return false;}
+function dpCareDate(value,allowFuture=false){if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;
+ const day=new Date(value+'T12:00:00Z');return Number.isFinite(day.getTime())&&day.toISOString().slice(0,10)===value&&(allowFuture||value<=iso(localDate()));}
+// A missing appointment time is unknown, not 10:00. Validate only times
+// explicitly entered by the guardian; an empty optional time remains empty.
+function dpOptionalAppointmentTime(value){return value===''||typeof value==='string'&&/^([01]\d|2[0-3]):[0-5]\d$/.test(value);}
+// A laboratory reference must be either absent or a complete finite interval.
+// Zero is a legitimate lower (or upper) bound; it must never become "missing".
+function dpReportBoundsValid(low,high){if(low===''&&high==='')return true;
+ const lo=typeof low==='string'?low.trim():low,hi=typeof high==='string'?high.trim():high;
+ if((lo===''||lo===null||lo===undefined)&&(hi===''||hi===null||hi===undefined))return true;
+ return lo!==''&&hi!==''&&lo!==null&&hi!==null&&lo!==undefined&&hi!==undefined&&Number.isFinite(Number(lo))&&Number.isFinite(Number(hi))&&Number(lo)<Number(hi);}
+
+// V8.32: hard boundary between pet-owned settings; language remains a user-interface preference.
+const DP_PET_NOTIFICATION_DEFAULTS={notifyMed:true,notifyVax:true,notifyHealth:true,notifyFence:true};
+const DP_NOTIFICATION_KEYS=Object.freeze({health:'notifyHealth',med:'notifyMed',vaccine:'notifyVax',fence:'notifyFence'});
+function dpNormalizeNotificationSettings(raw){
+ const source=raw&&typeof raw==='object'&&!Array.isArray(raw)?raw:{};
+ const result={...DP_PET_NOTIFICATION_DEFAULTS,...source};
+ // Previous versions wrote to short names while the rest of the app read notify*.
+ // Preserve the last user's short-name choice exactly once, then retire that key.
+ for(const [shortName,realName] of Object.entries(DP_NOTIFICATION_KEYS)){
+  if(typeof source[shortName]==='boolean')result[realName]=source[shortName];
+  delete result[shortName];
+  result[realName]=result[realName]!==false;
+ }
+ return result;
+}
+function dpSavePetWorkspace(){
+ if(state.emptyPreview)return;
+ const key=String(state.dog);state.dpPetWorkspaceByPet??={};
+ state.dpPetWorkspaceByPet[key]={
+  settings:dpNormalizeNotificationSettings(state.settings),
+  gardenFollow:[...(state.gardenFollow||[])],gardenWaves:Number(state.gardenWaves)||0,
+  shopCart:(state.shopCart||[]).map(item=>({...item})),shopSelection:state.shopSelection||'bt',shopPlan:state.shopPlan||'yearly',
+  checkoutForm:state.checkoutForm?{...state.checkoutForm}:null,
+  checkoutMethod:state.checkoutMethod||null,checkoutOrder:state.checkoutOrder?JSON.parse(JSON.stringify(state.checkoutOrder)):null,
+  subscriptionActive:!!state.subscriptionActive
+ };
+}
+function dpLoadPetWorkspace(index){
+ const w=state.dpPetWorkspaceByPet?.[String(index)]||{};
+ state.settings=dpNormalizeNotificationSettings(w.settings);
+ state.gardenFollow=[...(w.gardenFollow||[])];state.gardenWaves=Number(w.gardenWaves)||0;
+ state.shopCart=(w.shopCart||[]).map(item=>({...item}));state.shopSelection=w.shopSelection||'bt';state.shopPlan=w.shopPlan||'yearly';
+ state.checkoutForm=w.checkoutForm?{...w.checkoutForm}:null;state.checkoutMethod=w.checkoutMethod||null;
+ state.checkoutOrder=w.checkoutOrder?JSON.parse(JSON.stringify(w.checkoutOrder)):null;
+ state.subscriptionActive=!!w.subscriptionActive;
+}
+// The previous app stored notification/follow/cart preferences globally. Give this
+// legacy data only to the last active pet, never copy it into another pet's profile.
+if(!state.dpPetWorkspaceMigrated832){
+ state.dpPetWorkspaceByPet??={};
+ if(!state.emptyPreview)dpSavePetWorkspace();
+ state.dpPetWorkspaceMigrated832=true;
+}
+// Migrate the old single active geofence flag to its owner's device record once.
+if(!state.dpFenceSettingMigrated832){
+ const active=state.devicesByPet?.[String(state.dog)];
+ if(active&&state.deviceType==='4g'&&active.connectedId===state.connectedId)active.geofenceEnabled=!!state.geofenceEnabled;
+ state.dpFenceSettingMigrated832=true;
+}
+if(!state.emptyPreview){dpLoadDevice(state.dog);dpLoadPrivacy(state.dog);dpLoadPetWorkspace(state.dog);}
+// Dismissing drafts before changing an identity avoids writing pet A's editing state to B.
+function dpResetPetTransient(){
+ state.dpPetEpoch=(Number(state.dpPetEpoch)||0)+1;
+ dpScanRequest++;dpPairCommitRequest++;dpAvatarReadSerial++;dpVerifiedScan=[];
+ dpAbandonImportWorkflow();
+ // Modal editors are owned by the old pet, not by a global DOM layer. Close
+ // them before a new identity can reuse their pending upload or form draft.
+ window.DeepPetExam921?.resetEditor?.();
+ window.DeepPetHealthInsights?.resetWizard?.();
+ if(typeof dpStopFriendCamera==='function')dpStopFriendCamera();
+ dpStopChatVoice();
+ state.deepType=0;state.range=1;state.deepSelectedDate=iso(localDate());state.chartPoint=-1;
+ state.dp1007DayManuallyChosen=false;
+ // An alert's Home return and selected minute belong to the OLD pet. Clear
+ // them before displaying another pet, including a completely blank profile.
+ state.dp919AlertReturnTab=null;state.dp1059AlertFocus=null;
+ state.dp1099AlertNeedsScroll=false;state.dp1099EnergyNeedsScroll=false;
+ state.dp932WaveMinute=null;state.dp932EnergyMinute=null;state.dp90WaveDate=null;
+ state.dp905ChosenDate=null;state.dp905OriginDetail=null;state.dp905WaveMode=null;
+ state.dp905WaveRange=null;state.dp905PickedEvent=0;state.dp932WaveDays=1;
+ state.detail=null;state.modal='';state.activeReport=0;state.reportListExpanded=false;state.healthReturnFromSummary=false;
+ state.foodSelectedDate=null;state.foodWindowMode='history';state.vetDays=7;state.healthSummaryDays=7;state.careEditDate=null;
+ state.inspectDate=null;state.inspectKind=null;state.chatWith=null;state.chatPerspective='me';
+ state.gardenMode='map';state.gardenSelected=null;state.gardenProfileId=null;state.gardenProfileOrigin=null;
+ state.noteEditId=null;state.noteDraft='';state.selectedNote=null;state.medEditingId=null;state.medDeleteId=null;
+ state.vaxEditingKey=null;state.vaxEditingSource=null;state.vaxDeleteId=null;
+ state.reportEditId=null;state.reportDeleteId=null;state.reportEditDraft=null;
+ state.mealEditingDate=null;state.mealEditingIndex=null;state.mealEditDraft=null;state.mealEditDateDraft=null;
+ state.importKind=null;state.importSource=null;state.importText='';state.importName='';state.importPreview='';state.importFileId=null;
+ state.foodDraftParts=[];state.foodPhotoDraft=null;state.dpFoundPet=null;state.dpFriendQuery='';
+ state.pairType=null;state.pairStage=0;state.pairSelected='';state.pairReturnContext=null;
+ state.fenceDraft=[];state.fenceEditMode=false;state.showAllRec=false;state.attentionExpanded=false;
+ state.gardenGpsDemo=false;state.gardenDemoGpsPet=null;state.sleepMatrixExpanded=false;
+ state.dpEventIndex=0;state.dpEventDate=iso(localDate());
+}
+function dpActivatePet(index){
+ if(!Number.isInteger(index)||index<0||index>=allPets().length)return false;
+ if(!state.emptyPreview){dpRememberDevice();dpSavePrivacy();dpSavePetWorkspace();}
+ dpResetPetTransient();state.dog=index;state.emptyPreview=false;state.dpPetSelectionMade=true;
+ dpLoadDevice(index);dpLoadPrivacy(index);dpLoadPetWorkspace(index);return true;
+}
+function dpActivateBlank(){
+ if(!state.emptyPreview){dpRememberDevice();dpSavePrivacy();dpSavePetWorkspace();}
+ dpResetPetTransient();state.emptyPreview=true;state.dpPetSelectionMade=true;
+ state.gardenVisible=false;state.connected=false;state.deviceType=null;state.connectedId='';state.connectedName='';
+ state.gpsEnabled=false;state.geofenceEnabled=false;
+ state.settings={...DP_PET_NOTIFICATION_DEFAULTS};state.gardenFollow=[];state.gardenWaves=0;
+ state.shopCart=[];state.checkoutForm=null;state.checkoutMethod=null;state.checkoutOrder=null;
+}
+
+
+if(!state.dpCareV72Migrated){
+ state.medsByDog??={};for(const k of Object.keys(state.medsByDog)){state.medsByDog[k]=(state.medsByDog[k]||[]).filter(m=>!m.sample&&!['m1','m2','c1','l1'].includes(m.id));}
+ state.meds=[];state.dpCareV72Migrated=true;persist();
+}
+
+function dp58FreshPet(){return !state.emptyPreview && currentDog().dpFreshPet===true;}
+function dp58FreshDisplayName(p){if(p.dpFreshDemo&&/^(New Pet|新宠物|新寵物)$/i.test(String(p.name||'').trim()))return ({zh:'新宠物',zht:'新寵物',en:'New Pet',ko:'새 반려동물',ja:'新しいペット'})[state.lang]||'New Pet';return p.name;}
+function dp58Acquired(){const saved=state.dpHeartAcquired?.[String(state.dog)]||null;return saved?.simulated===true?null:saved;}
+function dp58HeartEntry(){const acquired=!!dp58Acquired();return `<button class="card me-heart-moment-entry dp58-heart-entry" data-action="heart-moment"><div class="me-heart-art">${heartFeatureArt()}</div><div class="me-heart-content"><div class="me-heart-label">${label3('心跳時刻','Heart Moments','심장 박동 순간')}</div><div class="me-heart-desc">${acquired?label3('查看已保存的有效測量結果','View the saved verified reading','저장된 유효 측정 결과 보기'):label3('連接項圈取得有效數據後，可在此查看心跳、呼吸及 HRV','Connect your collar to view verified heart, breathing and HRV readings','목걸이 연결 후 심박·호흡·HRV를 확인하세요')}</div><span class="me-heart-action">${label3('查看心跳時刻','Open Heart Moments','심장 박동 순간 보기')} ${vicon('chev',16)}</span></div></button>`;}
+function dp58FreshHome(){
+ const d=currentDog(),r=dp58Acquired(),has=!!r&&Number.isFinite(Number(r.score));
+ const summary=has?`<section class="card dp58-first-result"><span class="dp58-eyebrow">${label3('首次測量結果 · 模擬數據','First reading · simulated','첫 측정 결과 · 시뮬레이션')}</span><div class="dp58-first-metrics"><div><small>${label3('健康狀態','Health state','건강 상태')}</small><strong>${Math.round(Number(r.score))}</strong></div><div><small>HRV · RMSSD</small><strong>${Number(r.rmssd).toFixed(1)}<em>ms</em></strong></div><div><small>${label3('心率','Heart rate','심박수')}</small><strong>${Math.round(r.heart)}<em>BPM</em></strong></div><div><small>${label3('呼吸','Breathing','호흡')}</small><strong>${Math.round(r.breath)}<em>/min</em></strong></div></div><p>${label3('這是本次 60 秒首次測量的模擬結果，尚未形成日常趨勢與 14 天基準。','These are simulated values from the first 60-second reading; daily trends and a 14-day baseline are not established.','첫 60초 측정의 시뮬레이션 결과이며 14일 기준과 장기 추세는 아직 없습니다.')}</p></section>`:
+ `<section class="card dp58-first-empty"><strong>${label3('尚未有健康監測資料','No health readings yet','건강 측정 데이터가 없어요')}</strong><p>${label3('目前已有姓名、品種、年齡、體重和照片等基本資料，尚未有健康量測。首次點擊心跳時刻後，會開始 60 秒倒數，完成才顯示本次示例結果。','This profile has a name, breed, age, weight and photo, but no health readings. The first Heart Moment starts a 60-second countdown before showing an example result.','이름·품종·나이·체중·사진만 있으며 건강 측정은 아직 없습니다. 첫 심박 순간에서 60초 후 예시 결과를 표시합니다.')}</p></section>`;
+ const photo=d.dpFreshDemo&&!state.petOverrides?.[state.dog]?.photo?'assets/new_pet_shiba_hero_v1002.jpg':(d.photo||'');
+ return `<div class="app-pad home-page-v30 dp58-first-page">${homePetStrip()}${dp924TourEntry()}<section class="dp58-first-hero" style="background-image:url('${photo}')"><div class="dp58-first-name">${esc(dp58FreshDisplayName(d))}</div></section>${summary}${dp58HeartEntry()}${emptyHealthPreview()}${emptyWearableCard()}<div class="footer-space"></div></div>`;
+}
+function dp58FreshEmptyTab(){let d=currentDog(),r=dp58Acquired();return `<div class="app-pad dp58-first-page">${homePetStrip()}${bigHeader(t(state.tab))}<section class="card dp58-first-empty"><strong>${label3('個體健康趨勢尚未建立','This pet’s health trends not yet available','반려동물 건강 추세가 아직 없습니다')}</strong><p>${label3('目前只有姓名、品種、年齡、體重、照片及首次測量（如有）；沒有日常健康監測與長期趨勢。','Only the profile (name, breed, age, weight and photo) and any first reading are available; there is no daily monitoring or long-term trend.','현재 기본 프로필과 첫 측정 결과(있는 경우)만 있으며 일상 건강 기록과 장기 추세는 없습니다.')}</p>${r?`<p>${label3('首次測量分數','First reading score','첫 측정 점수')}: ${Math.round(Number(r.score))}</p>`:''}</section>${state.tab==='me'?`<button class="cta full" data-action="avatar-change">${label3('更換照片','Change photo','사진 바꾸기')}</button>`:''}<div class="footer-space"></div></div>`;}
+function allPets(){return [...dogs,...(state.petExtras||[])]}
+// A pet's display name is not an identity key. Two profiles may legitimately
+// share the same name; preserve the selected index without persisting or
+// exposing a new property in the guardian's records.
+const DP_SELECTED_PET_MARK=Symbol('DeepPet selected pet');
+function currentDog(){const saved=allPets()[state.dog],pet={...(saved||{}),...(state.petOverrides?.[state.dog]||{})};Object.defineProperty(pet,DP_SELECTED_PET_MARK,{value:state.dog});return pet;}
+function medsForDog(){if(typeof selectedBlank==='function'&&selectedBlank())return [];dpPruneOwnerShowcaseRecords();const key=String(state.dog);state.medsByDog??={};state.medsByDog[key]??=[];return state.medsByDog[key];}
+
+function notesForDog(){if(typeof selectedBlank==='function'&&selectedBlank())return [];dpPruneOwnerShowcaseRecords();const key=String(state.dog);state.notesByDog??={};state.notesByDog[key]??=[];return state.notesByDog[key];}
+
+function vaxForDog(){if(typeof selectedBlank==='function'&&selectedBlank())return [];dpPruneOwnerShowcaseRecords();const key=String(state.dog);if(!state.vaxByDog)state.vaxByDog={'0':state.vax||[]};const list=state.vaxByDog[key]||(state.vaxByDog[key]=[]);for(let i=0;i<list.length;i++)if(!list[i].id)list[i].id='v'+key+'-'+i+'-'+String(list[i].date||'');return list;}
+function allVaxForDog(){if(typeof selectedBlank==='function'&&selectedBlank())return [];const entries=vaxForDog().map(x=>({...x,status:x.status||'upcoming',source:x.sample===true?'showcase':'user',key:x.id})),demo=dpReviewDemoCare(state.dog).vaccines.map(x=>({...x,...(state.vaxOverridesByDog?.[String(state.dog)]?.[x.id]||{})}));return [...entries,...demo];}
+
+function vaccineRecord(source,key){if(source==='sample'){const sample=allVaxForDog().find(v=>v.source==='sample'&&v.key===key);return sample||null;}return vaxForDog().find(v=>v.id===key)||null;}
+function setVaccineOverride(source,key,update){const pet=String(state.dog),bucket=source==='sample'?'vaxOverridesByDog':'vaxByDog';return dpCareCommit([[bucket,pet]],()=>{if(source==='sample'){state.vaxOverridesByDog??={};state.vaxOverridesByDog[pet]??={};state.vaxOverridesByDog[pet][key]={...(state.vaxOverridesByDog[pet][key]||{}),...update};}else{const v=vaxForDog().find(v=>v.id===key);if(v)Object.assign(v,update);}});}
+// Completion date is evidence about the pet's actual vaccination, not the
+// day the guardian happens to tap a button or the original appointment date.
+function dpVaxRecordCompletion(source,key,actualDate){
+ const v=vaccineRecord(source,key);
+ if(!v||v.status==='done'||!dpCareDate(actualDate))return false;
+ return setVaccineOverride(source,key,{status:'done',doneDate:actualDate});
+}
+function reportStats(){
+ if(typeof selectedBlank==='function'&&selectedBlank())return [0,0];
+ // The active examination screen scores numeric values against the applicable
+ // reference. A raw "unknown" import flag must not make an abnormal sample
+ // disappear from the advice/summary layer.
+ const canonical=globalThis.dp914ReportRecords?.(state.dog);
+ if(Array.isArray(canonical)){
+  const lab=globalThis.DeepPetLabEvidence;
+  // Without the lab evaluator, unverified import flags must not masquerade
+  // as verified results or trigger a medical-looking warning.
+  if(typeof lab?.item!=='function')return [0,0];
+  const today=iso(localDate()),validDate=x=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(x||'')||x>today)return false;const date=new Date(`${x}T12:00:00Z`);return Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===x;};
+  const dates=[...new Set(canonical.map(x=>x?.date).filter(validDate))].sort((a,b)=>b.localeCompare(a));
+  for(const date of dates){
+   const perReport=new Map();
+   for(const row of canonical.filter(x=>x?.date===date)){
+    const id=String(row.reportId||('legacy:'+date));
+    if(!perReport.has(id))perReport.set(id,[]);
+    perReport.get(id).push(row);
+   }
+   const scored=[];
+   for(const rows of perReport.values()){
+    // The detailed report refuses conflicting test-day age/weight snapshots;
+    // its advice counter must also refuse the whole inconsistent report.
+    const conflict=(key,tolerance)=>{const values=rows.map(x=>x[key]).filter(x=>x!==null&&x!==undefined&&String(x).trim()!==''&&Number.isFinite(Number(x))).map(Number);return values.length>1&&Math.max(...values)-Math.min(...values)>tolerance;};
+    if(conflict('ageAtExamYears',.1)||conflict('weightAtExamKg',.1))continue;
+    scored.push(...rows.map(x=>lab.item(x,currentDog(),date)).filter(x=>Number.isFinite(x.score)));
+   }
+   // A newer submitted report with no assessable values must not conceal an
+   // earlier assessable report's abnormal findings. Keep the pending report
+   // visible in Health, but use the latest assessable date for the advice.
+   if(scored.length)return [scored.filter(x=>x.score>=90).length,scored.filter(x=>x.score<90).length];
+  }
+  return [0,0];
+ }
+ const rows=reportEntriesForDate(0);return [rows.filter(x=>x.status==='normal').length,rows.filter(x=>['alert','abnormal','critical'].includes(x.status)).length];
+}
+
+function nearbyPets(){const names=['Luna','Coco','Miso','Nori','Poppy','Mochi','Kiki','Leo','Milo','Max']; const kms=[0.3,0.5,0.8,1.1,1.3,1.7,2.1,2.6,3.2,4.0]; return names.map((name,i)=>{const pet=dogs.find(x=>x.name===name)||dogs[i%dogs.length]; const visible=state.gardenVisible||i<7; const scheme=scoreScheme(score(pet)); return {id:name.toLowerCase(),name:pet.name,photo:pet.photo,breed:breedText(pet),age:pet.age,publicId:`DP-${String(12001+i)}`,km:kms[i],visible,x:16+(i%5)*17,y:26+Math.floor(i/5)*26}})}
+
+// V8.27: pet-by-pet public IDs and consent-based friend requests.
+// All social activity is local DEMO state; a real cross-device backend is required for live delivery.
+function dpSocialState(){
+ state.dpSocial??={friendIds:{},requests:[],schema:827};
+ state.dpSocial.friendIds??={};state.dpSocial.requests??=[];
+ return state.dpSocial;
+}
+function dpSecureId(){
+ let bytes=new Uint8Array(8);
+ if(globalThis.crypto?.getRandomValues)crypto.getRandomValues(bytes);
+ else for(let i=0;i<bytes.length;i++)bytes[i]=Math.floor(Math.random()*256);
+ return 'DP-'+Array.from(bytes,x=>x.toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+function dpPetId(index=state.dog){
+ if(index<dogs.length)return 'DP-'+String(210001+index);
+ const extra=state.petExtras?.[index-dogs.length];if(!extra)return '';
+ if(!/^DP-[0-9A-F]{16}$/.test(extra.publicId||'')){
+  const used=new Set(allPets().map(x=>x.publicId).filter(Boolean));let id;
+  do{id=dpSecureId()}while(used.has(id));extra.publicId=id;
+  // Older owner profiles sometimes had no public ID. Persist its first
+  // assignment immediately, before any friendship/device reminder references
+  // it; otherwise a reload can generate a different identity for the same pet.
+  persist();
+ }
+ return extra.publicId;
+}
+function dpPetDirectory(){return allPets().map((p,index)=>({...p,...(state.petOverrides?.[index]||{}),index,publicId:dpPetId(index)}));}
+function dpPetFromPublicId(value){const id=String(value||'').trim().toUpperCase();return dpPetDirectory().find(x=>x.publicId===id)||null;}
+function dpPetDisplayName(p){return p?.name||label3('未知寵物','Unknown pet','알 수 없는 반려동물');}
+function dpCurrentPetId(){return selectedBlank()?'':dpPetId(state.dog);}
+function dpChatKeyForPet(p){return p.index<dogs.length?dogs[p.index].name.toLowerCase():'pet-'+p.publicId;}
+function dpPetFromChatKey(key){const match=dpPetDirectory().find(p=>dpChatKeyForPet(p)===String(key));return match||null;}
+function dpSocialSeedShowcase(){
+ const ss=dpSocialState();if(ss.seeded827)return;
+ // Keep pre-existing showcase conversations with clearly defined sample friends.
+ for(let i=0;i<dogs.length;i++){
+  const from=dpPetId(i),target=dpPetId(i===0||i===2?1:2);
+  if(from===target)continue;
+  ss.friendIds[from]??=[];ss.friendIds[target]??=[];
+  if(!ss.friendIds[from].includes(target))ss.friendIds[from].push(target);
+  if(!ss.friendIds[target].includes(from))ss.friendIds[target].push(from);
+ }
+ ss.seeded827=true;
+}
+function dpAreFriends(otherId,ownerId=dpCurrentPetId()){
+ if(!otherId||!ownerId)return false;
+ const ss=dpSocialState();return (ss.friendIds[ownerId]||[]).includes(String(otherId));
+}
+function dpPendingToMe(){const id=dpCurrentPetId();return dpSocialState().requests.filter(r=>r.toId===id&&r.status==='pending');}
+function dpRequestBetween(otherId){const id=dpCurrentPetId();return dpSocialState().requests.find(r=>r.status==='pending'&&((r.fromId===id&&r.toId===otherId)||(r.toId===id&&r.fromId===otherId)));}
+function dpFriendLabel(otherId){
+ if(dpAreFriends(otherId))return label3('已是好友','Friends','이미 친구');
+ const pending=dpRequestBetween(otherId);
+ return pending?(pending.fromId===dpCurrentPetId()?label3('已送出申請','Request sent','요청 보냄'):label3('等待你同意','Awaiting approval','수락 대기')):label3('加好友','Add friend','친구 추가');
+}
+function dpFriendsOfCurrent(){const id=dpCurrentPetId();return (dpSocialState().friendIds[id]||[]).map(dpPetFromPublicId).filter(Boolean);}
+function dpFriendSend(otherId){
+ const owner=dpCurrentPetId(),other=dpPetFromPublicId(otherId);
+ if(!owner||!other){toast(label3('目前找不到這個 ID。跨裝置搜尋需要正式帳號服務。','ID not found locally; cross-device lookup requires a live account service.','이 기기에 없는 ID입니다. 다른 기기 검색에는 계정 서비스가 필요합니다.'));return false;}
+ if(owner===other.publicId){toast(label3('不能加自己為好友','You cannot add yourself','자기 자신을 친구로 추가할 수 없습니다'));return false;}
+ if(dpAreFriends(other.publicId,owner)){toast(label3('已經是好友','Already friends','이미 친구입니다'));return false;}
+ if(dpRequestBetween(other.publicId)){toast(label3('已經有一筆等待回應的申請','A request is already pending','이미 대기 중인 요청이 있습니다'));return false;}
+ if(!dpRootCommit(['dpSocial'],()=>dpSocialState().requests.push({id:'fr-'+dpSecureId(),fromId:owner,toId:other.publicId,status:'pending',createdAt:new Date().toISOString()})))return false;
+ toast(label3('好友申請已送出（本機示範），請切換到對方寵物的訊息頁同意。','Request sent in this local demo; switch to the other pet and approve it in Messages.','로컬 데모에서 요청을 보냈습니다. 상대 반려동물로 전환해 메시지에서 수락하세요.'));
+ return true;
+}
+function dpFriendAnswer(requestId,approve){
+ const ss=dpSocialState(),r=ss.requests.find(x=>x.id===requestId&&x.status==='pending'&&x.toId===dpCurrentPetId());
+ if(!r)return false;
+ return dpRootCommit(['dpSocial'],()=>{
+  r.status=approve?'accepted':'rejected';
+  if(approve){for(const [a,b] of [[r.fromId,r.toId],[r.toId,r.fromId]]){ss.friendIds[a]??=[];if(!ss.friendIds[a].includes(b))ss.friendIds[a].push(b);}}
+ });
+}
+function dpPublicPetData(p){return {version:1,id:p.publicId||dpPetId(p.index),name:String(p.name||'').slice(0,40),species:p.species==='cat'?'cat':'dog',breed:typeof p.breed==='object'?(p.breed[state.lang]||p.breed.en||p.breed.zh||''):String(p.breed||''),age:Number(p.age)||0,weight:Number(p.weight)||0};}
+function dpPublicB64(data){const json=JSON.stringify(data),bytes=new TextEncoder().encode(json);let bin='';bytes.forEach(x=>bin+=String.fromCharCode(x));return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function dpPublicDecode(enc){
+ try{if(!/^[a-zA-Z0-9_-]{5,1200}$/.test(enc))return null;
+ const bin=atob(enc.replace(/-/g,'+').replace(/_/g,'/'));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));const x=JSON.parse(new TextDecoder().decode(bytes));
+ if(x.version!==1||!/^DP-[0-9A-F-]{6,24}$/.test(x.id)||typeof x.name!=='string'||x.name.length>40)return null;
+ return {version:1,id:x.id,name:x.name.slice(0,40),species:x.species==='cat'?'cat':'dog',breed:String(x.breed||'').slice(0,70),age:Math.max(0,Math.min(35,Number(x.age)||0)),weight:Math.max(0,Math.min(120,Number(x.weight)||0))};
+ }catch{return null;}
+}
+function dpPublicUrl(p=currentDog()){
+ const profile=dpPublicPetData({...p,index:state.dog,publicId:dpCurrentPetId()});
+ return location.href.split('#')[0]+'#dpPublic='+dpPublicB64(profile);
+}
+function dpLinkProfileFromQR(value){
+ try{
+  const raw=String(value||'').trim().slice(0,2048);
+  const match=raw.match(/(?:^#|[#?&])dpPublic=([A-Za-z0-9_-]+)/);
+  if(match)return dpPublicDecode(match[1]);
+  const direct=raw.match(/^(DP-(?:\d{6}|[0-9A-F]{16}))$/i);
+  if(direct){const pet=dpPetFromPublicId(direct[1]);return pet?dpPublicPetData(pet):{id:direct[1].toUpperCase(),name:'',version:1};}
+ }catch{}return null;
+}
+function dpOpenPublicPet(profile){if(!profile)return;state.dpPublicCandidate=profile;openModal('pet-public-card');}
+function dpPublicCardContent(profile=state.dpPublicCandidate){
+ if(!profile)return '';
+ const external=!!state.dpExternalPublic&&profile===state.dpExternalPublic;const mine=!external&&dpCurrentPetId()===profile.id,found=external?null:dpPetFromPublicId(profile.id),friend=!external&&dpAreFriends(profile.id),pending=!external&&dpRequestBetween(profile.id);
+ const actual=found?dpPublicPetData(found):profile;
+ const actions=mine?`<p class="dp-social-muted">${label3('這是你自己的公開資料','This is your public profile','내 공개 프로필입니다')}</p>`:friend?`<button class="cta full" data-action="dp-friend-chat" data-id="${esc(profile.id)}">${vicon('message',18)} ${label3('發送訊息','Message friend','친구에게 메시지')}</button>`:pending?`<p class="dp-social-muted">${esc(dpFriendLabel(profile.id))}</p>`:found?`<button class="cta full" data-action="dp-friend-request" data-id="${esc(profile.id)}">${vicon('plus',18)} ${label3('發送好友申請','Send friend request','친구 요청 보내기')}</button>`:`<p class="notices">${label3('這是另一部裝置提供的公開資料預覽。要把好友申請送到對方，正式版需要連接帳號及訊息伺服器；此演示不會假裝已送達。','Public profile preview from another device. Sending a real request requires the account/messaging backend; this demo will not claim delivery.','다른 기기의 공개 정보입니다. 실제 친구 요청은 계정·메시징 서버 연결 후 가능합니다.')}</p>`;
+ return `<div class="dp-social-public"><div class="dp-social-public-avatar">${found?`<img src="${esc(found.photo)}" alt=""/>`:vicon('paw-print',42)}</div><b class="dp-social-public-name">${esc(actual.name||profile.id)}</b><div class="dp-social-id">ID · ${esc(actual.id)}</div><div class="dp-social-facts"><div><small>${label3('品種','Breed','품종')}</small><b>${esc(actual.breed||'—')}</b></div><div><small>${label3('年齡','Age','나이')}</small><b>${actual.age} ${label3('歲','years','세')}</b></div><div><small>${label3('體重','Weight','체중')}</small><b>${actual.weight} kg</b></div></div><div class="dp-social-privacy">${vicon('shield',16)} ${label3('只有基本資料公開；Deep、健康報告、用藥、精確定位與私人訊息都無法查看。','Only basic profile details are public. Deep analytics, health records, medication, exact location and private chats stay private.','기본 정보만 공개됩니다. 심층 분석, 건강 기록, 투약, 정확한 위치, 보호자 채팅은 비공개입니다.')}</div>${actions}</div>`;
+}
+function dpFriendMenuContent(){return `<div class="dp-social-menu"><button data-action="dp-friend-manual">${vicon('search',20)}<span><b>${label3('輸入寵物 ID','Enter pet ID','반려동물 ID 입력')}</b><small>${label3('搜尋並發送好友申請','Find a pet and request friendship','반려동물 검색 및 친구 요청')}</small></span>${vicon('chev',17)}</button><button data-action="dp-friend-scan">${vicon('camera',20)}<span><b>${label3('掃描 QR Code','Scan QR code','QR 코드 스캔')}</b><small>${label3('用相機掃描對方的公開檔案','Scan a pet’s public profile','카메라로 공개 프로필 스캔')}</small></span>${vicon('chev',17)}</button><button data-action="dp-friend-qr">${vicon('qr',20)}<span><b>${label3('我的寵物 QR Code','My pet QR code','내 반려동물 QR 코드')}</b><small>${label3('提供給朋友掃描加好友','Let other owners find your pet','다른 보호자가 스캔할 수 있어요')}</small></span>${vicon('chev',17)}</button></div>`;}
+function dpOwnQrContent(){const id=dpCurrentPetId(),url=dpPublicUrl();let svg='';try{svg=window.DeepPetQR?.svg(url)||''}catch{}return `<div class="dp-social-qr-page"><h3>${esc(currentDog().name)}</h3><small>ID · ${esc(id)}</small><div class="dp-social-qr-art">${svg||`<p>${label3('此瀏覽器無法產生 QR Code','QR code unavailable','QR 코드 생성 불가')}</p>`}</div><p class="dp-social-muted">${label3('掃描後只能看到姓名、品種、年齡、體重；不會開放健康與定位資料。','Scanning reveals only basic profile details, never health or location data.','QR 코드로 기본 정보만 공개되고 건강·위치 정보는 비공개입니다.')}</p><div class="dp-social-qr-actions"><button class="cta secondary" data-action="dp-copy-id">${label3('複製 ID','Copy ID','ID 복사')}</button><button class="cta" data-action="dp-share-public">${label3('分享公開連結','Share public link','공개 링크 공유')}</button></div><p class="notices">${location.protocol==='file:'?label3('離線 HTML 的檔案連結無法在另一支手機開啟；請使用部署到 HTTPS 的網站分享。','A file:// URL cannot be opened on another phone. Share the deployed HTTPS website instead.','오프라인 파일 주소는 다른 휴대폰에서 열 수 없습니다. HTTPS 사이트를 공유하세요.'):label3('好友申請與聊天目前只在同一瀏覽器內模擬；跨手機通訊仍需後端服務。','Friend requests and chats currently work only within this browser demo; cross-device service is not connected.','친구 요청과 채팅은 현재 브라우저 데모에서만 작동합니다.')}</p></div>`;}
+function dpFriendSearchContent(){const list=state.dpFoundPet?[state.dpFoundPet]:[];return `<div class="dp-social-find"><label class="form-label">${label3('輸入對方寵物的 DeepPet ID','Enter the other pet’s DeepPet ID','상대 반려동물의 DeepPet ID')}</label><input id="dpFriendSearchInput" class="form-control" value="${esc(state.dpFriendQuery||'')}" placeholder="DP-210002" autocapitalize="characters" autocomplete="off"/><button data-action="dp-friend-search" class="cta full">${label3('搜尋寵物','Find pet','반려동물 검색')}</button>${list.length?`<div class="dp-social-search-result"><b>${esc(list[0].name)}</b><span>${esc(list[0].publicId)}</span><button class="cta secondary" data-action="dp-friend-preview" data-id="${esc(list[0].publicId)}">${label3('查看公開資料','View public profile','공개 정보 보기')}</button></div>`:''}<p class="notices">${label3('可用示範寵物的 ID 測試雙方申請；目前不能搜尋另一支手機上的真實帳號。','Try IDs of the demo pets to test both sides. Live lookup of another account is not connected.','데모 반려동물 ID로 친구 요청을 테스트할 수 있습니다. 다른 기기의 실시간 검색은 아직 없습니다.')}</p></div>`;}
+function dpFriendScanContent(){return `<div class="dp-social-scanner"><div class="dp-scan-window"><video id="dpFriendScanVideo" autoplay playsinline muted></video><div class="dp-scan-reticle"></div></div><p>${label3('將對方的 QR Code 對準取景框。相機需 HTTPS 與權限；部分瀏覽器不支援內建 QR 辨識。','Point your camera at the QR code. HTTPS and camera permission are required; native QR recognition may be unavailable on some browsers.','QR 코드를 카메라에 맞춰 주세요. HTTPS와 카메라 권한이 필요합니다.')}</p><button class="cta full" data-action="dp-scan-start">${label3('開啟相機掃描','Start camera scan','카메라 스캔 시작')}</button><p id="dpScanStatus" class="dp-social-muted"></p><button class="cta secondary full" data-action="dp-friend-manual">${label3('改用輸入 ID','Enter ID instead','ID 직접 입력')}</button></div>`;}
+function dpFriendRequestsContent(){const pending=dpPendingToMe(),friends=dpFriendsOfCurrent(),sent=dpSocialState().requests.filter(x=>x.fromId===dpCurrentPetId()&&x.status==='pending');return `<div class="dp-social-inbox"><div class="row spread"><h3>${label3('好友申請','Friend requests','친구 요청')}</h3><span class="pill purple">${pending.length}</span></div>${pending.length?pending.map(r=>{const p=dpPetFromPublicId(r.fromId);return `<div class="dp-social-request"><div><b>${esc(dpPetDisplayName(p))}</b><small>ID · ${esc(r.fromId)}</small></div><div class="dp-social-request-actions"><button class="cta" data-action="dp-friend-accept" data-id="${esc(r.id)}">${label3('同意','Accept','수락')}</button><button class="cta secondary" data-action="dp-friend-deny" data-id="${esc(r.id)}">${label3('拒絕','Decline','거절')}</button></div></div>`}).join(''):`<p class="dp-social-muted">${label3('目前沒有新的好友申請','No pending requests','대기 중인 요청이 없습니다')}</p>`}${sent.length?`<p class="dp-social-muted">${label3('已送出、等待回覆','Sent, awaiting response','보낸 요청 대기 중')} · ${sent.length}</p>`:''}<div class="row spread"><h3>${label3('好友','Friends','친구')}</h3><span>${friends.length}</span></div>${friends.length?friends.map(p=>`<button class="dp-social-friend-row" data-action="dp-friend-chat" data-id="${esc(p.publicId)}"><img src="${esc(p.photo)}" alt=""/><div><b>${esc(p.name)}</b><small>${esc(p.publicId)}</small></div>${vicon('message',18)}</button>`).join(''):`<p class="dp-social-muted">${label3('可在「我的」右上角按 + 新增好友','Use + on your profile to add friends','내 프로필의 +로 친구를 추가하세요')}</p>`}</div>`;}
+function dpFriendAuthorizedForThread(thread){const p=dpPetFromChatKey(thread);return !!p&&dpAreFriends(p.publicId);}
+function dpOpenFriendsInbox(){state.gardenMode='messages';openModal('garden-detail');}
+
+function dpRiskGuard(base,componentScores){
+ const scores=(componentScores||[]).map(dpScoreValue).filter(v=>v!==null);
+ if(!scores.length||dpScoreValue(base)===null)return null;
+ const lowest=Math.min(...scores),ceiling=lowest<60?59:lowest<80?79:lowest<90?89:100;
+ return Math.min(dpOwnerQualityValue(base),ceiling);
+}
+function dpPhysiolComposite(heart,sleep,energyActivity){
+ const values=[heart,sleep,energyActivity].map(dpScoreValue);
+ if(values.some(v=>v===null))return null;
+ return dpRiskGuard(values[0]*.42+values[1]*.30+values[2]*.28,values);
+}
+function score(d=currentDog()){
+ if(!d||d[DP_SELECTED_PET_MARK]!==state.dog){
+  if(!d||d.dpFreshPet||d.freeCare||d.dpFixtureInvalidated)return null;
+  const fallback=Array.isArray(d.score)?d.score.slice(0,3).map(dpScoreValue):[];
+  return fallback.length===3&&fallback.every(v=>v!==null)?Math.round(fallback.reduce((a,b)=>a+b,0)/3):null;
+ }
+ const values=dpTodayUnifiedScores();
+ return dpPhysiolComposite(values.heart,values.sleep,values.energyActivity);
+}
+
+function scoreLabel(raw){const n=dpScoreValue(raw);if(n===null)return state.lang==='en'?'Insufficient data':state.lang==='zh'?'数据不足':state.lang==='zht'?'資料不足':state.lang==='ko'?'자료 부족':'データ不足';const k=n>=90?0:n>=80?1:n>=60?2:3;const labels={zh:['健康','低风险','中风险','高风险'],zht:['健康','低風險','中風險','高風險'],en:['Healthy','Mild','Moderate','Risk'],ko:['건강','낮은 위험','중간 위험','높은 위험'],ja:['健康','低リスク','中リスク','高リスク']};return (labels[state.lang]||labels.zht)[k];}
+
+function recoveryEvidence(){const history=demoRecords(state.dog),species=qualitySpec().species;
+ const available=Math.max(1,observationDays()),start=30-available;
+ const recent=history.slice(-Math.min(3,available)).map((r,j)=>({...r,_idx:30-Math.min(3,available)+j}));
+ const recentValid=recent.filter(x=>validDaySample(x,x._idx).valid);
+ const prior=history.slice(start,Math.max(start,27)).map((r,i)=>({...r,_idx:start+i})).filter(x=>validDaySample(x,x._idx).valid);
+ const mean=a=>a.reduce((acc,x)=>acc+x,0)/Math.max(1,a.length);
+ const recentActivity=mean(recentValid.map(r=>r.activity));
+ const matched=prior.filter(x=>Math.abs(x.activity-recentActivity)/Math.max(1,recentActivity)<=.23).slice(-14);
+ const enough=recentValid.length>=2&&matched.length>=6;
+ const baseline=enough?mean(matched.map(x=>x.recovery)):null;
+ const recentMean=recentValid.length?mean(recentValid.map(x=>x.recovery)):null;
+ const delta=enough?recentMean-baseline:null;
+ const pct=enough?100*delta/Math.max(1,baseline):null;
+ // Actionable *trend* criterion, NOT a clinical abnormality threshold.
+ const sustained=enough&&recentValid.length===3&&recent.length===3&&recent.every(x=>x.recovery>baseline+Math.max(5,.16*baseline));
+ const since=sustained?recent[0].date:null;
+ return {species,ready:baselineProfile().ready,enough,baseline,recentMean,delta,pct,sustained,since,
+ recentValid:recentValid.length,matchedCount:matched.length,first:recent[0].date,last:recent.at(-1).date,
+ lastThree:recent.map(x=>({date:x.date,recovery:x.recovery,valid:validDaySample(x,x._idx).valid})),
+ uncertainty:!enough?label3('相近活動強度的有效資料還不足，暫不判斷恢復是否變慢。','Not enough valid matched-activity recordings to judge a recovery slowdown.','비슷한 활동 강도의 유효 측정이 부족해 회복 변화를 판단하지 않습니다.'):''};
+}
+function recoveryNextStep(e){return e.sustained?label3('今天先保持熟悉但較輕鬆的活動量，記錄精神、食慾和休息；明天用相近活動條件再次比較。','Keep activity familiar but gentle today. Note appetite, energy and rest; compare again after similar activity tomorrow.','오늘은 가벼운 활동을 하고 식욕·활력·휴식을 기록한 뒤 비슷한 활동 후 다시 비교하세요.'):
+ label3('維持平常作息，在相近活動強度下繼續累積有效量測。','Keep the usual routine and collect comparable readings after similar activity.','평소 생활을 유지하고 비슷한 활동 조건에서 측정을 쌓아주세요.');}
+function recoveryVetRule(){return label3('如變化持續數天，或伴隨精神下降、食慾變差、咳嗽等症狀，請諮詢獸醫。若呼吸困難、昏倒或無法站立，應立即就醫。','Contact a veterinarian if changes persist for days or occur with reduced energy, appetite or coughing. Breathing distress, collapse or inability to stand needs urgent care.','며칠 지속되거나 기력·식욕 저하, 기침 등이 동반되면 수의사와 상담하세요. 호흡곤란, 실신 등은 즉시 진료가 필요합니다.');}
+function recoveryEvidenceText(e){if(!e.enough)return e.uncertainty;
+ if(e.sustained)return label3(`自 ${e.since.slice(5)} 起連續 3 個有效量測日，類似活動後平均恢復 ${Math.round(e.recentMean)} 分鐘；比參考期 ${Math.round(e.baseline)} 分鐘多 ${Math.round(e.delta)} 分鐘（約 ${Math.round(e.pct)}%）。`,`Since ${e.since.slice(5)}, 3 valid days show an average ${Math.round(e.recentMean)}-min recovery after comparable activity, ${Math.round(e.delta)} min (${Math.round(e.pct)}%) above the ${Math.round(e.baseline)}-min reference.`,`지난 ${e.since.slice(5)}부터 3일 연속 회복 평균 ${Math.round(e.recentMean)}분, 기준보다 약 ${Math.round(e.delta)}분 증가했습니다.`);
+ return label3(`最近 3 天平均約 ${Math.round(e.recentMean)} 分鐘，參考期約 ${Math.round(e.baseline)} 分鐘，尚未出現連續 3 天明顯偏離。`,`Recent 3-day average ${Math.round(e.recentMean)} min vs ${Math.round(e.baseline)} min reference, without 3 consecutive days of marked deviation.`,`최근 3일 평균 ${Math.round(e.recentMean)}분, 기준 ${Math.round(e.baseline)}분으로 지속적 변동은 확인되지 않았어요.`);}
+function recoveryEvidenceCard(e){return `<div class="rec-evidence-block"><div class="rec-evidence-title">${label3('活動後回穩時間的變化依據','Return-to-rest time evidence','활동 후 안정 복귀 시간')}</div>${e.enough?`<div class="rec-evidence-stats"><span>${label3('開始觀察','First noticed','관찰 시작')} <b>${e.since?.slice(5)||label3('未形成連續趨勢','No persistent trend','지속 추세 없음')}</b></span><span>${label3('與參考差異','Vs reference','기준 차이')} <b>${e.delta>=0?'+':''}${e.delta.toFixed(0)} min (${e.pct>=0?'+':''}${Math.round(e.pct)}%)</b></span></div>`:''}<p>${recoveryEvidenceText(e)}</p><div class="rec-guidance"><strong>${label3('接下來怎麼做','What to do next','다음 행동')}</strong><p>${recoveryNextStep(e)}</p></div><div class="rec-vet-guidance"><strong>${label3('何時諮詢獸醫','When to contact a vet','수의사 상담 시점')}</strong><p>${recoveryVetRule()}</p></div><small>${label3(`已比較 ${e.matchedCount} 次相似活動，持續追蹤恢復節奏。`,`Compared with ${e.matchedCount} similar-activity days to track recovery.`,`비슷한 활동량의 유효 과거 ${e.matchedCount}일을 비교한 데모입니다.`)}</small></div>`;}
+
+function todayFood(){return todayFoodFor(state.dog);}
+
+const DP_FOODS={
+ dry:{zh:'乾糧／飼料',en:'Dry food',ko:'건사료',kcal:360}, wet:{zh:'濕糧／罐頭',en:'Wet food',ko:'습식 사료',kcal:95}, chicken:{zh:'雞肉',en:'Chicken',ko:'닭고기',kcal:165}, beef:{zh:'牛肉',en:'Beef',ko:'소고기',kcal:210}, fish:{zh:'魚肉',en:'Fish',ko:'생선',kcal:145}, egg:{zh:'雞蛋',en:'Egg',ko:'달걀',kcal:145}, rice:{zh:'米飯',en:'Cooked rice',ko:'밥',kcal:130}, vegetable:{zh:'蔬菜',en:'Vegetables',ko:'채소',kcal:35}, treat:{zh:'零食',en:'Treat',ko:'간식',kcal:330}, other:{zh:'其他食物',en:'Other',ko:'기타',kcal:150}
+};
+function dpFoodLabel(key){const x=DP_FOODS[key]||DP_FOODS.other;const ja={dry:'ドライフード',wet:'ウェットフード',chicken:'鶏肉',beef:'牛肉',fish:'魚肉',egg:'卵',rice:'ご飯',vegetable:'野菜',treat:'おやつ',other:'その他の食品'};return state.lang==='ja'?(ja[key]||x.en):state.lang==='en'?x.en:state.lang==='ko'?x.ko:x.zh;}
+function dpFoodChoices(selected='dry'){return Object.entries(DP_FOODS).map(([k,v])=>`<option value="${k}" ${selected===k?'selected':''}>${dpFoodLabel(k)}</option>`).join('');}
+function dpAutoEnergy(){const d=currentDog(),kg=Math.max(.5,Number(d.weight)||1),age=Math.max(0,Number(d.age)||0),cat=d.species==='cat',size=petSizeClass(d),rest=70*Math.pow(kg,.75);let factor=cat?(age<1?2.1:age>=11?1.1:1.25):(age<1?2:age>=10?1.15:age>=7&&['large','giant'].includes(size)?1.18:size==='giant'?1.36:size==='large'?1.44:size==='small'?1.52:1.5);return Math.round(rest*factor/10)*10;}
+function dpFoodKey(date=iso(localDate())){return String(state.dog)+'-'+date;}
+function dpFoodMeals(date=iso(localDate())){if(typeof selectedBlank==='function'&&selectedBlank())return [];dpPruneOwnerShowcaseRecords();return state.mealItems?.[dpFoodKey(date)]||[];}
+function dpFoodTotals(date=iso(localDate())){const meals=dpFoodMeals(date),safe=x=>Number.isFinite(Number(x))&&Number(x)>=0?Number(x):0;
+ const grams=meals.reduce((a,m)=>a+(m.grams!==undefined&&m.grams!==null&&Number.isFinite(Number(m.grams))?safe(m.grams):(Array.isArray(m.parts)?m.parts:[]).reduce((q,x)=>q+safe(x.grams),0)),0);
+ const kcal=meals.reduce((a,m)=>a+safe(m.kcal),0);return {meals,grams:Math.round(grams),kcal:Math.round(kcal)};}
+// Sample meals belong only to the ten preloaded showcase pets. New user-created
+// pets always start with an empty log; previously recorded meals are untouched.
+function dpSeedCocoV812Showcase(){
+ if(dpUsesRealMeasurements())return;
+ const key=String(state.dog),today=localDate(),date=iso(today);
+ if(state.dog===2){
+   // Coco is a showcase-only scenario: seed fresh issues on each new local day.
+   // Prior days' records remain historical, never surface in today's panel.
+   let changed=false;
+   state.vaxByDog??={};state.vaxByDog[key]??=[];state.notesByDog??={};state.notesByDog[key]??=[];
+   if(!state.vaxByDog[key].some(x=>x.id==='dp-v812-demo-vax-'+date)){state.vaxByDog[key].push({id:'dp-v812-demo-vax-'+date,name:'今日加強針複查',date,time:'15:30',status:'upcoming',sample:true});changed=true;}
+   if(!state.notesByDog[key].some(x=>x.id==='dp-v812-demo-note-'+date)){state.notesByDog[key].push({id:'dp-v812-demo-note-'+date,date,time:'10:45',cat:'精力',text:'今天散步意願變少，下午看起來比較疲倦，需要持續觀察。',needsFollowup:true,sample:true});changed=true;}
+   state.userReportEntries??={};state.userReportEntries[key]??=[];
+   for(const [id,name,value,unit] of [['a','紅血球指標',4.1,''],['b','發炎相關指標',18,'']])if(!state.userReportEntries[key].some(x=>x.id==='dp-v812-demo-lab-'+id+'-'+date)){state.userReportEntries[key].push({id:'dp-v812-demo-lab-'+id+'-'+date,reportId:'dp-v812-demo-report-'+date,date,name,value,unit,status:'alert',source:'sample',notes:'示範待複查項目'});changed=true;}
+   // V9.12: a recovery episode is only created by an explicit owner action.
+   // The showcase fixture may seed care tasks but must NEVER auto-start recovery observation.
+   state.dpV812CocoShowcaseDate=date;state.dpV812CocoShowcaseSeeded=true;
+   if(changed)persist();
+ }
+}
+// Exhibition-only diverse care cases; rehydrate missing fixtures by ID, never
+// replace an edited gallery pet's user-entered health records.
+function dpEnhanceShowcaseCareV833(){
+ if(state.emptyPreview||dpUsesRealMeasurements())return;
+ state.dpShowcaseCareV833??={};const key=String(state.dog);
+ let changed=false;
+ const pet=state.dog,today=localDate(),meds=medsForDog(),vaccines=vaxForDog(),notes=notesForDog();
+ const extraMeds=[2,3,4,3,2,2,3,4,4,3,4,2,3,2,3][pet];
+ const medNames=['益生菌','魚油','關節營養補充品','皮膚營養補充品','營養補充品','獸醫建議營養品','腸胃支持'];
+ for(let i=0;i<extraMeds;i++){
+  const id=`dp-showcase-833-med-${key}-${i}`;
+  if(meds.some(x=>x.id===id))continue;
+  const time=['07:20','12:40','18:30'][i%3];
+  meds.push({id,name:medNames[(pet*3+i)%medNames.length],qty:1+(i%2),unit:'顆',time,times:[time],startDate:iso(dateAdd(today,-(pet+i)%4)),days:5+((pet+i*2)%13),paused:pet%6===4&&i===2,sample:true});changed=true;
+ }
+ const extraVaccines=[2,2,3,2,2,2,2,3,3,2,4,2,3,2,3][pet];
+ for(let i=0;i<extraVaccines;i++){
+  const id=`dp-showcase-833-vax-${key}-${i}`;
+  if(vaccines.some(x=>x.id===id))continue;
+  const done=i===0&&pet%3===0,dayShift=done?-(45+pet*4):14+pet*3+i*27;
+  const date=iso(dateAdd(today,dayShift));
+  vaccines.push({id,name:['年度核心疫苗','狂犬病疫苗','綜合疫苗'][(pet+i+1)%3],date,time:['10:00','14:30','11:15'][i%3],status:done?'done':'upcoming',doneDate:done?date:null,sample:true});changed=true;
+ }
+ const extraNotes=[3,3,4,4,3,3,3,4,4,3,4,3,3,3,4][pet];
+ const noteTexts=[
+  ['活動','傍晚的活動節奏比平常穩定。'],['飲食','今天進食量與往常有差別，已記錄。'],
+  ['休息','最近幾晚醒來次數變多，持續觀察。'],['活動','散步後需要多休息一段時間。'],
+  ['其他','今日完成例行的健康照護。'],['飲食','食慾良好，進食速度比平常快。'],
+  ['休息','下午長時間安靜休息。'],['活動','玩耍時比較活躍，晚間早些休息。']
+ ];
+ for(let i=0;i<extraNotes;i++){
+  const id=`dp-showcase-833-note-${key}-${i}`;
+  if(notes.some(x=>x.id===id))continue;
+  const [cat,text]=noteTexts[(pet*3+i)%noteTexts.length];
+  notes.push({id,date:iso(dateAdd(today,-(pet*2+i+1)%10)),time:['08:20','15:05','19:10'][i%3],cat,text,needsFollowup:pet%5===3&&i===1,sample:true});changed=true;
+ }
+ if(changed||!state.dpShowcaseCareV833[key]){state.dpShowcaseCareV833[key]=true;persist();}
+}
+
+function dpEnsureShowcaseCareRecords(){
+ if(state.emptyPreview)return;
+ if(dpUsesRealMeasurements()){dpPruneOwnerShowcaseRecords();return;}
+ state.dpShowcaseCareSeededByPet??={};const key=String(state.dog);
+ const today=localDate();let changed=!state.dpShowcaseCareSeededByPet[key];
+ state.medsByDog??={};state.medsByDog[key]??=[];
+ if(!state.medsByDog[key].some(x=>x.id==='dp-showcase-med-'+key)){state.medsByDog[key].push({
+  id:'dp-showcase-med-'+key,name:['關節營養補充品','益生菌','皮膚營養補充品','獸醫建議營養品','關節支持','毛球管理','魚油','腸胃營養品','心臟營養支持','眼部營養支持','關節營養補充品','魚油','腸胃支持','皮膚營養補充品','關節營養補充品'][state.dog]||'營養補充品',qty:[1,2,1,1,2,1,1,1,1,1,2,1,1,1,1][state.dog]||1,unit:'顆',
+  time:['09:00','08:00','19:00','09:30','20:00'][state.dog%5],times:[['09:00'],['08:00','20:00'],['19:00'],['09:30'],['20:00']][state.dog%5],startDate:iso(dateAdd(today,-(state.dog%3))),days:5+(state.dog%6),
+  paused:state.dog%8===6,sample:true
+ });changed=true;}
+ state.vaxByDog??={};state.vaxByDog[key]??=[];
+ if(!state.vaxByDog[key].some(x=>x.id==='dp-showcase-vax-'+key)){state.vaxByDog[key].push({
+  id:'dp-showcase-vax-'+key,name:state.dog%3===0?'狂犬病疫苗':state.dog%3===1?'年度核心疫苗':'綜合疫苗',date:iso(dateAdd(today,[0,3,7,14,21,30,45,9,1,18,4,22,2,6,15][state.dog]||21)),time:['09:30','10:30','14:00','16:00'][state.dog%4],status:'upcoming',sample:true
+ });changed=true;}
+ state.notesByDog??={};state.notesByDog[key]??=[];
+ if(!state.notesByDog[key].some(x=>x.id==='dp-showcase-note-'+key)){state.notesByDog[key].push({
+  id:'dp-showcase-note-'+key,date:iso(dateAdd(today,-(state.dog%6+1))),time:['07:30','12:10','18:00'][state.dog%3],cat:['活動','飲食','休息','體重','其他'][state.dog%5],
+  text:['今天的散步意願較平常高。','今天吃完了三餐。','今天下午休息時間較多。','已記錄近期體重。','今天狀態較平穩。','今天活動後比較早休息。','食慾與平時接近。','早上有短暫不安。','今天夜間休息較少。','活動安排改在傍晚。','今天外出後較疲倦。','最近精神良好。','睡前比較活躍。','今天有新的食物記錄。','今天安排了定期檢查。'][state.dog],sample:true
+ });changed=true;}
+ dpSeedCocoV812Showcase();
+ dpEnhanceShowcaseCareV833();
+ // After many weeks, every short sample course used to end permanently,
+ // leaving all exhibition profiles without today's medication workflow.
+ // Preserve historical plans and manual edits; renew just one supplementary
+ // sample schedule when every unpaused plan has naturally expired.
+ dpEnsureShowcaseCurrentMedication();
+ dpEnsureShowcaseRecoveryHistory();
+ state.dpShowcaseCareSeededByPet[key]=true;
+ if(changed)persist();
+}
+// Every built-in gallery pet has an independent historical 14-day recovery
+// observation. These records are fictional and do not start today's alerts.
+function dpEnsureShowcaseRecoveryHistory(){
+ if(state.emptyPreview===true||state.dog>=dogs.length||dpUsesRealMeasurements())return false;
+ const key=String(state.dog);state.carePlanHistoryByPet??={};
+ const bucket=state.carePlanHistoryByPet[key]??=[];
+ const id=`dp-showcase-recovery-${key}`;
+ if(bucket.some(x=>x.id===id))return false;
+ const reasons=['activity','illness','medication','surgery','anesthesia','activity','illness','medication','surgery','illness','anesthesia','activity','medication','illness','surgery'];
+ const signs=['none','cough','digestion','movement','none','none','breathing','digestion','movement','cough','movement','none','digestion','cough','movement'];
+ const start=dateAdd(localDate(),-(42+state.dog%9));
+ const checkins=Array.from({length:14},(_,day)=>{
+  const group=state.dog%5;
+  const lower=group===0?day<3:group===1?day<10:group===2?day%3!==0:group===3?day>5:day<7;
+  const unusual=lower?'lower':(group===3&&day<4?'higher':'usual');
+  return {date:iso(dateAdd(start,day)),energy:unusual,
+   appetite:(day+state.dog)%4===0?'lower':unusual,
+   rest:group===4&&day>7?'higher':unusual,
+   signs:lower?signs[state.dog]:'none',note:'',sample:true};
+ });
+ bucket.push({id,started:iso(start),ended:checkins.at(-1).date,reason:reasons[state.dog],reasonNote:'',checkins,sample:true});
+ persist();return true;
+}
+function dpEnsureShowcaseCurrentMedication(){
+ if(state.emptyPreview||dpUsesRealMeasurements())return false;
+ const key=String(state.dog),rows=medsForDog(),today=iso(localDate());
+ const samples=rows.filter(m=>m.sample===true&&!m.deleted);
+ if(!samples.length||samples.every(m=>m.paused)||samples.some(m=>m.paused&&String(m.id).startsWith(`dp-showcase-renew-${key}-`)))return false;
+ const active=rows.some(m=>!m.deleted&&!m.paused&&(!m.startDate||m.startDate<=today)&&(!m.days||today<=iso(dateAdd(new Date(`${m.startDate||today}T12:00:00`),Number(m.days)-1))));
+ if(active)return false;
+ const source=samples.find(m=>!m.paused),id=`dp-showcase-renew-${key}-${today}`;
+ if(!source||rows.some(m=>m.id===id))return false;
+ const times=Array.isArray(source.times)&&source.times.length?source.times:[source.time||'09:00'];
+ rows.push({id,name:source.name,qty:source.qty||1,unit:source.unit||'顆',time:times[0],times:[...times],startDate:today,days:14+state.dog%7,paused:false,source:'showcase',sample:true});
+ persist();return true;
+}
+function dpEnsureShowcaseMeals(){
+ if(state.emptyPreview)return;
+ if(dpUsesRealMeasurements()){dpPruneOwnerShowcaseRecords();return;}
+ state.dpShowcaseMeals??={};const id=String(state.dog);
+ state.mealItems??={};
+ const target=dpAutoEnergy(),today=localDate();let changed=!state.dpShowcaseMeals[id];
+ // Fifteen independent dietary patterns, with deliberately wide energy intake
+ // for showroom testing. These are NOT feeding recommendations.
+ const recipes=[
+  ['dry','chicken','vegetable',1.04],['dry','beef','rice',.98],
+  ['wet','fish','vegetable',1.47],['dry','egg','rice',.57],
+  ['dry','beef','vegetable',.83],['wet','fish','egg',1.01],
+  ['dry','fish','vegetable',1.21],['wet','chicken','rice',.72],
+  ['dry','fish','egg',.52],['wet','beef','vegetable',1.08],
+  ['dry','beef','rice',.61],['dry','chicken','vegetable',1.05],
+  ['wet','egg','rice',1.33],['dry','chicken','treat',1.26],
+  ['wet','fish','vegetable',.69]
+ ];
+ const recipe=recipes[state.dog]||recipes[0];
+ const part=(type,calories,brand='')=>dpFoodPart(type,Math.max(3,Math.round(calories*100/(DP_FOODS[type]?.kcal||150))),brand);
+ for(let daysAgo=6;daysAgo>=0;daysAgo--){
+   const date=iso(dateAdd(today,-daysAgo)),key=id+'-'+date;
+   state.mealItems[key]??=[];
+   if(!Array.isArray(state.mealItems[key]))state.mealItems[key]=[];
+   const modifier=recipe[3]*(.90+(((state.dog*3+daysAgo*5)%11)/100));
+   const daily=target*modifier,morning=.44+(state.dog%4)*.025;
+   const p1=part(recipe[0],daily*morning,recipe[0]==='dry'?'DeepPet 日常飼料':'');
+   const p2=part(recipe[1],daily*(1-morning)*.86);
+   const p3=part(recipe[2],daily*(1-morning)*.14);
+   const samples=[
+     {id:'showcase-breakfast-'+id+'-'+date,time:'08:00',date,parts:[p1],grams:p1.grams,kcal:p1.kcal,source:'showcase',sample:true},
+     {id:'showcase-dinner-'+id+'-'+date,time:'18:15',date,parts:[p2,p3],grams:p2.grams+p3.grams,kcal:p2.kcal+p3.kcal,source:'showcase',sample:true}
+   ];
+   // Upgrade only mathematically unchanged V9.72 generated sample meals.
+   // Owner-modified samples and all manual rows remain byte-for-byte intact.
+   const oldModifier=.92+(((state.dog*3+daysAgo*5)%8)/100);
+   const oldDry=Math.max(8,Math.round(target*.69*oldModifier/3.6));
+   const oldProtein=Math.max(8,Math.round(target*.18*oldModifier/1.65));
+   const oldVegetable=Math.max(3,Math.round(target*.04*oldModifier/.35));
+   for(const row of samples){
+    const previous=state.mealItems[key].find(x=>x.id===row.id);
+    if(!previous){state.mealItems[key].push(row);changed=true;continue;}
+    const oldBreakfast=previous.sample===true&&previous.parts?.length===1&&previous.parts[0].type==='dry'&&previous.grams===oldDry&&previous.parts[0].grams===oldDry;
+    const oldDinner=previous.sample===true&&previous.parts?.length===2&&previous.parts[0].type==='chicken'&&previous.parts[1].type==='vegetable'&&previous.grams===oldProtein+oldVegetable&&previous.parts[0].grams===oldProtein&&previous.parts[1].grams===oldVegetable;
+    if(!state.dpShowcaseMealsV973?.[id]&&((row.id.startsWith('showcase-breakfast-')&&oldBreakfast)||(row.id.startsWith('showcase-dinner-')&&oldDinner))){Object.assign(previous,row);changed=true;}
+   }
+ }
+ state.dpShowcaseMealsV973??={};if(!state.dpShowcaseMealsV973[id])changed=true;state.dpShowcaseMealsV973[id]=true;
+ state.dpShowcaseMeals[id]=true;
+ if(changed)persist();
+}
+
+
+async function dpHandleFoodPhoto(file){
+ if(!file||!file.type.startsWith('image/'))return;
+ const pet=state.dog,epoch=state.dpPetEpoch,serial=++dpFoodPhotoSerial;
+ const stillSame=()=>state.dog===pet&&state.dpPetEpoch===epoch&&state.importKind==='meal'&&serial===dpFoodPhotoSerial&&['record-import','record-editor'].includes(state.modal);
+ const box=$('#mealAIStatus'),photo=state.foodPhotoDraft??={};
+ // A newly chosen photo owns the draft immediately. Do not let Save attach the
+ // previous photo while the replacement is still decoding (or if it fails).
+ photo.data='';state.foodRecognizedType=null;state.foodRecognizedBrand='';
+ const previousPreview=document.querySelector('.dp-photo-preview');if(previousPreview)previousPreview.remove();
+ photo.message=label3('圖片已加入。正在確認是否可以識別食物種類。','Photo attached. Checking food recognition.','사진을 추가했습니다. 식품 인식을 확인합니다.');
+ if(box)box.textContent=photo.message;
+ try{
+  const data=await new Promise((resolve,reject)=>{
+   const img=new Image(),url=URL.createObjectURL(file),cleanup=()=>URL.revokeObjectURL(url);
+   img.onload=()=>{try{const canvas=document.createElement('canvas'),scale=Math.min(1,500/Math.max(img.width,img.height));canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.67));}catch(e){reject(e)}finally{cleanup()}};
+   img.onerror=()=>{cleanup();reject(Error('Food photo decode failed'))};img.src=url;
+  });
+  if(!stillSame())return;
+  photo.data=data;if(box)box.textContent=photo.message;
+  const existing=document.querySelector('.dp-photo-preview');if(existing)existing.src=data;
+  else{const newImg=document.createElement('img');newImg.className='dp-photo-preview';newImg.src=data;$('#mealPhotoInput')?.closest('.dp-food-photo-tools')?.appendChild(newImg);}
+ }catch(e){if(stillSame()&&box)box.textContent=label3('圖片讀取失敗，請重新選擇。','Could not read photo; try again.','사진을 다시 선택하세요.');return;}
+ try{if(location.protocol==='file:')throw Error('no image recognition server');const fd=new FormData();fd.append('image',file);const response=await fetch('/api/food-recognize',{method:'POST',body:fd});if(!response.ok)throw Error('unavailable');const data=await response.json();if(!stillSame())return;const item=Array.isArray(data.foods)?data.foods[0]:null;if(item&&DP_FOODS[item.type]){state.foodRecognizedType=item.type;state.foodRecognizedBrand=String(item.brand||'');const type=$('#importFoodType'),brand=$('#importFoodBrand');if(type)type.value=item.type;if(brand)brand.value=state.foodRecognizedBrand;photo.message=label3('已辨識可能的食物，請確認種類、品牌與實際吃下的克數。','Possible food recognized. Verify type, brand and actual grams eaten.','식품 인식 결과를 확인하고 g을 입력하세요.');}else throw Error('no match');}
+ catch(e){if(!stillSame())return;photo.message=label3('照片已保存。目前未接上食物影像辨識服務，請選種類、品牌與吃下的克數。','Photo saved. Food recognition service is not connected; choose food, brand and grams.','사진을 저장했습니다. 식품 인식 서비스가 없어 직접 식품과 g을 선택하세요.');}
+ if(box)box.textContent=photo.message;
+}
+
+function dpFoodPart(type,grams,brand=''){const num=Number(grams),item=DP_FOODS[type]||DP_FOODS.other;return {type,grams:num,brand:String(brand||'').trim().slice(0,80),kcal:Math.round(num*item.kcal/100)};}
+function dpFoodTrend(days=7){const future=state.foodWindowMode==='future';return Array.from({length:days},(_,i)=>{const date=iso(dateAdd(localDate(),future?i:i-days+1));return {date,...dpFoodTotals(date)};});}
+function dpFoodListHTML(date){
+ const meals=dpFoodMeals(date);
+ return meals.length?meals.map((meal,i)=>`<div class="dp-meal-row"><div class="row spread"><b>${meal.time?esc(meal.time)+' · ':''}${label3('第','Meal ','식사 ')}${i+1}${state.lang==='zht'||state.lang==='zh'?label3('餐','','끼'):''}${!meal.time?` <small>(${label3('時間未記錄','time not recorded','시간 미기록')})</small>`:''}</b><span>${Number(meal.grams)||0} g · ${Number(meal.kcal)||0} kcal</span></div>
+ ${(meal.parts?.length?meal.parts:[{type:'other',grams:meal.grams||0,brand:'',kcal:meal.kcal||0}]).map(part=>`<div class="dp-meal-part">${esc(part.brand||dpFoodLabel(part.type))} · ${Number(part.grams)||0} g · ${Number(part.kcal)||0} kcal</div>`).join('')}
+ ${meal.photo?`<img class="dp-meal-thumb" src="${esc(meal.photo)}" alt=""/>`:''}
+ <div class="dp-meal-actions"><button data-action="meal-edit" data-date="${date}" data-index="${i}">${vicon('edit',14)} ${label3('修改這餐','Edit meal','식사 수정')}</button><button data-action="meal-delete" data-date="${date}" data-index="${i}">${vicon('trash',14)} ${label3('刪除','Delete','삭제')}</button></div></div>`).join(''):
+ `<p class="notices">${label3('這一天尚未記錄餐食。','No meals logged this day.','이 날은 식사 기록이 없어요.')}</p>`;
+}
+function dpMealEditCapture(){
+ const boxes=[...document.querySelectorAll('.dp-meal-edit-part')];
+ return boxes.map(el=>({type:el.querySelector('.dp-meal-type')?.value||'other',brand:el.querySelector('.dp-meal-brand')?.value||'',grams:Number(el.querySelector('.dp-meal-grams')?.value)}));
+}
+function dpMealEditContent(){
+ const date=state.mealEditingDate,index=state.mealEditingIndex;
+ const meal=dpFoodMeals(date)?.[index];
+ if(!meal)return `<p>${label3('找不到餐食紀錄。','Meal record not found.','식사 기록을 찾지 못했습니다.')}</p>`;
+ const parts=state.mealEditDraft||meal.parts||[{type:'other',grams:meal.grams||0,brand:'',kcal:meal.kcal||0}];
+ return `<div class="dp-meal-editor"><p class="subtitle">${label3('修改日期、用餐時間和每種食物的克數；熱量會重新估算。','Edit date, time and grams for each food; calories recalculate automatically.','날짜, 시간, 음식별 g을 수정하면 열량이 다시 계산됩니다.')}</p>
+ <div class="form-grid"><div><label class="form-label">${label3('用餐日期','Meal date','식사 날짜')}</label><input class="form-control" id="dpMealEditDate" type="date" value="${esc(state.mealEditDateDraft||date)}" max="${iso(localDate())}"/></div><div><label class="form-label">${label3('用餐時間（選填）','Meal time (optional)','식사 시간(선택)')}</label><input class="form-control" id="dpMealEditTime" type="time" value="${esc(state.mealEditTimeDraft??meal.time??'')}"/></div></div>
+ ${parts.map((item,i)=>`<div class="dp-meal-edit-part"><div class="row spread"><b>${label3('食物','Food','음식')} ${i+1}</b>${parts.length>1?`<button data-action="meal-edit-remove-part" data-index="${i}" class="dp-meal-remove-small">${label3('移除','Remove','삭제')}</button>`:''}</div>
+ <div class="form-grid"><div><label class="form-label">${label3('種類','Food type','식품 종류')}</label><select class="form-control dp-meal-type">${dpFoodChoices(item.type||'other')}</select></div><div><label class="form-label">${label3('重量（克）','Weight (g)','무게(g)')}</label><input class="form-control dp-meal-grams" type="number" min="1" max="5000" step="1" value="${Number(item.grams)||''}"/></div></div>
+ <label class="form-label">${label3('品牌或食品名稱','Brand or food name','브랜드 또는 음식 이름')}</label><input class="form-control dp-meal-brand" maxlength="80" value="${esc(item.brand||'')}"/></div>`).join('')}
+ <button class="care-outline full" data-action="meal-edit-add-part">${label3('＋ 新增食物','＋ Add food','＋ 음식 추가')}</button>
+ <button class="cta full dp-meal-save" data-action="meal-edit-save">${label3('儲存修改','Save changes','변경사항 저장')}</button>
+ <button class="care-outline full dp-meal-delete-cta" data-action="meal-delete" data-date="${date}" data-index="${index}">${label3('刪除這筆餐食','Delete this meal','이 식사 삭제')}</button></div>`;
+}
+
+function dpFoodBars(){const rows=dpFoodTrend(7),max=Math.max(50,...rows.map(r=>r.grams)),selected=state.foodSelectedDate||iso(dateAdd(localDate(),state.foodWindowMode==='future'?0:-1));return `<div class="dp-food-bars">${rows.map(r=>`<button class="dp-food-bar ${selected===r.date?'active':''}" data-action="food-day" data-date="${r.date}" title="${r.date} · ${r.grams} g · ${r.kcal} kcal"><b>${r.date>iso(localDate())?'—':r.grams+' g'}</b><span class="dp-food-bar-track"><i style="height:${Math.round(r.grams/max*100)}%"></i></span><small>${r.date.slice(5)}</small></button>`).join('')}</div>`;}
+function dpMedicationSchedules(){return medsForDog().filter(m=>!m.deleted);}
+// Legacy owner records may contain only a medicine name and a clock time.
+// They are historical notes, not a complete veterinary dosing instruction.
+function dpMedHasExplicitSchedule(m){if(!m)return false;if(m.sample===true)return true;
+ const times=Array.isArray(m.times)&&m.times.length?m.times:(m.time?[m.time]:[]);
+ return !!String(m.name||'').trim()&&Number.isFinite(Number(m.qty))&&Number(m.qty)>0&&Number(m.qty)<=100&&
+ ['顆','包','mL','滴'].includes(m.unit)&&Number.isInteger(Number(m.days))&&Number(m.days)>=1&&Number(m.days)<=365&&
+ dpCareDate(m.startDate,true)&&times.length>0&&times.length<=3&&times.every(time=>!!time&&dpOptionalAppointmentTime(time))&&new Set(times).size===times.length;
+}
+function dpMedDue(date=iso(localDate())){const key=String(state.dog),history=state.medHistoryByPet?.[key]||[];return dpMedicationSchedules().filter(m=>!m.paused&&dpMedHasExplicitSchedule(m)&&(!m.startDate||date>=m.startDate)&&(!m.days||date<=iso(dateAdd(new Date((m.startDate||date)+'T12:00:00'),Number(m.days)-1)))).flatMap(m=>{const times=Array.isArray(m.times)&&m.times.length?m.times:(m.time?[m.time]:[]);return times.map((time,slot)=>{
+ // Slot order can change when the owner edits a plan. A confirmed 08:00 dose
+ // must not silently turn into a confirmed 20:00 dose after reordering or
+ // replacing the times. Legacy history without a time still uses its slot.
+ const h=history.find(x=>x.date===date&&x.id===m.id&&(x.time?String(x.time)===String(time):Number(x.slot||0)===slot));
+ return {id:m.id,slot,name:m.name,time,qty:m.qty??null,unit:m.unit||'',status:h?.status||'pending',sample:!!m.sample};});}).sort((a,b)=>a.time.localeCompare(b.time));}
+function dpMedMark(id,slot,status){const med=dpMedicationSchedules().find(m=>m.id===id);if(!dpMedHasExplicitSchedule(med)||med.paused||!['pending','taken','skipped'].includes(status))return false;
+ const key=String(state.dog),date=iso(localDate()),times=Array.isArray(med.times)&&med.times.length?med.times:(med.time?[med.time]:[]);
+ // A stale control cannot confirm a future, expired or paused prescription.
+ if((med.startDate&&date<med.startDate)||(med.startDate&&med.days&&date>iso(dateAdd(new Date(med.startDate+'T12:00:00'),Number(med.days)-1))))return false;
+ if(!Number.isInteger(slot)||slot<0||slot>=times.length)return false;
+ return dpCareCommit([['medHistoryByPet',key]],()=>{state.medHistoryByPet??={};state.medHistoryByPet[key]??=[];const hist=state.medHistoryByPet[key];
+ // Update the currently displayed time, not an unrelated historical dose
+ // that formerly occupied the same slot before a schedule edit.
+ const index=hist.findIndex(x=>x.date===date&&x.id===id&&(x.time?String(x.time)===String(times[slot]):Number(x.slot||0)===slot));if(index>=0)hist.splice(index,1);
+ if(status!=='pending')hist.push({date,timestamp:new Date().toISOString(),id,slot,time:times[slot],name:med.name,qty:med.qty??null,unit:med.unit||'',status});});}
+function dpUnitLabel(unit){return unit==='顆'?label3('顆','tablet(s)','정'):unit==='包'?label3('包','packet(s)','포'):unit==='滴'?label3('滴','drop(s)','방울'):unit||'';}
+function dpDoseNum(value){const n=value===null||value===undefined||value===''?NaN:Number(value);return Number.isFinite(n)&&n>0?Math.round(n*100)/100:'—';}
+
+// These are session tokens, never persisted. A newer upload or pet switch
+// invalidates every older callback without rewriting any showcase fixtures.
+let dpImportSerial=0,dpFoodPhotoSerial=0;
+function dpAbandonImportWorkflow(){
+ dpImportSerial++;dpFoodPhotoSerial++;
+ const id=state.importFileId;state.importFileId=null;
+ if(id)dpDiscardUncommittedReportFile(id);
+}
+function dpDb(){return new Promise((resolve,reject)=>{if(typeof indexedDB==='undefined')return reject(Error('IndexedDB unsupported'));const req=indexedDB.open('deeppet-health-attachments',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('files'))req.result.createObjectStore('files',{keyPath:'id'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+async function dpSaveReportFile(file){const db=await dpDb(),id='report-'+Date.now()+'-'+Math.random().toString(36).slice(2);return new Promise((resolve,reject)=>{const tx=db.transaction('files','readwrite');tx.objectStore('files').put({id,name:file.name,type:file.type,blob:file,at:new Date().toISOString()});tx.oncomplete=()=>{db.close();resolve(id)};tx.onerror=()=>{db.close();reject(tx.error)};});}
+async function dpDeleteReportFile(id){if(!id)return;const db=await dpDb();return new Promise((resolve,reject)=>{const tx=db.transaction('files','readwrite');tx.objectStore('files').delete(id);tx.oncomplete=()=>{db.close();resolve()};tx.onerror=()=>{db.close();reject(tx.error)};});}
+function dpDiscardUncommittedReportFile(id){if(id)dpDeleteReportFile(id).catch(e=>console.warn('Could not release abandoned attachment',e));}
+async function dpOpenReportFile(id){
+ const pet=state.dog,epoch=state.dpPetEpoch;let db=null;
+ try{
+  db=await dpDb();
+  const file=await new Promise((resolve,reject)=>{const tx=db.transaction('files','readonly');const req=tx.objectStore('files').get(id);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+  if(state.dog!==pet||state.dpPetEpoch!==epoch)return;
+  if(!file)throw Error('missing');
+  const url=URL.createObjectURL(file.blob),a=document.createElement('a');
+  a.href=url;a.download=file.name||'DeepPet_Report';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),15000);
+ }catch(e){
+  if(state.dog===pet&&state.dpPetEpoch===epoch)toast(label3('附件未找到，請重新上傳','Attachment unavailable; upload again','첨부 파일을 찾을 수 없습니다.'));
+ }finally{db?.close();}
+}
+
+function dpLabTrendRows(){const dates=reportAvailableDates(),byCode=new Map();dates.forEach((day,idx)=>{reportEntriesForDate(idx).forEach(e=>{const raw=String(e.name||'').trim(),unit=String(e.unit||'').trim(),missing=e.value===null||e.value===undefined||String(e.value).trim()==='',num=missing?NaN:Number(e.value);if(!raw||!Number.isFinite(num))return;const key=raw.toUpperCase()+'|'+unit;if(!byCode.has(key))byCode.set(key,{name:raw,unit,rows:[]});byCode.get(key).rows.push({date:day,value:num,sample:e.source==='sample'||!e.date});});});return [...byCode.values()].map(v=>{const petRows=v.rows.filter(row=>!row.sample),use=petRows.length?petRows:v.rows,byDate=new Map();for(const row of use){if(!byDate.has(row.date))byDate.set(row.date,[]);byDate.get(row.date).push(row);}const conflicts=[],clean=[];for(const [date,list] of byDate){if(new Set(list.map(row=>row.value)).size>1){conflicts.push(date);continue;}clean.push(list[0]);}return {...v,rows:clean.sort((a,b)=>a.date.localeCompare(b.date)),excludedDates:conflicts.sort(),demo:!petRows.length};}).filter(v=>v.rows.length>=2);}
+function dpLabTrendSvg(rows,unit,excludedDates=[]){
+ if(!Array.isArray(rows)||rows.length<2)return '';
+ const values=rows.map(x=>Number(x.value));if(values.some(x=>!Number.isFinite(x)))return '';
+ const lo=Math.min(...values),hi=Math.max(...values),margin=(hi-lo||Math.max(1,Math.abs(hi)*.1))*.15;
+ const min=lo-margin,max=hi+margin,w=330,h=148,left=55,right=10,top=14,bottom=105;
+ const time=date=>Date.parse(date+'T12:00:00Z'),first=time(rows[0].date),last=time(rows.at(-1).date);
+ const xx=i=>left+(w-left-right)*(time(rows[i].date)-first)/Math.max(1,last-first),yy=v=>top+(bottom-top)*(max-v)/Math.max(.001,max-min);
+ const coords=rows.map((r,i)=>[xx(i),yy(r.value)]),d=deepCurvePath(coords);
+ const number=v=>Number(v.toFixed(Math.abs(v)>=100?0:Math.abs(v)>=10?1:2)).toString();
+ // Both axes and every tick are SVG text, not part of a stretched screenshot.
+ const ticks=[min,(min+max)/2,max].map(v=>`<g><line x1="${left}" y1="${yy(v)}" x2="${w-right}" y2="${yy(v)}" stroke="#e7e6f2" stroke-dasharray="3 4"/><text x="${left-7}" y="${yy(v)+4}" text-anchor="end" font-size="11" fill="#52647d">${number(v)}</text></g>`).join('');
+ return `<div class="dp-lab-chart"><svg class="dp-lab-trend-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${label3('完整檢驗趨勢及數值座標','Laboratory values with complete X and Y axes','검사 값과 두 축의 눈금')}">${ticks}<line x1="${left}" y1="${top}" x2="${left}" y2="${bottom}" stroke="#98a0b9"/><line x1="${left}" y1="${bottom}" x2="${w-right}" y2="${bottom}" stroke="#98a0b9"/><path d="${d}" stroke="#755ed9" fill="none" stroke-width="3" stroke-linecap="round"/>${coords.map(([x,y],i)=>`<g class="dp-lab-point" data-action="lab-point" data-date="${rows[i].date}" data-value="${rows[i].value} ${esc(unit)}" data-lab-i="${i}" tabindex="0" role="button" aria-label="${rows[i].date} ${rows[i].value} ${esc(unit)}"><circle cx="${x}" cy="${y}" r="15" fill="transparent" pointer-events="all"/><circle cx="${x}" cy="${y}" r="4.5" fill="#755ed9" stroke="white" stroke-width="1.3"/><title>${rows[i].date} · ${rows[i].value} ${esc(unit)}</title></g>`).join('')}<text x="${left}" y="${h-11}" font-size="9" fill="#75809a">${rows[0].date}</text><text x="${w-right}" y="${h-11}" text-anchor="end" font-size="9" fill="#75809a">${rows.at(-1).date}</text></svg><div class="dp-lab-readout" aria-live="polite"><span>${label3('所選日期','Selected date','선택 날짜')}：<b class="dp-lab-date">${rows.at(-1).date}</b></span><span>${label3('檢驗值','Result','결과')}：<b class="dp-lab-value">${rows.at(-1).value} ${esc(unit)}</b></span></div><div class="dp-lab-points">${rows.map((r,i)=>`<button class="dp-lab-date-btn" data-action="lab-point" data-index="${i}" data-date="${r.date}" data-value="${r.value} ${esc(unit)}">${r.date.slice(5)}</button>`).join('')}</div>${excludedDates.length?`<p class="notices">${label3(`以下日期同一檢驗項目存在不同結果，未納入趨勢：${excludedDates.join('、')}。原始報告仍完整保留。`,`Conflicting same-test results were excluded on ${excludedDates.join(', ')}; original reports remain available.`,`같은 날짜에 서로 다른 검사 결과가 있어 ${excludedDates.join(', ')} 날짜는 추세에서 제외했습니다. 원본 기록은 유지됩니다.`)}</p>`:''}</div>`;
+}
+function dpSummaryMiniSvg(rows,key,color,unit){
+ // Showcase-only trend; a verified real pet requires a measured time series.
+ if(dpUsesRealMeasurements())return `<p class="subtitle">${label3('需要完整實測時序資料才能產生趨勢。','Complete measured time-series data is needed for this trend.','실제 시계열 측정 데이터가 더 필요합니다.')}</p>`;
+ const values=rows.map(row=>{
+  const value=key==='activeMinutes'?minuteDemoSeries('activityIntensity',row.date).filter(v=>v>=35).length:
+   key==='sleep'?dpNightSleepStats(row.idx).minutes/60:row[key];
+  return {date:row.date,value:typeof value==='number'&&Number.isFinite(value)?value:null};
+ }).filter(point=>point.value!==null).sort((a,b)=>a.date.localeCompare(b.date));
+ if(values.length<2)return `<p class="subtitle">${label3('目前沒有足夠資料形成趨勢。','More readings needed for a trend.','추세를 그리려면 기록이 더 필요합니다.')}</p>`;
+ const w=326,h=94,L=33,R=8,T=10,B=26,low=Math.min(...values.map(point=>point.value)),high=Math.max(...values.map(point=>point.value));
+ const pad=Math.max(1,(high-low)*.15),min=low-pad,max=high+pad,stamp=date=>Date.parse(date+'T12:00:00Z');
+ const start=stamp(values[0].date),end=stamp(values.at(-1).date),x=point=>L+(w-L-R)*(stamp(point.date)-start)/Math.max(1,end-start);
+ const y=value=>T+(h-T-B)*(max-value)/Math.max(.001,max-min);
+ const segments=[];let current=[];
+ for(let i=0;i<values.length;i++){if(i>0&&stamp(values[i].date)-stamp(values[i-1].date)>86400000){if(current.length)segments.push(current);current=[];}current.push(values[i]);}
+ if(current.length)segments.push(current);
+ const paths=segments.map(segment=>segment.map((point,i)=>`${i?'L':'M'}${x(point).toFixed(1)} ${y(point.value).toFixed(1)}`).join(' '));
+ const tick=number=>Number(number.toFixed(Math.abs(number)>=100?0:1));
+ const axis=[min,(min+max)/2,max].map(value=>`<line x1="${L}" y1="${y(value)}" x2="${w-R}" y2="${y(value)}" stroke="#e5eaf2"/><text x="${L-5}" y="${y(value)+3}" text-anchor="end" font-size="9" fill="#718199">${tick(value)}</text>`).join('');
+ return `<svg class="dp-summary-mini-svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label3('有效日期與指標數值的趨勢','Trend by actual dates and values','실제 날짜별 지표 추세')}">
+  ${axis}<line x1="${L}" y1="${T}" x2="${L}" y2="${h-B}" stroke="#a0aabb"/><line x1="${L}" y1="${h-B}" x2="${w-R}" y2="${h-B}" stroke="#a0aabb"/>
+  ${paths.map(d=>`<path d="${d}" fill="none" stroke="${color}" stroke-width="2.6" stroke-linecap="round"/>`).join('')}
+  ${values.map(point=>`<circle cx="${x(point)}" cy="${y(point.value)}" r="3" fill="${color}"><title>${point.date}: ${Math.round(point.value*10)/10} ${unit}</title></circle>`).join('')}
+  <text x="${L}" y="${h-6}" font-size="9" fill="#718199">${values[0].date}</text><text x="${w-R}" y="${h-6}" text-anchor="end" font-size="9" fill="#718199">${values.at(-1).date}</text>
+ </svg>`;
+}
+// V8.50: Record-backed period stories for the built-in 15 demo pets only.
+// Entries are clearly sample data and never masquerade as uploaded clinical files.
+function dpReviewDemoCare(petIndex=state.dog){
+ if((typeof selectedBlank==='function'&&selectedBlank())||Number(petIndex)<0||Number(petIndex)>=15||dpUsesRealMeasurements(Number(petIndex)))return {med:[],reports:[],vaccines:[]};
+ const p=Number(petIndex),species=(dogs[p]?.species||dogs[p]?.type||'dog').toLowerCase(),isCat=p===5||species==='cat',stamp=daysAgo=>iso(dateAdd(localDate(),-daysAgo));
+ const names=isCat?['腸胃益生菌','毛球營養支持','皮膚營養補充品']:['關節營養補充品','腸胃益生菌','皮膚營養補充品'];
+ const med=[1,4,7,10,14,18,22,27].map((age,i)=>({kind:'med',id:`demo-med-${p}-${age}`,date:stamp(age),time:i%2?'19:00':'09:00',name:names[(p+i)%3],status:'taken',qty:1,unit:'顆',sample:true}));
+ const reports=[2,16,26].map((age,i)=>({kind:'report',id:`demo-report-${p}-${age}`,date:stamp(age),name:[ '定期健康檢查','生化與血液檢查','健康追蹤檢查'][(p+i)%3],sample:true}));
+ const vaccines=[5,21].map((age,i)=>({kind:'vaccines',id:`demo-vax-${p}-${age}`,key:`demo-vax-${p}-${age}`,date:stamp(age),doneDate:stamp(age),time:'10:30',name:(i===0?'狂犬病疫苗':isCat?'貓核心綜合疫苗':'犬核心綜合疫苗'),status:'done',source:'sample',sample:true}));
+ return {med,reports,vaccines};
+}
+function dpReviewPeriodCurve(series,color,title,dates){
+ // Missing observations are gaps, never actual 0-point scores.
+ const pts=series.map((v,i)=>({x:i,y:v===null||v===undefined||v===''?NaN:Number(v)})).filter(p=>Number.isFinite(p.y));
+ if(!pts.length)return '';
+ const w=334,h=128,L=23,R=12,T=14,B=27,max=100,min=0;
+ const x=i=>L+(w-L-R)*i/Math.max(1,series.length-1),y=v=>T+(h-T-B)*(max-Math.max(min,Math.min(max,v)))/(max-min);
+ const segments=[];let segment=[];
+ for(let i=0;i<series.length;i++){
+  const v=series[i];if(v===null||v===undefined||v===''||!Number.isFinite(Number(v))){if(segment.length)segments.push(segment);segment=[];continue;}
+  segment.push({x:i,y:Number(v)});
+ }
+ if(segment.length)segments.push(segment);
+ const paths=segments.map(items=>items.map((p,i)=>`${i?'L':'M'}${x(p.x).toFixed(1)},${y(p.y).toFixed(1)}`).join(' '));
+ const areas=paths.map((poly,i)=>poly+` L${x(segments[i].at(-1).x).toFixed(1)},${h-B} L${x(segments[i][0].x).toFixed(1)},${h-B} Z`);
+ // Every available day is an inspectable point, not just each fifth day.
+ const key='dp850'+(title==='status'?'a':'b'),dots=pts;
+ return `<div class="dp850-curve"><div class="dp850-curve-head"><span>${label3('期間變化趨勢','Period trend','기간 변화 추세')}</span><b>${series.length} ${label3('天','days','일')}</b></div><svg role="img" aria-label="${label3('每日評分趨勢曲線','Daily score trend','일별 점수 추세')}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="${key}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".23"/><stop offset="100%" stop-color="${color}" stop-opacity=".015"/></linearGradient></defs>${[0,50,80,90,100].map(q=>`<line x1="${L}" x2="${w-R}" y1="${y(q)}" y2="${y(q)}" stroke="#e5ebf3" stroke-dasharray="4 5" stroke-width="1"/><text x="${L-4}" y="${y(q)+3}" text-anchor="end" font-size="8" fill="#8190a7">${q}</text>`).join('')}<line x1="${L}" y1="${T}" x2="${L}" y2="${h-B}" stroke="#9eabba" stroke-width="1"/>${areas.map(area=>`<path d="${area}" fill="url(#${key})"/>`).join('')}${paths.map(poly=>`<path d="${poly}" fill="none" stroke="${color}" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>`).join('')}${dots.map(p=>`<circle cx="${x(p.x)}" cy="${y(p.y)}" r="3.8" fill="white" stroke="${color}" stroke-width="2"><title>${dates[p.x]} · ${Math.round(p.y)}</title></circle>`).join('')}<text x="${L}" y="${h-4}" font-size="10" fill="#8190a7">${dates[0]?.slice(5).replace('-','/')}</text><text x="${w-R}" y="${h-4}" text-anchor="end" font-size="10" fill="#8190a7">${dates.at(-1)?.slice(5).replace('-','/')}</text></svg></div>`;
+}
+function dpReviewCareEntry(v){
+ const type=v.kind==='med'?'med':v.kind==='report'?'report':'vaccines';
+ const dateNote=type==='vaccines'&&v.actualDateUnknown?` · ${label3('僅原預約日','Scheduled date only','예약일만 기록')}`:'';
+ return `<button class="dp850-record" data-action="review-care-open" data-kind="${type}" data-date="${v.date}" data-id="${esc(v.id)}" aria-label="${esc(v.name+' '+v.date+dateNote)}"><span class="dp850-record-date">${v.date.slice(5).replace('-','/')}</span><span class="dp850-record-name">${esc(v.name)}${dateNote}</span><span class="dp850-record-go">↗</span></button>`;
+}
+function dpHealthSummary(days=state.healthSummaryDays===30?30:7){
+ // Keep every calendar day, including the gaps. Filtering missing days before
+ // drawing joined far-apart observations as if they were consecutive days.
+ const rows=dayRowsWithIndex(days),start=iso(dateAdd(localDate(),1-days)),end=iso(localDate());
+ const scoredDays=new Map((globalThis.DeepPetSignalScoring?.getDaily?.(state.dog)||[]).filter(Boolean).map(d=>[d.date,d.scores]));
+ const records=rows.map(row=>{
+  const valid=validDaySample(row,row.idx).valid;
+  if(!valid)return {date:row.date,phys:null,rhythm:null,parts:{heart:null,sleep:null,energyActivity:null},rhythmParts:null};
+  const engine=scoredDays.get(row.date),number=x=>Number.isFinite(x)?x:null;
+  // Period averages and their displayed components must share the same
+  // event-capped, date-matched engine output as Home/Deep. A separate legacy
+  // dpOwnerDayScores() path could show green components above a red daily score.
+  const parts={heart:number(engine?.cardio),sleep:number(engine?.sleep),energyActivity:number(engine?.activityRecovery)};
+  const rhythmParts={calm:number(engine?.calm),stable:number(engine?.stable)};
+  const validPhysical=Object.values(parts).every(Number.isFinite);
+  const validRhythm=Object.values(rhythmParts).every(Number.isFinite);
+  const phys=validPhysical?number(engine?.physiol):null,rhythm=validRhythm?number(engine?.rhythm):null;
+  return {date:row.date,phys,rhythm,parts,rhythmParts};
+ });
+ const validPhysicalRecords=records.filter(v=>Number.isFinite(v.phys));
+ const validRhythmRecords=records.filter(v=>Number.isFinite(v.rhythm));
+ const avg=values=>{const xs=values.filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v))).map(Number);return xs.length?Math.round(xs.reduce((sum,x)=>sum+x,0)/xs.length):null;};
+ const physScore=avg(validPhysicalRecords.map(r=>r.phys)),rhythmScore=avg(validRhythmRecords.map(r=>r.rhythm));
+ const physComponents=[
+  {name:label3('心肺狀態','Heart & breathing','심폐 상태'),val:avg(validPhysicalRecords.map(r=>r.parts.heart))},
+  {name:label3('睡眠狀態','Sleep & rest','수면 상태'),val:avg(validPhysicalRecords.map(r=>r.parts.sleep))},
+  {name:label3('精力與恢復','Energy & Recovery','활력과 회복'),val:avg(validPhysicalRecords.map(r=>r.parts.energyActivity))}
+ ];
+ const rhythmComponents=[
+  {name:label3('放鬆與平穩度','Relaxation','휴식과 안정'),val:avg(validRhythmRecords.map(r=>rhythmPositiveValue('calm',r.rhythmParts)))},
+  {name:label3('心搏節奏穩定度','Rhythm stability','심박 리듬 안정'),val:avg(validRhythmRecords.map(r=>rhythmPositiveValue('stable',r.rhythmParts)))}
+ ];
+ const scoreColor=n=>n===null?'#7788a1':scoreScheme(n).color;
+ const tiles=items=>`<div class="dp850-components">${items.map(item=>`<div class="dp850-part"><span>${item.name}</span><b style="color:${scoreColor(item.val)}">${item.val===null?'—':item.val}<small>/100</small></b></div>`).join('')}</div>`;
+ const panel=(no,title,score,parts,values,shade,validCount)=>`<section class="card dp850-score-panel" style="--dp850-accent:${shade}"><div class="dp850-panel-head"><div class="dp850-panel-titles"><span class="dp850-panel-eyebrow">${no} · ${days===7?'WEEKLY':'MONTHLY'} INSIGHT</span><h3>${title}</h3><small>${start.slice(5).replace('-','/')} – ${end.slice(5).replace('-','/')} · ${label3('有效評分','Valid scores','유효 점수')} ${validCount}/${days}</small></div><div class="dp850-mean">${dpDotScore(score,'health')}<span>${label3('平均分','Average','평균')}</span></div></div>${dpReviewPeriodCurve(values,shade,no,records.map(r=>r.date))}${tiles(parts)}</section>`;
+ const demo=dpReviewDemoCare(state.dog),pk=String(state.dog),personalMeds=(state.medHistoryByPet?.[pk]||[]).filter(x=>x.status==='taken').map(x=>({...x,id:x.id||`real-med-${x.date}`,kind:'med'})),userReports=(state.userReportEntries?.[pk]||[]).filter(x=>x.date).map(x=>({...x,kind:'report',name:x.clinic||x.name||'體檢報告',id:x.id||`real-report-${x.date}`})),vaccinations=vaxForDog().filter(x=>x.status==='done'&&(!dpUsesRealMeasurements()||x.source!=='sample'&&x.sample!==true)).map(x=>({...x,kind:'vaccines',date:x.doneDate||x.date,actualDateUnknown:!x.doneDate,id:x.id||x.key}));
+ // The care journal must list the exact examination reports shown in Health,
+ // not an independent set of sample reports with different dates and counts.
+ const labRows=globalThis.dp914ReportRecords?.(state.dog);
+ const canonicalReports=Array.isArray(labRows)?[...new Map(labRows.filter(x=>x?.date).map(x=>[`${x.reportId||'legacy:'+x.date}::${x.date}`,{kind:'report',id:x.reportId||`legacy:${x.date}`,date:x.date,name:x.clinic||label3('體檢報告','Examination report','검진 보고서'),sample:x.sample===true}])).values()]:[...demo.reports.filter(r=>reportAvailableDates().includes(r.date)),...userReports];
+ const filter=arr=>arr.filter(x=>x.date>=start&&x.date<=end),med=filter([...demo.med,...personalMeds]).sort((a,b)=>b.date.localeCompare(a.date)),reports=filter(canonicalReports).sort((a,b)=>b.date.localeCompare(a.date)),vax=filter([...allVaxForDog().filter(x=>x.source==='sample'&&x.status==='done').map(x=>({...x,kind:'vaccines',date:x.doneDate||x.date,actualDateUnknown:!x.doneDate,id:x.id||x.key})),...vaccinations]).sort((a,b)=>b.date.localeCompare(a.date));
+ const careGroup=(name,values,icon)=>`<div class="dp850-care-group"><div class="dp850-care-title"><span>${icon} ${name}</span><strong>${values.length} ${label3('筆','records','건')}</strong></div>${values.map(dpReviewCareEntry).join('')||`<p class="dp850-empty">${label3('此期間沒有紀錄','No records this period','이번 기간 기록 없음')}</p>`}</div>`;
+ const name=esc(currentDog().name),photo=esc(currentDog().photo||currentDog().avatar||''),period=days===7?label3('本週回顧','Weekly Review','이번 주 회고'):label3('本月回顧','Monthly Review','이번 달 회고');
+ return `<section class="card dp850-hero" style="background-image:linear-gradient(180deg,rgba(9,20,36,.13),rgba(10,23,39,.88)),url('${photo}')"><div class="dp850-hero-kicker">DeepPet / HEALTH STORY</div><div class="dp850-hero-copy"><span>${name} · ${start.slice(5).replace('-','/')} — ${end.slice(5).replace('-','/')}</span><h2>${period}</h2><p>${label3('一段時間，兩個角度，讀懂牠的健康。','Two perspectives on your pet’s wellbeing.','두 가지 점수로 건강을 살펴봐요.')}</p></div></section>
+ ${panel('01',label3('身體狀態平均分','Body status · average','몸 상태 평균'),physScore,physComponents,records.map(r=>r.phys),scoreColor(physScore),validPhysicalRecords.length)}
+ ${panel('02',label3('身體節奏平均分','Body rhythm · average','몸의 리듬 평균'),rhythmScore,rhythmComponents,records.map(r=>r.rhythm),scoreColor(rhythmScore),validRhythmRecords.length)}
+ <section class="card dp850-care"><div class="dp850-care-header"><div><span>DAILY HEALTH RECORDS</span><h3>${label3('日常健康紀錄','Daily health records','일상 건강 기록')}</h3></div><small>${label3('點擊單筆查看原始紀錄','Tap a record for details','기록을 눌러 상세 보기')}</small></div>
+ ${careGroup(label3('用藥記錄','Medication','복약 기록'),med,'✚')}
+ ${careGroup(label3('體檢報告','Examination reports','검진 보고서'),reports,'▤')}
+ ${careGroup(label3('疫苗記錄','Vaccinations','예방접종'),vax,'◈')}</section>`;
+}
+
+function targetFood(){const saved=Number(state.foodTarget?.[state.dog]);return saved>0?saved:dpAutoEnergy();}
+
+function densityFood(){return DP_FOODS.dry.kcal;}
+
+function currentMealList(){return dpFoodMeals();}
+
+function bioEstimateFromSignals(record,d,index){
+ // DEMO-ONLY model, not a veterinary biological-age score or validated aging clock.
+ // Base anchor is the selected pet profile; influences below are bounded to keep a
+ // visually plausible trend for reviewing design and scientific descriptions.
+ const heart=(record.heart-d.hr)/Math.max(55,d.hr);
+ const breathing=(record.breath-d.rr)/Math.max(12,d.rr);
+ const hrv=((34-record.rmssd)/34*.55+(51-record.sdnn)/51*.45);
+ const activity=(332+index*.0-record.activity)/420;
+ const rest=(d.rest-record.sleep)/Math.max(7,d.rest);
+ const weight=Math.abs(record.weight-d.weight)/Math.max(1,d.weight);
+ const food=Math.abs(record.food-d.target)/Math.max(140,d.target);
+ const delta=.28*heart+.22*breathing+.22*hrv+.14*activity+.16*rest+.10*weight+.09*food;
+ const longTerm=0.06*Math.sin(index*.23+d.age*.15);
+ return +Math.max(.1,d.bio + Math.max(-.23,Math.min(.23,delta)) + longTerm).toFixed(2);
+}
+let dp904RenderCache=new Map();
+function dpUsesRealMeasurements(index=state.dog){
+ const animal={...(allPets()[index]||{}),...(state.petOverrides?.[index]||{})};
+ return index>=dogs.length||animal.dpFixtureInvalidated===true||animal.dpFreshPet===true||animal.freeCare===true;
+}
+// Only genuinely new owner-created pets (index >= 15) may undergo legacy
+// sample cleanup. Gallery fixtures are intentionally NEVER deleted, including
+// after an edit, photo upload or restoration of an old V9.63 browser cache.
+function dpPruneOwnerShowcaseRecords(index=state.dog){
+ if(index<dogs.length||!dpUsesRealMeasurements(index))return false;
+ const key=String(index),synthetic=x=>!!x&&typeof x==='object'&&(x.sample===true||x.source==='sample'||x.source==='showcase');
+ let changed=false;const removedMeds=new Set();
+ // Before the per-pet vaccine migration, Milo's entries lived in state.vax.
+ if(index===0&&Array.isArray(state.vax)){
+  const old=state.vax,retained=old.filter(row=>!synthetic(row));
+  if(retained.length!==old.length){state.vax=retained;changed=true;}
+ }
+ for(const bucket of ['medsByDog','vaxByDog','notesByDog','userReportEntries','behaviorLogs']){
+  const rows=state[bucket]?.[key];if(!Array.isArray(rows))continue;
+  const retained=rows.filter(row=>{if(!synthetic(row))return true;if(bucket==='medsByDog'&&row.id!==undefined)removedMeds.add(String(row.id));return false;});
+  if(retained.length!==rows.length){state[bucket][key]=retained;changed=true;}
+ }
+ // Legacy meal entries are keyed by `${petIndex}-YYYY-MM-DD`, not nested per pet.
+ const meals=state.mealItems;
+ if(meals&&typeof meals==='object')for(const [dayKey,rows] of Object.entries(meals)){
+  if(!dayKey.startsWith(key+'-')||!Array.isArray(rows))continue;
+  const retained=rows.filter(row=>!synthetic(row));
+  if(retained.length!==rows.length){meals[dayKey]=retained;changed=true;}
+ }
+ // This storage namespace was created exclusively by demoRecords(), which
+ // previously wrote fictional 30-day snapshots even for owner-created pets.
+ if(state.dpDemoDailySnapshots?.[key]){
+  delete state.dpDemoDailySnapshots[key];changed=true;
+  if(typeof dp904RenderCache!=='undefined')for(const cacheKey of dp904RenderCache.keys())
+   if(cacheKey.startsWith('records:'+key+':'))dp904RenderCache.delete(cacheKey);
+ }
+ if(removedMeds.size&&Array.isArray(state.medHistoryByPet?.[key])){
+  const old=state.medHistoryByPet[key],retained=old.filter(row=>!removedMeds.has(String(row?.id)));
+  if(retained.length!==old.length){state.medHistoryByPet[key]=retained;changed=true;}
+ }
+ // Some older sessions already removed the seed medication but kept its
+ // taken/skipped history. Never migrate that orphan showcase dose to an owner.
+ if(Array.isArray(state.medHistoryByPet?.[key])){
+  const old=state.medHistoryByPet[key],retained=old.filter(row=>!/^dp-showcase(?:-833)?-med-/.test(String(row?.id||'')));
+  if(retained.length!==old.length){state.medHistoryByPet[key]=retained;changed=true;}
+ }
+ if(changed){globalThis.DeepPetSignalScoring?.invalidate?.(index);persist();}
+ return changed;
+}
+function demoRecords(dogIndex){
+ // The rolling 30-day fixture window must advance at local midnight even
+ // when the WebApp stays open; otherwise "today" still points to yesterday.
+ const dp904Key=`records:${dogIndex}:${iso(localDate())}`;
+ if(dp904RenderCache.has(dp904Key))return dp904RenderCache.get(dp904Key);
+ // All real/edited pets get calendar slots only. Even when the daily engine
+ // has accepted a real 20 Hz record, no synthetic heart, breath, sleep, food,
+ // recovery, weight, bio-age or 30-day snapshot may be produced here.
+ if(dpUsesRealMeasurements(dogIndex)){
+  const calendar=Array.from({length:30},(_,i)=>({date:iso(dateAdd(localDate(),i-29))}));
+  dp904RenderCache.set(dp904Key,calendar);return calendar;
+ }
+ // Upgrade only the bundled example sensor snapshots, not personally entered records.
+ if(dogIndex<dogs.length && state.dpShowcaseScenarioVersion!==833){
+  state.dpDemoDailySnapshots??={};
+  for(let k=0;k<dogs.length;k++)delete state.dpDemoDailySnapshots[String(k)];
+  state.dpShowcaseScenarioVersion=833;persist();
+ }
+ // V9.80: two older CAT gallery baselines had conspicuously inflated SDNN.
+ // Apply a one-time HRV-only correction to dated cached fixtures, preserving
+ // every other sensor, health, medication, lab, vaccine and diet field. This
+ // does NOT touch owner pets or independent user-entered records.
+ if(dogIndex<dogs.length&&state.dpHrvEvidenceVersion!==980){
+  const changes={5:{rm:13,sd:41},9:{rm:6,sd:20}};
+  for(const [index,delta] of Object.entries(changes)){
+   const snapshots=state.dpDemoDailySnapshots?.[index];if(!snapshots)continue;
+   for(const row of Object.values(snapshots))if(row&&Number.isFinite(row.rmssd)&&Number.isFinite(row.sdnn)){
+    row.rmssd=+(Math.max(1,row.rmssd-delta.rm)).toFixed(1);
+    row.sdnn=+(Math.max(1,row.sdnn-delta.sd)).toFixed(1);
+   }
+  }
+  state.dpHrvEvidenceVersion=980;persist();
+ }
+ const d={...allPets()[dogIndex],...(state.petOverrides?.[dogIndex]||{})}, out=[];
+ const demo=DP_SHOWCASE_CASES[dogIndex]||{a:1,h:4,b:2,r:1,rm:34,sd:51,v:1,phase:dogIndex*.5};
+ for(let i=0;i<30;i++){
+  const date=iso(dateAdd(localDate(),i-29));
+  const calendarCode=Math.floor(Date.parse(date+'T12:00:00Z')/86400000);
+  const wave=Math.sin((calendarCode%479)*.62+demo.phase)*.72+Math.cos((calendarCode%307)*1.03+demo.phase*.7)*.34;
+  const shift=Math.sin((calendarCode%601)*.19+demo.phase)*.42;
+  const w=(wave+shift)*demo.v;
+  const activity=Math.max(35,Math.round((332+wave*66+shift*60)*demo.a));
+  const lateShift=(i>=27?({1:10,2:13,3:17,7:11,8:14,10:16,12:7,14:11}[dogIndex]||0):0);
+  const recovery=Math.max(8,Math.round(d.recovery+w*5.1+(activity-330*demo.a)*.032+lateShift));
+  const hr=Math.round(d.hr+wave*demo.h+(recovery-d.recovery)*.10);
+  const breath=Math.round(d.rr+wave*demo.b+(hr-d.hr)*.12);
+  const rest=+Math.max(5.5,Math.min(16.5,d.rest-wave*demo.r-shift*.6)).toFixed(1);
+  const health=Math.max(0,Math.min(100,Math.round(d.score.reduce((s,x)=>s+x,0)/3-wave*4*demo.v-(recovery-d.recovery)*.20)));
+  const food=Math.round(d.target*(.9+Math.sin(i*.38+dogIndex)*.08));
+  const weight=+(d.weight+(i-29)*-.005+Math.sin(i*.2+dogIndex)*.04).toFixed(2);
+  
+  const rmssd=+(Math.max(5,demo.rm+wave*(3.7+demo.v*2.4)+shift*3.4)).toFixed(1);
+  const sdnn=+(Math.max(9,demo.sd+wave*(4.5+demo.v*3.0)-shift*4.1)).toFixed(1);
+  const nvgr=+(hr+0.65*Math.sin(i*.51+dogIndex)).toFixed(1); // NNVGR: supplier-defined mean HR (bpm)
+  const bio=bioEstimateFromSignals({heart:hr,breath,rmssd,sdnn,activity,sleep:rest,weight,food},d,i);
+  out.push({date,heart:hr,breath,activity,recovery,sleep:rest,score:health,food,weight,bio,rmssd,sdnn,nvgr});
+ }
+ Object.assign(out[29],{heart:d.hr+(dogIndex===2?12:0),breath:d.rr+(dogIndex===2?3:0),sleep:d.rest,recovery:out[29].recovery,score:Math.round(d.score.reduce((s,x)=>s+x,0)/3),food:todayFoodFor(dogIndex),weight:d.weight});
+ out[29].bio=bioEstimateFromSignals(out[29],d,29);
+ // Freeze the fictional daily measurements by pet and date. A sliding 30-day
+ // window must not retroactively alter the numbers for the same calendar day.
+ state.dpDemoDailySnapshots??={};
+ const petKey=String(dogIndex),snapshots=state.dpDemoDailySnapshots[petKey]||(state.dpDemoDailySnapshots[petKey]={});
+ let newRows=0;
+ for(let j=0;j<out.length;j++){
+  const dateKey=out[j].date;
+  if(snapshots[dateKey])out[j]={...snapshots[dateKey]};
+  else{snapshots[dateKey]={...out[j]};newRows++;}
+ }
+ const cutoff=iso(dateAdd(localDate(),-65));
+ for(const key of Object.keys(snapshots))if(key<cutoff)delete snapshots[key];
+ if(newRows)persist();
+ dp904RenderCache.set(dp904Key,out);
+ return out;
+}
+function currentBioAge(){return demoRecords(state.dog).at(-1).bio;}
+// Compare the numbers at the SAME display precision; color signals direction, not diagnosis.
+function bioAgeDelta(){const estimate=currentBioAge(),real=Number(currentDog().age);if(!Number.isFinite(estimate)||!Number.isFinite(real))return {bio:null,actual:Number.isFinite(real)?real:null,diff:null};const bio=Number(estimate.toFixed(2)),actual=real,diff=Number((bio-actual).toFixed(2));return {bio,actual,diff};}
+function bioAgeDeltaBadge(){const {bio,actual}=bioAgeDelta();if(!Number.isFinite(bio)||!Number.isFinite(actual))return '<span class="bio-delta-chip">—</span>';const diff=window.DeepPetMetric1015?.difference('age',bio,actual)??Math.round((Number(bio.toFixed(1))-Number(actual.toFixed(1)))*10)/10;const tone=diff<0?'younger':diff>0?'older':'equal';const symbol=diff>0?'+':diff<0?'−':'±';const message=diff<0?label3('估算年齡較實際年齡小','Estimate below actual age','추정 나이가 실제보다 낮음'):diff>0?label3('估算年齡較實際年齡大','Estimate above actual age','추정 나이가 실제보다 높음'):label3('估算年齡與實際年齡接近','Estimate matches actual age','실제 나이와 비슷');const amount=window.DeepPetMetric1015?.format('age',Math.abs(diff))??Math.abs(diff).toFixed(1);return `<span class="bio-delta-chip ${tone}">${symbol}${amount} ${t('years')} · ${message}</span>`;}
+
+function todayFoodFor(i){const meals=state.mealItems?.[String(i)+'-'+iso(localDate())]||[];return Math.round(meals.reduce((a,m)=>a+Number(m.kcal||0),0));}
+
+function daySeries(dogIndex,kind){return demoRecords(dogIndex).map(d=>d[kind]??d.score)}
+// V6.0: shared interactive inspection engine. These are illustrative minute samples,
+// never raw BCG or a medical-quality recording. Daily aggregated metrics stay daily.
+let plotRegistry=[];
+const simulatedMinuteCache=new Map();
+function dateRatio(day,start,end){const startMs=Date.parse(start+'T00:00:00Z'),endMs=Date.parse(end+'T00:00:00Z'),value=Date.parse(day+'T00:00:00Z');return endMs===startMs?.5:Math.max(0,Math.min(1,(value-startMs)/(endMs-startMs)));}
+function minuteClock(i){const m=Math.max(0,Math.min(1439,Math.round(i)));return `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;}
+function minuteDemoSeries(kind,date){
+ // This generator is ONLY the gallery fixture, never a real owner's data.
+ if(dpUsesRealMeasurements())return [];
+ const pet=state.dog,records=demoRecords(pet),day=records.findIndex(x=>x.date===date);
+ if(day<0)return [];
+ const base=records[day],key=`${pet}:${date}:${kind}:${base.heart}:${base.breath}:${base.activity}:${base.sleep}`;
+ if(simulatedMinuteCache.has(key))return simulatedMinuteCache.get(key);
+ const dayCode=(Math.floor(Date.parse(date+'T12:00:00Z')/86400000)%997);
+ const seed=pet*.12+dayCode*.09;
+ const sleepSlots=kind==='restState'?sleepPatternForDay(day).slots:null;
+ const exerciseStops=[438+(pet*13+dayCode*2)%55,800+(pet*9+dayCode*3)%60,1055+(pet*17+dayCode)%48];
+ const exertionAt=(minute,kind)=>exerciseStops.reduce((acc,stop,i)=>{
+  const length=12+((dayCode*3+i*7+pet)%17),peak=14+((pet*7+dayCode*5+i*3)%19);
+  const d=minute-stop;const progress=Math.max(0,Math.min(1,(d+7)/8));
+  const rise=d>=-7&&d<1?peak*progress:0;
+  const plateau=d>=1&&d<length?peak*(.84+.14*Math.sin(d*.45+i)):0;
+  const recovery=d>=length&&d<length+27?peak*Math.exp(-(d-length)/8):0;
+  return acc+(kind==='heart'?rise+plateau+recovery:(d>=-7&&d<length?52+peak:0));
+ },0);
+ let out=[];
+ for(let m=0;m<1440;m++){
+   const morning=Math.exp(-Math.pow((m-465)/185,2)),evening=Math.exp(-Math.pow((m-1050)/195,2));
+   const wave=Math.sin(m*.007+seed)*.46+Math.sin(m*.037+seed*2)*.25+Math.cos(m*.021+seed)*.18+Math.sin(m*.139+dayCode)*.10;
+   let v;
+   if(kind==='heart')v=Math.max(30,base.heart-5.0+wave*5.2+morning*7.5+evening*5.8+exertionAt(m,'heart')+Math.sin(m*.63+dayCode)*.75);
+   else if(kind==='breath')v=Math.max(5,base.breath-1.1+wave*1.15+morning*1.35+evening*1.4+exertionAt(m,'heart')*.105+Math.sin(m*.17+dayCode)*.21);
+   else if(kind==='activityIntensity'){
+     // Simulated activity intensity; NOT minutes-of-recovery or actual collar values.
+      // Diverse short bouts with continuity at each minute; stable per pet/date.
+      const daylight=(m>=330&&m<1320)?1:.10;
+      const rhythms=Math.sin(m*.137+seed*9)*.27+Math.sin(m*.219+seed*13)*.17+Math.cos(m*.071+seed*5)*.25;
+      const shortBout=Math.pow(Math.max(0,Math.sin(m*.043+seed*3.5)),2)*.42;
+      const bursts=Math.pow(Math.max(0,Math.sin(m*.018+seed*2)),3)*.38;
+      const micro=Math.sin(m*.41+seed*3)*.08;
+      v=Math.max(0,Math.min(100,Math.round(8+daylight*(26+rhythms*38+shortBout*66+bursts*54+micro*25)+exertionAt(m,'activity'))));
+   }else if(kind==='restState'){
+     // Underlying prototype sleep data were 30-minute slots. Carry the known slot
+     // state across each of its 30 minutes without inventing within-slot changes.
+     const slot=sleepSlots[Math.floor(m/30)];
+     v=slot==='sleep'?100:0;
+   }else return [];
+   out.push(kind==='heart'?Math.round(v*100)/100:kind==='breath'?Math.round(v*100)/100:v);
+ }
+ if(kind==='heart'||kind==='breath'){
+   // Keep the minute demo centered on that date's daily illustrative statistic.
+   const mean=out.reduce((a,b)=>a+b,0)/out.length,desired=kind==='heart'?base.heart:base.breath;
+   out=out.map(v=>Math.round(Math.max(kind==='heart'?25:4,v+desired-mean)*100)/100);
+ }
+  if(kind==='activityIntensity'){
+    const duration=Math.max(0,Math.min(900,Math.round(base.activity)));
+    const ranked=out.map((value,i)=>({value,i})).sort((a,b)=>b.value-a.value||a.i-b.i);
+    const active=new Set(ranked.slice(0,duration).map(x=>x.i));
+    out=out.map((value,i)=>active.has(i)?Math.max(40,Math.min(100,Math.round(40+value*.52))):Math.min(30,Math.round(value*.32)));
+  }
+ simulatedMinuteCache.set(key,out);
+ if(simulatedMinuteCache.size>170)simulatedMinuteCache.delete(simulatedMinuteCache.keys().next().value);
+ return out;
+}
+
+// V8.18 quiet respiratory-rate guard: use only ten-minute low-motion windows.
+// For production, replace the demo minute arrays with time-stamped, quality-gated SDK breath intervals.
+const dpQuietRespCache=new Map();
+function dpQuietRespDatum(row){
+ if(!row)return null;
+ const key=[state.dog,row.date,row.breath,row.activity].join(':');
+ if(dpQuietRespCache.has(key))return dpQuietRespCache.get(key);
+ const motion=minuteDemoSeries('activityIntensity',row.date),breath=minuteDemoSeries('breath',row.date);
+ let windows=[],quietMinutes=0;
+ for(let t=0;t+10<=Math.min(motion.length,breath.length);t+=10){
+  const mv=motion.slice(t,t+10),rr=breath.slice(t,t+10);
+  if(mv.length!==10||rr.some(v=>!Number.isFinite(v)||v<=0)||mv.some(v=>v>=35))continue;
+  const mean=rr.reduce((a,b)=>a+b,0)/rr.length;
+  if(Math.max(...rr)-Math.min(...rr)>7.5)continue;
+  windows.push(mean);quietMinutes+=10;
+ }
+ const value=quietMinutes>=30&&windows.length>=3?Math.round(windows.reduce((a,b)=>a+b,0)/windows.length*10)/10:null;
+ const data={date:row.date,value,quietMinutes,windowCount:windows.length};
+ dpQuietRespCache.set(key,data);
+ if(dpQuietRespCache.size>85)dpQuietRespCache.delete(dpQuietRespCache.keys().next().value);
+ return data;
+}
+function dpQuietRespModel(days=state.range){
+ const history=demoRecords(state.dog),idx=days===1?Math.max(0,history.findIndex(r=>r.date===deepChosenDate())):history.length-1;
+ const range=days===1?1:Math.min(days,history.length);
+ const rows=history.map((row,i)=>({...row,idx:i})).slice(Math.max(0,idx-range+1),idx+1)
+  .filter(r=>validDaySample(r,r.idx).valid).map(dpQuietRespDatum).filter(x=>x&&Number.isFinite(x.value));
+ const reference=history.map((row,i)=>({...row,idx:i})).slice(Math.max(0,idx-14),idx)
+  .filter(r=>validDaySample(r,r.idx).valid).map(dpQuietRespDatum).filter(x=>x&&Number.isFinite(x.value));
+ const avg=arr=>arr.length?arr.reduce((a,b)=>a+b.value,0)/arr.length:null;
+ const baseline=reference.length>=7?avg(reference):null;
+ const recent=history.map((row,i)=>({...row,idx:i})).slice(Math.max(0,idx-2),idx+1)
+  .filter(r=>validDaySample(r,r.idx).valid).map(dpQuietRespDatum).filter(x=>x&&Number.isFinite(x.value));
+ const latest=recent.at(-1),above=baseline!==null&&recent.filter(x=>x.value>=baseline+Math.max(3,baseline*.15)).length;
+ const rising=recent.length>=3&&recent.every((x,i)=>i===0||x.value>=recent[i-1].value+.5);
+ const alert=baseline!==null&&latest?.date===history[idx]?.date&&recent.length>=3&&(above>=2||rising)&&latest.value>=baseline+Math.max(3,baseline*.15);
+ return {rows,baseline,referenceDays:reference.length,mean:avg(rows),latest,alert,days,idx};
+}
+// Owner pets receive only SDK-derived low-motion respiratory aggregates. The
+// minute-by-minute showroom generator must never become an owner's trend chart.
+function dpVerifiedQuietRespPanel(days=state.range){
+ const today=iso(localDate()),cutoff=iso(dateAdd(localDate(),-(Math.max(1,days)-1))),chosen=days===1?deepChosenDate():null;
+ const all=(window.DeepPetSignalScoring?.getFeatures?.(state.dog)||[])
+  .filter(x=>x&&x.date<=today&&x.quality?.restQuality===true&&x.quality?.respValid===true&&x.quietBreathRate!==null&&Number.isFinite(x.quietBreathRate))
+  .sort((a,b)=>a.date.localeCompare(b.date));
+ const inRange=all.filter(x=>days===1?x.date===chosen:x.date>=cutoff),recent=all.filter(x=>x.date<today&&x.date>=iso(dateAdd(localDate(),-14)));
+ const mean=x=>x.length?x.reduce((sum,r)=>sum+r.quietBreathRate,0)/x.length:null;
+ const value=mean(inRange),baseline=recent.length>=7?mean(recent):null;
+ const say=(tw,en,ja,ko)=>state.lang==='zh'?toSimplified(tw):state.lang==='zht'?toTraditional(tw):state.lang==='ja'?ja:state.lang==='ko'?ko:en;
+ const title=say('靜息呼吸變化守護','Resting breathing watch','安静時呼吸の変化','안정 시 호흡 변화 관찰');
+ const note=value===null
+  ?say('尚未收到足夠且品質合格的真實安靜呼吸資料；不使用模擬圖表補足。','No verified low-motion breathing samples yet; simulated readings are never substituted.','検証済みの安静時呼吸データがありません。模擬値は補完しません。','검증된 안정 호흡 자료가 아직 없습니다. 시뮬레이션으로 채우지 않습니다.')
+  :baseline===null
+  ?say('已顯示真實低活動時段資料；建立個體參考仍需至少7個過去有效日。','Verified quiet-period data is shown. Seven prior valid days are needed for a reference.','実測の安静時データを表示しています。個体基準には過去7日以上の有効日が必要です。','검증된 안정 호흡 자료입니다. 반려동물 자체 기준은 이전 유효일 7일 이상 필요합니다.')
+  :say('以下為已驗證的安靜時段日平均值。請在相近環境下比較，持續異常時諮詢獸醫。','These are verified low-motion daily values; compare similar conditions and consult a vet if changes persist.','確認済みの安静時の値です。似た条件で比較し、変化が続く場合は獣医師へ。','검증된 안정 호흡 일별 값입니다. 비슷한 조건에서 비교하고 지속되면 수의사에게 상담하세요.');
+ const chart=inRange.length>1?`<div class="dp-quiet-bars" role="img" aria-label="${title}">${inRange.map(x=>`<div class="dp-quiet-day"><b>${x.quietBreathRate.toFixed(1)}</b><span class="dp-quiet-bar" style="height:${Math.max(12,Math.min(74,x.quietBreathRate/40*70))}px"></span><small>${x.date.slice(5)}</small></div>`).join('')}</div>`:'';
+ return `<section class="card dp-quiet-guardian"><div class="dp-quiet-head"><span class="dp-quiet-icon">${vicon('breeze',20)}</span><div class="grow"><h3>${title}</h3><p>${say('已核驗的項圈資料','Verified collar data','確認済みの首輪データ','검증된 목걸이 측정값')}</p></div></div><div class="dp-quiet-values"><div><small>${say('期間靜息呼吸','Period quiet breathing','期間の安静時呼吸','기간 안정 호흡')}</small><strong>${value===null?'—':value.toFixed(1)} <em>/min</em></strong></div><div><small>${say('過去14天個體參考','Prior 14-day reference','過去14日間の個体基準','이전 14일 반려동물 자체 기준')}</small><strong>${baseline===null?'—':baseline.toFixed(1)} <em>/min</em></strong></div></div><p class="dp-quiet-summary">${note}</p>${chart}<small class="dp-quiet-source">${say('僅使用品質合格的低活動時段聚合值；未證實每個數值都有連續10分鐘量測，故不宣稱連續10分鐘。非疾病診斷。','Uses quality-checked low-motion aggregates, not a claim of continuous ten-minute recording. Not a diagnosis.','品質確認済みの低活動時集計値です。連続10分間の測定を保証するものではありません。診断ではありません。','품질 검증된 저활동 집계값이며 연속 10분 측정을 보장하지 않습니다. 진단이 아닙니다.')}</small></section>`;
+}
+function dpQuietRespPanel(days=state.range){
+ if(dpUsesRealMeasurements())return dpVerifiedQuietRespPanel(days);
+ const m=dpQuietRespModel(days),points=m.rows,mode=days===1?label3('本日安靜時段','Today’s quiet periods','오늘의 안정 시간'):label3(`最近 ${days} 天的安靜呼吸`,`Quiet breathing over ${days} days`,`최근 ${days}일 안정 호흡`);
+ const medicalNote=label3('醫學觀察提示：例如平常安靜呼吸為24次／分，近期出現25、28次／分甚至持續升高，先確認是否在運動後、天氣炎熱、喘氣、興奮、壓力或疼痛時量到；建議在涼爽、熟睡或真正安靜時再測，並觀察是否呼吸費力。單一數字或輕微上升不能診斷疾病。若休息／睡眠時多次持續超過30次／分、持續升高或伴咳嗽、精神下降，請聯絡獸醫；呼吸困難、牙齦發紫或倒下應立即急診。貓咪張口喘氣尤其需要緊急評估。',
+ 'Veterinary context: if a pet usually breathes 24/min at rest and later reads 25, 28 or higher, first rule out recent exercise, heat, panting, excitement, stress or pain. Recheck during quiet sleep in a cool environment and watch breathing effort. A single reading cannot diagnose disease. Repeated resting/sleeping rates over 30/min, sustained rises or associated cough/lethargy warrant veterinary advice; laboured breathing, blue gums or collapse require urgent care. Open-mouth panting in cats merits urgent assessment.',
+ '수의학적 참고: 평소 안정 호흡수가 분당 24회인데 최근 25·28회 이상이라면 운동 직후, 더위, 헐떡임, 흥분, 스트레스, 통증의 영향을 먼저 확인하세요. 서늘한 곳에서 깊이 쉬거나 잘 때 다시 측정하고 호흡 노력도 살펴보세요. 한 번의 수치만으로 질병을 진단할 수 없습니다. 안정·수면 중 분당 30회를 반복적으로 넘거나 상승이 지속되면 수의사와 상담하세요. 호흡곤란, 잇몸 청색증, 쓰러짐은 응급 상황이며 고양이의 입 벌린 호흡도 즉시 진료가 필요합니다.');
+ const chart=points.length>1?`<div class="dp-quiet-bars" role="img" aria-label="${label3('逐日靜息呼吸趨勢','Daily quiet respiration trend','일별 안정 호흡 추세')}">${points.map(pt=>`<div class="dp-quiet-day"><b>${pt.value.toFixed(1)}</b><span class="dp-quiet-bar" style="height:${Math.max(12,Math.min(74,pt.value/40*70))}px"></span><small>${pt.date.slice(5)}</small></div>`).join('')}</div>`:'';
+ let stateText=m.mean===null?label3('目前缺少足夠的安靜時段，暫不評估。','Not enough usable quiet periods yet.','충분한 안정 시점 데이터가 없습니다.')
+  :m.baseline===null?label3(`本期平均 ${m.mean.toFixed(1)} 次／分；14 天個體參考尚需累積至少7個有效的安靜測量日。`,`Period mean ${m.mean.toFixed(1)}/min; at least 7 prior valid quiet days are needed for an initial this pet’s reference.`,`기간 평균 ${m.mean.toFixed(1)}회/분. 반려동물 자체 기준을 위해 이전 유효 측정일 7일 이상이 필요합니다.`)
+  :m.alert?label3('安靜時呼吸近期持續上升或多次高於個體參考，請先排除喘氣及運動干擾，並於熟睡時再次確認。','Quiet breathing has risen or been repeatedly above this pet’s reference. Exclude panting or activity and recheck during sleep.','안정 호흡이 최근 상승하거나 반려동물 자체 기준보다 반복적으로 높습니다. 헐떡임·운동 영향을 확인하고 수면 중 재측정하세요.')
+  :label3('目前沒有符合持續升高的趨勢提醒；請繼續比較相近的安靜時段。','No sustained-rise alert from the available quiet readings. Keep comparing similar resting windows.','현재 지속 상승 경보는 없습니다. 비슷한 안정 시점에서 계속 비교해 주세요.');
+ return `<section class="card dp-quiet-guardian"><div class="dp-quiet-head"><span class="dp-quiet-icon">${vicon('breeze',20)}</span><div class="grow"><h3>${label3('靜息呼吸變化守護','Resting breathing watch','안정 시 호흡 변화 관찰')}</h3><p>${mode}</p></div>${m.alert?`<span class="dp-quiet-flag">${label3('需留意','Review','주의')}</span>`:''}</div><div class="dp-quiet-values"><div><small>${label3('期間有效安靜呼吸','Valid quiet breathing','유효 안정 호흡')}</small><strong>${m.mean===null?'—':m.mean.toFixed(1)} <em>${label3('次／分','/min','회/분')}</em></strong></div><div><small>${label3('過去14天個體參考','Previous 14-day reference','이전 14일 반려동물 자체 기준')}</small><strong>${m.baseline===null?'—':m.baseline.toFixed(1)} <em>${label3('次／分','/min','회/분')}</em></strong></div></div><p class="dp-quiet-summary">${stateText}</p>${chart}<details class="dp-quiet-medical dp-collapsible-note"><summary><b>${label3('醫學觀察備註','Veterinary interpretation notes','수의학적 참고')}</b><span class="dp-note-chevron" aria-hidden="true"></span></summary><div class="dp-note-reveal"><p class="dp-quiet-evidence">${label3(`本期 ${points.length} 個有效安靜測量日 · 參考 ${m.referenceDays} 日；只取動靜判定為安靜且連續10分鐘品質可用的區間。`,`Valid quiet days: ${points.length} in period, ${m.referenceDays} in reference; uses consecutive 10-minute low-motion, usable signal windows.`,`기간 내 유효 안정 측정일 ${points.length}일 · 기준 ${m.referenceDays}일. 10분 연속 움직임이 적고 신호가 유효한 구간만 사용합니다.`)}</p><p>${medicalNote}</p><small class="dp-quiet-source">${label3('參考來源：VCA / Cornell 獸醫呼吸評估建議。此處為模擬訊號分析，不等於診斷，也不代表已接入真實項圈。','Reference: VCA / Cornell veterinary respiratory guidance. This prototype uses simulated signals; it is not a diagnosis or live-device reading.','참고: VCA / Cornell 수의학 호흡 평가 안내. 본 기능은 시뮬레이션이며 진단 또는 실측 결과가 아닙니다.')}</small><div class="dp-quiet-links"><a href="https://vcahospitals.com/know-your-pet/home-breathing-rate-evaluation" target="_blank" rel="noopener noreferrer">VCA</a><a href="https://www.vet.cornell.edu/departments-centers-and-institutes/riney-canine-health-center/canine-health-topics/recognizing-and-responding-canine-respiratory-distress" target="_blank" rel="noopener noreferrer">Cornell</a></div></div></details></section>`;
+}
+function dpQuietRespTodayAlert(){
+ // This 10-minute quiet-breath model is built from showroom minute streams.
+ // A genuinely paired owner pet must never inherit such a synthetic alert.
+ if(dpUsesRealMeasurements())return null;
+ const m=dpQuietRespModel(3),today=iso(localDate());
+ if(!m.alert||m.latest?.date!==today||!signalQuality().valid)return null;
+ return {id:'quiet-breath-watch',type:'deep',index:0,title:label3('今日安靜呼吸上升值得留意','Resting breathing rise needs review today','오늘 안정 호흡 상승 확인 필요'),detail:label3(`最近安靜呼吸高於14天參考 ${m.baseline.toFixed(1)} 次／分；今天約 ${m.latest.value.toFixed(1)} 次／分。請確認是否運動、炎熱或喘氣所致，並在熟睡時複測。`,`Today’s quiet breathing ~${m.latest.value.toFixed(1)}/min vs this pet’s reference ${m.baseline.toFixed(1)}/min. Exclude exercise, heat and panting; recheck while asleep.`,`오늘 안정 호흡 약 ${m.latest.value.toFixed(1)}회/분, 반려동물 자체 기준 ${m.baseline.toFixed(1)}회/분. 운동·더위·헐떡임을 확인하고 수면 중 다시 측정하세요.`),lines:[label3('靜息呼吸近期連續偏高','Quiet breathing has risen repeatedly','안정 호흡이 최근 반복 상승'),label3('這不是疾病診斷；請於涼爽、安靜或熟睡時再測。','This is not a diagnosis; recheck during cool, quiet sleep.','질병 진단이 아니므로 안정된 수면 중 재측정하세요.')],page:'deep',icon:'breeze',priority:1,date:today,score:0};
+}
+
+function minuteKindLabel(kind){return ({heart:t('heartRate'),breath:t('breath'),activityIntensity:label3('活動強度','Activity intensity','활동 강도'),restState:label3('休息狀態','Rest state','휴식 상태'),sleep:label3('安靜休息總時數','Daily quiet rest','일간 휴식'),recovery:label3('恢復時間（日統計）','Daily recovery duration','일간 회복 시간'),bio:t('bioAge'),food:label3('飲食攝取','Food intake','음식 섭취'),calm:label3('平穩度（日評估）','Daily calm score','일간 안정 점수'),stable:label3('心搏穩定（日評估）','Daily rhythm score','일간 리듬 점수'),recover:label3('恢復狀態（日評估）','Daily recovery score','일간 회복 점수')})[kind]||label3('趨勢數據','Trend data','추세 데이터');}
+function inspectValueText(v,kind,unit=''){
+ if(v===null||v===undefined||v===''||!Number.isFinite(Number(v)))return '—';
+ if(kind==='activityIntensity')return `${Number(v).toFixed(0)}% · ${label3('相對活動強度（越高代表活動越多）','Relative movement intensity (higher = more movement)','상대 활동 강도 (높을수록 더 활발함)')}`;
+  if(kind==='sleepPhase')return Number(v)>=.5?label3('睡眠','Sleep','수면'):label3('清醒','Awake','기상');
+ if(kind==='restState')return Number(v)>=.5?label3('安靜／休息','Resting / quiet','조용히 쉬는 중'):label3('清醒／活動','Awake / moving','깨어 있음 / 활동');
+ const registry=typeof window!=='undefined'?window.DeepPetMetric1015:null;
+ const metric={heart:'heartRate',breath:'breathing',bio:'age',rmssd:'hrv',sdnn:'hrv',sleep:'sleepHours',weight:'weight',calm:'score',stable:'score',recover:'score'}[kind];
+ if(registry&&metric)return `${registry.format(metric,Number(v))}${unit?' '+unit:''}`;
+ const decimals=['breath','bio','rmssd','sdnn','sleep','weight'].includes(kind)?1:0;
+ return `${Number(v).toFixed(decimals)}${unit?' '+unit:''}`;
+}
+function inspectSvg(svg,values,{kind='',title='',unit='',dates=[],timeLabels=null,minute=false,color='#7968e8',left=29,right=8,top=16,bottom=29,width=350,height=165,yCoords=null,xRatios=null,compact=false}={}){
+ const list=Array.isArray(values)?values:[];
+ if(!list.length)return svg;
+ const id=plotRegistry.push({values:list,kind,title,unit,dates,timeLabels,minute,color,left,right,top,bottom,width,height,yCoords,xRatios})-1;
+ const header=kind==='sleepPhase'?label3('滑鼠移動即可查看每半小時狀態','Hover to inspect each half-hour','커서를 옮기면 30분 상태를 확인할 수 있어요'):label3('拖曳／點選曲線查看數值','Drag or tap for a value','선을 드래그하거나 터치해 수치 보기');
+ const guide=kind==='sleepPhase'?'':minute?label3('逐分鐘變化','Minute-by-minute changes','분별 변화'):label3('每日趨勢','Daily trend','일일 추세');
+ const showDay=!minute&&['heart','breath','sleep','restState','recovery','activity','activityIntensity'].includes(kind);
+ return `<div class="dp-chart-inspector${compact?' dp-chart-small':''}" data-inspector-id="${id}" tabindex="0" role="group" aria-label="${esc(title||minuteKindLabel(kind))}">${svg}<div class="dp-chart-readout"><span class="dp-chart-tip">${header}</span><strong class="dp-chart-current" aria-live="polite"></strong>${showDay?`<button class="dp-open-minute" type="button" data-action="inspect-minute-day" data-plot="${id}">${label3('查看所選日期逐分鐘','View selected day by minute','선택 날짜의 분별 보기')} ›</button>`:''}</div>${guide?`<div class="dp-chart-resolution">${guide}</div>`:''}</div>`;
+}
+function inspectPoint(wrapper,index){
+ const data=plotRegistry[Number(wrapper.dataset.inspectorId)];if(!data)return;
+ const svg=wrapper.querySelector('svg');if(!svg)return;
+ const n=data.values.length,k=Math.max(0,Math.min(n-1,index));
+ wrapper.dataset.selectedIndex=String(k);
+ const xRatio=Math.max(0,Math.min(1,data.xRatios?.[k]??(n===1?0.5:k/(n-1))));
+ const x=data.left+(data.width-data.left-data.right)*xRatio;
+ const v=data.values[k];
+ const missing=v===null||v===undefined||v===''||!Number.isFinite(Number(v));
+ let yy=data.yCoords?.[k];
+ if(!Number.isFinite(yy)){
+  const valid=data.values.filter(v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))).map(Number),min=Math.min(...valid),max=Math.max(...valid),spread=max-min||1;
+  yy=missing?data.top:data.top+(max-Number(v))/spread*(data.height-data.top-data.bottom);
+ }
+ let cross=svg.querySelector('.dp-cursor-line');
+ if(!cross){
+  const ns='http://www.w3.org/2000/svg';cross=document.createElementNS(ns,'line');cross.setAttribute('class','dp-cursor-line');cross.setAttribute('stroke',data.color);cross.setAttribute('stroke-width','1.4');cross.setAttribute('stroke-dasharray','4 4');cross.setAttribute('pointer-events','none');svg.appendChild(cross);
+  const dot=document.createElementNS(ns,'circle');dot.setAttribute('class','dp-cursor-dot');dot.setAttribute('r','4.5');dot.setAttribute('fill','#fff');dot.setAttribute('stroke',data.color);dot.setAttribute('stroke-width','2.5');dot.setAttribute('pointer-events','none');svg.appendChild(dot);
+ }
+ cross.setAttribute('x1',x);cross.setAttribute('x2',x);cross.setAttribute('y1',data.top);cross.setAttribute('y2',data.height-data.bottom);
+ const dot=svg.querySelector('.dp-cursor-dot');dot.setAttribute('visibility',missing?'hidden':'visible');dot.setAttribute('cx',x);dot.setAttribute('cy',yy);
+ const when=data.timeLabels?.[k]||(data.minute?minuteClock(k):(data.dates[k]||`${k+1}`));
+ const label=`${data.minute&&!data.timeLabels?(data.dates[0]||'')+'  ':''}${when}　${inspectValueText(v,data.kind,data.unit)}`;
+ const r=wrapper.querySelector('.dp-chart-current');if(r)r.textContent=label;
+ wrapper.classList.add('dp-chart-inspected');
+ if(data.kind==='sleepPhase')dpSyncSleepSlot(wrapper.closest('.dp-night-record, .dp-owner-sleep-timeline'),k,false);
+}
+function pointerInspect(e){const holder=e.target.closest?.('.dp-chart-inspector');if(!holder)return;
+ const data=plotRegistry[Number(holder.dataset.inspectorId)],svg=holder.querySelector('svg');if(!data||!svg)return;
+ const rect=svg.getBoundingClientRect();if(!rect.width)return;
+ let xx;
+ try{const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;xx=pt.matrixTransform(svg.getScreenCTM().inverse()).x;}catch{xx=(e.clientX-rect.left)/rect.width*data.width;}
+ const ratio=Math.max(0,Math.min(1,(xx-data.left)/(data.width-data.left-data.right)));
+ let index=Math.round(ratio*(data.values.length-1));
+ if(data.xRatios?.length){const a=data.xRatios;let lo=0,hi=a.length-1;while(lo<hi){const mid=(lo+hi)>>1;if(a[mid]<ratio)lo=mid+1;else hi=mid;}index=lo>0&&Math.abs(a[lo-1]-ratio)<Math.abs(a[lo]-ratio)?lo-1:lo;}
+ inspectPoint(holder,index);
+ if(e.type==='pointerdown'&&e.pointerId!==undefined){holder.setPointerCapture?.(e.pointerId);}
+ if(e.cancelable&&e.type==='pointermove'&&e.buttons)e.preventDefault();
+}
+function dpSyncSleepSlot(container,index,fromTimeline=true){
+ if(!container)return;
+ const i=Math.max(0,Math.min(31,Number(index)||0)),widgets=container.querySelectorAll('.dp-sleep-slot-widget');
+ widgets.forEach(widget=>{
+  const btns=widget.querySelectorAll('.sleep-date-timeline button');if(!btns.length)return;
+  btns.forEach((btn,j)=>btn.classList.toggle('selected-slot',j===i));
+  const scrub=widget.querySelector('.dp-sleep-scrub-track');if(scrub)scrub.style.setProperty('--sleep-scrub',`${(i+.5)/32*100}%`);
+  const btn=btns[i],row=demoRecords(state.dog)[Number(btn?.dataset.day)],min=(1200+i*30)%1440,next=(min+30)%1440,asleep=nightSlotSequence(Number(btn?.dataset.day))[i]==='sleep';
+  const out=widget.querySelector('.sleep-slot-reading');if(out)out.textContent=`${row?.date||''} · ${dpTime(min)}–${dpTime(next)} · ${asleep?label3('睡眠','Sleep','수면'):label3('清醒','Awake','깨어 있음')} · 30 ${label3('分鐘','min','분')}`;
+ });
+ if(fromTimeline){const chart=container.querySelector('.dp-owner-sleep-wave .dp-chart-inspector');if(chart){const data=plotRegistry[Number(chart.dataset.inspectorId)];if(data?.kind==='sleepPhase')inspectPoint(chart,i);}}
+}
+function minuteDetailView(){
+ const date=state.inspectDate||iso(localDate()),kind=state.inspectKind||'heart',dayIndex=demoRecords(state.dog).findIndex(x=>x.date===date);
+ // The legacy drill-down must obey exactly the same source contract as Deep:
+ // showroom pets may see illustrative traces; real pets need verified SDK
+ // minute samples. A verified daily score alone cannot create a waveform.
+ const real=dpUsesRealMeasurements();
+ const key=kind==='activityIntensity'?'activity':kind==='restState'?'rest':kind;
+ const values=real?(dpSignals(date,[key])?.[key]||[]):kind==='restState'&&dayIndex>=0?nightMinuteSequence(dayIndex):minuteDemoSeries(kind,date);
+ // Match the precise bridge key used above, including activity/rest aliases.
+ const sourceKind=key;
+ const evidence=real?window.DeepPetDataProvenance1075?.get?.(state.dog,date,sourceKind):null;
+ if(!values.length)return `<div class="chart-pending">${label3('當日尚無有效資料','No data available for this date','해당 날짜 데이터가 없습니다')}${evidence?.validMinutes>0?`<small class="dp1075-coverage">${label3(`已收到 ${evidence.validMinutes}/1440 分鐘；資料尚不完整，暫不繪製曲線。`,`Received ${evidence.validMinutes}/1440 minutes; incomplete coverage is not plotted.`,`수신된 기록 ${evidence.validMinutes}/1440분. 불완전한 곡선은 표시하지 않습니다.`)}</small>`:''}</div>`;
+ const units={heart:'bpm',breath:label3('次/分','breaths/min','회/분'),activityIntensity:'%',restState:''};
+ const title=minuteKindLabel(kind),color=kind==='heart'?'#d66f8e':kind==='breath'?'#c45c7c':kind==='restState'?'#30a26d':'#438bdf';
+ const note=kind==='restState'?label3('此圖以每 30 分鐘的休息／活動示範區間展開成分鐘座標；同一區間內的值相同，不代表實際具備每分鐘睡眠分期精度。','Prototype rest states come from 30-minute bins; values repeat within the bin and are not one-minute sleep-stage measurements.','30분 휴식 구간을 분 단위로 펼친 예시이며 실제 1분 수면 단계 데이터는 아닙니다.'):label3('以下為按日統計生成的逐分鐘示範序列，不是工廠 SDK 的實際量測記錄。','Illustrative per-minute series derived from daily demo aggregates, not recorded SDK measurements.','일별 시연 통계로 생성한 1분 예시 데이터이며 실제 센서 기록이 아닙니다.');
+ const provenanceLine=real&&evidence?.valid?`<div class="dp1075-provenance" data-pet="${state.dog}" data-date="${date}" data-coverage="${evidence.coveragePct}">${label3(`項圈量測 · 佩戴已驗證 · ${evidence.validMinutes}/1440 分鐘 · ${evidence.identityAssurance==='payload-verified'?'來源身分已核對':'依本次裝置請求綁定寵物'}`,`Collar · Wear verified · ${evidence.validMinutes}/1440 min · ${evidence.identityAssurance==='payload-verified'?'Payload identity checked':'Pet bound by bridge request'}`,`목걸이 · 착용 확인 · ${evidence.validMinutes}/1440분 · ${evidence.identityAssurance==='payload-verified'?'원본 식별 확인':'장치 요청에 연결된 반려동물'}`)}</div>`:'';
+ return `<div class="minute-detail-panel"><div class="minute-detail-head"><b>${date} · ${title}</b><span class="pill purple">1 min</span></div>${provenanceLine}${plotMinuteChart(values,kind,units[kind]||'',color,date)}${!real&&kind==='restState'&&dayIndex>=0?`<div class="sleep-matrix-wrap night-drilldown"><div class="sleep-cells">${nightSlotSequence(dayIndex).map(s=>`<i class="${s}"></i>`).join('')}</div><small>${label3('同一份夜間狀態資料 · 30 分鐘一格','Same night states · 30-minute bins','동일한 야간 상태 · 30분 간격')}</small></div>`:''}<p class="notices">${real?label3('此曲線僅顯示項圈已驗證的分鐘級記錄。','This chart displays verified collar minute readings only.','이 그래프는 확인된 목걸이 분 단위 기록만 표시합니다.'):note} ${label3('在曲線上左右拖動或點選，可看到 X 軸時間與 Y 軸對應值。','Drag left/right or tap the plot to inspect X time and Y value.','차트를 좌우로 드래그하면 시간과 수치를 볼 수 있습니다.')}</p></div>`;
+}
+function plotMinuteChart(values,kind,unit,color,date){
+ const W=350,H=180,l=31,r=2,t=13,b=30,n=values.length,binary=kind==='restState';
+ const lo=binary?0:kind==='activityIntensity'?0:Math.floor(Math.min(...values)-2);
+ const hi=binary?1:kind==='activityIntensity'?100:Math.ceil(Math.max(...values)+2);
+ const x=i=>l+i/Math.max(1,n-1)*(W-l-r),y=v=>t+(hi-v)/(hi-lo||1)*(H-t-b);
+ const coords=values.map((v,i)=>[x(i),y(v)]),path=deepCurvePath(coords,binary);
+ const grid=[0,.5,1].map(f=>{const yy=t+f*(H-t-b),val=hi-(hi-lo)*f;return `<line x1="${l}" y1="${yy}" x2="${W-r}" y2="${yy}" stroke="#e6eaf3"/><text x="${l-6}" y="${yy+4}" fill="#8790a4" font-size="10" text-anchor="end">${binary?(f===.5?'':Number(val>=.5)):val.toFixed(0)}</text>`}).join('');
+ const demoNight=binary&&values.length===960;
+ const tickLabels=demoNight?['20:00','04:00','12:00']:['00:00','12:00','23:59'];
+ const svg=`<svg class="dp-minute-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(minuteKindLabel(kind))}">${grid}<path d="${path}" fill="none" stroke="${color}" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/><text x="${l}" y="${H-6}" fill="#858da0" font-size="10">${tickLabels[0]}</text><text x="${W/2}" y="${H-6}" text-anchor="middle" fill="#858da0" font-size="10">${tickLabels[1]}</text><text x="${W-r}" y="${H-6}" text-anchor="end" fill="#858da0" font-size="10">${tickLabels[2]}</text></svg>`;
+ const timeLabels=demoNight?values.map((_,m)=>`${m<240?iso(dateAdd(new Date(date+'T12:00:00'),-1)):date} ${minuteClock((1200+m)%1440)}`):null;
+ return inspectSvg(svg,values,{kind,title:minuteKindLabel(kind),unit,minute:true,dates:[date],timeLabels,color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:coords.map(p=>p[1])});
+}
+function validDailyRecords(days){return dayRowsWithIndex(days).filter(x=>validDaySample(x,x.idx).valid);}
+function rangeData(kind){
+ const days=state.range,rec=demoRecords(state.dog);
+ if(dpUsesRealMeasurements()&&days!==1){
+  const verified=window.DeepPetSignalScoring,from=iso(dateAdd(localDate(),1-days));
+  const field={heart:'heartRate',breath:'breathRate',sleep:'restHours',activityIntensity:'activity',restState:'restHours'}[kind]||kind;
+  return (verified?.getFeatures?.(state.dog)||[]).filter(x=>x?.date>=from&&x?.date<=iso(localDate())&&verified?.isVerifiedWear?.(x)===true)
+   .map(x=>field==='restHours'&&x.quality?.fullDayRestSupported!==true?null:x[field])
+   .filter(v=>typeof v==='number'&&Number.isFinite(v));
+ }
+ if(days!==1)return validDailyRecords(days).map(x=>x[kind]).filter(v=>typeof v==='number'&&Number.isFinite(v));
+ if(['heart','breath','activityIntensity','restState'].includes(kind)){
+  const date=rec.at(-1)?.date||iso(localDate()),key=kind==='activityIntensity'?'activity':kind==='restState'?'rest':kind;
+  return dpSignals(date,[key])?.[key]||[];
+ }
+ // A daily total, calculated age, and recovery duration cannot be presented as
+ // a minute-by-minute instantaneous measurement.
+ const value=rec.at(-1)?.[kind];return typeof value==='number'&&Number.isFinite(value)?[value]:[];
+}
+function deepHighlights(kind,period){const all=demoRecords(state.dog).slice(-Math.min(observationDays(),(period===1?1:period))),d=currentDog(), k=kind===0?'heart':kind===1?'sleep':'recovery',base=kind===0?d.hr:kind===1?d.rest:d.normalRecovery; if(all.length<2)return `<p class="notices">${label3('單日模式顯示今天的有效測量；切換 3 天以上可比較最高、最低與趨勢。','Day mode shows today’s values. Switch to 3+ days for comparisons.','3일 이상 선택하면 비교할 수 있어요.')}</p>`;
+const points=all.map(r=>({date:r.date,value:r[k],distance:Math.abs(r[k]-base)}));const byDistance=[...points].sort((a,b)=>a.distance-b.distance),best=byDistance[0],worst=byDistance.at(-1),delta=points.at(-1).value-points[0].value;
+let wording=kind===0?label3('最接近／最偏離14天心率基準','Closest / furthest from HR baseline','심박 기준에 가까운 날 / 먼 날'):kind===1?label3('最接近／最偏離14天休息基準','Closest / furthest from rest baseline','휴식 기준에 가까운 날 / 먼 날'):label3('恢復時間比較（須相近活動強度）','Recovery time comparison (matched activity only)','비슷한 활동량에서 회복 시간 비교');
+return `<p class="subtitle" style="margin:8px 0">${wording}</p><div class="highlight-grid"><div class="highlight-box good"><span>${label3('最佳參考日','Best reference day','최적 참조일')}</span><b>${dpFullDate(best.date)}</b><strong>${best.value}${kind===0?' bpm':kind===1?' h':' min'}</strong></div><div class="highlight-box watch"><span>${label3('偏離最多日','Largest deviation','가장 큰 편차')}</span><b>${dpFullDate(worst.date)}</b><strong>${worst.value}${kind===0?' bpm':kind===1?' h':' min'}</strong></div></div><div class="highlight-delta">${label3('本期間首尾變化：','First-to-last change: ','기간 시작–끝 변화: ')}<b>${delta>0?'+':''}${delta.toFixed(kind===1?1:0)} ${kind===0?'bpm':kind===1?'h':'min'}</b></div><p class="notices">${label3('此處以14 天基準差距比較，並非醫學上「愈低愈好」的判斷。','Based on deviation from 14-day baseline, not a lower-is-always-better clinical judgement.','반려동물 자체 기준과의 편차를 비교한 값이며 의학적 판정이 아니에요.')}</p>`;}
+function spark(values,color='#8571e8',height=43){
+ if(!values||values.length<2)return '';
+ const W=305,H=height,l=5,r=5,t=7,b=7,mn=Math.min(...values)-2,mx=Math.max(...values)+2,span=mx-mn||1;
+ const pts=values.map((v,i)=>[l+i*(W-l-r)/(values.length-1),H-b-((v-mn)/span)*(H-t-b)]);
+ const svg=`<svg class="mini-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${label3('每日趨勢','Daily trend','일별 추세')}"><path d="${smoothPath(pts)}" fill="none" stroke="${color}" stroke-width="2.8" stroke-linecap="round"/></svg>`;
+ const dates=values.map((_,i)=>iso(dateAdd(localDate(),i-values.length+1)));
+ return inspectSvg(svg,values,{dates,kind:'score',unit:'/100',color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:pts.map(p=>p[1]),compact:true});
+}
+function icon(k){const x={heart:'♡',breath:'〰',activity:'⌁',sleep:'☾',light:'✦',chev:'›',bell:'♧',shield:'♧',food:'🍽️',med:'💊',report:'📄',vax:'💉',notes:'📝',garden:'🌿',device:'⌚',settings:'⚙',users:'♧',age:'✧',dog:'🐾'};return x[k]||k;}
+function vicon(key,size=20){
+ const map={
+  qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2v3h-2zM14 19h3v2h-3zM19 19h2v2h-2z"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/>',
+  home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
+  deep:'<path d="M3 12h3l3-7 4 14 3-8 2 1h3"/>',
+  health:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/><path d="M4 12h4l2-3 3 6 2-3h4"/>',
+  me:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',
+  bell:'<path d="M18 8a6 6 0 0 0-12 0c0 8-3 8-3 10h18c0-2-3-2-3-10M10 22h4"/>',
+  heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/>',
+  moon:'<path d="M20.7 14A9 9 0 0 1 10 3.3 9 9 0 1 0 20.7 14Z"/><path d="M18 3v4m-2-2h4"/>',
+  breeze:'<path d="M3 8h11a3 3 0 1 0-3-3M2 12h17a3 3 0 1 1-3 3M4 16h8a3 3 0 1 1-3 3"/>',
+  activity:'<path d="M2 12h4l3-8 5 16 3-8h5"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  leaf:'<path d="M20 4c-10 0-16 4-16 12a4 4 0 0 0 4 4C16 20 20 14 20 4ZM4 20c2-4 6-7 11-9"/>',
+  paw:'<circle cx="7" cy="6" r="1"/><circle cx="12" cy="4" r="1"/><circle cx="17" cy="6" r="1"/><path d="M5 15c0-2 2-3 4-5h6c2 2 4 3 4 5a4 4 0 0 1-5 4l-2-1-2 1a4 4 0 0 1-5-4"/>',
+  food:'<path d="M3 13c1 5 4 8 9 8s8-3 9-8H3ZM6 8l1 2m5-5v5m5-3-1 3"/>',
+  med:'<path d="M18 6 6 18a4.2 4.2 0 0 1-6-6L12 0a4.2 4.2 0 0 1 6 6Z" transform="translate(3 3) scale(.85)"/><path d="m8 11 5 5"/>',
+  report:'<path d="M5 2h10l5 5v15H5zM15 2v5h5M9 12h7M9 16h7"/>',
+  vaccine:'<path d="m4 20 5-5m1-1 8-8M14 4l6 6M8 10l6 6M19 3l2 2M3 21l3-1"/>',
+  notes:'<path d="M3 4h13l4 4v13H3zM16 4v4h4M7 13h9M7 17h7"/>',
+  device:'<rect x="7" y="2" width="10" height="20" rx="5"/><path d="M10 6h4M10 18h4"/>',
+  garden:'<path d="M12 22V8m0 7c-6 0-8-3-8-8 5 0 8 2 8 8Zm0-5c0-5 3-7 8-7 0 5-2 8-8 8Z"/>',
+  pin:'<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/>',
+  users:'<circle cx="9" cy="8" r="3"/><path d="M2 21v-2a7 7 0 0 1 14 0v2M17 5a3 3 0 0 1 0 6m1 4a6 6 0 0 1 4 6"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M10 2h4l1 3 3 1 3-1 2 4-2 2v2l2 2-2 4-3-1-3 1-1 3h-4l-1-3-3-1-3 1-2-4 2-2v-2L1 9l2-4 3 1 3-1z"/>',
+  shield:'<path d="m12 2 9 4v5c0 6-4 10-9 11-5-1-9-5-9-11V6z"/><path d="m8 12 3 3 5-6"/>',
+  spark:'<path d="m12 2 2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/>',
+  arrow:'<path d="M5 12h14m-6-6 6 6-6 6"/>',
+  chev:'<path d="m9 18 6-6-6-6"/>',
+  back:'<path d="m15 18-6-6 6-6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  check:'<path d="m5 12 5 5 9-10"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/>',
+  share:'<circle cx="6" cy="12" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="m8 11 8-5m-8 8 8 4"/>',
+  edit:'<path d="M12 20h9M16 4l4 4-11 11-5 1 1-5z"/>',
+  bluetooth:'<path d="M7 7l10 10-5 5V2l5 5L7 17"/>',
+  download:'<path d="M12 3v12m-5-5 5 5 5-5M4 18v3h16v-3"/>',
+  image:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+  camera:'<path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/>',
+  message:'<path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>',
+  mic:'<rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4m-4 0h8"/>',
+  square:'<rect x="5" y="5" width="14" height="14" rx="2"/>',
+  eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>'
+ };
+ return `<svg class="line-icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${map[key]||map.spark}</svg>`;
+}
+function label3(zh,en,ko){return state.lang==='zht'?toTraditional(zh):state.lang==='zh'?toSimplified(zh):state.lang==='ko'?ko:state.lang==='ja'?(JA_PHRASES[zh]||en):en}
+function niceDogText(){const d=currentDog();return (state.lang==='zh'||state.lang==='zht')?`${d.name} · ${breedText(d)} · ${d.age} ${state.lang==='zht'?'歲':'岁'} · ${d.weight} kg`:state.lang==='ko'?`${d.name} · ${d.breed.ko} · ${d.age}세 · ${d.weight}kg`:state.lang==='ja'?`${d.name} · ${breedText(d)} · ${d.age}歳 · ${d.weight} kg`:`${d.name} · ${d.breed.en} · ${d.age} yrs · ${d.weight} kg`}
+function nightArt(){return `<svg viewBox="0 0 96 90" class="night-art" aria-hidden="true"><defs><linearGradient id="ng" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#626bbd"/><stop offset="1" stop-color="#b5bbf5"/></linearGradient></defs><rect width="96" height="90" rx="16" fill="url(#ng)"/><circle cx="65" cy="27" r="14" fill="#fff6cf"/><circle cx="73" cy="22" r="13" fill="#8c98e1"/><g fill="white"><circle cx="19" cy="20" r="1.5"/><circle cx="39" cy="14" r="1.7"/><circle cx="78" cy="53" r="1.2"/></g><path fill="#383d80" d="M0 76Q30 64 49 73Q69 58 96 70V90H0Z"/><path d="M18 70c8-17 20-19 26-9 4-6 11-8 15-2 9 5 8 16-8 17H20Z" fill="#4e548e"/><circle cx="32" cy="61" r="3" fill="#4e548e"/></svg>`}
+
+function kv(k,v){return `<div class="row spread"><span class="sm muted">${t(k)}</span><span class="sm strong">${v}</span></div>`}
+function bigHeader(title,sub=''){return `<div class="view-header"><h1 class="app-title">${title}</h1>${sub?`<div class="subtitle mt8">${sub}</div>`:''}</div>`}
+function card(title,content,extra=''){return `<section class="card ${extra}">${title?`<div class="row spread mb8"><h2 class="section-title">${title}</h2></div>`:''}${content}</section>`}
+function button(label,action,klass='cta secondary',attrs=''){return `<button class="${klass}" data-action="${action}" ${attrs}>${label}</button>`}
+function toast(msg){const x=$('.toast');if(x)x.remove();const n=document.createElement('div');n.className='toast';n.setAttribute('role','status');n.setAttribute('aria-live','polite');n.setAttribute('aria-atomic','true');n.textContent=msg;$('.app-shell').appendChild(n);setTimeout(()=>n.remove(),2300)}
+function panel(iconTxt,label,description,action){return `<button class="menu-item" data-action="${action}"><span class="menu-ic">${iconTxt}</span><span class="grow"><div class="menu-name">${label}</div><div class="menu-desc">${description}</div></span><span class="menu-chevron">›</span></button>`}
+const copy={
+ zh:{story:'我昨晚睡得还不错！不过，今天玩耍后我需要多休息一会儿。',storyGood:'我今天感觉节奏不错，心跳、呼吸和休息都和平常接近！',storyEvidence:'活动后恢复约 45 分钟，平常约 29 分钟；这是模拟监测解读。',attention:'活动后恢复时间比平常长 16 分钟。留意未来几天是否持续出现。',ageIntro:'这是 AI 模型演示估算，长期稳定趋势比单日数字更值得参考。',nightQuote:'昨晚我安静休息了一阵，心率与呼吸接近平常。',nightSub:'夜间心率与呼吸趋势 · 仅展示有效数据',rec1:'活动后恢复',rec1why:'大型犬的活动量与恢复情况都值得观察。今天恢复时间高于14 天基準。',rec1what:'比较相似活动强度的恢复趋势，避免仅凭单日数据判断。',rec2:'维持适龄体态',rec2why:'根据品种、4 岁和约 28 kg 的背景，定期留意体态与体重变化。',rec2what:'每周记录体重、体态评分，并结合饮食目标调整。',rec3:'稳定夜间休息',rec3why:'最近的夜间静息指标可帮助建立长期14 天基準。',rec3what:'在固定作息下连续观察 14–30 天。',rec4:'规律饮食管理',rec4why:'目前饮食目标需要结合实际摄入与体态才能评估。',rec4what:'记录主要餐次，核对食物能量密度。',rec5:'保存检查与用药背景',rec5why:'体检报告与用药时间线可帮助解释生理变化。',rec5what:'补全报告待核对项，并保持用药记录准确。',insight:'这是相对于该宠物个体基准的示例趋势，不能替代兽医诊断。',ageDetail:'生理年龄使用体型、实际年龄、长期活动、休息和心肺趋势作为概念性估算输入。当前 4.2 岁是演示数据，并非临床验证的生物老化检测。'},
+ en:{story:'I slept pretty well last night! But I needed a little extra time to recover after play today.',storyGood:'I had a steady day! My breathing, heart and rest were close to my usual routine.',storyEvidence:'Recovery ~45 min, compared with my typical ~29 min. Simulated reading.',attention:'Recovery after activity took 16 minutes longer than usual. Watch if the pattern continues.',ageIntro:'This is a model demonstration; longer-term trends matter more than a single value.',nightQuote:'I got some quiet rest last night. My resting indicators stayed near usual.',nightSub:'Nighttime heart and breathing trends · valid data only',rec1:'Recovery after exercise',rec1why:'For a large dog, recovery trends matter. Today took longer than this dog’s baseline.',rec1what:'Compare recovery after similar activity, rather than interpreting one day.',rec2:'Maintain healthy body condition',rec2why:'Breed, age 4, and ~28 kg suggest regular weight and body condition tracking.',rec2what:'Log weight and body condition weekly; review the food target.',rec3:'Maintain steady rest',rec3why:'Nightly resting trends help form this pet’s reference.',rec3what:'Monitor a consistent routine for 14–30 days.',rec4:'Consistent nutrition',rec4why:'Food targets should be assessed alongside actual intake and body condition.',rec4what:'Log meals and verify the food’s energy density.',rec5:'Keep care context accurate',rec5why:'Reports and medication timelines contextualize physiological changes.',rec5what:'Verify uncertain report items and keep medication records updated.',insight:'This demo trend compares the pet with its own baseline and is not a diagnosis.',ageDetail:'Biological age is a conceptual estimate using age, body size, long-term activity, rest and cardiopulmonary patterns. The displayed 4.2 is demo data, not a clinically validated age test.'},
+ ko:{story:'어젯밤엔 꽤 잘 쉬었어요! 하지만 오늘 놀고 난 뒤에는 회복하는 데 시간이 조금 더 필요했어요.',storyGood:'오늘은 평온했어요! 심박수와 호흡, 휴식이 평소와 비슷했어요.',storyEvidence:'활동 후 회복 약 45분, 평소 약 29분 · 모의 데이터',attention:'활동 후 회복이 평소보다 16분 더 걸렸어요. 며칠 더 지켜보세요.',ageIntro:'AI 모델의 시연 추정치이며 하루 수치보다 장기 추세가 중요해요.',nightQuote:'어젯밤 편히 쉬었고 안정 수치는 평소와 비슷했어요.',nightSub:'야간 심장·호흡 추세 · 유효 데이터만',rec1:'활동 후 회복',rec1why:'대형견은 활동량과 회복 추세가 중요해요. 오늘은 평소보다 길었어요.',rec1what:'비슷한 강도의 활동 후 회복을 비교하세요.',rec2:'건강한 체형 유지',rec2why:'품종, 4세, 약 28kg의 특성을 고려해 체중을 관리해요.',rec2what:'매주 체중과 체형을 기록하세요.',rec3:'안정적인 수면과 휴식',rec3why:'야간 안정 지표는 반려동물 자체 기준 수립에 도움이 돼요.',rec3what:'일정한 생활 패턴에서 14~30일 관찰하세요.',rec4:'식사량 관리',rec4why:'식사 목표는 섭취량 및 몸 상태와 함께 평가해야 해요.',rec4what:'식사 기록과 사료 열량을 확인하세요.',rec5:'의료 기록 보관',rec5why:'검사와 투약 이력은 생체 변화 해석에 도움을 줘요.',rec5what:'불명확한 보고서 항목을 확인하고 투약을 정확히 기록하세요.',insight:'이것은 반려동물 자체 기준을 이용한 데모 추세이며 진단이 아닙니다.',ageDetail:'생체 나이는 나이·체형·활동·휴식·심폐 추세로 추정하는 데모입니다. 4.2세는 임상 검증된 값이 아닙니다.'}
+};
+function c(k){const value=copy[state.lang]?.[k]||(state.lang==='ja'?copy.en[k]:copy.zh[k])||'';return state.lang==='zht'?toTraditional(value):value;}
+// 14-day reference prototype. Group proxy values stand in for a future validated
+// age/breed/species database. No claim that simulated data are clinically validated.
+// These are illustrative signal-quality criteria. Actual thresholds must be validated
+// against factory SDK output and dog/cat ground-truth recordings before release.
+// Demonstration quality gates. These are deliberately configurable per species,
+// not clinical cutoffs. The factory SDK and separate dog/cat datasets must calibrate them.
+function qualitySpec(d=currentDog()){
+ const cat=d.species==='cat'||/cat|貓|猫/i.test(d.breed?.en||'');
+ return {species:cat?'cat':'dog',durationMin:4,contactMin:cat?.88:.85,motionMax:cat?.20:.25,nnMin:120,usableMin:.80};
+}
+function qualityIssues(sample,limits){const misses=[];
+ if(sample.durationMin<limits.durationMin)misses.push('duration');
+ if(sample.contactPct<limits.contactMin)misses.push('contact');
+ if(sample.motionPct>limits.motionMax)misses.push('motion');
+ if(sample.nnIntervals<limits.nnMin||sample.usableFraction<limits.usableMin)misses.push('intervals');
+ return misses;
+}
+function qualityIssueName(k){return ({no_record:label3('當天沒有有效量測','No valid recording that day','해당 날짜 측정 없음'),duration:label3('量測時長不足','Recording too short','측정 시간 부족'),contact:label3('疑似貼合不穩（請人工確認）','Possible collar fit issue (check manually)','착용 불안정 가능성(직접 확인)'),motion:label3('活動干擾較多','Too much movement','움직임 간섭'),intervals:label3('有效心搏資料不足','Insufficient clean heartbeats','유효 심박 데이터 부족')})[k]||k}
+function qualityForDay(index,dogIndex=state.dog){const d={...(allPets()[dogIndex]||currentDog()),...(state.petOverrides?.[dogIndex]||{})},limits=qualitySpec(d),j=index+dogIndex;
+ // Never synthesize wear/contact/interval quality for personally added pets.
+ // Accepted SDK days are validated by the same 20 Hz provenance gate used by
+ // the final scoring engine; their local calendar date, not an array index,
+ // determines whether the day counts toward the health baseline.
+ if(dogIndex>=dogs.length||d.dpFixtureInvalidated||d.dpFreshPet||d.freeCare){
+  const date=iso(dateAdd(localDate(),index-29));
+  // Use the same owner-filtered, conflict-resolved daily evidence as the
+  // scoring engine. A raw row in this numeric storage bucket alone is NOT
+  // proof that today's selected animal wore a collar.
+  const rows=globalThis.DeepPetSignalScoring?.getFeatures?.(dogIndex)||[];
+  const row=rows.find(x=>x?.date===date&&x.source==='20hz-waveform'&&globalThis.DeepPetSignalScoring?.isVerifiedWear?.(x)===true)||null;
+  const accepted=!!row&&window.DeepPetSignalScoring?.isVerifiedWear?.(row)===true;
+  const q=accepted?row.quality||{}:{};
+  const numeric=k=>Number.isFinite(Number(q[k]))&&q[k]!==null&&q[k]!==undefined?Number(q[k]):null;
+  const seconds=numeric('observedSeconds');
+  const result={durationMin:accepted&&seconds!==null?+(seconds/60).toFixed(1):null,
+   contactPct:accepted?numeric('contactPct'):null,motionPct:accepted?numeric('motionPct'):null,
+   nnIntervals:accepted?numeric('nnIntervals'):null,usableFraction:accepted?numeric('usableFraction'):null,
+   limits,reasons:accepted?[]:['no_record'],valid:accepted,points:accepted?numeric('nnIntervals'):null,
+   quiet:accepted&&numeric('motionPct')!==null&&numeric('motionPct')<=limits.motionMax,
+   contact:accepted&&numeric('contactPct')!==null&&numeric('contactPct')>=limits.contactMin?'good':'unknown'};
+  return result;
+ }
+ let durationMin= +(5.1+(j%4)*.34).toFixed(1),contactPct=+.92+(j%3)*.015,motionPct=+.09+(j%4)*.022,
+ nnIntervals=154+(j%7)*8,usableFraction=.91+(j%3)*.018;
+ // Showcase pets include deliberately varied wear/no-wear patterns. A calendar
+ // day must not count toward the 14-day this pet’s baseline without a reading.
+ if(dogIndex>=15){
+  if(j%10===3)durationMin=2.6;
+  if(j%11===6)contactPct=.69;
+  if(j%9===5)motionPct=.37;
+  if(j%13===8){nnIntervals=84;usableFraction=.63;}
+ }
+ if(dogIndex===0&&index>=23){durationMin=5.5;contactPct=.96;motionPct=.10;nnIntervals=166;usableFraction=.95;}
+ if(index===29){durationMin=5.5;contactPct=.96;motionPct=.10;nnIntervals=166;usableFraction=.95;}
+ const q={durationMin,contactPct:+contactPct.toFixed(2),motionPct:+motionPct.toFixed(2),nnIntervals,usableFraction:+usableFraction.toFixed(2),limits};
+ q.reasons=qualityIssues(q,limits);
+ const reportedDays=dogIndex<DEMO_OBSERVATION_DAYS.length?(state.baselineDaysByPet?.[dogIndex]??DEMO_OBSERVATION_DAYS[dogIndex]):(state.baselineDaysByPet?.[dogIndex]??(d.freeCare?0:1));
+ if(index<30-Math.max(0,Number(reportedDays)||0))q.reasons=['no_record'];
+ if(dogIndex<DEMO_OBSERVATION_DAYS.length&&DEMO_WEAR_GAPS[dogIndex]?.includes(index))q.reasons=['no_record'];
+ if(q.reasons.includes('no_record')){q.durationMin=null;q.contactPct=null;q.motionPct=null;q.nnIntervals=null;q.usableFraction=null;}
+ q.valid=q.reasons.length===0;q.points=q.nnIntervals;q.quiet=q.motionPct!==null&&q.motionPct<=limits.motionMax;q.contact=q.contactPct!==null&&q.contactPct>=limits.contactMin?'good':'weak';
+ return q;
+}
+function signalQuality(){return qualityForDay(29)}
+function qualityMessage(){const q=signalQuality();if(q.valid)return '';return label3('量測品質不足：','Signal quality insufficient: ','측정 품질 부족: ')+q.reasons.map(qualityIssueName).join('、')+label3('。請先調整貼合、等活動停止後重新量測。','. Check collar fit and retry during a quiet period.','。착용을 확인하고 안정 시 다시 측정하세요.')}
+function qualityInline(){const q=signalQuality();return q.valid?'':`<div class="signal-quality-warning">${vicon('activity',18)}<span>${qualityMessage()}</span><button data-action="baseline-detail">${label3('查看原因','Details','자세히')}</button></div>`;}
+function validDaySample(record,index){return qualityForDay(index)}
+function qualityAuditCard(){const q=signalQuality(),lim=q.limits,present=v=>v!==null&&v!==undefined&&Number.isFinite(Number(v)),rows=[
+ {key:'duration',name:label3('有效量測時長','Recording duration','유효 측정 시간'),now:present(q.durationMin)?Number(q.durationMin).toFixed(1)+' min':'N/A',need:'≥ '+lim.durationMin+' min',pass:present(q.durationMin)?q.durationMin>=lim.durationMin:null},
+ {key:'contact',name:label3('波形貼合估計','Estimated signal coupling','파형 접촉 추정'),now:present(q.contactPct)?Math.round(q.contactPct*100)+'%':'N/A',need:'≥ '+Math.round(lim.contactMin*100)+'%',pass:present(q.contactPct)?q.contactPct>=lim.contactMin:null},
+ {key:'motion',name:label3('活動干擾比例','Movement interference','움직임 간섭'),now:present(q.motionPct)?Math.round(q.motionPct*100)+'%':'N/A',need:'≤ '+Math.round(lim.motionMax*100)+'%',pass:present(q.motionPct)?q.motionPct<=lim.motionMax:null},
+ {key:'intervals',name:label3('有效心搏間期','Clean beat intervals','유효 심박 간격'),now:present(q.nnIntervals)&&present(q.usableFraction)?q.nnIntervals+' · '+Math.round(q.usableFraction*100)+'%':'N/A',need:'≥ '+lim.nnMin+' · ≥ '+Math.round(lim.usableMin*100)+'%',pass:present(q.nnIntervals)&&present(q.usableFraction)?q.nnIntervals>=lim.nnMin&&q.usableFraction>=lim.usableMin:null}
+ ];return `<section class="quality-audit"><div class="row spread"><h4>${label3('本次量測品質','Current recording quality','현재 측정 품질')}</h4><span class="quality-spec-pill">${lim.species==='cat'?label3('貓咪模型','Cat profile','고양이 기준'):label3('狗狗模型','Dog profile','강아지 기준')}</span></div><div class="quality-audit-grid">${rows.map(r=>`<div class="quality-audit-item"><div class="quality-audit-label"><span>${r.name}</span><i class="${r.pass===null?'na':r.pass?'pass':'fail'}">${r.pass===null?'—':r.pass?'✓':'!'}</i></div><div class="quality-audit-values"><strong>${r.now}</strong><small>${label3('參考條件','Reference','참고 조건')} ${r.need}</small></div></div>`).join('')}</div><p class="quality-audit-foot">${label3('依每隻寵物的有效佩戴資料建立健康基準；設備未提供的品質欄位顯示 N/A，不代表量測不合格。','The baseline uses valid pet-specific wear data. A missing optional quality field shows N/A, not a failed reading.','기준은 반려동물별 유효 착용 기록으로 생성되며, 미제공 항목은 실패가 아닌 N/A로 표시됩니다.')}</p></section>`;}
+function qualityDayGrid(){
+ if(dpUsesRealMeasurements()){
+  // The calendar and baseline must use the SAME verified-wear gate as scoring.
+  // Nonzero heart/respiratory fields alone are not ownership or contact proof.
+  const verified=globalThis.DeepPetSignalScoring;
+  const dates=new Set((verified?.getFeatures?.(state.dog)||[]).filter(x=>x?.source==='20hz-waveform'&&verified?.isVerifiedWear?.(x)===true).map(x=>x.date));
+  const cells=Array.from({length:14},(_,k)=>{const date=iso(dateAdd(localDate(),k-13)),valid=dates.has(date);return `<span class="${valid?'valid':'invalid'}"><small>${date.slice(5)}</small><strong>${valid?'✓':'×'}</strong></span>`;}).join('');
+  return `<div class="quality-days-grid">${cells}</div><p class="quality-days-caption">${label3('此日曆顯示最近14個自然日；個體基準另外累計所有合格佩戴日，達14個有效日才建立，不要求連續。','This grid shows the last 14 calendar dates; this pet’s baseline counts 14 cumulative verified wear days, not necessarily consecutive.','최근 14일 일정이며 기준은 누적 유효 착용 14일로 계산됩니다.')}</p>`;
+ }
+ const start=16;return `<div class="quality-days-grid">${Array.from({length:14},(_,k)=>{const idx=start+k,date=demoRecords(state.dog)[idx]?.date||iso(dateAdd(localDate(),k-13)),q=qualityForDay(idx),available=!q.reasons.includes('no_record');return `<button data-action="quality-day" data-index="${idx}" data-available="${available}" class="${q.valid?'valid':'invalid'}"><span>${date.slice(5)}</span><strong>${q.valid?'✓':'×'}</strong></button>`}).join('')}</div><p class="quality-days-caption">${label3('✓ 表示當天確實佩戴且量測品質合格；× 表示當天未穿戴或資料不合格。必須累積 14 個有效穿戴日（不要求連續），才能啟用個體健康基準；單純過了 14 個日曆日不算。','✓ means a genuinely worn and valid recording day; × means not worn or invalid. A this pet’s baseline requires 14 valid wear days (not necessarily consecutive), not 14 calendar days.','✓ 유효 착용일, × 미착용/무효. 유효 착용일 14일이 필요합니다.')}</p>`;}
+function qualityDayDetail(){const i=Math.max(0,Math.min(29,Number(state.qualityDayIndex??29))),q=qualityForDay(i),date=demoRecords(state.dog)[i].date,n=x=>x===null||x===undefined?'N/A':x;return `<div class="quality-day-detail"><h3>${date} · ${q.valid?label3('有效量測日','Valid recording day','유효 측정일'):label3('未列入基準','Excluded from baseline','기준에서 제외')}</h3><p>${q.valid?label3('本日量測品質良好。','Today’s recording quality is good.','오늘 측정 품질이 좋습니다.'):label3('未通過：','Failed: ','미통과: ')+q.reasons.map(qualityIssueName).join('、')}</p><div class="quality-audit-grid"><div>${label3('時長','Duration','시간')} <b>${q.durationMin===null?'N/A':q.durationMin+' min'}</b></div><div>${label3('接觸','Contact','접촉')} <b>${q.contactPct===null?'N/A':Math.round(q.contactPct*100)+'%'}</b></div><div>${label3('活動干擾','Motion','움직임')} <b>${q.motionPct===null?'N/A':Math.round(q.motionPct*100)+'%'}</b></div><div>${label3('有效心搏','Clean intervals','유효 박동')} <b>${n(q.nnIntervals)}</b></div></div><p class="baseline-smallprint">${label3('僅供檢查互動和分數建立邏輯，非真實設備量測。','Recording quality follows valid readings.','데모 로직이며 실제 센서 측정이 아닙니다.')}</p></div>`;}
+// Number of calendar days with demo recordings for this individual pet. The count
+// of VALID days is calculated separately by baselineProfile(), after quality checks.
+// All fifteen showcase pets have comparable 30-day histories; new user-created pets start empty / accumulating.
+const DEMO_OBSERVATION_DAYS=[30,30,30,30,26,24,23,18,17,14,15,28,12,9,21];
+// Luna is the full-coverage reference showcase. Previous intentional gaps
+// contradicted the connected weekly chart and veterinary visit summary.
+// These are synthetic showcase dates, never owner/SDK readings.
+const DEMO_WEAR_GAPS={1:[],2:[4,12,19,25],3:[6,14,22],4:[7,17],5:[8,21],6:[11,19,26],7:[15,20],8:[16,19,23,27],9:[18,22,26],10:[16,21,24],11:[8,13,20],12:[19,23],13:[22,24,26,28],14:[14,20,27]};
+function observationDays(){
+ if(dpUsesRealMeasurements()){
+  const verified=globalThis.DeepPetSignalScoring;
+  const earliest=iso(dateAdd(localDate(),-45)),today=iso(localDate());
+  return new Set((verified?.getFeatures?.(state.dog)||[]).filter(x=>x?.date>=earliest&&x.date<=today&&x.source==='20hz-waveform'&&verified?.isVerifiedWear?.(x)===true).map(x=>x.date)).size;
+ }
+ const defaultDays=DEMO_OBSERVATION_DAYS[state.dog]??1;
+ const requested=state.baselineDaysByPet?.[state.dog];
+ // The chosen fixture's actual recorded days, not 30 days merely elapsed.
+ const value=requested??defaultDays;
+ return Math.max(0,Math.min(30,Number(value) || (state.dog>=dogs.length ? (currentDog().freeCare?0:1):1)));
+}
+function baselinePhase(b=baselineProfile()){
+ const n=Math.min(14,b.days);
+ if(b.ready)return {key:'ready',tag:label3('個體基準已建立','Pet-specific baseline ready','반려동물 자체 기준 완료'),headline:label3('已建立專屬健康基準','This pet’s health baseline established','반려동물 건강 기준 설정 완료'),desc:label3('已累積至少 14 個有效量測日，可比較寵物自身趨勢；只有存在適用且已驗證的群體資料時，才補充群體參考。','At least 14 valid recording days support comparison with this pet’s history; group references appear only if suitable, verified evidence exists.','유효 측정일 14일 이상으로 반려동물 자체 추세를 비교하며, 검증된 집단 자료가 있을 때만 추가 참조합니다.'),icon:'✓'};
+ if(n<=2)return {key:'start',tag:label3('剛開始記錄','Getting started','시작 단계'),headline:label3('正在建立初始記錄','Gathering first recordings','첫 기록 수집 중'),desc:label3(`已有 ${n} 個有效量測日，尚無法做個體化的 14 天比較。`,`Only ${n} valid day(s) so far; this pet’s 14-day comparisons are unavailable.`,`현재 유효일 ${n}일로 반려동물 자체 기준 비교는 아직 할 수 없습니다.`),icon:'✦'};
+ if(n<=6)return {key:'early',tag:label3('初步學習','Early learning','초기 학습'),headline:label3('逐步認識日常節奏','Learning daily patterns','일상 리듬 학습 중'),desc:label3(`目前 ${n}/14 個有效日。先看基本量測，暫不當作已建立的專屬基準。`,`Currently ${n}/14 valid days. Basic measures are available; this pet’s baseline is not yet ready.`,`현재 ${n}/14 유효일. 반려동물 자체 기준은 아직 준비 중입니다.`),icon:'◔'};
+ if(n<=10)return {key:'building',tag:label3('持續累積中','Building history','기록 축적 중'),headline:label3('已開始看到初步趨勢','Early trends are emerging','초기 추세 확인 중'),desc:label3(`目前 ${n}/14 個有效日，只能觀察初步方向；沒有適用且已驗證的群體參考時，不顯示比較。`,`Currently ${n}/14 valid days. Trends are provisional; comparison is omitted unless a suitable verified group reference exists.`,`현재 ${n}/14 유효일. 초기 추세만 보이며 검증된 참고값이 없으면 비교하지 않습니다.`),icon:'◑'};
+ return {key:'almost',tag:label3('接近完成','Almost ready','거의 완료'),headline:label3('快建立個體基準了','Pet-specific baseline nearly ready','반려동물 자체 기준 완료 임박'),desc:label3(`已有 ${n}/14 個有效日，還差 ${14-n} 個有效日。未完成前不顯示已建立的個體基準。`,`Already ${n}/14 valid days; ${14-n} more required. Individual baseline remains provisional until completion.`,`현재 ${n}/14 유효일. ${14-n}일 더 필요합니다.`),icon:'◕'};
+}
+function referenceName(b=baselineProfile(),kind='heart'){
+ if(!Number.isFinite(b?.[kind]))return label3('尚無可用參考值','No applicable reference yet','사용 가능한 참고값 없음');
+ const origin=b?.referenceSources?.[kind];
+ return b.ready&&origin!=='group'?label3('寵物自身14天基準','Pet-specific 14-day baseline','반려동물 자체 14일 기준'):label3('可用參考值（非自身基準）','Available reference (not pet-specific)','사용 가능한 참고값 (자체 기준 아님)');
+}
+function dpSafeReferenceText(value,unit){return Number.isFinite(value)?`${value.toFixed(0)} ${unit}`:'—';}
+function petBaselineOverview(petIndex){
+ if(dpUsesRealMeasurements(petIndex)){
+  // Valid days for a real pet are not the synthetic 30-day gallery calendar.
+  // A report must not mistakenly mark a verified owner baseline as incomplete.
+  const verified=globalThis.DeepPetSignalScoring;
+  const earliest=iso(dateAdd(localDate(),-45)),today=iso(localDate());
+  const valid=new Set((verified?.getFeatures?.(petIndex)||[]).filter(x=>x?.date>=earliest&&x.date<=today&&x.source==='20hz-waveform'&&verified?.isVerifiedWear?.(x)===true).map(x=>x.date)).size;
+  return {valid,phase:baselinePhase({days:valid,ready:valid>=14})};
+ }
+ const days=DEMO_OBSERVATION_DAYS[petIndex]??1;
+ let valid=0;
+ for(let i=30-days;i<30;i++)if(qualityForDay(i,petIndex).valid)valid++;
+ const phase=baselinePhase({days:valid,ready:valid>=14});
+ return {valid,phase};
+}
+function animalGroupReference(d,rows){
+ if(d.dpFreshPet||d.dpFixtureInvalidated||d.freeCare||state.dog>=dogs.length)return null; // No fictional real-pet cohort.
+ const cat=(d.species==='cat'||/cat|貓|猫/i.test(d.breed?.en||''));
+ const ageAdjust=d.age>=8?1.04:1;
+ return {hr:d.hr*ageAdjust,heart:d.hr*ageAdjust,breath:d.rr,sleep:d.rest,recovery:d.normalRecovery,
+         sd:cat?44:52,rm:cat?29:35,rr:d.rr,weight:d.weight};
+}
+function meanOf(rows,key,fallback){const vals=rows.map(r=>r?.[key]).filter(v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))).map(Number);return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:fallback}
+// Explanation-only 14-day trend: use the very same 75/25 composite displayed
+// in the 30-day model; this never changes stored daily or long-term scores.
+function dpBaselineTrendMean(rows){
+ const valid=rows.filter(x=>Number.isFinite(x?.scores?.physiol)&&Number.isFinite(x?.scores?.rhythm));
+ return valid.length?valid.reduce((sum,x)=>sum+.75*x.scores.physiol+.25*x.scores.rhythm,0)/valid.length:null;
+}
+function baselineProfile(){
+ if(state.dog>=dogs.length||currentDog().dpFixtureInvalidated){
+  // A fourteen-day current this pet’s baseline must not be rebuilt from last
+  // year's collar sessions. Use the 45-calendar-day recency policy already
+  // established for personalized-change alerts.
+  const today=iso(localDate()),earliest=iso(dateAdd(localDate(),-45));
+  const recent=x=>x?.date>=earliest&&x.date<=today;
+  const verified=globalThis.DeepPetSignalScoring;
+  const accepted=(verified?.getFeatures?.(state.dog)||[]).filter(x=>recent(x)&&x.source==='20hz-waveform'&&verified?.isVerifiedWear?.(x)===true).sort((a,b)=>a.date.localeCompare(b.date));
+  const features=[...new Map(accepted.map(x=>[x.date,x])).values()];
+  const goodDates=new Set(features.map(x=>x.date));
+  const rows=(verified?.getDaily?.(state.dog)||[]).filter(x=>recent(x)&&goodDates.has(x.date)&&Number.isFinite(x.scores?.physiol)&&Number.isFinite(x.scores?.rhythm)).sort((a,b)=>a.date.localeCompare(b.date));
+  const days=features.length,ready=days>=14,validWindow=rows.slice(-14),last=features.slice(-14);
+  // Keep the existing 14-valid-day rolling this pet’s reference. Record its
+  // actual date span and how it changed relative to the PRECEDING fourteen
+  // eligible days; do not mix old data or today's own measurements into the
+  // reference USED for scoring that same day.
+  const previousValid=features.filter(x=>x.date<today),todayPersonalizationReady=previousValid.length>=14;
+  const recentScored=rows.slice(-28);
+  const prior14=recentScored.length>=28?dpBaselineTrendMean(recentScored.slice(0,14)):null;
+  const latest14=recentScored.length>=28?dpBaselineTrendMean(recentScored.slice(-14)):null;
+  const recentScoreDelta=Number.isFinite(prior14)&&Number.isFinite(latest14)?Math.round((latest14-prior14)*10)/10:null;
+  const p={hr:meanOf(last,'quietHeartRate',null),heart:meanOf(last,'quietHeartRate',null),breath:meanOf(last,'quietBreathRate',null),sleep:meanOf(last,'restHours',null),recovery:meanOf(last,'recoveryDrop',null),sd:meanOf(last,'sdnn',null),rm:meanOf(last,'rmssd',null),rr:meanOf(last,'quietBreathRate',null)};
+  const g=globalThis.DeepPetVerifiedReferenceForPet?.(currentDog())||null;
+  const aliases={hr:['hr','quietHeartRate','heartRate'],heart:['heart','quietHeartRate','heartRate'],breath:['breath','quietBreathRate','breathRate'],sleep:['sleep','restHours'],recovery:['recovery','recoveryDrop'],sd:['sd','sdnn'],rm:['rm','rmssd'],rr:['rr','quietBreathRate','breathRate']};
+  const groupFor=k=>(aliases[k]||[k]).map(name=>g?.[name]).find(Number.isFinite)??null;
+  const hasVerifiedGroup=!!g&&Object.keys(aliases).some(k=>Number.isFinite(groupFor(k)));
+  const weight=ready?(hasVerifiedGroup?.70:1):0;
+  const get=k=>{const pv=p[k],gv=groupFor(k),name=k==='rm'?'rmssd':k==='sd'?'sdnn':null;
+   // A complete 14-day WEAR history is not the same as 14 valid HRV days.
+   const enoughMetricHistory=!name||last.filter(x=>x?.quality?.hrvValid===true&&Number.isFinite(x[name])&&x[name]>0).length>=14;
+   if(ready&&enoughMetricHistory&&Number.isFinite(pv))return Number.isFinite(gv)?(1-weight)*gv+weight*pv:pv;
+   return Number.isFinite(gv)?gv:null;};
+  // Display-only provenance: 14 valid wear dates can exist while a single
+  // metric still relies solely on verified group reference values.
+  const sourceFor=k=>{const name=k==='rm'?'rmssd':k==='sd'?'sdnn':null;
+   const enoughMetricHistory=!name||last.filter(x=>x?.quality?.hrvValid===true&&Number.isFinite(x[name])&&x[name]>0).length>=14;
+   if(ready&&enoughMetricHistory&&Number.isFinite(p[k]))return Number.isFinite(groupFor(k))?'blended':'pet';
+   return Number.isFinite(groupFor(k))?'group':'none';};
+  const referenceSources=Object.fromEntries(Object.keys(aliases).map(k=>[k,sourceFor(k)]));
+  return {days,calendarDays:days,ready,weight,remaining:Math.max(0,14-days),group:g,personal:p,window:validWindow,
+   referenceSources,
+   updatedOn:features.at(-1)?.date||null,windowStart:last[0]?.date||null,todayPersonalizationReady,
+   todayReferenceEndsOn:previousValid.at(-1)?.date||null,scoreDelta14:recentScoreDelta,trendComparedDays:recentScoreDelta===null?0:28,
+   hr:get('hr'),heart:get('heart'),breath:get('breath'),sleep:get('sleep'),recovery:get('recovery'),sd:get('sd'),rm:get('rm'),rr:get('rr')};
+ }
+ const d=currentDog(),calDays=observationDays(),all=demoRecords(state.dog),group=animalGroupReference(d,all);
+ // Count VALID RECORDING DAYS, never elapsed days. Gather up to 14 valid records.
+ const filtered=all.map((record,index)=>({...record,_quality:validDaySample(record,index)}))
+   .slice(-calDays).filter(row=>row._quality.valid);
+ const days=filtered.length,ready=days>=14,validWindow=filtered.slice(-14);
+ // The displayed this pet’s reference and actual daily engine now share the
+ // same per-pet derived signal features, not two unrelated mock value sets.
+ const featureRows=typeof globalThis.DeepPetSignalScoring?.getFeatures==='function'?globalThis.DeepPetSignalScoring.getFeatures(state.dog):[];
+ const features=validWindow.map(row=>featureRows[all.findIndex(r=>r.date===row.date)]).filter(Boolean);
+ const personal={hr:meanOf(features,'quietHeartRate',group.hr),heart:meanOf(features,'quietHeartRate',group.heart),
+   breath:meanOf(features,'quietBreathRate',group.breath),sleep:meanOf(features,'restHours',group.sleep),
+   recovery:meanOf(validWindow,'recovery',group.recovery),sd:meanOf(features,'sdnn',group.sd),
+   rm:meanOf(features,'rmssd',group.rm),rr:meanOf(features,'quietBreathRate',group.rr)};
+ const weight=ready?.7:0,blend=k=>group[k]*(1-weight)+personal[k]*weight;
+ return {days,calendarDays:calDays,ready,weight,remaining:Math.max(0,14-days),group,personal,window:validWindow,
+   referenceSources:Object.fromEntries(['hr','heart','breath','sleep','recovery','sd','rm','rr'].map(k=>[k,ready?'blended':'group'])),
+   hr:blend('hr'),heart:blend('heart'),breath:blend('breath'),sleep:blend('sleep'),recovery:blend('recovery'),
+   sd:blend('sd'),rm:blend('rm'),rr:blend('rr')};
+}
+function baselineBanner(compact=false){
+ const m=baselineProfile(),phase=baselinePhase(m),displayDays=Math.min(14,m.days);
+ return `<button class="baseline-banner baseline-stage-${phase.key} ${compact?'compact':''}" data-action="baseline-detail" aria-label="${phase.tag} ${displayDays}/14"><span class="baseline-phase-mark">${phase.icon}</span><span class="grow"><b>${phase.tag}</b>${compact?'':`<small>${label3('DeepPet 會自動整理平常的心跳、呼吸、休息與活動，之後可更早看出哪些變化值得留意。','DeepPet automatically learns usual heart, breathing, rest and activity patterns, so later changes are easier to spot.','DeepPet이 평소 심박·호흡·휴식·활동을 자동으로 정리해 이후 변화를 확인하도록 도와줘요.')}</small>`}</span><span class="baseline-counter">${displayDays}/14 ${vicon('chev',14)}</span></button>`;
+}
+
+function dp105BaselineContext(b){
+ if(!(state.dog>=dogs.length||currentDog().dpFixtureInvalidated)||!b.updatedOn)return '';
+ const period=`${b.windowStart||b.updatedOn} → ${b.updatedOn}`;
+ const range=label3(`近 45 天共 ${b.days} 個有效佩戴日；個體參考最近 14 個有效日的範圍為 ${period}。`,
+  `${b.days} valid wear days in the last 45 calendar days. The rolling pet-specific window runs ${period}.`,
+  `최근 45일간 유효 착용 ${b.days}일. 반려동물 자체 기준 구간은 ${period}입니다.`);
+ const update=label3(`最近一次有效更新：${b.updatedOn}。`,`Last valid update: ${b.updatedOn}.`,`최근 유효 업데이트: ${b.updatedOn}.`);
+ const basis=b.days>=14&&!b.todayPersonalizationReady?
+  label3('今天剛滿 14 個有效日；今天評分仍用之前可用的參考，從下一個有效測量日開始採用完整個體基準。',
+   'Today completes 14 valid days. Today’s score uses previously available references; the full this pet’s baseline applies from the next eligible day.',
+   '오늘 유효일 14일을 채웠습니다. 오늘 점수는 이전 기준을 사용하며 다음 유효 측정일부터 반려동물 자체 기준을 적용합니다.'):'';
+ const delta=Number.isFinite(b.scoreDelta14)?label3(`最近 14 個有效日的綜合均分較更早 14 個有效日${b.scoreDelta14>=0?'提高':'降低'} ${Math.abs(b.scoreDelta14).toFixed(1)} 分；這是分數趨勢，不代表疾病好轉或惡化。`,
+  `The latest 14 valid-day mean is ${Math.abs(b.scoreDelta14).toFixed(1)} points ${b.scoreDelta14>=0?'higher':'lower'} than the preceding 14 valid days. This is a score trend, not a disease assessment.`,
+  `최근 유효 14일 평균은 앞선 14일보다 ${Math.abs(b.scoreDelta14).toFixed(1)}점 ${b.scoreDelta14>=0?'높습니다':'낮습니다'}. 질병 판정이 아닙니다.`):
+  label3('尚未累積兩組各 14 個可比有效日，不推測「改善幅度」。',
+   'Two comparable 14-day windows are not yet available; no improvement amount is inferred.',
+   '비교 가능한 14일 구간 2개가 없어 개선 폭을 추정하지 않습니다.');
+ return `<p class="baseline-mean-explain dp105-baseline-context">${range}<br>${update}${basis?`<br>${basis}`:''}<br>${delta}</p>`;
+}
+function baselineDetail(){const b=baselineProfile(),days=Math.min(14,b.days),phase=baselinePhase(b);return `<div class="baseline-detail-wrap baseline-stage-${phase.key}">
+ <div class="baseline-stage-head"><div><div class="eyebrow">${label3('寵物健康分析','Pet health analysis','반려동물 건강 분석')}</div><h3>${b.ready?label3('已建立 14 天基準','14-day baseline established','14일 기준 완료'):label3('正在認識你的寵物','Getting to know your pet','반려동물을 알아가는 중')}</h3></div><div class="baseline-days-large">${days}<small>/14</small></div></div>
+ <div class="baseline-progress-track"><i style="width:${Math.min(100,Math.round(days/14*100))}%"></i></div><div class="baseline-phase-status"><strong>${phase.icon} ${phase.tag}</strong><p>${phase.desc}</p></div>
+ <p>${b.ready?label3('基準建立後，可將這隻寵物最近14個有效量測日的變化，與可用的同類群體參考一起比較；有效日不必連續。','After the baseline is established, compare its latest 14 valid recording days with available matching group references. Valid days need not be consecutive.','기준이 준비되면 최근 유효 측정 14일을 사용 가능한 동물군 참고값과 비교합니다. 측정일이 연속될 필요는 없습니다.'):label3('開始時只會使用可用且經過驗證的同類群體參考；累積14個有效日後，從下一個有效量測日起加入這隻寵物自身的趨勢。','Initially, only available validated group references are considered. After 14 eligible days, this pet’s trends enter the comparison from the next valid recording.','처음에는 검증된 비교군 참고값이 있을 때만 사용하며, 유효일 14일이 누적되면 다음 유효 측정부터 이 반려동물의 추세를 함께 반영합니다.')}</p>
+ ${dp105BaselineContext(b)}
+ <div class="baseline-model-steps"><div><span>01</span><b>${label3('初始階段 · 1–13 個有效日','Start · 1–13 valid days','초기 · 유효일 1–13')}</b><small>${label3('群體參考 + 已有量測，持續學習','Group references, with measurements accumulating','참조값을 바탕으로 데이터 수집')}</small></div><div><span>14+</span><b>${label3('累積 14 個有效日 · 建立個體基準','14 valid days · Pet-specific baseline','유효일 14일 · 반려동물 자체 기준')}</b><small>${label3('最近14個有效日＋可用的群體參考','Latest 14 valid days + available group reference','최근 유효 14일과 이용 가능한 비교군 참고값')}</small></div></div>
+ <div class="baseline-compare-note">${label3('不同建立階段請切換主頁上方的狗貓；其中數隻長期佩戴情境已建立基準。','Switch pets at the top of Home to inspect distinct stages. Some gallery pets have already established baselines.','홈에서 반려동물을 변경하여 각 단계를 보세요. 일부 장기 기록 반려동물은 반려동물 자체 기준이 완료되었습니다.')}</div>
+ ${qualityAuditCard()}<h4>${label3('最近14個日曆日的記錄','Recording status for the last 14 calendar dates','최근 14일 달력의 측정 상태')}</h4>${qualityDayGrid()}
+ <div class="baseline-summary-grid dp-baseline-mean-cards"><div class="dp-baseline-mean-card"><small>${b.ready?label3('最近14個有效監測日','Last 14 valid monitoring days','최근 유효 측정 14일'):label3('已累積有效監測日','Valid days accumulated','현재 유효 측정일')}</small>${dpDotScore(dpBaselineAverageScore(),'health')}<b>${b.ready?label3('最近14個有效日平均','Latest 14 valid-day average','최근 유효 14일 평균'):label3('目前有效日平均','Available-day average','현재 유효일 평균')}</b></div><div class="dp-baseline-stage-card"><small>${label3('資料階段','Data stage','데이터 단계')}</small><strong>${b.ready?label3('已建立','Established','설정 완료'):label3('建立中','Learning','학습 중')}</strong><span class="dp-baseline-stage-count">${Math.min(14,b.days)} / 14</span><span>${label3('有效監測日','Valid days','유효 측정일')}</span></div></div>
+ <p class="baseline-mean-explain">${dpBaselineAverageExplanation()}</p>
+ <p class="baseline-smallprint">${label3('最近45個日曆日內累積14個有效量測日（無須連續）後，下一個有效日才開始使用完整的寵物自身基準。','After 14 eligible recording days within the last 45 calendar days, apply the full pet baseline from the next valid day. Days need not be consecutive.','최근 45일 안에 누적 유효 측정 14일이 있으면, 다음 유효 측정부터 반려동물 자체 기준을 사용합니다. 연속된 날짜일 필요는 없습니다.')}</p></div>`}
+// The baseline uses the same last 14 VALID recording dates for both score families.
+// Read the actual post-fusion/alert daily scoring engine; do not recompute a
+// competing mean of three cards or a legacy rhythm score on this page.
+function dpBaselineAverageStats(){
+ const validRecords=baselineProfile().window,all=demoRecords(state.dog),daily=globalThis.DeepPetSignalScoring?.getDaily?.(state.dog)||[];
+ // Daily scores may be sparse or returned in a different order after genuine
+ // sensor uploads. Join on an ISO date, never on a fixture array index.
+ const byDate=new Map(daily.filter(x=>x&&typeof x.date==='string').map(x=>[x.date,x.scores]));
+ const pairs=validRecords.map(r=>{
+   const idx=all.findIndex(x=>x.date===r.date);
+   if(idx<0)return null;
+   const phys=byDate.get(r.date)?.physiol;
+   const rhythm=byDate.get(r.date)?.rhythm;
+   return Number.isFinite(phys)&&Number.isFinite(rhythm)?{phys,rhythm}:null;
+ }).filter(Boolean);
+ if(!pairs.length)return {days:0,phys:null,rhythm:null,combined:null};
+ const mean=key=>pairs.reduce((a,v)=>a+v[key],0)/pairs.length;
+ const phys=mean('phys'),rhythm=mean('rhythm');
+ return {days:pairs.length,phys,rhythm,combined:.70*phys+.30*rhythm};
+}
+function dpBaselineAverageScore(){const s=dpBaselineAverageStats();return s.combined===null?null:dpOwnerQualityValue(s.combined);}
+function dpBaselineAverageExplanation(){
+ const x=dpBaselineAverageStats();
+ if(!x.days)return label3('尚無有效監測日，暫不顯示綜合平均。','No valid monitoring days yet.','아직 유효 측정일이 없습니다.');
+ return label3(`本頁為最近 ${x.days} 個有效監測日的綜合平均，不是今天的分數；因此可能與首頁「今日總結」不同。`,`This is the combined average across the latest ${x.days} valid days, not today's score. It may differ from Home's daily summary.`,`최근 유효 측정 ${x.days}일의 종합 평균이며, 오늘 점수와 다를 수 있습니다.`);
+}
+function dpBaselineStandalonePage(){
+ const empty=selectedBlank()||((dp58FreshPet()||isFreePet()||Number(state.dog)>=15)&&!(globalThis.DeepPetSignalScoring?.getDaily?.(state.dog)||[]).some(x=>Number.isFinite(x?.scores?.physiol)));
+ if(empty){
+  const txt=label3('尚未有有效量測紀錄','No valid measurements yet','아직 유효한 측정 기록 없음');
+  return `<div class="app-pad dp-independent-page dp-baseline-standalone dp938-empty-baseline"><header class="dp-independent-head"><button data-action="baseline-page-back" aria-label="Back">←</button><b>${label3('14天健康基準','14-day Health Baseline','14일 건강 기준')}</b></header><section class="card"><h3>${label3('14天健康基準','14-day Health Baseline','14일 건강 기준')}</h3><div class="dp938-empty-baseline-score">${dpDotScore(null,'health')}<div><b>${txt}</b><small>N/A · ${label3('尚無有效日','No valid days','유효일 없음')}</small></div></div><h4>${label3('最近14個日曆日的記錄','Recording status for the last 14 calendar dates','최근 14일 달력의 측정 상태')}</h4><div class="quality-days-grid">${Array.from({length:14},(_,i)=>{const date=iso(dateAdd(localDate(),i-13));return `<span class="dp938-no-day"><small>${date.slice(5)}</small><strong>—</strong></span>`}).join('')}</div><section class="quality-audit dp938-empty-quality"><h4>${label3('本次量測品質','Current recording quality','현재 측정 품질')}</h4><div class="quality-audit-grid">${[['有效量測時長','Duration'],['波形貼合估計','Contact'],['活動干擾比例','Motion'],['有效心搏間期','Clean beats']].map(([zh,en])=>`<div class="quality-audit-item"><small>${label3(zh,en,en)}</small><strong>N/A</strong></div>`).join('')}</div><p>${txt} · ${label3('未測量不視為零分或失敗','Unmeasured is not a failed or zero score','미측정은 실패나 0점이 아닙니다')}</p></section></section><div class="footer-space"></div></div>`;
+ }
+ return `<div class="app-pad dp-independent-page dp-baseline-standalone"><header class="dp-independent-head"><button data-action="baseline-page-back" aria-label="Back">←</button><b>${label3('14天健康基準','14-day Health Baseline','14일 건강 기준')}</b></header><section class="card">${baselineDetail()}</section><div class="footer-space"></div></div>`;
+}
+function activityCareModel(){const d=currentDog(),m=rhythmData().today,b=baselineProfile(),history=rhythmHistory(14,'recover'),
+ recent=history.slice(-7),before=history.slice(0,7),avg=x=>x.reduce((s,v)=>s+v,0)/x.length,
+ diff=Math.round(avg(recent)-avg(before)),recoverDelta=d.recovery-b.recovery;
+ let tier=m.recover>=83&&m.load<34&&recoverDelta<5?'normal':m.recover>=68&&m.load<52?'easy':'rest';
+ const labels={normal:label3('維持平常的陪伴節奏','Stay with the usual routine','평소 활동 유지'),
+ easy:label3('今天適合輕鬆活動','A gentler day together','오늘은 가볍게 활동'),
+ rest:label3('今天多安排一些休息','A little more rest today','오늘은 휴식을 더')};
+ const story={normal:label3('我今天的身體節奏接近平常，我們可以照熟悉的步調散步與玩耍。','My rhythm is close to usual. We can follow our familiar walk-and-play routine.','오늘 리듬이 평소와 비슷해요.'),
+ easy:label3('今天可以陪我輕鬆走走，不用追求活動量，晚點再看看恢復情況。','A calm walk sounds good today. Let’s watch how I settle afterward.','오늘은 가볍게 산책하고 회복을 살펴봐요.'),
+ rest:label3('今天我的恢復節奏有些偏離平常，讓我多休息，也留意是否持續。','Pet recovery pattern differs from usual. Give me extra rest and keep an eye on it.','오늘은 회복 리듬이 달라요. 좀 더 쉬게 해주세요.')};
+ return {tier,title:labels[tier],story:story[tier],diff,trend:diff>2?'up':diff< -2?'down':'flat',m,baseline:b};
+}
+function activityCareCard(){const x=activityCareModel(),c=x.tier==='normal'?'#24a56c':x.tier==='easy'?'#2f6fe4':'#d58b2d';return `<section class="care-ai-card" style="--care:${c}">
+ <div class="row spread"><div class="care-ai-label">${vicon('spark',15)} ${label3('今天適合怎麼陪我？','How should we spend today?','오늘 어떻게 함께할까요?')}</div><span class="pill" style="background:#ffffffbd;color:${c}">${baselineProfile().ready?label3('14 天基準','14-day baseline','14일 기준'):label3('建立中','Learning','학습 중')}</span></div>
+ <h3>${x.title}</h3><p class="care-ai-voice">「${x.story}」</p><div class="care-ai-metrics"><span>${label3('恢復節奏','Recovery rhythm','회복 리듬')} <b>${x.m.recover}/100</b></span><span>${label3('身體負荷','Body load','몸의 부담')} <b>${rhythmStatus('load',x.m.load)}</b></span></div><button data-action="care-detail"><span>${label3('查看 14 天恢復變化','View 14-day recovery progress','14일 회복 변화 보기')}</span>${vicon('chev',15)}</button>${technicalBasisNote('rhythm')}</section>`}
+function recoveryProgressDetail(){const ev=recoveryEvidence(),x=activityCareModel(),vals=rhythmHistory(14,'recover'),color=x.diff>=0?'#24a56c':'#d58b2d';return `<div class="recovery-progress">${recoveryEvidenceCard(ev)}
+ <div class="recover-heading"><b>${label3('最近 14 天 · 牠的恢復進展','Pet recovery · last 14 days','최근 14일 회복 변화')}</b><span class="pill purple">14D</span></div>
+ <div class="recover-number" style="color:${color}">${x.diff>0?'+':''}${x.diff}<small> ${label3('分／相對上一週','pts vs prior week','점 / 이전 주 대비')}</small></div>${rhythmMiniChart('recover',14,165)}
+ <div class="recover-columns"><div><span>${label3('前 7 天平均','Previous 7-day average','이전 7일 평균')}</span><b>${Math.round(vals.slice(0,7).reduce((a,b)=>a+b,0)/7)}</b></div><div><span>${label3('最近 7 天平均','Latest 7-day average','최근 7일 평균')}</span><b>${Math.round(vals.slice(-7).reduce((a,b)=>a+b,0)/7)}</b></div></div>
+ <div class="recovery-progress-story">${x.diff>2?label3('近期恢復節奏比前一週更接近理想參考；維持現在的生活習慣並持續觀察。','Recovery readings have moved upward versus the prior week. Keep a steady routine.','지난주보다 회복 지표가 높아졌어요.'):x.diff< -2?label3('近期恢復節奏比前一週下降；比較活動強度、休息時間與用藥背景。','Recovery readings dipped versus the prior week. Compare activity, rest and medication context.','지난주보다 회복 지표가 낮아졌어요.'):label3('這兩週的恢復節奏大致相近，可繼續累積可比較的資料。','Recovery readings are broadly similar across these two weeks.','최근 두 주의 회복 지표가 비슷해요.')}</div>
+ <p class="baseline-smallprint">${label3('此為 HRV 與平均心率等訊號的模型化趨勢，不能單獨判斷疾病或情緒。','Modeled from HRV and mean heart-rate trends; not a standalone diagnosis or emotion detector.','HRV 및 평균 심박 추세로 추정하며 질병 진단이나 감정 판단에 사용하지 않습니다.')}</p></div>`}
+
+// Consumer-friendly rhythm insights. Illustrative weights; require species-specific
+// BCG validation, 120+ clean intervals and like-for-like window comparisons in production.
+// Third input (NNVGR) is the supplier's average heart rate, NOT an independent HRV measure.
+function rhythmicBaseline(records){const b=baselineProfile();return {sd:b.sd,rm:b.rm,hr:b.hr};}
+function rhythmMeasures(record,base){const clamp=(x,min=35,max=98)=>Math.round(Math.max(min,Math.min(max,x)));
+ const s=(record.sdnn-base.sd)/Math.max(1,base.sd),r=(record.rmssd-base.rm)/Math.max(1,base.rm),h=(record.nvgr-base.hr)/Math.max(1,base.hr);
+ const recover=clamp(85+100*(.32*s+.52*r-.16*h));
+ const calm=clamp(86+100*(.15*s+.45*r-.40*h));
+ const stable=clamp(90-70*(.43*Math.abs(s)+.37*Math.abs(r)+.20*Math.abs(h)));
+ // Higher load = more deviation in the direction of increased HR / reduced variability.
+ const load=clamp(22+130*(.45*Math.max(0,h)+.35*Math.max(0,-r)+.20*Math.max(0,-s)),5,93);
+ return {recover,calm,stable,load,s,r,h};}
+function rhythmData(){const dp904Key=`rhythm:${state.dog}:${iso(localDate())}`;if(dp904RenderCache.has(dp904Key))return dp904RenderCache.get(dp904Key);const all=demoRecords(state.dog),base=rhythmicBaseline(all),values=all.map((row,i)=>{
+ const group=animalGroupReference(currentDog(),all)||{sd:35,rm:30,hr:75},available=Math.min(observationDays(),i+1),raw=all.slice(Math.max(0,i+1-14),i+1);
+ const personal={sd:meanOf(raw,'sdnn',group.sd),rm:meanOf(raw,'rmssd',group.rm),hr:meanOf(raw,'nvgr',group.hr)};
+ const w=available>=14?.7:0,ref={sd:group.sd*(1-w)+personal.sd*w,rm:group.rm*(1-w)+personal.rm*w,hr:group.hr*(1-w)+personal.hr*w};
+ return rhythmMeasures(row,ref);
+ });const result={rows:all,base,values,today:values.at(-1)};dp904RenderCache.set(dp904Key,result);return result;}
+function rhythmPositiveValue(key,m){const raw=m?.[key];if(raw===null||raw===undefined||!Number.isFinite(Number(raw)))return null;return key==='load'?Math.max(0,Math.min(100,100-Number(raw))):Number(raw);}
+function rhythmCompositeScore(m=rhythmData().today){const components=['calm','load','stable'].map(k=>rhythmPositiveValue(k,m));if(components.some(v=>v===null||v===undefined||!Number.isFinite(Number(v))))return null;return dpRiskGuard(components.reduce((a,b)=>a+Number(b),0)/3,components);}
+function rhythmHistory(days=7,key='recover'){return rhythmData().values.slice(-days).map(x=>x[key]);}
+function rhythmLabel(key){
+ const names={recover:['今日恢復力','Recovery readiness','오늘 회복 상태'],calm:['放鬆與平穩度','Calm and steady','편안함과 안정감'],load:['負荷調節表現','Body load balance','신체 부담 조절'],stable:['心搏節奏穩定度','Heartbeat rhythm stability','심박 리듬 안정도']};
+ return label3(...(names[key]||names.recover));
+}
+
+function rhythmStatus(key,num){
+ if(key==='load')return num<=10?label3('很穩定','Very steady','매우 안정'):num<=20?label3('調節良好','Balanced well','조절 양호'):num<=40?label3('稍需留意','Worth watching','조금 주의'):label3('需要多留意','Needs attention','주의 필요');
+ return num>=90?label3('很穩定','Very steady','매우 안정'):num>=80?label3('接近平常','Near usual','평소와 비슷'):num>=60?label3('稍需留意','Worth watching','관찰 필요'):label3('需要多留意','Needs attention','주의 필요');
+}
+
+function rhythmColor(key,num){return scoreScheme(key==='load'?100-num:num);}
+
+function rhythmReason(key,val){const delta=(val.r*100).toFixed(0),high=val.recover>=80;
+ if(key==='recover')return high?label3('我今天的心搏變化大致接近平常，可以繼續維持熟悉的活動節奏。','My heartbeat variation is close to usual today. I can stay with my regular routine.','오늘 심박 변화가 평소와 비슷해요.'):label3('我今天的心搏節奏與平常有點不同，可以讓我多休息並繼續觀察。','My heartbeat rhythm differs somewhat today. A little more rest and observation may help.','오늘 심박 패턴이 평소와 달라요. 조금 쉬어볼까요?');
+ if(key==='calm')return val.calm>=80?label3('我在安靜時的心搏調節接近平常，呈現較平穩的身體狀態。','My quiet-time heartbeat regulation looks fairly steady today.','쉬는 동안 심박 조절이 비교적 안정적이에요.'):label3('我的心搏節奏比平常更起伏，建議看看活動、環境和休息背景。','My beat-to-beat pattern differs today. Check activity, environment and rest.','오늘 심박 리듬이 평소와 달라요.');
+ if(key==='load')return val.load<35?label3('今天沒有明顯高於平常的生理負荷訊號。','No clear increase in physiological load relative to usual.','평소보다 부담이 커졌다는 신호는 뚜렷하지 않아요.'):label3('最近的心率與心搏變異同時偏離平常，值得觀察休息與活動的安排。','Heart rate and variability shifted together; review rest and activity patterns.','심박과 변동이 함께 달라졌어요.');
+ return val.stable>=80?label3('最近心搏調節的整體表現相對一致。','Overall beat-to-beat regulation looks fairly consistent.','최근 심박 조절 흐름이 비교적 일정해요.'):label3('最近的心搏節奏比平常多一些變動，值得比較幾天的趨勢。','Beat-to-beat regulation has fluctuated more than usual recently.','최근 심박 리듬 변화가 조금 커졌어요.');}
+function rhythmAction(val){return val.load>=50||val.recover<70?label3('今天可以安排更溫和的活動，若持續明顯偏離平常或出現症狀，請詢問獸醫。','Consider a gentler routine today; contact a vet if changes persist or symptoms appear.','오늘은 활동을 조금 줄이고 변화가 지속되면 수의사와 상담하세요.'):label3('照平常節奏活動，明天再看看恢復曲線有沒有保持穩定。','Keep the usual routine and check tomorrow whether the trend stays steady.','평소 리듬을 유지하고 내일 추세를 다시 확인하세요.');}
+function rhythmMiniChart(key='recover',days=7,height=115){
+ const raw=rhythmHistory(days,key),rows=dayRowsWithIndex(days),sized=rows.map((row,i)=>({date:row.date,value:raw[raw.length-rows.length+i],valid:validDaySample(row,row.idx).valid})),valid=sized.filter(x=>x.valid),vals=valid.map(x=>x.value),color=rhythmColor(key,vals.at(-1)??50).color;if(vals.length<2)return `<p class="notices">${label3('有效觀察不足，尚無法畫出節奏趨勢','Not enough valid days for rhythm trend','유효 데이터 부족')}</p>`;
+ const W=330,H=height,l=26,r=2,t=13,b=24,lo=Math.min(...vals)-7,hi=Math.max(...vals)+7;
+ const ratios=valid.map(row=>dateRatio(row.date,iso(dateAdd(localDate(),1-days)),iso(localDate()))),xy=vals.map((v,i)=>[l+ratios[i]*(W-l-r),t+(hi-v)/(hi-lo)*(H-t-b)]),line=xy.map((p,i)=>`${i?'L':'M'}${p[0]} ${p[1]}`).join(' ');
+ const axes=[0,.5,1].map(f=>`<line x1="${l}" y1="${t+f*(H-t-b)}" x2="${W-r}" y2="${t+f*(H-t-b)}" stroke="#e8edf3"/><text x="${l-6}" y="${t+f*(H-t-b)+4}" text-anchor="end" fill="#a1a8b6" font-size="10">${Math.round(hi-(hi-lo)*f)}</text>`).join('');
+ const svg=`<svg class="rhythm-curve" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(rhythmLabel(key))}">${axes}<path d="${line}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round"/>${xy.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.8" fill="${color}"/>`).join('')}<text x="${l}" y="${H-4}" fill="#98a1b0" font-size="10">${days}D</text><text x="${W-r}" y="${H-4}" text-anchor="end" fill="#98a1b0" font-size="10">${label3('今日','Today','오늘')}</text></svg>`;
+ const dates=valid.map(r=>r.date);
+ return inspectSvg(svg,vals,{kind:key,unit:'/100',dates,color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:xy.map(p=>p[1]),xRatios:ratios,compact:true});
+}
+
+
+function rhythmDetailModal(){
+ if(!signalQuality().valid)return `<div class="rhythm-unavailable-dialog">${qualityInline()}</div>`;
+ const m=rhythmData().today,total=rhythmCompositeScore(m),keys=['calm','load','stable'];
+ const values=keys.map(k=>({key:k,score:rhythmPositiveValue(k,m)}));
+ const strong=values.filter(v=>v.score>=80).sort((a,b)=>b.score-a.score);
+ const attention=values.filter(v=>v.score<80).sort((a,b)=>a.score-b.score);
+ const note={
+ calm:label3('安靜時的身體反應比較平穩，代表近期的放鬆狀態較好。','Quiet-time responses are steadier, suggesting better calmness.','쉬는 동안 생리 반응이 안정적이며 편안함이 좋아요.'),
+ load:label3('活動與休息後的身體調節比較平順，負荷適應表現較好。','Responses to activity and rest are better balanced.','활동과 휴식 후 조절 상태가 더 안정적이에요.'),
+ stable:label3('心搏節奏接近牠的平常模式，整體變化比較一致。','Heartbeat rhythm is close to its usual pattern.','심박 리듬이 평소 패턴과 비슷해요.')};
+ const weak={
+ calm:label3('放鬆與平穩度較低，請看看最近活動、環境與休息有沒有變化。','Calmness is below usual; review activity, environment and rest.','안정도가 낮아요. 활동과 휴식을 확인하세요.'),
+ load:label3('負荷調節分數偏低，可留意活動後恢復和近期休息安排。','Body-load balance is lower; review recovery and rest.','부담 조절 점수가 낮아요. 회복과 휴식을 확인하세요.'),
+ stable:label3('心搏節奏近期較不一致，請到心肺狀態查看詳細趨勢。','Heartbeat rhythm is less consistent; review heart trends.','심박 리듬 변화가 커져 심폐 추세를 확인하세요.')};
+ const target=k=>k==='stable'?label3('心肺狀態','Heart & breathing','심폐 상태'):label3('精力與恢復','Activity & energy','활동과 활력');
+ const findings=(items,positive)=>items.map(v=>`<button class="summary-finding ${positive?'good':'concern'} dp-rhythm-finding" data-action="rhythm-to-deep" data-key="${v.key}" title="${esc(target(v.key))}"><span class="finding-mark">${positive?'✓':'!'}</span><span>${positive?note[v.key]:weak[v.key]}</span>${vicon('chev',15)}</button>`).join('');
+ return `<div class="summary-detail-v44 dp-rhythm-summary"><p class="summary-detail-lead"><strong>${label3('身體節奏分數','Body rhythm score','몸의 리듬 점수')}：${total} /100</strong><br>${label3('由放鬆、負荷調節及心搏節奏三項表現組成；每項分數越高，表示相對自己的平常狀態越好。','Made up of calmness, load balance and heartbeat stability. Higher means more favorable relative to usual.','안정, 부담 조절, 심박 리듬 세 요소를 종합하며 높을수록 평소 대비 좋아요.')}</p>
+ <div class="summary-three-rings">${values.map(v=>`<button class="summary-ring-item" data-action="rhythm-to-deep" data-key="${v.key}" data-hint="${esc(rhythmLabel(v.key))} · ${v.score}/100 · ${esc(target(v.key))}" aria-label="${esc(rhythmLabel(v.key))} ${v.score}/100 · ${esc(target(v.key))}"><span class="summary-ring-label">${rhythmLabel(v.key)}</span>${scoreRing(v.score)}<span class="summary-ring-status" style="color:${scoreScheme(v.score).color}">${scoreLabel(v.score)} · ${target(v.key)} ›</span></button>`).join('')}</div>
+ <section class="summary-detail-section"><h3>${label3('表現較好的地方','What looks good','좋은 부분')}</h3>${strong.length?findings(strong,true):`<div class="summary-finding neutral">${label3('目前沒有明顯突出的項目，建議先看最近幾天的變化。','No clear strong area yet; review the recent days.','뚜렷하게 좋은 항목이 아직 없어요.')}</div>`}</section>
+ <section class="summary-detail-section"><h3>${label3('需要關注的地方','What needs attention','주의할 부분')}</h3>${attention.length?findings(attention,false):`<div class="summary-finding neutral">${label3('三項表現目前都相對平穩，繼續維持熟悉的日常節奏。','All three look steady. Keep the usual routine.','세 가지 상태가 모두 비교적 안정적이에요.')}</div>`}</section>
+ <p class="notices">${label3('點擊任一圓形分數，可直接查看該項在 Deep 的詳細趨勢。','Tap any ring to view its detailed trend in Deep.','원을 눌러 Deep에서 해당 추세를 확인하세요.')}</p></div>`;
+}
+
+function technicalBasisNote(kind='rhythm'){return ''}
+function sleepPatternForDay(dayIndex){
+ // Demo data: make the half-hour timeline and nightly duration share the same
+ // daily rest estimate. This is QUIET REST, not EEG-confirmed sleep staging.
+ const row=demoRecords(state.dog)[Math.min(29,Math.max(0,dayIndex))],stableDayNumber=Math.floor(Date.parse(row.date+'T12:00:00Z')/86400000),seed=(stableDayNumber%131)*17+state.dog*11;
+ const slots=Array(48).fill('awake'),night=Array(32).fill('awake');
+ const target=Math.max(4,Math.min(32,Math.round(Number(row.sleep||8.6)*2))),bed=Math.min(2,Math.max(0,32-target));
+ const available=32-bed,interruptionCount=Math.min(3,1+(seed%3),Math.max(0,available-target));
+ const duration=Math.min(available,target+interruptionCount);
+ for(let i=bed;i<bed+duration;i++)night[i]='sleep';
+ const positions=[];
+ for(let j=0;j<interruptionCount;j++){
+  const start=bed+2,end=bed+duration-2;
+  if(end<start)break;
+  let index=start+((seed*3+j*7)%(end-start+1));
+  for(let z=0;z<=end-start&&positions.includes(index);z++)index=start+(index-start+1)%(end-start+1);
+  if(!positions.includes(index)){positions.push(index);night[index]='awake';}
+ }
+ for(let i=0;i<32;i++)slots[(40+i)%48]=night[i];
+ return {bed,asleepSlots:night.filter(v=>v==='sleep').length,slots,row};
+}
+function nightSlotSequence(dayIndex){const pat=sleepPatternForDay(dayIndex);return Array.from({length:32},(_,i)=>pat.slots[(40+i)%48]);}
+function nightMinuteSequence(dayIndex){const slots=nightSlotSequence(dayIndex);return Array.from({length:960},(_,minute)=>slots[Math.floor(minute/30)]==='sleep'?1:0);}
+function nightRestHours(dayIndex){return nightSlotSequence(dayIndex).filter(x=>x==='sleep').length/2;}
+function sleepMatrix(period=1){
+ const count=Math.min(period,observationDays(),30),start=30-count;
+ const data=demoRecords(state.dog),rows=Array.from({length:count},(_,i)=>{const idx=start+i,rec=data[idx],valid=validDaySample(rec,idx).valid;return {idx,date:rec.date,valid,slots:valid?nightSlotSequence(idx):[]};});
+ const expanded=period<7||!!state.sleepMatrixExpanded,visible=expanded?rows:rows.slice(-3),validNights=rows.filter(x=>x.valid).length;
+ const labels=Array.from({length:8},(_,i)=>`${String((20+i*2)%24).padStart(2,'0')}:00`);
+ return `<div class="sleep-matrix-wrap ${period>=7&&!expanded?'sleep-stack-preview':''}"><div class="sleep-matrix-title"><strong>${period===1?label3('昨晚睡眠時段','Last night’s sleep','지난밤 수면 시간'):label3(`最近 ${period} 天睡眠情況`,`Sleep each night · ${period} days`,`최근 ${period}일 수면 상황`)}</strong>${period>=7?`<span class="pill purple">${label3(`${validNights}/${count} 晚有效`,`${validNights}/${count} valid nights`,`${validNights}/${count}박 유효`)}</span>`:''}</div><div class="sleep-matrix-head">${labels.map(l=>`<span>${l}</span>`).join('')}</div><div class="sleep-matrix-rows">${visible.map(r=>`<button type="button" class="sleep-matrix-row sleep-date-button ${r.valid?'':'sleep-date-missing'}" ${r.valid?`data-action="sleep-date-detail" data-day="${r.idx}"`:'disabled'}><span class="sleep-day-label">${period===1?label3('昨夜','Last night','지난밤'):dpFullDate(r.date)}</span><span class="sleep-cells">${r.valid?r.slots.map(s=>`<i class="${s}"></i>`).join(''):`<span class="sleep-missing-label">${label3('無有效紀錄','No valid reading','유효 기록 없음')}</span>`}</span></button>`).join('')}</div>${period>=7?`<button class="sleep-expand-action" data-action="sleep-matrix-toggle">${expanded?label3('收合逐夜紀錄','Collapse nights','밤별 기록 접기'):label3(`展開查看全部 ${count} 晚`,`View all ${count} nights`,`전체 ${count}박 보기`)}</button>`:''}<div class="sleep-legend"><span><i class="sleep"></i>${label3('睡眠與休息','Sleep & rest','수면 및 휴식')}</span><span><i class="awake"></i>${label3('活動','Movement','움직임')}</span></div></div>`;
+}
+function sleepDateDetail(){const idx=Math.max(0,Math.min(29,Number(state.sleepSelectedDay??29))),row=demoRecords(state.dog)[idx],slots=nightSlotSequence(idx),hrs=slots.filter(v=>v==='sleep').length*.5;const wake=dpNightSleepStats(idx).wakes;return `<div class="sleep-date-modal"><h3>${dpFullDate(row.date)}</h3><div class="metric-grid"><div class="metric"><label>${label3('休息時間','Rest time','휴식 시간')}</label><b>${hrs.toFixed(1)} h</b></div><div class="metric"><label>${label3('活動／清醒區間','Awake periods','깨어 있는 구간')}</label><b>${wake}</b></div></div>${sleepMatrixDate(idx)}<p class="dp-conclusion">${label3('點選色塊可查看對應的時間和狀態。','Tap a segment to see the time and state.','시간대를 눌러 상태를 확인하세요.')}</p></div>`;}
+function sleepMatrixDate(idx){
+ const slots=nightSlotSequence(idx),first=slots[0],start=label3('將滑鼠移到綠色／灰色時間段即可查看時間與狀態','Hover over the green/gray slots to see each interval','초록색/회색 구간에 커서를 올려 시간과 상태를 확인하세요');
+ return `<div class="dp-sleep-slot-widget"><div class="sleep-date-timeline" role="group" aria-label="${label3('20:00至次日12:00的每半小時安靜休息及活動狀態','Estimated quiet rest and movement, half-hour bins from 20:00 to 12:00','20:00-12:00 추정 휴식/움직임')}">${slots.map((v,i)=>`<button type="button" class="${v}" data-action="sleep-slot" data-day="${idx}" data-slot="${i}" aria-label="${dpTime((1200+i*30)%1440)} ${v==='sleep'?label3('睡眠與休息','Sleep & rest','수면 및 휴식'):label3('活動／非休息','Movement / not quiet rest','움직임／휴식 아님')}" title="${dpTime((1200+i*30)%1440)}"></button>`).join('')}</div><div class="dp-sleep-scrub-track" style="--sleep-scrub:1.5625%"><span class="dp-sleep-scrub-fill"></span><i class="dp-sleep-scrub-handle"></i></div><div class="sleep-slot-reading" aria-live="polite">${start}</div></div>`;
+}
+function lastNightStats(){
+ const slots=nightSlotSequence(29);let onsetIndex=-1,interrupts=0,everRested=false,afterRestAwake=false;
+ for(let j=0;j<slots.length;j++){
+  const resting=slots[j]==='sleep';
+  if(resting){if(onsetIndex<0)onsetIndex=j;if(everRested&&afterRestAwake)interrupts++;everRested=true;afterRestAwake=false;}
+  else if(everRested)afterRestAwake=true;
+ }
+ const fmt=j=>minuteClock((20*60+Math.max(0,j)*30)%1440);
+ return {onset:onsetIndex<0?'—':fmt(onsetIndex),interrupts,restHours:nightRestHours(29),score:dpTodayUnifiedScores().sleep,valid:signalQuality().valid};
+}
+function lastNightCard(compact=false){
+ const n=lastNightStats(),valid=n.valid;
+ const label=valid?(n.interrupts>=3?label3('推估休息有幾次中斷，請觀察近期趨勢。','Estimated rest had several interruptions; compare recent nights.','추정 휴식이 여러 번 중단되었어요. 최근 추세를 확인하세요.'):label3('昨夜推估休息相對連續；不代表已測出睡眠分期。','Estimated rest looked fairly continuous; this does not determine sleep stages.','추정 휴식이 비교적 이어졌으나 수면 단계 측정은 아닙니다.')):qualityMessage();
+ return `<div class="night-quick"><div><small>${label3('推估開始休息','Estimated rest start','추정 휴식 시작')}</small><b>${valid?n.onset:'—'}</b></div><div><small>${label3('推估中斷','Estimated interruptions','추정 중단')}</small><b>${valid?n.interrupts:'—'}</b></div>${compact?'':`<div><small>${label3('推估休息時間','Estimated quiet rest','추정 휴식 시간')}</small><b>${valid?n.restHours.toFixed(1)+' h':'—'}</b></div>`}</div><div class="night-verdict"><b>${label3('昨夜觀察摘要','Last night’s observations','지난밤 관찰 요약')}</b><p>${label}</p></div><p class="sleep-estimate-caveat">${label3('夜間休息及中斷情況已整理完成。','Overnight rest and interruptions are summarized.','야간 휴식과 중단 시간을 정리했어요.')}</p>`;
+}
+function sleepSummaryCard(){const days=state.range;
+ const daily=days===1;
+ return `<div class="rest-assessment simplified-rest">${daily?deepTimeChart('restState','#2e9d70',label3('夜間休息與活動','Night rest & movement','야간 휴식·활동')):''}${days>=14?deepTimeChart('restState','#2e9d70',label3('每日休息時數趨勢','Daily resting hours','일별 휴식 시간 추세')):''}${sleepMatrix(days)}${daily?lastNightCard(true):''}</div>`;
+}
+function ageTrendDeltaLabel(first,last){const a=Number(first.toFixed(1)),b=Number(last.toFixed(1)),delta=typeof window!=='undefined'&&window.DeepPetMetric1015?window.DeepPetMetric1015.difference('age',last,first):Math.round((b-a)*10)/10;const text=typeof window!=='undefined'&&window.DeepPetMetric1015?window.DeepPetMetric1015.format('age',delta):delta.toFixed(1);return `${delta>0?'+':''}${text}`;}
+function ageTrendCard(compact=false){const rows=validDailyRecords(observationDays());if(rows.length<3)return `<div class="age-trend-panel chart-pending"><b>${label3('生理年齡長期趨勢仍在累積','Biological age trend is building','생체 나이 추세 수집 중')}</b><p>${label3('目前有效觀察日不足，先顯示當前模型估算，累積更多資料後再顯示可比較的趨勢。','Not enough observation days for a meaningful age trend. A provisional estimate remains available.','관찰일이 부족해 장기 추세는 아직 표시하지 않습니다.')}</p></div>`;const v=rows.map(x=>x.bio),now=v.at(-1),first=v[0],w=340,h=compact?134:180,top=15,left=31,right=2,bottom=26;
+ let min=Math.floor((Math.min(...v)-.065)*10)/10,max=Math.ceil((Math.max(...v)+.065)*10)/10;
+ // Five axis labels all render to one decimal; reserve >=0.1 years per tick.
+ if(max-min<.4){const middle=(min+max)/2;min=Math.floor((middle-.2)*10)/10;max=Number((min+.4).toFixed(1));}
+ const unit=max-min;
+ const ratios=rows.map(row=>dateRatio(row.date,rows[0].date,rows.at(-1).date)),x=i=>left+ratios[i]*(w-left-right), y=n=>top+(1-(n-min)/unit)*(h-top-bottom);
+ const pts=v.map((n,i)=>[x(i),y(n)]),line=pts.map((p,i)=>`${i?'L':'M'}${p[0]} ${p[1]}`).join(' '),grid=[0,1,2,3,4].map(j=>{const vv=min+(max-min)*j/4,yy=y(vv);return `<line x1="${left}" y1="${yy}" x2="${w-right}" y2="${yy}" stroke="#e5e8f3"/><text x="2" y="${yy+3}" font-size="10" fill="#8e92a6">${vv.toFixed(1)}</text>`}).join('');
+ const dots=pts.filter((_,i)=>i%4===0||i===29).map(([px,py])=>`<circle cx="${px}" cy="${py}" r="2.4" fill="#7160d9"/>`).join('');
+ const svg=`<svg class="age-science-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="30-day biological age trend">${grid}<path d="${line}" fill="none" stroke="#7866e5" stroke-width="2.6" stroke-linecap="round"/>${dots}<text x="${left}" y="${h-4}" font-size="10" fill="#8e92a6">${dpFullDate(rows[0].date)}</text><text x="${w-right}" y="${h-4}" font-size="10" text-anchor="end" fill="#8e92a6">${dpFullDate(rows.at(-1).date)}</text></svg>`;return `<div class="age-trend-panel"><div class="row spread"><b>${label3(`${rows.length} 天生理年齡估算趨勢`,`${rows.length}-day biological age estimate`,`${rows.length}일 생체 나이 추정 추세`)}</b><span class="age-change">${ageTrendDeltaLabel(first,now)} ${t('years')}</span></div>${inspectSvg(svg,v,{kind:'bio',unit:t('years'),dates:rows.map(r=>r.date),color:'#7866e5',left,right,top,bottom,width:w,height:h,yCoords:pts.map(p=>p[1]),xRatios:ratios,compact:true})}<div class="chart-footnote">${label3('近30天生理年齡變化趨勢。','Physiological age trend over 30 days.','최근 30일 생리 나이 추세입니다.')}</div></div>`}
+function dpAgeFullPage(){
+ const d=currentDog(),all=demoRecords(state.dog),last=all.at(-1)||{},base=baselineProfile();
+ const rows=[
+  {name:label3('每日休息時間','Daily quiet rest','일일 조용한 휴식'),value:Number(last.sleep),ref:Number(base.sleep),unit:'h',mode:'lower',help:label3('提供安靜舒適的休息空間、固定作息，並觀察活動是否過量。','Provide a quiet rest area, steady routines and review excessive activity.','조용하고 편안한 공간과 규칙적인 일과를 유지하세요.')},
+  {name:label3('平均心率','Average heart rate','평균 심박수'),value:Number(last.heart),ref:Number(base.heart),unit:'bpm',mode:'higher',help:label3('在相近的安靜狀態比較；先排除剛運動、緊張、炎熱等原因。若持續偏離或有症狀請諮詢獸醫。','Compare under similar resting conditions; rule out activity, stress and heat. Ask a vet if changes persist or symptoms appear.','같은 안정 상태에서 비교하고 운동, 스트레스, 더위를 먼저 확인하세요.')},
+  {name:label3('安靜呼吸頻率','Resting breathing rate','안정 시 호흡수'),value:Number(last.breath),ref:Number(base.breath),unit:label3('次/分','breaths/min','회/분'),mode:'higher',help:label3('在熟睡或安靜時觀察，排除活動、喘氣、溫度和興奮的影響。','Observe during true rest or sleep and exclude exercise, panting, heat and excitement.','숙면 또는 안정 상태에서 운동, 헐떡임, 더위와 흥분의 영향을 제외하세요.')},
+  {name:label3('RMSSD · 相鄰心搏間隔短期變化','RMSSD · Short-term beat interval variation','RMSSD · 연속 심박 간격의 단기 변화'),value:Number(last.rmssd),ref:Number(base.rm),unit:'ms',mode:'trend',help:label3('在相同量測長度、休息狀態和訊號品質下追蹤；不以越高越好作為目標。','Compare matching duration, resting conditions and quality; higher alone is not better.','같은 측정 길이와 휴식 조건에서 비교하며 높을수록 무조건 좋은 것은 아닙니다.')},
+  {name:label3('SDNN · 整段心搏間隔整體變化','SDNN · Overall beat interval variation','SDNN · 측정 구간 심박 간격 변화'),value:Number(last.sdnn),ref:Number(base.sd),unit:'ms',mode:'trend',help:label3('需使用相同時間窗比較心搏間隔變化；不設定未經驗證的通用理想值。','Compare like-for-like recording windows; no universal ideal target is claimed.','같은 측정 길이로 비교하며 일률적인 이상 수치를 제시하지 않습니다.')}
+ ];
+ const fmt=(n,unit)=>Number.isFinite(n)?`${n.toFixed(unit==='h'?1:0)} ${unit}`:'—';
+ const chips=rows.map(x=>{const abs=Math.max(x.unit==='h'?.5:1,Math.abs(x.ref)*.08),poor=x.mode==='lower'?x.value<x.ref-abs:x.mode==='higher'?x.value>x.ref+abs:Math.abs(x.value-x.ref)>abs,lo=x.ref-abs,hi=x.ref+abs;
+  const goal=x.mode==='trend'?label3('維持可比較的個體趨勢，不設單一高低目標','Track comparable this pet’s trends; no universal higher/lower goal','동일 조건의 이 반려동물의 추세를 관찰하며 획일적 목표는 없습니다'):label3(`建議先以個體參考 ${fmt(Math.max(0,lo),x.unit)}～${fmt(hi,x.unit)} 為觀察區間`,`Pet-specific comparison band: ${fmt(Math.max(0,lo),x.unit)}–${fmt(hi,x.unit)}`,`반려동물별 비교 범위: ${fmt(Math.max(0,lo),x.unit)}–${fmt(hi,x.unit)}`);
+  return `<section class="dp-age-metric"><div class="row spread"><b>${x.name}</b><span class="pill ${poor?'warn':'ok'}">${poor?label3('值得留意','Review','확인 필요'):label3('接近個體基準','Near baseline','기준 근처')}</span></div><div class="dp-age-comparison"><div><small>${label3('目前數值','Current','현재')}</small><strong>${fmt(x.value,x.unit)}</strong></div><div><small>${label3('14天個體參考','14-day baseline','14일 반려동물 자체 기준')}</small><strong>${fmt(x.ref,x.unit)}</strong></div></div><p><b>${label3('改善與觀察方向：','What to aim for:','개선 및 관찰 목표:')}</b>${goal}</p><p>${x.help}</p></section>`;
+ }).join('');
+ return `<div class="app-pad dp-independent-page dp-age-full"><header class="dp-independent-head"><button data-action="age-detail-back" aria-label="${label3('返回','Back','뒤로')}">←</button><b>${label3('AI 多維度健康趨勢 · 推算依據','AI health trend · Estimation basis','AI 건강 추세 · 추정 근거')}</b></header><section class="card"><div class="age-modal-big"><div><span>${t('aiAge')}</span><strong>${bioAgeDelta().bio.toFixed(1)} <small>${t('years')}</small></strong></div><div><span>${t('actualAge')}</span><strong>${d.age.toFixed(1)} <small>${t('years')}</small></strong></div></div>${ageTrendCard(false)}${dpBioAgeReasons()}<p class="notices">${label3('模型依據：品種、實際年齡、體重、14個有效監測日的個體基準，以及心率、呼吸、休息、SDNN與RMSSD的相對趨勢；目前是展示模型，沒有經過臨床驗證，也不代表醫療生理年齡。','Model inputs: breed, age, weight, 14 valid baseline days, and relative trends in heart rate, breathing, rest, SDNN and RMSSD. This is an illustrative, clinically unvalidated estimate, not a medical biological age.','품종, 나이, 체중, 유효 측정 14일 기준, 심박수·호흡·휴식·SDNN·RMSSD 추세를 이용한 예시 추정이며 임상 검증된 생체 나이는 아닙니다.')}</p><p class="dp-age-profile">${esc(breedText(d))} · ${d.age} ${t('years')} · ${d.weight} kg · ${label3('有效基準天數','Valid baseline days','유효 기준 일수')}: ${Math.min(14,base.days)}/14</p></section><h3>${label3('目前指標、個體參考與改善方向','Current values, this pet’s references and actions','현재 수치, 반려동물 자체 기준, 개선 방향')}</h3>${chips}<button class="cta full" data-action="age-detail-back">${label3('返回我的','Back to Me','내 페이지로 돌아가기')}</button></div>`;
+}
+
+function dpBioAgeReasons(){
+ const d=currentDog(),all=demoRecords(state.dog),last=all.at(-1),base=baselineProfile(),diff=bioAgeDelta().diff;
+ const points=[
+ {name:label3('平均心率','Average heart rate','평균 심박수'),value:last.heart,ref:base.heart,unit:'bpm',good:'lower',weight:1.1,what:label3('安排熟悉、適量的散步與休息，留意持續升高的情況。','Keep walks and rest consistent, and watch sustained rises.','산책과 휴식을 규칙적으로 유지하고 지속적인 상승을 살펴보세요.')},
+ {name:label3('呼吸頻率','Breathing rate','호흡수'),value:last.breath,ref:base.breath,unit:label3('次/分','/min','회/분'),good:'lower',weight:1.05,what:label3('保持舒適的環境，觀察安靜時呼吸是否回到平常。','Keep the environment comfortable and review breathing at rest.','편안한 환경을 유지하고 휴식 중 호흡 변화를 확인하세요.')},
+ {name:'RMSSD',value:last.rmssd,ref:base.rm,unit:'ms',good:'higher',weight:1,what:label3('固定休息時間，活動後給我足夠的放鬆時間。','Keep rest regular and allow recovery after activity.','휴식 시간을 일정하게 하고 활동 후 충분히 쉬게 해 주세요.')},
+ {name:'SDNN',value:last.sdnn,ref:base.sd,unit:'ms',good:'higher',weight:.9,what:label3('保持有規律的作息，觀察接下來幾天的變化。','Keep routines steady and compare the coming days.','규칙적인 생활을 유지하며 며칠간 변화를 살펴보세요.')},
+ {name:label3('每日休息時間','Daily rest','하루 휴식'),value:last.sleep,ref:base.sleep,unit:'h',good:'higher',weight:.8,what:label3('讓休息環境安靜舒適，維持固定的作息。','Provide a calm, comfortable rest space and regular routine.','조용하고 편안한 휴식 공간과 일정한 일과를 유지하세요.')},
+ ];
+ const candidates=points.map(p=>{const change=(p.value-p.ref)/Math.max(1,p.ref),benefit=(p.good==='higher'?change:-change),match=diff<0?benefit:-benefit;return {...p,match,benefit,change};}).filter(p=>Number.isFinite(p.match)).sort((a,b)=>b.match*b.weight-a.match*a.weight);
+ const selected=diff===0?[]:(candidates.filter(p=>p.match>0.005).slice(0,3).length?candidates.filter(p=>p.match>0.005).slice(0,3):candidates.slice(0,2));
+ const heading=diff>0?label3('我的估算年齡比較大，哪些地方值得改善？','Why is my estimate higher, and what can improve?','추정 나이가 더 높은 이유와 개선점'):diff<0?label3('我的估算年齡比較小，哪些指標表現較好？','Why is my estimate younger?','추정 나이가 더 낮은 이유'):label3('我的生理年齡接近實際年齡','My estimate is close to my actual age','생체 나이가 실제 나이와 비슷해요');
+ const intro=selected.length?(diff>0?label3('近期可優先留意的相關指標：','Recent indicators worth attention:','최근 살펴볼 지표:'):label3('近期表現比較好的指標：','Recent indicators doing well:','최근 상태가 좋은 지표:')):'';
+ const items=selected.length?selected.map(p=>{const title=p.name==='RMSSD'?label3('放鬆狀態','Calmness','안정 상태'):p.name==='SDNN'?label3('心跳平穩度','Rhythm steadiness','심박 안정도'):p.name;const guidance=diff>0?p.what:label3('這段時間表現較平穩，繼續維持現在的日常習慣。','This area has been steadier lately. Keep up your pet’s routine.','최근 안정적인 흐름이에요. 일상을 유지해 주세요.');return `<div class="dp-age-reason"><div><b>${title}</b></div><p>${guidance}</p></div>`;}).join(''):`<div class="dp-age-reason"><p>${diff>0?label3('近期沒有單一明顯的變化，先留意整體精力和休息。','No single change stands out; watch overall energy and rest.','뚜렷한 한 가지 변화는 없어요. 전반적인 활력과 휴식을 살펴보세요.'):label3('日常狀態大致穩定，可以持續保持。','Your pet’s everyday patterns look steady.','일상 상태가 전반적으로 안정적이에요.')}</p></div>`;
+ const tail=diff<0?label3('維持目前規律的活動與休息，繼續觀察長期變化。','Keep up regular activity and rest, and follow the longer-term trend.','지금처럼 규칙적으로 활동하고 쉬면서 장기 변화를 확인하세요.'):diff>0?label3('先從作息、休息與適量活動開始；若異常持續或有不適，請諮詢獸醫。','Start with routine, rest and suitable activity. Ask a vet if unusual changes persist or symptoms appear.','휴식과 적절한 활동부터 조정하세요. 변화가 지속되거나 증상이 있으면 수의사에게 문의하세요.'):label3('持續保持固定作息，觀察近期狀態。','Maintain a consistent routine and monitor the trend.','규칙적인 일과를 유지하며 변화를 확인하세요.');
+ return `<section class="dp-age-explanation"><h3>${heading}</h3><p>${intro}</p><div class="dp-age-reason-list">${items}</div><p class="dp-age-guidance">${tail}</p></section>`;
+}
+function vitalAgeFactors(){const d=currentDog(),today=dpTodayUnifiedScores(),rhythm=rhythmData().today;const blocks=[
+ [label3('休息是否安穩','How steady is rest?','휴식은 안정적인가요?'),label3('近期休息表現','Recent rest patterns','최근 휴식 상태')],
+ [label3('今天的精力','Everyday energy','일상 활력'),dpOwnerStatus(today.energy)],
+ [label3('活動後恢復','Recovery after activity','활동 후 회복'),dpOwnerStatus(rhythm?.recover)],
+ [label3('生活與飲食','Lifestyle and food','생활과 식사'),label3('結合日常紀錄','Based on routine records','생활 기록 반영')],
+ [label3('年齡、品種與體型','Age, breed & body size','나이·품종·체형'),`${breedText(d)} · ${d.age} ${t('years')}`]
+ ];return `<div class="factor-grid">${blocks.map(x=>`<div class="factor-chip"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div><p class="notices">${label3('生理年齡是綜合多項趨勢的估算，適合長期追蹤，不代表醫療診斷。','Biological age estimates patterns over time and is not a medical diagnosis.','생체 나이는 장기 추세를 참고한 추정치이며 진단 결과가 아닙니다.')}</p>`}
+function dpDottedSvg(value,color='#ae93e5'){
+ const count=54,v=Math.max(0,Math.min(100,Number(value)||0)),lit=Math.round(v/100*count);
+ return `<svg class="dp-uniform-dot-svg" viewBox="0 0 114 114" aria-hidden="true">${Array.from({length:count},(_,i)=>{const a=(i/count)*Math.PI*2-Math.PI/2;return `<circle cx="${(57+48*Math.cos(a)).toFixed(2)}" cy="${(57+48*Math.sin(a)).toFixed(2)}" r="2.25" fill="${color}" opacity="${i<lit?1:.19}"/>`;}).join('')}</svg>`;
+}
+function dpDeepDottedScore(value,color,cls='stat-bubble'){
+ const n=dpScoreValue(value),valid=n!==null,statusColor=valid?scoreScheme(n).color:'#aab0bc';
+ return `<div class="${cls} dp-uniform-dotted dp-status-score" data-score="${valid?Math.round(n):''}" role="img" aria-label="${valid?Math.round(n)+'/100':'—'}" style="--dp-dots:${statusColor};--sc:${statusColor}">${dpDottedSvg(valid?n:0,statusColor)}<div class="stat-inner"><b>${valid?Math.round(n):'—'}</b><small>/100</small></div></div>`;
+}
+function dpDotScore(n,type='health'){
+ const value=dpScoreValue(n);
+ const count=54,fill=Math.round((value??0)/100*count),color=value===null?'#aab0bc':scoreScheme(value).color;
+ const dots=Array.from({length:count},(_,i)=>{const angle=(i/count)*Math.PI*2-Math.PI/2,cx=57+48*Math.cos(angle),cy=57+48*Math.sin(angle);return `<circle cx="${cx.toFixed(2)}" cy="${cy.toFixed(2)}" r="2.25" fill="${color}" opacity="${i<fill?'.98':'.22'}"/>`}).join('');
+ return `<span class="dp-dotted-meter dp-status-score ${type==='health'?'health':'rhythm'}" style="--score-color:${color}" data-score="${value===null?'':Math.round(value)}" role="img" aria-label="${value===null?'—':value+' / 100'}"><svg viewBox="0 0 114 114" aria-hidden="true">${dots}</svg><span class="dp-dot-meter-center"><strong>${value===null?'—':Math.round(value)}</strong><small>/100</small></span></span>`;
+}
+function scoreRing(raw,large=false){const n=dpScoreValue(raw),valid=n!==null,s=valid?scoreScheme(n):{color:'#aab0bc'};return `<div class="score-visual dp-uniform-dotted ${large?'score-large':''}" style="--sc:${s.color};--val:${valid?n:0}" role="img" aria-label="${valid?n+'/100':'—'}">${dpDottedSvg(valid?n:0,s.color)}<div class="score-core"><strong>${valid?n:'—'}</strong><small>/100</small></div></div>`}
+function restingPanel(){return sleepSummaryCard()}
+
+function heartbeatSVG(){
+ const p=Array.from({length:160},(_,i)=>[i*330/159,41-bcgSample(i/20,82,state.dog+1)*25]);
+ return `<svg class="wave" viewBox="0 0 330 80" preserveAspectRatio="none" aria-hidden="true"><path d="${smoothPath(p)}" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/></svg>`;
+}
+function recWhy(id){const d=currentDog(),diff=d.recovery-d.normalRecovery;
+ if(id===1)return baselineProfile().ready?label3(`活動後恢復 ${d.recovery} 分鐘，與模擬個體基準 ${d.normalRecovery} 分鐘相差 ${diff>0?'+':''}${diff} 分鐘。`,`Recovery ${d.recovery} min versus illustrative this pet’s reference ${d.normalRecovery} min (${diff>0?'+':''}${diff}).`,`회복 ${d.recovery}분, 모의 반려동물 자체 기준 ${d.normalRecovery}분.`):label3('14 天個體基準尚在建立；先記錄活動後的恢復時間，避免把初期數值當成個體基準。','Pet-specific baseline still building. Collect post-activity recovery records before making individual comparisons.','반려동물 자체 기준 수집 중이므로 활동 후 회복 기록을 먼저 모아 주세요.');
+ if(id===2)return label3(`根據${breedText(d)}、${d.age}歲、${d.weight} kg 與最近體重趨勢，定期追蹤體態比較有意義。`,`Given ${breedText(d)}, age ${d.age} and ${d.weight} kg, follow weight and body condition trends.`,`품종·나이·체중을 고려해 체형 추세를 보세요.`);
+ if(id===3){
+  const date=iso(localDate()),feature=(globalThis.DeepPetSignalScoring?.getFeatures?.(state.dog)||[]).find(x=>x?.date===date);
+  const hours=feature?.restHours;
+  return Number.isFinite(hours)?label3(`今天有效量測的安靜休息約 ${hours.toFixed(1)} 小時；請比較連續 7–30 天的變化。`,`Verified quiet rest today is around ${hours.toFixed(1)} hours. Compare the last 7–30 days.`,`오늘 유효한 휴식 측정은 약 ${hours.toFixed(1)}시간입니다. 최근 7–30일을 비교하세요.`):label3('今日有效休息時數尚未齊全，請觀察後續 7–30 天的變化。','Verified rest duration is unavailable today; review the next 7–30 days.','오늘 유효한 휴식 시간이 부족합니다. 앞으로 7–30일 추세를 확인하세요.');
+ }
+ return c('rec'+id+'why');}
+function metricBand(value,baseline,tolerance=.08){if(!Number.isFinite(value)||!Number.isFinite(baseline)||baseline<=0)return {label:label3('資料不足','Not enough data','데이터 부족'),color:'#777d8e',bg:'#f0f2f5'};const diff=(value-baseline)/Math.max(1,baseline);if(Math.abs(diff)<=tolerance)return {label:label3('接近平常','Near usual','평소와 비슷'),color:'#238e68',bg:'#eaf7f0'};return diff>0?{label:label3('偏高','Above usual','평소보다 높음'),color:'#b8741d',bg:'#fff4e5'}:{label:label3('偏低','Below usual','평소보다 낮음'),color:'#3d73da',bg:'#eef4ff'}}
+function currentCardioSnapshot(){const rows=demoRecords(state.dog),rec=rows.at(-1),base=baselineProfile();return {rec,base,heart:metricBand(rec.heart,base.heart,.06),breath:metricBand(rec.breath,base.breath,.08),rmssd:metricBand(rec.rmssd,base.rm,.1),sdnn:metricBand(rec.sdnn,base.sd,.1),nnvgr:metricBand(rec.nvgr,base.hr,.06)}}
+function lifeStageTag(d=currentDog()){const age=Number(d.age)||0;if(age<1)return label3('幼年期','Young','성장기');if(age<7)return label3('成年期','Adult','성견기');return label3('熟齡期','Senior stage','시니어기')}
+function suggestionIcon(id){return ({1:'activity',2:'spark',3:'moon',4:'food',5:'med',6:'report',7:'heart'})[id]||'spark'}
+function suggestionPageLabel(id){return id===7?label3('前往心肺狀態','Open heart & breathing','심폐 상태 보기'):id===1?label3('前往精力與恢復','Open energy & activity','에너지·활동 보기'):id===3?label3('前往睡眠狀態','Open sleep & rest','수면·휴식 보기'):id===2||id===4?label3('前往飲食管理','Open nutrition','식사 보기'):id===5?label3('前往用藥紀錄','Open medication','복약 보기'):label3('前往體檢報告','Open reports','검사 보기')}
+
+function recItems(){if(!signalQuality().valid)return `<div class="ai-pending-data">${vicon('activity',18)}<p>${label3('量測品質不足，先修正項圈貼合與量測條件，暫不產生新的 AI 建議。','Signal quality is insufficient. Improve collar fit and recording conditions before generating AI guidance.','신호 품질이 부족해 AI 제안을 보류합니다.')}</p><button data-action="baseline-detail">${label3('檢查量測品質','Check signal quality','측정 품질 보기')}</button></div>`;const d=currentDog(),today=dpTodayUnifiedScores(),evidence=recoveryEvidence();
+ // Advice must read the same verified, event-capped daily domains as Home/Deep.
+ // Profile d.score[] is a fixed exhibition scenario, not today's measurement.
+ const cardio=Number.isFinite(today?.heart)?today.heart:null;
+ const sleep=Number.isFinite(today?.sleep)?today.sleep:null;
+ const energy=Number.isFinite(today?.energyActivity)?today.energyActivity:null;
+ if(cardio===null||sleep===null||energy===null)return `<div class="ai-pending-data">${vicon('activity',18)}<p>${label3('今日的有效分數尚未齊全，完成量測後才會更新建議。','Today’s verified scores are incomplete. Guidance will update after a valid measurement.','오늘 유효 점수가 부족하여 측정 완료 후 제안을 갱신합니다.')}</p><button data-action="baseline-detail">${label3('檢查量測品質','Check signal quality','측정 품질 보기')}</button></div>`;
+ dpEnsureShowcaseCareRecords();
+ const concerns=[];
+ if(evidence.sustained||energy<80)concerns.push({id:1,weight:14+(90-energy)*.2});
+ if(sleep<85)concerns.push({id:3,weight:12+(85-sleep)*.25});
+ if(cardio<80)concerns.push({id:7,weight:12+(80-cardio)*.25});
+ if(d.age>=8&&energy<80)concerns.push({id:2,weight:7});
+ // Medication reminders are shown in Health, not in improvement advice.
+
+ // Lab findings are independent of sensor-derived cardio scores: don't hide
+ // an abnormal examination merely because today's heartbeat looks steady.
+ const abnormalExams=reportStats()[1];
+ if(abnormalExams>0)concerns.push({id:6,weight:12+Math.min(5,abnormalExams*2)});
+ const rank=concerns.sort((a,b)=>b.weight-a.weight).map(x=>x.id);
+ if(!rank.length)return `<div class="dp-positive-today">${vicon('check',18)} <div><b>${label3('今天沒有新增需要改善的項目','No new improvements needed today','오늘 추가 개선 항목이 없어요')}</b><p>${label3('我目前的健康狀態較平穩，先維持日常飲食、休息與活動即可；狀態改變時會更新建議。','Current patterns are steady. Keep the usual routine; recommendations will update if health or habits change.','현재 건강 흐름이 안정적이에요. 상태가 바뀌면 권장 사항도 갱신돼요.')}</p></div></div>`;
+ const visible=state.showAllRec?rank:rank.slice(0,2);
+  return visible.map((id,i)=>{const items={
+ 1:[label3('活動恢復管理','Activity recovery','활동 후 회복'),recoveryEvidenceText(evidence),recoveryNextStep(evidence)],
+ 2:[label3('體重與體態管理','Weight & body condition','체중·체형'),recWhy(2),label3('每週記錄體重與身體狀態，並搭配飲食目標一起看。','Log weight and body condition weekly with the feeding plan.','체중과 체형을 식사 계획과 함께 보세요.')],
+ 3:[label3('休息規律觀察','Rest consistency','휴식 규칙성'),recWhy(3),label3('一起比較過去 14 天的休息與恢復節奏，不憑單日判斷。','Review 14-day rest and recovery trends together, not one day alone.','14일 휴식과 회복 추세를 함께 보세요.')],
+ 4:[label3('飲食管理','Nutrition plan','식사 관리'),c('rec4why'),c('rec4what')],
+ 5:[label3('保存用藥背景','Medication history','복약 기록'),label3('用藥安排可以幫助理解生理數據發生在什麼時間背景。','Medication timing gives context to physiological changes.','복약 일정은 생체 변화의 맥락을 보여줘요.'),label3('查看用藥紀錄、下次提醒與歷史。','Review medication history and the next reminder.','복약 기록과 다음 알림을 확인하세요.')],
+ 7:[label3('心跳與呼吸變化','Heart and breathing changes','심박과 호흡 변화'),label3('近期心肺分數偏低，請查看相對平常的心率、呼吸與變化時間。','Heart and breathing scores are lower; review readings versus usual and the timing of changes.','최근 심폐 점수가 낮습니다. 평소 수치 및 변화 시간을 확인하세요.'),label3('查看心肺分析中的歷史比較與事件。','Open heart and breathing trends and events.','심폐 추세 및 이벤트를 확인하세요.')],
+ 6:[label3('定期體檢追蹤','Exam reports','검사 기록'),label3('定期檢查能補充項圈無法量到的健康背景。','Exam results complement what the collar cannot measure.','검사 결과는 목걸이가 측정하지 못하는 정보를 보완해요.'),label3('查看歷史體檢與下次檢查安排。','Review reports and next checkup.','검사 기록과 다음 일정을 확인하세요.')]
+ };
+ const [title,evidenceText,action]=items[id],needsAttention=(id===1&&(evidence.sustained||energy<80))||(id===2&&energy<80)||(id===3&&sleep<80)||(id===7&&cardio<80)||(id===6&&abnormalExams>0),tone=needsAttention?'warn':'ok';
+ const suggestionColors={1:{ink:'#cf6380',bg:'#fff0f5',bd:'#f2ccdb'},2:{ink:'#c27a27',bg:'#fff6ea',bd:'#f3dfbb'},3:{ink:'#27946c',bg:'#edf9f3',bd:'#caebdc'},4:{ink:'#377fca',bg:'#edf6ff',bd:'#cde3fb'},5:{ink:'#765ad3',bg:'#f4f0ff',bd:'#ddd5ff'},6:{ink:'#287f96',bg:'#edf9fc',bd:'#c5e5eb'},7:{ink:'#c25476',bg:'#fff1f5',bd:'#f5d5df'}};const toneMap=suggestionColors[id];
+ return `<button class="ai-suggestion-card tone-${tone}" data-action="go-suggestion" data-id="${id}" style="--tone:${toneMap.ink};--tonebg:${toneMap.bg};--tonebd:${toneMap.bd}"><div class="ai-suggestion-top"><div class="ai-suggestion-icon">${vicon(suggestionIcon(id),18)}</div><div class="grow"><div class="ai-suggestion-title">${title}</div><div class="ai-suggestion-sub">${tone==='warn'?label3('日常健康紀錄','Daily health records','관리 기록'):label3('日常建議','Daily advice','일상 제안')}</div></div><span class="pill ${tone==='warn'?'warn':'purple'}">0${i+1}</span></div><div class="ai-suggestion-body">${id===1?recoveryEvidenceCard(evidence):`<p>${evidenceText}</p><p>${action}</p>`}</div><div class="ai-suggestion-foot"><span>${suggestionPageLabel(id)}</span>${vicon('chev',16)}</div></button>`}).join('')+(rank.length<=2?'':`<button class="rec-expand ai-suggestion-more" data-action="toggle-recs">${state.showAllRec?label3('收起建議','Show fewer','접기'):label3(`查看全部 ${rank.length} 項建議`,`View all ${rank.length} suggestions`,`전체 ${rank.length}개 보기`)} ${vicon('chev',14)}</button>`);}
+
+
+// V5: engagement tools. They use only the local demo's data; no medical or causal assertions.
+const ENGAGEMENT_TYPES=[
+ ['activity', '增加活動量', 'More activity', '활동량 증가'],
+ ['food', '調整飼料或份量', 'Food change', '사료/급여량 변경'],
+ ['schedule', '改變進餐時間', 'Meal timing change', '식사 시간 변경'],
+ ['routine', '作息或環境改變', 'Routine or environment change', '생활 패턴/환경 변화'],
+ ['medication', '開始新用藥', 'New medication', '새 약 복용']
+];
+function behaviorKindLabel(k){const a=ENGAGEMENT_TYPES.find(x=>x[0]===k)||ENGAGEMENT_TYPES[0];return label3(a[1],a[2],a[3])}
+// Keep the gallery's activity/care-habit history populated out of the box.
+// A manually entered observation always wins for the same pet, date and kind.
+// This only runs for the 15 showcase identities, never Blank or New Pet.
+function dpEnsureShowcaseBehaviorRecords(save=true){
+ if(state.emptyPreview||dpUsesRealMeasurements())return;
+ const key=String(state.dog);
+ if(state.dpShowcaseBehaviorClearedByPet?.[key])return;
+ state.behaviorLogs??={};state.behaviorLogs[key]??=[];
+ const rows=state.behaviorLogs[key];let changed=false;
+ for(const [kindIndex,item] of ENGAGEMENT_TYPES.entries())for(let daysAgo=13;daysAgo>=0;daysAgo--){
+  const date=iso(dateAdd(localDate(),-daysAgo)),kind=item[0],id=`dp-showcase-behavior-${key}-${kind}-${date}`;
+  if(rows.some(x=>x.id===id||x.date===date&&x.kind===kind&&!x.sample))continue;
+  rows.push({id,date,kind,choice:(state.dog*3+kindIndex*5+daysAgo*7)%11<5?'yes':'no',sample:true});changed=true;
+ }
+ if(changed&&save)persist();
+}
+function behaviorLogForPet(){if(typeof selectedBlank==='function'&&selectedBlank())return [];dpEnsureShowcaseBehaviorRecords();return (state.behaviorLogs||{})[String(state.dog)]||[]}
+function carePlanForPet(){return (state.carePlans||{})[String(state.dog)]||{started:null,checkins:[]}}
+function carePlanStatus(){const p=carePlanForPet(), unique=[...new Set((p.checkins||[]).map(x=>x.date))];return {started:!!p.started,days:unique.length,done:unique.length>=14}}
+function dpArchiveCarePlan(key,plan){if(!plan?.started)return;state.carePlanHistoryByPet??={};state.carePlanHistoryByPet[key]??=[];
+ state.carePlanHistoryByPet[key].push({started:plan.started,ended:iso(localDate()),reason:plan.reason||'activity',reasonNote:plan.reasonNote||'',checkins:(plan.checkins||[]).map(x=>({...x}))});}
+function dayRowsWithIndex(days){const r=demoRecords(state.dog),requested=[1,7,30].includes(Number(days))?Number(days):7;
+ // Window width is a calendar choice. A new pet with one valid wear day still
+ // needs seven or thirty correctly dated slots, including missing dates.
+ const count=dpUsesRealMeasurements()?requested:Math.min(requested,observationDays());
+ return r.map((x,i)=>({...x,idx:i})).slice(-count);
+}
+function validWeekRows(n){return dayRowsWithIndex(n).filter(r=>validDaySample(r,r.idx).valid)}
+function recoveryChangeEvidence(){
+ // The underlying recoveryEvidence() already matches comparable activity and filters invalid records.
+ const e=recoveryEvidence();
+ return {e,valid:signalQuality().valid && !!e.enough,needsAction:signalQuality().valid && !!e.enough && !!e.sustained};
+}
+// V8.12: A single today-only action registry powers the Health to-do list
+// and the home priority panel. Past days never leak into today's actions.
+function dpTodayCareItems(){
+ if(typeof selectedBlank==='function'&&selectedBlank())return [];
+ dpEnsureShowcaseCareRecords();
+ const today=iso(localDate()),key=String(state.dog),items=[];
+ const add=(type,title,detail,page,icon,priority=4)=>items.push({id:type+'-'+items.length,type,title,detail,page,icon,priority,date:today});
+ for(const x of dpMedDue(today).filter(x=>x.status==='pending')){
+  add('med',label3('用藥待確認','Medication to confirm','투약 확인 필요')+' · '+dpL10nSample(x.name),`${x.time} · ${dpDoseNum(x.qty)} ${dpUnitLabel(x.unit)} · ${label3('請記錄是否已服用','Confirm the dose status','복용 여부를 확인해 주세요')}`,'med','med',1);
+  Object.assign(items[items.length-1],{scheduledTime:x.time,medId:x.id,doseSlot:x.slot});
+ }
+ // Past-dated unconfirmed visits cannot vanish just because their original
+ // appointment day passed. Ask for confirmation without claiming the animal
+ // missed its vaccination: it may already have been performed elsewhere.
+ for(const x of allVaxForDog().filter(x=>x.status==='upcoming'&&/^\d{4}-\d{2}-\d{2}$/.test(String(x.date||''))&&x.date<=today).sort((a,b)=>a.date.localeCompare(b.date)||String(a.time||'').localeCompare(String(b.time||'')))){
+  const overdue=x.date<today;
+  add('vax',label3(overdue?'疫苗接種安排尚未確認':'今天有疫苗接種安排',overdue?'Vaccination appointment needs confirmation':'Vaccination scheduled today',overdue?'예방접종 일정 확인 필요':'오늘 예방접종 일정')+' · '+dpL10nSample(x.name),`${overdue?x.date+' · ':''}${x.time||''} · ${overdue?label3('原定日期已過，請核對是否已接種並更新紀錄','Scheduled date has passed; verify the vaccination and update the record','예정일이 지났습니다. 접종 여부를 확인하고 기록을 갱신하세요'):label3('確認是否完成接種，完成後更新紀錄','Confirm the visit and mark it complete','접종 여부를 확인하고 완료 처리하세요')}`,'vaccines','vaccine',2);
+ }
+ // Different internal/external courses can both be due; never hide one behind
+ // the first reminder, and never surface superseded historical courses.
+ for(const dueWorm of window.dpWormEffectiveReminders?.()||[]){
+  if(dueWorm.nextDate<=today)add('deworm',dpWormLocale().reminder+' · '+dueWorm.brand,`${dueWorm.nextDate} · ${dpWormLocale().nextDue}`,'deworming','vaccine',2);
+ }
+ // The daily care reminder is a view of the SAME canonical examination
+ // evidence used elsewhere, not a second lab scoring system. Earlier only
+ // status="alert" was considered: explicit critical flags and validated
+ // out-of-range unknown-status rows were silently omitted from Home.
+ const exams=(typeof window.dp914ReportRecords==='function'?window.dp914ReportRecords(state.dog):state.userReportEntries?.[key]||[]).filter(x=>x?.date===today);
+ const pet=typeof allPets==='function'?{...(allPets()[state.dog]||{}),...(state.petOverrides?.[state.dog]||{})}:{};
+ const already=new Set(),reviewByReport=new Map();
+ for(const x of exams){
+  // A mis-tagged imported row must not create another pet's Home reminder.
+  const ownerClaims=[x.petId,x.ownerPetId,x.profile?.petId].filter(v=>v!==null&&v!==undefined&&String(v).trim()!=='');
+  if(ownerClaims.some(v=>String(v)!==key))continue;
+  const status=String(x.status||'').toLowerCase(),explicit=['alert','abnormal','critical'].includes(status);
+  const assessed=window.DeepPetLabEvidence?.item?.(x,pet,x.date);
+  const verifiedDeviation=assessed?.kind==='numeric'&&Number.isFinite(assessed.score)&&assessed.score<90;
+  // A 'normal' flag on an out-of-range test is not proof of wellness. The
+  // existing lab engine deliberately withholds a numeric score and asks for
+  // review; Home must not hide that genuine record discrepancy.
+  const flagValueConflict=assessed?.kind==='needs_review'&&assessed?.reason==='value_flag_conflict';
+  if(!explicit&&!verifiedDeviation&&!flagValueConflict)continue;
+  const identity=String(x.id??`${x.reportId||''}|${x.date}|${x.name}|${x.unit}|${x.value}`);
+  if(already.has(identity))continue;already.add(identity);
+  // One laboratory report may contain dozens of abnormal test rows. Home
+  // should count the report as one review task, while Health keeps every
+  // original test and its own evidence. Untagged legacy rows stay separate.
+  const reportId=String(x.reportId||'').trim();
+  const groupKey=reportId?`report:${reportId}::${x.date}`:`row:${identity}`;
+  const rank=status==='critical'?0:flagValueConflict?1:explicit?2:3;
+  if(!reviewByReport.has(groupKey))reviewByReport.set(groupKey,[]);
+  reviewByReport.get(groupKey).push({x,status,flagValueConflict,rank,reportId});
+ }
+ for(const rows of reviewByReport.values()){
+  rows.sort((a,b)=>a.rank-b.rank||String(a.x.name||'').localeCompare(String(b.x.name||'')));
+  const {x,status,flagValueConflict,reportId}=rows[0],other=rows.length-1;
+  const kind=status==='critical'?label3('報告標記嚴重異常','Marked critical on the report','검사표에 중대 이상 표시'):flagValueConflict?label3('原報告標註與檢驗數值不一致','Report label and test value disagree','검사표 표시와 측정값이 일치하지 않음'):['alert','abnormal'].includes(status)?label3('報告標記需留意','Flagged on the report','검사표에 주의 표시'):label3('數值偏離參考區間','Outside the applicable reference range','적용 참고 범위 밖');
+  const more=other?label3(` · 同份報告另有 ${other} 項需核對`,` · ${other} more finding(s) in this report`,` · 같은 보고서에서 ${other}개 항목 추가 확인`):'';
+  add('report',label3('今天體檢結果需要查看','Exam result needs review today','오늘 검사 결과 확인 필요')+' · '+dpL10nSample(x.name),`${x.value??''} ${x.unit||''} · ${kind}${more} · ${label3('請核對報告與獸醫意見','Check the original report and consult your vet','원본 결과와 수의사 의견을 확인하세요')}`,'reports','report',status==='critical'?1:2);
+  // Use the exact dossier group identity for direct navigation, with a
+  // graceful list fallback if a report was edited or removed meanwhile.
+  if(reportId)items[items.length-1].reportKey=`${reportId}::${x.date}`;
+ }
+ // A note already saved in Health is historical context, not an outstanding
+ // action. Do not silently reclassify owner-completed records as today's tasks.
+ const care=carePlanForPet();
+ if(care.started&&care.started<=today&&!carePlanStatus().done){
+  const checkin=(care.checkins||[]).find(x=>x.date===today);
+  if(!checkin)add('recovery',label3('恢復觀察尚未完成','Recovery check-in due','회복 관찰 미완료'),label3('請記錄精神、食慾與休息情況，方便追蹤恢復','Record energy, appetite and rest to track recovery','활력, 식욕, 휴식을 기록하세요'),'recovery-care','activity',2);
+  // An existing recovery check-in is complete, even if it records a change.
+ }
+ return items.sort((a,b)=>a.priority-b.priority);
+}
+// Home shows one representative pending dose, while Health keeps every due dose.
+function dpHomeTodayCareItems(){
+ const rows=dpTodayCareItems(),meds=rows.filter(x=>x.type==='med');
+ if(meds.length<=1)return rows;
+ // Select the earliest truly unconfirmed scheduled slot; title collation is
+ // unrelated to dose chronology and could promote a later medicine.
+ const earliest=meds.slice().sort((a,b)=>String(a.scheduledTime||'').localeCompare(String(b.scheduledTime||''))||String(a.medId||'').localeCompare(String(b.medId||''))||Number(a.doseSlot)-Number(b.doseSlot))[0];
+ const summary={...earliest,title:label3('用藥待確認','Medication to confirm','투약 확인 필요'),detail:label3(`最早待確認：${earliest.title.replace(/^.*? · /,'')} · ${earliest.scheduledTime}；另外 ${meds.length-1} 筆仍在健康管理中。`,`Earliest unconfirmed: ${earliest.title.replace(/^.*? · /,'')} · ${earliest.scheduledTime}; ${meds.length-1} other doses remain in Health.`,`가장 이른 미확인 일정: ${earliest.title.replace(/^.*? · /,'')} · ${earliest.scheduledTime}; 건강 관리에 ${meds.length-1}건이 더 있습니다.`)};
+ return rows.filter(x=>x.type!=='med').concat(summary).sort((a,b)=>a.priority-b.priority);
+}
+function dpTodayMessageItems(){
+ if(selectedBlank()||isFreePet())return [];
+ const today=iso(localDate()),store=dpChatStore(),result=[];
+ for(const [id,messages] of Object.entries(store)){
+  const unread=(Array.isArray(messages)?messages:[]).filter(m=>m&&typeof m==='object'&&m.from==='other'&&!m.read&&m.date===today);
+  if(!unread.length)continue;
+  const contact=nearbyPets().find(p=>p.id===id)?.name||id;
+  result.push({id:'chat-'+id,type:'chat',title:label3('附近寵物今天有新留言','New nearby-pet message today','오늘 주변 반려동물 새 메시지')+' · '+contact,
+   detail:dpChatMessageText(unread.at(-1)).slice(0,110),page:'chat',chatId:id,icon:'message',priority:4,date:today});
+ }
+ return result;
+}
+// Concrete advice explaining every Deep red dot (one shared source for home and Deep).
+function dpTwoMinuteRecoveryTodayAlert(){
+ // Showroom-only helper; real 20 Hz recovery belongs to the validated SDK
+ // daily feature and its independently matched prior exertion episodes.
+ if(dpUsesRealMeasurements())return null;
+ if(selectedBlank()||isFreePet()||!signalQuality().valid)return null;
+ const records=demoRecords(state.dog),today=records.at(-1),idx=records.length-1;
+ if(!today||!validDaySample(today,idx).valid)return null;
+ const measured=dpRecovery2Min(today.date);
+ if(!measured||!Number.isFinite(measured.average)||measured.average<=0)return null;
+ const matches=records.slice(Math.max(0,idx-14),idx).filter((r,j)=>validDaySample(r,Math.max(0,idx-14)+j).valid).map(r=>dpRecovery2Min(r.date)).filter(x=>x&&Number.isFinite(x.average)&&x.average>0&&Math.abs(x.intensity-measured.intensity)<=30);
+ if(matches.length<3)return null;
+ const baseline=matches.reduce((sum,x)=>sum+x.average,0)/matches.length;
+ const decline=baseline-measured.average;
+ if(decline<Math.max(5,.2*baseline))return null;
+ const title=label3('活動後兩分鐘恢復值得留意','Two-minute recovery needs attention','활동 후 2분 회복 확인 필요');
+ const lines=[
+  label3(`今天活動後兩分鐘心率回落 ${measured.average.toFixed(1)} bpm，較${matches.length}次相近活動平均 ${baseline.toFixed(1)} bpm 少 ${decline.toFixed(1)} bpm。`,`Today's 2-minute heart-rate drop was ${measured.average.toFixed(1)} bpm versus ${baseline.toFixed(1)} bpm across ${matches.length} comparable sessions (${decline.toFixed(1)} bpm less).`,`오늘 활동 후 2분 심박 감소는 ${measured.average.toFixed(1)} bpm으로 비슷한 활동 ${matches.length}회 평균 ${baseline.toFixed(1)} bpm보다 ${decline.toFixed(1)} bpm 적습니다.`),
+  label3('先確認項圈貼合、心率訊號品質與活動強度是否相近；留意精神、食慾與休息。明天在相似活動條件下再比較。','Check collar contact, signal quality and comparable exertion. Observe energy, appetite and rest, then compare after similar activity another day.','목걸이 착용 상태·신호 품질·활동 강도를 확인하고 활력·식욕·휴식을 살펴본 뒤 비슷한 활동 후 다시 비교하세요.')];
+ return {id:'deep-recovery-2m',type:'deep',index:2,title,detail:lines[0],lines,page:'deep',icon:'activity',priority:1,date:iso(localDate()),score:Math.round(measured.average)};
+}
+// This is only a ranking/explanation of existing dated scores, not a new
+// physiological score, medical risk threshold or signal-quality analysis.
+function dp1028DomainLowStreak(index){
+ const today=iso(localDate()),core=window.DeepPetCareIntelligence1028;
+ if(!core)return 0;
+ const key=['cardio','sleep','activityRecovery'][index];
+ const scored=globalThis.DeepPetSignalScoring?.getDaily?.(state.dog)||[];
+ const recent=dpUsesRealMeasurements()?scored.map(x=>({date:x.date,score:x.scores?.[key]})):
+  dayRowsWithIndex(3).filter(r=>validDaySample(r,r.idx).valid).map(r=>({date:r.date,score:dpOwnerDayScores(r)[['heart','sleep','energyActivity'][index]]}));
+ return core.adjacentLowDays(recent,today,3,80);
+}
+function dpTodayDeepItems(){
+ if(selectedBlank()||isFreePet()||!signalQuality().valid)return [];
+ if(!validDaySample(demoRecords(state.dog).at(-1),29).valid)return [];
+ const d=currentDog(),computed=dpTodayUnifiedScores(),scores=[computed.heart,computed.sleep,computed.energyActivity],names=[t('heartCategory'),t('sleepCategory'),t('activeCategory')],out=[];
+ const real=dpUsesRealMeasurements(),today=iso(localDate());
+ const measured=real?(window.DeepPetSignalScoring?.getFeatures?.(state.dog)||[]).find(x=>x?.date===today):null;
+ const rec=real?null:demoRecords(state.dog).at(-1),ev=real?null:recoveryEvidence();
+ // Four explicit translations: interpolated figures cannot be looked up in JA_PHRASES.
+ const say=(tw,en,ja,ko)=>state.lang==='zh'?toSimplified(tw):state.lang==='zht'?toTraditional(tw):state.lang==='ja'?ja:state.lang==='ko'?ko:en;
+ const valid=x=>x!==null&&x!==undefined&&Number.isFinite(Number(x));
+ // Explain low domain scores from the same dated scoring engine that renders
+ // the displayed score. A low load or a missing measurement is not a reason to
+ // attribute a cardio/energy-domain result to a different indicator.
+ const scoredToday=(window.DeepPetSignalScoring?.getDaily?.(state.dog)||[]).find(x=>x?.date===today)?.scores||{};
+ const weakestSubscore=domain=>{
+  const names=domain===0?[
+   ['heart','心跳','Heart rate','心拍数','심박'],
+   ['breath','呼吸','Breathing','呼吸数','호흡'],
+   ['hrv','HRV','HRV','HRV','HRV'],
+   ['stable','心搏節奏穩定度','Heartbeat stability','心拍の安定性','심박 안정도']
+  ]:[
+   ['energy','精力情況','Energy status','元気の状態','활력 상태'],
+   ['recovery','恢復情況','Recovery status','回復状態','회복 상태'],
+   ['calm','放鬆與平穩度','Rest & steadiness','落ち着き・安定度','휴식·안정도']
+  ];
+  const validParts=names.filter(([k])=>valid(scoredToday[k]));
+  if(!validParts.length)return '';
+  const lowest=validParts.reduce((a,b)=>Number(scoredToday[a[0]])<=Number(scoredToday[b[0]])?a:b);
+  const value=Math.round(Number(scoredToday[lowest[0]]));if(value>=90)return '';
+  return say(`其中「${lowest[1]}」為較低的子項（${value}/100），建議優先查看該項的有效紀錄與近期變化。`,
+   `The lowest contributing indicator is ${lowest[2]} (${value}/100). Review its valid readings and recent trend first.`,
+   `内訳では「${lowest[3]}」が比較的低い項目です（${value}/100）。有効な記録と最近の変化を優先して確認してください。`,
+   `세부 항목 중 ${lowest[4]} 점수가 가장 낮습니다(${value}/100). 해당 기록과 최근 추세를 먼저 확인하세요.`);
+ };
+ const heart=real?measured?.heartRate:rec?.heart,breath=real?measured?.breathRate:rec?.breath;
+ const vitalDetail=valid(heart)&&valid(breath)
+  ?say(`今日平均心率約 ${Math.round(heart)} bpm、呼吸約 ${Number(breath).toFixed(1)} 次／分；先與個體基準比較，不只看單一讀數。`,`Today's measured mean heart rate is ~${Math.round(heart)} bpm and breathing ~${Number(breath).toFixed(1)}/min. Compare with this pet’s baseline.`,`本日の平均心拍数は約 ${Math.round(heart)} bpm、呼吸数は約 ${Number(breath).toFixed(1)} 回/分。個体基準と比較してください。`,`오늘 평균 심박 약 ${Math.round(heart)} bpm, 호흡 약 ${Number(breath).toFixed(1)}회/분. 반려동물 자체 기준과 비교하세요.`)
+  :say('今天尚無可核對的心率與呼吸平均值；請先完成有效量測，再查看細節。','No verified heart-rate and breathing averages are available today. Complete a valid recording before reviewing details.','本日は確認済みの心拍数・呼吸数の平均値がありません。有効な測定後に詳細を確認してください。','오늘 확인된 평균 심박·호흡 수치가 없습니다. 유효 측정 후 확인하세요.');
+ const restHours=real?(measured?.quality?.fullDayRestSupported===true&&valid(measured?.restHours)?Number(measured.restHours):null):dpNightSleepStats(29).minutes/60;
+ const restDetail=valid(restHours)
+  ?say(`昨夜推估安靜休息約 ${Number(restHours).toFixed(1)} 小時；單看時長不夠，還需要看夜間中斷。`,`Estimated quiet rest was ~${Number(restHours).toFixed(1)} h; review interruptions as well as duration.`,`推定安静休息時間は約 ${Number(restHours).toFixed(1)} 時間です。長さだけでなく夜間の中断も確認してください。`,`추정 안정 휴식 시간은 약 ${Number(restHours).toFixed(1)}시간입니다. 수면 중단도 확인하세요.`)
+  :say('今日尚無足夠的夜間有效量測，不推估整晚睡眠時長。',"Night-time coverage is insufficient to estimate a full night's rest.",'夜間の有効な測定が不足しているため、一晩の休息時間は推定しません。','야간 유효 측정이 부족하여 전체 수면 시간을 추정하지 않습니다.');
+ const demoRecovery=real?null:dpOwnerRecoveryComparison({...rec,idx:29});
+ const recoveryDrop=real?(Number(measured?.recoveryCount)>0&&valid(measured?.recoveryDrop)?Number(measured.recoveryDrop):null):demoRecovery?.average;
+ const recoveryDetail=valid(recoveryDrop)
+  ?say(`活動後兩分鐘心率回落約 ${Number(recoveryDrop).toFixed(1)} bpm；與相近活動強度的紀錄比較才有意義。`,`The 2-minute post-activity heart-rate drop is ~${Number(recoveryDrop).toFixed(1)} bpm; compare only similar exertion episodes.`,`活動後2分間の心拍数低下は約 ${Number(recoveryDrop).toFixed(1)} bpmです。同程度の運動強度で比較してください。`,`활동 후 2분 심박 감소는 약 ${Number(recoveryDrop).toFixed(1)} bpm입니다. 비슷한 활동 강도끼리 비교하세요.`)
+  :say('今日尚無可核對的活動後兩分鐘恢復讀數，暫不推斷恢復速度。','No verified 2-minute recovery episode is available today; recovery speed is not inferred.','本日は確認済みの活動後2分間の回復測定がないため、回復速度を推定しません。','오늘 검증된 활동 후 2분 회복 수치가 없어 회복 속도를 추정하지 않습니다.');
+ for(let i=0;i<3;i++){
+  // Number(null) === 0: an unavailable score is NOT a critical red 0/100.
+  const score=scores[i];if(!Number.isFinite(score)||score>=90)continue;
+  let lines=[];
+  if(i===0){
+   lines=[say(`今天心肺狀態只有 ${score} 分，先看看是心跳、呼吸還是節奏和平常不同。`,`Heart and breathing scored ${score} today; check which reading changed.`,`本日の心肺は${score}点。普段と違う項目を確認しましょう。`,`오늘 심폐 점수는 ${score}점입니다. 무엇이 달라졌는지 확인하세요.`),
+    vitalDetail,
+    say('建議查看心率、呼吸與心搏節奏變化，並留意今天的精神、食慾和活動。','Review heart, breathing and rhythm trends, and watch energy, appetite and activity.','心拍数・呼吸数・心拍リズムの変化を確認し、元気・食欲・活動にも注意してください。','심박·호흡·리듬을 확인하고 활력·식욕·활동을 살펴보세요.')];
+  }else if(i===1){
+   lines=[say(`今天睡眠狀態只有 ${score} 分，睡得久不代表休息得好，請看昨晚哪些時段沒睡安穩。`,`Sleep scored ${score} today; longer rest does not always mean good rest.`,`今日の睡眠は${score}点。休息の途切れを確認してください。`,`오늘 수면 점수는 ${score}점입니다. 잠이 끊긴 시간을 확인하세요.`),
+    restDetail,
+    say('建議保持睡眠環境與作息規律，查看今天對應的睡眠時間軸。','Keep a consistent rest environment and review the sleep timeline.','休息環境と生活リズムを整え、当日の休息時間帯を確認してください。','수면 환경과 생활 리듬을 일정하게 유지하고 수면 시간대를 확인하세요.')];
+  }else{
+   lines=[say(`今天精力與恢復只有 ${score} 分，看看是活動變少、恢復變慢，還是休息不夠平穩。`,`Energy and recovery scored ${score} today; check activity, recovery and quiet rest.`,`今日の活力・回復は${score}点。活動・回復・休息を確認。`,`오늘 활력·회복은 ${score}점입니다. 활동·회복·휴식을 확인하세요.`),
+    recoveryDetail,
+    ev?.sustained?say('近期有持續恢復較慢的趨勢，建議調整活動強度並記錄精神與食慾。','Sustained slower recovery is observed; ease exertion and log energy/appetite.','最近、回復の遅さが続いています。運動強度を調整し、元気と食欲を記録してください。','회복이 지속적으로 느려져 운동 강도를 조절하고 상태를 기록하세요.'):say('先比較近期活動與休息，視實際表現調整運動量。','Compare activity and rest and adjust exercise to how your pet feels.','最近の活動と休息を比較し、ペットの状態に合わせて運動量を調整してください。','활동과 휴식을 비교해 운동량을 조절하세요.')];
+  }
+  if(i!==1){const reason=weakestSubscore(i);if(reason)lines.splice(1,0,reason);}
+  // Show one readable, evidence-backed reason on Home as well, with the
+  // complete dates/reference explanation in the already-existing Deep panel.
+  const today=iso(localDate()),scope=globalThis.DeepPetUX1050?.scope?.(1)||[];
+  const evidence=scope.filter(x=>x.row?.date===today);
+  const insight=evidence.length?globalThis.DeepPetUX1055?.insight?.(['cardio','sleep','activityRecovery'][i],evidence,1):null;
+  if(insight?.level>=2&&insight.headline)lines.splice(1,0,insight.headline);
+  const continuityDays=score<80&&typeof dp1028DomainLowStreak==='function'?dp1028DomainLowStreak(i):0;
+  if(continuityDays>=2)lines.push(say(`這項分數已連續 ${continuityDays} 個自然日低於 80 分；請在 Deep 的 7 天趨勢中查看每天的實際分數。`,`This score has remained below 80 for ${continuityDays} consecutive calendar days. Review the dated 7-day trend in Deep.`,`このスコアは${continuityDays}日連続で80点未満です。Deepの7日間の推移をご確認ください。`,`이 점수는 ${continuityDays}일 연속 80점 미만입니다. Deep의 7일 추세를 확인하세요.`));
+  out.push({id:'deep-'+i,type:'deep',index:i,score,title:names[i]+' · '+score+'/100',detail:lines[0],lines,page:'deep',icon:['heart','moon','activity'][i],priority:score<60?0:score<80?1:2,continuityDays,date:iso(localDate())});
+ }
+  const recoveryAlert=dpTwoMinuteRecoveryTodayAlert();if(recoveryAlert)out.push(recoveryAlert);
+  const quietAlert=dpQuietRespTodayAlert();if(quietAlert)out.push(quietAlert);
+  return out.sort((a,b)=>a.priority-b.priority||((a.index??0)-(b.index??0)));
+}
+function dpDeepIssueHeader(index){
+  const items=dpTodayDeepItems().filter(x=>x.index===index);
+  if(!items.length)return '';
+  // Event insights (two-minute recovery, quiet breathing) are NOT 0–100 scores.
+  // Showing their observed bpm or an internal placeholder as "0/100" misleads
+  // users and contradicts the independent daily score displayed above.
+  return items.map(item=>`<section class="dp-deep-alert-reasons" aria-label="${esc(label3('今日觀察與建議','Today’s observations and advice','오늘 관찰 및 권장 사항'))}"><div class="dp-deep-alert-heading">${dpFlagDot(item.title)}<b>${item.id==='deep-recovery-2m'?label3('兩分鐘恢復觀察','Two-minute recovery observation','2분 회복 관찰'):label3('今日觀察與建議','Today’s observations and advice','오늘 관찰 및 권장 사항')}</b><span>${/^deep-[012]$/.test(String(item.id))?item.score+'/100':item.id==='deep-recovery-2m'?'2 min':label3('回看','Review','확인')}</span></div><div class="dp-deep-alert-lines">${item.lines.map(x=>`<p>${vicon('check',15)}<span>${esc(x)}</span></p>`).join('')}</div></section>`).join('');
+}
+function dpTodayActionClickAttrs(item){
+ return item.type==='deep'?`data-action="today-open" data-page="deep" data-index="${item.index}"`:item.type==='chat'?`data-action="today-open" data-page="chat" data-chat="${esc(item.chatId)}"`:`data-action="today-open" data-page="${esc(item.page)}"${item.type==='report'&&item.reportKey?` data-report-key="${esc(item.reportKey)}"`:''}`;
+}
+function dpTodayActionCard(item){
+ const reason=item.type==='deep'?[...new Set(item.lines.slice(1))].slice(0,3).map(x=>`<p>${esc(x)}</p>`).join(''):`<p>${esc(item.detail)}</p>`;
+ const isCoreDeep=item.type==='deep'&&/^deep-[012]$/.test(String(item.id));
+ return `<button class="ai-suggestion-card dp-today-action dp-today-${item.type}" ${dpTodayActionClickAttrs(item)}><div class="ai-suggestion-top"><div class="ai-suggestion-icon">${vicon(item.icon,18)}</div><div class="grow"><div class="ai-suggestion-title">${esc(item.title)}</div><div class="ai-suggestion-sub">${item.type==='deep'?(isCoreDeep?label3('今天這項分數需要留意','This score needs attention today','오늘 점수 확인 필요'):label3('有一段變化值得回看','Review this change','변화 확인 필요')):item.type==='chat'?label3('今日未讀留言','Unread today','오늘 안 읽은 메시지'):label3('今天需要處理','Action for today','오늘 처리할 일')}</div></div>${vicon('chev',17)}</div><div class="ai-suggestion-body">${reason}</div></button>`;
+}
+function dpHealthTodayTasksMarkup(items){return items.length?items.map(item=>`<button class="care-action" ${dpTodayActionClickAttrs(item)}><div class="care-action-icon">${vicon(item.icon,18)}</div><div class="grow"><b>${esc(item.title)}</b><div class="subtitle">${esc(item.detail)}</div></div>${vicon('chev',17)}</button>`).join(''):`<div class="empty-inline">${vicon('check',17)} ${label3('今天沒有需要處理的健康事項。','No health tasks to handle today.','오늘 처리할 건강 관리 항목이 없습니다.')}</div>`}
+function dpAllTodayAttentionItems(){
+ const items=[...dpTodayDeepItems(),...dpHomeTodayCareItems(),...dpTodayMessageItems()];
+ return window.DeepPetCareIntelligence1028?.sortAttention(items)||items.sort((a,b)=>(a.priority??5)-(b.priority??5));
+}
+function dpTodayMorePage(){
+ const all=dpAllTodayAttentionItems();
+ return `<div class="app-pad dp-today-more-page"><div class="dp-independent-head"><button type="button" data-action="today-more-back" aria-label="${label3('返回首頁','Back to Home','홈으로 돌아가기')}">←</button><b>${label3('今日最值得知道','Most important today','오늘 가장 알아야 할 것')}</b></div><p class="dp-today-all-context">${label3(`今天共有 ${all.length} 項值得留意與處理的內容。點選任何一項，可直接查看相應的健康或 Deep 頁面。`,`There are ${all.length} things to review today. Select an item to open its Health or Deep details.`,`오늘 확인할 항목이 ${all.length}건 있습니다. 항목을 선택하면 해당 건강 또는 Deep 페이지로 이동합니다.`)}</p><div class="dp-today-list">${all.map(dpTodayActionCard).join('')}</div><div class="footer-space"></div></div>`;
+}
+function focusCard(){
+ const all=dpAllTodayAttentionItems();
+ const title=label3('今日最值得知道','Most important today','오늘 가장 알아야 할 것');
+ // Every identity, including a measured pet with zero tasks, uses the same
+ // brown/spark/0-count card. A zero task count is not proof of good health.
+ if(!all.length)return `<section class="focus-feature focus-watch dp-today-focus dp1001-empty-todos"><div class="row spread"><span class="focus-eyebrow">${vicon('spark',17)} ${title}</span><span class="focus-count">0 ${label3('項','items','건')}</span></div><p>${label3('今天尚無待辦事項','No to-dos for today','오늘 할 일이 없습니다')}</p></section>`;
+ return `<section class="focus-feature focus-watch dp-today-focus"><div class="row spread"><span class="focus-eyebrow">${vicon('spark',17)} ${title}</span><span class="focus-count">${all.length} ${label3('項','items','건')}</span></div><div class="dp-today-list">${all.slice(0,3).map(dpTodayActionCard).join('')}</div>${all.length>3?`<button type="button" class="dp-today-more-button" data-action="today-more-open">${label3('More · 查看全部','More · View all','More · 모두 보기')} ${vicon('chev',17)}</button>`:''}</section>`;
+}
+
+// V8.18: one episode per pet, a complete fourteen-day care/medication/physiology timeline.
+// The day-by-day log is observational: time association is not a causal drug effect.
+function observationLabel(value){return ({usual:label3('接近平常','Near usual','평소와 비슷함'),lower:label3('比平常少或差','Below usual','평소보다 낮음'),higher:label3('比平常多','Above usual','평소보다 많음')})[value]||label3('未記錄','Not recorded','미기록');}
+function dpCareSignLabel(value){return ({none:label3('沒有額外症狀','No additional signs','추가 증상 없음'),cough:label3('咳嗽','Coughing','기침'),breathing:label3('呼吸情況改變','Breathing change','호흡 변화'),movement:label3('行動不便','Movement discomfort','움직임 불편'),digestion:label3('消化狀況改變','Digestive change','소화 변화'),other:label3('其他狀況','Other sign','기타')})[value]||'—';}
+function dpCareTimeline(){
+ const episode=carePlanForPet();
+ if(!episode.started)return `<section class="dp-recovery-timeline"><h3>${label3('恢復期間的14天觀察軸','14-day recovery timeline','14일 회복 관찰 타임라인')}</h3><p>${label3('開始一輪恢復觀察後，生理趨勢、用藥時間與每日紀錄會整理在這裡。','Start a care follow-up to see physiological trends, medication timing and daily notes in one place.','회복 관찰을 시작하면 생리 추세, 복약 시점, 일일 기록이 함께 표시됩니다.')}</p></section>`;
+ const all=dayRowsWithIndex(14).filter(row=>row.date>=episode.started).reverse();
+ const history=state.recoveryTimelineAll?all:all.slice(0,5);
+ const real=dpUsesRealMeasurements(),verified=real?new Map((window.DeepPetSignalScoring?.getFeatures?.(state.dog)||[]).filter(x=>x?.date).map(x=>[x.date,x])):null;
+ const dataFor=row=>real?verified.get(row.date):row;
+ const measured=(row,kind)=>{const data=dataFor(row);if(!data)return null;
+  if(kind==='rest')return real?(data.quality?.fullDayRestSupported===true&&Number.isFinite(data.restHours)?data.restHours:null):dpNightSleepStats(row.idx).minutes/60;
+  if(kind==='recovery')return real?(Number(data.recoveryCount)>0&&Number.isFinite(data.recoveryDrop)?data.recoveryDrop:null):dpRecovery2Min(row.date)?.average??null;
+  const value=kind==='heart'?(real?data.heartRate:data.heart):(real?data.breathRate:data.breath);return Number.isFinite(value)?value:null;};
+ const ref=baselineProfile(),sample=all.filter(x=>validDaySample(x,x.idx).valid),avg=kind=>{const values=sample.map(x=>measured(x,kind)).filter(Number.isFinite);return values.length?values.reduce((sum,x)=>sum+x,0)/values.length:null;};
+ const checklist=episode.checkins||[];
+ const dayHTML=(row)=>{
+  const q=validDaySample(row,row.idx),entry=checklist.find(x=>x.date===row.date),meds=dpMedDue(row.date),heart=q.valid?measured(row,'heart'):null,breath=q.valid?measured(row,'breath'):null,rest=q.valid?measured(row,'rest'):null,two=q.valid?measured(row,'recovery'):null;
+  const medication=meds.length?meds.map(m=>`<span class="dp-care-med">${esc(m.time)} ${esc(dpL10nSample(m.name))} · ${m.status==='taken'?label3('已確認服用','Confirmed','복용 확인'):m.status==='skipped'?label3('略過','Skipped','건너뜀'):label3('未確認','Unconfirmed','미확인')}</span>`).join(''):label3('沒有已排定的用藥','No scheduled medication','예정 복약 없음');
+  const detail=entry?`${label3('精神','Energy','활력')} ${observationLabel(entry.energy)} · ${label3('食慾','Appetite','식욕')} ${observationLabel(entry.appetite)} · ${label3('休息','Rest','휴식')} ${observationLabel(entry.rest)}${entry.signs&&entry.signs!=='none'?' · '+dpCareSignLabel(entry.signs):''}`:label3('尚未填寫當天觀察','No owner check-in recorded','보호자 관찰 기록 없음');
+  return `<article class="dp-care-timeline-item"><div class="dp-care-timeline-date"><b>${row.date.slice(5)}</b><span class="${entry?'done':''}">${entry?label3('已記錄','Logged','기록됨'):label3('待補充','Not logged','미기록')}</span></div><div class="dp-care-timeline-content"><div class="dp-care-data"><span>${label3('心率','Heart','심박')} <b>${heart===null?'—':heart.toFixed(0)+' bpm'}</b></span><span>${label3('呼吸','Breathing','호흡')} <b>${breath===null?'—':breath.toFixed(0)+'/min'}</b></span><span>${label3('安靜休息','Quiet rest','안정 휴식')} <b>${rest===null?'—':rest.toFixed(1)+' h'}</b></span><span>${label3('2分鐘心率回落','2-min HR drop','2분 심박 감소')} <b>${two===null?'—':two.toFixed(1)+' bpm'}</b></span></div><p>${detail}</p>${entry?.note?`<p class="dp-care-diary-note">${esc(entry.note)}</p>`:''}${entry?`<div class="dp-care-checkin-actions"><button class="care-outline" data-action="care-plan-edit-checkin" data-date="${row.date}">${label3('修改觀察','Edit observation','관찰 수정')}</button><button class="care-outline" data-action="care-plan-delete-checkin" data-date="${row.date}">${label3('刪除觀察','Delete observation','관찰 삭제')}</button></div>`:''}<div class="dp-care-medication"><b>${label3('當天用藥時間','Medication timing','당일 복약 시간')}</b>${medication}</div></div></article>`;
+ };
+ const meanHr=avg('heart'),meanBreath=avg('breath'),meanRest=avg('rest');
+ const baselineLine=ref.ready?label3('與14天個體基準比較，並結合每天的活動、用藥與人工觀察；不要把時間相關性解讀為藥物療效。','Compare with the 14-day this pet’s baseline and view activity, medication and owner notes together; temporal association does not establish drug benefit.','14일 반려동물 자체 기준과 활동·복약·보호자 기록을 함께 비교하세요. 시간적 연관성은 약물 효과의 증거가 아닙니다.'):
+  label3('14天個體基準仍在建立中，先累積有效記錄，不提前判斷恢復好壞。','The 14-day baseline is still being established. Collect valid recordings before interpreting changes.','14일 반려동물 자체 기준을 구성 중입니다. 유효 기록이 쌓인 후 추세를 해석하세요.');
+ return `<section class="card dp-recovery-timeline"><h3>${label3('恢復期間的14天觀察軸','14-day recovery timeline','14일 회복 관찰 타임라인')}</h3><p class="dp-care-muted">${label3('同一時間軸查看生理變化、用藥時間與主人紀錄','Physiology, medication timing and owner observations on one timeline','생리 변화·복약 시간·보호자 기록을 하나의 시간축에서 확인')}</p><div class="dp-recovery-quickstats"><div><small>${label3('有效量測日','Valid days','유효 측정일')}</small><strong>${sample.length}/14</strong></div><div><small>${label3('平均心率','Mean heart rate','평균 심박')}</small><strong>${meanHr==null?'—':meanHr.toFixed(0)} <em>bpm</em></strong></div><div><small>${label3('平均呼吸','Mean breathing','평균 호흡')}</small><strong>${meanBreath==null?'—':meanBreath.toFixed(1)} <em>/min</em></strong></div><div><small>${label3('每晚安靜休息','Overnight quiet rest','야간 안정 휴식')}</small><strong>${meanRest==null?'—':meanRest.toFixed(1)} <em>h</em></strong></div></div><p class="dp-care-baseline">${baselineLine}</p><div class="dp-care-timeline-list">${history.map(dayHTML).join('')}</div>${all.length>5?`<button class="care-outline dp-timeline-more" data-action="care-timeline-more">${state.recoveryTimelineAll?label3('收起記錄','Show fewer days','기록 접기'):label3(`查看全部 ${all.length} 天記錄`,`See all ${all.length} days`,`전체 ${all.length}일 보기`)}</button>`:''}<p class="dp-care-muted">${label3('已確認用藥才算已服用；未確認不代表漏服。心肺與活動回復數據只作觀察，不會自動評估藥效或診斷疾病。','A dose counts as taken only when confirmed; unconfirmed does not mean missed. Physiological changes are for monitoring, not diagnosis or treatment efficacy.','복용 확인 후에만 복용 완료로 표시됩니다. 미확인은 누락을 뜻하지 않습니다. 생리 변화로 약효를 진단하지 않습니다.')}</p></section>`;
+}
+
+function carePlanModal(){const e=recoveryEvidence(),p=carePlanForPet(),q=signalQuality(),status=carePlanStatus(),today=state.careEditDate||iso(localDate()),currentCheckin=(p.checkins||[]).find(x=>x.date===today),recorded=!!currentCheckin;
+ const enough=!!e.enough;
+ return `<div class="care-action-modal"><div class="care-mini-kicker">${label3('發現 → 觀察 → 回顧','Notice → Observe → Review','발견 → 관찰 → 검토')}</div><h3>${label3('每日恢復狀態','Daily recovery status','일일 회복 상태')}</h3>${p.reason&&p.reason!=='activity'?`<p class="subtitle">${label3('以下健康追蹤重點是每日精神、食慾與休息；活動後心肺恢復數據只作輔助參考。','For this recovery type, daily energy, appetite and rest are the main observations.','활력, 식욕, 휴식 변화가 핵심 기록입니다.')}</p>`:''}${!q.valid?`<p class="care-warning">${label3('目前尚無足夠的心肺數據，仍可以先記錄精神、食慾與休息。','Not enough heart and breathing data yet. You can still log energy, appetite and rest.','심폐 데이터가 아직 충분하지 않지만 활력·식욕·휴식을 기록할 수 있어요.')}</p>`:!enough?`<p class="care-warning">${label3('先累積幾次相近的散步或玩耍紀錄，再看恢復的變化。','Log a few similar walks or play sessions to compare recovery.','비슷한 산책이나 놀이 기록을 모아 회복 변화를 비교해요.')}</p>`:!e.sustained?`<div class="focus-stat calm">${label3('最近沒有持續恢復變慢的趨勢，可繼續觀察活動後的狀態。','No sustained recovery slowdown is apparent. Continue observing after activity.','최근 회복이 지속적으로 느려지는 경향은 없어요. 활동 후 상태를 계속 살펴보세요.')}</div>`:`<div class="focus-stat">${label3('最近恢復變化','Recent recovery change','최근 회복 변화')}：${e.delta>=0?'+':''}${Math.round(e.delta)} min（${e.pct>=0?'+':''}${Math.round(e.pct)}%） · ${label3('開始留意','First noticed','처음 발견')} ${e.since||label3('近期','Recently','최근')}</div>`}
+ <p>${label3('接下來留意精神、食慾、休息和相近活動後的恢復時間；新資料不足時不要硬判改善。','Observe energy, appetite, rest and recovery after similar activity. Do not infer improvement from insufficient new data.','활력·식욕·휴식·비슷한 활동 후 회복 시간을 관찰하세요.')}</p>
+ ${status.started?`<div class="dp-care-reason"><b>${label3('本次恢復原因','Recovery reason','회복 이유')}：</b>${esc(p.reasonNote||({surgery:label3('術後','After surgery','수술 후'),illness:label3('疾病後','After illness','질병 후'),anesthesia:label3('麻醉後','After anesthesia','마취 후'),medication:label3('用藥後','After medication','복약 후'),activity:label3('活動後','After activity','활동 후'),other:label3('其他','Other','기타')})[p.reason]||'—')}</div>`:''}<div class="care-mini-progress"><b>${status.days} / 14</b><span>${label3('不同日期的14天恢復觀察','Daily observations toward a 14-day record','서로 다른 날짜의 14일 회복 관찰')}</span></div>
+ ${state.careEditDate?`<p class="dp-care-muted">${label3('正在修改先前記錄','Editing a previous observation','이전 관찰 기록 수정')}：${state.careEditDate}</p>`:''}${!status.started?`<label class="form-label">${label3('這次要觀察的恢復情況','Recovery reason','회복 이유')}</label><select id="careReason" class="form-control"><option value="surgery">${label3('手術／術後','After surgery','수술 후')}</option><option value="illness">${label3('疾病後','After illness','질병 후')}</option><option value="anesthesia">${label3('麻醉後','After anesthesia','마취 후')}</option><option value="medication">${label3('用藥後','After medication','복약 후')}</option><option value="activity">${label3('運動／活動後','After activity','활동 후')}</option><option value="other">${label3('其他原因','Other','기타')}</option></select><label class="form-label">${label3('補充原因（可自填）','Add details (optional)','상세 사유')}</label><input id="careReasonNote" class="form-control" maxlength="160" placeholder="${label3('例：昨天剛做完結紮手術','e.g. Recent dental procedure','예: 최근 수술')}"/><button class="cta full" data-action="care-plan-start">${label3('開始14天恢復觀察','Start 14-day recovery observation','14일 회복 관찰 시작')}</button>`:`${true?`<div class="care-daily-form">${[['energy',label3('精神／活動意願','Energy / willingness','활력 / 활동 의지')],['appetite',label3('食慾','Appetite','식욕')],['rest',label3('休息','Rest','휴식')]].map(([key,name])=>`<label>${name}<select id="care-${key}"><option value="">${label3('請選擇','Select','선택')}</option><option value="usual" ${currentCheckin?.[key]==="usual"?"selected":""}>${label3('和平常接近','Near usual','평소와 비슷함')}</option><option value="lower" ${currentCheckin?.[key]==="lower"?"selected":""}>${label3('比平常少／差','Less than usual','평소보다 적음')}</option><option value="higher" ${currentCheckin?.[key]==="higher"?"selected":""}>${label3('比平常多','More than usual','평소보다 많음')}</option></select></label>`).join('')}<label>${label3('額外症狀（可選）','Additional signs (optional)','추가 증상 (선택)')}<select id="care-signs">${[['none',label3('沒有額外症狀','None','없음')],['cough',label3('咳嗽','Coughing','기침')],['breathing',label3('呼吸變化','Breathing change','호흡 변화')],['movement',label3('行動不便','Movement issue','움직임 불편')],['digestion',label3('消化異常','Digestion','소화 변화')],['other',label3('其他','Other','기타')]].map(([v,t])=>`<option value="${v}" ${currentCheckin?.signs===v?'selected':''}>${t}</option>`).join('')}</select></label><label>${label3('補充描述（選填）','Optional note','메모(선택)')}<textarea id="care-note" rows="2" maxlength="300" placeholder="${label3('例如：今天比昨天更願意玩','e.g. More playful than yesterday','예: 어제보다 잘 놀아요')}">${esc(currentCheckin?.note||'')}</textarea></label></div>`:''}<button class="cta full" data-action="care-plan-checkin" >${state.careEditDate?label3('儲存該日觀察修改','Save observation changes','해당 날짜 관찰 수정 저장'):recorded?label3('更新今天的觀察','Update today’s observations','오늘 관찰 수정'):label3('儲存今天的觀察','Save today’s observations','오늘 관찰 저장')}</button>`}
+ ${(p.checkins||[]).length?`<div class="care-checkin-history">${p.checkins.map(c=>`<div>${c.date} · ${label3('精神','Energy','활력')}: ${observationLabel(c.energy)} · ${label3('食慾','Appetite','식욕')}: ${observationLabel(c.appetite)} · ${label3('休息','Rest','휴식')}: ${observationLabel(c.rest)} ${c.signs&&c.signs!=='none'?' · '+dpCareSignLabel(c.signs):''}${c.note?`<small>${esc(c.note)}</small>`:''}</div>`).join('')}</div>`:''}
+ ${status.done?`<button class="care-outline care-new-cycle" data-action="care-plan-restart">${label3('開始下一輪14天觀察','Start another 14-day observation','다음 14일 관찰 시작')}</button>`:''}
+ ${(state.carePlanHistoryByPet?.[String(state.dog)]||[]).length?`<details class="care-older-cycles"><summary>${label3('歷次健康管理觀察','Past care checks','이전 건강 기록')}</summary>${state.carePlanHistoryByPet[String(state.dog)].map(c=>`<details class="care-older-cycle"><summary>${esc(c.started||'')} · ${(c.checkins||[]).length} ${label3('天紀錄','days logged','일 기록')}</summary><p>${label3('觀察原因','Reason','관찰 사유')}：${esc(c.reasonNote||c.reason||'—')}</p>${(c.checkins||[]).map(x=>`<p>${esc(x.date||'')} · ${label3('精神','Energy','활력')}: ${observationLabel(x.energy)} · ${label3('食慾','Appetite','식욕')}: ${observationLabel(x.appetite)} · ${label3('休息','Rest','휴식')}: ${observationLabel(x.rest)}${x.note?' · '+esc(x.note):''}</p>`).join('')}</details>`).join('')}</details>`:''}
+ ${dpCareTimeline()}<div class="care-vet-rule"><b>${label3('何時聯絡獸醫','When to contact a vet','수의사 상담 시점')}</b><p>${recoveryVetRule()}</p></div>
+ <small>${label3('健康管理觀察會保留在這隻寵物的紀錄中。','Care notes remain in this pet’s history.','돌봄 관찰은 이 반려동물 기록에 저장됩니다.')}</small>
+ <button class="care-outline" data-action="care-to-deep">${label3('到 Deep 查看活動趨勢','Open activity trends in Deep','Deep 활동 추세 보기')} →</button></div>`;
+}
+function logBehaviorToday(kind,choice){
+ const valid=ENGAGEMENT_TYPES.some(x=>x[0]===kind)&&['yes','no'].includes(choice);if(!valid)return false;
+ state.behaviorLogs=state.behaviorLogs||{};const key=String(state.dog),today=iso(localDate());
+ let rows=(state.behaviorLogs[key]||[]).filter(x=>!(x.date===today&&x.kind===kind));rows.push({date:today,kind,choice,sample:false});state.behaviorLogs[key]=rows;return true;
+}
+function behaviorComparison(kind=state.behaviorKind||'activity'){
+ const logs=behaviorLogForPet().filter(x=>x.kind===kind);const byDate=new Map(logs.map(x=>[x.date,x]));
+ const records=dayRowsWithIndex(30).filter(r=>byDate.has(r.date)&&validDaySample(r,r.idx).valid);
+ const yes=records.filter(r=>byDate.get(r.date).choice==='yes'),no=records.filter(r=>byDate.get(r.date).choice==='no');
+ const mean=(rows,key)=>rows.reduce((s,r)=>s+Number(r[key]),0)/Math.max(1,rows.length);
+ // Activity must be comparable before we show an illustrative association.
+ const comparable=yes.length>=3&&no.length>=3&&Math.abs(mean(yes,'activity')-mean(no,'activity'))/Math.max(1,mean(no,'activity'))<=.25;
+ return {yes:yes.length,no:no.length,comparable,yesAvg:comparable?mean(yes,'recovery'):null,noAvg:comparable?mean(no,'recovery'):null};
+}
+function behaviorDetail(){const kind=state.behaviorKind||'activity',logs=behaviorLogForPet(),rows=logs.slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))||ENGAGEMENT_TYPES.findIndex(x=>x[0]===a.kind)-ENGAGEMENT_TYPES.findIndex(x=>x[0]===b.kind)).slice(0,12),s=behaviorComparison(kind),today=logs.find(x=>x.date===iso(localDate())&&x.kind===kind);
+ return `<div class="behavior-detail"><h3>${label3('健康管理習慣觀察','Care habit journal','돌봄 습관 기록')}</h3><p>${label3('選一項最近有變動的健康管理習慣，記錄今天有沒有發生。這是 WHOOP Journal 式的寵物觀察，不是醫療實驗。','Record whether a care habit occurred today. This is observational journaling, not a medical experiment.','오늘 돌봄 습관의 유무를 기록하세요. 의료 실험이 아닙니다.')}</p><div class="behavior-types">${ENGAGEMENT_TYPES.map(x=>`<button class="${kind===x[0]?'active':''}" data-action="behavior-kind" data-kind="${x[0]}">${behaviorKindLabel(x[0])}</button>`).join('')}</div><div class="behavior-today"><b>${label3('今天有沒有發生？','Did this happen today?','오늘 해당되나요?')}</b><div class="row gap8 mt8"><button class="${today?.choice==='yes'?'active':''}" data-action="behavior-log" data-choice="yes">${label3('有','Yes','예')}</button><button class="${today?.choice==='no'?'active':''}" data-action="behavior-log" data-choice="no">${label3('沒有','No','아니오')}</button></div></div><section class="behavior-analysis"><b>${label3('日常習慣與恢復平穩時間的關聯','Care habits and return-to-rest duration','생활 습관과 안정 복귀 시간')}</b><p>${label3(`可用記錄：有 ${s.yes} 天，沒有 ${s.no} 天。`,`Comparable valid records: Yes ${s.yes} days, No ${s.no} days.`,`유효 기록: 예 ${s.yes}일, 아니오 ${s.no}일.`)}</p>${s.comparable?`<div class="behavior-compare"><div><span>${label3('有','Yes','예')}</span><b>${s.yesAvg.toFixed(1)} min</b></div><div><span>${label3('沒有','No','아니오')}</span><b>${s.noAvg.toFixed(1)} min</b></div></div><p>${label3('只呈現相關性，不表示行為導致恢復改善或惡化。','Association only: no claim that this habit caused recovery to improve or worsen.','연관성만 나타내며 인과관계는 아닙니다.')}</p>`:`<p class="care-warning">${label3('暫無足夠可比資料。需有／無各至少 3 個有效日，且活動量相近，才能呈現趨勢對比。','Not enough comparable data. At least 3 valid Yes and 3 valid No days with similar activity levels are required.','비교 가능한 유효 기록이 충분하지 않습니다. 각 3일 이상 필요합니다.')}</p>`}</section><details class="behavior-history"><summary>${label3('歷史紀錄','History','이전 기록')} (${rows.length})</summary>${rows.map(x=>`<div>${esc(x.date)} · ${behaviorKindLabel(x.kind)} · ${x.choice==='yes'?label3('有','Yes','예'):label3('沒有','No','아니오')}</div>`).join('')}</details><div class="row gap8"><button class="care-outline" data-action="behavior-demo-load">${label3('載入 14 天紀錄','Load 14-day records','14일 데모 기록 불러오기')}</button><button class="care-outline" data-action="behavior-demo-clear">${label3('清除預載紀錄','Clear preloaded records','데모 삭제')}</button></div><small>${label3('日誌不會改變健康評分；用藥請依獸醫指示。','Journal entries do not change health scores. Follow your veterinarian’s medication plan.','데모 기록은 건강 점수를 바꾸지 않으며 약물 변경은 수의사와 상의하세요.')}</small></div>`;
+}
+function weeklyStoryData(){const rec=dayRowsWithIndex(14),recent=rec.slice(-7).filter(r=>validDaySample(r,r.idx).valid),before=rec.slice(-14,-7).filter(r=>validDaySample(r,r.idx).valid),avg=(a,k)=>a.length?a.reduce((sum,x)=>sum+Number(x[k]),0)/a.length:null;return {recent:recent.length,before:before.length,rest:avg(recent,'sleep'),oldRest:avg(before,'sleep')}}
+function weeklyStoryContent(){const d=currentDog(),m=weeklyStoryData(),quality=signalQuality().valid;
+ const status=!quality?label3('等待有效量測','Awaiting valid readings','유효 측정 대기'):m.recent<3?label3('本週記錄仍在累積','More readings needed','이번 주 기록 수집 중'):label3('又一起累積了一週的健康管理回憶','Another week of care together','함께 쌓아가는 한 주의 기록');
+ return `<div class="story-modal"><div class="story-card-preview"><img src="${esc(d.photo)}" alt="${esc(d.name)}"/><div class="story-card-copy"><small>DeepPet · Weekly Story</small><h3>${esc(d.name)} · ${label3('這一週','This week','이번 주')}</h3><p>${status}</p><div class="story-small-stats"><span>${label3('有效量測','Valid days','유효 측정')} ${m.recent}/7</span>${quality&&m.rest!=null?`<span>${label3('平均休息','Avg rest','평균 휴식')} ${m.rest.toFixed(1)}h</span>`:''}</div></div></div>${dpWeekMemory()}<p>${label3('這是一張可以分享給家人的健康故事卡。預設不分享 GPS、用藥及詳細健康報告。','Share a gentle weekly care story. GPS, medication and detailed health records are excluded.','가족에게 공유할 주간 돌봄 카드입니다. GPS, 복약 기록, 상세 보고서는 포함하지 않아요.')}</p><button class="cta full" data-action="weekly-export">${label3('儲存本週故事卡','Save weekly story card','주간 스토리 카드 저장')}</button></div>`;
+}
+function tourMiniSvg(kind){
+ if(kind==='rings'){
+  const dots=(cx,score,color)=>Array.from({length:42},(_,i)=>{const angle=i/42*Math.PI*2-Math.PI/2;return `<circle cx="${(cx+27*Math.cos(angle)).toFixed(2)}" cy="${(43+27*Math.sin(angle)).toFixed(2)}" r="2.25" fill="${color}" opacity="${i<Math.round(score*.42)?1:.20}"/>`}).join('');
+  return `<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><circle cx="46" cy="43" r="33" fill="#f1ecff"/><circle cx="134" cy="43" r="33" fill="#e8f6ed"/>${dots(46,90,'#6655dc')}${dots(134,83,'#24a56c')}<text x="46" y="49" text-anchor="middle" font-size="18" font-weight="800" fill="#5546ad">90</text><text x="134" y="49" text-anchor="middle" font-size="18" font-weight="800" fill="#168556">83</text><text x="46" y="87" text-anchor="middle" font-size="9" fill="#776aaf">Health</text><text x="134" y="87" text-anchor="middle" font-size="9" fill="#579b7a">Rhythm</text></svg>`;
+ }
+ const grid=`<path d="M14 19H166M14 46H166M14 73H166" stroke="#e9eaf3" stroke-width="1"/>`;
+ const defs={
+ rings:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><circle cx="48" cy="46" r="29" fill="#efeafc"/><circle cx="48" cy="46" r="24" fill="none" stroke="#d6cff8" stroke-width="5"/><circle cx="48" cy="46" r="24" fill="none" stroke="#6655dc" stroke-width="5" stroke-dasharray="132 151" transform="rotate(-90 48 46)" stroke-linecap="round"/><circle cx="132" cy="46" r="29" fill="#e7f6ef"/><circle cx="132" cy="46" r="24" fill="none" stroke="#cee9dd" stroke-width="5"/><circle cx="132" cy="46" r="24" fill="none" stroke="#24a56c" stroke-width="5" stroke-dasharray="122 151" transform="rotate(-90 132 46)" stroke-linecap="round"/><text x="48" y="51" text-anchor="middle" font-size="18" font-weight="800" fill="#5546ad">90</text><text x="132" y="51" text-anchor="middle" font-size="18" font-weight="800" fill="#168556">83</text><text x="48" y="88" text-anchor="middle" font-size="9" fill="#776aaf">Health</text><text x="132" y="88" text-anchor="middle" font-size="9" fill="#579b7a">Rhythm</text></svg>`,
+ vitals:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><rect x="2" y="8" width="54" height="74" rx="11" fill="#edf5ff"/><rect x="63" y="8" width="54" height="74" rx="11" fill="#eaf7f4"/><rect x="124" y="8" width="54" height="74" rx="11" fill="#f0edff"/><text x="29" y="29" text-anchor="middle" font-size="10" fill="#4a84c9">Energy</text><text x="29" y="61" text-anchor="middle" font-size="21" font-weight="800" fill="#3072bc">88</text><text x="90" y="29" text-anchor="middle" font-size="10" fill="#389c84">Activity</text><text x="90" y="61" text-anchor="middle" font-size="21" font-weight="800" fill="#247e69">92</text><text x="151" y="29" text-anchor="middle" font-size="10" fill="#8b6cc1">Recovery</text><text x="151" y="61" text-anchor="middle" font-size="21" font-weight="800" fill="#7755b5">90</text></svg>`,
+ age:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><rect x="3" y="4" width="174" height="84" rx="13" fill="#f0f0ff"/><text x="14" y="25" font-size="10" fill="#6655dc">AI MULTI-SIGNAL</text><text x="14" y="58" font-size="27" font-weight="850" fill="#5143a9">5.3<tspan font-size="10"> yr</tspan></text><text x="98" y="39" font-size="9" fill="#737a98">Actual</text><text x="98" y="58" font-size="18" font-weight="800" fill="#53566d">5.0<tspan font-size="9"> yr</tspan></text><rect x="14" y="70" width="152" height="5" rx="2.5" fill="#d9d5f5"/><rect x="14" y="70" width="105" height="5" rx="2.5" fill="#6f60d7"/></svg>`,
+ alerts:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><rect x="5" y="5" width="170" height="39" rx="10" fill="#fff1f1" stroke="#f4d6d6"/><circle cx="19" cy="19" r="5" fill="#df6865"/><text x="29" y="23" font-size="10" font-weight="800" fill="#a44848">02:10 · Heart ↑ 12%</text><text x="29" y="35" font-size="8.5" fill="#b67979">Nighttime change</text><rect x="5" y="49" width="170" height="38" rx="10" fill="#fff7e9"/><circle cx="19" cy="62" r="5" fill="#e09a42"/><text x="29" y="66" font-size="10" font-weight="800" fill="#93632c">Sleep -1.2 h</text><text x="29" y="78" font-size="8.5" fill="#ad8c65">Compared with usual</text></svg>`,
+ event:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true">${grid}<path d="M13 60 C23 58 34 57 43 53S59 24 68 32S81 57 93 51S111 27 123 31S142 47 168 41" fill="none" stroke="#e6527d" stroke-width="3" stroke-linecap="round"/><path d="M13 69 C31 70 38 60 52 62S70 41 81 44S103 68 119 56S145 37 168 50" fill="none" stroke="#347fe7" stroke-width="3" stroke-linecap="round"/><line x1="83" y1="14" x2="83" y2="77" stroke="#a48cdd" stroke-dasharray="3 3"/><circle cx="83" cy="49" r="4" fill="#e6527d"/><text x="90" y="12" font-size="9" fill="#7363bd">14:35</text><text x="12" y="88" font-size="8" fill="#c65d84">Heart</text><text x="54" y="88" font-size="8" fill="#337ccf">Breath</text><text x="126" y="88" font-size="8" fill="#777">Activity</text></svg>`,
+ action:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><rect x="4" y="7" width="82" height="35" rx="10" fill="#f0edff"/><rect x="94" y="7" width="82" height="35" rx="10" fill="#ebf7f0"/><rect x="4" y="49" width="82" height="35" rx="10" fill="#fff3e6"/><rect x="94" y="49" width="82" height="35" rx="10" fill="#eef6ff"/><text x="11" y="22" font-size="10" font-weight="800" fill="#6655dc">AI Care</text><text x="11" y="34" font-size="9" fill="#7664a0">Walk 15 min</text><text x="101" y="22" font-size="10" font-weight="800" fill="#268e67">Diet</text><text x="101" y="34" font-size="9" fill="#638678">Weight care</text><text x="11" y="64" font-size="10" font-weight="800" fill="#c58b40">Checkup</text><text x="11" y="76" font-size="9" fill="#ac9169">Lab report</text><text x="101" y="64" font-size="10" font-weight="800" fill="#387ec7">Schedule</text><text x="101" y="76" font-size="9" fill="#748aa4">Meds / Vaccine</text></svg>`,
+ baseline:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><rect x="3" y="7" width="174" height="78" rx="12" fill="#f4f1ff"/><text x="13" y="23" font-size="10" font-weight="800" fill="#6655dc">YOUR PET'S USUAL ROUTINE</text><rect x="13" y="34" width="154" height="9" rx="5" fill="#e0dafa"/><rect x="13" y="34" width="138" height="9" rx="5" fill="#7666dc"/><text x="13" y="62" font-size="11" font-weight="700" fill="#5143a9">Rest · Energy · Activity</text><text x="13" y="77" font-size="10" fill="#67667a">Always learning from your pet</text></svg>`,
+ trend:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true">${grid}<path d="M12 69 C24 65 34 60 46 60S66 39 80 44S98 52 112 39S145 42 168 28" fill="none" stroke="#24a56c" stroke-width="3" stroke-linecap="round"/><path d="M12 40 C28 38 39 45 52 44S77 55 90 52S117 40 128 46S150 52 168 57" fill="none" stroke="#e6527d" stroke-width="3" stroke-linecap="round"/><text x="12" y="88" font-size="9" fill="#837a94">7d</text><text x="83" y="88" font-size="9" fill="#837a94">14d</text><text x="155" y="88" font-size="9" fill="#837a94">30d</text><text x="88" y="12" font-size="9" fill="#24a56c">Sleep</text><text x="126" y="12" font-size="9" fill="#e6527d">Energy</text></svg>`,
+ report:`<svg viewBox="0 0 180 92" class="tour-svg" aria-hidden="true"><rect x="15" y="4" width="150" height="84" rx="12" fill="#fff" stroke="#e2dff4"/><text x="27" y="21" font-size="10" font-weight="800" fill="#6655dc">HEALTH HISTORY</text><rect x="27" y="34" width="86" height="6" rx="3" fill="#e5e1fa"/><rect x="27" y="46" width="112" height="6" rx="3" fill="#d9eaf8"/><rect x="27" y="58" width="97" height="6" rx="3" fill="#d8f0e4"/><circle cx="145" cy="69" r="12" fill="#e4f6eb"/><path d="M139 69l4 4 8-9" stroke="#1c9d6f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+ };
+ return defs[kind]||defs.rings;
+}
+function tourContent(){const x=Math.min(2,Math.max(0,Number(state.tourStep)||0)),scenarios=[
+ {pet:0,title:label3('平常健康時，能看到什麼？','What can you see on a normal day?','평소에는 무엇을 볼 수 있나요?'),body:label3('打開 APP 就能看懂今天過得好不好、需要注意什麼，以及 AI 生理年齡。','One glance shows how your pet is doing, what to watch, and AI biological age.','앱을 열면 오늘 컨디션과 주의할 점, AI 생체 나이를 알 수 있어요.'),items:[
+  {svg:'rings',title:label3('今日總結','Daily health & rhythm','오늘의 건강 요약'),desc:label3('生理狀態評分看心肺、睡眠與精力與恢復；身體節奏評分只看放鬆與平穩度及心搏節奏穩定度。','Physiological status combines heart, sleep, and energy/recovery; body rhythm weights rest/steadiness 58% and heartbeat stability 42%.','생리 상태는 심폐·수면·활력/회복, 몸의 리듬은 휴식 안정도·심박 안정도만 반영합니다.')},
+  {svg:'vitals',title:label3('精力與恢復','Energy & recovery','활력과 회복'),desc:label3('直接看到精力、活動、恢復三個分數，了解今天是否有活力。','See energy, activity and recovery scores without needing technical knowledge.','활력·회복·회복 점수로 오늘의 상태를 쉽게 파악해요.')},
+  {svg:'age',title:label3('多維度 AI 生理年齡','Multi-signal AI biological age','다차원 AI 생체 나이'),desc:label3('結合多項健康表現估算生理年齡，並和實際年齡比較；例如5.3歲比5.0歲略高。','AI estimates biological age from multiple health measures, then compares it with actual age (e.g. 5.3 vs 5.0).','다양한 건강 지표로 생체 나이를 추정하고 실제 나이와 비교해요(예: 5.3세 vs 5.0세).')}
+ ]},
+ {pet:2,title:label3('出現變化時，能看懂什麼？','What if something changes?','변화가 생기면 무엇을 알 수 있나요?'),body:label3('不只是提醒你有變化，還讓你知道時間、內容與下一步。','See the time, the change itself, and a helpful next step.','변화 시간과 내용, 다음 행동까지 쉽게 보여줘요.'),items:[
+  {svg:'alerts',title:label3('今天值得留意','Changes to watch today','오늘 주의할 변화'),desc:label3('例如凌晨心率比平常高12%，或昨晚休息少1.2小時；重要提醒直接列出。','For example, nighttime heart rate +12%, or 1.2 hours less rest; key alerts appear right away.','예: 야간 심박 12% 상승 또는 휴식 1.2시간 감소. 중요한 변화를 바로 보여줘요.')},
+  {svg:'event',title:label3('變化發生在哪裡','When & how it changed','변화가 언제 어떻게 생겼나요'),desc:label3('例如最近幾天比較疲累；到 Deep 查看心肺、休息或精力的變化與建議。','For example, your pet has been more tired than usual; check Deep for an easy-to-understand comparison.','예: 최근 더 피곤해 보여요. Deep에서 일별 변화와 간단한 설명을 볼 수 있어요.')},
+  {svg:'action',title:label3('AI 健康管理與改善建議','AI care & improvement','AI 맞춤 돌봄 안내'),desc:label3('根據品種、年齡與近期狀態，提供活動、飲食、體重管理方向；也能分析體檢報告、管理用藥與疫苗。','Breed-, age- and trend-aware activity, food and weight guidance; plus checkup reports, medication and vaccines.','품종·나이·상태에 맞춰 활동·식사·체중을 안내하고 검진 보고서·약·예방접종도 관리해요.')}
+ ]},
+ {pet:5,title:label3('長期佩戴，有什麼價值？','What gets better with long-term wear?','오래 착용하면 어떤 가치가 있나요?'),body:label3('把每天的紀錄變成牠自己的健康參考，慢慢看出真正的生活變化。','Daily readings build this pet’s reference and reveal meaningful longer-term patterns.','매일 기록이 쌓이면 우리 아이만의 기준과 장기 변화를 알 수 있어요.'),items:[
+  {svg:'baseline',title:label3('每隻寵物的專屬基準','This pet’s health baseline','개별 건강 기준'),desc:label3('系統自動認識牠平常的生活節奏，讓你更容易察覺最近是不是不太一樣。','The app gradually learns your pet’s usual routine, making changes easier to notice.','앱이 평소 생활 패턴을 학습해 달라진 점을 알아보기 쉬워져요.')},
+  {svg:'trend',title:label3('7／30 天健康趨勢','7 / 30-day trends','7·30일 건강 추세'),desc:label3('看牠最近一週或一個月是否更有精神、睡得更安穩、恢復得更好。','See whether your pet has more energy, rests better and recovers more steadily over time.','지난주보다 활력이 좋아졌는지, 잠과 회복이 안정적인지 볼 수 있어요.')},
+  {svg:'report',title:label3('長期健康管理更有依據','Better-informed long-term care','더 체계적인 장기 돌봄'),desc:label3('例如提前發現幾天持續偏離平常的變化，連同體檢、疫苗與日常健康紀錄一起查看。','Spot multi-day changes earlier and review them alongside checkups, vaccines and health records.','며칠간 이어지는 변화를 먼저 알아차리고 검진·예방접종·건강 기록과 함께 볼 수 있어요.')}
+ ]}
+ ];const sc=scenarios[x],d=dogs[sc.pet];
+ return `<div class="tour-modal tour-v69"><div class="tour-progress">${[0,1,2].map(i=>`<span class="${i<=x?'active':''}"></span>`).join('')}</div><div class="tour-hero"><div class="tour-photo-frame"><img src="${esc(d.photo)}" alt="${esc(d.name)}"/></div><div class="tour-hero-text"><small>${label3('60 秒認識 DeepPet','Discover DeepPet in 60 seconds','DeepPet 60초 둘러보기')} · ${x+1}/3</small><h3>${sc.title}</h3><p>${sc.body}</p><span class="tour-pet-tag">${esc(d.name)} · ${breedText(d)}</span></div></div><div class="tour-stage-grid">${sc.items.map((item,i)=>`<section class="tour-stage-card"><div class="tour-stage-index">${i+1}</div><div class="tour-stage-copy"><h4>${item.title}</h4><p>${item.desc}</p></div><div class="tour-stage-visual">${tourMiniSvg(item.svg)}</div></section>`).join('')}</div><div class="tour-bottom"><div class="tour-disclaimer">${label3('目前顯示的是內建體驗資料。','Preloaded experience data.','체험용 데이터입니다.')}</div><div class="tour-nav-buttons"><button class="care-outline" data-action="tour-back" ${x===0?'disabled':''}>${label3('上一步','Back','이전')}</button><button class="cta full" data-action="${x===2?'tour-enter':'tour-next'}">${x===2?label3('立即體驗','Try it now','바로 체험'):label3('下一階段','Next','다음 단계')}</button></div></div></div>`;
+}
+function vetMetricDefinitions(){return [
+ {key:'heart',title:label3('心率趨勢','Heart rate','심박수 추세'),unit:'bpm',color:'#E85D87',digits:0},
+ {key:'breath',title:label3('呼吸頻率趨勢','Respiratory rate','호흡수 추세'),unit:label3('次/分','/min','회/분'),color:'#3B82D9',digits:0},
+ {key:'rmssd',title:'RMSSD · HRV',unit:'ms',color:'#755FD6',digits:1},
+ {key:'sdnn',title:'SDNN · HRV',unit:'ms',color:'#A46EE0',digits:1},
+ {key:'sleep',title:label3('安靜休息趨勢','Quiet rest','안정 휴식'),unit:'h',color:'#24A788',digits:1},
+ {key:'activity',title:label3('活動指數趨勢','Activity index','활동 지표'),unit:label3('示範單位','demo units','예시 단위'),color:'#C88A37',digits:0},
+ {key:'recovery',title:label3('活動後回到平穩的時間','Time to return to rest','활동 후 안정 복귀 시간'),unit:'min',color:'#C96A83',digits:0}
+]}
+function vetReportData(){const pet=currentDog(),days=[1,7,30].includes(Number(state.vetDays))?Number(state.vetDays):7,real=dpUsesRealMeasurements(),rows=dayRowsWithIndex(days).map(r=>({...r,sleep:real?(typeof r.sleep==='number'&&Number.isFinite(r.sleep)?r.sleep:null):dpNightSleepStats(r.idx).minutes/60})),sensor=!isFreePet()&&!selectedBlank(),usable=sensor?rows.map(r=>({record:r,valid:validDaySample(r,r.idx).valid})):[],valid=usable.filter(x=>x.valid).map(x=>x.record);return {pet,days,rows:sensor?rows:[],usable,valid,sensor,real,latest:rows.at(-1)?.date||iso(localDate()),start:rows[0]?.date||iso(dateAdd(localDate(),1-days)),generated:iso(localDate()),labs:reportEntriesForDate(),meds:medsForDog().filter(m=>!m.deleted),vax:allVaxForDog(),notes:notesForDog().slice(-5),baseline:sensor&&petBaselineOverview(state.dog).valid>=14};}
+function vetNum(n,digits=1){return Number.isFinite(n)?Number(n).toFixed(digits):'—'}
+function vetTrendSummary(d,metric){const list=d.valid.map(x=>x[metric.key]).filter(x=>typeof x==='number'&&Number.isFinite(x));if(list.length<4)return label3('有效數據不足，暫不比較變化。','Insufficient valid readings for comparison.','비교 가능한 데이터가 부족합니다.');const group=Math.min(3,Math.floor(list.length/2));const earlier=list.slice(0,group).reduce((a,b)=>a+b,0)/group,later=list.slice(-group).reduce((a,b)=>a+b,0)/group,delta=later-earlier;const unit=metric.unit;const text=Math.abs(delta)<.05?label3('變化不明顯','No notable directional change','뚜렷한 변화 없음'):delta>0?label3('近期數值較前期上升','Recent values higher than earlier','최근 값 증가'):label3('近期數值較前期下降','Recent values lower than earlier','최근 값 감소');const raw=`${delta>=0?'+':''}${vetNum(delta,metric.digits)} ${unit}`;if(metric.key==='recovery'){const matched=d.valid.filter(x=>typeof x[metric.key]==='number'&&Number.isFinite(x[metric.key]));const acts=matched.slice(-group).map(x=>x.activity),old=matched.slice(0,group).map(x=>x.activity),avg=x=>x.reduce((a,b)=>a+b,0)/x.length;if([...acts,...old].some(x=>typeof x!=='number'||!Number.isFinite(x))||Math.abs(avg(acts)-avg(old))/Math.max(1,avg(old))>.25)return label3('活動強度差異較大或無法核實，不比較恢復快慢','Activity intensity differs or is unverified; recovery change not comparable','활동량이 다르거나 확인할 수 없어 비교할 수 없습니다');}return `${text} · ${raw}`;}
+function vetTrendSvg(d,metric){
+ const all=d.usable;
+ // Keep the actual date axis: a valid day retains its original day index.
+ // Missing days remain real gaps, not zeros or a line bridging unseen days.
+ const series=all.map((item,i)=>{const raw=item.record[metric.key];return {v:item.valid&&typeof raw==='number'&&Number.isFinite(raw)?raw:null,i,date:item.record.date};});
+ const valid=series.filter(pt=>Number.isFinite(pt.v));
+ if(valid.length<2)return `<div class="vet-chart-empty">${label3('有效量測日不足，尚無法繪製趨勢','Not enough valid measurements to draw a trend','유효 측정 부족')}</div>`;
+ const w=520,h=148,l=32,r=2,t=15,b=28;
+ const values=valid.map(pt=>pt.v),rawLo=Math.min(...values),rawHi=Math.max(...values);
+ const pad=Math.max((rawHi-rawLo)*.15,Math.abs(rawHi)*.018,.4),lo=Math.max(0,rawLo-pad),hi=rawHi+pad,dy=hi-lo||1;
+ const x=i=>l+i/Math.max(1,series.length-1)*(w-l-r),y=v=>t+(hi-v)/dy*(h-t-b);
+ // One path for each uninterrupted valid calendar segment.
+ let contiguous=[],run=[];for(const point of series){if(Number.isFinite(point.v))run.push([x(point.i),y(point.v)]);else if(run.length){contiguous.push(run);run=[];}}if(run.length)contiguous.push(run);
+ const line=contiguous.filter(group=>group.length>1).map(group=>`<path class="vet-observed-line" data-observations="${group.length}" d="${deepCurvePath(group,false)}" fill="none" stroke="${metric.color}" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>`).join('');
+ const points=valid.map(pt=>`<circle class="vet-observed-point" cx="${x(pt.i).toFixed(1)}" cy="${y(pt.v).toFixed(1)}" r="2.9" fill="${metric.color}" stroke="white" stroke-width="0.7"/>`).join('');
+ // Mark omitted dates without placing imaginary points on the value axis.
+ const missing=series.filter(pt=>!Number.isFinite(pt.v));
+ const missingTicks=missing.map(pt=>`<line class="vet-missing-day" x1="${x(pt.i).toFixed(1)}" y1="${h-b+3}" x2="${x(pt.i).toFixed(1)}" y2="${h-b+8}" stroke="#AAB3C6" stroke-width="2" stroke-linecap="round"/>`).join('');
+ const labels=[0,1,2].map(i=>{const v=hi-(hi-lo)*i/2,yy=t+(h-t-b)*i/2;return `<line x1="${l}" y1="${yy}" x2="${w-r}" y2="${yy}" stroke="#E7E9F1"/><text x="${l-7}" y="${yy+4}" text-anchor="end" fill="#778096" font-size="11">${vetNum(v,metric.digits)}</text>`}).join('');
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" class="vet-line-chart" data-vet-metric="${metric.key}" data-valid-days="${valid.length}" data-missing-days="${missing.length}" role="img" aria-label="${esc(metric.title)}"><rect x="0" y="0" width="${w}" height="${h}" rx="10" fill="#FFF"/>${labels}${line}${points}${missingTicks}${(()=>{const every=all.length>=25?5:3,indices=[...new Set([...Array.from({length:Math.ceil(all.length/every)},(_,i)=>Math.min(all.length-1,i*every)),all.length-1])];return indices.map((i,j)=>`<text x="${x(i).toFixed(1)}" y="${h-7}" text-anchor="${j===0?'start':i===all.length-1?'end':'middle'}" fill="#78839B" font-size="9.5">${esc(all[i].record.date.slice(5).replace('-','/'))}</text>`).join('')})()}</svg>`;
+}
+function vetTrendInteractive(d,m){
+ const svg=vetTrendSvg(d,m),all=d.usable,valid=all.map((item,i)=>{const value=item.record[m.key];return {v:item.valid&&typeof value==='number'&&Number.isFinite(value)?value:null,date:item.record.date,i};}).filter(x=>Number.isFinite(x.v));
+ if(valid.length<2)return svg;
+ const w=520,h=148,l=32,r=2,t=15,b=28,vals=valid.map(x=>x.v),rawLo=Math.min(...vals),rawHi=Math.max(...vals),pad=Math.max((rawHi-rawLo)*.15,Math.abs(rawHi)*.018,.4),lo=Math.max(0,rawLo-pad),hi=rawHi+pad;
+ const y=v=>t+(hi-v)/(hi-lo||1)*(h-t-b),ratios=valid.map(p=>p.i/Math.max(1,all.length-1));
+ return inspectSvg(svg,vals,{kind:m.key,unit:m.unit,dates:valid.map(p=>p.date),color:m.color,left:l,right:r,top:t,bottom:b,width:w,height:h,yCoords:vals.map(y),xRatios:ratios,compact:true});
+}
+function vetMetricCard(d,m){const vals=d.valid.map(r=>r[m.key]).filter(x=>typeof x==='number'&&Number.isFinite(x)),avg=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;return `<section class="vet-chart-card"><div class="vet-chart-head"><h3>${m.title}</h3><div><b>${avg===null?'—':vetNum(avg,m.digits)}</b><small>${m.unit} · ${label3('有效日平均','Valid-day mean','평균')}</small></div></div>${vetTrendInteractive(d,m)}<p class="vet-chart-summary">${vetTrendSummary(d,m)}</p></section>`}
+function vetReportContent(d){const species=qualitySpec(d.pet).species==='cat'?label3('貓','Cat','고양이'):label3('狗','Dog','강아지'),name=d.pet.name,labNormal=d.labs.filter(x=>x.status==='normal').length,labAttention=d.labs.filter(x=>x.status==='alert').length,mean=m=>{const values=d.valid.map(r=>r[m]).filter(x=>typeof x==='number'&&Number.isFinite(x));return values.length?values.reduce((a,b)=>a+b,0)/values.length:null};const zero=!d.sensor?(d.real?label3('尚未配對項圈，無可輸出的生理量測資料；以下僅列已保存的這隻寵物日常健康紀錄。','No paired collar: no sensor trends are available. Only saved health records are shown.','목걸리 미연결: 저장한 건강관리 기록만 표시합니다.'):label3('尚未連接項圈，因此沒有可輸出的生理量測資料；以下僅列已保存的健康管理資料與示範體檢資料。','No paired collar. Sensor trends are unavailable; only saved care data and clearly marked demo exam records are shown.','목걸이 미연결로 생체 데이터가 없습니다.')):label3('量測資料不足；未通過品質檢查的日期不納入統計，趨勢線只連接已觀測到的有效資料點。','Insufficient data; excluded dates are omitted from statistics. Lines connect valid observations only.','품질 미충족 데이터는 통계에서 제외하고 유효 관측점만 이어 표시합니다.');return `<div class="vet-report-root"><header class="vet-report-header"><div class="vet-brand"><span class="vet-brand-icon">✦</span><span>DeepPet <small>HEALTH INTELLIGENCE</small></span></div><div class="vet-report-tag">${(d.real?label3('健康觀察｜非醫療診斷','OBSERVATIONAL · NOT FOR DIAGNOSIS','관찰 자료 · 진단용 아님'):label3('示範資料｜非醫療診斷','DEMO · NOT FOR DIAGNOSIS','데모 · 진단용 아님'))}</div></header><div class="vet-report-title"><div><p>${label3('寵物健康觀察報告','Pet health observation report','반려동물 건강 관찰 보고서')}</p><h2>${label3('就診健康摘要','Veterinary Visit Report','진료 건강 요약')}</h2><span>${d.start} — ${d.latest} · ${d.days} ${label3('天','days','일')}</span></div><div class="vet-report-issued">${label3('產生日期','Generated','작성일')}<b>${d.generated}</b></div></div><section class="vet-patient-card"><div><small>${label3('寵物姓名','Patient','반려동물')}</small><b>${esc(name)}</b></div><div><small>${label3('種類與品種','Species / Breed','종류 및 품종')}</small><b>${species} · ${esc(breedText(d.pet))}</b></div><div><small>${label3('年齡／體重','Age / Weight','나이 / 체중')}</small><b>${esc(String(d.pet.age))} ${label3('歲','yr','세')} · ${esc(String(d.pet.weight))} kg</b></div><div><small>${label3('個體基準','Pet-specific baseline','개별 기준')}</small><b>${!d.sensor?label3('未啟用','Not available','없음'):d.baseline?label3('已建立','Established','완료'):label3('建立中','In progress','구축 중')}</b></div></section><section class="vet-report-section"><h2><span>01</span>${label3('量測資料概況','Measurement quality','측정 데이터')}</h2><div class="vet-stat-grid"><div><small>${label3('有效量測日','Valid recording days','유효 측정일')}</small><strong>${d.valid.length}<em> / ${d.days}</em></strong></div><div><small>${label3('平均心率','Mean HR','평균 심박')}</small><strong>${mean('heart')===null?'—':vetNum(mean('heart'),0)}<em> bpm</em></strong></div><div><small>${label3('平均呼吸','Mean RR','평균 호흡')}</small><strong>${mean('breath')===null?'—':vetNum(mean('breath'),0)}<em> /min</em></strong></div><div><small>${label3('平均夜間安靜休息','Mean overnight quiet rest','평균 야간 안정 휴식')}</small><strong>${mean('sleep')===null?'—':vetNum(mean('sleep'),1)}<em> h</em></strong></div></div><p class="vet-data-note">${d.sensor?label3(`品質合格 ${d.valid.length} 天／可取得 ${d.rows.length} 天；曲線連接有效量測點，灰色短刻痕標示無效日期。`,`Quality-passed ${d.valid.length}/${d.rows.length} days; solid lines connect valid observations and gray ticks mark excluded dates.`,`유효 ${d.valid.length}/${d.rows.length}일 · 회색 표시는 제외된 날짜`):zero}</p></section><section class="vet-report-section vet-trend-section"><h2><span>02</span>${label3('生理指標趨勢','Physiological trends','생리 지표 추세')}</h2>${d.sensor?`<div class="vet-report-charts">${vetMetricDefinitions().map(m=>vetMetricCard(d,m)).join('')}</div>`:`<div class="vet-report-no-data">${zero}</div>`}<div class="vet-hrv-explainer"><p><b>RMSSD</b> — ${label3('相鄰心跳間隔的短期變化。高低要與同一隻寵物過去相近情境比較，不能單憑這個數字判斷健康。','Short-term variation between adjacent heartbeat intervals. Compare with this pet’s history under similar conditions; the value alone is not diagnostic.','연속 심박 간격의 단기 변화이며 같은 반려동물의 추세와 비교하세요.')}</p><p><b>SDNN</b> — ${label3('整段量測期間的心跳間隔變化程度。觀察長期趨勢，並以同樣的活動／休息狀態作比較。','Overall heartbeat-interval variability during a recording. Review long-term trends under comparable activity and resting conditions.','측정 시간 전체 심박 간격 변화입니다. 활동 조건이 비슷할 때 비교하세요.')}</p></div><p class="vet-method-note">${label3('每張曲線依日期順序連接有效量測點；灰色短刻痕代表缺測／排除日期，跨越該日期的連線只是視覺連接，不代表當日有量測。近期／前期比較採用有效日的前後各最多三個值；變化不等於疾病或健康管理成效。','Each chart connects valid observations in date order. Gray ticks mark excluded days; connecting across them is visual only, not an inferred measurement. Recent vs earlier uses up to three valid readings at each end; changes do not establish diagnosis or causation.','차트 선은 날짜순 유효 관측값만 연결합니다. 회색 표시는 무효 날짜이며 선이 지나가도 측정값을 추정하지 않습니다. 변화는 진단이 아닙니다.')}</p></section><section class="vet-report-section"><h2><span>03</span>${label3('體檢檢驗結果','Examination and laboratory findings','검진 및 검사 결과')}</h2><div class="vet-report-lab-head"><span>${label3('所選體檢日期','Selected exam date','선택된 검사 날짜')} · ${esc(reportAvailableDates()[Math.max(0,Math.min(state.activeReport||0,reportAvailableDates().length-1))]||'—')}</span><span>${labNormal} ${t('normal')} · ${labAttention} ${t('attentionCount')}${d.labs.filter(x=>!['normal','alert'].includes(x.status)).length?` · ${d.labs.filter(x=>!['normal','alert'].includes(x.status)).length} ${label3('待確認','Needs review','검토 필요')}`:''}</span></div><table class="vet-report-lab-table"><thead><tr><th>${label3('檢驗項目（中英文）','Laboratory test (name & code)','검사 항목 (한국어·영문)')}</th><th>${label3('結果','Result','결과')}</th><th>${label3('分類','Status','분류')}</th></tr></thead><tbody>${d.labs.map(x=>{const info=labI18n(x.name);return `<tr><td><strong>${esc(info.known?(state.lang==='ko'?info.ko:state.lang==='en'?info.en:info.zh):x.name)} (${esc(info.code)})</strong><small>${esc(info.known?info.en:label3('自訂檢驗項目','Custom test','사용자 검사 항목'))}</small></td><td>${esc(x.value)} ${esc(x.unit||'')}</td><td><span class="vet-lab-status ${x.status==='alert'?'attention':x.status==='normal'?'normal':'pending'}">${x.status==='alert'?t('attentionCount'):x.status==='normal'?t('normal'):label3('待確認','Needs review','검토 필요')}</span></td></tr>`}).join('')}</tbody></table><p class="vet-method-note">${label3('分類僅為預設示範／使用者確認的紀錄，未提供檢驗參考區間，不能據此自動判讀疾病。','Statuses are demo/user-reviewed labels; no laboratory reference intervals are provided for clinical interpretation.','검사 분류는 예시/사용자 확인 정보로 진단에 사용하지 않습니다.')}</p></section><section class="vet-report-section"><h2>${label3('身體節奏指標摘要','Body rhythm summary','몸 리듬 요약')}</h2><div class="vet-stat-grid">${[['calm',label3('放鬆與平穩度','Calmness','안정도')],['stable',label3('心搏節奏穩定度','Rhythm stability','심박 리듬 안정')]].map(([k,name])=>{const vals=rhythmData().values.slice(-d.days).map(x=>rhythmPositiveValue(k,x));return `<div><small>${name}</small><strong>${vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):'—'}<em> / 100</em></strong></div>`;}).join('')}</div><p>${label3('上述分數反映最近一段時間的生理表現，用於追蹤個體變化，並非疾病診斷。','These scores summarize this pet’s trends and are not diagnostic measurements.','이 점수는 이 반려동물의 추세를 나타내며 진단은 아닙니다.')}</p></section><section class="vet-report-section"><h2><span>04</span>${label3('健康管理與用藥紀錄','Care and treatment records','관리 및 투약 기록')}</h2><div class="vet-care-columns"><div><h3>${label3('用藥清單','Medication','약물')}</h3>${d.meds.length?d.meds.map(m=>`<p>${esc(m.name)} · ${esc(m.time)} · ${m.status==='taken'?t('taken'):m.status==='skipped'?t('skip'):t('pending')}</p>`).join(''):`<p>${label3('尚無已存用藥。例：關節補充品，每日09:00，1顆（僅供填寫參考）。','No saved medication. Example format: Joint supplement, daily 09:00, 1 tablet (not a saved dose).','저장된 복약 기록 없음. 입력 예: 관절 보조제, 매일 09:00, 1정.')}</p>`}</div><div><h3>${label3('疫苗紀錄','Vaccinations','예방접종')}</h3>${d.vax.length?d.vax.map(x=>`<p>${esc(x.name)} · ${esc(x.date)} · ${x.status==='done'?t('done'):label3('待確認','Scheduled','예정')}</p>`).join(''):'<p>—</p>'}</div></div><h3>${label3('近期健康管理備註','Recent care notes','최근 관리 메모')}</h3>${d.notes.length?d.notes.map(x=>`<p class="vet-note-entry">${esc(x.date)} · ${esc(displayNote(x).cat)} · ${esc(displayNote(x).text)}</p>`).join(''):'<p>—</p>'}</section><section class="vet-report-section vet-report-footer"><h2><span>05</span>${label3('方法、限制與獸醫備註','Limitations & veterinary notes','제한 및 수의사 메모')}</h2><p>${label3('此報告是 DeepPet 示範資料輸出，不是醫療診斷。量測數值來自模擬 BCG 資料；臨床用途必須以實際設備、有效訊號品質、犬貓分別驗證及獸醫判讀為準。','This is an illustrative DeepPet report, not a diagnostic document. Sensor readings are simulated BCG data and require real-device calibration and species-specific veterinary validation.','이 문서는 데모 데이터이며 진단 보고서가 아닙니다.')}</p><div class="vet-doctor-note">${label3('獸醫臨床備註（留白）','Clinician notes','수의사 메모')}</div><div class="vet-report-signoff">DeepPet · ${d.generated} <span>${label3('僅供展示','Demonstration only','데모 전용')}</span></div></section></div>`}
+function vetBriefModal(){const d=vetReportData();return `<div class="vet-brief-modal vet-report-modal"><p class="vet-brief-intro">${label3('預覽正式版式的健康報告，可選擇 當天／7／30 天。列印時可直接另存為 PDF，不再輸出 TXT。','Preview the professional report. Select Today/7/30 days, then print or Save as PDF. No TXT export.','오늘/7/30일 전문 보고서를 미리보고 PDF로 저장할 수 있어요.')}</p><div class="vet-period">${[1,7,30].map(v=>`<button class="${d.days===v?'active':''}" data-action="vet-days" data-days="${v}">${v===1?label3('當天','Today','오늘'):`${v} ${label3('天','days','일')}`}</button>`).join('')}</div><div class="vet-report-actions"><button class="cta full" data-action="download-vet">${label3('列印／另存 PDF','Print / Save as PDF','인쇄 / PDF 저장')}</button></div>${vetReportContent(d)}</div>`}
+function exportVet(){const data=vetReportData(),report=vetReportContent(data),css=document.querySelector('link[rel="stylesheet"]')?.href,localStyle=document.querySelector('style')?.textContent||'',stylesheet=css?`<link rel="stylesheet" href="${css}">`:`<style>${localStyle}</style>`;const popup=window.open('','_blank');if(!popup){toast(label3('瀏覽器封鎖了報告視窗，請允許彈出視窗後重試。','Please allow pop-ups for this report and try again.','팝업 차단을 해제하세요.'));return;}const html=`<!DOCTYPE html><html lang="${state.lang==='en'?'en':state.lang==='ko'?'ko':state.lang==='zh'?'zh-CN':'zh-TW'}"><head><meta charset="utf-8"><title>DeepPet - ${esc(data.pet.name)} - ${data.days}d Veterinary Report</title>${stylesheet}<style>body{background:white!important;margin:0!important;} .vet-print-toolbar{max-width:850px;margin:18px auto;padding:12px;background:#edf1ff;border-radius:12px;display:flex;align-items:center;justify-content:space-between;font-family:Arial,sans-serif;font-size:13px;gap:12px}.vet-print-toolbar button{border:0;color:white;background:#705DCD;border-radius:9px;padding:10px 18px;cursor:pointer}.vet-report-root{max-width:850px!important;margin:20px auto!important;box-shadow:none!important;border:0!important}.vet-report-charts{grid-template-columns:repeat(2,minmax(0,1fr))!important}@media print{@page{size:A4;margin:12mm}html,body{background:white!important;margin:0!important;padding:0!important}.vet-print-toolbar{display:none!important}.vet-report-root{width:100%!important;max-width:none!important;margin:0!important;padding:0!important;zoom:.90!important}.vet-report-charts{display:block!important}.vet-chart-card{display:inline-block!important;vertical-align:top!important;width:48.5%!important;margin:0 1% 9px 0!important}.vet-chart-card,.vet-patient-card{break-inside:avoid}.vet-report-lab-table tr{break-inside:avoid}a{text-decoration:none!important}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}</style></head><body><div class="vet-print-toolbar"><b>${label3('DeepPet 就診報告預覽','DeepPet veterinary report preview','DeepPet 보고서 미리보기')}</b><button onclick="window.print()">${label3('列印／另存 PDF','Print / Save as PDF','인쇄 / PDF 저장')}</button></div>${report}<style id="dp-v841-heart-design">
+#dp-story-card:has(.dp-petstage){background:#090f18!important}
+#dp-story-body:has(.dp-petstage){padding:0!important;margin:0!important}
+.dp-petstage{height:100dvh!important;min-height:0!important;max-height:none!important;background:#111!important}
+.dp-petstage #dp-petcanvas{height:100%!important;width:100%!important}
+.dp-petstage .dp-photo-vignette{background:linear-gradient(180deg,rgba(0,0,0,.52),transparent 18%,transparent 31%,rgba(0,0,0,.35) 47%,rgba(0,0,0,.80) 73%,rgba(0,0,0,.94) 100%)!important}
+.dp-petstage .dp-stage-top{top:max(34px,env(safe-area-inset-top));left:18px;right:65px;font-size:16px}
+.dp-petstage .dp-stage-bottom{bottom:max(24px,env(safe-area-inset-bottom));left:20px;right:20px}
+.dp-petstage .dp-stage-mood{display:flex;justify-content:flex-start;gap:18px;align-items:center;margin-bottom:14px}
+.dp-petstage .dp-score-ring{width:116px;height:116px;flex:none;display:flex;flex-direction:column;justify-content:center;align-items:center;border-radius:50%;background:radial-gradient(circle at center,rgba(14,18,28,.62) 62%,transparent 64%),conic-gradient(var(--dp-mood-color) 0deg 318deg,rgba(255,255,255,.28) 318deg 360deg);box-shadow:0 0 26px color-mix(in srgb,var(--dp-mood-color) 50%,transparent)}
+.dp-petstage .dp-score-ring strong{font-size:47px!important;line-height:1;color:white}
+.dp-petstage .dp-score-ring small{font-size:13px;font-weight:500;color:#eee}
+.dp-petstage .dp-mood-copy{display:flex;flex-direction:column;gap:9px;text-shadow:0 2px 8px #000}
+.dp-petstage .dp-mood-copy strong{font-size:21px!important;color:white}
+.dp-petstage .dp-mood-copy small{font-size:12px;color:#eee}
+.dp-petstage .dp-stage-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dp-petstage .dp-stage-stats>div{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:12px 5px;backdrop-filter:blur(16px)}
+.dp-petstage .dp-stage-stats>div:last-child{display:none}
+.dp-petstage .dp-stage-stats small{font-size:12px;color:#f3f3f5}
+.dp-petstage .dp-stage-stats b{font-size:24px;margin-top:4px}
+.dp-petstage .dp-overlay-wave{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:15px;margin-top:9px;padding:9px 11px;backdrop-filter:blur(12px)}
+.dp-petstage .dp-overlay-wave span{font-size:12px;min-width:94px;color:white}
+.dp-petstage .dp-overlay-wave canvas{width:calc(100% - 98px);height:38px}
+.dp-petstage .dp-stage-actions{margin-top:13px;gap:8px}
+.dp-petstage .dp-stage-actions button{background:color-mix(in srgb,var(--dp-mood-color) 80%,#12141c)!important;color:white!important;border:1px solid #ffffff65!important;padding:12px 16px!important;min-width:116px}
+.dp-petstage .dp-stage-upload{background:#ffffff26!important;color:#fff!important;border:1px solid #ffffff55!important}
+@media(max-height:740px){.dp-petstage .dp-score-ring{width:86px;height:86px}.dp-petstage .dp-score-ring strong{font-size:34px!important}.dp-petstage .dp-stage-stats>div{padding:7px 4px}.dp-petstage .dp-overlay-wave{padding:4px 9px;margin-top:5px}.dp-petstage .dp-overlay-wave canvas{height:27px}}
+</style></body></html>`;popup.document.open();popup.document.write(html);popup.document.close();popup.focus();}
+
+function showcasePetOrder(){const n=allPets().findIndex(p=>p?.dpFreshDemo);return [0,'blank',...(n>=0?[n]:[]),...allPets().map((p,i)=>i).filter(i=>i!==0&&i!==n)];} // Milo, blank, fourteen other showcase pets; Add is appended by the strip.
+function isFreePet(){return !state.emptyPreview&&!!currentDog().freeCare;}
+function selectedBlank(){return state.emptyPreview===true;}
+function blankPetPill(){return `<button type="button" class="pet-pill pet-blank-pill ${selectedBlank()?'active':''}" data-action="select-blank" aria-label="${label3('尚未新增寵物：首次使用畫面','No pet yet: first-time experience','반려동물 미등록: 첫 사용 화면')}"><span class="pet-blank-avatar">${vicon('plus',27)}</span><span>${label3('空白檔案','No pet yet','새 사용자')}</span></button>`;}
+function showcasePetPill(i){if(i==='blank')return blankPetPill();const base=allPets()[i],pet={...base,...(state.petOverrides?.[i]||{})};const photo=dp58FaceAsset(i,pet);return `<button class="pet-pill ${!selectedBlank()&&state.dog===i?'active':''}" data-action="select-pet" data-index="${i}"><img src="${esc(photo)}" alt="${esc(dp58FreshDisplayName(pet))}"/><span>${esc(dp58FreshDisplayName(pet))}</span></button>`;}
+function homePetStrip(){return `<div class="pet-top-strip-wrap"><div class="pet-top-strip"><div class="pet-strip-scroll">${showcasePetOrder().map(showcasePetPill).join('')}<button type="button" class="pet-pill pet-add-pill" data-action="pet-add"><span class="pet-add-circle">＋</span><span>${label3('新增','Add pet','추가')}</span></button></div></div><div class="pet-strip-scrollbar"><input class="pet-strip-range" type="range" min="0" max="100" value="0" step="1" aria-label="${label3('左右滑動切換寵物','Scroll through pets','반려동물 목록 좌우 이동')}"/></div></div>`;}
+
+function dp58FaceAsset(index,d){
+ if(index>=0&&index<15&&!state.petOverrides?.[index]?.photo){return 'assets/home_faces/'+String(index).padStart(2,'0')+'.jpg'}
+ return d?.photo||'';
+}
+function heroTagline(d){const species=(d.species||(/cat|貓|猫/i.test(d.breed?.en||'')?'cat':'dog')); const mature=d.age>=1; if(state.lang==='en') return species==='cat'?(mature?'Daily indoor watch':'Young indoor watch'):(mature?'Daily routine watch':'Growth routine watch'); if(state.lang==='ko') return species==='cat'?(mature?'일상 컨디션 관찰':'성장기 관찰'):(mature?'일상 컨디션 관찰':'성장기 관찰'); return species==='cat'?(mature?label3('成貓日常觀察','Daily indoor watch','일상 컨디션 관찰'):label3('幼貓成長觀察','Young indoor watch','성장기 관찰')):(mature?label3('成犬日常觀察','Daily routine watch','일상 컨디션 관찰'):label3('幼犬成長觀察','Growth routine watch','성장기 관찰'))}
+function homeHero(d){return `<section class="home-hero-poster dp58-centered-hero" style="background-image:linear-gradient(90deg,rgba(33,37,55,.52) 0%,rgba(33,37,55,.24) 33%,rgba(33,37,55,.08) 52%,rgba(250,239,223,.24) 100%), url('${dp58FaceAsset(state.dog,d)}')"><div class="hero-overlay"><div class="hero-name">${esc(d.name)}</div><div class="hero-meta">${breedText(d)} · ${d.age} ${t('years')}</div><div class="hero-tag">${heroTagline(d)}</div></div></section>`}
+
+
+function attentionItems(d=currentDog()){
+ if(!signalQuality().valid)return [];
+ const items=[],todayScores=dpTodayUnifiedScores();
+ function record(kind, index, value, titleZh, titleEn, titleKo, whyZh, whyEn, whyKo, extra=null){
+  const scheme=scoreScheme(value);
+  items.push({kind,index,value,title:label3(titleZh,titleEn,titleKo),why:label3(whyZh,whyEn,whyKo),color:scheme.color,bg:scheme.bg,level:value<60?0:value<80?1:2,extra});
+ }
+ if(todayScores.heart!==null&&todayScores.heart!==undefined&&Number.isFinite(Number(todayScores.heart))&&todayScores.heart<90)record('heart',0,todayScores.heart,
+  '心肺狀態值得留意','Heart & breathing need a closer look','심박·호흡 상태를 확인해 주세요',
+  `目前 ${todayScores.heart}/100，${baselineProfile().ready?'建議留意最近的精神、食慾與活動狀態。':'建議先累積規律的日常記錄。'}`, 
+  `Currently ${todayScores.heart}/100. ${baselineProfile().ready?'Check energy, appetite and daily activity.':'Keep recording everyday routines.'}`, 
+  `현재 ${todayScores.heart}/100. ${baselineProfile().ready?'반려동물 자체 기준과 심박·호흡 추세를 비교하세요.':'반려동물 자체 기준 준비 중으로 현재 측정 품질을 확인하세요.'}`);
+ if(todayScores.sleep!==null&&todayScores.sleep!==undefined&&Number.isFinite(Number(todayScores.sleep))&&todayScores.sleep<90)record('sleep',1,todayScores.sleep,
+  '睡眠狀態需要追蹤','Sleep status worth tracking','수면·휴식 변화 확인',
+  `休息評分 ${todayScores.sleep}/100，可查看昨夜入睡狀態及中斷情況。`,
+  `Rest score ${todayScores.sleep}/100. Review estimated sleep and night interruptions.`,
+  `휴식 점수 ${todayScores.sleep}/100. 수면 여부와 밤중 중단을 확인해 보세요.`);
+ if(todayScores.energyActivity!==null&&todayScores.energyActivity!==undefined&&Number.isFinite(Number(todayScores.energyActivity))&&todayScores.energyActivity<90)record('activity',2,todayScores.energyActivity,
+  '活動與精力有改善空間','Activity & energy could improve','활동·활력 추세 확인',
+  `活動評分 ${todayScores.energyActivity}/100，建議查看近期活動與恢復的變化。`,
+  `Activity score ${todayScores.energyActivity}/100. Compare recent activity and recovery trends.`,
+  `활동 점수 ${todayScores.energyActivity}/100. 최근 활동량과 회복 추세를 비교해 보세요.`);
+ const recoveryTrend=recoveryEvidence();
+ if(recoveryTrend.sustained)record('recovery',2,Math.min(79,Math.max(40,90-recoveryTrend.pct*.6)),
+  '連續多日恢復較慢','Multi-day recovery slowdown','며칠간 회복이 느림',
+  recoveryEvidenceText(recoveryTrend),recoveryEvidenceText(recoveryTrend),recoveryEvidenceText(recoveryTrend));
+ // Treat slower recovery and lower activity as one related signal, not two diagnoses.
+ const activity=items.find(x=>x.kind==='activity'),recovery=items.find(x=>x.kind==='recovery');
+ if(activity&&recovery){
+   const i=items.indexOf(activity);items.splice(i,1);
+   recovery.kind='load'; recovery.index=2;
+   recovery.value=Math.min(activity.value,recovery.value);
+   recovery.title=label3('活動與恢復負荷變化','Activity & recovery load','활동·회복 부담 변화');
+   recovery.why=recoveryEvidenceText(recoveryTrend);
+   const tone=scoreScheme(recovery.value);recovery.color=tone.color;recovery.bg=tone.bg;recovery.level=recovery.value<60?0:1;
+ }
+ const order={heart:0,sleep:1,load:2,activity:3,recovery:4};
+ return items.sort((a,b)=>a.level-b.level || order[a.kind]-order[b.kind]);
+}
+function attentionCard(d=currentDog()){
+ if(!signalQuality().valid)return '';
+ const items=attentionItems(d),count=items.length,visible=items;
+ const goodIndex=d.score.indexOf(Math.max(...d.score));
+ const goodLabel=[t('heartCategory'),t('sleepCategory'),t('activeCategory')][goodIndex];
+ const firstColor=items[0]?.color||'#23a56b';
+ return `<section class="card attention attention-v38 ${count?'has-notes':'is-calm'}">
+   <div class="attention-v38-heading row spread">
+     <div class="attention-title-wrap"><span class="attention-icon" style="background:${count?items[0].bg:'#e5f7ee'};color:${firstColor}">${vicon(count?'clock':'check',18)}</span><span class="strong md">${t('attention')}</span></div>
+     <span class="attention-count ${count?'has-count':'is-calm'}" style="${count?`color:${firstColor};background:${items[0].bg}`:''}">${count?label3(`${count} 項`,`${count} item${count===1?'':'s'}`,`${count}건`):label3('目前穩定','All clear','현재 안정적')}</span>
+   </div>
+   ${count?`<div class="attention-list">${visible.map(item=>`<button class="attention-entry" data-action="attention-open" data-deep-index="${item.index}"><span class="attention-entry-dot" style="background:${item.color}"></span><span class="attention-entry-main"><span class="attention-entry-title">${item.title}</span><span class="attention-entry-desc">${item.why}</span></span><span class="attention-entry-arrow">${vicon('chev',16)}</span></button>`).join('')}</div>`:`<p class="attention-all-good">${t('allGood')}</p>`}
+   
+   <div class="attention-positive"><span>${vicon('check',14)} ${label3('表現較好','Strongest area','좋은 상태')}</span><span>${goodLabel} · ${Math.max(...d.score)}/100</span></div>
+ </section>`;
+}
+
+function nightFeatureArt(){return `<div class="feature-premium-scene"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyMDAgNzIwIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDI9IjEiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjMDYxYzQ2Ii8+PHN0b3Agb2Zmc2V0PSIuNTQiIHN0b3AtY29sb3I9IiMyNDQ5ODkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM4Mzc2YmYiLz48L2xpbmVhckdyYWRpZW50PjxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdyI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZlZjVjZSIgc3RvcC1vcGFjaXR5PSIuNjIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmY2VjYTEiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoaWxsIiB4MT0iMCIgeDI9IjAiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzNiNjdhZCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE0MmM2NiIvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0iYmx1ciI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMTIiLz48L2ZpbHRlcj48ZmlsdGVyIGlkPSJzaGFkZSI+PGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjIwIiBzdGREZXZpYXRpb249IjM1IiBmbG9vZC1jb2xvcj0iIzA2MWI0MyIgZmxvb2Qtb3BhY2l0eT0iLjM2Ii8+PC9maWx0ZXI+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3MjAiIGZpbGw9InVybCgjYmcpIi8+PGNpcmNsZSBjeD0iODk1IiBjeT0iMTY1IiByPSIyNTUiIGZpbGw9InVybCgjZ2xvdykiLz48Y2lyY2xlIGN4PSI4OTIiIGN5PSIxNjIiIHI9IjExMCIgZmlsbD0iI2ZmZjdkNyIgZmlsdGVyPSJ1cmwoI3NoYWRlKSIvPjxjaXJjbGUgY3g9IjkzNSIgY3k9IjEyNyIgcj0iMTEyIiBmaWxsPSIjMjQ0OTg5Ii8+CjxnIGZpbGw9IiNmNGVmZmYiPjxjaXJjbGUgY3g9IjExMiIgY3k9IjkzIiByPSI0Ii8+PGNpcmNsZSBjeD0iMjc0IiBjeT0iMTkxIiByPSIzIi8+PGNpcmNsZSBjeD0iMzgxIiBjeT0iNzkiIHI9IjQiLz48Y2lyY2xlIGN4PSI1NDciIGN5PSIxNTEiIHI9IjMiLz48Y2lyY2xlIGN4PSI2NjYiIGN5PSI3MSIgcj0iNSIvPjxjaXJjbGUgY3g9IjEwNTQiIGN5PSIzNDAiIHI9IjMiLz48Y2lyY2xlIGN4PSIxODMiIGN5PSIzMjgiIHI9IjMiLz48Y2lyY2xlIGN4PSI0MjkiIGN5PSIyOTIiIHI9IjMiLz48Y2lyY2xlIGN4PSI3MjQiIGN5PSIzMTYiIHI9IjQiLz48L2c+CjxnIHN0cm9rZT0iI2M5ZDdmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNzgiPjxwYXRoIGQ9Ik0xMTMgNjV2NDVtLTIzLTIyaDQ1Ii8+PHBhdGggZD0iTTU0NiAxMTh2NThtLTI5LTI5aDU4Ii8+PHBhdGggZD0iTTEwNjAgMjk5djM4bS0xOS0xOWgzOCIvPjwvZz4KPHBhdGggZD0iTTAgNTM3QzE3MSA0MzEgMzA2IDQ5MiA0MzYgNTQxIDU1MCA1ODUgNjk4IDQ1MyA4MzkgNDYzIDk5MiA0NzQgMTA1MiA0MDAgMTIwMCA0MzJWNzIwSDBaIiBmaWxsPSIjNTM3NGI3IiBvcGFjaXR5PSIuNDIiLz4KPHBhdGggZD0iTTAgNjA4QzE1MSA1MTYgMzI4IDU0NSA0NjcgNTk0UzgyNyA0OTYgOTc2IDUyMHMxNjIgMTYgMjI0LTI5VjcyMEgwWiIgZmlsbD0idXJsKCNoaWxsKSIvPgo8cGF0aCBkPSJNMCA2NTdDMjA2IDYxOSAzNzUgNjg4IDUzOSA2NDlzMzkxLTYyIDY2MS00VjcyMEgwWiIgZmlsbD0iIzEwMjk1YyIvPgo8ZyBvcGFjaXR5PSIuOTUiIGZpbHRlcj0idXJsKCNzaGFkZSkiPjxyZWN0IHg9Ijk4IiB5PSI0MzYiIHdpZHRoPSI1NzgiIGhlaWdodD0iMTM5IiByeD0iNDAiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iLjExIiBzdHJva2U9IiNjNWQ4ZmYiIHN0cm9rZS1vcGFjaXR5PSIuNCIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTEzMiA1MDVoMTA0bDI4LTM2IDM2IDY4IDQzLTU0IDM0IDIyaDYzbDI4LTMxIDMxIDMxaDEyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzdlM2ZmIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+Cjwvc3ZnPg==" alt=""/></div>`}
+function heartFeatureArt(){return `<div class="feature-premium-scene"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyMDAgNzIwIj4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDI9IjEiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjNGUyMzRjIi8+PHN0b3Agb2Zmc2V0PSIuNTUiIHN0b3AtY29sb3I9IiNiZTVmOGQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmNmM2Y2QiLz48L2xpbmVhckdyYWRpZW50PjxyYWRpYWxHcmFkaWVudCBpZD0iYSI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZDllNyIgc3RvcC1vcGFjaXR5PSIuODQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmNWFiYzciIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJoZWFydCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNmZmY4ZmUiLz48c3RvcCBvZmZzZXQ9Ii40OCIgc3RvcC1jb2xvcj0iI2ZmZDZlOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2Y2YTFiZiIvPjwvbGluZWFyR3JhZGllbnQ+PGZpbHRlciBpZD0iZ2xvdyI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjMiLz48L2ZpbHRlcj48ZmlsdGVyIGlkPSJzaGFkb3ciPjxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIyNCIgc3RkRGV2aWF0aW9uPSIyNiIgZmxvb2QtY29sb3I9IiM3MDJjNjEiIGZsb29kLW9wYWNpdHk9Ii4zNCIvPjwvZmlsdGVyPjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNzIwIiBmaWxsPSJ1cmwoI2JnKSIvPjxjaXJjbGUgY3g9Ijg4MSIgY3k9IjIxOCIgcj0iMjk3IiBmaWxsPSJ1cmwoI2EpIi8+PGNpcmNsZSBjeD0iMTgyIiBjeT0iNTc0IiByPSIyMzMiIGZpbGw9InVybCgjYSkiLz4KPGcgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjQyIj48Y2lyY2xlIGN4PSIxMTUiIGN5PSI4OSIgcj0iOCIvPjxjaXJjbGUgY3g9IjI0MiIgY3k9IjE4MyIgcj0iNSIvPjxjaXJjbGUgY3g9IjM4MSIgY3k9IjExMSIgcj0iNyIvPjxjaXJjbGUgY3g9IjEwNzciIGN5PSI0MDEiIHI9IjciLz48Y2lyY2xlIGN4PSIxMDMyIiBjeT0iODIiIHI9IjUiLz48Y2lyY2xlIGN4PSI2NDkiIGN5PSI1OTQiIHI9IjYiLz48L2c+CjxnIGZpbHRlcj0idXJsKCNzaGFkb3cpIj48cGF0aCBkPSJNODcwIDQ4N0M3NjIgMzkyIDU4NyAyOTEgNjUwIDE3NSA2OTkgODcgODEyIDkzIDg3MiAxNzAgOTUxIDYxIDEwODEgMTE4IDEwOTAgMjE5YzkgMTE5LTEyMiAyMTUtMjIwIDI2OFoiIGZpbGw9InVybCgjaGVhcnQpIi8+PHBhdGggZD0iTTg2NyA0MTljLTkyLTkxLTE3My0xMzgtMTY4LTIxMyA1LTU4IDgzLTk1IDE0MS0yMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjQ4IiBzdHJva2Utd2lkdGg9IjIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L2c+CjxwYXRoIGQ9Ik02OCA1MDNoMjM3bDQxLTU2IDU3IDExMiA2My0xMzYgNTkgODBoMTU2bDQ2LTU5IDU1IDU5aDMyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmMWZhIiBzdHJva2Utb3BhY2l0eT0iLjU0IiBzdHJva2Utd2lkdGg9IjE4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbHRlcj0idXJsKCNnbG93KSIvPgo8cGF0aCBkPSJNNjggNTAzaDIzN2w0MS01NiA1NyAxMTIgNjMtMTM2IDU5IDgwaDE1Nmw0Ni01OSA1NSA1OWgzMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmFmZiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHJlY3QgeD0iODMiIHk9IjU4MiIgd2lkdGg9IjQ3NCIgaGVpZ2h0PSI2MyIgcng9IjMxIiBmaWxsPSIjZmZmOWZmIiBmaWxsLW9wYWNpdHk9Ii4xNCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjI0IiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNMTEyIDYxNGg0MTgiIHN0cm9rZT0iI2ZmZTRlZSIgc3Ryb2tlLW9wYWNpdHk9Ii41IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iOCAxNCIvPgo8L3N2Zz4=" alt=""/></div>`}
+// V5.2: zero-profile and free-care pathways have NO generated wearable data.
+// The placeholders intentionally never call demoRecords, score or biological-age estimates.
+function newVisitorHero(){return `<section class="home-hero-poster blank-home-hero"><div class="blank-hero-orbit orbit-one"></div><div class="blank-hero-orbit orbit-two"></div><div class="blank-hero-center"><div class="blank-hero-emblem">${vicon('plus',40)}</div><span>${label3('DeepPet · 從這裡開始','DeepPet · Start here','DeepPet · 여기서 시작')}</span><h1>${label3('還沒有寵物資料','Your pet story starts here','아직 반려동물 정보가 없어요')}</h1><p>${label3('先建立健康檔案，不需要先買項圈。','Create a care profile first—no collar required.','목걸이 없이도 건강 프로필부터 시작하세요.')}</p></div></section>`;}
+function emptyIntroCard(){return `<section class="card empty-intro-card"><span class="empty-section-eyebrow">01 · ${label3('第一次使用','First time here','처음 사용')}</span><h2>${label3('先從認識你的寵物開始','Start with your pet','반려동물 정보부터 시작')}</h2><p>${label3('只要填寫狗或貓、品種、年齡和體重，就能開始整理適合生命階段的日常健康紀錄。','Add species, breed, age and weight to start age-appropriate health records.','동물 종류, 품종, 나이, 체중을 입력해 건강 기록을 시작하세요.')}</p><button class="cta full" data-action="pet-add">${vicon('plus',17)} ${label3('建立我的寵物健康檔案','Create a free pet profile','무료 건강 프로필 만들기')}</button><button class="empty-secondary-action" data-action="demo-gallery">${label3('另行查看示範寵物（不會加入我的資料）','Explore sample pets (not added to my profile)','サンプルのペットを見る（マイデータには追加しません）')}</button></section>`;}
+function emptyHealthPreview(){return `<section class="card empty-care-preview"><div class="row spread"><div><span class="empty-section-eyebrow">02 · ${label3('免費健康管理','Free health management','무료 건강 관리')}</span><h2>${label3('沒買項圈，也可以開始照顧','Care starts before a collar','목걸이 없이도 시작할 수 있어요')}</h2></div><span class="empty-care-icon">${vicon('heart',20)}</span></div><div class="empty-care-modules">${[['food',label3('飲食與體重','Food & weight','식사·체중')],['vaccine',label3('疫苗與預防','Vaccines & prevention','예방접종')],['med',label3('用藥與健康記錄','Medication & records','복약·건강기록')],['report',label3('體檢與回診','Exams & follow-ups','검진·재진')]].map(([icon,title])=>`<div class="empty-care-module"><span>${vicon(icon==='vaccine'?'vaccine':icon==='report'?'report':icon,20)}</span><b>${title}</b></div>`).join('')}</div><p>${label3('建立檔案後才開始保存記錄；目前沒有寵物，因此沒有任何預設飲食、疫苗或檢查結果。','Records start only after a pet is added. No fake food, vaccine or exam history is created.','반려동물 등록 전에는 가상의 식사·예방접종·검사 기록을 만들지 않습니다.')}</p><button class="empty-secondary-action" data-action="empty-open-health">${label3('看看健康頁如何開始','See the care setup','건강 관리 시작 보기')} ${vicon('chev',16)}</button></section>`;}
+function emptyWearableCard(){return `<section class="card empty-collar-card"><div class="row gap12"><div class="empty-collar-icon">${vicon('activity',23)}</div><div class="grow"><span class="empty-section-eyebrow">03 · ${label3('搭配項圈，增加生理監測','Add sensing with a collar','목걸이로 건강 모니터링')}</span><h3>${label3('想了解心跳、呼吸和休息趨勢？','Want heartbeat, breathing and rest trends?','심박·호흡·휴식 추세가 궁금하신가요?')}</h3></div></div><p>${label3('Bluetooth 版提供健康監測；4G 版另有 GPS 與遠端連線。未配對時不會顯示任何感測分數。','Bluetooth adds health sensing; 4G also adds GPS and remote connection. No sensor scores appear before pairing.','블루투스는 건강 측정을, 4G는 GPS와 원격 연결을 추가합니다. 연결 전에는 점수를 표시하지 않습니다.')}</p><button class="cta full" data-action="device-find">${label3('連接項圈 · 搜尋附近設備','Connect collar · Find devices','목걸이 연결 · 기기 찾기')}</button></section>`;}
+function dp924TourEntry(){return `<button type="button" class="card dp924-tour-entry" data-action="tour-open"><span class="dp924-tour-icon">▶</span><span class="dp924-tour-copy"><small>${label3('第一步 · 60 秒認識 DeepPet','Start here · 60 seconds','첫 단계 · DeepPet 60초 알아보기')}</small><strong>${label3('60 秒了解這個 APP 能為寵物做什麼','Discover what DeepPet can do in 60 seconds','60초 동안 DeepPet 소개')}</strong><em>${label3('健康分析、免費記錄與項圈監測，一次看懂','Health insights, health records and collar sensing','건강 분석·무료 관리·목걸이 측정')}</em></span><span class="dp924-tour-arrow">›</span></button>`;}
+function blankHomeView(){return `<div class="app-pad home-page-v30 empty-demo-page">${homePetStrip()}${dp924TourEntry()}${newVisitorHero()}${emptyIntroCard()}${emptyHealthPreview()}${emptyWearableCard()}<button type="button" class="cta full dp58-blank-heart" data-action="heart-blank">${vicon('heart',18)} ${label3('心跳時刻','Heart Moments','심장 박동 순간')}</button><p class="empty-demo-footer">${label3('零資料首次使用示範 · 尚未新增寵物，也未配對項圈。','First-run empty state · no pet profile or collar connected.','첫 이용 화면 · 반려동물과 기기 미등록.')}</p><div class="footer-space"></div></div>`;}
+function dp58BlankHeartSetup(){
+ const old=document.getElementById('dp58-setup-modal');if(old)old.remove();
+ const originPet=state.dog,originEpoch=state.dpPetEpoch;
+ const box=document.createElement('div');box.id='dp58-setup-modal';box.className='dp58-setup-modal';
+ box.innerHTML=`<div class="dp58-setup-card"><button type="button" class="dp58-setup-exit" aria-label="${t('close')}">×</button><h2>${label3('開始首次心跳時刻','Start your first Heart Moment','첫 심박 순간 시작')}</h2><p>${label3('必須先填入寵物名稱並上傳正面照片，才可以進行 60 秒測量。','A pet name and portrait are required before the 60-second reading.','60초 측정 전에 반려동물 이름과 사진이 필요합니다.')}</p><label>${label3('寵物名稱','Pet name','반려동물 이름')}<input class="form-control" id="dp58-pet-name" maxlength="24" placeholder="${label3('請輸入名稱','Enter name','이름 입력')}"/></label><label>${label3('寵物照片','Pet photo','반려동물 사진')}<input class="form-control" id="dp58-pet-photo" type="file" accept="image/*"/></label><p id="dp58-setup-error" role="alert"></p><button type="button" class="cta full" id="dp58-setup-start">${label3('建立檔案並開始 60 秒測量','Create profile and start reading','프로필을 만들고 60초 측정 시작')}</button></div>`;
+ document.body.appendChild(box);box.querySelector('.dp58-setup-exit').onclick=()=>box.remove();
+ box.addEventListener('click',e=>{if(e.target===box)box.remove()});
+ let submitting=false;
+ const stillCurrent=()=>box.isConnected&&selectedBlank()&&state.dog===originPet&&state.dpPetEpoch===originEpoch;
+ box.querySelector('#dp58-setup-start').onclick=async()=>{
+  if(submitting||!stillCurrent())return;
+  const name=box.querySelector('#dp58-pet-name').value.trim(),file=box.querySelector('#dp58-pet-photo').files[0];
+  const error=box.querySelector('#dp58-setup-error');
+  if(!name||!file||!file.type.startsWith('image/')){error.textContent=label3('請先填入名稱並上傳寵物照片。','Enter a name and choose a pet photo first.','이름과 사진을 먼저 입력하세요.');return}
+  submitting=true;const start=box.querySelector('#dp58-setup-start');start.disabled=true;
+  try{
+   const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)});
+   const photo=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{
+    const cv=document.createElement('canvas'),max=1000,scale=Math.min(1,max/Math.max(img.width,img.height));cv.width=Math.round(img.width*scale);cv.height=Math.round(img.height*scale);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);resolve(cv.toDataURL('image/jpeg',.82));};img.onerror=reject;img.src=data});
+   if(!stillCurrent())return;
+   const d={dpFreshPet:true,freeCare:true,name,photo,publicId:dpSecureId(),score:null,age:0,weight:0,
+    species:'dog',breed:{zh:'未設定',zht:'未設定',en:'Not set',ko:'미설정'},bio:null,hr:null,rr:null};
+   state.petExtras??=[];state.petExtras.push(d);
+   if(!persist()){state.petExtras.pop();error.textContent=label3('儲存空間不足，未建立檔案，請清理空間後再試。','Storage is full; no profile was created. Please free space and retry.','저장 공간이 부족해 프로필이 생성되지 않았습니다.');return;}
+   dpResetPetTransient();state.dog=dogs.length+state.petExtras.length-1;state.emptyPreview=false;
+   dpLoadDevice(state.dog);dpLoadPrivacy(state.dog);dpLoadPetWorkspace(state.dog);state.tab='home';box.remove();render(true);persist();
+   // Do not launch an artificial 60-second reading. A new pet stays N/A until
+   // an independently verified collar day is accepted for this pet's UID.
+  }catch(e){if(stillCurrent())error.textContent=label3('無法讀取照片，請再試一次','Unable to read the image; try again','이미지를 읽을 수 없습니다. 다시 시도하세요');console.warn(e)}
+  finally{if(stillCurrent()){submitting=false;start.disabled=false;}}
+ };
+}
+// Historical free/empty Health standalones were removed. They cannot be
+// revived by an outdated navigation call or a new pet state.
+function blankHealthView(){return healthView();}
+function dp924FreshHealthView(){return healthView();}
+function blankDeepView(){return `<div class="app-pad empty-demo-page">${homePetStrip()}${bigHeader(t('deep'))}<section class="card empty-deep-card"><div class="empty-deep-logo">${vicon('activity',35)}</div><h2>${label3('尚無可分析的生理資料','No sensor readings yet','아직 분석할 센서 데이터가 없어요')}</h2><p>${label3('心跳、呼吸、HRV、睡眠、AI 生理年齡及 14 天基準，需要建立寵物檔案並配對項圈後，累積有效量測才能分析。','Heart rate, breathing, HRV, sleep, biological age and the 14-day baseline need a pet profile, paired collar and valid recordings.','심박·호흡·HRV·수면·생체 나이·14일 기준은 프로필과 기기 연결 및 유효 측정이 필요합니다.')}</p><div class="empty-metric-skeleton"><span>${label3('心跳','Heart','심박')} <b>—</b></span><span>${label3('呼吸','Breathing','호흡')} <b>—</b></span><span>HRV <b>—</b></span></div><button class="cta full" data-action="empty-collar-guide">${label3('了解項圈如何開啟 Deep','How to enable Deep','Deep 활성화 방법')}</button></section>${emptyHealthPreview()}<div class="footer-space"></div></div>`;}
+function blankMeView(){return `<div class="app-pad empty-demo-page">${homePetStrip()}${bigHeader(t('me'))}<section class="card empty-profile-card"><span class="empty-profile-symbol">${vicon('plus',27)}</span><h2>${label3('尚未建立寵物','No pet profile yet','반려동물 프로필 없음')}</h2><p>${label3('建立檔案後，這裡會顯示寵物資料與配對裝置。','Your pet profile and paired device will appear here after setup.','등록 후 프로필과 연결 기기가 여기에 표시됩니다.')}</p><button class="cta full" data-action="pet-add">${label3('新增寵物','Add a pet','반려동물 추가')}</button></section>${emptyWearableCard()}<section class="card flat care-menu">${panel(vicon('globe',19),t('language'),label3('切換介面語言','Change language','언어 변경'),'language-detail')}${panel(vicon('shield',19),t('privacy'),label3('查看資料與權限說明','View privacy details','정보 보호 안내'),'privacy-detail')}</section><div class="footer-space"></div></div>`;}
+function petSizeClass(d){
+ if(d.species==='cat')return 'cat';
+ const en=String(d.breed?.en||'').toLowerCase();
+ if(/saint bernard|great dane|mastiff|newfoundland|irish wolfhound/.test(en))return 'giant';
+ if(/chihuahua|toy|poodle|bichon|pomeranian|maltese|french bulldog|shih tzu/.test(en))return 'small';
+ if(/border collie|shiba|corgi|beagle|cocker/.test(en))return 'medium';
+ if(/malamute|retriever|german shepherd|labrador|husky/.test(en))return 'large';
+ return d.weight>=45?'giant':d.weight>=24?'large':d.weight>=10?'medium':'small';
+}
+function lifeStageName(d){const size=petSizeClass(d),age=Number(d.age)||0;return age<1?label3(d.species==='cat'?'幼貓':'幼犬','Young','성장기'):age>=(d.species==='cat'?11:size==='giant'?6:size==='large'?7:size==='medium'?9:10)?label3('熟齡期','Senior','시니어'):label3('成年期','Adult','성체기');}
+function petSizeLocalized(d){const type=petSizeClass(d);return ({cat:label3('貓','Cat','고양이'),giant:label3('巨型犬','Giant dog','초대형견'),large:label3('大型犬','Large dog','대형견'),medium:label3('中型犬','Medium dog','중형견'),small:label3('小型犬','Small dog','소형견')})[type];}
+function careStageDescription(d){const age=Number(d.age)||0,size=petSizeClass(d),cat=d.species==='cat',en=String(d.breed?.en||'').toLowerCase();
+ if(cat){
+  if(age<1)return label3('幼貓階段：優先留意成長、飲食安排、疫苗與環境適應。','Kitten: prioritize growth, meals, vaccination and adjustment to the environment.','새끼 고양이: 성장, 식사, 예방접종, 환경 적응을 관찰하세요.');
+  if(age>=11)return label3('熟齡貓階段：優先觀察體重、食慾、飲水／排泄習慣、行動能力與定期獸醫檢查。','Senior cat: monitor weight, appetite, drinking/litter-box habits, mobility and routine veterinary reviews.','노령묘: 체중, 식욕, 음수·배변, 움직임과 정기 진료를 살피세요.');
+  return /scottish fold/.test(en)?label3('成貓階段：體重與活動是日常重點；摺耳貓還應留意行動舒適度，並定期向獸醫確認關節狀況。','Adult cat: track weight and activity; Scottish Folds also warrant attention to comfortable movement and veterinary joint reviews.','성묘: 체중과 활동을 관리하며 스코티시 폴드는 관절 움직임도 살피세요.'):label3('成貓階段：優先維持體態、活動與休息平衡，並追蹤口腔健康與定期檢查。','Adult cat: focus on body condition, activity/rest balance, dental care and routine checkups.','성묘: 체형, 활동·휴식 균형, 치아와 정기 검진을 관리하세요.');
+ }
+ if(age<1)return label3('幼犬階段：成長曲線、合理餵食、疫苗與社會化訓練是首要健康管理重點。','Puppy: prioritize growth, suitable feeding, vaccination and socialization.','어린 강아지: 성장, 급여, 예방접종과 사회화가 우선입니다.');
+ const senior=age>=(size==='giant'?6:size==='large'?7:size==='medium'?9:10);
+ if(senior)return label3('熟齡犬階段：更重視體態維持、關節／行動舒適度、活動後恢復及定期健康檢查。','Senior dog: focus on body condition, joint/mobility comfort, recovery after activity and regular checkups.','노령견: 체형, 관절·움직임, 활동 후 회복과 정기 검진을 중점 확인하세요.');
+ if(/french bulldog|pug|bulldog/.test(en))return label3('短吻犬健康管理：留意呼吸舒適度、熱環境與活動後恢復；避免把單一呼吸數字當成疾病診斷。','Brachycephalic breed: watch breathing comfort, heat exposure and recovery after activity; readings alone do not diagnose illness.','단두종: 호흡의 편안함, 더위 노출, 활동 후 회복을 관찰하세요.');
+ if(size==='giant'||size==='large')return label3('大型／巨型成犬：優先關注體態、關節負擔、適度活動和活動後的休息恢復。','Large/giant adult dog: prioritize body condition, joint load, suitable exercise and post-activity rest.','대형견: 체형, 관절 부담, 적절한 운동과 활동 후 휴식을 살피세요.');
+ if(size==='small')return label3('小型成犬：優先留意體重、牙齒與口腔、日常活動和休息規律。','Small adult dog: focus on body weight, dental/oral care, daily activity and rest routine.','소형 성견: 체중, 구강 관리, 활동과 휴식 규칙성을 확인하세요.');
+ return label3('中型成犬：優先關注體態、活動量、牙齒與休息恢復的日常變化。','Medium adult dog: prioritize body condition, activity, dental health and rest patterns.','중형 성견: 체형, 활동량, 치아와 휴식 변화를 살피세요.');
+}
+function freeCareRecords(){return state.freeCareRecords?.[String(state.dog)]||[];}
+function freeCareRows(){const items=freeCareRecords();return items.length?items.slice().reverse().slice(0,8).map(x=>`<div class="free-care-row"><span><b>${esc(x.title)}</b><small>${esc(x.date)} · ${esc(x.kind)}</small></span><p>${esc(x.notes)}</p></div>`).join(''):`<div class="empty-data-box">${label3('尚無健康記錄。從下方新增第一筆，這裡不會填入假資料。','No health records yet. Add the first one below; no fake history is generated.','건강 기록이 없어요. 첫 기록을 추가하세요.')}</div>`;}
+function freeProfileHero(){const d=currentDog();return `<section class="home-hero-poster free-profile-hero"><div class="free-profile-hero-symbol">${d.species==='cat'?'🐈':'🐕'}</div><div class="hero-overlay"><div class="hero-name">${esc(d.name)}</div><div class="hero-meta">${breedText(d)} · ${d.age} ${t('years')}</div><div class="hero-tag">${label3('免費健康管理 · 未配對項圈','Free health care · No collar paired','무료 건강관리 · 기기 미연결')}</div></div></section>`;}
+function freeCareActions(){return `<div class="free-care-action-grid">${[['food',label3('飲食記錄','Feeding','식사 기록')],['weight',label3('體重記錄','Weight','체중 기록')],['vaccines',label3('疫苗記錄','Vaccines','예방접종')],['med',label3('用藥記錄','Medication','복약 기록')],['report',label3('體檢記錄','Checkup','건강검진')],['notes',label3('健康管理備註','Care note','돌봄 메모')]].map(([kind,title])=>`<button data-action="free-add-record" data-kind="${kind}"><span>${vicon(kind==='vaccines'?'vaccine':kind==='report'?'report':kind==='notes'?'edit':kind==='weight'?'activity':kind==='food'?'food':'med',21)}</span>${title}<small>＋</small></button>`).join('')}</div>`;}
+function freeCareHomeView(){const d=currentDog();return `<div class="app-pad home-page-v30 free-care-page">${dp924TourEntry()}${homePetStrip()}${freeProfileHero()}<section class="card free-stage-card"><div class="row spread"><strong>${label3('依生命階段健康管理','Care by life stage','성장 단계별 돌봄')}</strong><span class="pill purple">${label3('免費方案','Free','무료')}</span></div><p>${careStageDescription(d)}</p><button class="empty-secondary-action" data-action="free-open-health">${label3('開始健康管理','Open health management','건강 관리 시작')} ${vicon('chev',16)}</button></section><section class="card"><h2 class="section-title">${label3('健康記錄','Health records','건강 기록')}</h2>${freeCareRows()}</section>${emptyWearableCard()}<div class="footer-space"></div></div>`;}
+function freeCareHealthView(){return healthView();}
+function oldFreeCareHealthViewUnused(){const d=currentDog();return `<div class="app-pad free-care-page">${homePetStrip()}${bigHeader(t('health'))}<section class="card free-stage-card"><div class="row spread"><strong>${esc(d.name)} · ${label3('生命階段健康管理','Life-stage care','생애 단계 돌봄')}</strong><span class="pill purple">${label3('免費','Free','무료')}</span></div><p>${careStageDescription(d)}</p><small>${label3('依物種、年齡和體型提供預防性健康管理方向；並非診斷。','Preventive advice by species, age and size; not a diagnosis.','종류, 나이, 크기에 따른 예방 관리 안내입니다.')}</small></section><h2 class="section-title free-care-section-title">${label3('新增健康記錄','Add a health record','건강 기록 추가')}</h2>${freeCareActions()}<h2 class="section-title free-care-section-title">${label3('我的健康管理時間線','My care timeline','돌봄 타임라인')}</h2><section class="card">${freeCareRows()}</section>${emptyWearableCard()}<div class="footer-space"></div></div>`;}
+function freeCareDeepView(){const d=currentDog();return `<div class="app-pad free-care-page">${homePetStrip()}${bigHeader(t('deep'))}<section class="card empty-deep-card"><div class="empty-deep-logo">${vicon('activity',35)}</div><h2>${label3('尚未連接項圈','No collar connected','목걸이 미연결')}</h2><p>${esc(label3(`${d.name} 已建立免費健康檔案，但沒有感測器資料；不顯示心率、呼吸、HRV、AI 生理年齡或 14 天基準。`,`${d.name} has a free care profile but no sensor data. Heart rate, breathing, HRV, biological age and 14-day baseline are not available.`,`${d.name}은 무료 프로필만 있어 센서 분석을 사용할 수 없습니다.`))}</p><button class="cta full" data-action="empty-collar-guide">${label3('了解如何啟用監測','Explore sensor monitoring','모니터링 알아보기')}</button><button class="empty-secondary-action" data-action="free-open-health">${label3('回到健康管理','Open health management','건강 관리로 이동')} ${vicon('chev',16)}</button></section><div class="footer-space"></div></div>`;}
+function dpFirstTimeSteps(){return `<section class="card dp-onboarding-steps"><h3>${label3('首次設定進度','First-time setup','初期設定')}</h3><div class="dp-onboard-row"><span class="dp-step-check">✓</span><b>${label3('① 寵物檔案已建立','① Pet profile complete','① ペット情報登録済み')}</b></div><div class="dp-onboard-row"><span class="dp-step-wait">2</span><b>${label3('② 連接項圈','② Connect a collar','② 首輪を接続')}</b></div><p>${label3('可以先開始健康紀錄；要啟用心率、呼吸與14天個體基準，請連接項圈。','Health records are available now. Pair a collar to enable heart, breathing and the 14-day sensor baseline.','健康記録は先に開始できます。心拍・呼吸・14日間の基準には首輪の接続が必要です。')}</p><button class="cta full" data-action="device-find">${label3('搜尋並連接項圈','Find and pair collar','首輪を検索・接続')}</button></section>`;}
+function freeCareMeView(){const d=currentDog();return `<div class="app-pad free-care-page">${homePetStrip()}${bigHeader(t('me'))}<section class="card profile-hero"><div class="pet-profile"><button type="button" class="pet-avatar-tap" data-action="avatar-change" aria-label="${label3('更換寵物照片','Change pet photo','반려동물 사진 변경')}"><img src="${esc(dp58FaceAsset(state.dog,d))}" class="pet-avatar" alt="${esc(d.name)}"/><span class="pet-avatar-camera">${vicon('camera',13)}</span></button><div class="grow"><div class="pet-name">${esc(d.name)}</div><div class="pet-caption">${breedText(d)} · ${d.age} ${t('years')} · ${d.weight} kg</div><div class="device-identity">${label3('免費健康檔案 · 未配對項圈','Free care profile · No collar','무료 건강 프로필 · 기기 없음')}</div><div class="dp-profile-id">ID · ${esc(dpCurrentPetId())}</div></div><button type="button" class="dp-profile-social-plus" data-action="dp-friend-menu" aria-label="${label3('新增好友與 QR Code','Add friends and QR code','친구 추가 및 QR 코드')}">${vicon('plus',22)}</button></div><div class="profile-actions"><button data-action="pet-switch">${vicon('users',16)} ${t('managePets')}</button><button data-action="edit-pet">${vicon('edit',16)} ${label3('編輯資料','Edit profile','프로필 편집')}</button><button data-action="avatar-change">${vicon('camera',16)} ${label3('更換頭像','Change photo','사진 변경')}</button></div></section>${dpFirstTimeSteps()}<section class="card flat care-menu">${panel(vicon('globe',19),t('language'),label3('切換介面語言','Change language','언어 변경'),'language-detail')}${panel(vicon('shield',19),t('privacy'),label3('查看資料與權限說明','View privacy details','정보 보호 안내'),'privacy-detail')}</section><div class="footer-space"></div></div>`;}
+function freeRecordModal(){const items=[['food',label3('飲食記錄','Feeding','식사 기록')],['weight',label3('體重記錄','Weight','체중 기록')],['vaccines',label3('疫苗記錄','Vaccine','예방접종')],['med',label3('用藥記錄','Medication','복약')],['report',label3('體檢記錄','Checkup','건강검진')],['notes',label3('健康管理備註','Care note','돌봄 메모')]];const kind=state.freeRecordKind||'notes',title=items.find(x=>x[0]===kind)?.[1]||items[5][1];return `<p class="notices">${label3('這是手動健康記錄，不會自動產生心率或疾病判斷。','Manual care entry; it does not invent sensor readings or medical conclusions.','수동 기록이며 센서 데이터나 진단을 생성하지 않습니다.')}</p><label class="form-label">${label3('日期','Date','날짜')}</label><input class="form-control" type="date" id="freeRecordDate" value="${iso(localDate())}" max="${iso(localDate())}"/><label class="form-label">${label3('記錄項目','Record title','기록 제목')}</label><input class="form-control" id="freeRecordTitle" maxlength="60" value="${esc(title)}"/><label class="form-label">${label3('內容／量測值（由主人填寫）','Details (entered by owner)','내용 (직접 입력)')}</label><textarea class="form-control" id="freeRecordNotes" maxlength="500" rows="4" placeholder="${label3('例如：今天食慾正常；或填寫實際體重、接種名稱與日期。','e.g., appetite as usual, actual weight, vaccine name and date.','예: 식욕, 실제 체중, 예방접종 기록')}"></textarea><div class="sp16"></div><button class="cta full" data-action="free-save-record">${label3('保存健康記錄','Save health record','건강 기록 저장')}</button>`;}
+
+function dpDailyNarrative(d=currentDog(),m=rhythmData().today){
+ // Explanations must follow the true scored inputs of each summary. Individual
+ // sentences remain stable within one day and do not reveal scoring weights.
+ const today=dpTodayUnifiedScores(),finite=v=>v!==null&&v!==undefined&&Number.isFinite(Number(v));
+ const h=[today.heart,today.sleep,today.energyActivity].map(v=>finite(v)?Number(v):null);
+ // Body rhythm is officially 58% calm + 42% heartbeat stability. Load is an
+ // interpretation/context field, not a third scored rhythm component.
+ const r=['calm','stable'].map(k=>rhythmPositiveValue(k,m));
+ const bands=v=>v>=90?3:v>=80?2:v>=60?1:0;
+ const hTotal=score(d),rTotal=rhythmCompositeScore(m);
+ const sort=a=>a.map((v,i)=>({v,i})).sort((x,y)=>x.v-y.v||x.i-y.i);
+ const weakestH=sort(h)[0], strongestH=sort(h)[2],weakestR=sort(r)[0],strongestR=sort(r)[1];
+ const seed=Math.abs(state.dog*13+Number(iso(localDate()).replace(/-/g,''))+(finite(hTotal)?hTotal:0)*7+(finite(rTotal)?rTotal:0)*11);
+ const pick=(a,shift=0)=>a[(seed+shift)%a.length];
+ const Hintro=[
+  [label3('我今天的整體狀態需要多留意。','My overall condition needs a closer look today.','오늘은 제 전반적인 상태를 더 살펴봐 주세요.'),label3('我今天有幾項健康表現偏低。','Several of my health measures are lower today.','오늘은 몇 가지 건강 지표가 낮아요.'),label3('我今天沒有平常那麼有精神。','I am not quite at my usual level today.','오늘은 평소만큼 활기차지 않아요.')],
+  [label3('我今天的健康表現有些起伏。','My health readings have been mixed today.','오늘 건강 수치에 조금 변화가 있어요.'),label3('我今天的狀態有好有壞。','I have had a mixed day.','오늘은 좋은 부분과 살펴볼 부분이 함께 있어요.'),label3('今天我需要比平常多一點關心。','I could use a little extra attention today.','오늘은 평소보다 조금 더 신경 써주세요.')],
+  [label3('我今天整體表現不錯。','My overall condition is doing well today.','오늘 전체적인 상태가 좋아요.'),label3('我今天大致維持了好狀態。','I have mostly stayed on track today.','오늘은 대체로 좋은 상태를 유지했어요.'),label3('我今天的健康節奏還算穩定。','My health pattern is generally steady today.','오늘 건강 흐름이 대체로 안정적이에요.')],
+  [label3('我今天整體狀態很好。','I am having a very good day overall.','오늘 전반적인 상태가 아주 좋아요.'),label3('我今天的健康表現很亮眼。','My health measures look particularly good today.','오늘 건강 지표가 특히 좋아요.'),label3('今天我大致保持在很好的狀態。','I have stayed in a strong overall state today.','오늘은 전반적으로 매우 좋은 상태예요.')]
+ ];
+ const Hweak=[
+  [label3('心肺這一項最需要關心。','Heart and breathing need the most attention.','심폐 상태를 가장 살펴봐 주세요.'),label3('心跳與呼吸的表現比較值得留意。','Heart and breathing readings deserve another look.','심박과 호흡 수치를 더 살펴봐 주세요.'),label3('今天可以多觀察我的心肺變化。','Please watch my heart and breathing changes.','오늘 심폐 변화를 조금 더 지켜봐 주세요.')],
+  [label3('睡眠狀態是今天較弱的一項。','Rest and sleep are my weaker area today.','오늘은 수면과 휴식이 상대적으로 약해요.'),label3('我今天更需要把休息安排好。','I could benefit from better rest today.','오늘은 휴식을 조금 더 챙겨주세요.'),label3('我的休息品質比較值得留意。','My rest pattern deserves a little more attention.','휴식 패턴을 조금 더 살펴봐 주세요.')],
+  [label3('今天的精力活動表現較弱。','My energy and recovery are lower today.','오늘은 활력과 회복 상태가 낮아요.'),label3('我今天的活動節奏需要多觀察。','My activity pattern needs another look today.','오늘 활동 흐름을 더 지켜봐 주세요.'),label3('精力這一項還有改善空間。','My energy level has some room to improve.','활력 상태는 더 좋아질 수 있어요.')]
+ ];
+ const Hbest=[
+  [label3('心肺表現特別平穩。','Heart and breathing are a strong point.','심폐 상태가 특히 안정적이에요.'),label3('心跳與呼吸是我今天的亮點。','Heart and breathing are a bright spot today.','오늘 심박과 호흡이 좋은 편이에요.')],
+  [label3('休息表現很不錯。','My rest is looking strong.','휴식 상태가 좋아요.'),label3('睡眠狀態是我今天的亮點。','Sleep status is a bright spot today.','오늘 수면과 휴식이 좋은 편이에요.')],
+  [label3('今天的活動狀態尤其不錯。','My activity is a strong point today.','오늘 활동 상태가 특히 좋아요.'),label3('精力表現是我今天的亮點。','Energy is a bright spot today.','활력 상태가 오늘의 좋은 점이에요.')]
+ ];
+ const Rintro=[
+  [label3('我今天的身體調節狀態需要留意。','My body regulation needs more attention today.','오늘 몸의 조절 상태를 더 살펴봐 주세요.'),label3('我的身體節奏今天不太理想。','My body rhythm is below its usual standard today.','오늘 몸의 리듬이 다소 좋지 않아요.'),label3('我今天的身體節奏有明顯波動。','My body rhythm has changed noticeably today.','오늘 몸의 리듬 변화가 두드러져요.')],
+  [label3('我的身體節奏今天有些起伏。','My body rhythm has been mixed today.','오늘 몸의 리듬이 조금 들쑥날쑥해요.'),label3('我今天的調節表現還可以更好。','My body regulation could be better today.','오늘 몸의 조절 상태는 더 좋아질 수 있어요.'),label3('我今天需要多留意身體恢復。','I could use closer attention to recovery today.','오늘은 몸의 회복을 조금 더 챙겨주세요.')],
+  [label3('我的身體節奏大致平順。','My body rhythm looks mostly steady.','몸의 리듬은 대체로 안정적이에요.'),label3('我今天的身體調節表現還不錯。','My body regulation is doing fairly well.','오늘 몸의 조절 상태는 괜찮아요.'),label3('今天我的身體節奏整體不錯。','My body rhythm is generally good today.','오늘 몸의 리듬은 전반적으로 좋아요.')],
+  [label3('我的身體節奏今天很穩定。','My body rhythm is very steady today.','오늘 몸의 리듬은 아주 안정적이에요.'),label3('我今天的身體調節表現很出色。','My body regulation is looking strong today.','오늘 몸의 조절 상태가 아주 좋아요.'),label3('我的放鬆、負荷與心搏表現整體很好。','My calmness, load balance and heartbeat rhythm look strong.','오늘 편안함, 부담 조절, 심박 리듬 모두 좋은 편이에요.')]
+ ];
+ const Rweak=[
+  [label3('放鬆與平穩度比較值得留意。','Calmness and steadiness deserve another look.','안정감과 편안함을 조금 더 살펴봐 주세요.'),label3('安靜時的身體調節仍有改善空間。','My quiet-time regulation has room to improve.','쉬는 동안의 조절 상태는 더 좋아질 수 있어요.'),label3('今天我可能需要更多安靜休息。','I could use more quiet rest today.','오늘은 조용한 휴식이 더 필요할 수 있어요.')],
+  [label3('負荷調節是今天較弱的一項。','Handling body load is my weaker area today.','오늘은 신체 부담 조절이 상대적으로 약해요.'),label3('我今天對身體負荷的調節比較吃力。','My body is handling its load less smoothly today.','오늘은 신체 부담 조절이 다소 어려워 보여요.'),label3('活動與休息的平衡需要多留意。','The balance between effort and rest deserves attention.','활동과 휴식의 균형을 살펴봐 주세요.')],
+  [label3('心搏節奏是今天比較需要觀察的一項。','Heartbeat rhythm needs closer observation today.','오늘 심박 리듬을 더 살펴봐 주세요.'),label3('心搏變化的穩定度還有改善空間。','Heartbeat stability has room to improve.','심박 안정성은 더 좋아질 수 있어요.'),label3('我的心搏節奏今天有些不一致。','My heartbeat pattern is less consistent today.','오늘 심박 패턴에 조금 변화가 있어요.')]
+ ];
+ const Rbest=[
+  [label3('放鬆時的狀態是亮點。','My calmness is a bright spot.','편안함이 오늘의 좋은 점이에요.'),label3('安靜時的表現很好。','My quiet-time state looks strong.','쉬는 동안의 상태가 좋아요.')],
+  [label3('負荷調節表現很不錯。','Body load balance is a strong point.','신체 부담 조절이 좋아요.'),label3('活動與休息平衡得很好。','Effort and rest are well balanced.','활동과 휴식의 균형이 좋아요.')],
+  [label3('心搏節奏表現相當穩定。','Heartbeat rhythm is a strong point.','심박 리듬이 안정적이에요.'),label3('心搏調節是今天的亮點。','Heartbeat regulation is a bright spot today.','심박 조절이 오늘의 좋은 점이에요.')]
+ ];
+ const healthReady=finite(hTotal)&&h.every(finite),rhythmReady=finite(rTotal)&&r.every(finite);
+ const hIntro=healthReady?pick(Hintro[bands(hTotal)]):'',rIntro=rhythmReady?pick(Rintro[bands(rTotal)],3):'';
+ const hSecond=healthReady?(weakestH.v<80?pick(Hweak[weakestH.i],5):pick(Hbest[strongestH.i],7)):'';
+ const rhythmIndex=i=>i===0?0:2; // Rweak/Rbest original third group describes heartbeat stability.
+ const rSecond=rhythmReady?(weakestR.v<80?pick(Rweak[rhythmIndex(weakestR.i)],9):pick(Rbest[rhythmIndex(strongestR.i)],11)):'';
+ const noCompleteScore=state.lang==='ja'?'本日の有効データがまだ不足しており、確定的な評価は表示しません。':label3('今天尚缺完整的有效量測，暫不作出健康狀態結論。','Not enough complete valid readings today to summarize this score.','오늘은 유효 측정이 부족하여 종합 평가를 표시하지 않습니다.');
+ return {health:!signalQuality().valid?qualityMessage():healthReady?`${hIntro}${hSecond}`:noCompleteScore,
+  rhythm:!signalQuality().valid?'':rhythmReady?`${rIntro}${rSecond}`:noCompleteScore,
+  stats:{health:h,rhythm:r}};
+}
+function dpGpsMapWithoutLocation(){
+ return `<svg class="geo-preview-map dp-gps-empty-map" viewBox="0 0 360 240" role="img" aria-label="${label3('地圖預覽，目前沒有可用的位置','Map preview without available location','현재 위치 정보가 없는 지도 미리보기')}"><rect width="360" height="240" fill="#edf5ee"/><path d="M0 75Q80 47 160 84T370 66 M-12 196Q120 141 370 196 M93 -8Q109 111 76 255 M282 -10Q247 108 301 253" fill="none" stroke="#fff" stroke-width="25"/><path d="M0 75Q80 47 160 84T370 66 M-12 196Q120 141 370 196 M93 -8Q109 111 76 255 M282 -10Q247 108 301 253" fill="none" stroke="#d4dfd9" stroke-width="2"/><path d="M145 5Q214 2 219 60L181 96L137 63Z" fill="#d1ebd8"/><path d="M9 125L57 108L74 154L29 170Z" fill="#d2e7f1"/><path d="M308 2L358 13L358 78L333 83Z" fill="#d1eedb"/><g fill="#91a7a0" font-size="11" font-family="Arial,sans-serif"><text x="167" y="44">Park</text><text x="17" y="179">Park Rd.</text><text x="228" y="222">Pet Lane</text></g></svg>`;
+}
+function dpOwnerGpsHome(){
+ const is4g=gpsForCurrentPet(),located=is4g&&state.gpsEnabled;
+ const subtitle=located?label3('目前位置 · GPS 已開啟','Current position · GPS on','현재 위치 · GPS 켜짐'):is4g?label3('GPS 已關閉，開啟後即可查看位置','GPS is off. Turn it on to view location','GPS를 켜면 위치를 볼 수 있어요'):label3('Bluetooth 僅監測健康；4G 項圈可查看位置','Bluetooth supports health only; 4G adds location','블루투스는 건강 측정만, 4G는 위치 확인 가능');
+ const status=located?label3('位置顯示中','Location visible','위치 표시 중'):is4g?label3('定位未開啟','Location off','위치 꺼짐'):label3('尚無定位','No location','위치 정보 없음');
+ const buttonAction=!is4g?'gps-upgrade-4g':located?'gps-open':'gps-home-enable';
+ const buttonText=!is4g?label3('切換到4G，查看現在位置','Get 4G to view location','4G로 위치 확인'):located?label3('查看位置與電子圍欄','View map & safe area','지도와 안전 구역'):label3('開啟GPS查看位置','Enable GPS to see location','GPS 켜서 위치 보기');
+ const map=located?geoMapSvg(false):dpGpsMapWithoutLocation();
+ const boundary=located&&geoHasActiveFence()?label3(geoStatus()==='outside'?'已離開安全範圍':'位於安全範圍內',geoStatus()==='outside'?'Outside safe area':'Inside safe area',geoStatus()==='outside'?'안전 구역 밖':'안전 구역 안'):label3('電子圍欄未啟用，不影響 GPS 定位','Geofence off · location remains available','안전 구역 해제 상태도 GPS 사용 가능');
+ return `<section class="card dp-owner-gps-card dp-home-map-card" id="dp-owner-gps-card"><div class="dp-owner-gps-head"><span class="dp-owner-gps-icon">${vicon('pin',23)}</span><div><strong>${label3('GPS 定位','GPS Location','GPS 위치')}</strong><small>${subtitle}</small></div><span class="dp-owner-gps-status ${located?'active':''}">${status}</span></div><div class="dp-home-gps-map ${located?'is-located':'is-unlocated'}">${map}${!located?`<div class="dp-home-map-notice">${vicon('pin',23)}<b>${label3('目前無法顯示寵物位置','Pet location unavailable','현재 반려동물 위치를 볼 수 없어요')}</b></div>`:''}</div>${located?`<p class="dp-home-map-fence-caption">${boundary} · ${label3('地圖為展示位置','Illustrative location','데모 위치')}</p>`:''}<button class="dp-owner-gps-button dp-home-gps-action" data-action="${buttonAction}">${buttonText} ${vicon('chev',16)}</button></section>`;
+}
+function dpOwnerBaselineMe(){const b=baselineProfile(),ok=b.ready;return `<button class="card dp-owner-baseline-me" data-action="baseline-detail"><span class="dp-owner-baseline-icon">${vicon('heart',20)}</span><span class="grow"><b>${label3('14天健康基準','14-day Health Baseline','14일 건강 기준')}</b><small>${ok?label3('根據最近14個有效監測日，建立牠的個體健康基準','Built from the latest 14 valid recording days','최근 14일 유효 기록으로 반려동물 건강 기준 완성'):label3(`14天個體基準建立中 · ${b.days}/14 個有效監測日`,`Building 14-day this pet’s baseline · ${b.days}/14 valid days`,`14일 반려동물 자체 기준 구축 중 · ${b.days}/14일`)}</small></span>${vicon('chev',17)}</button>`;}
+function homeView(){
+ const d=currentDog(),scoreVal=score(d),now=localDate(),scheme=signalQuality().valid?scoreScheme(scoreVal):{color:'#9a9fae'},show=!!state.liveExpanded;
+   const summaryLines=dpDailyNarrative(d,rhythmData().today);
+const liveHr=streamingPanel('heart','#ed5177',t('heartRate'),d.hr), liveBreath=streamingPanel('breath','#3282eb',t('breath'),d.rr);
+ return `<div class="app-pad home-page-v30">
+ ${homePetStrip()}
+ ${homeHero(d)}
+
+ <section class="card summary-card dp-combined-summary dp-aurora-summary"><div class="summary-top"><div class="summary-day"><strong>${t('today')}</strong><span> · ${fmtDate(now,true)}</span></div></div><div class="dp-summary-lanes"><button class="dp-summary-lane dp-health-lane" style="--score-color:${scheme.color}" data-action="show-summary"><span class="dp-lane-meter">${dpDotScore(signalQuality().valid?scoreVal:null,'health')}</span><span class="dp-lane-copy"><strong>${label3('生理狀態評分','Physiological status score','생리 상태 점수')}</strong><span class="dp-lane-description">${summaryLines.health}</span><small>${label3('心肺 · 睡眠 · 精力與恢復','Cardio · Sleep · Energy','심폐 · 수면 · 활력·회복')}</small></span></button><button class="dp-summary-lane dp-rhythm-lane" style="--score-color:${signalQuality().valid?scoreScheme(rhythmCompositeScore()).color:'#aab0bc'}" data-action="rhythm-detail"><span class="dp-lane-meter">${dpDotScore(signalQuality().valid?rhythmCompositeScore():null,'rhythm')}</span><span class="dp-lane-copy"><strong>${label3('身體節奏分數','Body rhythm score','몸의 리듬 점수')}</strong><span class="dp-lane-description">${summaryLines.rhythm}</span><small>${label3('放鬆與平穩度 · 心搏節奏穩定度','Rest & steadiness · Heartbeat stability','휴식과 안정 · 심박 안정')}</small></span></button></div></section>
+ 
+ ${dp66UrgentHome()}
+ ${focusCard()}
+ ${dp67HomePrevention()}
+ ${dpOwnerGpsHome()}
+ <button class="card me-heart-moment-entry" data-action="heart-moment" aria-label="${label3('開啟心跳時刻','Open Heart Moments','심장 박동 순간 열기')}"><div class="me-heart-art">${heartFeatureArt()}</div><div class="me-heart-content"><div class="me-heart-label">${label3('心跳時刻','Heart Moments','심장 박동 순간')}</div><div class="me-heart-desc">${label3('把今天的心搏節奏做成可保存的紀念卡','Turn today’s heartbeat rhythm into a keepsake','오늘의 심장 박동 리듬을 기념 카드로 저장')}</div><span class="me-heart-action">${label3('製作紀念卡','Create a card','카드 만들기')} ${vicon('chev',15)}</span></div></button>
+ <div class="footer-space"></div></div>`;
+}
+
+function sevenDayChart(kind,color){
+ const rows=validDailyRecords(7), W=340,H=175,left=35,right=12,top=17,bottom=31;
+ if(rows.length<2)return chart(rows.map(r=>Number(r[kind])),kind==='heart'?t('heartRate'):t('breath'),kind==='heart'?'bpm':'/min',color,kind);
+ const vals=rows.map(r=>Number(r[kind])),isHeart=kind==='heart';
+ const span=rows.map((r,i)=>isHeart?(3.6+2.1*Math.abs(Math.sin(i*.91+state.dog))):(1.5+.6*Math.abs(Math.cos(i*.72+state.dog))));
+ const mins=vals.map((v,i)=>v-span[i]),maxs=vals.map((v,i)=>v+span[i]*.8);
+ const lo=Math.floor(Math.min(...mins)-1),hi=Math.ceil(Math.max(...maxs)+1),denom=hi-lo||1;
+ const ratios=rows.map(row=>dateRatio(row.date,iso(dateAdd(localDate(),-6)),iso(localDate()))),x=i=>left+ratios[i]*(W-left-right), y=v=>top+(hi-v)/denom*(H-top-bottom);
+ const xy=vals.map((v,i)=>[x(i),y(v)]),linePath=smoothPath(xy);
+ const grid=[0,.5,1].map(f=>`<line x1="${left}" y1="${top+f*(H-top-bottom)}" x2="${W-right}" y2="${top+f*(H-top-bottom)}" stroke="#e9edf4"/><text x="${left-7}" y="${top+f*(H-top-bottom)+4}" text-anchor="end" fill="#949aaa" font-size="10">${Math.round(hi-f*denom)}</text>`).join('');
+ const labels=`<text x="${left}" y="${H-8}" text-anchor="start" fill="#9096a6" font-size="9.5">${dpFullDate(rows[0].date)}</text><text x="${W-right}" y="${H-8}" text-anchor="end" fill="#9096a6" font-size="9.5">${dpFullDate(rows.at(-1).date)}</text>`;
+ const points=xy.map(([xx,yy])=>`<circle cx="${xx}" cy="${yy}" r="3.5" stroke="white" stroke-width="1" fill="${color}"/>`).join('');
+ const svg=`<svg viewBox="0 0 ${W} ${H}" class="week-chart-svg" role="img" aria-label="${esc(isHeart?t('heartRate'):t('breath'))}">${grid}<path d="${linePath}" stroke="${color}" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>${points}${labels}</svg>`;
+ return `<div class="seven-day-chart"><div class="row spread seven-day-title"><b>${isHeart?t('heartRate'):t('breath')}</b><span class="trend-legend">${label3('每日均值 · 可點選日期','Daily means · select a day','일 평균 · 날짜 선택')}</span></div>${inspectSvg(svg,vals,{kind,unit:isHeart?'bpm':label3('次/分','breaths/min','회/분'),dates:rows.map(r=>r.date),color,left,right,top,bottom,width:W,height:H,yCoords:xy.map(p=>p[1]),xRatios:ratios})}</div>`;
+}
+function sevenDaySummary(){const history=rhythmHistory(7,'recover');const latest=history.at(-1);return `<section class="card week-comparison-card">${sevenDayChart('heart','#e6527d')}${sevenDayChart('breath','#347fe7')}<div class="weekly-hrv"><div class="row spread"><b>${label3('最近 7 天恢復節奏','7-day recovery rhythm','최근 7일 회복 리듬')}</b><span class="pill" style="background:${scoreScheme(latest).bg};color:${scoreScheme(latest).color}">${latest}/100</span></div>${spark(history,scoreScheme(latest).color,88)}<div class="row spread"><span class="subtitle">${label3('與自己的平常節奏比較','Compared with 14-day baseline','14일 기준과 비교')}</span><button class="small-link" data-action="rhythm-detail">${label3('查看原因','What changed?','변화 보기')} ›</button></div></div><p class="notices">${label3('7 天曲線表示每日統計；心率、呼吸與恢復節奏是不同的圖，不能直接互相代替。','The seven-day lines summarize daily measures. Recovery rhythm differs from heart-rate and breathing trends.','7일 추세는 일별 통계이며 심박·호흡과 회복 리듬은 서로 다른 지표입니다.')}</p></section>`}
+
+// V6.2: one source for Deep's Day / hourly / daily views, with coherent 30-min rest bins.
+// No hourly data are claimed when data quality is invalid; all values are demo-derived.
+function deepTimePoints(kind,period){
+ const rows=(period===1?deepDayRows():dayRowsWithIndex(period)).filter(r=>validDaySample(r,r.idx).valid),points=[];
+ const real=dpUsesRealMeasurements();
+ const source=kind==='activityIntensity'?'activity':kind==='restState'?'rest':kind;
+ for(const row of rows){
+  if(period===1){
+   const arr=real?dpSignals(row.date,[source])?.[source]||[]:kind==='restState'?nightMinuteSequence(row.idx):(['heart','breath','activityIntensity'].includes(kind)?dpSignals(row.date,[source])?.[source]||[]:minuteDemoSeries(kind,row.date));
+   if(kind==='activityIntensity'){for(let m=0;m<arr.length;m+=30){const chunk=arr.slice(m,m+30),avg=chunk.reduce((a,b)=>a+b,0)/Math.max(1,chunk.length);points.push({v:Number(avg.toFixed(1)),date:row.date,when:`${row.date} ${minuteClock(m)}`,timestamp:m,minute:true});}}else{for(let m=0;m<arr.length;m++){const clock=kind==='restState'&&!real?(20*60+m)%1440:m;points.push({v:arr[m],date:row.date,when:`${row.date} ${minuteClock(clock)}`,timestamp:m,minute:true});}}
+  }else if(kind==='restState'){
+   // Multi-day sleep gets individual night rows; this path is for daily summary trends only.
+   const feature=real?window.DeepPetSignalScoring?.getFeatures?.(state.dog)?.find(x=>x.date===row.date):null;
+   const hours=real?(feature?.quality?.fullDayRestSupported===true&&Number.isFinite(feature?.restHours)?feature.restHours:null):nightRestHours(row.idx);
+   if(Number.isFinite(hours))points.push({v:hours,date:row.date,when:row.date,timestamp:Date.parse(row.date+'T00:00:00Z')});
+  }else if(kind==='activityIntensity' && period>1){
+   const readings=real?dpSignals(row.date,['activity'])?.activity||[]:minuteDemoSeries('activityIntensity',row.date);
+   if(!readings.length)continue;
+   const bin=period>=14?24:period>=7?4:3;
+   for(let h=0;h<24;h+=bin){
+    const block=readings.slice(h*60,(h+bin)*60);
+    points.push({v:block.reduce((a,b)=>a+b,0)/Math.max(1,block.length),date:row.date,when:`${row.date} ${String(h).padStart(2,'0')}:00`,timestamp:Date.parse(row.date+'T00:00:00Z')+h*3600000});
+   }
+  }else if(period>=14){
+   const readings=real?dpSignals(row.date,[source])?.[source]||[]:['heart','breath'].includes(kind)?dpSignals(row.date,[kind])[kind]:minuteDemoSeries(kind,row.date);
+   const val=readings.length?readings.reduce((a,b)=>a+b,0)/readings.length:real?null:row[kind];
+   if(typeof val==='number'&&Number.isFinite(val))points.push({v:Number(val.toFixed(2)),date:row.date,when:row.date,timestamp:Date.parse(row.date+'T00:00:00Z')});
+  }else{
+   const readings=real?dpSignals(row.date,[source])?.[source]||[]:['heart','breath'].includes(kind)?dpSignals(row.date,[kind])[kind]:minuteDemoSeries(kind,row.date);
+   for(let h=0;h<24;h++){
+    const slice=readings.slice(h*60,(h+1)*60);
+    if(!slice.length)continue;
+    points.push({v:slice.reduce((a,b)=>a+b,0)/slice.length,date:row.date,when:`${row.date} ${String(h).padStart(2,'0')}:00`,timestamp:Date.parse(row.date+'T00:00:00Z')+h*3600000});
+   }
+  }
+ }
+ return points;
+}
+function deepCurvePath(points,step=false){
+ if(!points.length)return '';
+ if(points.length===1)return `M ${points[0][0]} ${points[0][1]}`;
+ if(step)return points.slice(1).reduce((d,p,i)=>`${d} H ${p[0].toFixed(2)} V ${p[1].toFixed(2)}`,`M ${points[0][0].toFixed(2)} ${points[0][1].toFixed(2)}`);
+ const vals=points;
+ let d=`M ${vals[0][0].toFixed(2)} ${vals[0][1].toFixed(2)}`;
+ for(let i=0;i<vals.length-1;i++){
+  const a=vals[i],b=vals[i+1],prev=vals[Math.max(0,i-1)],next=vals[Math.min(vals.length-1,i+2)],dx=b[0]-a[0],dy=b[1]-a[1];
+  let m1=(b[1]-prev[1])/Math.max(.001,b[0]-prev[0]);let m2=(next[1]-a[1])/Math.max(.001,next[0]-a[0]);
+  // Horizontal tangent at turning points avoids jagged and overshooting spikes.
+  if((a[1]-prev[1])*dy<=0)m1=0;
+  if((next[1]-b[1])*dy<=0)m2=0;
+  if(Math.abs(dy)<.01){m1=0;m2=0;}
+  const maxSlope=3*Math.abs(dy)/Math.max(.001,dx);
+  m1=Math.max(-maxSlope,Math.min(maxSlope,m1));m2=Math.max(-maxSlope,Math.min(maxSlope,m2));
+  d+=` C ${(a[0]+dx/3).toFixed(2)} ${(a[1]+m1*dx/3).toFixed(2)} ${(b[0]-dx/3).toFixed(2)} ${(b[1]-m2*dx/3).toFixed(2)} ${b[0].toFixed(2)} ${b[1].toFixed(2)}`;
+ }
+ return d;
+}
+function deepTimeChart(kind,color,title){
+ const period=state.range,pts=deepTimePoints(kind,period);
+ if(!pts.length)return `<div class="chart-pending"><b>${label3('目前沒有可顯示的記錄','No readings available','표시할 기록이 없어요')}</b></div>`;
+ const W=350,H=188,l=36,r=3,t=14,b=32,plotW=W-l-r,plotH=H-t-b;
+ const binary=kind==='restState'&&period<=7;
+ const unit=binary?'':kind==='heart'?'bpm':kind==='breath'?label3('次/分','breaths/min','회/분'):kind==='activityIntensity'?'%':'h';
+ const vals=pts.map(x=>x.v),minimum=Math.min(...vals),maximum=Math.max(...vals),base=baselineProfile();
+ let ylo,yhi;
+ if(binary){ylo=0;yhi=1;}
+ else if(kind==='heart'){const center=base.heart||currentDog().hr;ylo=Math.floor(Math.min(minimum-2,center-16)/5)*5;yhi=Math.ceil(Math.max(maximum+2,center+20)/5)*5;}
+ else if(kind==='breath'){const center=base.breath||currentDog().rr;ylo=Math.floor(Math.min(minimum-1,center-7)/2)*2;yhi=Math.ceil(Math.max(maximum+1,center+9)/2)*2;}
+ else if(kind==='restState'){ylo=0;yhi=Math.max(16,Math.ceil(maximum+1));}
+ else if(kind==='activityIntensity'){ylo=0;yhi=100;}
+ else {const pad=Math.max(1,(maximum-minimum)*.18);ylo=Math.max(0,minimum-pad);yhi=maximum+pad;}
+ const x=i=>pts.length===1?l+plotW/2:l+plotW*(pts[i].timestamp-pts[0].timestamp)/Math.max(1,pts.at(-1).timestamp-pts[0].timestamp);
+ const y=v=>t+(yhi-v)/Math.max(.001,yhi-ylo)*plotH;
+ const coords=pts.map((p,i)=>[x(i),y(p.v)]);
+ const path=deepCurvePath(coords,binary),trace=coords.length>1?`<path d="${path}" fill="none" stroke="${color}" stroke-width="${binary?'2.6':'2.5'}" stroke-linejoin="round" stroke-linecap="round"/>`:`<circle cx="${coords[0][0]}" cy="${coords[0][1]}" r="4.4" fill="${color}"/>`;
+ const axis=[0,.5,1].map(f=>{const yy=t+f*plotH,n=yhi-f*(yhi-ylo);const v=binary?(f===.5?'':n>=.5?label3('休息','Rest','휴식'):label3('清醒','Awake','깨어 있음')):Math.round(n*10)/10;return `<line x1="${l}" x2="${W-r}" y1="${yy}" y2="${yy}" stroke="#e6ebf3"/><text x="${l-6}" y="${yy+4}" font-size="10" text-anchor="end" fill="#79869b">${v}</text>`}).join('');
+ const labels=period===1?(kind==='restState'?['20:00','04:00','12:00']:['00:00','12:00','23:59']):[];
+ const allDates=[...new Set(pts.map(p=>p.date))],tickStep=period>=30?5:period>=14?3:1;
+ const dateTicks=period>1?allDates.map((d,i)=>({d,i})).filter(x=>x.i%tickStep===0||x.i===allDates.length-1).map(({d,i})=>{const k=pts.findIndex(p=>p.date===d),xx=coords[Math.max(0,k)][0];return `<text x="${xx}" y="${H-7}" font-size="${period===7?'8':'9'}" fill="#778399" text-anchor="${i===0?'start':i===allDates.length-1?'end':'middle'}">${esc(d.slice(5).replace('-','/'))}</text>`;}).join(''):'';
+ const dayLabels=period===1?`<text x="${l}" y="${H-7}" font-size="9.5" fill="#778399">${esc(labels[0])}</text><text x="${W/2}" y="${H-7}" font-size="10" text-anchor="middle" fill="#778399">${esc(labels[1])}</text><text x="${W-r}" y="${H-7}" font-size="9.5" text-anchor="end" fill="#778399">${esc(labels[2])}</text>`:dateTicks;
+ const svg=`<svg class="deep-time-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}">${axis}${trace}${dayLabels}</svg>`;
+ const mode=kind==='activityIntensity'?(period===1?label3('每30分鐘','Every 30 min','30분 간격'):period<=3?label3('逐小時','Hourly','시간별'):period===7?label3('每4小時','Every 4 hours','4시간 간격'):label3('每日概覽','Daily overview','일별 개요')):(period===1?label3('逐分鐘','Every minute','1분 간격'):period<=7?label3('逐小時','Hourly','시간별'):label3('逐日','Daily','일별'));
+ const missing=period>1?period-new Set(pts.map(p=>p.date)).size:0;
+ const note=missing>0?label3(`有 ${missing} 天尚無有效記錄，圖線連接已記錄的時間點。`,`${missing} day(s) have no readings; the line joins recorded dates.`,`${missing}일의 기록이 없어 기록된 날짜를 연결했어요.`):'';
+ const plot=inspectSvg(svg,vals,{kind,unit,title,dates:pts.map(p=>p.date),timeLabels:pts.map(p=>p.when),minute:period===1,color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:coords.map(p=>p[1]),xRatios:coords.map(p=>(p[0]-l)/plotW)});
+ return `<div class="deep-timeline-chart"><div class="deep-timeline-head"><strong>${title}</strong><span>${mode} · ${pts.length} ${label3('筆紀錄','readings','개 기록')}</span></div>${plot}${note?`<p class="deep-plot-note">${note}</p>`:''}</div>`;
+}
+
+function chart(values,label,unit,color='#725fe2',kind='',observedDates=null){
+ const daily=state.range===1;
+ if(!values.length||!values.some(Number.isFinite))return `<div class="chart-pending"><b>${label3('目前沒有可用的觀測資料','No observations available','사용 가능한 관측값이 없습니다')}</b></div>`;
+ if(values.length===1){const W=350,H=175,l=30,r=2,t=16,b=31,yy=67;const date=observedDates?.[0]||validDailyRecords(state.range).at(-1)?.date||iso(localDate()),ratio=dateRatio(date,iso(dateAdd(localDate(),1-state.range)),iso(localDate())),xx=l+ratio*(W-l-r);const svg=`<svg viewBox="0 0 ${W} ${H}" class="dp-detail-curve" role="img" aria-label="${esc(label)}"><line x1="${l}" x2="${W-r}" y1="${yy}" y2="${yy}" stroke="#e8eaf2"/><circle cx="${xx}" cy="${yy}" r="5" fill="${color}"/><text x="${l}" y="${H-7}" fill="#858ea3" font-size="10">${dpFullDate(date)}</text></svg>`;return `<div class="chart-wrap dp-trend-wrap">${inspectSvg(svg,values,{kind,unit,dates:[date],color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:[yy],xRatios:[ratio]})}<p class="notices">${label3('僅一個有效量測日，尚無法連成趨勢線。','Only one valid observation, so no trend line yet.','유효 관측이 하루뿐이므로 추세선이 없습니다.')}</p></div>`;}
+ const W=350,H=175,l=30,r=2,t=16,b=31,available=values.filter(Number.isFinite),lo=Math.min(...available),hi=Math.max(...available),buffer=Math.max(kind==='restState'?0:1,(hi-lo)*.15),mn=kind==='restState'||kind==='activityIntensity'?0:lo-buffer,mx=kind==='restState'||kind==='activityIntensity'?100:hi+buffer,denom=mx-mn||1;
+ const historicalDates=observedDates||validDailyRecords(state.range).map(row=>row.date),rangeStart=iso(dateAdd(localDate(),1-state.range)),rangeEnd=iso(localDate()),xRatios=values.map((_,i)=>daily?i/(values.length-1):dateRatio(historicalDates[i],rangeStart,rangeEnd)),x=i=>l+xRatios[i]*(W-l-r),y=v=>t+(mx-v)/denom*(H-t-b);
+ const points=values.map((v,i)=>[x(i),y(v)]);
+ // A missing HRV day must not look like a physiological zero or a continuous measurement.
+ const hrvDated=!!observedDates&&(kind==='rmssd'||kind==='sdnn');
+ const segments=[];let part=[];
+ points.forEach((point,i)=>{if(hrvDated&&i>0&&new Date(historicalDates[i]+'T12:00:00')-new Date(historicalDates[i-1]+'T12:00:00')>86400000){if(part.length)segments.push(part);part=[];}part.push(point);});
+ if(part.length)segments.push(part);
+ const path=segments.map(segment=>deepCurvePath(segment,false)).join(' ');
+ const hrvDots=hrvDated?points.map(([xx,yy])=>`<circle cx="${xx}" cy="${yy}" r="3.4" fill="${color}"/>`).join(''):'';
+ const axis=[0,.5,1].map(f=>{const yy=t+f*(H-t-b);const v=mx-f*denom;return `<line x1="${l}" y1="${yy}" x2="${W-r}" y2="${yy}" stroke="#e6e9f3"/><text x="${l-7}" y="${yy+3}" fill="#8990a2" text-anchor="end" font-size="10">${v.toFixed(0)}</text>`}).join('');
+ const rows=validDailyRecords(state.range),days=values.length,first=iso(dateAdd(localDate(),1-state.range)),last=iso(localDate());
+ const ticks=daily?['00:00','12:00','23:59']:[dpFullDate(first),'',dpFullDate(last)];
+ const svg=`<svg viewBox="0 0 ${W} ${H}" class="dp-detail-curve" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title>${axis}<path d="${path}" fill="none" stroke="${color}" stroke-width="${daily?'1.65':'3.1'}" stroke-linecap="round" stroke-linejoin="round"/>${hrvDots}<text x="${l}" y="${H-6}" font-size="10" fill="#8490a3">${ticks[0]}</text><text x="${W/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#8490a3">${ticks[1]}</text><text x="${W-r}" y="${H-6}" text-anchor="end" font-size="10" fill="#8490a3">${ticks[2]}</text></svg>`;
+ const dates=daily?[iso(localDate())]:historicalDates;
+ return `<div class="chart-wrap dp-trend-wrap">${inspectSvg(svg,values,{kind,unit,dates,minute:daily,color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:points.map(p=>p[1]),xRatios})}</div>`;
+}
+
+// V10.74: gallery and real readings have mutually exclusive provenance.
+// An owner/SDK record must NEVER fall back to a generated gallery minute.
+const DP_L=t=>label3(...t);
+function dpSignals(date,wanted=null){
+ const bridge=window.DeepPetSignalBridge;
+ const realPet=dpUsesRealMeasurements();
+ const verified=realPet&&Array.isArray(state.dpVerifiedDaysByPet?.[String(state.dog)])&&
+  state.dpVerifiedDaysByPet[String(state.dog)].some(row=>row?.date===date&&window.DeepPetSignalScoring?.isVerifiedWear?.(row)===true);
+ const take=kind=>{let result;
+  // A gallery case is deterministic; a globally attached bridge must not
+  // silently override the showcased animal's illustrative data.
+  if(!realPet)return state.dog<dogs.length&&!currentDog().dpFixtureInvalidated&&!currentDog().dpFreshPet&&!currentDog().freeCare?minuteDemoSeries(kind,date):[];
+  // Bridge presence is not evidence. In real mode a matching verified day
+  // must exist before accepting any 1,440-minute chart values.
+  const provenance=window.DeepPetDataProvenance1075;
+  if(realPet&&!verified){provenance?.missing?.(state.dog,date,kind,'wear-not-verified');return [];}
+  try{result=bridge?.minuteSeries?.({pet:state.dog,date,kind});}catch{}
+  // V10.75: a new SDK may return a record with owner/date/source/quality
+  // fields; reject a mismatched payload instead of trusting the caller's UI.
+  // For a legacy array, ownership is bound to the verified bridge request.
+  if(provenance)return provenance.inspect({petId:state.dog,date,kind,verifiedWear:verified,payload:result}).values;
+  // Number(null), Number('') and Number(' ') are zero; none is a heart/breath
+  // measurement. Keep actual zero only when the SDK provided numeric zero.
+  if(Array.isArray(result)&&result.length===1440&&result.every(v=>typeof v==='number'&&Number.isFinite(v))&&
+    (!['heart','breath'].includes(kind)||result.some(v=>v>0)))return result.slice();
+  // A real/new pet without verified minute samples has no minute trace,
+  // even if the daily scoring engine reports a valid aggregate score.
+  return [];
+ };
+ const keys=wanted||['heart','breath','activity','rest'],out={};
+ if(keys.includes('heart'))out.heart=take('heart');
+ if(keys.includes('breath'))out.breath=take('breath');
+ if(keys.includes('activity')){const motion=take('activityIntensity');const maxMotion=motion.length?Math.max(...motion):0;out.activity=maxMotion<=1.1?motion.map(v=>v>=.5?70:0):motion;}
+ if(keys.includes('rest'))out.rest=take('restState');
+ return out;
+}
+function dpAverage(v){const a=v.filter(Number.isFinite);return a.length?a.reduce((s,n)=>s+n,0)/a.length:0;}
+function dpTime(m){return `${String(Math.floor(Math.max(0,m)/60)).padStart(2,'0')}:${String(Math.max(0,m)%60).padStart(2,'0')}`;}
+function dpChart(values,color='#6d6acf',height=110,options={}){
+ const numeric=v=>typeof v==='number'?v:typeof v==='string'&&v.trim()?Number(v):NaN;
+ const normalized=values.map(numeric);
+ const valid=normalized.map((v,i)=>({v,i})).filter(o=>Number.isFinite(o.v));
+ if(valid.length<2)return `<div class="dp-empty">${label3('目前沒有連續記錄','No continuous recordings','연속 기록이 없어요')}</div>`;
+ const W=350,H=height,l=30,r=2,t=11,b=25;
+ const low=options.min??Math.min(...valid.map(o=>o.v)),high=options.max??Math.max(...valid.map(o=>o.v));
+ const range=Math.max(.1,high-low),padding=Math.max(.4,range*.10),lo=options.min??low-padding,hi=options.max??high+padding;
+ const x=i=>l+(W-l-r)*i/Math.max(1,values.length-1),y=v=>t+(hi-v)/(hi-lo||1)*(H-t-b);
+ let runs=[],run=[];for(let i=0;i<normalized.length;i++){if(Number.isFinite(normalized[i]))run.push([x(i),y(normalized[i])]);else if(run.length){runs.push(run);run=[];}}if(run.length)runs.push(run);
+ const paths=runs.filter(a=>a.length>1).map(a=>`<path d="${deepCurvePath(a,false)}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`).join('');
+ const grid=[0,.5,1].map(z=>{const yy=t+(H-t-b)*z;return `<line x1="${l}" x2="${W-r}" y1="${yy}" y2="${yy}" stroke="#e9edf4"/><text x="${l-7}" y="${yy+3.5}" text-anchor="end" font-size="10" fill="#8b93a5">${(hi-(hi-lo)*z).toFixed(hi-lo<8?1:0)}</text>`}).join('');
+ const labels=options.labels||['0',String(Math.round((values.length-1)/2)),String(values.length-1)];
+ const xlabel=`<text x="${l}" y="${H-6}" font-size="10" fill="#818ba0">${labels[0]}</text><text x="${(W+l-r)/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="#818ba0">${labels[1]}</text><text x="${W-r}" y="${H-6}" text-anchor="end" font-size="10" fill="#818ba0">${labels[2]}</text>`;
+ // Even small event/recovery curves that are not wrapped in inspectSvg need
+ // individual numeric mouse-hover targets. Do not invent missing samples.
+ const middle=String(labels[1]||''),clock=/^(\d{1,2}):(\d\d)$/.exec(middle);
+ const timeAt=i=>{if(!clock)return `${labels[0]||'sample'} · ${i+1}`;const minute=(Number(clock[1])*60+Number(clock[2])+i-Math.floor((values.length-1)/2)+1440)%1440;return `${String(Math.floor(minute/60)).padStart(2,'0')}:${String(minute%60).padStart(2,'0')}`;};
+ const targets=valid.map(p=>`<circle class="dp938-trend-point" data-date="${esc(timeAt(p.i))}" data-value="${p.v.toFixed(1)}" data-unit="" cx="${x(p.i).toFixed(2)}" cy="${y(p.v).toFixed(2)}" r="3.4" fill="${color}" stroke="white" stroke-width="1.2"><title>${esc(timeAt(p.i))} · ${p.v.toFixed(1)}</title></circle>`).join('');
+ return `<svg class="dp-signal-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${label3('變化曲線','Trend line','변화 곡선')}">${grid}${paths}${targets}${xlabel}</svg>`;
+}
+function dpEventsFor(date){
+ const a=dpSignals(date);if(!a.heart.length||!a.breath.length)return [];
+ const hrBase=dpAverage(a.heart),rrBase=dpAverage(a.breath),rank=[];
+ for(let mid=30;mid<1410;mid+=15){
+  const start=mid-12,end=mid+12,hr=dpAverage(a.heart.slice(start,end)),rr=dpAverage(a.breath.slice(start,end)),act=dpAverage(a.activity.slice(start,end));
+  const h=Math.max(0,(hr-hrBase)/Math.max(2,hrBase*.025)),r=Math.max(0,(rr-rrBase)/Math.max(.55,rrBase*.045));
+  const score=.49*h+.51*r;
+  if(score>.65){rank.push({minute:mid,start,end,hr,rr,act,score,type:h>.9&&r>.9?'both':h>r?'heart':'breath'});}
+ }
+ const result=[];
+ for(const e of rank.sort((a,b)=>b.score-a.score)){
+  if(result.every(v=>Math.abs(v.minute-e.minute)>95)){result.push(e);if(result.length===4)break;}
+ }
+ return result.sort((a,b)=>a.minute-b.minute);
+}
+function dpEventTitle(e){return e.type==='both'?label3('心率與呼吸同步變化','Heart and breathing changed together','심박과 호흡이 함께 변했어요'):e.type==='breath'?label3('呼吸節奏出現變化','Breathing changed','호흡 변화가 있었어요'):label3('心率出現變化','Heart rate changed','심박 변화가 있었어요');}
+function dpEventLine(e){const stateLabel=e.act<22?label3('安靜中','At rest','휴식 중'):e.act>=42?label3('活動中','Moving','활동 중'):label3('輕度活動','Light movement','가벼운 움직임');return stateLabel+' · '+label3(`${dpTime(e.start)}–${dpTime(e.end)} · 心率 ${Math.round(e.hr)} bpm，呼吸 ${e.rr.toFixed(0)} 次／分`,`${dpTime(e.start)}–${dpTime(e.end)} · HR ${Math.round(e.hr)} bpm, breathing ${e.rr.toFixed(0)}/min`,`${dpTime(e.start)}–${dpTime(e.end)} · 심박 ${Math.round(e.hr)}, 호흡 ${e.rr.toFixed(0)}/분`);}
+function dpEventList(date,limit=4){return dpEventsFor(date).slice(0,limit);}
+function dpEventEntryButton(e,i){return `<button class="dp-event-item" data-action="dp-event-pick" data-index="${i}"><span class="dp-event-time">${dpTime(e.minute)}</span><span class="dp-event-copy"><b>${dpEventTitle(e)}</b><small>${dpEventLine(e)}</small></span>${vicon('chev',16)}</button>`;}
+// A missing/partial time series is not proof of a healthy day. Even with
+// enough samples, zero highlighted moments means only "no flagged moments",
+// never "no sudden events" or a score-based clinical conclusion.
+function dpEventObservationsAvailable(date){
+ const a=dpSignals(date,['heart','breath']);
+ if(![a.heart,a.breath].every(x=>Array.isArray(x)&&x.length===1440))return false;
+ let paired=0;for(let i=0;i<1440;i++)if(Number.isFinite(a.heart[i])&&a.heart[i]>0&&Number.isFinite(a.breath[i])&&a.breath[i]>0)paired++;
+ return paired>=120;
+}
+function dpEventEmptyMessage(date){return dpEventObservationsAvailable(date)?label3('目前沒有標記出值得回看的心肺變化時刻。','No heart or breathing moments have been flagged for review.','현재 다시 볼 만한 심폐 변화 시점이 표시되지 않았어요.'):label3('當天有效心率與呼吸記錄不足，無法判斷變化時刻。','Not enough valid heart and breathing readings to review moments for this day.','해당 날짜의 유효 심박·호흡 기록이 부족해 변화 시점을 판단할 수 없어요.');}
+function dpEventPreview(){const day=iso(localDate()),es=dpEventList(day,3);return `<section class="card dp-added-block"><div class="row spread"><h3 class="section-title">${label3('24 小時心肺時刻','24-hour heart & breathing moments','24시간 심폐 순간')}</h3><button class="small-link" data-action="dp-events">${label3('回放7天','Replay 7 days','7일 다시보기')} ${vicon('chev',14)}</button></div><div class="dp-event-list">${es.length?es.map(dpEventEntryButton).join(''):`<div class="dp-empty">${dpEventEmptyMessage(day)}</div>`}</div></section>`;}
+function dp1028Text(zh,en,ja,ko){return state.lang==='zh'?toSimplified(zh):state.lang==='zht'?toTraditional(zh):state.lang==='ja'?ja:state.lang==='ko'?ko:en;}
+// The Health journal owns the full records. Deep only places real, owner-dated
+// observations beside physiological moments; it never creates new events.
+function dp1028DayCareRecords(date){
+ const items=[];
+ for(const m of dpFoodMeals(date)){
+  const parts=Array.isArray(m.parts)?m.parts:[],grams=Number(m.grams),name=parts.length?parts.map(p=>dpFoodLabel(p.type)).slice(0,2).join(' + '):dp1028Text('餐食','Meal','食事','식사');
+  items.push({date,time:m.time||'',title:dp1028Text('飲食','Meal','食事','식사')+' · '+name+(Number.isFinite(grams)&&grams>0?' · '+Math.round(grams)+' g':'')});
+ }
+ for(const n of notesForDog().filter(x=>x.date===date)){
+  items.push({date,time:n.time||'',title:dp1028Text('額外紀錄','Care note','健康メモ','건강 기록')+' · '+dpL10nSample(String(n.cat||''))+' · '+dpL10nSample(String(n.text||'')).slice(0,105)});
+ }
+ // The dosing time is a plan slot, NOT evidence of the moment a dose was
+ // swallowed. Keep confirmed medication as DATE-ONLY context.
+ for(const m of (state.medHistoryByPet?.[String(state.dog)]||[]).filter(x=>x.date===date&&x.status==='taken')){
+  items.push({date,time:'',title:dp1028Text('已確認用藥','Dose marked taken','服薬確認済み','투약 확인')+' · '+dpL10nSample(String(m.name||''))+' · '+dp1028Text('原定','Scheduled','予定','예정')+' '+String(m.time||'—')});
+ }
+ return items;
+}
+function dp1028DayCarePanel(date){
+ const core=window.DeepPetCareIntelligence1028;if(!core)return '';
+ const {near,untimed}=core.timedContext(dp1028DayCareRecords(date),date),events=[...near,...untimed];
+ if(!events.length)return '';
+ const shown=events.slice(0,7),extra=events.length-shown.length;
+ return `<section class="card dp1028-care-context"><h3>${dp1028Text('當日健康紀錄對照','Same-day care context','同日の健康記録','당일 건강 기록 대조')}</h3><p>${dp1028Text('僅把健康管理已有的餐食、額外紀錄與服藥確認按日期並列。這些紀錄不會改變當日分數。','Displays existing meal, note and dose-confirmation records on this date. They do not change daily scores.','健康管理に記録された食事・メモ・服薬確認を日付で並べます。点数は変わりません。','해당 날짜의 식사·기록·투약 확인을 나란히 표시하며 점수를 변경하지 않습니다.')}</p><ul>${shown.map(e=>`<li><time>${e.time?esc(e.time):dp1028Text('時間未記錄','No event time','時刻未記録','시간 미기록')}</time><span>${esc(e.title)}</span></li>`).join('')}</ul>${extra>0?`<small>${dp1028Text(`另外 ${extra} 筆在 Health 原紀錄中完整保留。`,`${extra} more records remain in Health.`,`ほか${extra}件はHealthに保存されています。`,`나머지 ${extra}건은 Health에 보존됩니다.`)}</small>`:''}<p class="dp1028-caution">${dp1028Text('同日發生不代表有因果關係；藥物的預定時間不等於實際服藥時間。','Same-day timing does not establish cause. A scheduled dose time is not the actual administration time.','同日の記録は因果関係を意味しません。予定服薬時刻は実際の服薬時刻ではありません。','같은 날의 기록은 인과관계를 의미하지 않으며 예정 투약 시간은 실제 투약 시간이 아닙니다.')}</p></section>`;
+}
+function dp1028EventCarePanel(date,minute){
+ const core=window.DeepPetCareIntelligence1028;if(!core)return '';
+ const {near,untimed}=core.timedContext(dp1028DayCareRecords(date),date,minute,90);
+ if(!near.length&&!untimed.length)return '';
+ const shown=near.slice(0,4);
+ return `<div class="dp1028-event-care"><b>${dp1028Text('附近已記錄的生活時刻（前後90分鐘）','Logged events within 90 minutes','前後90分の記録','전후 90분 기록')}</b>${shown.length?`<ul>${shown.map(e=>`<li><time>${esc(e.time)}</time><span>${esc(e.title)}</span></li>`).join('')}</ul>`:`<p>${dp1028Text('沒有可核對時間的鄰近事件。','No nearby event with a confirmed time.','時刻を確認できる近接記録はありません。','확인된 인접 시간 기록이 없습니다.')}</p>`}${untimed.length?`<small>${dp1028Text(`另有 ${untimed.length} 筆只有日期的健康紀錄，未對應到此時刻。`,`${untimed.length} date-only care records were not attributed to this moment.`,`日付のみの記録${untimed.length}件はこの時刻に関連付けていません。`,`날짜만 있는 기록 ${untimed.length}건은 이 시각과 연결하지 않았습니다.`)}</small>`:''}<small>${dp1028Text('時間接近只供回顧，不代表餐食或照護造成心率變化。','Timing alone does not establish a cause of heart-rate or breathing changes.','時間が近いだけでは心拍・呼吸変化の原因とは言えません。','시간이 가깝다고 원인을 뜻하지 않습니다.')}</small></div>`;
+}
+function dpEventDetail(){
+ const date=state.dpEventDate||iso(localDate()),events=dpEventsFor(date),selected=Math.max(0,Math.min(events.length-1,Number(state.dpEventIndex||0))),e=events[selected],all=dpSignals(date);
+ const dates=Array.from({length:7},(_,i)=>iso(dateAdd(localDate(),i-6)));
+ return `<div class="dp-insight-modal"><div class="dp-date-strip">${dates.map(x=>`<button class="dp-date-btn ${x===date?'active':''}" data-action="dp-event-date" data-date="${x}">${x.slice(5)}</button>`).join('')}</div>${dpDailyContext(date)}<div class="dp-section-small">${label3('當天值得回看的時刻','Moments worth revisiting','돌아볼 순간들')} · ${events.length}</div><div class="dp-event-list">${events.map((x,i)=>`<button class="dp-event-item ${i===selected?'active':''}" data-action="dp-event-pick" data-index="${i}"><span class="dp-event-time">${dpTime(x.minute)}</span><span class="dp-event-copy"><b>${dpEventTitle(x)}</b><small>${dpEventLine(x)}</small></span>${vicon('chev',16)}</button>`).join('')||`<div class="dp-empty">${dpEventEmptyMessage(date)}</div>`}</div>${e?`<div class="dp-event-wave"><h3>${dpTime(e.minute)} · ${dpEventTitle(e)}</h3><small>${label3('前後20分鐘的心率與呼吸變化','Heart and breathing, 20 minutes before and after','전후 20분 심박·호흡')}</small><p class="dp-conclusion">${dpEventContext(e,all)}</p><div class="dp-mini-legend"><i style="background:#db7190"></i>${t('heartRate')}</div>${dpChart(all.heart.slice(e.minute-20,e.minute+21),'#db7190',122,{labels:['−20m',dpTime(e.minute),'+20m']})}<div class="dp-mini-legend"><i style="background:#c45c7c"></i>${t('breath')}</div>${dpChart(all.breath.slice(e.minute-20,e.minute+21),'#c45c7c',122,{labels:['−20m',dpTime(e.minute),'+20m']})}<button class="cta full" data-action="dp-event-to-moment">${label3('保存成 Heart Moment','Save as Heart Moment','Heart Moment로 저장')}</button></div>`:''}</div>`;
+}
+// Keep event graphs and the existing one-step modal route exactly as before.
+// Append genuine time-matched care observations alongside the event conclusion.
+const dp1028EventDetailBase=dpEventDetail;
+dpEventDetail=function(){
+ const html=dp1028EventDetailBase(),date=state.dpEventDate||iso(localDate()),events=dpEventsFor(date),index=Math.max(0,Math.min(events.length-1,Number(state.dpEventIndex||0))),event=events[index];
+ if(!event)return html;
+ const context=dp1028EventCarePanel(date,event.minute);
+ return context?html.replace('<div class="dp-mini-legend">',context+'<div class="dp-mini-legend">'):html;
+};
+function dpBreathingSummary(){const d=dpSignals(iso(localDate()));const indices=d.activity.map((v,i)=>typeof v==='number'&&Number.isFinite(v)&&v>=0&&v<24?i:-1).filter(x=>x>=0),values=indices.map(i=>d.breath[i]).filter(v=>typeof v==='number'&&Number.isFinite(v)&&v>0);
+ // Zero breathing readings and a handful of isolated quiet minutes must not
+ // become an authoritative "mostly steady today" percentage.
+ if(indices.length<120||values.length<90||values.length/indices.length<.8)return '';
+ const avg=dpAverage(values),stable=values.filter(x=>Math.abs(x-avg)<Math.max(2,avg*.13)).length/values.length*100;
+ const summary=stable>=83?label3('今天安靜時的呼吸節奏大多平穩。','Breathing stayed steady through most quiet periods today.','오늘 안정 시 호흡이 대부분 고르게 유지되었어요.'):label3('今天安靜時的呼吸變化較多，已標記值得回看的時段。','Breathing varied more during quiet periods today.','오늘 안정 시 호흡 변동이 조금 더 있었어요.');
+ return `<div class="dp-inline-insight"><div class="row spread"><b>${label3('呼吸節奏','Breathing rhythm','호흡 리듬')}</b><strong>${Math.round(stable)}%</strong></div><p>${summary}</p></div>`;
+}
+function dpQuietNightVitalAverages(date=iso(localDate())){
+ // All overnight surfaces refer to the SAME 21:00-08:00 window. The old
+ // 20:00-12:00 range silently mixed late-morning activity with the night.
+ // A quiet reading also needs actual motion AND rest-state evidence.
+ const prev=iso(dateAdd(new Date(date+'T12:00:00'),-1));
+ const prevSignals=dpSignals(prev),todaySignals=dpSignals(date),heart=[],breath=[];
+ for(let i=0;i<660;i++){
+  const signal=i<180?prevSignals:todaySignals,at=i<180?1260+i:i-180;
+  const h=signal.heart?.[at],r=signal.breath?.[at],motion=signal.activity?.[at],rest=signal.rest?.[at];
+  if(!Number.isFinite(h)||h<=0||!Number.isFinite(r)||r<=0||!Number.isFinite(motion)||!Number.isFinite(rest))continue;
+  if(motion>=28||rest<50)continue;
+  heart.push(h);breath.push(r);
+ }
+ // A few isolated minutes do not justify a number labelled "overnight".
+ const samples=heart.length,usable=samples>=60;
+ return {hr:usable?Math.round(dpAverage(heart)):null,rr:usable?Math.round(dpAverage(breath)):null,samples};
+}
+function dpNightBreathing(selectedDate=deepChosenDate()){const date=selectedDate,prev=iso(dateAdd(new Date(date+'T12:00:00'),-1)),today=dpSignals(date),prior=dpSignals(prev),bins=[];
+ // Both calendar portions of the night need actual minute records; missing
+ // waveform minutes must not be rendered as a fabricated 0 breaths/min event.
+ if(![today.breath,today.rest,prior.breath,prior.rest].every(x=>Array.isArray(x)&&x.length===1440))
+  return `<div class="dp-empty">${label3('夜間呼吸資料不足','Not enough overnight breathing data','야간 호흡 데이터 부족')}</div>`;
+ const quietBreaths=[];
+ for(let k=0;k<22;k++){
+  const src=k<6?prior:today,m=k<6?1260+k*30:(k-6)*30;
+  const quiet=[];
+  for(let i=m;i<m+30;i++)if(Number.isFinite(src.rest[i])&&src.rest[i]>=50&&Number.isFinite(src.breath[i])&&src.breath[i]>0)quiet.push(src.breath[i]);
+  if(quiet.length>=10)quietBreaths.push(...quiet);
+  // Never substitute active/awake breathing for a missing quiet half-hour.
+  // NaN produces a visible gap, not a physiologically impossible zero.
+  bins.push(quiet.length>=10?dpAverage(quiet):NaN);
+ }
+ const validBins=bins.filter(Number.isFinite);
+ if(quietBreaths.length<180||validBins.length<6)
+  return `<div class="dp-empty">${label3('夜間安靜呼吸記錄不足','Not enough quiet overnight breathing readings','야간 안정 호흡 기록 부족')}</div>`;
+ const avg=dpAverage(quietBreaths),baseline=baselineProfile().breath,hasReference=Number.isFinite(baseline)&&baseline>0,diff=hasReference?Math.round(100*(avg-baseline)/baseline):null;
+ const head=!hasReference?label3('已記錄昨夜平均呼吸；尚無可用參考值，暫不判斷是否偏離平常。','Overnight average recorded; no applicable reference is available to judge a change from usual.','야간 평균 호흡을 기록했지만 비교 가능한 기준값이 없습니다.'):Math.abs(diff)<=12?label3('昨夜呼吸接近平常，整體維持平穩。','Overnight breathing stayed close to usual.','지난밤 호흡은 평소와 비슷했어요.'):diff>0?label3(`昨夜平均呼吸比平常快約 ${diff}%。`,`Overnight breathing averaged ${diff}% faster than usual.`,`지난밤 평균 호흡이 평소보다 약 ${diff}% 빨랐어요.`):label3(`昨夜平均呼吸比平常慢約 ${Math.abs(diff)}%。`,`Overnight breathing averaged ${Math.abs(diff)}% slower than usual.`,`지난밤 평균 호흡이 평소보다 약 ${Math.abs(diff)}% 느렸어요.`);
+ const lo=Math.min(...validBins),hi=Math.max(...validBins),pad=Math.max(.4,(hi-lo)*.1),min=lo-pad,max=hi+pad;
+ const missing=22-validBins.length;
+ return `<section class="dp-subpanel"><div class="row spread"><h3>${label3('夜間呼吸守護','Overnight breathing','야간 호흡 관찰')}</h3><strong>${avg.toFixed(1)} <small>${label3('次/分','/min','회/분')}</small></strong></div><p class="dp-conclusion">${head}</p>${inspectSvg(dpChart(bins,'#309b77',125,{labels:['21:00','02:30','07:30']}),bins,{kind:'breath',unit:label3('次／分','/min','회/분'),color:'#309b77',dates:bins.map((_,i)=>i<6?prev:date),timeLabels:bins.map((_,i)=>String((21+Math.floor(i/2))%24).padStart(2,'0')+':'+(i%2?'30':'00')),width:350,height:125,left:30,right:2,top:11,bottom:25,yCoords:bins.map(v=>Number.isFinite(v)?11+(max-v)/Math.max(.1,max-min)*(125-11-25):null)})}${missing?`<p class="dp-conclusion">${label3(`${missing} 個半小時缺少有效的安靜記錄，曲線已留空。`,`${missing} half-hour slots have no usable quiet reading and appear as gaps.`,`${missing}개 30분 구간에 유효한 안정 기록이 없어 빈칸으로 표시했어요.`)}</p>`:''}${dpNightLongestRest(date)}<p class="dp-conclusion">${dpSleepEnergyLine(date)}</p></section>`;
+}
+function dpSleepEnergyLine(selectedDate=deepChosenDate()){if(state.dog>=dogs.length)return '';const all=demoRecords(state.dog),last=all.findIndex(r=>r.date===selectedDate),records=all.slice(Math.max(0,(last<0?all.length-1:last)-14),(last<0?all.length-1:last)+1);if(records.length<10)return '';
+ const m=records.slice(0,-1).map((r,i)=>({s:r.sleep,a:records[i+1].activity})),median=[...m].sort((a,b)=>a.s-b.s)[Math.floor(m.length/2)].s;
+ const higher=m.filter(x=>x.s>=median),lower=m.filter(x=>x.s<median),lo=dpAverage(lower.map(x=>x.a)),hi=dpAverage(higher.map(x=>x.a)),pct=Math.round(100*(hi-lo)/Math.max(1,lo));
+ return Math.abs(pct)<5?label3('最近兩週，睡眠與隔日活動大致維持平常節奏。','Sleep and next-day activity stayed broadly consistent over the last two weeks.','최근 2주간 수면과 다음 날 활동은 평소와 비슷했어요.'):pct>0?label3(`最近兩週，休息較充足後，隔日活動平均多 ${pct}%。`,`Over two weeks, next-day activity averaged ${pct}% higher after longer rest.`,`최근 2주간 충분히 쉰 다음 날 활동량이 평균 ${pct}% 높았어요.`):label3(`最近兩週，休息較長後，隔日活動平均少 ${Math.abs(pct)}%。`,`Over two weeks, next-day activity averaged ${Math.abs(pct)}% lower after longer rest.`,`최근 2주간 더 오래 쉰 다음 날 활동량은 평균 ${Math.abs(pct)}% 낮았어요.`);
+}
+
+// V6.4: non-overlapping composites. Heart = time-indexed events; sleep = longest
+// uninterrupted quiet cardiopulmonary span; activity = moving vs still comparison.
+// The SDK bridge is consumed if available; rendering otherwise uses existing preview records.
+function dpMovementContrast(){
+ const a=dpSignals(iso(localDate()));
+ const quiet=[],moving=[];
+ for(let i=0;i<1440;i++){
+  if(!Number.isFinite(a.heart[i])||a.heart[i]<=0||!Number.isFinite(a.breath[i])||a.breath[i]<=0||!Number.isFinite(a.activity[i])||a.activity[i]<0)continue;
+  if(a.activity[i]<=22)quiet.push(i);else if(a.activity[i]>=42)moving.push(i);
+ }
+ if(quiet.length<25||moving.length<25)return '';
+ const stats=rows=>[dpAverage(rows.map(i=>a.heart[i])),dpAverage(rows.map(i=>a.breath[i]))];
+ const q=stats(quiet),m=stats(moving);
+ return `<div class="dp-subpanel dp-motion-compare"><h3>${label3('動靜心肺對照','Heart & breathing: moving vs resting','활동·휴식 심폐 비교')}</h3><p class="dp-meaning-tip">${label3('這裡比較活動時與安靜時的心跳、呼吸反應，目的是看兩種狀態是否有合理差異。活動時較高通常是正常反應，不能只憑高低判斷好壞。','Compare heart and breathing during rest versus activity. A higher reading while moving is often expected; high or low alone is not a health verdict.','활동과 휴식 때의 심박·호흡을 비교해요. 활동 중 수치가 높은 것은 자연스러울 수 있습니다.')}</p><div class="dp-motion-compare-grid"><div><small>${label3('安靜時','At rest','휴식 중')}</small><b>${q[0].toFixed(0)} <em>bpm</em></b><span>${label3('呼吸','Breathing','호흡')} ${q[1].toFixed(0)} /min</span></div><div><small>${label3('活動時','While moving','활동 중')}</small><b>${m[0].toFixed(0)} <em>bpm</em></b><span>${label3('呼吸','Breathing','호흡')} ${m[1].toFixed(0)} /min</span></div></div><p class="dp-conclusion">${label3(`今天活動時心率比安靜時高 ${Math.round(m[0]-q[0])} bpm，呼吸多 ${Math.round(m[1]-q[1])} 次／分。`,`Moving: heart rate +${Math.round(m[0]-q[0])} bpm and breathing +${Math.round(m[1]-q[1])}/min compared with rest.`,`활동 시 휴식보다 심박 +${Math.round(m[0]-q[0])}, 호흡 +${Math.round(m[1]-q[1])}/분.`)}</p></div>`;
+}
+function dpNightLongestRest(selectedDate=deepChosenDate()){
+ const now=new Date(selectedDate+'T12:00:00'),a=dpSignals(iso(dateAdd(now,-1))),b=dpSignals(iso(now)),chain=[];
+ for(let i=21*60;i<1440;i++)chain.push({t:i, v:a.rest[i],h:a.heart[i],r:a.breath[i]});
+ for(let i=0;i<8*60;i++)chain.push({t:i+1440,v:b.rest[i],h:b.heart[i],r:b.breath[i]});
+ const valid=chain.filter(x=>x.v>=50&&Number.isFinite(x.h)&&x.h>0&&Number.isFinite(x.r)&&x.r>0);
+ if(valid.length<30)return '';
+ const hr=dpAverage(valid.map(x=>x.h)),rr=dpAverage(valid.map(x=>x.r));
+ let best={start:0,n:0},cur={start:0,n:0};
+ chain.forEach((x,i)=>{const steady=x.v>=50&&Number.isFinite(x.h)&&x.h>0&&Number.isFinite(x.r)&&x.r>0&&Math.abs(x.h-hr)<=Math.max(5,hr*.13)&&Math.abs(x.r-rr)<=Math.max(2,rr*.17);if(steady){if(!cur.n)cur.start=i;cur.n++;if(cur.n>best.n)best={...cur};}else cur={start:i+1,n:0};});
+ if(best.n<20)return '';
+ const fmt=i=>dpTime(chain[Math.min(chain.length-1,i)].t%1440);
+ const end=fmt(Math.min(best.start+best.n,chain.length-1));
+ return `<p class="dp-conclusion dp-best-night">${label3(`最安穩的心肺時段：${fmt(best.start)}–${end}，連續 ${best.n} 分鐘。`,`Steadiest overnight interval: ${fmt(best.start)}–${end} (${best.n} minutes).`,`가장 안정된 심폐 구간: ${fmt(best.start)}–${end} (${best.n}분).`)}</p>`;
+}
+function dpDailyContext(date){
+ const a=dpSignals(date);
+ if(![a.heart,a.breath,a.activity].every(x=>Array.isArray(x)&&x.length===1440))
+  return `<div class="dp-empty">${label3('當日連續波形資料不足','No continuous waveform data for this day','해당 날짜 연속 파형 데이터 부족')}</div>`;
+ // Exactly 24 hourly buckets. The previous 25th point repeated 23:00-24:00
+ // at x=24:00, manufacturing a flat last segment on the daily trend.
+ const W=350,H=228,l=30,r=2,plotW=W-l-r,plotKinds=[['heart','#dc7d9b',23,71],['breath','#c45c7c',87,135]],hourly=Array.from({length:24},(_,i)=>{
+  const start=i*60,paired=[];
+  for(let k=start;k<start+60;k++)if(Number.isFinite(a.heart[k])&&a.heart[k]>0&&Number.isFinite(a.breath[k])&&a.breath[k]>0&&Number.isFinite(a.activity[k])&&a.activity[k]>=0)paired.push(k);
+  // Fewer than 45 usable paired minutes is a GAP, not an hourly 0 or a
+  // fabricated continuous trend through an unobserved interval.
+  return paired.length>=45?{h:dpAverage(paired.map(k=>a.heart[k])),b:dpAverage(paired.map(k=>a.breath[k])),m:dpAverage(paired.map(k=>a.activity[k]))}:{h:NaN,b:NaN,m:NaN};
+ });
+ const observedHours=hourly.filter(x=>Number.isFinite(x.h)&&Number.isFinite(x.b)).length;
+ if(observedHours<2)return `<div class="dp-empty">${label3('當日有效心肺與動靜記錄不足，暫不繪製全天趨勢。','Not enough valid paired heart, breathing and movement hours to plot the day.','해당 날짜의 유효 심박·호흡·활동 시간이 부족해 일일 추이를 그리지 않아요.')}</div>`;
+ const rows=plotKinds.map(([kind,color,top,bottom])=>{
+  const values=hourly.map(x=>kind==='heart'?x.h:x.b),observed=values.filter(Number.isFinite),lo=Math.min(...observed),hi=Math.max(...observed),pad=Math.max(.5,(hi-lo)*.13);
+  const points=values.map((v,i)=>Number.isFinite(v)?[l+plotW*(i+.5)/24,top+8+(hi+pad-v)/(hi-lo+2*pad||1)*(bottom-top-16)]:null);
+  const runs=[];let run=[];for(const point of points){if(point){run.push(point);}else if(run.length){runs.push(run);run=[];}}if(run.length)runs.push(run);
+  const paths=runs.map(a=>a.length>=2?`<path d="${deepCurvePath(a,false)}" stroke="${color}" stroke-width="2.65" stroke-linejoin="round" stroke-linecap="round" fill="none"/>`:`<circle cx="${a[0][0]}" cy="${a[0][1]}" r="2.5" fill="${color}"/>`).join('');
+  const title=kind==='heart'?label3('心率','Heart','심박'):label3('呼吸','Breath','호흡');
+  return `<text x="4" y="${top+13}" font-size="10" fill="${color}">${title}</text><line x1="${l}" x2="${W-r}" y1="${bottom}" y2="${bottom}" stroke="#e8ecf4"/>${paths}`;
+ }).join('');
+ const activity=hourly.slice(0,24).map((x,i)=>{if(!Number.isFinite(x.m))return '';const left=l+i*plotW/24;const c=x.m>=42?'#73a9eb':x.m>=22?'#bdcfeb':'#dce5ee';return `<rect x="${left+1}" y="171" width="${Math.max(1,plotW/24-2)}" height="24" rx="2" fill="${c}"/>`;}).join('');
+ const guides=[0,6,12,18,24].map(h=>{const x=l+h*plotW/24;return `<line x1="${x}" y1="12" x2="${x}" y2="199" stroke="#f0f1f5"/><text x="${x}" y="${H-8}" font-size="10" text-anchor="${h===0?'start':h===24?'end':'middle'}" fill="#8590a3">${String(h).padStart(2,'0')}:00</text>`}).join('');
+ return `<section class="dp-context-card"><h3>${label3('24小時心肺與動靜節奏','24-hour heart, breathing & movement','24시간 심폐·활동 리듬')}</h3><svg class="dp-context-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${label3('24小時心率、呼吸與動靜時間線','24-hour heart, breathing and movement','24시간 심박·호흡·활동')}">${guides}${rows}<text x="4" y="179" font-size="10" fill="#7c8ba0">${label3('動靜','Move','활동')}</text>${activity}</svg><div class="dp-context-key"><span><i style="background:#dc7d9b"></i>${label3('心率','Heart','심박')}</span><span><i style="background:#c45c7c"></i>${label3('呼吸','Breath','호흡')}</span><span><i style="background:#73a9eb"></i>${label3('活動較多','More active','활동 많음')}</span><span><i style="background:#dce5ee"></i>${label3('較安靜','Quieter','휴식 많음')}</span></div>${observedHours<24?`<p class="dp-conclusion">${label3(`有 ${24-observedHours} 個小時缺少足夠的有效心肺與動靜資料，曲線已留空。`,`${24-observedHours} hour(s) lacked enough paired readings and are shown as gaps.`,`${24-observedHours}시간은 기록이 부족해 선을 연결하지 않았어요.`)}</p>`:''}</section>`;
+}
+function dpEventContext(e,a){
+ const resting=e.act<22,active=e.act>=42;
+ const title=resting?label3('發生時正在安靜休息。','This happened while resting.','휴식 중 나타났어요.'):active?label3('發生時正在活動。','This happened while moving.','활동 중 나타났어요.'):label3('發生時有輕度活動。','This happened during light movement.','가벼운 움직임 중 나타났어요.');
+ const start=e.minute+12,baseH=dpAverage(a.heart.slice(Math.max(0,e.minute-75),Math.max(1,e.minute-25))),baseR=dpAverage(a.breath.slice(Math.max(0,e.minute-75),Math.max(1,e.minute-25)));
+ let recovered=-1;for(let i=start;i<Math.min(1436,start+65);i++){const h=a.heart.slice(i,i+5),r=a.breath.slice(i,i+5);if(h.length===5&&h.every(v=>Math.abs(v-baseH)<=Math.max(5,baseH*.1))&&r.every(v=>Math.abs(v-baseR)<=Math.max(2,baseR*.14))){recovered=i-e.minute;break;}}
+ return title+' '+(recovered>0?label3(`約 ${recovered} 分鐘後回到接近平常的心肺節奏。`,`Heart and breathing returned near usual about ${recovered} minutes later.`,`약 ${recovered}분 뒤 평소 심폐 리듬에 가까워졌어요.`):label3('後續的心率與呼吸變化可在下方查看。','The following heart and breathing trends are shown below.','이후 심박·호흡 변화는 아래에서 확인하세요.'));
+}
+function dpWeekMemory(){
+ const list=Array.from({length:7},(_,i)=>({date:iso(dateAdd(localDate(),-i))}));
+ const ranked=list.flatMap(d=>dpEventList(d.date,2).map(e=>({...e,date:d.date}))).sort((a,b)=>b.score-a.score);
+ const e=ranked[0];if(!e)return '';
+ return `<div class="dp-week-memory"><b>${label3('本週值得記住的時刻','A moment from this week','이번 주 기억할 순간')}</b><p>${e.date.slice(5)} · ${dpTime(e.minute)}　${dpEventTitle(e)}</p></div>`;
+}
+
+function dpActivityRecoveryInfo(){
+ const a=dpSignals(iso(localDate()));
+ if(a.heart.length!==1440)return null;
+ const candidates=[];
+ for(let m=90;m<1400;m+=10){const prior=dpAverage(a.activity.slice(m-25,m)),next=dpAverage(a.activity.slice(m,m+15));if(prior>36&&next<prior*.82)candidates.push({minute:m,drop:prior-next});}
+ const end=candidates.sort((x,y)=>y.drop-x.drop)[0]?.minute;
+ if(!Number.isFinite(end))return null;
+ const h=a.heart.slice(end,end+36),b=a.breath.slice(end,end+36),baseH=baselineProfile().heart,baseB=baselineProfile().breath;
+ if(!Number.isFinite(baseH)||baseH<=0||!Number.isFinite(baseB)||baseB<=0)return null; // A profile default is not a verified recovery reference.
+ if(h.length!==36||b.length!==36)return null;
+ const restored=(values,base,margin)=>{const i=values.findIndex((x,j)=>j>=4&&j+3<values.length&&Math.abs(x-base)<=margin&&values.slice(j,j+4).every(v=>Math.abs(v-base)<=margin));return i>=0?i:null;};
+ return {heart:h,breath:b,heartMinutes:restored(h,baseH,Math.max(4,baseH*.08)),breathMinutes:restored(b,baseB,Math.max(2,baseB*.12))};
+}
+function dpActivityRecovery(){
+ const x=dpActivityRecoveryInfo();
+ if(!x)return ''; // The parent card already displays the unavailable recovery state.
+ const hr=x.heartMinutes===null?label3('仍在恢復','Still recovering','회복 중'):`${x.heartMinutes} ${label3('分鐘','min','분')}`;
+ const br=x.breathMinutes===null?label3('仍在恢復','Still recovering','회복 중'):`${x.breathMinutes} ${label3('分鐘','min','분')}`;
+ return `<div class="dp-subpanel"><h3>${label3('心肺雙重恢復','Heart & breathing recovery','심박·호흡 회복')}</h3><p class="dp-conclusion">${label3(`活動結束後，我的心率約 ${hr} 回到休息水準，呼吸約 ${br}。`,`After activity, my heart rate settled in ${hr}; breathing in ${br}.`,`활동 후 심박은 약 ${hr}, 호흡은 약 ${br} 만에 안정됐어요.`)}</p><div class="dp-mini-legend"><i style="background:#d77d9c"></i>${t('heartRate')} (bpm)</div>${dpChart(x.heart,'#d77d9c',115,{labels:['0m','18m','35m']})}<div class="dp-mini-legend"><i style="background:#c45c7c"></i>${t('breath')} (/min)</div>${dpChart(x.breath,'#c45c7c',115,{labels:['0m','18m','35m']})}</div>`;
+}
+
+function dpVitalityHours(){const dates=Array.from({length:7},(_,i)=>iso(dateAdd(localDate(),-i))),sums=Array(12).fill(0),counts=Array(12).fill(0);
+ for(const date of dates){const a=dpSignals(date).activity||[];for(let h=0;h<12;h++){const vals=a.slice(h*120,(h+1)*120),valid=vals.filter(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0);if(vals.length===120&&valid.length>=108){sums[h]+=dpAverage(valid);counts[h]++;}}}
+ // Zero coverage previously declared 00:00-02:00 the "most active" hours.
+ // At least three observed days are needed to call a period "usually" active.
+ const best=sums.map((v,i)=>({i,v:counts[i]?v/counts[i]:0,days:counts[i]})).filter(x=>x.days>=3).sort((a,b)=>b.v-a.v)[0];if(!best||best.v<5)return '';
+ return `<div class="dp-inline-insight"><b>${label3('最有活力的時段','Most active hours','가장 활발한 시간')}</b><p>${label3(`最近7天，${dpTime(best.i*120)}–${dpTime((best.i+1)*120)} 通常最活躍。`,`Over the last 7 days, the most active period was ${dpTime(best.i*120)}–${dpTime((best.i+1)*120)}.`,`최근 7일간 ${dpTime(best.i*120)}–${dpTime((best.i+1)*120)}에 가장 활발했어요.`)}</p></div>`;
+}
+function dpSoloRows(){return (state.dpSoloByPet?.[String(state.dog)]||[]).slice().reverse();}
+function dpSoloSummary(rec){
+ const start=new Date(rec.start),end=new Date(rec.end||Date.now()),elapsed=(end-start)/60000,minutes=Number.isFinite(elapsed)?Math.max(0,Math.round(elapsed)):0;
+ const unavailable=(coverage=0)=>({minutes,share:null,events:null,coverage});
+ if(!Number.isFinite(elapsed)||elapsed<10||minutes>7*1440)return unavailable();
+ // Historical windows use the minute readings of THEIR OWN dates and owner.
+ // Today's signalQuality() is not evidence for a past time-alone session.
+ const heart=[],breath=[],activity=[],startDay=new Date(start.getFullYear(),start.getMonth(),start.getDate());
+ let expected=0;
+ for(let i=0;i<=7;i++){
+  const d=dateAdd(startDay,i),next=dateAdd(d,1),from=new Date(Math.max(start.getTime(),d.getTime())),to=new Date(Math.min(end.getTime(),next.getTime()));
+  if(to<=from)continue;
+  const a=Math.max(0,from.getHours()*60+from.getMinutes()),b=Math.min(1440,to.getTime()===next.getTime()?1440:to.getHours()*60+to.getMinutes());
+  expected+=Math.max(0,b-a);
+  const signal=dpSignals(iso(d));
+  for(let minute=a;minute<b;minute++){
+   const h=signal.heart?.[minute],r=signal.breath?.[minute],motion=signal.activity?.[minute];
+   if(!Number.isFinite(h)||h<=0||!Number.isFinite(r)||r<=0||!Number.isFinite(motion)||motion<0)continue;
+   heart.push(h);breath.push(r);activity.push(motion);
+  }
+ }
+ const coverage=expected?heart.length/expected:0;
+ // Ten recorded minutes cannot substantiate an eight-hour percentage. Lack
+ // of evidence is "—", not 0 events or a misleadingly calm 100%.
+ if(heart.length<10||coverage<.8)return unavailable(coverage);
+ const bh=dpAverage(heart),br=dpAverage(breath),share=Math.round(100*heart.filter((n,i)=>activity[i]<25&&n<bh+Math.max(3,bh*.08)&&breath[i]<br+Math.max(1.5,br*.1)).length/heart.length);
+ const events=Math.round(heart.filter((n,i)=>i%30===0&&n>bh+Math.max(5,bh*.08)&&breath[i]>br+Math.max(2,br*.1)).length);
+ return {minutes,share,events,coverage};
+}
+function dpSoloModal(){const rows=dpSoloRows(),active=rows.find(r=>!r.end);
+ return `<div class="dp-insight-modal"><div class="dp-solo-intro">${label3('出門時記錄獨處時間，回家後查看心跳、呼吸與休息狀態。','Mark time alone, then see heart, breathing and rest patterns.','외출 시간을 기록하고 돌아와 심박·호흡·휴식을 확인하세요.')}</div><button class="cta full" data-action="${active?'dp-solo-stop':'dp-solo-start'}">${active?label3('我回家了 · 完成記錄','I’m home · finish','돌아왔어요 · 기록 완료'):label3('開始獨處觀察','Start time alone','혼자 있는 시간 시작')}</button>${rows.length?rows.slice(0,7).map(r=>{const x=dpSoloSummary(r);return `<div class="dp-solo-record"><div class="row spread"><b>${iso(new Date(r.start))}</b><span class="pill ${r.end?'ok':'warn'}">${r.end?label3('已完成','Completed','완료'):label3('進行中','In progress','진행 중')}</span></div><div class="dp-solo-grid"><div><small>${label3('獨處時間','Time alone','혼자 있는 시간')}</small><b>${(x.minutes/60).toFixed(1)} h</b></div><div><small>${label3('平穩時段','Steady periods','안정된 시간')}</small><b>${x.share===null?'—':x.share+'%'}</b></div><div><small>${label3('心肺變化','Cardio changes','심폐 변화')}</small><b>${x.events===null?'—':x.events}</b></div></div><p>${x.share===null?label3('這段時間有效心肺與動靜記錄不足，暫不評估。','Not enough valid heart, breathing and motion readings for this period.','해당 기간의 심박·호흡·활동 기록이 부족해 평가하지 않아요.'):x.share>=70?label3('這段時間的生理狀態大多平穩。','Most of this period was physiologically steady.','대부분 생리 상태가 안정적이었어요.'):label3('這段時間有較多心肺變化，值得回看。','There were more heart and breathing changes to review.','심폐 변화가 있어 다시 살펴볼 만해요.')}</p></div>`}).join(''):`<div class="solo-empty-onboarding"><div class="solo-how-title">${label3('使用方式','How it works','이용 방법')}</div><div class="solo-how-grid">${[[label3('離家前','Before you leave','외출 전'),label3('按開始記錄','Tap Start','시작 누르기')],[label3('回家後','When you return','귀가 후'),label3('按完成記錄','Tap Finish','완료 누르기')],[label3('查看結果','Review','결과 보기'),label3('心肺、休息變化','Heart, breathing & rest','심박·호흡·휴식 변화')]].map((x,i)=>`<div><strong>${i+1}</strong><b>${x[0]}</b><small>${x[1]}</small></div>`).join('')}</div></div>`}</div>`;
+}
+function dpMomentRows(){return state.dpMomentsByPet?.[String(state.dog)]||[];}
+function dpMomentFocusCurrent(){
+ const focus=state.dpMomentFocus;
+ if(!focus||focus.dog!==state.dog||focus.epoch!==state.dpPetEpoch||!/^\d{4}-\d{2}-\d{2}$/.test(String(focus.date))||!Number.isInteger(focus.minute)||focus.minute<0||focus.minute>=1440)return null;
+ const saved=dpMomentRows().find(x=>x.date===focus.date&&x.minute===focus.minute);
+ if(saved)return {...focus,hr:saved.hr,rr:saved.rr};
+ const source=dpEventsFor(focus.date).find(x=>x.minute===focus.minute);
+ return source?{...focus,hr:source.hr,rr:source.rr}:null;
+}
+function dpMomentWindowMean(values){const observed=(values||[]).filter(v=>typeof v==='number'&&Number.isFinite(v)&&v>0);return observed.length>=8?dpAverage(observed):null;}
+function dpMomentStats(){const focus=dpMomentFocusCurrent(),e=focus||dpMomentRows().at(-1);if(!e)return null;const a=dpSignals(e.date),minute=Number(e.minute),valid=Number.isInteger(minute)&&minute>=0&&minute<1440;return {e,beforeH:valid&&minute>=12?dpMomentWindowMean(a.heart.slice(minute-12,minute)):null,afterH:valid&&minute<=1428?dpMomentWindowMean(a.heart.slice(minute,minute+12)):null,beforeR:valid&&minute>=12?dpMomentWindowMean(a.breath.slice(minute-12,minute)):null,afterR:valid&&minute<=1428?dpMomentWindowMean(a.breath.slice(minute,minute+12)):null};}
+function dpMomentShareLine(){const x=dpMomentStats();if(!x)return '';const fmt=(v)=>v===null?'—':String(Math.round(v));return `<div class="dp-share-data">${x.e.date} · ${dpTime(x.e.minute)}<br>${label3('心率','Heart','심박')} ${fmt(x.beforeH)} → ${fmt(x.afterH)} bpm<br>${label3('呼吸','Breathing','호흡')} ${fmt(x.beforeR)} → ${fmt(x.afterR)} /min</div>`;}
+function dpMomentExportText(){const x=dpMomentStats();if(!x)return 'DeepPet · Heart Moments';const fmt=(v)=>v===null?'—':String(Math.round(v));return `HR ${fmt(x.beforeH)} to ${fmt(x.afterH)} bpm · Breath ${fmt(x.beforeR)} to ${fmt(x.afterR)}/min`;}
+function dpMomentPanel(){const rows=dpMomentRows(),focus=dpMomentFocusCurrent(),es=dpEventsFor(focus?.date||iso(localDate())),selected=focus?es.find(x=>x.minute===focus.minute):es[Math.min(es.length-1,Math.max(0,Number(state.dpEventIndex||0)))],last=focus?rows.find(x=>x.date===focus.date&&x.minute===focus.minute):rows.at(-1);if(!selected&&!last&&!focus)return `<div class="dp-subpanel"><h3>${label3('留下有意義的心動時刻','Save a meaningful moment','의미 있는 순간을 남겨요')}</h3><p>${label3('目前沒有保存的心動時刻；可從有記錄的變化時段選取。','No Heart Moment has been saved yet. Choose a recorded moment to keep.','아직 저장된 순간이 없어요. 기록된 변화 시점에서 선택할 수 있어요.')}</p></div>`;
+ const e=focus||last||{date:iso(localDate()),minute:selected.minute,hr:selected.hr,rr:selected.rr};const a=dpSignals(e.date),minute=Number(e.minute),validMinute=Number.isInteger(minute)&&minute>=0&&minute<1440;
+ const preH=validMinute&&minute>=12?dpMomentWindowMean(a.heart.slice(minute-12,minute)):null,postH=validMinute&&minute<=1428?dpMomentWindowMean(a.heart.slice(minute,minute+12)):null,preR=validMinute&&minute>=12?dpMomentWindowMean(a.breath.slice(minute-12,minute)):null,postR=validMinute&&minute<=1428?dpMomentWindowMean(a.breath.slice(minute,minute+12)):null;
+ const fmt=v=>v===null?'—':String(Math.round(v)),paired=[preH,postH,preR,postR].every(v=>v!==null);
+ const verdict=!paired?label3('這個時刻的原始分鐘記錄不足，保留心動時刻，但不補造變化數值。','Minute readings are incomplete for this saved moment; no values are invented.','이 순간의 분 단위 기록이 부족해 수치를 만들어 표시하지 않아요.'):Math.abs(postH-preH)>4||Math.abs(postR-preR)>2?label3('這個時刻前後，心跳或呼吸出現值得回看的變化。','Heart or breathing changed around this moment.','이 순간 전후 심박 또는 호흡 변화가 있었어요.'):label3('在已記錄的這段時間內，心跳與呼吸變化較小。','Heart and breathing varied little during this recorded interval.','기록된 구간에서 심박과 호흡 변화가 적었어요.');
+ return `<div class="dp-subpanel"><div class="row spread"><h3>${label3('我們的心動時刻','Our Heart Moment','우리의 심장 순간')}</h3><b>${dpTime(e.minute)}</b></div><div class="dp-moment-grid"><div><small>${label3('前段心率','Before HR','이전 심박')}</small><b>${fmt(preH)} <em>bpm</em></b></div><div><small>${label3('後段心率','After HR','이후 심박')}</small><b>${fmt(postH)} <em>bpm</em></b></div><div><small>${label3('前段呼吸','Before breath','이전 호흡')}</small><b>${fmt(preR)} <em>/min</em></b></div><div><small>${label3('後段呼吸','After breath','이후 호흡')}</small><b>${fmt(postR)} <em>/min</em></b></div></div><p class="dp-conclusion">${verdict}</p>${selected?`<button class="cta secondary full" data-action="dp-moment-save">${label3('保存今天這個時刻','Save today’s moment','오늘의 순간 저장')}</button>`:''}</div>`;
+}
+
+
+function dpMomentActiveEvent(){
+ const focus=dpMomentFocusCurrent();if(focus)return focus;
+ const saved=dpMomentRows().at(-1), events=dpEventsFor(iso(localDate()));
+ const selected=events[Math.max(0,Math.min(events.length-1,Number(state.dpEventIndex||0)))];
+ const now=new Date();
+ return saved|| (selected?{date:iso(localDate()),minute:selected.minute,hr:selected.hr,rr:selected.rr}:{date:iso(localDate()),minute:now.getHours()*60+now.getMinutes()});
+}
+function dpMomentCardContext(){
+ const e=dpMomentActiveEvent(), signals=dpSignals(e.date), requested=Number(e.minute);
+ // Preserve an actual 00:00 or 23:59 event. Midnight must never silently
+ // become 12:00, and absent adjacent-day data must remain unavailable.
+ const minute=Number.isInteger(requested)&&requested>=0&&requested<1440?requested:720;
+ const preH=minute>=12?dpMomentWindowMean(signals.heart.slice(minute-12,minute)):null,postH=minute<=1428?dpMomentWindowMean(signals.heart.slice(minute,minute+12)):null;
+ const preR=minute>=12?dpMomentWindowMean(signals.breath.slice(minute-12,minute)):null,postR=minute<=1428?dpMomentWindowMean(signals.breath.slice(minute,minute+12)):null;
+ const index=demoRecords(state.dog).findIndex(r=>r.date===e.date),daily=index<0?null:demoRecords(state.dog)[index];
+ return {e,signals,minute,preH,postH,preR,postR,daily};
+}
+function dpPosterPath(vals,minY,maxY,start,width=780,baseline=1120){
+ const seq=vals.length>=2?vals:[0,0],lo=Math.min(...seq),hi=Math.max(...seq),span=Math.max(1,hi-lo);
+ const points=seq.map((v,i)=>[60+i*(width/Math.max(1,seq.length-1)),baseline+maxY-(v-lo)/span*(maxY-minY)]);
+ return smoothPath(points);
+}
+function dpPosterPhoto(photo){return DP_HEART_POSTER_PHOTOS[photo]||photo;}
+function dpHeartPosterSvg(){
+ const d=currentDog(),ctx=dpMomentCardContext(),m=ctx.minute;
+ const a=ctx.signals;
+ // Only a showcase pet with enough matching source minutes may render its
+ // existing illustrative curves. A saved historical moment must not sprout
+ // a fictitious zero-rate 20Hz waveform when its source has disappeared.
+ const hasMomentReadings=[ctx.preH,ctx.postH,ctx.preR,ctx.postR].every(v=>v!==null&&Number.isFinite(v)&&v>0);
+ const hr=hasMomentReadings?ctx.preH:null,rr=hasMomentReadings?ctx.preR:null;
+ const heartPts=hasMomentReadings?Array.from({length:160},(_,i)=>[60+i*(780/159),1097-bcgSample(i/20,hr,state.dog+1)*49]):[];
+ const breathPts=hasMomentReadings?Array.from({length:160},(_,i)=>[60+i*(780/159),1142-breathingSample(i/20,rr,state.dog+1)*16]):[];
+ const hpath=hasMomentReadings?smoothPath(heartPts):'',rpath=hasMomentReadings?smoothPath(breathPts):'';
+ const title=label3('每一次心跳，','Every heartbeat,','모든 심장 박동은');
+ const subtitle=label3('都值得被珍藏。','is worth keeping.','기억할 가치가 있어요.');
+ const date=`${dpFullDate(ctx.e.date)} · ${dpTime(m)}`;
+ const status=!hasMomentReadings?label3('此時刻原始記錄不足，未推測生理狀態。','Insufficient source readings; no health status inferred.','원본 기록이 부족해 상태를 추정하지 않아요.'):Math.abs(ctx.postH-ctx.preH)>=5||Math.abs(ctx.postR-ctx.preR)>=2?label3('這一刻，牠的心跳或呼吸有值得回看的變化。','Heart or breathing changed around this moment.','이 순간 심박 또는 호흡 변화가 있었어요.'):label3('在這段已記錄時間，心跳與呼吸變化較小。','Little variation in this recorded interval.','이 기록 구간은 심박과 호흡 변화가 적었어요.');
+ const rate=v=>v===null?'—':String(Math.round(v));
+ const pic=esc(dpPosterPhoto(d.photo));
+ const breed=esc(breedText(d));
+ const dayHRV=ctx.daily?`RMSSD ${Math.round(ctx.daily.rmssd)} ms    ·    SDNN ${Math.round(ctx.daily.sdnn)} ms`:label3('心率與呼吸的日常記錄','Daily heart and breathing record','일상 심박·호흡 기록');
+ return `<svg id="heartPoster" class="dp-heart-poster-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 900 1500" width="900" height="1500" role="img" aria-label="DeepPet Heart Moments — ${esc(d.name)}">
+ <defs>
+  <linearGradient id="hpTop" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#091321" stop-opacity=".67"/><stop offset=".70" stop-color="#0b1325" stop-opacity=".06"/><stop offset="1" stop-color="#0b1325" stop-opacity="0"/></linearGradient>
+  <linearGradient id="hpBottom" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#070f1d" stop-opacity="0"/><stop offset=".38" stop-color="#071122" stop-opacity=".76"/><stop offset="1" stop-color="#06101d" stop-opacity=".97"/></linearGradient>
+  <linearGradient id="hpWave" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ffa0c4"/><stop offset="1" stop-color="#ffd5e9"/></linearGradient>
+ </defs>
+ <image x="0" y="0" width="900" height="1500" preserveAspectRatio="xMidYMid slice" href="${pic}" xlink:href="${pic}"/>
+ <rect x="0" y="0" width="900" height="620" fill="url(#hpTop)"/>
+ <rect x="0" y="750" width="900" height="750" fill="url(#hpBottom)"/>
+ <rect x="48" y="54" width="518" height="65" rx="32" fill="#071324" fill-opacity=".52" stroke="#ffffff" stroke-opacity=".32"/>
+ <circle cx="89" cy="87" r="9" fill="#ff92b1"/>
+ <text x="115" y="99" fill="#fff" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="30" font-weight="700" letter-spacing="4">DEEPPET · HEART MOMENTS</text>
+ <path d="M735 78c-27-36-75 4-32 41l32 30 33-30c45-39-7-77-33-41z" fill="none" stroke="#ffd6e8" stroke-width="6" opacity=".95"/>
+ <text x="51" y="224" fill="#fff" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-weight="800" font-size="58">${title}</text>
+ <text x="51" y="302" fill="#fff" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-weight="800" font-size="58">${subtitle}</text>
+ <text x="58" y="919" fill="#fff" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-weight="800" font-size="79">${esc(d.name)}</text>
+ <text x="59" y="968" fill="#e8e3f2" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="29">${breed} · ${date}</text>
+ <rect x="44" y="1010" width="812" height="404" rx="34" fill="#0d1d2b" fill-opacity=".78" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+ <text x="67" y="1056" fill="#f0e5f6" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-weight="700" font-size="25">${hasMomentReadings?label3('這一刻的心搏與呼吸波形','Heartbeat & breathing waves','이 순간의 심박·호흡 파형'):label3('此時刻暫無可用心搏與呼吸波形','No available heart or breathing trace','이 순간의 심박·호흡 파형 없음')}</text>
+ <line x1="60" y1="1137" x2="839" y2="1137" stroke="#fff" stroke-opacity=".15" stroke-width="2"/>
+ ${hasMomentReadings?`<path d="${hpath}" fill="none" stroke="url(#hpWave)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="${rpath}" fill="none" stroke="#75d9ea" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".88"/><circle cx="88" cy="1174" r="6" fill="#ffafcc"/><text x="104" y="1183" fill="#fce5ef" font-size="23" font-family="Arial,sans-serif">${label3('心搏','Heartbeat','심박')}</text><circle cx="310" cy="1174" r="6" fill="#75d9ea"/><text x="326" y="1183" fill="#e7f9ff" font-size="23" font-family="Arial,sans-serif">${label3('呼吸','Breathing','호흡')}</text>`:''}
+ <line x1="63" y1="1204" x2="837" y2="1204" stroke="#fff" stroke-opacity=".15"/>
+ <text x="68" y="1245" fill="#fbd2e5" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="27">${label3('心率變化','Heart rate','심박 변화')}</text>
+ <text x="68" y="1288" fill="#fff" font-family="Arial,sans-serif" font-weight="800" font-size="35">${rate(ctx.preH)}  →  ${rate(ctx.postH)}  bpm</text>
+ <text x="470" y="1245" fill="#a5e9f5" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="27">${label3('呼吸變化','Breathing','호흡 변화')}</text>
+ <text x="470" y="1288" fill="#fff" font-family="Arial,sans-serif" font-weight="800" font-size="35">${rate(ctx.preR)}  →  ${rate(ctx.postR)} /min</text>
+ <text x="67" y="1340" fill="#c4d5e5" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="25">${dayHRV}</text>
+ <text x="60" y="1460" fill="#ffffff" font-family="Arial,'Noto Sans CJK TC',sans-serif" font-size="27">${status}</text>
+ </svg>`;
+}
+async function dpDownloadPoster(){
+ const svg=document.querySelector('#heartPoster');
+ if(!svg){toast(label3('請先打開心跳時刻預覽','Open the moment preview first','먼저 미리보기를 열어 주세요'));return;}
+ const petIndex=state.dog,petEpoch=state.dpPetEpoch,petName=currentDog().name||'DeepPet';
+ let url=null;
+ try{
+  const cloned=svg.cloneNode(true);cloned.setAttribute('xmlns','http://www.w3.org/2000/svg');cloned.setAttribute('xmlns:xlink','http://www.w3.org/1999/xlink');
+  // SVG-as-image browsers commonly block external JPG resources. Embed the
+  // selected pet's existing photo in the export so the full background stays
+  // visible in the PNG, including offline WebViews and Safari.
+  const photo=cloned.querySelector('image');
+  if(photo){const src=photo.getAttribute('href')||photo.getAttribute('xlink:href');
+   if(src&&!src.startsWith('data:')){
+    const response=await fetch(src,{credentials:'same-origin'});
+    if(!response.ok)throw new Error(`Heart Moments photo unavailable: ${response.status}`);
+    const blob=await response.blob();
+    const embedded=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(blob);});
+    photo.setAttribute('href',embedded);photo.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href',embedded);
+   }
+  }
+  // Export the same SVG layout, now with a self-contained background image.
+  const xml=new XMLSerializer().serializeToString(cloned);
+  url=URL.createObjectURL(new Blob([xml],{type:'image/svg+xml;charset=utf-8'}));
+  const poster=new Image();
+  await new Promise((resolve,reject)=>{poster.onload=resolve;poster.onerror=reject;poster.src=url;});
+  if(state.dog!==petIndex||state.dpPetEpoch!==petEpoch||document.querySelector('#heartPoster')!==svg)return;
+  const canvas=document.createElement('canvas');canvas.width=900;canvas.height=1500;
+  canvas.getContext('2d').drawImage(poster,0,0,900,1500);
+  const a=document.createElement('a');a.download=`${petName}_DeepPet_HeartMoments.png`;a.href=canvas.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();
+  toast(label3('圖片已儲存，內容與預覽相同','Saved exactly as previewed','미리보기와 같은 이미지로 저장했어요'));
+ }catch(err){toast(label3('儲存 PNG 失敗，請重新開啟預覽','Could not save PNG. Reopen the preview.','PNG 저장에 실패했어요. 다시 열어 주세요.'));}
+ finally{if(url)URL.revokeObjectURL(url);}
+}
+function dpHeartMomentScreen(){
+ const focus=dpMomentFocusCurrent(),s=dpMomentCardContext(),saved=focus?dpMomentRows().find(x=>x.date===focus.date&&x.minute===focus.minute):dpMomentRows().at(-1),events=dpEventsFor(focus?.date||iso(localDate()));
+ const before=label3('時刻前12分鐘的平均值','Average in the 12 minutes before','순간 이전 12분 평균');
+ const after=label3('時刻後12分鐘的平均值','Average in the 12 minutes after','순간 이후 12분 평균');
+ return `<div class="dp-heart-editor">
+  <section class="dp-heart-story-intro"><span class="dp-heart-kicker">HEART MOMENTS · DEEPPET</span><h3>${label3('留下我們的心跳時刻','Save a heartbeat together','함께한 심장 박동 순간')}</h3><p>${label3('選擇值得紀念的時刻，看看當時心跳、呼吸與當日心率變異的紀錄，再做成專屬圖片。','Pick a meaningful moment and see heart rate, breathing and daily HRV before making a pet keepsake.','기억할 순간을 골라 심박, 호흡, 당일 HRV를 확인하고 카드로 남겨요.')}</p>
+  <div class="dp-heart-time">${dpFullDate(s.e.date)} · ${dpTime(s.minute)}</div>
+  <div class="dp-heart-compare"><div><b>${label3('心率','Heart rate','심박수')}</b><strong>${s.preH===null?'—':Math.round(s.preH)} → ${s.postH===null?'—':Math.round(s.postH)} <small>bpm</small></strong></div><div><b>${label3('呼吸','Breathing','호흡수')}</b><strong>${s.preR===null?'—':Math.round(s.preR)} → ${s.postR===null?'—':Math.round(s.postR)} <small>/min</small></strong></div></div>
+  <p class="dp-heart-explanation">${label3('箭頭左邊是這個時刻前12分鐘的平均值，右邊是後12分鐘的平均值。這是前後變化，不代表情緒或疾病診斷。','Left values are the 12-minute averages before this moment, right values are the 12-minute averages afterward. They show changes, not a diagnosis or emotion reading.','왼쪽은 이전 12분 평균, 오른쪽은 이후 12분 평균이에요. 변화는 감정이나 질환 진단을 뜻하지 않아요.')}</p>
+  ${events.length?`<button type="button" class="dp-heart-collect" data-action="dp-moment-save">${vicon('heart',18)} ${saved?label3('再收藏今天這個時刻','Save another moment','오늘의 순간을 더 저장'):label3('收藏這個時刻','Keep this moment','이 순간 저장')}</button>`:''}
+  </section>
+  <div class="dp-heart-poster-head"><h3>${label3('你的心跳紀念卡','Your heartbeat keepsake','나만의 심박 카드')}</h3><span>${label3('完整圖片預覽','Full image preview','전체 이미지 미리보기')}</span></div>
+  <div class="dp-heart-poster-frame"><img class="dp-heart-photo-backdrop" src="${esc(dpPosterPhoto(currentDog().photo))}" alt="" aria-hidden="true">${dpHeartPosterSvg()}</div>
+  <p class="dp-heart-wysiwyg">${label3('這張完整海報就是最後儲存的圖片。可先全螢幕查看，確認後再存成 PNG。','The entire poster above is exactly what will be saved. Preview it full-screen, then save as PNG.','보이는 전체 포스터 그대로 저장돼요. 전체 화면으로 확인하고 PNG로 저장하세요.')}</p>
+  <div class="dp-heart-actions"><button class="care-outline" data-action="heart-fullscreen">${vicon('eye',17)} ${label3('全螢幕預覽','Full-screen preview','전체 화면 미리보기')}</button><button class="cta" data-action="save-heart-image">${vicon('download',17)} ${label3('儲存這張圖片','Save this image','이미지 저장')}</button></div>
+ </div>`;
+}
+
+function dpHRVSummary(snap){
+ const r=snap?.rec,b=snap?.base;
+ if(!Number.isFinite(r?.rmssd)||!Number.isFinite(r?.sdnn)||!Number.isFinite(b?.rm)||!Number.isFinite(b?.sd)||b.rm<=0||b.sd<=0)return `<div class="dp-hrv-conclusion"><strong>HRV</strong><p>${state.lang==='ja'?'比較可能な有効データを収集中です。':state.lang==='en'?'Collecting valid, comparable HRV readings.':state.lang==='zh'?'正在积累可比较的有效 HRV 数据。':'正在累積可比較的有效 HRV 數據。'}</p></div>`;
+ const ra=(r.rmssd-b.rm)/b.rm,sa=(r.sdnn-b.sd)/b.sd;
+ const stable=Math.abs(ra)<.12&&Math.abs(sa)<.12;
+ const summary=stable?label3('今天RMSSD與SDNN都接近平常，心搏調節維持穩定。','RMSSD and SDNN are both near their usual levels today.','오늘 RMSSD와 SDNN이 평소 수준에 가까워요.'):
+ ra<-.12&&sa<-.12?label3('今天兩項心搏變異指標都低於平常，休息時可繼續留意變化。','Both HRV measures are below usual today. Watch the next resting readings.','오늘 두 HRV 지표가 평소보다 낮아요. 휴식 때 추세를 살펴보세요.'):
+ ra>.12&&sa>.12?label3('今天兩項心搏變異指標都高於平常，近期節奏出現變化。','Both HRV measures are above usual today. The recent rhythm has shifted.','오늘 두 HRV 지표가 평소보다 높아요. 최근 리듬에 변화가 있어요.'):
+ label3('今天兩項心搏變異指標變化方向不同，建議繼續比較近7天趨勢。','The two HRV measures moved differently today. Review the seven-day trend.','오늘 두 HRV 지표의 변화 방향이 달라요. 7일 추세를 살펴보세요.');
+ return `<div class="dp-hrv-conclusion"><strong>${label3('今天的心搏調節','Today’s heart rhythm','오늘의 심박 조절')}</strong><p>${summary}</p></div>`;
+}
+
+function dpBaselineHelp(kind=0){const name=kind===0?label3('心肺','Heart and breathing','심폐'):kind===1?label3('睡眠狀態','Sleep status','수면·휴식'):label3('精力活動','Activity','활동');
+ return `<details class="dp-plain-help"><summary>${label3('我的平常範圍是什麼？','What is my usual range?','평소 범위란 무엇인가요?')} </summary><p>${label3(`DeepPet 會從近期14個有效記錄日整理 ${name} 的平常狀態，之後拿新一天和牠自己的過往表現比較。不是所有狗貓共用同一個正常數字，也不是簡單把14天所有數值直接平均。`,`The app builds this pet’s reference from up to 14 recent valid recording days, then compares newer days with this pet's own patterns. It is not a universal threshold or a simple average of every raw reading.`,`최근 유효한 14일 기록으로 반려동물의 평소 상태를 정리해 새 날짜와 비교합니다.`)}</p></details>`;}
+function dpHrvHelp(){
+ const L=(tw,cn,en,ja)=>state.lang==='en'?en:state.lang==='ja'?ja:state.lang==='zh'?cn:tw;
+ const b=baselineProfile(),period=Number(state.range)||1,features=globalThis.DeepPetSignalScoring?.getFeatures?.(state.dog)||[];
+ const owner=typeof dpUsesRealMeasurements==='function'&&dpUsesRealMeasurements();
+ const selected=period===1?deepChosenDate():null;
+ // One dated, quality-controlled PAIR is one observation. Neither absent
+ // channel may become an invented zero or be averaged across another date.
+ const paired=features.filter(f=>f?.date&&f.quality?.hrvValid===true&&
+  Number.isFinite(f.rmssd)&&f.rmssd>0&&f.rmssd<500&&Number.isFinite(f.sdnn)&&f.sdnn>0&&f.sdnn<500&&
+  (!owner||['verified_beat_timestamps','sdk_quality_gated_metric','sdk-verified','beat-timestamps'].includes(f.quality?.hrvProvenance))&&
+  (period===1?f.date===selected:(f.date>=iso(dateAdd(localDate(),1-period))&&f.date<=iso(localDate())))).sort((a,c)=>a.date.localeCompare(c.date));
+ // Multiple quality-eligible sessions on one date are one calendar day in a
+ // multi-day trend. Average within the date first; do not count that date
+ // twice or let it outweigh another date with a single session.
+ const daily=new Map();
+ for(const f of paired){
+  const row=daily.get(f.date)||{date:f.date,rmssd:0,sdnn:0,count:0};
+  row.rmssd+=f.rmssd;row.sdnn+=f.sdnn;row.count++;daily.set(f.date,row);
+ }
+ const relevant=[...daily.values()].map(row=>({date:row.date,rmssd:row.rmssd/row.count,sdnn:row.sdnn/row.count}));
+ const average=(items,key)=>items.length?items.reduce((sum,r)=>sum+r[key],0)/items.length:null;
+ const explain=(key,ref)=>{
+  const value=average(relevant,key);if(value===null)return L('尚無有效的同日成對 HRV 數據','尚无有效的同日成对 HRV 数据','No quality-eligible paired HRV readings','同日に測定された有効なHRVデータがありません');
+  if(!Number.isFinite(ref)||ref<=0)return `${value.toFixed(1)} ms · ${L('個體基準建立中','个体基准建立中','Pet-specific baseline still building','個体基準を作成中')}`;
+  const pct=100*(value-ref)/ref;
+  const source=b?.referenceSources?.[key==='rmssd'?'rm':'sd'];
+  const status=source==='group'?(Math.abs(pct)<=10?L('接近可用參考','接近可用参考','near available reference','利用可能な参考値に近い'):pct>0?L('高於可用參考','高于可用参考','above available reference','利用可能な参考値より高い'):L('低於可用參考','低于可用参考','below available reference','利用可能な参考値より低い')):
+   (Math.abs(pct)<=10?L('接近平常','接近平常','near usual','通常に近い'):pct>0?L('高於平常','高于平常','above usual','通常より高い'):L('低於平常','低于平常','below usual','通常より低い'));
+  let change='';if(period>1&&relevant.length>=4){
+   const half=Math.floor(relevant.length/2),early=average(relevant.slice(0,half),key),late=average(relevant.slice(half),key),delta=late-early;
+   change=Math.abs(delta)<.5?L(' · 前後兩段接近',' · 前后两段接近',' · period largely steady',' · 期間内ほぼ安定'):delta>0?` · ${L('後半段增加','后半段增加','later +','後半は +')}${Math.abs(delta).toFixed(1)} ms`:` · ${L('後半段減少','后半段减少','later −','後半は −')}${Math.abs(delta).toFixed(1)} ms`;
+  }
+  return `${value.toFixed(1)} ms · ${status} ${Math.abs(pct).toFixed(0)}%${change}`;
+ };
+ const groupOnly=b?.referenceSources?.rm==='group'||b?.referenceSources?.sd==='group';
+ const sourceSuffix=groupOnly?L('至少一項採用群體參考，並非兩項均已有寵物自身基準。','至少一项采用群体参考，并非两项都有宠物自身基准。','At least one metric uses a group reference, not this pet’s own 14-day baseline.','少なくとも一項目は集団参考値であり、両方がこのペット自身の基準ではありません。'):'';
+ const reference=Number.isFinite(b?.rm)&&b.rm>0&&Number.isFinite(b?.sd)&&b.sd>0?
+  L(`近期參考：RMSSD ${b.rm.toFixed(1)} ms，SDNN ${b.sd.toFixed(1)} ms。`,`近期参考：RMSSD ${b.rm.toFixed(1)} ms，SDNN ${b.sd.toFixed(1)} ms。`,`Recent comparison: RMSSD ${b.rm.toFixed(1)} ms, SDNN ${b.sd.toFixed(1)} ms.`,`最近の比較基準：RMSSD ${b.rm.toFixed(1)} ms、SDNN ${b.sd.toFixed(1)} ms。`)+` ${sourceSuffix}`:
+  L('尚未有足夠有效測量建立兩項 HRV 基準。','尚未有足够有效测量建立两项 HRV 基准。','Both HRV baselines require more eligible measurements.','2つのHRV基準値を作成するには、さらに有効な測定が必要です。');
+ return `<div class="dp-hrv-explained"><div class="dp-hrv-comparison"><span><b>RMSSD</b><small>${explain('rmssd',b?.rm)}</small></span><span><b>SDNN</b><small>${explain('sdnn',b?.sd)}</small></span></div><p>${L(`僅納入 ${relevant.length} 天有品質依據的同日 RMSSD／SDNN 配對值；比較相同休息情境與測量時長。`,`仅纳入 ${relevant.length} 天有质量依据的同日 RMSSD／SDNN 配对值；比较相同休息情境与测量时长。`,`Uses ${relevant.length} day(s) with both quality-eligible HRV values; compare like-for-like resting conditions and recording durations.`,`品質条件を満たす同日RMSSD／SDNNの ${relevant.length} 日分のみ使用。安静状態と測定時間を揃えて比較します。`)}</p><details class="dp-plain-help dp-hrv-help"><summary>${L('HRV 高低應怎麼看？','HRV 高低应怎么看？','How should I interpret HRV?','HRVの高低はどう見ればよい？')}</summary><p><b>RMSSD</b> — ${L('相鄰正常心搏間隔的短期變化；偏低值得觀察，高於平常也不保證更健康。','相邻正常心搏间隔的短期变化；偏低值得观察，高于平常也不保证更健康。','Short-term changes between consecutive normal beats. A rise is not automatically healthier.','隣り合う正常な心拍間隔の短期変動。高いほど健康とは限りません。')}</p><p><b>SDNN</b> — ${L('整段有效正常心搏間隔的整體變化；不同記錄長度不能直接比較。','整段有效正常心搏间隔的整体变化；不同记录长度不能直接比较。','Overall variation across normal-beat intervals. Do not directly compare different recording durations.','正常心拍間隔の全体的な変動。異なる測定時間の数値は直接比較できません。')}</p><p>${L('個體±10%只是趨勢顯示帶，不是犬貓疾病診斷門檻。','个体±10%只是趋势显示带，不是犬猫疾病诊断门槛。','The ±10% pet-specific comparison band is a display convention, not a veterinary diagnostic cutoff.','個体差±10%は表示上の比較帯であり、診断基準ではありません。')}</p><p>${reference}</p></details></div>`;
+}
+function dpDateInsight(kind=0,period=state.range){
+ const rec=demoRecords(state.dog),date=period===1?deepChosenDate():rec.at(-1)?.date,idx=rec.findIndex(x=>x.date===date),curr=rec[idx];let prior=rec[idx-1];if(!curr)return '';
+ // “Previous day” means the adjacent calendar date, not merely the
+ // preceding array entry; a missing day cannot be silently skipped.
+ if(prior&&(!validDaySample(prior,idx-1).valid||prior.date!==iso(dateAdd(new Date(date+'T12:00:00'),-1))))prior=null;
+ const name=kind===0?label3('心肺變化','Heart & breathing','심폐 변화'):kind===1?label3('休息變化','Rest changes','휴식 변화'):label3('活動變化','Activity changes','활동 변화');
+ const delta=(a,b)=>Math.round((a-b)*10)/10;
+ if(period===1){if(!prior)return `<div class="dp-change-summary"><b>${name}</b><p>${label3('前一自然日沒有可比較的有效紀錄，請先查看當日數據。','No eligible reading on the immediately preceding calendar day; review this day’s data.','바로 전날의 유효 기록이 없어 오늘의 자료를 먼저 확인하세요.')}</p></div>`;
+ let line='';if(kind===0){const h=delta(curr.heart,prior.heart),r=delta(curr.breath,prior.breath);if(Math.abs(h)<1&&Math.abs(r)<1)line=label3('心率與呼吸與前一天相近，沒有明顯變化。','Heart rate and breathing were similar to the previous day.','심박과 호흡이 전날과 비슷해요.');else line=label3(`相較前一天，平均心率${h>=0?'增加':'減少'} ${Math.abs(h)} bpm，呼吸${r>=0?'加快':'減慢'} ${Math.abs(r)} 次／分。請搭配當時的活動和安靜狀態看。`,`Compared with the previous day: heart rate ${h>=0?'+':''}${h} bpm, breathing ${r>=0?'+':''}${r}/min. Check activity context.`,`전날 대비 심박 ${h>=0?'+':''}${h}, 호흡 ${r>=0?'+':''}${r}/분.`);}else if(kind===1){const a=nightRestHours(idx),b=nightRestHours(idx-1),v=delta(a,b);line=label3(`${Math.abs(v)<.08?'和前一晚休息時間相近':`比前一晚${v>0?'多':'少'}休息 ${Math.floor(Math.abs(v))} 小時 ${Math.round((Math.abs(v)%1)*60)} 分`}。${Math.abs(v)<.5?'這屬於小幅變化，仍可比較醒來次數。':v>0?'休息較久，但不代表越久越好，還要看中斷與這隻寵物平常的範圍。':'休息較短，建議查看清醒時間是否增加。'}`,`Compared with previous night: ${Math.round(Math.abs(v)*60)} minutes ${v>=0?'more':'less'} rest. More is not always better; review interruptions.`,`전날 밤 대비 휴식 시간 ${Math.round(Math.abs(v)*60)}분 ${v>=0?'증가':'감소'}.`);}else{const a=minuteDemoSeries('activityIntensity',date).filter(v=>v>=35).length,b=minuteDemoSeries('activityIntensity',prior.date).filter(v=>v>=35).length,v=a-b;line=label3(`今天的活動時間比前一天${v>=0?'多':'少'} ${Math.abs(v)} 分鐘。再看看精神與活動後恢復是否一致。`,`Activity time was ${Math.abs(v)} minutes ${v>=0?'longer':'shorter'} than the previous day. Compare energy and recovery.`,`전날보다 활동 시간이 ${Math.abs(v)}분 ${v>=0?'늘었어요':'줄었어요'}.`);}return `<div class="dp-change-summary"><b>${label3('與前一天比較','Compared with previous day','전날과 비교')}</b><p>${line}</p></div>`;
+ }
+ const rows=dayRowsWithIndex(period).filter(x=>validDaySample(x,x.idx).valid);
+ // Divide the SELECTED CALENDAR PERIOD, not the list of observed rows.
+ // Otherwise a missing day shifts an early date into the “later half”.
+ const laterStart=iso(dateAdd(localDate(),1-Math.ceil(period/2))),a=rows.filter(row=>row.date<laterStart),b=rows.filter(row=>row.date>=laterStart);
+ if(a.length<1||b.length<1)return `<div class="dp-change-summary"><b>${name}</b><p>${label3('前半段或後半段沒有可比較的有效日期，先查看已有數值。','One calendar half has no eligible date for comparison.','전반 또는 후반에 비교할 수 있는 유효 날짜가 없습니다.')}</p></div>`;
+ const avg=(arr,key)=>{const available=arr.map(row=>row[key]).filter(value=>typeof value==='number'&&Number.isFinite(value));return available.length?available.reduce((sum,value)=>sum+value,0)/available.length:null;};
+ const key=kind===0?'heart':kind===1?'sleep':'activity',firstMean=avg(a,key),lastMean=avg(b,key);
+ if(firstMean===null||lastMean===null)return `<div class="dp-change-summary"><b>${name}</b><p>${label3('前後兩段缺少可比較的同項數值，暫不計算變化。','The early or later period lacks comparable values for this metric.','전반 또는 후반에 비교할 동일 지표 값이 없습니다.')}</p></div>`;
+ const diff=lastMean-firstMean,unit=kind===0?'bpm':kind===1?'h':label3('活動指標','activity index','활동 지표');
+ const v=Math.abs(diff).toFixed(kind===1?1:0),trend=Math.abs(diff)<(kind===0?3:kind===1?.4:25)?label3('前後兩段接近，沒有明顯變化。','The early and later parts were broadly similar.','앞뒤 기간이 비슷해요.'):kind===0?label3(`後半段心率比前半段${diff>0?'高':'低'}約 ${v} bpm。心率升降並不直接等於健康好壞，還需查看活動與休息。`,`Heart rate averaged ${v} bpm ${diff>0?'higher':'lower'} later. This alone does not mean better or worse health.`,`후반 심박이 약 ${v} bpm ${diff>0?'높았어요':'낮았어요'}.`):kind===1?label3(`後半段每晚休息平均${diff>0?'增加':'減少'}約 ${v} 小時。${diff>0?'休息時間更長，但仍要看中斷情況。':'可以查看休息中斷是否增加。'}`,`Rest time ${diff>0?'increased':'decreased'} by about ${v} hours in the later part. Review interruptions too.`,`후반 휴식이 약 ${v}시간 ${diff>0?'늘었어요':'줄었어요'}.`):label3(`後半段活動指標${diff>0?'增加':'減少'}約 ${v}。${diff<0?'留意精力、食慾和活動意願。':'持續觀察活動後是否恢復平穩。'}`,`Activity index ${diff>0?'increased':'decreased'} by about ${v} later in the period. Compare energy and recovery.`,`후반 활동 지표가 약 ${v} ${diff>0?'높아요':'낮아요'}.`);
+ return `<div class="dp-change-summary"><b>${label3(`最近${period}天的重點變化`,`What changed over ${period} days`,`최근 ${period}일 변화`)}</b><p>${trend}</p><small>${label3('比較本期間前半段與後半段，點擊曲線可看每日數字。','Compares the early and later parts of the selected period. Tap charts for daily values.','선택 기간의 전반과 후반을 비교해요.')}</small></div>`;
+}
+function dpComponentScorePanel(category){
+ const keys=category===0?['stable']:category===2?['calm']:[],period=state.range;if(!keys.length)return '';
+ const all=rhythmData().values,records=demoRecords(state.dog),selected=period===1?deepChosenDate():null;
+ const rows=(period===1?records.filter(x=>x.date===selected):dayRowsWithIndex(period).filter(x=>validDaySample(x,x.idx).valid));
+ const entries=rows.map(row=>({row,value:all[records.findIndex(r=>r.date===row.date)]})).filter(x=>x.value);
+ const panelTitle=category===0?label3('心搏節奏穩定度','Heartbeat rhythm stability','심박 리듬 안정도'):label3('放鬆與負荷調節','Calmness and load regulation','안정과 부담 조절');
+ const panelIcon=category===0?vicon('heart',86):vicon('breeze',92),panelClass=category===0?'dp-component-panel-heart':'dp-component-panel-load';
+ return `<section class="card dp-component-panel ${panelClass}" id="dp-component-section"><div class="dp-component-watermark" aria-hidden="true">${panelIcon}</div><h3>${panelTitle}</h3>${keys.map(k=>{
+  const nums=entries.map(e=>Number(rhythmPositiveValue(k,e.value))),score=nums.length?Math.round(nums.reduce((a,b)=>a+b,0)/nums.length):null;
+  const title=rhythmLabel(k),color=category===0?'#aa3659':'#3f82ce';
+  const expl=k==='stable'?label3(`最近${period}天平均 ${score===null?'—':score}/100。此分數綜合心跳間隔的規律性、短期波動與個體平常表現，分數高表示更接近模型預設的穩定模式，不表示心跳變異越少越健康；應在相似活動與休息條件下比較，不等於心電圖診斷。`,`Average over ${period} days: ${score===null?'—':score}/100. Beat-interval regularity and short-term changes are compared with this pet’s baseline; higher means closer to the model reference, not necessarily healthier or an ECG diagnosis.`,`최근 ${period}일 평균 ${score===null?'—':score}/100. 심박 간격 규칙성과 단기 변화의 평소 패턴 비교이며 심전도 진단이 아닙니다.`):k==='load'?label3('數值表示模型估計的負荷與回復是否接近平常；高分不代表沒有心肺疾病，也不是已驗證的醫療判斷。','A model-based estimate of exertion and return toward usual patterns; a high score does not rule out disease.','평소 활동 및 회복 패턴과의 모델 기반 비교이며 진단 지표는 아닙니다.'):label3('綜合安靜時的心搏間隔與個體趨勢；只能推估生理平穩程度，不能直接判定開心、焦慮或疼痛。','Uses resting heartbeat intervals relative to the pet’s own trend; it cannot directly identify happiness, anxiety or pain.','휴식 중 심박 변화를 평소와 비교한 추정치로 감정이나 통증을 단정하지 않습니다.');
+  return `<div class="dp-component-entry" data-score-key="${k}"><div class="dp-component-ring-row"><div class="dp-component-ring">${score===null?'—':dpDeepDottedScore(score,color)}</div><div class="dp-component-ring-copy"><b>${title}${period>1?' · '+label3('期間平均','Period average','기간 평균'):''}</b><span>${score===null?label3('資料不足','Not enough data','기록 부족'):scoreLabel(score)} · ${expl}</span></div></div>${period>1&&entries.length>=2&&k!=='stable'?dpOwnerPeriodMetricChart(entries.map(e=>e.row),k,color,nums,label3('分','pts','점')):''}</div>`;
+ }).join('')}</section>`;
+}
+function dpHeartBreathOverlay(date=deepChosenDate()){
+ const a=dpSignals(date,['heart','breath']);
+ if(!Array.isArray(a.heart)||a.heart.length!==1440||!Array.isArray(a.breath)||a.breath.length!==1440)return '';
+ const h=[],r=[];for(let hr=0;hr<24;hr++){h.push(dpAverage(a.heart.slice(hr*60,(hr+1)*60)));r.push(dpAverage(a.breath.slice(hr*60,(hr+1)*60)));}
+ if(h.some(x=>!Number.isFinite(x))||r.some(x=>!Number.isFinite(x)))return '';
+ const W=350,H=175,l=36,rr=32,top=18,b=32,loH=Math.min(...h)-5,hiH=Math.max(...h)+5,loR=Math.min(...r)-2,hiR=Math.max(...r)+2,x=i=>l+(W-l-rr)*i/23,xy=(vals,min,max)=>vals.map((v,i)=>[x(i),top+(max-v)/Math.max(.1,max-min)*(H-top-b)]),hp=xy(h,loH,hiH),rp=xy(r,loR,hiR);
+ return `<section class="card dp-heart-breath-overlay"><div class="row spread"><h3>${label3('心跳與呼吸同步變化','Heart & breathing together','심박·호흡 함께 보기')}</h3><small>${dpFullDate(date)} · 24h</small></div><p class="subtitle">${label3('這張圖用來看：我在活動、休息或受到刺激時，心跳與呼吸是否同時加快、放慢，還是只有其中一項改變。兩條線交叉，只表示圖上的位置重合；因為心率和呼吸使用不同刻度，交叉本身不代表異常，也不是疾病訊號。重點是同一時段的變化方向與持續時間。點選曲線可查看當時兩個數字。','See whether heart rate and breathing rise or fall together during activity or rest, or only one changes. A visual crossing simply reflects the two different chart scales; it does not itself signal a problem. Compare timing and duration, then tap for both readings.','활동이나 휴식 때 심박과 호흡이 함께 빨라지거나 느려지는지 확인하세요. 두 선이 교차하는 것은 눈금이 달라 생기는 화면상 교차일 뿐, 그 자체로 이상을 뜻하지 않습니다. 변화 시점과 지속 시간을 살펴보세요.')}</p><div class="dp-overlay-legend"><span style="color:#c64d73">● ${label3('心率 bpm','Heart bpm','심박 bpm')}</span><span style="color:#db7894">● ${label3('呼吸 次／分','Breathing /min','호흡 /분')}</span></div><svg class="dp-overlay-svg" viewBox="0 0 ${W} ${H}"><line x1="${l}" x2="${W-rr}" y1="${H-b}" y2="${H-b}" stroke="#dce1ec"/><path d="${deepCurvePath(hp)}" stroke="#c64d73" fill="none" stroke-width="2.6"/><path d="${deepCurvePath(rp)}" stroke="#db7894" fill="none" stroke-width="2.6"/>${[0,12,23].map(i=>`<text x="${x(i)}" y="${H-7}" text-anchor="${i===0?'start':i===23?'end':'middle'}" font-size="10" fill="#8990a1">${String(i).padStart(2,'0')}:00</text>`).join('')}${h.map((v,i)=>`<rect x="${x(i)-5}" y="${top}" width="10" height="${H-top-b}" fill="transparent" data-action="overlay-point" data-time="${String(i).padStart(2,'0')}:00" data-heart="${v.toFixed(0)} bpm" data-breath="${r[i].toFixed(1)} ${label3('次／分','/min','회/분')}"/>`).join('')}</svg><div class="dp-overlay-reading">${label3('點擊曲線上的時間查看數值','Tap a time on the chart','시간을 선택하세요')} <b>—</b></div></section>`;
+}
+
+function dpHrvChartForPeriod(days,key,color){
+ const rows=dayRowsWithIndex(days).filter(row=>validDaySample(row,row.idx).valid&&Number.isFinite(row[key])&&row[key]>0);
+ return chart(rows.map(row=>row[key]),key.toUpperCase(),'ms',color,key,rows.map(row=>row.date));
+}
+function cardioStandalone(snap,cp){
+ if(!signalQuality().valid)return `<section class="card cardio-signal-empty"><h2>${label3('心跳、呼吸與 HRV 暫停分析','Heartbeat, breathing and HRV paused','심박·호흡·HRV 분석 일시중지')}</h2><p>${qualityMessage()}</p></section>`;
+ const r=snap.rec,b=snap.base,n=state.range,daily=n===1,rows=dayRowsWithIndex(n).filter(x=>validDaySample(x,x.idx).valid);
+ const mean=key=>{const present=rows.filter(row=>Number.isFinite(row[key])&&row[key]>0);return present.length?present.reduce((sum,row)=>sum+row[key],0)/present.length:null;};
+ const hrvText=value=>Number.isFinite(value)?`${value.toFixed(1)} ms`:'—';
+ const periodHeart=dpPeriodMean('heart',n,r.heart),periodBreath=dpPeriodMean('breath',n,r.breath);
+ const h=daily?r.heart:Number.isFinite(periodHeart)?periodHeart.toFixed(0):'—',rr=daily?r.breath:Number.isFinite(periodBreath)?periodBreath.toFixed(1):'—';
+ const dateLabel=daily?label3('今日','Today','오늘'):label3(`最近 ${n} 天`,`${n} days`,`최근 ${n}일`);
+ const line=(key,color,title)=>deepTimeChart(key,color,title);
+ const band=(x)=>`<span class="cardio-band">${x.label}</span>`;
+ const hrvTrend=(!daily)?`<div class="dp-multiday-hrv"><div class="dp-hrv-summary"><span><small>RMSSD</small><b>${hrvText(mean('rmssd'))}</b></span><span><small>SDNN</small><b>${hrvText(mean('sdnn'))}</b></span></div>${dpHrvChartForPeriod(n,'rmssd','#bd4c6e')}${dpHrvChartForPeriod(n,'sdnn','#de849d')}</div>`:
+ `<div class="cardio-hrv-row"><div><small>RMSSD</small><b>${hrvText(r.rmssd)}</b><span>${snap.rmssd.label}</span></div><div><small>SDNN</small><b>${hrvText(r.sdnn)}</b><span>${snap.sdnn.label}</span></div></div>`;
+ return `<section class="card cardio-section"><div class="cardio-heading"><div><span class="cardio-eyebrow">01 / ${dateLabel}</span><h2>${label3('心跳狀態','Heartbeat status','심박 상태')}</h2></div><div class="cardio-actions">${daily?band(snap.heart):''}${daily?`<button class="cardio-live-button" data-action="deep-live" data-kind="heart">${vicon('activity',14)} ${label3('看即時波形','Live waveform','실시간 파형')}</button>`:''}</div></div><div class="cardio-primary"><div><strong>${h}</strong><span>bpm</span></div><div class="cardio-reference">${referenceName(b,'heart')}<b>${dpSafeReferenceText(b.heart,'bpm')}</b></div></div>${line('heart',cp.accent,label3('心率變化','Heart rate trend','심박수 추세'))}${daily?dpEventPreview():''}${daily?`<div class="cardio-footline"><span>${label3('平均心率','Mean heart rate','평균 심박수')}</span><b>${Number.isFinite(r.nvgr)?`${r.nvgr.toFixed(1)} bpm`:'—'}</b></div>`:''}</section>
+ <section class="card cardio-section"><div class="cardio-heading"><div><span class="cardio-eyebrow">02 / ${dateLabel}</span><h2>${label3('呼吸狀態','Breathing status','호흡 상태')}</h2></div><div class="cardio-actions">${daily?band(snap.breath):''}${daily?`<button class="cardio-live-button" data-action="deep-live" data-kind="breath">${vicon('activity',14)} ${label3('看即時波形','Live waveform','실시간 파형')}</button>`:''}</div></div><div class="cardio-primary"><div><strong>${rr}</strong><span>${label3('次／分','/min','회/분')}</span></div><div class="cardio-reference">${referenceName(b,'breath')}<b>${dpSafeReferenceText(b.breath,'/min')}</b></div></div>${line('breath','#ce7893',label3('呼吸頻率變化','Breathing trend','호흡수 추세'))}${daily?dpBreathingSummary():''}</section>
+ <section class="card cardio-section cardio-hrv"><div class="cardio-heading"><div><span class="cardio-eyebrow">03 / HRV</span><h2>${daily?label3('今日心搏變異','Today’s HRV','오늘의 HRV'):label3('心搏變異趨勢','HRV trends','HRV 추세')}</h2></div></div>${hrvTrend}${dpHrvHelp()}</section>${daily?dpHeartBreathOverlay(deepChosenDate()):''}`;
+}
+function dpPeriodMean(kind,days,fallback){const pts=deepTimePoints(kind,days);return pts.length?pts.reduce((s,p)=>s+p.v,0)/pts.length:fallback;}
+function dpPeriodScore(category,days,d){const records=dayRowsWithIndex(days).filter(x=>validDaySample(x,x.idx).valid);if(!records.length)return null;const vals=records.map(r=>{const v=dpOwnerDayScores(r,true);return category===0?v.heart:category===1?v.sleep:v.energyActivity}).filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v)));return vals.length?dpOwnerQualityValue(vals.reduce((a,b)=>a+Number(b),0)/vals.length):null;}
+function dpPeriodNightMax(days){const rows=dayRowsWithIndex(days).filter(x=>validDaySample(x,x.idx).valid);return rows.length?Math.max(...rows.map(x=>nightRestHours(x.idx))):0;}
+function dpPeriodActiveMinutes(days){const rows=dayRowsWithIndex(days).filter(x=>validDaySample(x,x.idx).valid);return rows.length?rows.reduce((sum,x)=>sum+minuteDemoSeries('activityIntensity',x.date).filter(v=>v>=35).length,0)/rows.length:0;}
+function dpPeriodRecoveryAvg(days){const rows=dayRowsWithIndex(days).filter(x=>validDaySample(x,x.idx).valid);return rows.length?rows.reduce((s,x)=>s+Number(x.recovery||0),0)/rows.length:0;}
+// V7.3: Deep day selection is shared across heart, rest and activity.
+// Older dates use their own timestamped per-day data; never fall back to today's card.
+function deepDateRows(){return demoRecords(state.dog).map((record,idx)=>({...record,idx}));}
+function deepDateBounds(){const rows=deepDateRows();return {min:rows[0]?.date||iso(localDate()),max:rows.at(-1)?.date||iso(localDate())};}
+function deepChosenDate(){const {min,max}=deepDateBounds(),v=String(state.deepSelectedDate||max);return /^\d{4}-\d{2}-\d{2}$/.test(v)&&v>=min&&v<=max?v:max;}
+function deepDayRows(){const date=deepChosenDate();return deepDateRows().filter(x=>x.date===date);}
+function deepDayIsPast(){return state.range===1&&deepChosenDate()!==iso(localDate());}
+function deepDatePicker(){
+ const {min,max}=deepDateBounds(),date=deepChosenDate(),idx=deepDateRows().findIndex(r=>r.date===date),isDay=state.range===1;
+ if(!isDay)return `<div class="deep-date-compact"><span>${label3('期間','Period','기간')} · ${dpFullDate(iso(dateAdd(localDate(),1-state.range)))} – ${dpFullDate(max)}</span><button class="deep-date-link" data-action="deep-select-day">${vicon('calendar',14)} ${label3('查看指定日期','Choose a day','날짜 지정')}</button></div>`;
+ return `<div class="deep-day-picker" aria-label="${label3('選擇單日日期','Choose a single day','하루 날짜 선택')}"><div class="deep-day-picker-top"><b>${label3('選擇單日','Select a day','날짜 선택')}</b><span>${dpFullDate(date)}</span></div><div class="deep-day-picker-actions"><button class="deep-day-arrow" data-action="deep-day-step" data-delta="-1" aria-label="${label3('前一天','Previous day','이전 날짜')}" ${idx<=0?'disabled':''}>‹</button><input type="date" id="deepDayDate" aria-label="${label3('選擇日期','Choose date','날짜 선택')}" class="deep-date-input" value="${date}" min="${min}" max="${max}"/><button class="deep-day-arrow" data-action="deep-day-step" data-delta="1" aria-label="${label3('後一天','Next day','다음 날짜')}" ${idx>=deepDateRows().length-1?'disabled':''}>${vicon('chev',18)}</button><button class="deep-date-shortcut ${date===iso(dateAdd(localDate(),-1))?'chosen':''}" data-action="deep-day-jump" data-days="-1">${label3('昨天','Yesterday','어제')}</button><button class="deep-date-shortcut ${date===max?'chosen':''}" data-action="deep-day-jump" data-days="0">${label3('今天','Today','오늘')}</button></div></div>`;
+}
+function deepSelectedScore(cat,row){
+ const all=demoRecords(state.dog),last=all.at(-1),d=currentDog(),baseline=d.score[cat];
+ if(row.date===last.date)return baseline;
+ const factor=cat===0?(-1)*(row.heart-last.heart)/Math.max(1,last.heart)*30:
+ cat===1?(nightRestHours(row.idx)-nightRestHours(29))*2.4:
+ (row.activity-last.activity)/Math.max(1,last.activity)*24;
+ return Math.max(0,Math.min(100,Math.round(baseline+factor+(row.score-last.score)*.75)));
+}
+function deepHistoricalDayView(n,cp,labels){
+ const row=deepDayRows()[0],date=deepChosenDate(),valid=row&&validDaySample(row,row.idx).valid;
+ const metric=(title,value,unit='')=>`<div class="metric" style="background:${cp.bg}"><label>${title}</label><b style="color:${cp.contrast}">${value}${unit?` <small>${unit}</small>`:''}</b></div>`;
+ const header=`<div class="row spread"><div class="grow"><h2 class="section-title">${labels[n]} · ${dpFullDate(date)}</h2><p class="section-sub">${label3('這一天的數據與走勢','Measurements and trends for this day','이 날짜의 기록과 추세')}</p></div>${dpDeepDottedScore(valid?deepSelectedScore(n,row):null,cp.accent)}</div>`;
+ if(!valid)return `<section class="card deep-summary-card">${header}<p class="deep-empty-day">${label3('這一天沒有有效的心肺與活動記錄。請選擇其他日期。','No valid heart, breathing or activity records for this day. Choose another date.','이 날짜에는 유효한 심박·호흡·활동 기록이 없습니다. 다른 날짜를 선택하세요.')}</p></section>`;
+ const note=label3('選擇曲線上的位置，可以查看該時刻的數值。','Tap the curve to see measurements at each time.','그래프를 누르면 해당 시간의 값을 확인할 수 있어요.');
+ if(n===0){
+  const preceding=deepDateRows().filter(r=>r.idx<row.idx&&validDaySample(r,r.idx).valid).slice(-14),b=preceding.length>=5?{heart:preceding.reduce((a,r)=>a+r.heart,0)/preceding.length,breath:preceding.reduce((a,r)=>a+r.breath,0)/preceding.length}:null;const hr=Number(row.heart),breath=Number(row.breath);
+  const body=`<div class="metric-grid mt12">${metric(label3('當日平均心率','Daily mean heart rate','일 평균 심박'),hr,'bpm')}${metric(label3('當日平均呼吸','Daily mean breathing','일 평균 호흡'),breath,label3('次/分','/min','회/분'))}</div><div class="metric-grid mt12">${metric('RMSSD',row.rmssd.toFixed(1),'ms')}${metric('SDNN',row.sdnn.toFixed(1),'ms')}</div><p class="deep-day-context">${label3('RMSSD 看短期心跳間隔變化，SDNN 看整段心搏變化；請把這一天與前後數日比較，單次高低不等於健康好壞。','RMSSD tracks short-term heartbeat interval variation; SDNN reflects variation over the measured period. Compare multiple days, not one isolated reading.','RMSSD는 짧은 심박 간격 변화, SDNN은 측정 시간 전체의 변화를 뜻해요. 하루만 보고 건강을 단정하지 마세요.')}</p><p class="deep-day-context">${b?label3(`與當時的過往紀錄比較：心率${Math.abs(hr-b.heart)<=b.heart*.06?'接近平常':hr>b.heart?'較高':'較低'}，呼吸${Math.abs(breath-b.breath)<=b.breath*.08?'接近平常':breath>b.breath?'較快':'較慢'}。`,`Compared with records before this day: heart rate ${Math.abs(hr-b.heart)<=b.heart*.06?'near usual':hr>b.heart?'higher':'lower'}, breathing ${Math.abs(breath-b.breath)<=b.breath*.08?'near usual':breath>b.breath?'faster':'slower'}.`,`이 날짜보다 이전 기록과 심박·호흡을 비교했어요.`):label3('這一天之前的紀錄還不夠，先查看當日的實際數值與曲線。','Not enough earlier records for a pet-specific comparison. Review this day’s values and curves.','이전 기록이 부족해 이 날의 수치와 그래프만 보여줘요.')}</p>${deepTimeChart('heart',cp.accent,label3('當日心率變化','Heart rate through the day','하루 심박 변화'))}${deepTimeChart('breath','#c45c7c',label3('當日呼吸變化','Breathing through the day','하루 호흡 변화'))}${dpHeartBreathOverlay(date)}<p class="deep-day-foot">${note}</p>`;
+  return `<section class="card deep-summary-card">${header}</section><section class="card">${body}</section>`;
+ }
+ if(n===1){
+  const slots=nightSlotSequence(row.idx),rest=nightRestHours(row.idx),interrupts=slots.reduce((sum,v,i)=>sum+(i>0&&v==='awake'&&slots[i-1]==='sleep'?1:0),0);
+  const body=`<div class="metric-grid mt12">${metric(label3('當晚休息時間','Rest that night','해당 밤 휴식'),rest.toFixed(1),'h')}${metric(label3('休息中斷','Rest interruptions','휴식 중단'),interrupts,label3('次','times','회'))}</div><p class="deep-day-context">${rest>=10?label3('這一晚休息時間較充足，可點選色塊查看清醒與休息時段。','Rest was relatively long. Tap a segment to see awake and resting periods.','휴식 시간이 비교적 길었어요. 구간을 눌러 확인하세요.'):label3('這一晚休息較少，可以查看哪些時段曾活動或清醒。','Rest was shorter. Explore when your pet was awake or moving.','휴식이 짧았어요. 깨어 있던 시간을 확인하세요.')}</p><div class="deep-night-selected"><strong>${label3('當晚休息時段','Overnight rest timeline','야간 휴식 시간대')} · ${dpFullDate(date)}</strong>${sleepMatrixDate(row.idx)}</div>${dpNightBreathing(date)}<p class="deep-day-foot">${label3('色塊代表休息或清醒；點選可查看具體時間與分鐘數。','Tap the rest or awake segments for their time and duration.','휴식·활동 구간을 눌러 시간과 분을 확인하세요.')}</p>`;
+  return `<section class="card deep-summary-card">${header}</section><section class="card">${body}</section>`;
+ }
+ const minutes=minuteDemoSeries('activityIntensity',date).filter(v=>v>=35).length;
+ const body=`<div class="metric-grid mt12">${metric(label3('當日活動時間','Active time that day','해당 날짜 활동'),minutes,label3('分鐘','min','분'))}${metric(label3('當日回到平穩耗時','Time to settle after activity','활동 후 안정 복귀 시간'),Number(row.recovery).toFixed(0),label3('分鐘','min','분'))}</div><p class="deep-day-context">${minutes>=250?label3('當日有較多活動時段，下方可查看整天的活動分布。','There were more active periods. Review the day’s activity pattern below.','활동한 시간이 많았어요. 아래에서 하루의 활동 흐름을 살펴보세요.'):label3('當日活動時段較少，下方可查看活動集中在哪些時間。','There were fewer active periods. Review when activity occurred.','활동한 시간이 적었어요. 활동한 시간대를 살펴보세요.')}</p>${deepTimeChart('activityIntensity',cp.accent,label3('當日活動變化','Activity through the day','하루 활동 변화'))}<p class="deep-day-foot">${note}</p>`;
+ return `<section class="card deep-summary-card">${header}</section><section class="card">${body}</section>`;
+}
+// Visible interpretive notes; Traditional/Simplified Chinese, English and Korean use the same 3-way locale helper.
+// Avoid diagnosing disease or claiming sleep staging/feelings from BCG alone.
+function dpMetricUsageNotes(kind){
+ const groups=[
+  [
+   [label3('心肺綜合狀態','Overall heart & breathing','심폐 종합 상태'),label3('綜合分數由心跳、呼吸、HRV及心搏節奏加權形成；未有可信逐搏資料時會降低評分信心度，不等於疾病診斷。','The cardio score combines heart rate, breathing, HRV and beat-pattern stability with weights; confidence falls when HRV is unavailable. It is not a diagnosis.','심박, 호흡, HRV, 심박 패턴을 가중합하여 계산하며 유효한 HRV가 없는 경우 신뢰도가 낮아집니다.')],
+   [label3('心搏節奏穩定度','Heartbeat rhythm stability','심박 리듬 안정도'),label3('綜合有效心搏間隔的規律性、短期變化與14天個體基準。較高分表示更接近模型定義的平常節奏；不代表心搏變異越小越健康，也不能診斷心律不整。','Combines valid beat-interval consistency, short-term variation and the 14-day this pet’s reference. A higher score means closer to the modeled usual pattern—not necessarily healthier, and not an arrhythmia diagnosis.','유효 심박 간격의 규칙성, 단기 변화와 14일 반려동물 자체 기준을 종합합니다. 높다고 무조건 건강한 것은 아니며 부정맥 진단이 아닙니다.')],
+   [label3('SDNN／RMSSD','SDNN / RMSSD','SDNN / RMSSD'),label3('SDNN看記錄期間的心搏間隔整體變化；RMSSD看相鄰心搏間隔的短期變化。必須使用有效心搏資料，並在相近時長及休息條件下比較；兩者都不是越高越好。','SDNN reflects overall beat-interval variation in a recording; RMSSD reflects short-term variation between adjacent beats. Compare valid readings at similar durations and resting conditions. Neither is simply “higher is better.”','SDNN은 측정 구간 전체 심박 간격 변화를, RMSSD는 연속 박동 사이 단기 변화를 나타냅니다. 유효한 데이터와 비슷한 측정 시간·휴식 조건에서 비교하며 높을수록 좋은 것은 아닙니다.')]
+  ],
+  [
+   [label3('睡眠情況','Sleep & rest status','수면·휴식 상태'),label3('依動靜與心肺訊號推估安靜休息和夜間中斷；安靜不動不一定是在睡覺。本產品目前無法直接分辨深睡、淺睡或REM睡眠階段。','Estimates quiet rest and nighttime interruptions from motion/rest and cardiorespiratory patterns. Stillness is not proof of sleep; deep, light and REM stages are not directly measured.','움직임·휴식과 심폐 신호로 조용한 휴식과 야간 중단을 추정합니다. 움직이지 않는다고 반드시 잠든 것은 아니며 깊은 잠·얕은 잠·REM 단계를 직접 측정하지 않습니다.')],
+   [label3('每晚睡眠與休息總時長／夜間休息中斷','Nightly sleep & rest duration / interruptions','밤 수면·휴식 시간 / 중단'),label3('時間軸表示推估的休息／活動區段；中斷次數只計入休息開始後的變化。請同時留意心率、呼吸與日常精神，而非只看時長。','The timeline shows estimated quiet/rest versus movement periods. Interruptions are counted after rest begins. Consider heart rate, breathing and daily behavior, not duration alone.','시간표는 추정 휴식·활동 구간을 보여줍니다. 중단은 휴식 시작 이후를 계산하며 심박·호흡과 일상 행동도 함께 살펴보세요.')]
+  ],
+  [
+   [label3('精力情況','Energy status','활력 상태'),label3('目前展示版的每日精力分數採情境模擬；分時曲線依活動／休息變化產生示意估算，並未直接測得精力。未來真實模型才會結合個體基準及恢復資料驗證。','The daily energy score is a demo scenario score; the hourly trend illustrates movement/rest patterns. Energy is not directly sensed. A future model needs validation with this pet’s baseline and recovery data.','일일 활력 점수는 데모 예시이며, 시간대별 그래프는 활동·휴식 패턴을 활용한 추정입니다. 직접 측정한 활력이 아닙니다.')],
+   [label3('活動情況','Activity status','활동 상태'),label3('展示版使用模擬的動靜與相對強度，活動評分比較個體平常活動量；真實版可由PVDF／BCG動靜判別提供資料，不直接量測步數、距離或熱量。','The demo simulates movement intensity and scores it against usual activity. The real collar may use PVDF/BCG motion-vs-rest; it does not directly measure steps, distance or calories.','데모는 움직임 강도를 시뮬레이션하고 평소 활동과 비교합니다. 실제 PVDF/BCG는 걸음 수·거리·칼로리를 직접 측정하지 않습니다.')],
+   [label3('兩分鐘心率恢復','2-minute heart-rate recovery','2분 심박 회복'),label3('記錄活動結束後兩分鐘心率下降的幅度（bpm），再和相近活動強度的有效紀錄比較。此項與「回到平穩所需分鐘數」是不同指標；若心率或活動結束點品質不足，就不能作比較。','Uses the heart-rate drop (bpm) in two minutes after activity, compared with valid recordings at similar exertion. This differs from minutes to return to rest. Poor signal or uncertain activity end time prevents reliable comparison.','활동 종료 후 2분 동안 심박이 감소한 양(bpm)을 비슷한 강도의 유효 기록과 비교합니다. 평온 상태로 돌아가는 시간(분)과는 다른 지표이며 신호 품질이 낮으면 비교하지 않습니다.')],
+   [label3('放鬆與平穩度','Calm & steady','편안함과 안정감'),label3('觀察安靜狀態下的心搏間隔與RMSSD／SDNN變化，排除明顯動作干擾，再比對自身基準；不能由此斷定快樂、焦慮或疼痛。','Uses resting beat intervals and RMSSD/SDNN patterns after excluding clear motion interference and compares them to baseline. It cannot identify happiness, anxiety or pain.','휴식 중 심박 간격과 RMSSD/SDNN 변화를 움직임 간섭을 제외하고 반려동물 자체 기준과 비교합니다. 행복·불안·통증을 단정할 수 없습니다.')],
+   [label3('負荷調節表現','Load regulation','부담 조절'),label3('綜合活動負荷、活動後兩分鐘心率回落和後續休息表現，觀察負荷與恢復的匹配情況；不是心臟疾病風險或運動處方。','Combines exertion, the two-minute post-activity heart-rate drop and subsequent rest to review load/recovery balance. It is neither a cardiac-risk estimate nor an exercise prescription.','활동 부하·활동 후 2분 심박 감소·이후 휴식을 종합해 부담과 회복의 균형을 살펴봅니다. 심장병 위험도나 운동 처방은 아닙니다.')]
+  ]
+ ];
+ return `<details class="card dp-metric-usage-notes dp-collapsible-note"><summary><h3>${kind===2?label3('各項分數測算依據與指標解釋','Score calculation & metric explanations','점수 산정 기준 및 지표 설명'):label3('指標解釋與判讀備註','Metric explanations & notes','지표 설명과 해석 참고')}</h3><span class="dp-note-chevron" aria-hidden="true"></span></summary><div class="dp-note-reveal"><div class="dp-metric-notes-items">${groups[kind].map(([title,desc])=>`<div class="dp-metric-note-row"><b>${title}</b><p>${desc}</p></div>`).join('')}</div><p class="dp-metric-note-footer">${label3('14天基準是有效紀錄建立的個體參考，不等於醫療正常值。若持續異常或有症狀，請諮詢獸醫。','The 14-day baseline is this pet’s reference from valid recordings, not a clinical normal range. Consult a veterinarian for persistent changes or symptoms.','14일 기준은 유효 기록으로 만든 반려동물 기준값이며 의학적 정상 범위가 아닙니다. 변화가 지속되거나 증상이 있으면 수의사와 상담하세요.')}</p></div></details>`;
+}
+function dpMetricGuide(kind){
+ const entries=kind===0?[label3('心率是每分鐘的心跳次數；呼吸是每分鐘的呼吸次數。','Heart rate is beats/minute; breathing is breaths/minute.','심박수는 분당 심장 박동, 호흡수는 분당 호흡 횟수입니다.'),label3('RMSSD與SDNN是心跳間隔變化的兩種觀察方式，主要與自己的長期趨勢比較，不是越高就必然越健康。','RMSSD and SDNN describe different patterns in heartbeat interval variation. Compare with this pet’s trends, not a universal high/low target.','RMSSD와 SDNN은 심박 간격 변화의 서로 다른 지표입니다. 일률적 기준보다 이 반려동물의 추세가 중요합니다.')]
+ :kind===1?[label3('休息時間包括安靜不動；夜間睡眠為推估。清醒中斷是休息期間的活動變化。','Quiet rest includes still periods; overnight sleep is estimated. Interruptions mark wakeful or moving periods.','휴식은 조용히 있는 시간을 포함하며 야간 수면은 추정치입니다. 중단은 움직임을 나타냅니다.'),label3('同一隻寵物的休息變多或變少，都要一起觀察清醒次數、心肺狀態與平常範圍。','More or less rest alone is not necessarily good or bad; review interruptions, heart/breathing and usual range together.','휴식 시간이 늘거나 줄어도 중단 횟수와 평소 상태를 함께 살펴보세요.')]
+ :[label3('活動曲線的百分比是相對活動強度：0%較安靜，100%活動較多，並不是健康得分。','Activity percentage means relative movement intensity: 0% quiet, 100% more active—not a health score.','활동 %는 상대적인 움직임 강도이며 건강 점수가 아닙니다.'),label3('放鬆與平穩度、負荷調節的分數愈高代表目前更接近平穩表現；切換日期可以觀察是否持續。','Higher calmness and load-balance scores mean a steadier pattern; use different periods to check whether it lasts.','안정과 부담 조절 점수가 높을수록 흐름이 안정적인 편이며, 기간별 추세를 함께 보세요.')];
+ return `<details class="dp-metric-guide"><summary>${label3('這些數字與曲線代表什麼？','What do these numbers and curves mean?','숫자와 그래프는 무엇을 뜻하나요?')}</summary>${entries.map(line=>`<p>${line}</p>`).join('')}</details>`;
+}
+function dpMultiDayOnly(n,cp,labels){const days=state.range,title=label3(`最近 ${days} 天的變化`,`${days}-day changes`,`최근 ${days}일 변화`);const curves=n===0?`${deepTimeChart('heart','#bf4b70',label3('心率趨勢','Heart-rate trend','심박 추세'))}${deepTimeChart('breath','#c45c7c',label3('呼吸趨勢','Breathing trend','호흡 추세'))}${dpHrvChartForPeriod(days,'rmssd','#a94469')}${dpHrvChartForPeriod(days,'sdnn','#cd7691')}`:n===1?`${sleepSummaryCard()}${deepTimeChart('restState','#48a97a',label3('每晚休息走勢','Nightly rest trend','밤 휴식 추세'))}`:`${deepTimeChart('activityIntensity','#377dd1',label3('活動變化趨勢','Activity changes','활동 변화'))}`;return `<section class="card dp-multi-only"><h2 class="section-title">${title}</h2><p class="subtitle">${label3('這裡只比較所選期間前半段與後半段，沒有混入今天的單日分數。點擊曲線可查看對應日期與數值。','Only changes across the selected period are shown here, without a daily score. Tap a graph for dated values.','선택한 기간의 변화만 표시하며 오늘 점수는 포함하지 않습니다. 그래프를 눌러 날짜별 값을 확인하세요.')}</p>${dpDateInsight(n,days)}${curves}<details class="dp-metric-guide"><summary>${label3('怎麼理解這段變化？','How to interpret this period','기간 변화를 이해하는 방법')}</summary><p>${n===0?label3('心率與呼吸的升降需結合當時活動量；RMSSD、SDNN要看和自己的平常趨勢是否持續偏離。','Review heart and breathing with activity context; compare RMSSD and SDNN with this pet’s trends.','심박·호흡을 활동량과 비교하고 HRV는 이 반려동물의 추세와 함께 살펴보세요.'):n===1?label3('休息時間增加或減少不一定都是好事，還要看中斷、活動和這隻寵物平常的作息。','More or less rest is not inherently good or bad; consider interruptions and normal routine.','휴식 시간과 중단 횟수를 함께 살펴보세요.'):label3('活動增加不一定代表更健康，還要看是否比平常疲累、恢復是否變慢。','More activity is not always healthier; also check energy and recovery.','활동량뿐 아니라 피로와 회복 상태도 확인하세요.')}</p></details></section>`;}
+function dpNightSleepStats(idx){
+ const slots=nightSlotSequence(idx),minutes=slots.filter(x=>x==='sleep').length*30;
+ const first=slots.indexOf('sleep'),last=slots.lastIndexOf('sleep');let wakes=0,awakeStart=-1;
+ if(first>=0&&last>first){for(let i=first+1;i<=last;i++){
+  if(slots[i]==='awake'&&slots[i-1]==='sleep')awakeStart=i;
+  if(slots[i]==='sleep'&&slots[i-1]==='awake'&&awakeStart>=0){wakes++;awakeStart=-1;}
+ }}
+ const start=first<0?'—':dpTime((20*60+first*30)%1440);
+ const end=last<0?'—':dpTime((20*60+(last+1)*30)%1440);
+ return {minutes,wakes,start,end,slots};
+}
+function dpMinutesText(min){const h=Math.floor(Math.abs(min)/60),m=Math.round(Math.abs(min)%60);return h?label3(`${h}小時${m?`${m}分鐘`:''}`,`${h}h ${m?`${m}m`:''}`,`${h}시간 ${m?`${m}분`:''}`):label3(`${m}分鐘`,`${m} min`,`${m}분`);}
+// Preview data use aligned daily heart/activity minutes. The same extraction can be
+// applied to real, adequately sampled streams once the SDK supplies them.
+const dpRecoveryCache=new Map();
+function dpRecovery2Min(date){
+ const key=state.dog+':'+date;
+ if(dpRecoveryCache.has(key))return dpRecoveryCache.get(key);
+ const {heart,activity}=dpSignals(date,['heart','activity']);
+ if(heart.length!==1440||activity.length!==1440)return null;
+ const events=[];
+ for(let i=15;i<1425;i++){
+  const before=dpAverage(activity.slice(i-5,i+1)),after=dpAverage(activity.slice(i+1,i+4));
+  if(before<30||after>before-4)continue;
+  const peak=Math.max(...heart.slice(i-3,i+1)),at2=heart[i+2];
+  const baseline=dpAverage(heart.slice(i-14,i-7));
+  const drop=peak-at2;
+  if(drop>=1 && peak>=baseline+1 && Number.isFinite(drop))events.push({minute:i,peak,at2,drop,intensity:before});
+ }
+ const found=[];
+ for(const e of events.sort((a,b)=>b.drop-a.drop)){if(found.every(x=>Math.abs(x.minute-e.minute)>45)){found.push(e);if(found.length>=3)break;}}
+ // Fallback for real or simulated bouts with a gradual cooldown: first require
+ // movement followed by lower activity, and a measurable fall over two minutes.
+ if(!found.length){
+  const alternatives=[];
+  for(let i=12;i<heart.length-3;i++){
+   const moving=dpAverage(activity.slice(i-4,i+1));
+   const easing=dpAverage(activity.slice(i+1,i+4));
+   const peak=Math.max(...heart.slice(i-3,i+1)),at2=heart[i+2],drop=peak-at2;
+   if(moving>=30&&easing<moving-2&&drop>=.5&&Number.isFinite(drop))
+    alternatives.push({minute:i,peak,at2,drop,intensity:moving});
+  }
+  alternatives.sort((a,b)=>b.drop-a.drop);
+  for(const e of alternatives){if(found.every(x=>Math.abs(x.minute-e.minute)>45)){found.push(e);if(found.length>=3)break;}}
+ }
+ const result=found.length?{...found[0],count:found.length,average:found.reduce((a,x)=>a+x.drop,0)/found.length}:null;
+ dpRecoveryCache.set(key,result);return result;
+}
+function dpOwnerRecoveryComparison(row){
+ const curr=dpRecovery2Min(row.date);if(!curr)return null;
+ const rows=demoRecords(state.dog).slice(Math.max(0,row.idx-7),row.idx);
+ const previous=rows.map(x=>dpRecovery2Min(x.date)).filter(x=>x&&Math.abs(x.intensity-curr.intensity)<=30).map(x=>x.average).filter(Number.isFinite);
+ const reference=previous.length>=3?previous.reduce((a,b)=>a+b,0)/previous.length:null;
+ const diff=reference===null?null:curr.average-reference;
+ // Relative display score, not an interspecies physiological threshold.
+ const score=reference===null?null:dpOwnerQualityValue(82+(diff/Math.max(8,reference))*28);
+ return {...curr,score,reference,diff};
+}
+function dpOwnerRecoveryCurve(row,recovery){
+ if(!recovery||state.range!==1)return '';
+ const heart=dpSignals(row.date,['heart']).heart;
+ if(!Array.isArray(heart)||heart.length!==1440||!Number.isInteger(recovery.minute))return '';
+ const end=Math.max(3,Math.min(heart.length-3,recovery.minute));
+ // The 20-Hz SDK does not imply that the *demo* offers 15-second HR readings.
+ // Use only the observed local pre-stop peak and two actual consecutive
+ // minute-level HR measurements. No sinusoidal or interpolated noise.
+ const candidates=heart.slice(end-3,end+1),peakIndex=end-3+candidates.indexOf(Math.max(...candidates));
+ const startHR=Number(heart[peakIndex]),midHR=Number(heart[end+1]),finalHR=Number(heart[end+2]);
+ if(![startHR,midHR,finalHR].every(Number.isFinite))return '';
+ const steps=[0,1,2],values=[startHR,midHR,finalHR];
+ const W=360,H=202,l=48,right=17,top=20,bottom=48;
+ const spanTop=Math.ceil((Math.max(...values)+5)/10)*10,spanBottom=Math.floor((Math.min(...values)-5)/10)*10,dy=spanTop-spanBottom||10;
+ const xy=values.map((v,i)=>[l+i*(W-l-right)/2,top+(spanTop-v)/dy*(H-top-bottom)]);
+ const grid=Array.from({length:5},(_,i)=>{const v=spanBottom+dy*i/4,y=top+(spanTop-v)/dy*(H-top-bottom);return `<line x1="${l}" y1="${y}" x2="${W-right}" y2="${y}" stroke="#e0eaf5" stroke-dasharray="3 5"/><text x="${l-7}" y="${y+3}" text-anchor="end" fill="#57758e" font-size="10">${Math.round(v)}</text>`}).join('');
+ const path=xy.map(([x,y],i)=>`${i?'L':'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
+ const xticks=[0,1,2].map(i=>`<text x="${xy[i][0]}" y="${H-24}" text-anchor="middle" font-size="10" fill="#54748d">${i===0?label3('0分','0 min','0분'):i===1?label3('1分（60秒）','1 min (60s)','1분(60초)'):label3('2分（120秒）','2 min (120s)','2분(120초)')}</text>`).join('');
+ const svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Two-minute recovery heart rate"><text x="${l}" y="12" font-size="10" fill="#54748d">${label3('心率（bpm）','Heart rate (bpm)','심박수(bpm)')}</text>${grid}<line x1="${l}" y1="${H-bottom}" x2="${W-right}" y2="${H-bottom}" stroke="#90b7d9"/><path d="${path}" fill="none" stroke="#377cc3" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/>${xy.map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${i===0||i===8?5:3}" fill="#2775be" stroke="white" stroke-width="1.2"/>`).join('')}${xticks}<text x="${W-right}" y="${H-7}" text-anchor="end" font-size="10" fill="#54748d">${label3('時間 0–2 分鐘（120秒）','Time 0–2 min (120 sec)','시간 0~2분(120초)')}</text></svg>`;
+ const time0=dpTime(end%1440),time2=dpTime((end+2)%1440),drop=startHR-finalHR;
+ const caption=label3(`今日代表性活動：${time0} 附近的參考高值 ${Math.round(startHR)} bpm，${time2} 觀測值 ${Math.round(finalHR)} bpm；兩分鐘觀察窗下降約 ${Math.round(drop)} bpm。`,`Representative activity: local reference peak near ${time0}, ${Math.round(startHR)} bpm; observation at ${time2}, ${Math.round(finalHR)} bpm; about ${Math.round(drop)} bpm lower over the two-minute window.`,`오늘 대표 활동: ${time0} 부근 기준 고점 ${Math.round(startHR)} bpm, ${time2} 측정 ${Math.round(finalHR)} bpm.`);
+ return `<div class="dp-recovery-two-minute-curve">${inspectSvg(svg,values,{kind:'heart',title:label3('恢復心率','Recovery heart rate','회복 심박수'),unit:'bpm',minute:true,color:'#377cc3',timeLabels:steps.map(i=>`${i*60} s`),left:l,right,top,bottom,width:W,height:H,yCoords:xy.map(p=>p[1]),xRatios:steps.map(i=>i/2)})}<p>${caption}</p><small>${label3('第0點採活動停止附近實測局部高值，第1和第2點為後續分鐘觀測值。曲線不再補造15秒波動；實際起點可能比停止時間略早。請在相近活動強度與訊號品質下比較，不能以回落斜率單獨判斷疾病。','The first point is a nearby observed local peak; the next two are actual minute-level readings. No 15-second data are synthesized. The reference peak may precede activity cessation. Compare similar exertion and signal quality; the slope alone is not diagnostic.','첫 점은 활동 종료 부근 관측 고점, 다음 두 점은 분 단위 실측입니다. 15초 간격 가상 데이터를 만들지 않습니다.')}</small></div>`;
+}
+function dpOwnerRhythmCard(row,cp){
+ const now=rhythmData().values[row.idx];if(!now)return '';
+ const val=dpOwnerQualityValue(rhythmPositiveValue('stable',now)),grade=dp66Grade(val);
+ return `<section class="card dp66-rhythm-short dp66-risk-${grade}"><div><b>${label3('心搏節奏穩定度','Heartbeat rhythm stability','심박 리듬 안정도')}</b><p><strong>${dp66GradeName(grade)}</strong> · ${val>=80?label3('心跳間隔接近平常，整體較平穩','Beat timing is close to usual','심박 간격이 평소와 비슷합니다'):label3('心跳間隔與平常不同，先檢查佩戴及活動干擾','Beat timing differs from usual; check fit and movement','심박 간격 변화가 있어 착용과 움직임을 확인하세요')}</p><small>${label3('這是趨勢提示，不是心電圖診斷。','A trend indication, not an ECG diagnosis.','추세 알림이며 심전도 진단이 아닙니다.')}</small></div>${dpDeepDottedScore(val,cp.accent)}</section>`;
+}
+function dpHeartComposite(row){const heart=dpOwnerVitalScore(row,'heart'),breath=dpOwnerVitalScore(row,'breath');if(heart===null||breath===null)return null;return dpRiskGuard((heart+breath)/2,[heart,breath]);}
+function dpOwnerPeriodHeartScore(rows){const values=rows.map(dpHeartComposite).filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v)));return values.length?dpOwnerQualityValue(values.reduce((sum,v)=>sum+v,0)/values.length):null;}
+function dpOwnerQualityValue(value){return Math.max(0,Math.min(100,Math.round(Number(value)||0)));}
+function dpOwnerDayScores(row,withRecovery=false){
+ const rec=demoRecords(state.dog);
+ const pastActivity=rec.slice(Math.max(0,row.idx-14),row.idx).filter((x,i)=>validDaySample(x,Math.max(0,row.idx-14)+i).valid);
+ const baseActivity=Math.max(1,pastActivity.length?pastActivity.reduce((a,x)=>a+Number(x.activity||0),0)/pastActivity.length:currentDog().activity||Number(row.activity||1));
+ // Exhibit fixtures combine day-to-day consistency with the pet-specific scenario.
+ // Otherwise a severely inactive case could misleadingly show a 96/100 activity score
+ // merely because its consistently low activity matches its own low baseline.
+ // This only applies to the 15 fictional profiles, not a user-created pet.
+ const consistency=dpOwnerQualityValue(97-Math.abs(Number(row.activity)-baseActivity)/baseActivity*140);
+ const scenarioActivity=Array.isArray(currentDog().score)?currentDog().score[2]:consistency;
+ const activity=state.dog<dogs.length?dpOwnerQualityValue(consistency*.35+scenarioActivity*.65):consistency;
+ const recovery=withRecovery?(dpOwnerRecoveryComparison(row)?.score??null):null;
+ const energy=dpOwnerQualityValue(deepSelectedScore(2,row));
+ const heart=dpHeartComposite(row),sleep=dpOwnerQualityValue(deepSelectedScore(1,row)),energyActivity=dpRiskGuard((energy+activity)/2,[energy,activity]);
+ return {heart,sleep,energy,activity,energyActivity,physiol:dpPhysiolComposite(heart,sleep,energyActivity),recovery};
+}
+function dpTodayUnifiedScores(){
+ const rows=demoRecords(state.dog);if(!rows.length)return {heart:null,sleep:null,energy:null,activity:null,energyActivity:null,physiol:null};
+ return dpOwnerDayScores({...rows.at(-1),idx:rows.length-1},false);
+}
+function dpOwnerStatus(score){if(!Number.isFinite(score))return label3('資料不足','Insufficient data','데이터 부족');return score>=90?label3('表現很好','Doing great','매우 좋아요'):score>=80?label3('狀態穩定','Looking steady','안정적이에요'):score>=60?label3('稍微留意','Keep an eye on it','조금 살펴봐요'):label3('需要多留意','Needs attention','주의가 필요해요');}
+function dpOwnerExplanation(kind,score,row=null){
+ // The explanation follows the exact selected-day demonstration record. It
+ // must never fabricate a reason, nor call a missing score 'abnormal'.
+ if(!Number.isFinite(score))return label3('目前沒有足夠資料形成今日結論。','There is not enough data for a conclusion today.','오늘 상태를 설명할 유효한 기록이 부족합니다.');
+ const base=currentDog(),finite=x=>typeof x==='number'&&Number.isFinite(x);
+ if(kind===0){
+  if(score>=80)return label3('心肺狀態相對平穩，請結合整天走勢觀察。','Heart and breathing patterns are relatively steady; review the day-long trend.','심장과 호흡은 비교적 안정적이며 하루 흐름을 함께 확인하세요.');
+  if(row&&finite(row.breath)&&finite(base.rr)&&base.rr>0&&row.breath>=base.rr*1.15)return label3(`今日呼吸約 ${Math.round(row.breath)} 次／分，高於牠平常的參考 ${Math.round(base.rr)} 次／分；先查看休息與活動時段。`,`Breathing is about ${Math.round(row.breath)}/min versus its usual ${Math.round(base.rr)}/min. Review rest and activity periods.`,`호흡은 분당 약 ${Math.round(row.breath)}회로 평소 ${Math.round(base.rr)}회보다 높습니다. 활동 시간을 확인하세요.`);
+  if(row&&finite(row.heart)&&finite(base.hr)&&base.hr>0&&row.heart>=base.hr*1.15)return label3(`今日心率約 ${Math.round(row.heart)} 次／分，高於牠平常的參考 ${Math.round(base.hr)} 次／分；請對照活動時段。`,`Heart rate is about ${Math.round(row.heart)}/min versus its usual ${Math.round(base.hr)}/min. Compare activity periods.`,`심박수는 분당 약 ${Math.round(row.heart)}회로 평소 ${Math.round(base.hr)}회보다 높습니다.`);
+  return label3('心肺綜合分較低，請查看心跳、呼吸與心搏節奏穩定度各項分數；單一頻率不代表診斷。','The cardio composite is lower. Review heart, breathing and beat-stability scores rather than a single rate.','심폐 종합 점수가 낮습니다. 심박·호흡·안정도 점수를 함께 확인하세요.');
+ }
+ if(kind===1){
+  if(score>=80)return label3('這一晚休息表現相對平穩，可點開時間軸查看中斷時段。','Rest was relatively steady. Open the timeline to inspect interruptions.','휴식은 비교적 안정적입니다. 시간대별 중단을 확인하세요.');
+  // The full sleep timeline comes from dpNightSleepStats rather than the
+  // daily summary field. Cite that same displayed value whenever available.
+  const timelineRest=row&&Number.isInteger(row.idx)&&typeof dpNightSleepStats==='function'?dpNightSleepStats(row.idx)?.minutes/60:null;
+  const shownRest=finite(timelineRest)?timelineRest:row?.sleep;
+  if(finite(shownRest)&&finite(base.rest)&&base.rest-shownRest>=1)return label3(`推估休息約 ${shownRest.toFixed(1)} 小時，比牠平常的參考少 ${(base.rest-shownRest).toFixed(1)} 小時；請查看醒來時段。`,`Estimated rest is ${shownRest.toFixed(1)} h, ${(base.rest-shownRest).toFixed(1)} h below its usual level. Inspect waking periods.`,`추정 휴식은 ${shownRest.toFixed(1)}시간으로 평소보다 ${(base.rest-shownRest).toFixed(1)}시간 짧습니다.`);
+  return label3('睡眠休息分較低，請查看中斷次數與睡眠時間軸。','Rest score is lower; check interruptions and the sleep timeline.','휴식 점수가 낮습니다. 깨어난 횟수와 수면 시간대를 확인하세요.');
+ }
+ if(score>=80)return label3('精力、活動與恢復的整體表現相對平穩。','Energy, activity and recovery are relatively steady.','활동과 회복은 비교적 안정적입니다.');
+ if(row&&finite(row.recovery)&&finite(base.normalRecovery)&&row.recovery>=base.normalRecovery*1.25)return label3(`今日恢復指標 ${Math.round(row.recovery)}，高於牠平常的參考 ${Math.round(base.normalRecovery)}；請查看活動後120秒恢復曲線。`,`Today's recovery indicator is ${Math.round(row.recovery)} versus its usual ${Math.round(base.normalRecovery)}. Inspect the 120-second recovery curve.`,`오늘 회복 지표 ${Math.round(row.recovery)}는 평소 ${Math.round(base.normalRecovery)}보다 높습니다. 120초 회복 곡선을 확인하세요.`);
+ return label3('精力與恢復綜合分較低，請同時查看活動量、恢復曲線及放鬆程度。','Energy/recovery score is lower. Review activity, recovery curve and calmness together.','활동·회복 점수가 낮습니다. 활동량과 회복 곡선을 함께 확인하세요.');
+}
+function dpOwnerDayDelta(kind,row){
+ const all=demoRecords(state.dog),prior=all[row.idx-1];if(!prior||!validDaySample(prior,row.idx-1).valid)return '';
+ if(kind===1){const now=dpNightSleepStats(row.idx),old=dpNightSleepStats(row.idx-1),mins=now.minutes-old.minutes;const text=mins>0?label3(`比昨天多睡 ${dpMinutesText(mins)}`,`Slept ${dpMinutesText(mins)} longer than yesterday`,`어제보다 ${dpMinutesText(mins)} 더 잠`):mins<0?label3(`比昨天少睡 ${dpMinutesText(-mins)}`,`Slept ${dpMinutesText(-mins)} less than yesterday`,`어제보다 ${dpMinutesText(-mins)} 덜 잠`):label3('與昨天的睡眠時間接近，醒來次數仍有差別','Sleep duration close to yesterday; interruptions may differ','어제와 수면 시간이 비슷하지만 중단 횟수는 다를 수 있어요');return `<p class="dp-owner-day-compare">${vicon('moon',16)} ${text}</p>`;}
+ if(kind===2){const old=dpOwnerDayScores({...prior,idx:row.idx-1},true),now=dpOwnerDayScores(row,true);const verdict=now.energy>old.energy+1?label3('比昨天精力更好','Energy improved since yesterday','어제보다 활력이 좋아요'):now.energy<old.energy-1?label3('比昨天精力較弱','Energy lower than yesterday','어제보다 활력이 낮아요'):'';return verdict?`<p class="dp-owner-day-compare">${vicon('activity',16)} ${verdict}</p>`:'';}
+ return '';
+}
+function dpOwnerVitalDaily(kind,row){
+ const color=kind==='heart'?'#a7375a':'#c45c7c';
+ const title=kind==='heart'?label3('當日心率變化 · 全天','Selected day heart rate · 24 hours','해당 날짜 심박수 · 24시간'):label3('當日呼吸變化 · 全天','Selected day breathing · 24 hours','해당 날짜 호흡 · 24시간');
+ return `<div class="dp-owner-full-day"><div class="dp-owner-full-day-header"><b>${title}</b><button class="cardio-live-button" data-action="deep-live" data-kind="${kind}">${vicon('activity',14)} ${label3('查看即時波形','Live waveform','실시간 파형 보기')}</button></div>${deepTimeChart(kind,color,title)}<p class="dp-owner-chart-note">${label3('圖表依當天逐分鐘心率／呼吸序列呈現活動上升、休息回落與自然波動；尚未連接SDK時為模擬數據，不是真實寵物的實測波形。移動游標查看時間。','Minute trends reflect active and resting periods. Without SDK data they are physiologically informed simulations, not measurements from a real pet. Hover for values.','SDK 실측 데이터가 없으면 활동·휴식 패턴을 반영한 시뮬레이션 그래프이며 실제 기록이 아닙니다.')}</p></div>`;
+}
+function dpOwnerSleepWave(row,compact=false){
+ const slots=dpNightSleepStats(row.idx).slots,values=slots.map(v=>v==='sleep'?1:0),W=350,H=compact?96:125,l=35,r=4,t=10,b=27,plotH=H-t-b,span=W-l-r;
+ const coords=values.map((v,i)=>[l+span*(i+.5)/32,t+(1-v)*plotH]);
+ const path=deepCurvePath(coords,true),times=slots.map((_,i)=>`${dpTime((1200+i*30)%1440)} – ${dpTime((1200+(i+1)*30)%1440)}`);
+ const tick=[0,8,16,24,32].map((i,j)=>`<text x="${l+span*i/32}" y="${H-6}" font-size="9" text-anchor="${j===0?'start':j===4?'end':'middle'}" fill="#728c7d">${dpTime((1200+i*30)%1440)}</text>`).join('');
+ const svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label3('睡眠與清醒變化','Sleep / awake changes','수면과 기상 변화')}"><line x1="${l}" y1="${t}" x2="${W-r}" y2="${t}" stroke="#e2efe8"/><line x1="${l}" y1="${t+plotH}" x2="${W-r}" y2="${t+plotH}" stroke="#e2efe8"/><text x="${l-4}" y="${t+4}" text-anchor="end" font-size="10" fill="#4e9770">${label3('睡眠','Sleep','수면')}</text><text x="${l-4}" y="${t+plotH+4}" text-anchor="end" font-size="10" fill="#4e9770">${label3('清醒','Awake','기상')}</text><path d="${path}" fill="none" stroke="#3d9d73" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${tick}</svg>`;
+ return `<div class="dp-owner-sleep-wave ${compact?'compact':''}">${inspectSvg(svg,values,{kind:'sleepPhase',title:label3('安靜休息／活動','Quiet rest / movement','조용한 휴식/움직임'),unit:'',dates:times.map(()=>row.date),timeLabels:times,color:'#3d9d73',left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:coords.map(p=>p[1]),xRatios:coords.map((p,i)=>(i+.5)/32),compact})}</div>`;
+}
+function dpOwnerMultiNightTimelines(rows,days,full=false){
+ const visible=full?rows:rows.slice(-3),more=!full&&rows.length>3;
+ const title=full?label3(`最近${days}天全部睡眠紀錄`,`All ${days}-day sleep records`,`최근 ${days}일 전체 수면 기록`):label3('最近三晚詳細睡眠','Latest three nights · details','최근 3일 자세한 수면');
+ return `<section class="card dp-owner-nights"><h3>${title}</h3><p class="subtitle">${label3('曲線與下方綠／灰色時間條使用完全相同的20:00–12:00時間區間；滑鼠移過即可同步查看每半小時狀態。','The curve and the green/gray strip share the same 20:00–12:00 interval. Hover to inspect the same half-hour on both.','곡선과 녹색/회색 시간대는 동일한 20:00-12:00 구간을 사용합니다. 마우스로 각 구간을 확인하세요.')}</p>${visible.map(row=>{const st=dpNightSleepStats(row.idx);return `<article class="dp-night-record"><div class="dp-night-record-head"><b>${dpFullDate(row.date)}</b><span>${dpMinutesText(st.minutes)} · ${label3('醒來','Wakings','기상')} ${st.wakes}${label3('次',' times','회')}</span></div><div class="dp-night-extra-stats"><span>${label3('入睡時間','Sleep start','취침')} <b>${st.start}</b></span><span>${label3('醒來時間','Wake time','기상')} <b>${st.end}</b></span><span>${label3('推估休息','Estimated sleep','추정 수면')} <b>${dpMinutesText(st.minutes)}</b></span></div>${dpOwnerSleepWave(row,true)}<div class="dp-owner-night-timeline">${sleepMatrixDate(row.idx)}</div></article>`}).join('')}${more?`<button class="care-outline full dp-all-nights-toggle" data-action="owner-all-nights-open">${label3(`More · 查看全部 ${rows.length} 晚`,`More · View all ${rows.length} nights`,`More · ${rows.length}일 전체 보기`)}</button>`:''}</section>`;
+}
+function dpOwnerWave(kind,row){return dpOwnerVitalDaily(kind,row);}
+function dpOwnerVitalScore(row,kind){
+ // A metric's score must depend on that metric, not on a shared preset heart/breathing score.
+ // Compare 24h mean and activity-adjusted excursions with PREVIOUS valid daily readings only.
+ const all=demoRecords(state.dog),idx=Number.isInteger(row?.idx)?row.idx:all.findIndex(r=>r.date===row?.date);
+ if(idx<0||!validDaySample(row,idx).valid||!['heart','breath'].includes(kind))return null;
+ const series=dpSignals(row.date,[kind,'activity']);const values=series[kind]||[],activity=series.activity||[];
+ if(values.length!==1440||activity.length!==1440)return null;
+ const begin=Math.max(0,idx-14),before=all.slice(begin,idx).filter((r,j)=>validDaySample(r,begin+j).valid);
+ const prior=before.map(r=>Number(r[kind])).filter(v=>Number.isFinite(v)&&v>0);
+ const fallback=Number(currentDog()[kind==='heart'?'hr':'rr'])||Number(row[kind]);
+ const reference=prior.length>=3?prior.reduce((a,b)=>a+b,0)/prior.length:fallback;
+ const dayMean=values.reduce((a,b)=>a+b,0)/values.length;
+ const meanActivity=activity.reduce((a,b)=>a+b,0)/activity.length;
+ // Don't count expected activity-related rises as a resting abnormality.
+ const quiet=values.filter((_,i)=>activity[i]<25);
+ const quietMean=quiet.length>=60?quiet.reduce((a,b)=>a+b,0)/quiet.length:dayMean;
+ const quietPast=before.map(r=>Number(r[kind])).filter(Number.isFinite);
+ const trendReference=prior.length>=3?reference:fallback;
+ const longTerm=Math.abs(dayMean-trendReference)/Math.max(1,trendReference);
+ const quietVariation=quiet.length>=60?quiet.reduce((sum,v)=>sum+Math.abs(v-quietMean),0)/quiet.length/Math.max(1,quietMean):0;
+ // Independent penalty: temporary deviations in QUIET minutes, not the other vital's score.
+ const threshold=kind==='heart'?.22:.28;
+ const excursions=quiet.length>=60?quiet.filter(v=>Math.abs(v-quietMean)/Math.max(1,quietMean)>threshold).length/quiet.length:0;
+ const qualityPenalty=Math.min(19,quietVariation*(kind==='heart'?105:110));
+ const changePenalty=Math.min(31,longTerm*(kind==='heart'?175:195));
+ const excursionPenalty=Math.min(27,excursions*165);
+ return dpOwnerQualityValue(96-changePenalty-qualityPenalty-excursionPenalty);
+}
+function dpOwnerVitalText(row,kind){
+ const records=demoRecords(state.dog),rawBefore=records[row.idx-1],before=rawBefore&&validDaySample(rawBefore,row.idx-1).valid?rawBefore:null;
+ const begin=Math.max(0,row.idx-7),week=records.slice(begin,row.idx).map((r,i)=>({...r,idx:begin+i})).filter(r=>validDaySample(r,r.idx).valid);
+ const v=Number(row[kind]),unit=kind==='heart'?'bpm':label3('次／分','/min','회/분');
+ const s=dpOwnerVitalScore(row,kind),scoreOld=before?dpOwnerVitalScore({...before,idx:row.idx-1},kind):null;
+ const weekEntries=week.map(r=>({row:r,value:dpOwnerVitalScore(r,kind)})).filter(x=>x.value!==null&&Number.isFinite(Number(x.value)));
+ const scoreWeek=weekEntries.length?weekEntries.reduce((sum,x)=>sum+x.value,0)/weekEntries.length:null;
+ const status=s===null?label3('資料不足','Not enough data','자료 부족'):s>=88?label3('狀態平穩','Steady','안정적'):s>=75?label3('略有變化','Some variation','다소 변화'):label3('值得留意','Worth watching','주의 필요');
+ const verdict=(ref,label)=>{if(ref==null)return '';const diff=s-ref;return `${label}${Math.abs(diff)<2?label3('狀態接近',' · broadly similar',' · 비슷함'):diff>0?label3('更加平穩',' · steadier',' · 더 안정적'):label3('變動較多',' · more variable',' · 변동 증가')}`;};
+ const change=ref=>{if(ref==null)return '';const diff=v-ref;return Math.abs(diff)<(kind==='heart'?1.5:.6)?label3('數值接近','reading similar','수치 비슷함'):label3(`${diff>0?'快':'慢'} ${Math.abs(diff).toFixed(1)} ${unit}`,`${Math.abs(diff).toFixed(1)} ${unit} ${diff>0?'higher':'lower'}`,`${Math.abs(diff).toFixed(1)} ${unit} ${diff>0?'증가':'감소'}`);};
+ const previous=before&&s!==null&&scoreOld!==null?`${verdict(scoreOld,row.date===iso(localDate())?label3('比昨天：','Compared with yesterday: ','어제보다: '):label3('比前一天：','Compared with prior day: ','전날보다: '))}（${change(Number(before[kind]))}）`:'';
+ const weekMean=weekEntries.length?weekEntries.reduce((sum,x)=>sum+Number(x.row[kind]),0)/weekEntries.length:null;
+ const weekly=s!==null&&scoreWeek!==null&&weekMean!==null?`${verdict(scoreWeek,label3('比上週平均：','Compared with last-week average: ','지난주 평균보다: '))}（${change(weekMean)}）`:'';
+ return `<div class="dp-vital-feedback"><b>${status}</b><small>${previous}${previous&&weekly?'<br>':''}${weekly}</small></div>`;
+}
+function dpOwnerPeriodMetricChart(rows,key,color,customValues=null,displayUnit=''){
+ if(!rows.length)return '';
+ const values=customValues||rows.map(row=>row[key]);
+ // For 7-/30-day views the horizontal slots represent calendar dates, not
+ // just the days with a measurement. A missing day must retain its position.
+ const byDate=new Map(rows.map((row,i)=>[row.date,values[i]]));
+ const chartRows=[7,30].includes(Number(state.range))?dayRowsWithIndex(Number(state.range)):rows;
+ const points=chartRows.map((row,i)=>{const value=byDate.get(row.date);
+  return {i,value:Number(value),row,present:value!==null&&value!==undefined&&value!==''};
+ }).filter(o=>o.present&&Number.isFinite(o.value)&&o.row);
+ if(!points.length)return `<div class="dp-owner-empty">${label3('尚無可比較資料','No data to compare','비교할 자료가 없어요')}</div>`;
+ const vals=points.map(x=>x.value),W=350,H=166,l=38,r=4,t=12,b=33,lo=Math.min(...vals),hi=Math.max(...vals),span=Math.max(2,hi-lo);
+ const scoreUnit=displayUnit==='/100',min=scoreUnit?Math.max(0,lo-span*.20):lo-span*.20;
+ const upper=scoreUnit?Math.min(100,hi+span*.20):hi+span*.20,max=upper>min?upper:min+1;
+ const pos=points.map(x=>[l+(W-l-r)*(chartRows.length===1?.5:x.i/(chartRows.length-1)),t+(max-x.value)/(max-min)*(H-t-b)]);
+ // Do not connect two valid observations THROUGH a missing date. Connecting
+ // them would visually assert a measurement for days with no observation.
+ const available=new Map(points.map((p,i)=>[p.i,pos[i]]));
+ let path='',active=false;
+ for(let i=0;i<chartRows.length;i++){
+  const point=available.get(i);if(!point){active=false;continue;}
+  path+=(active?' L ':' M ')+point[0].toFixed(2)+' '+point[1].toFixed(2);
+  active=true;
+ }
+ const step=points.length>=30?5:points.length>=14?3:points.length>=7?2:1;
+ const ticks=points.map((x,i)=>i).filter(i=>i%step===0||i===points.length-1);
+ const lines=[0,.5,1].map(q=>{const y=t+q*(H-t-b);return `<line x1="${l}" y1="${y}" x2="${W-r}" y2="${y}" stroke="#e9eaf0"/><text x="${l-5}" y="${y+4}" font-size="10" text-anchor="end" fill="#8790a3">${(max-(max-min)*q).toFixed(key==='sleep'?1:0)}</text>`;}).join('');
+ const svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(key)}">${lines}${path?`<path d="${path}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`:''}${pos.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.2" fill="${color}"/>`).join('')}${ticks.map(i=>`<text x="${pos[i][0]}" y="${H-7}" text-anchor="${i===0?'start':i===points.length-1?'end':'middle'}" font-size="9.5" fill="#8590a1">${points[i].row.date.slice(5).replace('-','/')}</text>`).join('')}</svg>`;
+ const labels={heart:label3('心率','Heart rate','심박수'),breath:label3('呼吸','Breathing','호흡'),sleep:label3('睡眠時數','Sleep hours','수면 시간'),activity:label3('活動','Activity','활동'),energy:label3('精力','Energy','활력'),recovery:label3('恢復','Recovery','회복'),calm:label3('放鬆與平穩度','Calmness','안정도'),load:label3('負荷調節','Load regulation','부담 조절'),stable:label3('心搏節奏穩定度','Rhythm stability','심박 리듬 안정도')};
+ return `<div class="dp-owner-chart-box dp-vital-trend">${inspectSvg(svg,vals,{kind:key,title:labels[key]||key,unit:displayUnit||({heart:'bpm',breath:label3('次/分','breaths/min','회/분'),sleep:'h'}[key]||'/100'),dates:points.map(x=>x.row.date),color,left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:pos.map(p=>p[1]),xRatios:pos.map(p=>(p[0]-l)/(W-l-r))})}</div>`;
+}
+function dpHrvValuesPanel(rows){
+ const valid=rows.filter(r=>Number.isFinite(Number(r.sdnn))&&Number.isFinite(Number(r.rmssd)));
+ if(!valid.length)return '';
+ const mean=k=>valid.reduce((sum,r)=>sum+Number(r[k]),0)/valid.length;
+ const isPeriod=state.range!==1;
+ return `<div class="dp-hrv-visible"><h3>${label3('心搏變異觀察指標','Heart-rate variability metrics','심박 변이 지표')}</h3><div class="dp-hrv-pair"><div><b>SDNN</b><strong>${mean('sdnn').toFixed(1)} <small>ms</small></strong><p>${label3('心搏間隔的整體變化','Overall beat-interval variation','심박 간격의 전체 변화')}</p></div><div><b>RMSSD</b><strong>${mean('rmssd').toFixed(1)} <small>ms</small></strong><p>${label3('相鄰心搏間隔的短期變化','Short-term variation between beats','인접 박동 간 단기 변동')}</p></div></div><small>${isPeriod?label3(`所選期間 ${valid.length} 個有效日的平均，不是單次心搏值。`,`Average over ${valid.length} valid days, not a single beat.`,`유효한 ${valid.length}일의 평균값입니다.`):label3('當日示範 HRV 值，請與相同休息條件下的個體基準比較。','Illustrative HRV values for this day; compare under comparable resting conditions.','오늘 HRV 예시값으로 비슷한 휴식 조건에서 비교하세요.')} ${label3('數值本身不能診斷疾病，也不是越高越好。','These values do not diagnose disease and are not simply better when higher.','질환 진단이나 단순한 높고 낮음 판정에 사용할 수 없습니다.')}</small></div>`;
+}
+function dpEnergyHourlyChart(row,dayScore){
+ const raw=dpSignals(row.date,['activity']).activity;
+ if(!Array.isArray(raw)||raw.length<1440)return `<p class="dp-owner-subsummary">${label3('沒有完整的全天活動資料，暫不顯示分時強度曲線。','Hourly movement trend requires complete day activity data.','하루 활동 기록이 부족합니다.')}</p>`;
+ // Show the actual available minute-level movement averaged per hour. The
+ // previous formula invented time-of-day score bumps (-7/+3/-4), which made
+ // an attractive curve but wasn't an observed hourly energy measurement.
+ if(raw.some(v=>typeof v!=='number'||!Number.isFinite(v)))return `<p class="dp-owner-subsummary">${label3('全天活動資料不完整，暫不顯示分時曲線。','Incomplete full-day movement observations.','하루 활동 데이터가 완전하지 않습니다.')}</p>`;
+ const values=Array.from({length:24},(_,hour)=>Number((raw.slice(hour*60,(hour+1)*60).reduce((a,v)=>a+v,0)/60).toFixed(1)));
+ const W=350,H=166,l=36,r=5,t=12,b=33,low=Math.max(0,Math.floor((Math.min(...values)-7)/10)*10),high=Math.min(100,Math.ceil((Math.max(...values)+7)/10)*10);
+ const pos=values.map((v,i)=>[l+i*(W-l-r)/23,t+(high-v)/Math.max(1,high-low)*(H-t-b)]);
+ const lines=[0,.5,1].map(f=>{const y=t+(H-t-b)*f;return `<line x1="${l}" y1="${y}" x2="${W-r}" y2="${y}" stroke="#e4edf7"/><text x="${l-6}" y="${y+4}" text-anchor="end" font-size="10" fill="#6d87a1">${Math.round(high-(high-low)*f)}</text>`;}).join('');
+ const axis=[0,6,12,18,23].map(i=>`<text x="${pos[i][0]}" y="${H-7}" text-anchor="${i===0?'start':i===23?'end':'middle'}" font-size="10" fill="#6982a1">${String(i).padStart(2,'0')}:00</text>`).join('');
+ const svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Hourly average movement intensity">${lines}<path d="${deepCurvePath(pos,false)}" fill="none" stroke="#4387dc" stroke-width="2.8" stroke-linejoin="round"/>${pos.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2" fill="#4387dc"/>`).join('')}${axis}</svg>`;
+ return `<div class="dp-owner-chart-box dp-vital-trend">${inspectSvg(svg,values,{kind:'activity',title:label3('分時活動強度','Hourly movement intensity','시간별 활동 강도'),unit:'%',dates:values.map(()=>row.date),timeLabels:values.map((_,i)=>String(i).padStart(2,'0')+':00'),color:'#4387dc',left:l,right:r,top:t,bottom:b,width:W,height:H,yCoords:pos.map(p=>p[1]),xRatios:values.map((_,i)=>i/23)})}<p class="dp-owner-chart-note">${label3('這是每小時活動強度平均值；精力分數另外依每日有效資料計算。','Hourly mean movement intensity; daily energy scores are calculated separately.','시간별 활동 강도 평균이며 일별 활력 점수와는 다른 지표입니다.')}</p></div>`;
+}
+// V8.66: owner-first results, demonstration-only alert grading (not validated medical diagnosis).
+function dp66Avg14(kind){
+ const records=demoRecords(state.dog).map((r,i)=>({...r,idx:i})).filter(r=>validDaySample(r,r.idx).valid).slice(-14);
+ if(records.length<14)return '—';
+ const xs=records.map(r=>Number(r[kind])).filter(Number.isFinite);
+ return xs.length?(xs.reduce((a,b)=>a+b,0)/xs.length).toFixed(1):'—';
+}
+function dp66RhythmLoadQuick(row){
+ const data=rhythmData().values,now=data[row.idx];if(!now)return '';
+ const prior=data[row.idx-1]||null;
+ const items=[['calm',label3('放鬆與平穩度','Rest & steadiness','휴식과 안정'),label3('安靜時是否接近平常的放鬆狀態','How closely quiet periods resemble usual rest','안정 시 평소 휴식과의 차이')],['load',label3('活動負荷調節','Activity load balance','활동 부하 조절'),label3('活動後能否回到平常的狀態','How well the body settles after activity','활동 후 평소 상태로 돌아오는 정도')]];
+ return `<section class="card dp66-rhythm-load"><h3>${label3('放鬆與負荷提示','Rest and load summary','휴식 및 부하 요약')}</h3><div class="dp66-rhythm-load-grid">${items.map(([k,title,help])=>{
+  const val=dpOwnerQualityValue(rhythmPositiveValue(k,now)),grade=dp66Grade(val),previous=prior?dpOwnerQualityValue(rhythmPositiveValue(k,prior)):null;
+  const repeat=grade>=2&&previous!==null&&dp66Grade(previous)>=2;
+  return `<div class="dp66-rhythm-item"><b>${title}</b><span class="dp66-grade-badge dp66-risk-${grade}">${dp66GradeName(grade)}</span><p>${help}</p><small>${repeat?label3('已連續兩天偏離平常，建議持續觀察','Changed for two days in a row; keep watching','이틀 연속 평소와 다릅니다'):grade>=1?label3('今天有些變化；明天再次偏離才提示持續變化','Changed today; repeated changes are flagged after two days','오늘 변화가 있으며 이틀 연속이면 반복으로 표시합니다'):label3('沒有連續異常變化','No sustained change seen','지속적인 변화 없음')}</small></div>`;}).join('')}</div><p class="dp66-demo-hint">${label3('依模擬活動與休息資料判讀，不是情緒或疾病診斷。','Interpreted from demo activity and rest, not a mood or disease diagnosis.','활동 및 휴식 시뮬레이션 데이터이며 감정이나 질환 진단이 아닙니다.')}</p></section>`;
+}
+function dp66Grade(value){
+ const v=dpScoreValue(value);
+ return v===null?-1:v>=90?0:v>=80?1:v>=60?2:3;
+}
+function dp66GradeName(grade){
+ if(!Number.isInteger(grade)||grade<0||grade>3)return label3('資料不足','Insufficient data','자료 부족');
+ return [label3('健康','Healthy','건강'),label3('低風險','Mild','낮은 주의'),label3('中風險','Moderate','중간 주의'),label3('高風險','Risk','높은 주의')][Math.max(0,Math.min(3,grade))];
+}
+function dp66DemoPeak(date,kind){
+ const series=dpSignals(date,[kind])?.[kind];
+ if(!Array.isArray(series)||series.length<720)return null;
+ // Compare rolling 20-minute averages against the same day. Deterministic for each pet/date.
+ const vals=series.map(Number);if(vals.some(v=>!Number.isFinite(v)))return null;
+ const mean=vals.reduce((a,b)=>a+b,0)/vals.length;
+ let biggest=-1,when=0;
+ for(let i=40;i<Math.min(vals.length-20,1360);i+=5){
+  let sum=0;for(let j=i;j<i+20;j++)sum+=vals[j];
+  const dev=Math.abs(sum/20-mean);
+  if(dev>biggest){biggest=dev;when=i+10;}
+ }
+ return {time:String(Math.floor(when/60)).padStart(2,'0')+':'+String(when%60).padStart(2,'0'),delta:biggest,avg:mean};
+}
+function dp66VitalGrade(row,kind){
+ if(!row||!validDaySample(row,row.idx).valid||!signalQuality().valid)return -1;
+ return dp66Grade(dpOwnerVitalScore(row,kind));
+}
+function dp66VitalCard(row,kind){
+ const heart=kind==='heart',grade=dp66VitalGrade(row,kind),peak=grade>0?dp66DemoPeak(row.date,kind):null;
+ const val=heart?Math.round(row.heart)+' bpm':Math.round(row.breath)+' '+label3('次／分','/min','회/분');
+ const title=heart?label3('心跳狀況','Heart rate','심박 상태'):label3('呼吸狀況','Breathing','호흡 상태');
+ const desc=grade<0?label3('有效資料不足，暫不判定','Insufficient valid data','유효 데이터 부족'):
+ grade===0?(heart?label3('心跳接近平常，未見需優先提示的變化','Heart rate is close to its usual pattern','심박수가 평소와 비슷합니다'):label3('呼吸平穩，未見需優先提示的變化','Breathing is close to its usual pattern','호흡이 평소와 비슷합니다')):
+ heart?label3('當天心跳與平常模式有明顯差異，建議確認休息及佩戴情況','Heart-rate pattern differs from usual on this day; check rest and collar fit','오늘 심박 패턴이 평소와 달라 휴식과 착용 상태를 확인하세요'):
+ label3('當天呼吸與平常模式有差異，請觀察是否出現持續喘促','Breathing differs from usual on this day; watch for persistent difficulty','오늘 호흡 패턴이 평소와 달라 지속적인 호흡 곤란 여부를 확인하세요');
+ const time=peak?`<span class="dp66-detected">${label3('示例變化時間','Demo change time','예시 변화 시간')} <b>${peak.time}</b></span>`:'';
+ return `<div class="dp66-vital dp66-risk-${Math.max(0,grade)}"><div class="dp66-vital-top"><b>${title}</b><span class="dp66-risk-label">${grade<0?label3('資料不足','No data','데이터 부족'):dp66GradeName(grade)}</span></div><strong>${val}</strong><p>${desc}</p>${time}<button type="button" class="dp66-live-link" data-action="deep-live" data-kind="${kind}">${vicon('activity',16)} ${label3('查看即時波形','View live waveform','실시간 파형 보기')}</button></div>`;
+}
+function dp66SleepAlert(row,score){
+ const st=dpNightSleepStats(row.idx),old=row.idx>0?dpNightSleepStats(row.idx-1):null;
+ const grade=dp66Grade(score),diff=old?st.minutes-old.minutes:null;
+ const changed=old&&(diff< -60||st.wakes>=old.wakes+2);
+ const actual=Math.max(grade,changed?1:0);
+ const summary=actual===0?label3('昨夜休息正常，未見值得優先提醒的變化','Rest looked steady last night','어젯밤 휴식이 안정적이었습니다'):
+ label3('昨夜休息較平常有變化，請留意今天的精神和食慾','Rest changed overnight; watch energy and appetite today','어젯밤 휴식에 변화가 있어 오늘 활력과 식욕을 살펴보세요');
+ return `<div class="dp66-status-alert dp66-risk-${actual}"><b>${dp66GradeName(actual)}</b><span>${summary}</span></div>`;
+}
+function dp66EnergyAlert(label,score,expl){const grade=dp66Grade(score);return `<p class="dp66-inline-risk dp66-risk-${Math.max(0,grade)}"><b>${grade<0?label3('資料不足','Insufficient data','데이터 부족'):dp66GradeName(grade)}</b><span>${expl}</span></p>`;}
+function dp66PeriodRhythm(rows,cp){
+ const all=rhythmData().values,values=rows.map(r=>all[r.idx]).filter(Boolean).map(v=>dpOwnerQualityValue(rhythmPositiveValue('stable',v)));
+ const avg=values.length?Math.round(values.reduce((a,b)=>a+b,0)/values.length):null;
+ return `<section class="card dp66-rhythm-short"><div><b>${label3('心搏節奏穩定度','Heartbeat rhythm stability','심박 리듬 안정도')}</b><p>${avg===null?label3('資料不足','Not enough data','자료 부족'):avg>=80?label3('這段時間心搏節奏較平穩','Beat timing looks fairly steady in this period','이 기간 심박 리듬이 비교적 안정적입니다'):label3('這段時間心搏節奏起伏較明顯，建議留意','Beat timing has varied more than usual','평소보다 심박 리듬 변동이 큽니다')}</p></div>${dpDeepDottedScore(avg,cp.accent)}</section>`;
+}
+function dp66UrgentHome(){
+ if(selectedBlank()||dp58FreshPet()||!signalQuality().valid)return '';
+ const rows=demoRecords(state.dog),row={...rows.at(-1),idx:rows.length-1};
+ if(!validDaySample(row,row.idx).valid)return '';
+ const important=['heart','breath'].map(kind=>({kind,grade:dp66VitalGrade(row,kind)})).filter(x=>x.grade>=2);
+ if(!important.length)return '';
+ return `<section class="card dp66-urgent"><div class="dp66-urgent-header"><span aria-hidden="true">⚠</span><strong>${label3('今天的即時變化提醒','Today’s priority changes','오늘의 주요 변화 알림')}</strong><span class="dp66-demo-tag">${label3('模擬預警','Demo alert','데모 알림')}</span></div><p>${label3('與這隻寵物平常的模式不同，請先查看；這不是疾病診斷。','These demo signals differ from this pet’s usual pattern; not a diagnosis.','평소 패턴과 다른 시뮬레이션 신호이며 진단은 아닙니다.')}</p>${important.map(x=>{const time=dp66DemoPeak(row.date,x.kind)?.time||'—';return `<button class="dp66-urgent-item" data-action="deep-category" data-index="0"><b>${x.kind==='heart'?label3('心跳變化','Heart-rate change','심박 변화'):label3('呼吸變化','Breathing change','호흡 변화')}</b><span>${dp66GradeName(x.grade)} · ${label3('示例時間','Demo time','예시 시간')} ${time}</span>${vicon('chev',16)}</button>`;}).join('')}<small>${label3('若實際出現呼吸困難、倒下等急症，請直接聯絡獸醫，不應等待 APP 判斷。','If your pet is struggling to breathe or collapses, seek urgent veterinary help rather than relying on the app.','실제로 호흡 곤란이나 쓰러짐이 나타나면 앱 대신 즉시 수의사의 도움을 받으세요.')}</small></section>`;
+}
+
+function dpOwnerDayDetail(kind,cp,row){
+ const s=dpOwnerDayScores(row,kind===2),score=kind===0?s.heart:kind===1?s.sleep:s.energyActivity,valid=validDaySample(row,row.idx).valid;
+ if(!valid)return `<section class="card dp-owner-status-card"><b>${label3('這一天沒有可靠的記錄','No reliable data for this day','이날은 신뢰할 수 있는 기록이 없어요')}</b></section>`;
+ const headline=kind===0?label3('心肺綜合狀態','Overall heart & breathing status','심폐 종합 상태'):kind===1?label3('睡眠情況','Sleep & rest','수면 상태'):label3('精力與恢復狀態','Energy & Recovery status','활력과 회복 상태');
+ const common=`<div class="dp-owner-status-heading dp-heart-overall-heading"><div><h2>${headline}</h2><p class="dp-heart-overall-verdict">${dpOwnerStatus(score)}</p></div>${dpDeepDottedScore(score,cp.accent)}</div>`;
+ if(kind===0){
+  return `<section class="card dp-owner-status-card dp-owner-heart dp66-heart-clean"><div class="dp-owner-status-inner">${common}<p>${dpOwnerExplanation(0,score,row)}</p><div class="dp66-vital-grid">${dp66VitalCard(row,'heart')}${dp66VitalCard(row,'breath')}</div><p class="dp66-demo-hint">${label3('分級反映模擬數據相對個體平常狀態的變化；不能用於疾病診斷。','Grades reflect simulated changes from this pet’s usual pattern; not a diagnosis.','등급은 평소와 비교한 시뮬레이션 변화이며 질환 진단이 아닙니다.')}</p></div></section>${dpOwnerRhythmCard(row,cp)}`;
+ }
+ if(kind===1){const st=dpNightSleepStats(row.idx),old=row.idx>0?dpNightSleepStats(row.idx-1):null;
+ const sleepTime=st.minutes,delta=old?sleepTime-old.minutes:null;
+ const diffText=delta===null?label3('尚無昨天的睡眠紀錄','No prior-night record','어제 수면 기록 없음'):delta===0?label3('睡眠時長與昨天接近，請留意醒來次數','Sleep duration was close to yesterday; review awakenings','수면 시간은 어제와 비슷해요'):delta>0?label3(`比昨天多睡 ${dpMinutesText(delta)}`,`Slept ${dpMinutesText(delta)} longer than yesterday`,`어제보다 ${dpMinutesText(delta)} 더 잤어요`):label3(`比昨天少睡 ${dpMinutesText(-delta)}`,`Slept ${dpMinutesText(-delta)} less than yesterday`,`어제보다 ${dpMinutesText(-delta)} 덜 잤어요`);
+ return `<section class="card dp-owner-status-card dp-owner-sleep"><div class="dp-owner-status-inner">${common}${dp66SleepAlert(row,score)}<p>${dpOwnerExplanation(1,score,row)}</p><div class="dp-owner-sleep-facts"><div><span>${label3('每晚睡眠與休息總時長','Nightly sleep & rest duration','밤 수면·휴식 총시간')}</span><b>${dpMinutesText(sleepTime)}</b></div><div><span>${label3('夜間休息中斷','Rest interruptions','야간 휴식 중단')}</span><b>${st.wakes} ${label3('次','times','회')}</b></div></div><p class="dp-owner-sleep-difference">${diffText}${old?` · ${label3('夜間醒來','Night wakings','밤중 기상')} ${st.wakes>old.wakes?label3('增加','increased','증가'):st.wakes<old.wakes?label3('減少','decreased','감소'):label3('接近昨天','similar to yesterday','어제와 비슷함')}`:''}</p><div class="dp-owner-sleep-legend"><strong>${label3('睡眠與休息／活動時間軸','Rest and movement timeline','수면·휴식/움직임 시간대')}</strong><span><i class="sleep"></i>${label3('睡眠與休息','Sleep & rest','수면 및 휴식')}</span><span><i class="awake"></i>${label3('活動','Movement','움직임')}</span></div><div class="dp-owner-sleep-timeline">${dpOwnerSleepWave(row)}${sleepMatrixDate(row.idx)}</div></div></section>`;
+ }
+ const recovery=dpOwnerRecoveryComparison(row);
+ const activityIntensity=dpSignals(row.date,['activity']).activity;
+ const activityMinutes=activityIntensity.filter(v=>Number(v)>=35).length;
+ const recoveryScore=s.recovery;
+ const recoveryText=recovery?label3(`今日活動後兩分鐘心率平均下降約 ${Math.round(recovery.average)} bpm。`, `Heart rate dropped an average of ${Math.round(recovery.average)} bpm within two minutes after activity.`, `오늘 활동 후 2분 동안 심박수가 평균 약 ${Math.round(recovery.average)} bpm 감소했습니다.`):label3('今天的有效恢復資料不足。','Not enough valid recovery readings today.','오늘 회복 데이터가 부족합니다.');
+ return `<section class="card dp-owner-status-card dp-owner-activity"><div class="dp-owner-status-inner">${common}${dp66EnergyAlert(null,s.energyActivity,label3('今日活動與休息的整體狀態','Overall movement and rest today','오늘 활동과 휴식의 전체 상태'))}<p>${dpOwnerExplanation(2,s.energyActivity,row)}</p>
+ <div class="dp-vital-panel dp-energy-score-panel"><div class="dp-vital-heading"><div><b>${label3('精力情況','Energy status','활력 상태')}</b><strong>${s.energy} <small>/100 · ${label3('推估評分','estimated score','추정 점수')}</small></strong></div>${dpDeepDottedScore(s.energy,cp.accent)}</div><p class="dp-owner-subsummary">${label3('根據活動與休息估算的精力狀態。','Energy estimated from activity and rest.','활동과 휴식으로 추정한 활력 상태입니다.')}</p>${dp66EnergyAlert(null,s.energy,s.energy>=80?label3('精力狀況正常','Energy looks steady','활력이 안정적입니다'):label3('今日精力較平常有變化','Energy differs from usual','활력이 평소와 다릅니다'))}<details class="dp66-expand"><summary>${label3('展開精力趨勢圖','Show energy trend','활력 추세 펼치기')}</summary>${dpEnergyHourlyChart(row,s.energy)}</details></div>
+ <div class="dp-vital-panel dp-activity-score-panel"><div class="dp-vital-heading"><div><b>${label3('活動情況','Activity status','활동 상태')}</b><strong>${activityMinutes} <small>${label3('分鐘 · 今日較活躍時段','min · active today','분 · 오늘 활동 시간')}</small></strong></div>${dpDeepDottedScore(s.activity,cp.accent)}</div><p class="dp-owner-subsummary">${label3('今日活動強度與平常的比較。','Today’s activity compared with usual.','오늘 활동량과 평소 비교입니다.')}</p>${dp66EnergyAlert(null,s.activity,s.activity>=80?label3('活動狀況正常','Activity looks steady','활동 상태가 안정적입니다'):label3('今日活動強度與平常有差異','Activity level differs from usual','활동량이 평소와 다릅니다'))}<details class="dp66-expand"><summary>${label3('展開活動趨勢圖','Show activity trend','활동 추세 펼치기')}</summary>${deepTimeChart('activityIntensity','#3c80d4',label3('全天活動強度變化','Movement intensity across the day','하루 활동 강도'))}</details></div>
+ <div class="dp-vital-panel dp-recovery-score-panel"><div class="dp-vital-heading"><div><b>${label3('今日的2分鐘心率恢復','Today’s two-minute heart-rate recovery','오늘의 2분 심박 회복')}</b><strong>${recovery?Math.round(recovery.average):'—'} <small>bpm · ${label3('兩分鐘下降','2-min drop','2분 감소')}</small></strong></div>${dpDeepDottedScore(recoveryScore,cp.accent)}</div><p class="dp-owner-subsummary">${recoveryText}</p>${dp66EnergyAlert(null,recoveryScore,recoveryScore===null?label3('恢復數據不足','Recovery data is limited','회복 데이터 부족'):recoveryScore>=80?label3('兩分鐘心率下降表現正常','The two-minute heart-rate recovery looks steady','2분 심박 회복이 안정적입니다'):label3('兩分鐘恢復比平常慢，建議留意','Two-minute recovery is slower than usual','2분 회복이 평소보다 느립니다'))}<details class="dp66-expand"><summary>${label3('展開兩分鐘恢復圖','Show 2-minute recovery chart','2분 회복 그래프 펼치기')}</summary>${dpOwnerRecoveryCurve(row,recovery)}</details><small>${label3('比較活動後兩分鐘心率回落的趨勢，了解恢復是否變慢。','Review the two-minute heart-rate drop to see if recovery is slowing.','활동 후 2분간 심박 감소 추세로 회복 변화를 살펴보세요.')}</small></div></div></section>${dp66RhythmLoadQuick(row)}`;
+
+}
+function dpOwnerPeriodChart(kind,cp,days){const rec=dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid);if(!rec.length)return `<div class="dp-owner-empty">${label3('這段時間的記錄還不足','Not enough recorded days','기록된 날짜가 부족해요')}</div>`;
+ const values=rec.map(r=>{const x=dpOwnerDayScores(r);return kind===0?x.heart:kind===1?x.sleep:x.energyActivity;});
+ const W=340,H=145,left=10,right=6,top=16,bottom=30,plotW=W-left-right,plotH=H-top-bottom;
+ const coords=values.map((v,i)=>[left+(rec.length===1?.5:i/(rec.length-1))*plotW,top+(100-v)/65*plotH]);
+ const path=coords.map((x,i)=>`${i?'L':'M'}${x[0].toFixed(1)} ${x[1].toFixed(1)}`).join(' ');
+ const step=days>=30?5:days>=14?3:days>=7?2:1;
+ const tickIndices=rec.map((r,i)=>i).filter((i)=>i%step===0||i===rec.length-1);
+ const dataDesc=rec.map((r,i)=>`${r.date}: ${dpOwnerStatus(values[i])}`).join(' · ');
+ return `<div class="dp-owner-chart-box"><b>${label3('每天的狀態走勢','How the days compared','날짜별 상태 변화')}</b><svg class="dp-owner-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${label3('所選期間的每日狀態','Daily status across the chosen period','선택한 기간의 날짜별 상태')}" xmlns="http://www.w3.org/2000/svg"><title>${dataDesc}</title>${[.25,.5,.75].map(f=>`<line x1="${left}" x2="${W-right}" y1="${top+f*plotH}" y2="${top+f*plotH}" stroke="#e9e9f1" stroke-dasharray="3 5"/>`).join('')}<path d="${path}" stroke="${cp.accent}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none"/>${coords.map((x,i)=>`<circle cx="${x[0]}" cy="${x[1]}" r="4" fill="${cp.accent}" stroke="white" stroke-width="1.8" pointer-events="none"/><circle cx="${x[0]}" cy="${x[1]}" r="11" fill="transparent" class="dp-owner-chart-hit" data-action="deep-day-view" data-date="${rec[i].date}" tabindex="0" role="button" aria-label="${rec[i].date} · ${dpOwnerStatus(values[i])}"><title>${rec[i].date} · ${dpOwnerStatus(values[i])}</title></circle>`).join('')}${tickIndices.map(i=>`<text x="${coords[i][0]}" y="${H-7}" text-anchor="${i===0?'start':i===rec.length-1?'end':'middle'}" fill="#8b91a3" font-size="9">${rec[i].date.slice(5).replace('-','/')}</text>`).join('')}</svg><p class="dp-owner-chart-note">${label3('點選線上的日期可查看當天狀態。','Tap a point to see how your pet felt on that date.','선을 눌러 날짜별 상태를 확인해 보세요.')}</p></div>`;
+}
+function dpOwnerPeriodDetail(kind,cp,days){
+ const rows=dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid),N=rows.length;
+ if(!N)return `<section class="card dp-owner-period-card"><h2>${label3('這段時間沒有足夠記錄','Not enough data for this period','기간 기록이 부족합니다')}</h2></section>`;
+ const avg=vs=>vs.reduce((s,v)=>s+v,0)/vs.length;
+ if(kind===0){const heartMean=avg(rows.map(x=>Number(x.heart))),breathMean=avg(rows.map(x=>Number(x.breath))),hs=Math.round(avg(rows.map(x=>dpOwnerVitalScore(x,'heart')))),bs=Math.round(avg(rows.map(x=>dpOwnerVitalScore(x,'breath')))),overall=dpOwnerPeriodHeartScore(rows);
+ const exactHeartAverage=(rows.reduce((total,row)=>total+dpHeartComposite(row),0)/rows.length).toFixed(1);
+ const lastWeek=demoRecords(state.dog).slice(Math.max(0,rows[0].idx-7),rows[0].idx);
+ const compare=(k,now,unit)=>{if(!lastWeek.length)return label3('持續累積比較資料','Building comparison history','비교 기록 수집 중');const ref=avg(lastWeek.map(r=>Number(r[k]))),delta=now-ref;return Math.abs(delta)<(k==='heart'?1.4:.6)?label3('接近前期平均','Near earlier average','이전 평균과 비슷함'):label3(`${delta>0?'比前期稍快':'比前期稍慢'} ${Math.abs(delta).toFixed(1)} ${unit}`,`${Math.abs(delta).toFixed(1)} ${unit} ${delta>0?'higher':'lower'} than earlier`,`${Math.abs(delta).toFixed(1)} ${unit} ${delta>0?'증가':'감소'}`);};
+ return `<section class="card dp-owner-period-card"><div class="dp-heart-period-overall"><div><h2>${label3('心肺綜合狀態','Overall heart & breathing status','심폐 종합 상태')}</h2><p>${dpOwnerStatus(overall)} · ${label3(`最近${days}天的平均`,`Average over ${days} days`,`최근 ${days}일 평균`)} ${exactHeartAverage}/100</p></div>${dpDeepDottedScore(overall,'#cf6684')}</div><h3>${label3(`最近${days}天的心肺情況`,`Heart & breathing · last ${days} days`,`최근 ${days}일 심폐 상태`)}</h3><p>${label3('依每天的心率、呼吸走勢看這段時間的變化。','Daily heart and breathing trends for this period.','이 기간 심박과 호흡 추세를 확인하세요.')}</p><div class="dp-vital-panel"><div class="dp-vital-heading"><div><b>${label3('心跳狀況','Heartbeat','심박 상태')}</b><strong>${heartMean.toFixed(0)} <small>bpm · ${label3('期間平均','period average','기간 평균')}</small></strong></div>${dpDeepDottedScore(hs,'#c75e80')}</div><p class="dp-owner-subsummary">${dpOwnerStatus(hs)} · ${compare('heart',heartMean,'bpm')}</p>${deepTimeChart('heart','#ad365d',label3('期間心率趨勢','Heart rate through this period','기간 심박 추세'))}</div><div class="dp-vital-panel"><div class="dp-vital-heading"><div><b>${label3('呼吸狀況','Breathing','호흡 상태')}</b><strong>${breathMean.toFixed(1)} <small>${label3('次／分','/min','회/분')} · ${label3('期間平均','period average','기간 평균')}</small></strong></div>${dpDeepDottedScore(bs,'#5294d5')}</div><p class="dp-owner-subsummary">${dpOwnerStatus(bs)} · ${compare('breath',breathMean,label3('次／分','/min','회/분'))}</p>${deepTimeChart('breath','#c45c7c',label3('期間呼吸趨勢','Breathing through this period','기간 호흡 추세'))}</div></section>${dp66PeriodRhythm(rows,cp)}`;
+ }
+ if(kind===1){const nights=rows.map(r=>dpNightSleepStats(r.idx)),meanMin=Math.round(avg(nights.map(x=>x.minutes))),meanWake=avg(nights.map(x=>x.wakes)),states=rows.map(r=>dpOwnerDayScores(r).sleep),meanScore=Math.round(avg(states));
+ return `<section class="card dp-owner-period-card"><div class="dp66-period-risk dp66-risk-${dp66Grade(meanScore)}"><b>${dp66GradeName(dp66Grade(meanScore))}</b><span>${meanScore>=85?label3('這段時間睡眠穩定','Sleep looks steady across this period','이 기간 수면이 안정적입니다'):label3('睡眠品質有下降或中斷增多，請留意','Sleep changes or interruptions need attention','수면 변화나 중단 증가에 주의하세요')}</span></div><div class="dp-sleep-period-score-head"><div><h2>${label3('睡眠情況','Sleep & rest','수면 상태')}</h2><p class="dp-heart-overall-verdict">${dpOwnerStatus(meanScore)}</p><p class="dp-owner-subsummary">${label3('此期間每日睡眠分數的平均值','Average of daily sleep scores in this period','이 기간 일별 수면 점수의 평균')} · ${avg(states).toFixed(1)}/100</p></div>${dpDeepDottedScore(meanScore,'#52a97d')}</div><p>${meanScore>=85?label3('這段時間整體睡得較安穩。','Sleep was generally settled during this period.','이 기간 수면이 대체로 안정적이에요.'):label3('這段時間的睡眠有些起伏，請留意夜間醒來情況。','Sleep was more variable; review night wakings.','수면에 변화가 있어 중단 횟수를 살펴보세요.')}</p><p class="dp-owner-subsummary">${label3('依項圈動靜估算安靜休息及中斷；安靜不一定代表真正睡著，不能據此判斷深睡或 REM。','Quiet rest and interruptions are estimated from motion; stillness does not prove sleep and cannot identify deep or REM sleep.','움직임을 통해 조용한 휴식을 추정하며 실제 수면 단계는 알 수 없습니다.')}</p><div class="dp-owner-period-stats"><div><small>${label3('每晚睡眠與休息總時長','Nightly sleep & rest duration','밤 수면·휴식 총시간')}</small><b>${dpMinutesText(meanMin)}</b></div><div><small>${label3('每晚平均休息中斷','Average nightly rest interruptions','평균 야간 휴식 중단')}</small><b>${meanWake.toFixed(1)} ${label3('次','times','회')}</b></div></div>${dpOwnerPeriodMetricChart(rows,'sleep','#50a77d',nights.map(n=>n.minutes/60),'h')}</section>${dpOwnerMultiNightTimelines(rows,days)}`;
+ }
+ const E=rows.map(r=>dpOwnerDayScores(r,true)),overallScore=dpOwnerQualityValue(avg(E.map(x=>x.energyActivity)));
+ const entries=[['energy',label3('精力情況','Energy status','활력 상태')],['activity',label3('活動情況','Activity status','활동 상태')],['recovery',label3('兩分鐘心率恢復','2-minute heart-rate recovery','2분 심박 회복')]];
+ return `<section class="card dp-owner-period-card dp-period-activity"><div class="dp-heart-period-overall"><div><h2>${label3('精力與恢復狀態','Energy & Recovery status','활력과 회복 상태')}</h2><p class="dp-heart-overall-verdict">${dpOwnerStatus(overallScore)}</p><p class="dp-owner-subsummary">${label3(`最近${days}天的平均分`,`Mean over the last ${days} days`,`최근 ${days}일 평균`)} · ${avg(E.map(x=>x.energyActivity)).toFixed(1)}/100</p></div>${dpDeepDottedScore(overallScore,cp.accent)}</div>
+ ${entries.map(([k,title])=>{const pairs=rows.map((row,i)=>({row,v:E[i][k]})).filter(x=>Number.isFinite(x.v)),vals=pairs.map(x=>x.v),score=vals.length?dpOwnerQualityValue(avg(vals)):null;return `<div class="dp-vital-panel dp-energy-period-panel"><div class="dp-vital-heading"><div><b>${title}</b><strong>${score===null?'—':score} <small>/100 · ${label3('期間平均','period average','기간 평균')}</small></strong></div>${dpDeepDottedScore(score,cp.accent)}</div>${dp66EnergyAlert(null,score,score===null?label3('資料不足','Not enough data','데이터 부족'):score>=80?label3('這段時間表現穩定','Steady across this period','이 기간 안정적입니다'):label3('這段時間有值得注意的變化','Changes worth watching across this period','이 기간 주의할 변화가 있습니다'))}<details class="dp66-expand"><summary>${label3('展開趨勢圖','Show trend chart','추세 그래프 펼치기')}</summary>${pairs.length>=2?dpOwnerPeriodMetricChart(pairs.map(x=>x.row),k,'#3b80d4',vals,'/100'):`<p class="dp-owner-subsummary">${label3('有效資料不足，暫無可連線的趨勢。','Too few valid readings for a trend line.','유효 기록이 부족해 그래프를 연결할 수 없습니다.')}</p>`}</details></div>`;}).join('')}
+ <p class="dp-owner-subsummary">${label3('兩分鐘心率恢復評分由活動後心率下降量推估，不等於回穩所需時間。','Two-minute recovery score estimates post-activity heart-rate decrease, not time to settle.','2분 회복 점수는 활동 후 심박 감소량을 추정하며 안정 복귀 시간과 다릅니다.')}</p></section><details class="dp66-expand dp66-extra"><summary>${label3('查看進階分數與解釋','Advanced scores and explanations','추가 점수 및 설명 보기')}</summary>${dpComponentScorePanel(2)}</details>`;
+
+}
+// One dated record source for V10.28's original long-term card and V10.29's
+// explanatory highlights. Neither screen substitutes a missing measurement.
+function dp1029PeriodSource(days){
+ const raw=dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid),real=dpUsesRealMeasurements(),pet=state.dog;
+ const features=new Map((window.DeepPetSignalScoring?.getFeatures?.(pet)||[]).filter(x=>x?.date).map(x=>[x.date,x]));
+ const scored=new Map((window.DeepPetSignalScoring?.getDaily?.(pet)||[]).filter(x=>x?.date).map(x=>[x.date,x.scores]));
+ const number=x=>typeof x==='number'&&Number.isFinite(x)?x:null;
+ const records=raw.map(r=>{
+  const f=real?features.get(r.date):null,s=real?scored.get(r.date):dpOwnerDayScores(r,true),sleep=real?null:dpNightSleepStats(r.idx);
+  return {date:r.date,values:{
+   heart:real?number(f?.heartRate):number(r.heart),breath:real?number(f?.breathRate):number(r.breath),
+   restHours:real?(f?.quality?.fullDayRestSupported===true?number(f.restHours):null):number(sleep?.minutes/60),
+   wakes:real?number(f?.restInterruptions):number(sleep?.wakes),
+   energy:real?number(s?.activityRecovery):number(s?.energyActivity),
+   recovery:real?(Number(f?.recoveryCount)>0?number(f.recoveryDrop):null):number(s?.recovery)
+  }};
+ });
+ return {records,real};
+}
+function dp1029TrendMetrics(kind,real){
+ return [
+  [{key:'heart',unit:'bpm',threshold:3,name:dp1028Text('心率','Heart rate','心拍数','심박수')},{key:'breath',unit:dp1028Text('次／分','/min','回／分','회/분'),threshold:1.5,name:dp1028Text('呼吸','Breathing','呼吸','호흡')}],
+  [{key:'restHours',unit:'h',threshold:.5,name:dp1028Text('每晚休息','Nightly rest','夜間休息','야간 휴식')},{key:'wakes',unit:dp1028Text('次','times','回','회'),threshold:1,name:dp1028Text('休息中斷','Rest interruptions','休息の中断','휴식 중단')}],
+  [{key:'energy',unit:'/100',threshold:6,name:dp1028Text('精力與恢復分數','Energy & recovery','活力・回復スコア','활력·회복 점수')},{key:'recovery',unit:real?'bpm':'/100',threshold:real?5:6,name:real?dp1028Text('兩分鐘心率回落','2-minute HR drop','2分間の心拍低下','2분 심박 감소'):dp1028Text('恢復子分數','Recovery subscore','回復サブスコア','회복 세부 점수')}]
+ ][kind]||[];
+}
+function dp1028PersonalPeriodPanel(kind,days){
+ const core=window.DeepPetCareIntelligence1028;if(!core||![7,30].includes(days))return '';
+ const {records,real}=dp1029PeriodSource(days);
+ const specs=dp1029TrendMetrics(kind,real);
+ const result=core.comparePeriod(records,{days,end:iso(localDate()),metrics:specs});
+ const formatted=(num,key)=>Number(num).toFixed(key==='restHours'||key==='breath'?1:0);
+ const row=spec=>{const m=result.metrics.find(x=>x.key===spec.key),available=m?.ready;
+  if(!available)return `<div class="dp1028-trend-row"><b>${esc(spec.name)}</b><span>${dp1028Text('前後兩段各需至少2個可比日期','Need 2 dated values in each half','前半・後半それぞれ2日以上必要','기간 전후 각각 2일 이상 필요')}</span></div>`;
+  const delta=m.direction==='steady'?dp1028Text('前後接近','Broadly similar','大きな変化なし','전후 유사'):m.direction==='up'?dp1028Text('後半增加','Higher later','後半に増加','후반 증가'):dp1028Text('後半減少','Lower later','後半に減少','후반 감소');
+  const change=m.pct===null?'':` · ${m.pct>0?'+':''}${m.pct.toFixed(1)}%`;
+  return `<div class="dp1028-trend-row"><b>${esc(spec.name)}</b><span><strong>${formatted(m.before,m.key)}</strong> → <strong>${formatted(m.after,m.key)}</strong> ${esc(spec.unit)}<small>${delta}${change} · ${m.earlyDays}+${m.lateDays} ${dp1028Text('日','days','日','일')}${m.sustained?' · '+dp1028Text('最近3日方向一致','Last 3 days sustained','直近3日も同方向','최근 3일 지속'):''}</small></span></div>`;};
+ return `<section class="card dp1028-personal-trend"><h3>${dp1028Text(`${days}天個體變化重點`,`${days}-day personal changes`,`${days}日間の個体変化`,`${days}일 개별 변화`)}</h3><p>${dp1028Text('直接比較所選期間前半與後半的同一指標，不混入單日結論；下方原始曲線與每日明細保留。','Compares the first and later calendar halves of this selected period. Original charts and daily details remain unchanged.','選択期間の前半と後半を比較します。既存のグラフと日別詳細はそのままです。','선택 기간의 전반과 후반을 비교하며 기존 그래프와 날짜별 상세는 유지됩니다.')}</p><div class="dp1028-trend-rows">${specs.map(row).join('')}</div><p class="dp1028-caution">${dp1028Text('箭頭只表示方向，不能直接解讀為變好或變差；活動、休息及健康紀錄仍需一起看。5% 比較帶是介面提示，不是疾病門檻。','Direction alone is not improvement or deterioration. Consider activity, rest and care history. The 5% display band is not a diagnostic cutoff.','増減は改善や悪化を示すものではありません。活動・休息・健康記録と併せて確認してください。5%は表示上の目安です。','증감이 곧 개선·악화를 뜻하지 않습니다. 활동·휴식·건강 기록을 함께 보세요. 5%는 표시 기준일 뿐입니다.')}</p></section>`;
+}
+function dpAllNightsPage(){
+ const days=[7,30].includes(state.range)?state.range:7;
+ const rows=dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid);
+ return `<div class="app-pad dp-all-nights-page deep-themed deep-theme-sleep"><div class="dp-independent-head"><button data-action="owner-all-nights-back">←</button><b>${label3('全部睡眠紀錄','All sleep records','전체 수면 기록')}</b></div><div class="dp-night-page-info">${label3(`最近${days}天 · ${rows.length}晚`,`Last ${days} days · ${rows.length} nights`,`최근 ${days}일 · ${rows.length}일`)}</div>${dpOwnerMultiNightTimelines(rows,days,true)}<div class="footer-space"></div></div>`;
+}
+function deepView(){if(![1,7,30].includes(state.range))state.range=7;const n=state.deepType,labels=[t('heartCategory'),t('sleepCategory'),t('activeCategory')],cp=[{accent:'#cf6684',bg:'#fff7f9',border:'#f2dce4',contrast:'#af5874'},{accent:'#52a97d',bg:'#f7fdf9',border:'#e6f3ea',contrast:'#347e60'},{accent:'#4387dc',bg:'#f2f7ff',border:'#d8e7ff',contrast:'#306da8'}][n],days=state.range,record=deepDateRows().find(x=>x.date===deepChosenDate()),tabs=[vicon('heart',20),vicon('moon',20),vicon('activity',20)];
+ if(state.detail==='sleep-all-nights')return dpAllNightsPage();
+ return `<div class="app-pad deep-themed deep-theme-${n===0?'heart':n===1?'sleep':'activity'} dp-owner-deep" style="--deep-accent:${cp.accent};--deep-soft:${cp.bg};--deep-border:${cp.border};--deep-contrast:${cp.contrast}">${bigHeader(t('deep'))}<div class="tabs">${labels.map((l,i)=>`<button class="tab ${n===i?'active':''}" data-action="deep-category" data-index="${i}" style="${n===i?`background:${cp.bg};color:${cp.contrast};border-color:${cp.border}`:''}"><span class="tab-icon">${tabs[i]}${dpDeepFlags().includes(i)?dpFlagDot(dpTodayDeepItems().find(x=>x.index===i)?.detail||tr('這項狀態需要留意','Needs attention','확인 필요')):''}</span>${l}</button>`).join('')}</div>${dpDeepIssueHeader(n)}<div class="segment">${[1,7,30].map(k=>`<button class="seg-btn ${days===k?'active':''}" data-action="range" data-value="${k}">${k===1?label3('單日','Day','하루'):label3(`${k}天`,`${k}D`,`${k}일`)}</button>`).join('')}</div>${deepDatePicker()}${days>1?`<p class="dp-range-quality">${label3(`最近${days}天 · ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length}個有效記錄日`,`Last ${days} days · ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length} valid recording days`,`최근 ${days}일 · 유효 기록 ${dayRowsWithIndex(days).filter(r=>validDaySample(r,r.idx).valid).length}일`)}</p>`:''}${days===1?(record?dpOwnerDayDetail(n,cp,record):''):dpOwnerPeriodDetail(n,cp,days)}${(days===1?(record&&validDaySample(record,record.idx).valid):dayRowsWithIndex(days).some(r=>validDaySample(r,r.idx).valid))?(n===0?'':dpMetricUsageNotes(n)):''}<div class="footer-space"></div></div>`;
+}
+// Enrich the SAME Deep page. No new route, tab, modal, chart replacement or
+// extra tap: Day gets actual dated context; 7/30 days get personal chronology.
+const dp1028DeepViewBase=deepView;
+deepView=function(){
+ const html=dp1028DeepViewBase();if(state.detail)return html;
+ const days=state.range,kind=state.deepType;
+ // V10.48: Deep is for the selected heart/sleep/energy assessment only.
+ // Do not duplicate Health records here or show the technical personal-change
+ // comparison panel. Those records remain in Health and their source data
+ // remain available to existing score calculations.
+ const add='';
+ if(!add)return html;
+ const marker='<div class="footer-space"></div></div>',index=html.lastIndexOf(marker);
+ return index<0?html:html.slice(0,index)+add+html.slice(index);
+};
+function dpUpcomingCareItems(){
+ if(typeof selectedBlank==='function'&&selectedBlank())return [];
+ const today=iso(localDate()),items=[],seenPlans=new Set();
+ // The previous view only looked at tomorrow. A course beginning in five
+ // days should also appear in upcoming care, once per scheduled dose slot,
+ // not thirty duplicate copies for the same recurring plan.
+ for(let offset=1;offset<=30;offset++){
+  const date=iso(dateAdd(localDate(),offset));
+  for(const m of dpMedDue(date).filter(x=>x.status==='pending')){
+   const key=String(m.id)+'::'+String(m.slot);
+   if(seenPlans.has(key))continue;seenPlans.add(key);
+   items.push({date,time:m.time,page:'med',icon:'med',type:'med',title:label3('下次用藥','Next medication','다음 투약')+' · '+dpL10nSample(m.name),detail:(offset===1?label3('明天','Tomorrow','내일'):dpFullDate(date))+' · '+m.time});
+  }
+  if(seenPlans.size>=12)break;
+ }
+ // Sort before limiting: storage insertion order is not appointment order.
+ const vaccine=allVaxForDog().filter(x=>x.status==='upcoming'&&x.date>today).sort((a,b)=>a.date.localeCompare(b.date)||String(a.time||'').localeCompare(String(b.time||''))).slice(0,12);
+ for(const v of vaccine)items.push({date:v.date,time:v.time||'',page:'vaccines',icon:'vaccine',type:'vax',title:label3('下次疫苗接種','Next vaccination','다음 예방접종')+' · '+dpL10nSample(v.name),detail:dpFullDate(v.date)});
+ // Superseded courses are history, not upcoming treatment commitments.
+ const deworm=(window.dpWormEffectiveReminders?.()||[]).filter(x=>x.nextDate>today).sort((a,b)=>a.nextDate.localeCompare(b.nextDate)).slice(0,2);
+ for(const w of deworm)items.push({date:w.nextDate,time:'',page:'deworming',icon:'vaccine',type:'deworm',title:label3('下次驅蟲','Next deworming','다음 구충')+' · '+w.brand,detail:dpFullDate(w.nextDate)});
+ return items.sort((a,b)=>a.date.localeCompare(b.date)||String(a.time||'').localeCompare(String(b.time||''))||a.page.localeCompare(b.page)).slice(0,40);
+}
+function dpUpcomingCareMarkup(items){
+ if(!items.length)return `<div class="empty-inline">${vicon('check',18)} ${label3('近期沒有已安排的健康提醒','No upcoming care reminders','예정된 건강 관리 알림이 없습니다')}</div>`;
+ return items.map(x=>`<button class="care-action dp-upcoming-action" data-action="health-detail" data-page="${x.page}"><span class="care-action-icon">${vicon(x.icon,18)}</span><span class="grow"><b>${esc(x.title)}</b><small>${esc(x.detail)}</small></span>${vicon('chev',17)}</button>`).join('');
+}
+function dp914ReportMarkup(){return typeof window.__dp914ReportSpotlight==='function'?window.__dp914ReportSpotlight():'';}
+function healthView(){
+ dpEnsureShowcaseMeals();
+ dpEnsureShowcaseCareRecords();
+ if(state.detail)return healthDetail();
+ const d=currentDog(),consumed=todayFood(),target=targetFood(),pct=Math.round(consumed/Math.max(1,target)*100),todayTasks=dpTodayCareItems(),upcomingTasks=dpUpcomingCareItems();
+ return `<div class="app-pad">${bigHeader(t('health'))}
+ ${dp67WatchMain()}
+ ${dp914ReportMarkup()}
+ <div class="section-head"><h2 class="section-title">${t('careToday')}${todayTasks.length?dpFlagDot(tr('今天有待辦事項','Tasks due today','오늘 할 일 있음')):''}</h2><span class="pill ${todayTasks.length?'warn':'ok'}">${todayTasks.length}</span></div><section class="card care-todo">${dpHealthTodayTasksMarkup(todayTasks)}</section>
+ <div class="section-head"><h2 class="section-title">${label3('近期健康提醒','Upcoming care','다가오는 건강 관리')}</h2></div><section class="card care-todo dp-upcoming-care">${dpUpcomingCareMarkup(upcomingTasks)}</section>
+  <div class="section-head"><h2 class="section-title">${t('healthCare')}</h2></div><section class="card flat care-menu">${[
+ ['med',t('med'),t('medHint'),'med','#f3efff'],
+ ['vaccine',t('vaccines'),t('vaccineHint'),'vaccines','#fff2e6'],
+ ['med',dpWormLocale().title,dpWormSummary(),'deworming','#eaf7ee'],
+ ['notes',t('notes'),t('notesHint'),'notes','#edf2ff']
+ ].map(([ic,name,hint,id,bg])=>`<button class="health-item" data-action="health-detail" data-page="${id}"><span class="thumb" style="background:${bg}">${vicon(ic,23)}</span><span class="grow"><div class="lbl">${name}</div><div class="hint">${hint}</div></span>${vicon('chev',19)}</button>`).join('')}<button class="health-item dp-care-moved" data-action="health-detail" data-page="recovery-care"><span class="thumb" style="background:#edf6ff">${vicon('activity',23)}</span><span class="grow"><div class="lbl">${label3('恢復情況','Recovery Check','회복 상태')}</div><div class="hint">${label3('14天觀察 · 精神、食慾、休息與用藥時間軸','14-day care · energy, appetite, rest and medication timeline','14일 관찰 · 활력·식욕·휴식·복약 타임라인')}</div></span>${vicon('chev',19)}</button></section>
+  <button class="card food-feature" data-action="health-detail" data-page="food"><div class="food-feature-top"><div class="food-illustration">${vicon('food',28)}</div><div class="grow"><div class="row spread"><div class="section-title">${t('food')}</div>${vicon('arrow',17)}</div><div class="food-feature-sub">${label3('每日飲食建議與記錄','Daily food plan & log','일일 식사 계획 및 기록')}</div></div></div><div class="food-feature-main"><div><strong>${consumed}</strong> <span>/ ${target} kcal</span></div><div class="food-pct">${pct}%</div></div><div class="food-progress"><i style="width:${Math.min(pct,100)}%"></i></div><div class="food-feature-foot"><span>${t('logged')}</span><span>${label3('查看建议与喂食量','View feeding plan','급여 계획 보기')} ${vicon('chev',14)}</span></div></button>
+ ${dp67AgeHealth()}
+ ${(isFreePet()||(state.dog>=dogs.length&&baselineProfile().days<7))?'':`<button class="health-engagement-card dp-health-summary-link health-watermark-card" data-action="health-detail" data-page="summary"><div class="health-engagement-watermark" aria-hidden="true">${vicon('activity',74)}</div><div class="health-engagement-icon">${vicon('activity',22)}</div><div class="grow"><b>${label3('健康總結 · 本週回顧／本月回顧','Health review · Weekly / Monthly','건강 요약 · 주간 / 월간')}</b><small>${label3('心肺、休息、活動與日常健康紀錄，看看這段時間有什麼變化','See changes in heart, rest, activity and health records','심박·휴식·활동과 건강 기록의 변화를 확인해요')}</small></div>${vicon('chev',17)}</button><button class="health-engagement-card vet health-watermark-card" data-action="vet-brief"><div class="health-engagement-watermark" aria-hidden="true">${vicon('report',74)}</div><div class="health-engagement-icon">${vicon('report',22)}</div><div class="grow"><b>${label3('一鍵生成獸醫就診摘要','One-tap veterinary visit summary','한 번에 수의사 진료 요약 생성')}</b><small>${label3('整理 當天／7／30 天有效趨勢及健康記錄','Valid Today/7/30-day trends and health history','오늘/7/30일 추세 및 건강 기록')}</small></div>${vicon('chev',17)}</button>`}
+ <div class="footer-space"></div></div>`;
+}
+function healthDetail(){
+ const sections={food:t('food'),med:t('med'),reports:t('reports'),vaccines:t('vaccines'),deworming:dpWormLocale().title,notes:t('notes'),solo:label3('獨處安心觀察','Home-alone wellbeing','혼자 있는 시간 관찰'),'report-trends':label3('全部檢驗趨勢','All exam trends','전체 검사 추세'),'report-entry':label3('單份體檢報告','Examination details','검진 상세'),summary:label3('健康總結','Health review','건강 요약'),'recovery-care':label3('恢復情況','Recovery status','회복 상태')};
+ const key=state.detail;let content='';
+ if(key==='food')content=foodDetail();
+ if(key==='summary')content=`<div class="segment">${[7,30].map(k=>`<button class="seg-btn ${(state.healthSummaryDays||7)===k?'active':''}" data-action="health-summary-range" data-value="${k}">${k===7?label3('本週回顧','Weekly Review','주간 회고'):label3('本月回顧','Monthly Review','월간 회고')}</button>`).join('')}</div>${dpHealthSummary()}`;
+ if(key==='med')content=medDetail();
+ if(key==='reports')content=reportsDetail();
+ if(key==='report-entry')content=dpReportDetailPage();
+ if(key==='report-trends')content=dpReportTrendsPage();
+ if(key==='vaccines')content=vaxDetail();
+  if(key==='deworming')content=dpWormPage();
+ if(key==='notes')content=noteDetail();
+ if(key==='solo')content=`<section class="care-page-head solo"><span class="care-page-icon">${vicon('home',25)}</span><div><b>${label3('牠獨處時是否安穩？','How steady is my pet when alone?','혼자 있을 때 안정적인가요?')}</b><p>${label3('這個功能幫你了解寵物獨處時是否能安靜休息、有沒有持續活躍或出現心跳與呼吸變化。離家前按開始，回家後結束，便能比較這段時間的狀態。','See whether your pet rests, remains active or shows heart and breathing changes while alone. Start when leaving and finish when home.','혼자 있을 때 휴식·활동·심박·호흡 변화를 살펴봐요. 외출 전 시작하고 귀가 후 종료하세요.')}</p></div></section><div class="dp-solo-explainer"><div><span>①</span><b>${label3('出門前開始','Start before leaving','외출 전 시작')}</b></div><div><span>②</span><b>${label3('記錄獨處時間','Track time alone','혼자 있는 시간 기록')}</b></div><div><span>③</span><b>${label3('回家後查看心肺與安靜比例','Review heart, breathing & rest','귀가 후 심박·호흡·휴식 확인')}</b></div></div>${dpSoloModal()}`;
+ if(key==='recovery-care')content=`<section class="care-page-head recovery"><span class="care-page-icon">${vicon('activity',25)}</span><div><b>${label3('正在從什麼情況恢復？','What is my pet recovering from?','어떤 상황에서 회복 중인가요?')}</b><p>${label3('可選擇手術、疾病、麻醉、用藥後或運動後恢復，也可自行填寫原因。每天記錄精神、食慾、休息與恢復進度，方便持續照顧。','Choose surgery, illness, anesthesia, medication or activity recovery—or enter a custom reason. Track appetite, energy and rest daily.','수술·질병·마취·복약·활동 후 회복 이유를 정하고 매일 활력·식욕·휴식을 기록하세요.')}</p></div></section>${carePlanModal()}`;
+ return `<div class="app-pad care-record-page"><button class="back-btn" data-action="health-back">‹ ${t('health')}</button><div class="row spread mb12"><h1 class="app-title">${sections[key]||key}</h1></div>${content}<div class="footer-space"></div></div>`;
+}
+function foodDetail(){dpEnsureShowcaseMeals();const target=targetFood(),today=dpFoodTotals(),consumed=today.kcal,pct=Math.round(consumed/Math.max(1,target)*100),selected=state.foodSelectedDate||iso(dateAdd(localDate(),state.foodWindowMode==='future'?0:-1));
+return `<section class="card purple dp-food-overview"><div class="row spread"><span class="sm strong">${label3('AI 每日建議熱量','AI daily energy target','AI 일일 권장 열량')}</span><span class="pill purple">${state.foodTarget?.[state.dog]?label3('自訂目標','Custom','사용자 설정'):'AI'}</span></div><div class="food-hero mt8"><b>${target}</b><span>kcal / ${label3('天','day','일')}</span></div><p class="dp-food-explain">${label3(`以 ${currentDog().weight} kg、${Number(currentDog().age)} 歲、${petSizeLocalized(currentDog())} 的基本需求為起始建議。可按體況與獸醫建議自行調整。`,`Starting estimate based on ${currentDog().weight} kg, ${currentDog().age} years and ${petSizeLocalized(currentDog())}. Adjust for condition and veterinary advice.`,`${currentDog().weight}kg, ${currentDog().age}세, 체형을 바탕으로 한 시작 권장량입니다.`)}</p><div class="food-progress"><i style="width:${Math.max(0,Math.min(100,pct))}%"></i></div><div class="row spread"><span>${label3('已吃','Consumed','섭취')} <b>${consumed} kcal</b></span><span>${label3('還可攝取','Remaining','잔여')} <b>${Math.max(0,target-consumed)} kcal</b></span></div><div class="dp-food-guide"><span>${label3('以乾糧換算','Dry-food equivalent','건사료 환산')}：<b>${Math.round(target/DP_FOODS.dry.kcal*100)} g</b></span><span>${label3('以濕糧換算','Wet-food equivalent','습식 사료 환산')}：<b>${Math.round(target/DP_FOODS.wet.kcal*100)} g</b></span></div><p class="subtitle">${label3('建議食量會因選擇的食物不同而改變；每100克熱量由食物資料庫估算，不必自己計算。','Suggested grams depend on the food. The app converts from food-category nutrition data; no manual calorie calculation needed.','사료 종류에 따라 권장 g이 달라집니다. 열량은 식품 기준표로 환산합니다.')}</p><button class="care-outline" data-action="food-edit">${label3('調整每日建議目標','Adjust daily target','일일 목표 조정')}</button></section>
+${card(label3('今天吃了什麼','Meals today','오늘 먹은 음식'),`<div class="row spread"><b>${today.meals.length} ${label3('餐','meals','끼')} · ${today.grams} g · ${today.kcal} kcal</b>${button(vicon('plus',15)+' '+label3('拍照／記錄食物','Photo / Log meal','사진 / 식사 기록'),'add-meal','cta secondary')}</div>${dpFoodListHTML(iso(localDate()))}${!today.meals.length&&state.dog<dogs.length?`<div class="dp-sample-mini"><b>${label3('可以這樣記錄','An example of a meal log','이렇게 기록할 수 있어요')}</b><div>${label3('早上 08:00｜乾糧 90 g（約 324 kcal）','08:00 · Dry food 90 g (about 324 kcal)','08:00 · 건사료 90 g (약 324 kcal)')}</div><div>${label3('下午 17:30｜雞肉 40 g＋蔬菜 30 g（約 76 kcal）','17:30 · Chicken 40 g + vegetables 30 g (about 76 kcal)','17:30 · 닭고기 40 g + 채소 30 g (약 76 kcal)')}</div><small>${label3('這是填寫方式的預覽，不會算進實際已吃紀錄。','Preview only: not counted as consumed.','입력 예시이며 실제 섭취량에 포함되지 않아요.')}</small></div>`:''}`)}
+${card(label3('七日飲食紀錄與計畫','7-day meal records & plan','7일 식사 기록과 계획'),`<div class="dp-food-range-toggle" role="group" aria-label="${label3('餐食日期範圍','Meal date range','식사 날짜 범위')}"><button type="button" data-action="food-window" data-value="history" class="${state.foodWindowMode==='future'?'':'active'}" aria-pressed="${state.foodWindowMode!=='future'}">${label3('最近七天','Past 7 days','지난 7일')}</button><button type="button" data-action="food-window" data-value="future" class="${state.foodWindowMode==='future'?'active':''}" aria-pressed="${state.foodWindowMode==='future'}">${label3('未來七天','Next 7 days','앞으로 7일')}</button></div><p class="subtitle">${state.foodWindowMode==='future'?label3('顯示今天至未來六天的飲食計畫；尚未到來的日期不會虛構吃過的餐食。','Plan from today through the next six days; future meals are not shown as already eaten.','오늘부터 6일 후까지의 계획입니다. 미래 식사 기록은 임의로 채우지 않습니다.'):label3('顯示最近七天實際記錄的每餐食物、品牌和克數。展示寵物的不同餐食範例都可切換查看。','Shows the last seven days of logged food, brands and grams. Each showcase pet has its own examples.','지난 7일간 기록한 음식·브랜드·g을 표시하며 반려동물마다 다른 예시를 확인할 수 있습니다.')}</p>${dpFoodBars()}<div class="dp-food-day-details"><label class="form-label">${label3('查看指定日期的飲食紀錄','View food log by date','날짜별 식사 기록')}</label><input id="foodHistoryDate" class="form-control" type="date" value="${selected}"/><h4>${selected} · ${label3('餐食明細','Meal details','식사 상세')}</h4>${selected===iso(localDate())?`<p class="notices">${label3('今天的完整餐食明細已顯示在上方，不再重複列出。','Today’s meals are already listed above.','오늘 식사 기록은 위에 표시되어 있습니다.')}</p>`:dpFoodListHTML(selected)}</div>`)}
+${card(label3('營養換算說明','How nutrition is estimated','영양 환산 안내'),`<p>${label3('日常只需要記錄「吃了什麼、品牌和克數」。系統按相應食物的每100克參考熱量換算，混合餐會加總各種食物。品牌包裝上的熱量若不同，應以該產品標籤為準。','Log what was eaten, the brand and grams. Calories are estimated from reference kcal per 100g; mixed meals are summed. Use product-label values when available.','음식 종류, 브랜드, g만 기록하세요. 식품별 100g당 기준 열량으로 계산합니다.')}</p>`)}`;
+}
+
+function recordMedDecision(m){return dpMedMark(m.id,0,m.status);}
+function medDetail(){const all=dpMedicationSchedules(),due=dpMedDue(),done=due.filter(x=>x.status==='taken').length,pending=due.filter(x=>x.status==='pending'),incomplete=all.some(m=>!m.sample&&!m.paused&&!dpMedHasExplicitSchedule(m)),hist=[...(state.medHistoryByPet?.[String(state.dog)]||[]),...dpReviewDemoCare(state.dog).med].sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,70);
+return `<section class="card dp-main-create"><button class="cta full dp-large-add" data-action="med-add">${vicon('plus',20)} ${label3('新增用藥療程','Add medication plan','복약 일정 추가')}</button><p class="subtitle">${label3('只需設定一次藥物、份量、每天時間及療程天數，系統會按日期列出待辦。','Enter medication, dose, daily time and duration once for a daily checklist.','약물·용량·시간·기간을 한 번 입력하면 매일 일정에 표시됩니다.')}</p></section>${card(label3('今天的用藥','Today’s doses','오늘 복약'),`<div class="row spread"><span class="pill ${pending.length?'warn':'ok'}">${done}/${due.length} ${label3('已確認','confirmed','확인')}</span><!-- primary create action above --></div>${incomplete?`<p class="notices">${label3('有用藥資料缺少劑量、單位、日期或服藥時間；請在下方療程管理補齊，未完成之前不會產生服藥提醒。','A medication plan is missing dose, unit, dates or time. Complete it in Medication plans before reminders can start.','복약 용량·단위·날짜·시간을 확인한 뒤 알림을 사용하세요.')}</p>`:''}${due.length?due.map(m=>`<div class="history-row"><span class="history-icon">${vicon('med',18)}</span><div class="grow"><b>${esc(m.name)} · ${dpDoseNum(m.qty)} ${esc(dpUnitLabel(m.unit))}</b><div class="subtitle">${esc(m.time)} · ${m.status==='taken'?label3('已服用','Taken','복용 완료'):m.status==='skipped'?label3('未服用','Skipped','미복용'):label3('待確認','Pending','대기 중')}</div></div><button class="dose-status ${m.status==='taken'?'checked':''}" data-action="dose-mark" data-id="${esc(m.id)}" data-slot="${m.slot}" data-status="${m.status==='taken'?'pending':'taken'}" aria-label="${label3('標記服用','Mark taken','복약 체크')}">${vicon('check',15)}</button><button class="dose-status ${m.status==='skipped'?'skipped':''}" data-action="dose-mark" data-id="${esc(m.id)}" data-slot="${m.slot}" data-status="${m.status==='skipped'?'pending':'skipped'}" aria-label="${label3('略過','Skip','건너뛰기')}">–</button></div>`).join(''):`<p class="notices">${label3('今天沒有有效的已安排用藥。確認完整療程後，系統會每天列出應服用的藥與數量。','No verified doses scheduled today. Once a plan is complete, its daily checklist will appear here.','오늘 확정된 투약 일정이 없습니다. 전체 처방을 확인하세요.')}</p><div class="dp-sample-mini"><b>${label3('可以這樣設定','Example schedule','일정 예시')}</b><div>${label3('關節補充品｜每日 09:00｜1顆｜7天','Joint supplement · 09:00 · 1 tablet · 7 days','관절 보조제 · 09:00 · 1정 · 7일')}</div><small>${label3('只有你新增並儲存後，才會進入每日待辦。','Only saved plans appear as daily reminders.','저장한 복약 일정만 매일 표시됩니다.')}</small></div>`}`)}
+${card(label3('療程管理','Medication plans','약물 일정 관리'),all.length?all.map(m=>`<div class="history-row"><div class="grow"><b>${esc(m.name)} ${m.paused?`· ${label3('已暫停','Paused','일시중지')}`:''}${!dpMedHasExplicitSchedule(m)?` · ${label3('待補全','Incomplete','정보 확인 필요')}`:''}</b><div class="subtitle">${esc((Array.isArray(m.times)&&m.times.length?m.times:(m.time?[m.time]:[])).join(' / '))} · ${dpDoseNum(m.qty)} ${esc(dpUnitLabel(m.unit))}${m.days?` · ${m.days} ${label3('天療程','days','일')}`:''}${m.startDate?` · ${m.startDate}`:''}</div></div><button class="care-outline dp-small-action" data-action="med-edit" data-id="${esc(m.id)}">${label3('編輯','Edit','편집')}</button></div>`).join(''):`<p class="notices">${label3('目前尚無用藥療程。','No medication plans yet.','등록된 복약 일정이 없습니다.')}</p>`)}
+${card(label3('服藥歷史','Dose history','복약 이력'),hist.length?hist.map(r=>`<div class="history-row" data-demo-care-id="${esc(r.id||'')}"><div class="grow"><b>${esc(r.name)} · ${esc(r.date)} ${esc(r.time||'')}</b><div class="subtitle">${dpDoseNum(r.qty)} ${esc(dpUnitLabel(r.unit))} · ${r.status==='taken'?label3('已服用','Taken','복용'):label3('略過','Skipped','건너뜀')}</div></div></div>`).join(''):`<p class="notices">${label3('尚無確認的歷史紀錄。','No confirmed doses yet.','확인된 기록이 없습니다.')}</p>`)}`;
+}
+
+function medManageModal(){const m=dpMedicationSchedules().find(x=>x.id===state.medEditingId);if(!m)return `<p class="notices">${label3('找不到這項用藥。','Medication not found.','약물 기록이 없습니다.')}</p>`;
+const times=Array.isArray(m.times)&&m.times.length?m.times:(m.time?[m.time]:[]);const units=['顆','包','mL','滴'];return `<p class="subtitle">${label3('修改後的排程適用於接下來的日期，已確認的服藥歷史會保留。缺少的處方資料須由主人核對並補齊。','Changes apply going forward and retain confirmed history. Verify any missing prescription details.','수정한 일정은 앞으로 적용되고 과거 기록은 유지됩니다. 누락된 처방 정보를 확인하세요.')}</p><label class="form-label">${label3('藥物名稱','Medication name','약 이름')}</label><input id="medEditName" class="form-control" value="${esc(m.name)}"/><div class="form-grid"><div><label class="form-label">${label3('每次數量','Amount per dose','회당 용량')}</label><input id="medEditQty" class="form-control" type="number" step="0.25" min="0.25" value="${m.qty??''}"/></div><div><label class="form-label">${label3('單位','Unit','단위')}</label><select id="medEditUnit" class="form-control"><option value="" ${!units.includes(m.unit)?'selected':''} disabled>${label3('請選擇單位','Choose unit','단위 선택')}</option>${units.map(x=>`<option value="${x}" ${m.unit===x?'selected':''}>${esc(dpUnitLabel(x))}</option>`).join('')}</select></div></div><label class="form-label">${label3('開始日期','Start date','시작일')}</label><input id="medEditStart" class="form-control" type="date" value="${m.startDate||''}"/><label class="form-label">${label3('連續服用天數','Duration (days)','복용 일수')}</label><input id="medEditDays" class="form-control" type="number" min="1" max="365" value="${m.days??''}"/><label class="form-label">${label3('每天的用藥時間','Daily dosing time(s)','매일 복약 시간')}</label>${[0,1,2].map(i=>`<input class="form-control" style="margin:5px 0" type="time" id="medEditTime${i}" value="${times[i]||''}"/>`).join('')}<p class="notices">${label3('例如：連續7天、每次2顆，每天08:00和20:00各一次。','For example: 7 days, 2 tablets per dose, at 08:00 and 20:00 daily.','예: 7일 동안 회당 2정, 매일 08:00과 20:00.')}</p><div class="care-manage-actions">${button(label3('儲存修改','Save changes','변경 저장'),'med-edit-save','cta full')}<button class="care-outline" data-action="med-pause" data-id="${esc(m.id)}">${m.paused?label3('恢復療程','Resume','다시 시작'):label3('暫停療程','Pause','일시중지')}</button><button class="care-danger-action" data-action="med-delete-ask" data-id="${esc(m.id)}">${label3('移除排程','Remove plan','일정 삭제')}</button></div>`;
+}
+
+function medDeleteConfirmModal(){const m=medsForDog().find(x=>x.id===state.medDeleteId);return `<p>${label3('確定移除這個用藥排程嗎？過去已確認的用藥紀錄會保留。','Remove this schedule? Confirmed history will be kept.','이 복약 일정을 삭제할까요? 확인된 기록은 보존됩니다.')}</p><p class="strong">${esc(m?.name||'')}</p><div class="row gap8">${button(label3('取消','Cancel','취소'),'med-delete-cancel','care-outline')}${button(label3('確認移除','Remove','삭제'),'med-delete-confirm','cta')}</div>`;}
+
+const DEEPPET_LAB_NAMES={
+ WBC:['白血球計數','White blood cell count','백혈구 수'],RBC:['紅血球計數','Red blood cell count','적혈구 수'],HGB:['血紅素','Hemoglobin','헤모글로빈'],HCT:['血球容積比','Hematocrit','헤마토크릿'],MCV:['平均紅血球容積','Mean corpuscular volume','평균 적혈구 용적'],MCH:['平均紅血球血紅素量','Mean corpuscular hemoglobin','평균 적혈구 혈색소량'],MCHC:['平均紅血球血紅素濃度','Mean corpuscular hemoglobin concentration','평균 적혈구 혈색소 농도'],PLT:['血小板計數','Platelet count','혈소판 수'],
+ ALT:['丙胺酸轉胺酶','Alanine aminotransferase','알라닌 아미노전달효소'],AST:['天門冬胺酸轉胺酶','Aspartate aminotransferase','아스파르테이트 아미노전달효소'],ALP:['鹼性磷酸酶','Alkaline phosphatase','알칼리 인산분해효소'],ALB:['白蛋白','Albumin','알부민'],GLOB:['球蛋白','Globulin','글로불린'],TP:['總蛋白','Total protein','총단백'],
+ GLU:['血糖','Glucose','혈당'],BUN:['血中尿素氮','Blood urea nitrogen','혈액 요소 질소'],CREA:['肌酸酐','Creatinine','크레아티닌'],Na:['鈉','Sodium','나트륨'],K:['鉀','Potassium','칼륨'],Cl:['氯','Chloride','염소'],Ca:['鈣','Calcium','칼슘'],P:['磷','Phosphorus','인'],CHOL:['總膽固醇','Total cholesterol','총 콜레스테롤'],TBIL:['總膽紅素','Total bilirubin','총 빌리루빈'],CK:['肌酸激酶','Creatine kinase','크레아틴 키나아제'],CRP:['C 反應蛋白','C-reactive protein','C 반응 단백']
+};
+const DP_LAB_JA={WBC:'白血球',RBC:'赤血球',HGB:'ヘモグロビン',HCT:'ヘマトクリット',MCV:'平均赤血球容積',MCH:'平均赤血球ヘモグロビン量',MCHC:'平均赤血球ヘモグロビン濃度',PLT:'血小板',ALT:'ALT',AST:'AST',ALP:'ALP',GGT:'GGT',TBIL:'総ビリルビン',ALB:'アルブミン',GLOB:'グロブリン',TP:'総タンパク',GLU:'血糖',BUN:'尿素窒素',CREA:'クレアチニン',SDMA:'SDMA',Na:'ナトリウム',K:'カリウム',Cl:'塩化物',Ca:'カルシウム',P:'リン',CHOL:'総コレステロール',CK:'CK',CRP:'C反応性タンパク',TSH:'甲状腺刺激ホルモン',T4:'サイロキシン'};
+function labI18n(code){const key=String(code||'').trim(),row=DEEPPET_LAB_NAMES[key.toUpperCase()]||DEEPPET_LAB_NAMES[key];return row?{zh:row[0],en:row[1],ko:row[2],ja:DP_LAB_JA[key]||DP_LAB_JA[key.toUpperCase()]||row[1],code:key.toUpperCase(),known:true}:{zh:label3('自訂檢驗項目','Custom lab test','사용자 검사 항목'),en:'Custom test / '+key,ko:'사용자 검사 항목',ja:'カスタム検査項目',code:key,known:false}}
+function labLocalizedRowName(entry){const info=labI18n(entry.name);if(!info.known)return `<span class="lab-names"><b>${esc(entry.name)}</b><small>${label3('自訂檢驗項目','Custom test','사용자 검사 항목')}</small></span>`;const local=info[state.lang]||info.en;return `<span class="lab-names"><b>${esc(local)} <em>${esc(info.code)}</em></b><small>${esc(info.en)}</small></span>`}
+function reportAvailableDates(){
+ if(typeof selectedBlank==='function'&&selectedBlank())return [];
+ const canonical=globalThis.dp914ReportRecords?.(state.dog);
+ if(Array.isArray(canonical))return [...new Set(canonical.map(x=>x?.date).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
+ const hidden=state.reportHiddenDatesByDog?.[String(state.dog)]||[],real=dpUsesRealMeasurements(),base=real?[]:dpReviewDemoCare(state.dog).reports.map(x=>x.date).filter(d=>!hidden.includes(d));
+ const added=(state.userReportEntries?.[String(state.dog)]||[]).filter(x=>x&&(!real||!(x.sample===true||x.source==='sample'||x.source==='showcase'))).map(x=>x.date).filter(Boolean);
+ return [...new Set([...base,...added])].sort((a,b)=>b.localeCompare(a));
+}
+function reportEntriesForDate(index=state.activeReport||0){
+ if(typeof selectedBlank==='function'&&selectedBlank())return [];
+ const dates=reportAvailableDates(),date=dates[Math.max(0,Math.min(index,dates.length-1))];if(!date)return [];
+ const canonical=globalThis.dp914ReportRecords?.(state.dog);
+ if(Array.isArray(canonical))return canonical.filter(x=>x.date===date);
+ const demoDates=[...dpReviewDemoCare(state.dog).reports.map(x=>x.date),'2026-10-12','2026-06-10','2026-02-15'],demoIndex=dpUsesRealMeasurements()?-1:demoDates.indexOf(date),all=reportEntries(),additions=(state.userReportEntries?.[String(state.dog)]||[]).filter(x=>x&&(!dpUsesRealMeasurements()||!(x.sample===true||x.source==='sample'||x.source==='showcase'))),base=all.slice(0,Math.max(0,all.length-(state.userReportEntries?.[String(state.dog)]||[]).length));
+ const overrides=state.reportOverridesByDog?.[String(state.dog)]||{};
+ const sample=demoIndex<0?[]:base.map((x,i)=>{
+  const id=`sample:${date}:${i}`,override=overrides[id];if(override===null)return null;
+  const numeric=Number.parseFloat(x.value),f=1+((((state.dog+1)*13+i*7+demoIndex*9)%21)-10)/100,alertFactor=x.status==='alert'?(1.08+((state.dog+i)%7)*.065):1,value=Number.isFinite(numeric)?(numeric*f*alertFactor+(demoIndex===1?.32:demoIndex===2?-.24:0)).toFixed(x.unit==='%'?0:1):x.value;
+  return {...x,id,date,source:'sample',value,...(override||{})};
+ }).filter(Boolean);
+ return [...sample,...additions.filter(x=>x.date===date)];
+}
+function reportEntries(){
+ if(typeof selectedBlank==='function'&&selectedBlank())return [];
+ const common=[['WBC','9.1','10⁹/L'],['RBC','6.8','10¹²/L'],['HGB','151','g/L'],['HCT','44','%'],['MCV','65','fL'],['MCH','22','pg'],['MCHC','341','g/L'],['PLT','278','10⁹/L'],['ALT','38','U/L'],['AST','29','U/L'],['ALP','72','U/L'],['ALB','33','g/L'],['GLOB','29','g/L'],['TP','62','g/L'],['GLU','5.2','mmol/L'],['BUN','5.9','mmol/L'],['CREA','91','µmol/L'],['Na','146','mmol/L'],['K','4.5','mmol/L'],['Cl','110','mmol/L'],['Ca','2.45','mmol/L'],['P','1.32','mmol/L'],['CHOL','4.9','mmol/L'],['TBIL','3.2','µmol/L'],['CK','116','U/L']];
+ const [normal,alert]=([[25,0],[20,2],[12,11],[10,15],[20,3],[25,0],[19,4],[11,13],[9,16],[23,1],[10,15],[25,0],[14,9],[21,3],[12,13]][state.dog]||[20,1]);
+ const arr=common.slice(0,normal+alert).map(([name,value,unit],i)=>({name,value,unit,status:i<normal?'normal':'alert'}));
+ if(alert&&arr[normal]) arr[normal]={name:'CRP',value:String(17+state.dog*4+alert*3),unit:'mg/L',status:'alert'};
+ return arr.concat(state.userReportEntries?.[String(state.dog)]||[]);
+}
+
+function dpLabAiConclusion(){
+ const entries=reportEntriesForDate(),latest=reportAvailableDates()[Math.max(0,Math.min(state.activeReport||0,reportAvailableDates().length-1))];if(!entries.length)return '';
+ const user=entries.filter(e=>e.id),alerts=entries.filter(e=>e.status==='alert'),unknown=entries.filter(e=>!['normal','alert'].includes(e.status)),trends=dpLabTrendRows().filter(m=>m.rows.some(r=>r.date===latest));
+ const result=alerts.length?label3(`本次有 ${alerts.length} 項標示為需要留意：${alerts.slice(0,3).map(e=>e.name).join('、')}。建議對照醫院參考範圍與獸醫意見。`,`There are ${alerts.length} flagged results: ${alerts.slice(0,3).map(e=>e.name).join(', ')}. Review the lab's reference range with a vet.`,`주의 표시 결과 ${alerts.length}건을 확인하세요.`):unknown.length?label3(`本次有 ${unknown.length} 項尚未確認。先核對醫院提供的參考區間，再做進一步比較。`,`${unknown.length} results need review. Confirm the lab reference ranges first.`,`${unknown.length}개 결과를 확인해야 해요.`):label3('目前所選報告沒有標記需優先留意的結果，可繼續追蹤定期檢查。','No results are marked for priority attention in this report. Continue routine follow-up.','현재 주의 표시 결과가 없어요.');
+ const latestTrend=trends.length?trends.slice(0,3).map(m=>{const x=m.rows.slice(-2),diff=x[1].value-x[0].value,dir=diff>0?label3('上升','rose','증가'):diff<0?label3('下降','fell','감소'):label3('持平','stayed level','유지');return `${m.name} ${dir} ${Math.abs(diff).toFixed(1)} ${m.unit}`;}).join('；'):'';
+ return `<section class="card dp-lab-ai"><div class="row spread"><h3>${vicon('spark',18)} ${label3('AI 體檢分析','AI exam insights','AI 검진 분석')}</h3><span class="pill">${esc(latest||'')}</span></div><p class="dp-lab-ai-result">${result}</p>${trends.length?`<div class="dp-lab-ai-trend"><b>${label3('前後檢驗趨勢','Changes between exams','검사 추세')}</b><p>${latestTrend}</p><small>${label3('數值上升或下降不一定代表健康變好或變差；需根據醫院參考區間及病史判讀。','A rise or fall is not necessarily improvement or decline; interpret with the laboratory range and veterinary history.','값의 증감은 건강의 호전이나 악화를 직접 의미하지 않아요.')}</small></div>`:`<p class="subtitle">${label3('同項指標有至少兩次記錄後，這裡會比較前後變化。','After two exams with the same test, the app compares its changes here.','같은 검사가 두 번 기록되면 변화를 비교해요.')}</p>`}<button class="care-outline" data-action="export-vet">${label3('查看完整就診摘要','View full visit summary','진료 요약 보기')}</button></section>`;
+}
+
+function dpLabHistoryAi(){
+ const dates=reportAvailableDates(),trends=dpLabTrendRows(),latest=dates[0],total=dates.length;
+ const summary=trends.length?label3(`目前有 ${total} 份歷史報告、${trends.length} 個可比較的同項指標。以下只描述跨次檢查的變化，不等於疾病改善或惡化。`,`There are ${total} historical exams and ${trends.length} tests with comparable results. Directional changes are not diagnoses.`,`과거 검진 ${total}건, 비교 가능한 항목 ${trends.length}개가 있습니다. 변화가 진단을 의미하지는 않습니다.`):label3(`目前有 ${total} 份報告；累積同一項目、相同單位的第二次檢查後，才能分析長期變化。`,`There are ${total} reports. Another exam using the same tests and units is needed for longitudinal analysis.`,`보고서 ${total}개가 있으며 같은 검사와 단위로 2회 이상 기록해야 추세 분석이 가능합니다.`);
+ return `<section class="card dp-lab-ai"><h3>${vicon('spark',18)} ${label3('AI 歷史體檢趨勢分析','AI historical exam trend analysis','AI 과거 검진 추세 분석')}</h3><p class="dp-lab-ai-result">${summary}</p>${trends.slice(0,3).map(x=>{const a=x.rows.at(0),b=x.rows.at(-1),delta=b.value-a.value;return `<p class="dp-report-trend-summary"><b>${esc(x.name)}</b> ${esc(a.date)} → ${esc(b.date)} · ${a.value} → ${b.value} ${esc(x.unit)} (${delta>=0?'+':''}${delta.toFixed(1)} ${esc(x.unit)})</p>`}).join('')}<small>${label3('請依獸醫院檢驗報告的參考區間與病史判讀。','Interpret using the veterinary laboratory report, its reference ranges and medical history.','수의사의 검사 보고서, 참고 범위와 병력을 함께 확인하세요.')}</small></section>`;
+}
+function dpSingleLabAi(index){
+ const rows=reportEntriesForDate(index),alert=rows.filter(x=>x.status==='alert'),unknown=rows.filter(x=>!['normal','alert'].includes(x.status)),date=reportAvailableDates()[index]||'';
+ const detail=alert.length?label3(`本份報告有 ${alert.length} 項標記需留意：${alert.slice(0,5).map(x=>x.name).join('、')}。請確認這次檢查的醫院參考區間，與獸醫討論。`,`This exam has ${alert.length} flagged results: ${alert.slice(0,5).map(x=>x.name).join(', ')}. Confirm this report's laboratory ranges with a vet.`,`이 보고서의 주의 항목은 ${alert.length}개입니다. 해당 검사실 기준치와 수의사 의견을 확인하세요.`):unknown.length?label3(`本份報告有 ${unknown.length} 項尚未判讀，不能直接視為正常。`,`This report has ${unknown.length} unreviewed results; they cannot be assumed normal.`,`이 보고서에 미확인 결과 ${unknown.length}개가 있으며 정상으로 단정할 수 없습니다.`):label3('本份報告沒有已標示的優先警示；仍需以實際參考區間與獸醫判讀為準。','This exam has no flagged priority results, but veterinary interpretation is still required.','이 보고서에 표시된 주의 결과는 없지만 수의사 해석이 필요합니다.');
+ return `<section class="card dp-lab-ai"><h3>${vicon('spark',18)} ${label3('AI 體檢分析','AI exam analysis','AI 검진 분석')}</h3><p class="dp-lab-ai-result">${detail}</p><small>${label3(`只分析 ${date} 這一份報告，不包含其他日期的趨勢。`, `This interpretation covers only the ${date} exam, not historical trends.`,`${date} 보고서만 분석하며 다른 날짜의 추세는 포함하지 않습니다.`)}</small></section>`;
+}
+function dpReportDetailPage(){
+ const dates=reportAvailableDates(),idx=Math.max(0,Math.min(dates.length-1,state.activeReport||0)),date=dates[idx],entries=reportEntriesForDate(idx),normal=entries.filter(x=>x.status==='normal').length,alert=entries.filter(x=>x.status==='alert').length;
+ if(!date)return `<section class="card">${label3('這份報告不存在，請返回歷史列表。','Report not found. Return to the history list.','보고서를 찾을 수 없습니다.')}</section>`;
+ const groups=[['alert',t('attentionCount')],['normal',t('normal')],['unknown',label3('待確認','Not reviewed','미확인')]];
+ return `${dpSingleLabAi(idx)}<section class="card"><h3>${date} · ${label3('檢驗明細','Test results','검사 상세')}</h3><p class="subtitle">${normal} ${t('normal')} · ${alert} ${t('attentionCount')} · ${entries.length-normal-alert} ${label3('待確認','Not reviewed','미확인')}</p>${groups.map(([key,title])=>`<details class="report-accordion"><summary><span class="report-dot ${key}"></span>${title}<b>${entries.filter(x=>(['normal','alert'].includes(x.status)?x.status:'unknown')===key).length}</b></summary>${entries.filter(x=>(['normal','alert'].includes(x.status)?x.status:'unknown')===key).map(x=>`<div class="report-item"><div>${labLocalizedRowName(x)}<small class="report-provenance">${esc(x.date||date)}${x.referenceLow!=null&&x.referenceHigh!=null?' · '+esc(x.referenceLow)+'–'+esc(x.referenceHigh)+' '+esc(x.unit||''):''}</small></div><span class="report-value">${esc(x.value)} <small>${esc(x.unit||'')}</small><span class="dp-row-actions"><button data-action="report-edit" data-id="${esc(x.id)}">${label3('修改','Edit','수정')}</button><button data-action="report-delete" data-id="${esc(x.id)}">${label3('刪除','Delete','삭제')}</button></span></span></div>`).join('')||'<p class="notices">—</p>'}</details>`).join('')}</section>${entries.some(e=>e.attachmentId)?`<section class="card">${[...new Map(entries.filter(e=>e.attachmentId).map(e=>[e.attachmentId,e])).values()].map(x=>`<button class="care-outline full" data-action="report-open-attachment" data-file="${esc(x.attachmentId)}">${label3('查看原始體檢報告','View original report','원본 보고서 보기')}</button>`).join('')}</section>`:''}<section class="card dp-report-delete-bottom"><p class="subtitle">${label3('以下操作會刪除這一天的整份體檢報告，請再次確認。','The following deletes the entire report for this date. Confirmation is required.','이 날짜의 보고서 전체가 삭제되며 확인이 필요합니다.')}</p><button class="care-danger-action full" data-action="report-delete-day" data-date="${esc(date)}">${label3('刪除這份歷史體檢報告','Delete this examination report','이 검진 보고서 삭제')}</button></section>`;
+}
+function reportsDetail(){
+ const dates=reportAvailableDates(),shown=state.reportListExpanded?dates:dates.slice(0,5);
+ return `${dpLabHistoryAi()}<section class="card dp-main-create"><button class="cta full dp-large-add" data-action="upload-report">${vicon('plus',19)} ${label3('新增體檢報告','Add examination report','검진 보고서 추가')}</button></section><section class="card dp-report-list"><h3>${label3('歷史體檢報告','Historical examination reports','과거 검진 보고서')}</h3><p class="subtitle">${label3(`依檢查日期排序，共 ${dates.length} 份。選擇日期才進入該份報告的詳細頁。`,`Sorted by exam date · ${dates.length} reports. Select a date to open a report.`,`날짜순 보고서 ${dates.length}개 · 날짜를 눌러 상세 보기`)}</p>${shown.map((date,i)=>`<button class="dp-report-row" data-action="report-open" data-index="${i}"><span class="grow"><b>${esc(date)}</b><small>${label3(`${reportEntriesForDate(i).length} 項檢查結果`,`${reportEntriesForDate(i).length} test results`,`${reportEntriesForDate(i).length}개 검사 결과`)}</small></span><span>${label3('查看詳情','Details','상세 보기')} ›</span></button>`).join('')||`<p class="notices">${label3('尚無報告，請先新增。','No reports yet. Add an exam.','보고서가 없습니다. 추가하세요.')}</p>`}${dates.length>5?`<button class="dp-lab-more" data-action="report-toggle-more">${state.reportListExpanded?label3('收起','Show less','접기'):label3(`More · 查看全部 ${dates.length} 份`,`More · View all ${dates.length} reports`,`더 보기 · 전체 ${dates.length}개`)}</button>`:''}</section><section class="card"><h3>${label3('同項體檢的長期趨勢','Long-term trends for repeated tests','동일 검사 장기 추세')}</h3><p class="subtitle">${label3('只有同一項目、相同單位、不同日期至少兩筆紀錄才生成比較。','Trend comparison requires the same test and unit on two different dates.','같은 검사, 단위, 서로 다른 날짜의 기록이 두 건 이상 필요합니다.')}</p>${dpLabTrendRows().slice(0,3).map(m=>`<details class="dp-lab-trend-item"><summary><b>${esc(m.name)}</b> · ${m.rows.length} ${label3('次','records','건')}</summary>${dpLabTrendSvg(m.rows,m.unit,m.excludedDates)}</details>`).join('')||`<p>${label3('目前尚無可比較的指標。','No comparable trends yet.','비교 가능한 추세가 없습니다.')}</p>`}${dpLabTrendRows().length>3?`<button class="dp-lab-more" data-action="report-trends-open">More · ${label3('查看全部檢驗趨勢','All lab trends','전체 추세')} →</button>`:''}</section><section class="card"><h3>${label3('一鍵生成獸醫就診摘要','One-tap veterinary visit summary','한 번에 수의사 진료 요약 생성')}</h3><button class="cta full" data-action="export-vet">${label3('立即生成摘要','Generate summary','요약 생성')}</button></section>`;
+}
+function dpReportTrendsPage(){
+ const all=dpLabTrendRows();return `<section class="card"><h2 class="section-title">${label3('全部檢驗項目趨勢','All laboratory trends','모든 검사 추세')}</h2><p class="subtitle">${label3('點按日期或曲線上的圓點，查看當天數值與單位。','Tap a date or point for its result and unit.','날짜나 점을 눌러 검사 값을 확인하세요.')}</p>${all.map(m=>`<details class="dp-lab-trend-item" open><summary><b>${esc(labI18n(m.name).known?(state.lang==='en'?labI18n(m.name).en:state.lang==='ko'?labI18n(m.name).ko:labI18n(m.name).zh):m.name)}</b> · ${m.rows.length}</summary>${dpLabTrendSvg(m.rows,m.unit,m.excludedDates)}</details>`).join('')||`<p class="notices">${label3('至少兩次相同檢驗才能形成趨勢。','At least two matching tests are needed.','같은 검사 항목이 2회 이상 필요합니다.')}</p>`}</section>`;
+}
+function dpReportEditModal(){const x=(state.userReportEntries?.[String(state.dog)]||[]).find(r=>r.id===state.reportEditId)||reportEntriesForDate().find(r=>r.id===state.reportEditId);if(!x)return `<p>${label3('找不到紀錄','Record not found','기록 없음')}</p>`;
+ return `<div class="care-edit-form"><label class="form-label">${label3('檢查日期','Examination date','검사 날짜')}</label><input id="repEditDate" class="form-control" type="date" value="${esc(x.date)}"/><label class="form-label">${label3('醫院','Clinic','병원')}</label><input id="repEditClinic" class="form-control" value="${esc(x.clinic||'')}"/><label class="form-label">${label3('檢驗項目','Test','검사 항목')}</label><input id="repEditName" class="form-control" value="${esc(x.name)}"/><label class="form-label">${label3('數值','Value','수치')}</label><input id="repEditValue" class="form-control" type="number" step="any" value="${esc(x.value)}"/><label class="form-label">${label3('單位','Unit','단위')}</label><input id="repEditUnit" class="form-control" value="${esc(x.unit||'')}"/><div class="form-grid mt12"><div><label class="form-label">${label3('參考下限','Lab lower limit','참고 하한')}</label><input id="repEditLow" class="form-control" type="number" step="any" value="${esc(x.referenceLow??'')}"/></div><div><label class="form-label">${label3('參考上限','Lab upper limit','참고 상한')}</label><input id="repEditHigh" class="form-control" type="number" step="any" value="${esc(x.referenceHigh??'')}"/></div></div><label class="form-label">${label3('狀態','Status','상태')}</label><select id="repEditStatus" class="form-control">${[['unknown',label3('已保存（未判讀）','Saved (not interpreted)','저장됨 (판독 전)')],['normal',label3('正常','Within range','범위 안')],['alert',label3('需留意','Attention','주의')]].map(([id,name])=>`<option value="${id}" ${x.status===id?'selected':''}>${name}</option>`).join('')}</select><button class="cta full" data-action="report-edit-save">${label3('儲存修改','Save changes','변경 저장')}</button></div>`;
+}
+function dpReportDeleteModal(){const x=(state.userReportEntries?.[String(state.dog)]||[]).find(r=>r.id===state.reportDeleteId)||reportEntriesForDate().find(r=>r.id===state.reportDeleteId);return `<p>${label3('確定刪除此筆檢驗數值？只刪除這一項，不影響其他報告。','Delete this result only? Other tests remain.','이 검사 결과만 삭제할까요?')}</p><b>${esc(x?.name||'')} · ${esc(x?.date||'')}</b><div class="sp12"></div><button class="care-danger-action" data-action="report-delete-confirm">${label3('確認刪除','Delete result','결과 삭제')}</button>`;}
+
+function vaxDetail(){
+ const entries=allVaxForDog(),upcoming=entries.filter(x=>x.status==='upcoming').sort((a,b)=>a.date.localeCompare(b.date)),completed=entries.filter(x=>x.status==='done').sort((a,b)=>String(b.doneDate||b.date).localeCompare(String(a.doneDate||a.date)));
+const row=v=>`<div class="history-row dp-vax-record" data-demo-care-id="${esc(v.id||v.key)}"><div class="dp-vax-status-top"><button class="vax-complete-action" data-action="vax-toggle" data-key="${esc(v.key)}" data-source="${v.source}" data-status="${v.status}">${v.status==='done'?label3('撤銷已接種','Undo given','접종 완료 취소'):label3('✓ 標記已接種','✓ Mark as given','✓ 접종 완료')}</button></div><div class="dp-vax-record-body"><span class="history-icon">${vicon('vaccine',18)}</span><div class="grow"><div class="history-title">${esc(v.name)}</div><div class="history-meta">${fmtDate(new Date((v.status==='done'?(v.doneDate||v.date):v.date)+'T12:00:00'))}${v.status==='done'&&!v.doneDate?` · ${label3('原預約日（實際接種日未記錄）','Scheduled date only (actual date not recorded)','예약일만 기록됨 (실제 접종일 미기록)')}`:''}${v.status==='done'||!v.time?'':` · ${esc(v.time)}`}</div></div><span class="pill ${v.status==='done'?'ok':dayDiff(v.date)<0?'danger':'warn'}">${v.status==='done'?t('done'):dayDiff(v.date)<0?label3('已到期','Due','예정일 지남'):label3('已預約','Scheduled','예정')}</span></div>${v.sample?'':`<div class="dp-vax-record-actions"><button class="care-outline dp-small-action" data-action="vax-edit" data-key="${esc(v.key)}">${label3('修改','Edit','수정')}</button><button class="care-danger-action dp-small-action" data-action="vax-delete" data-key="${esc(v.key)}">${label3('刪除','Delete','삭제')}</button></div>`}</div>`;
+ return `<section class="card dp-main-create"><button class="cta full dp-large-add" data-action="vax-add">${vicon('plus',20)} ${label3('新增疫苗接種','Add a vaccination','예방접종 추가')}</button><p class="subtitle">${label3('先預約接種日期；完成後可標記已接種，也能修改或刪除。','Schedule first, then mark as given, edit or delete.','접종 일정을 정한 후 완료 표시, 수정, 삭제할 수 있어요.')}</p></section>${card(t('vaxUpcoming'),upcoming.length?upcoming.map(row).join(''):`<p class="notices">${label3('目前沒有安排接種。','No upcoming vaccinations.','예정된 접종이 없습니다.')}</p><div class="dp-sample-mini"><b>${label3('預約方式','Example appointment','예약 예시')}</b><div>${label3('狂犬病疫苗｜選擇預約日期與時間｜完成後標記已接種','Rabies vaccine · choose appointment date and time · mark as given afterwards','광견병 백신 · 예약 날짜·시간 선택 후 접종 완료 표시')}</div></div>`)}${card(t('vaxHistory'),completed.length?completed.map(row).join(''):`<p class="notices">${label3('尚無已接種紀錄。','No completed vaccinations.','완료된 기록이 없습니다.')}</p>`)}`;
+}
+function vaxRescheduleModal(){const v=vaccineRecord(state.vaxEditingSource,state.vaxEditingKey);if(!v)return `<p class="notices">${label3('找不到這筆疫苗紀錄。','Vaccination not found.','기록을 찾을 수 없습니다.')}</p>`;
+ return `<p class="subtitle">${label3('修改的是原預約日期，不會新增第二筆疫苗。','This changes the scheduled date without adding a duplicate record.','예약 날짜만 변경하며 중복 기록을 만들지 않습니다.')}</p><b>${esc(v.name)}</b><div class="sp12"></div><label class="form-label">${label3('新的預約日期','New appointment date','새 예약 날짜')}</label><input class="form-control" id="vaxNewDate" type="date" min="${iso(localDate())}" value="${esc(v.date)}"/><label class="form-label">${label3('預約時間','Appointment time','예약 시간')}</label><input class="form-control" id="vaxNewTime" type="time" value="${esc(v.time??'')}"/><div class="sp12"></div>${button(label3('儲存新日期','Save new date','날짜 저장'),'vax-reschedule-save','cta full')}`;
+}
+
+function dpVaxCompleteDateModal(){
+ const samePet=state.dog===state.vaxConfirmOriginPet&&state.dpPetEpoch===state.vaxConfirmOriginEpoch;
+ const v=samePet?vaccineRecord(state.vaxConfirmSource,state.vaxConfirmKey):null;
+ if(!v||v.status==='done')return `<p class="notices">${label3('這筆疫苗紀錄已變更，請返回疫苗列表重新確認。','This vaccination record changed. Return to the vaccine list to review it.','예방접종 기록이 변경되어 목록에서 다시 확인해야 합니다.')}</p>`;
+ return `<p class="subtitle">${label3('原預約日期：','Originally scheduled: ','원래 예약일: ')}${esc(v.date)} · ${esc(v.name)}</p><p class="notices">${label3('請依疫苗本或獸醫紀錄填寫實際接種日期。系統不會把今天或原預約日直接當成接種日期。','Enter the actual vaccination date from the pet’s record or veterinarian. Today and the appointment date are not assumed to be the administration date.','접종수첩 또는 수의사 기록에 있는 실제 접종일을 입력하세요. 오늘이나 예약일을 접종일로 추정하지 않습니다.')}</p><label class="form-label">${label3('實際接種日期','Actual vaccination date','실제 접종일')}</label><input class="form-control" id="vaxActualDate" type="date" max="${iso(localDate())}" required/><div class="sp12"></div>${button(label3('確認並儲存已接種','Confirm vaccination and save','접종 완료 확인 및 저장'),'vax-complete-save','cta full')}`;
+}
+
+function vaxEditModal(){const v=vaxForDog().find(x=>x.id===state.vaxEditingKey);if(!v)return `<p>${label3('找不到紀錄','Record not found','기록 없음')}</p>`;
+ return `<div class="care-edit-form"><label class="form-label">${label3('疫苗名稱','Vaccine name','백신 이름')}</label><input id="vaxEditName" class="form-control" value="${esc(v.name)}"/><label class="form-label">${label3('原預約日期','Scheduled date','예약일')}</label><input id="vaxEditDate" type="date" class="form-control" value="${esc(v.date)}"/><label class="form-label">${label3('預約時間（選填）','Appointment time (optional)','예약 시간(선택)')}</label><input id="vaxEditTime" type="time" class="form-control" value="${esc(v.time??'')}"/><label class="form-label">${label3('接種狀態','Status','상태')}</label><select id="vaxEditStatus" class="form-control"><option value="upcoming" ${v.status!=='done'?'selected':''}>${label3('已預約','Scheduled','예약됨')}</option><option value="done" ${v.status==='done'?'selected':''}>${label3('已接種','Given','접종 완료')}</option></select><label class="form-label">${label3('實際接種日期（選擇已接種時必填）','Actual vaccination date (required if given)','실제 접종일(완료 시 필수)')}</label><input id="vaxEditActualDate" type="date" class="form-control" max="${iso(localDate())}" value="${esc(v.status==='done'?(v.doneDate||''):'')}"/><p class="notices">${label3('原預約日期和實際接種日分開保存，修改前者不會覆蓋後者。','Scheduled and administered dates are recorded separately; editing one does not overwrite the other.','예약일과 실제 접종일은 별도로 보관됩니다.')}</p><button class="cta full" data-action="vax-edit-save">${label3('儲存修改','Save changes','저장')}</button></div>`;
+}
+function vaxDeleteModal(){const v=vaxForDog().find(x=>x.id===state.vaxDeleteId);return `<p>${label3('確定刪除此筆疫苗紀錄？','Delete this vaccination record?','이 접종 기록을 삭제할까요?')}</p><p><b>${esc(v?.name||'')}</b></p><button class="care-danger-action" data-action="vax-delete-confirm">${label3('確認刪除','Confirm delete','삭제 확인')}</button>`;}
+
+function displayNote(x){
+ if(!x.sample)return {cat:x.cat,text:x.text||'-'};
+ if(state.lang==='ja')return {cat:dpL10nSample(x.cat),text:dpL10nSample(x.text)||'-'};
+ const categories={活动:['活动','Activity','활동'],饮食:['饮食','Food','식사'],休息:['休息','Rest','휴식']};
+ const cat=(categories[x.cat]||[x.cat,x.cat,x.cat])[(state.lang==='zh'||state.lang==='zht')?0:state.lang==='en'?1:2];
+ const sentences={
+ '散步约 45 分钟，精神状态和平时差不多。':['散步约 45 分钟，精神状态和平时差不多。','Walked about 45 minutes, typical energy.','약 45분 산책, 평소와 비슷했어요.'],
+ '早晚两餐都已记录。':['早晚两餐都已记录。','Breakfast and dinner logged.','아침과 저녁 식사를 기록했어요.'],
+ '夜间休息时间比前一周稍长。':['夜间休息时间比前一周稍长。','Quiet rest was a little longer than the prior week.','지난주보다 조용한 휴식이 조금 길었어요.'],
+ '户外玩耍后较快恢复平静。':['户外玩耍后较快恢复平静。','Calmed down quickly after outdoor play.','야외 놀이 후 빨리 안정됐어요.'],
+ '吃完了两次正餐。':['吃完了两次正餐。','Finished two scheduled meals.','정해진 두 끼를 먹었어요.'],
+ '下午安静休息了一段时间。':['下午安静休息了一段时间。','Had a quiet rest in the afternoon.','오후에 조용히 쉬었어요.'],
+ '今天减少了外出活动。':['今天减少了外出活动。','Less outdoor activity today.','오늘 야외 활동이 줄었어요.']
+ };
+ const raw=(sentences[x.text]||[x.text,x.text,x.text])[(state.lang==='zh'||state.lang==='zht')?0:state.lang==='en'?1:2];
+ return {cat:state.lang==='zht'?toTraditional(cat):state.lang==='zh'?toSimplified(cat):cat,text:state.lang==='zht'?toTraditional(raw):state.lang==='zh'?toSimplified(raw):raw};
+}
+function noteDetail(){const today=iso(localDate()),list=notesForDog(),editing=list.find(x=>x.id===state.noteEditId),categories=t('noteChips');
+ return `${card(editing?label3('修改其他健康紀錄','Edit care note','건강 기록 수정'):label3('新增其他健康紀錄','Add a care note','건강 기록 추가'),`<label class="form-label">${label3('事情發生的日期','Event date','기록 날짜')}</label><input id="noteDate" type="date" class="form-control" value="${esc(editing?.date||today)}"/><label class="form-label dp-note-time-label">${label3('事情發生的時間（選填）','Event time (optional)','발생 시간(선택)')}</label><input id="noteTime" type="time" class="form-control" value="${esc(editing?.time??'')}"/><div class="note-grid dp-note-types">${categories.map((x,i)=>`<button class="note-chip ${state.selectedNote===i?'active':''}" data-action="note-chip" data-index="${i}">${vicon(['food','moon','activity','health','leaf','edit'][i],17)} <span>${x}</span></button>`).join('')}</div><textarea id="noteText" class="form-control" rows="3" placeholder="${t('notePlaceholder')}">${esc(editing?.text||state.noteDraft||'')}</textarea>${button(editing?label3('儲存修改','Save changes','수정 저장'):t('saveNote'),'note-add','cta full')}${editing?button(label3('取消修改','Cancel editing','수정 취소'),'note-cancel','care-outline'):''}`)}
+ ${card(t('noteHistory'),list.length?list.slice().sort((a,b)=>(b.date+' '+(b.time||'')).localeCompare(a.date+' '+(a.time||''))).map((n,i)=>`<div class="history-row dp-note-record-card"><div class="grow"><b>${esc(displayNote(n).cat)} · ${esc(n.date)} ${esc(n.time||'')}</b><p>${esc(displayNote(n).text)}</p></div><div class="dp-row-actions"><button data-action="note-edit" data-id="${esc(n.id||'')}" data-index="${list.indexOf(n)}">${label3('修改','Edit','수정')}</button><button data-action="note-delete" data-id="${esc(n.id||'')}" data-index="${list.indexOf(n)}">${label3('刪除','Delete','삭제')}</button></div></div>`).join(''):`<p class="notices">${label3('尚無其他記錄。','No notes yet.','아직 기록이 없습니다.')}</p>`)}`;
+}
+function tr(zh,en,ko){return label3(zh,en,ko)}
+function devName(){
+ if(!state.connected)return tr('尚未配對項圈','No collar paired','연결된 목걸이 없음');
+ const name=DP_DEVICE(state.deviceType).name;
+ const raw=String(state.connectedId||''),match=raw.match(/(?:-|_)(\d{1,2})$/),suffix=match?match[1].padStart(2,'0'):'01';
+ return `${name} · ${suffix}`;
+}
+function dpDevicePhoto(){
+ // Never imply that an unpaired owner already owns the Bluetooth model.
+ if(!state.connected||!Object.hasOwn(DP_DEVICE_CATALOG,state.deviceType))
+  return `<span class="dp-device-unpaired-art" role="img" aria-label="${tr('尚未配對項圈','No paired collar','연결된 목걸이 없음')}">${vicon('device',30)}</span>`;
+ const product=DP_DEVICE_CATALOG[state.deviceType];
+ return `<img src="${esc(product.image)}" alt="${esc(product.name)}"/>`;
+}
+function shopItem(item,index){const kind=typeof item==='string'?item:item?.kind;
+ if(!Object.hasOwn(DP_DEVICE_CATALOG,kind))return null;
+ return {kind,plan:kind==='4g'?(item?.plan==='monthly'?'monthly':'yearly'):null,sourceIndex:index};
+}
+function shopPlanValue(plan){return DP_DEVICE_CATALOG['4g'][plan==='monthly'?'monthly':'yearly'];}
+function shopPlanName(plan){const v=shopPlanValue(plan);return plan==='monthly'?tr(`月繳 US$${v}／月`,`Monthly · US$${v}/mo`,`월간 US$${v}/월`):tr(`年繳 US$${v}／年`,`Annual · US$${v}/yr`,`연간 US$${v}/년`);}
+function cartSummary(){const source=Array.isArray(state.shopCart)?state.shopCart:[];
+ const items=source.map(shopItem).filter(Boolean);
+ const hardware=items.reduce((a,item)=>a+DP_DEVICE_CATALOG[item.kind].price,0);
+ const annual=items.filter(i=>i.kind==='4g'&&i.plan==='yearly').length*shopPlanValue('yearly');
+ const monthly=items.filter(i=>i.kind==='4g'&&i.plan==='monthly').length*shopPlanValue('monthly');
+ return {items,hardware,annual,monthly,now:hardware+annual+monthly};
+}
+function planPicker(){
+ const plan=state.shopPlan==='monthly'?'monthly':'yearly';
+ const monthly=shopPlanValue('monthly'),yearly=shopPlanValue('yearly');
+ const yearlyAtMonthly=monthly*12,saving=yearlyAtMonthly-yearly;
+ const percent=yearlyAtMonthly>0?Math.round(100*saving/yearlyAtMonthly):0;
+ const discount=saving>0?` <em>${tr(`省 US$${saving}`,`Save US$${saving}`,`US$${saving} 절약`)}</em>`:'';
+ return `<div class="shop-subscriptions"><div class="subscription-head"><div><span class="subscription-title">${tr('4G 服務方案（必選）','4G plan required','4G 요금제 (필수)')}</span><small>${tr('遠端定位需有效訂閱及網路覆蓋。','Remote GPS requires an active plan and coverage.','원격 GPS에는 구독과 통신망이 필요합니다.')}</small></div></div>
+ <div class="subscription-options"><button class="subscription-option ${plan==='monthly'?'active':''}" data-action="shop-plan" data-plan="monthly"><span class="radio-mark"></span><div><b>${tr('月繳','Monthly','월간')}</b><small>US$${monthly} / ${tr('月','month','월')}</small></div></button><button class="subscription-option ${plan==='yearly'?'active':''}" data-action="shop-plan" data-plan="yearly"><span class="radio-mark"></span><div><b>${tr('年繳','Annual','연간')}</b><small>US$${yearly} / ${tr('年','year','년')}${discount}</small></div></button></div>
+ <details class="dp1057-plan-math"><summary>${tr('查看費用比較','Compare plan costs','요금 비교')} <span aria-hidden="true">›</span></summary><p>${tr(`月繳一年合計 US$${yearlyAtMonthly}；年繳 US$${yearly}，平均約 US$${(yearly/12).toFixed(2)}／月${saving>0?`，節省 ${percent}%`:''}。`,`Monthly totals US$${yearlyAtMonthly} per year. Annual costs US$${yearly} (~US$${(yearly/12).toFixed(2)}/month)${saving>0?`, saving ${percent}%`:''}.`,`월간 1년 US$${yearlyAtMonthly}, 연간 US$${yearly} (월 약 US$${(yearly/12).toFixed(2)})${saving>0?`, ${percent}% 절약`:''}.`)}</p></details></div>`;
+}
+function storeFullPage(){
+ const checkout=state.detail==='store-checkout',paying=state.detail==='store-payment',success=state.detail==='store-success';
+ return `<div class="app-pad dp-store-page"><header class="dp-store-page-head"><button type="button" class="dp-store-back" data-action="${success?'shop-finish':paying?'shop-payment-back':checkout?'shop-back':'shop-close'}" aria-label="${tr('返回','Back','뒤로')}">←</button><div><span class="dp-store-eyebrow">DEEPPET / OFFICIAL STORE</span><h1>${success?tr('訂單已建立','Order complete','주문 완료'):paying?tr('選擇付款方式','Payment method','결제 방식 선택'):checkout?tr('確認選購內容','Review your order','주문 확인'):tr('DeepPet 商城','DeepPet Store','DeepPet 스토어')}</h1></div></header>${success?dpShopSuccess():paying?dpPaymentPage():checkout?shopCheckout():shopView()}</div>`;
+}
+// Shop communication/spec comparison. These are proposed hardware targets, not SDK-verified measurements.
+function dpShopL(zh,en,ko,ja){return state.lang==='ja'?ja:label3(zh,en,ko);}
+function dpShopFeature(kind){
+ const bt=kind==='bt';
+ const items=bt?[
+  ['feather',dpShopL('健康監測 · 不含定位','Health monitoring · no GPS','건강 측정 · GPS 없음','健康モニタリング・GPSなし')],
+  ['battery',dpShopL('續航目標超過 5 天','Target battery life · over 5 days','배터리 목표 · 5일 초과','電池目標・5日超')],
+  ['database',dpShopL('手機靠近時同步','Sync near your phone','휴대폰 가까이서 동기화','スマホの近くで同期')]
+ ]:[
+  ['signal',dpShopL('健康＋GPS 遠端定位','Health + remote GPS','건강 + 원격 GPS','健康＋遠隔GPS')],
+  ['battery',dpShopL('續航目標 2–3 天','Target battery life · 2–3 days','배터리 목표 · 2~3일','電池目標・2〜3日')],
+  ['database',dpShopL('支援 4G／eSIM','4G / eSIM connectivity','4G / eSIM 연결','4G・eSIM対応')]
+ ];
+ return `<span class="dp-shop-feature-list">${items.map(([key,label])=>`<span class="dp-shop-feature-row"><span class="dp-shop-feature-icon" aria-hidden="true">${key==='feather'?'✧':key==='battery'?'◷':key==='database'?'▣':'⌁'}</span><span>${label}</span></span>`).join('')}</span>`;
+}
+function dpShopUseConditions(kind){
+ return kind==='bt'?dpShopL('手機靠近並連線時可同步健康資料。未連線時是否能保存歷史紀錄，仍待工廠 SDK 驗證。','Health data syncs when the phone is nearby and connected. Offline history storage still requires SDK verification.','휴대폰이 가까이 연결되면 건강 정보가 동기화됩니다. 오프라인 기록 저장은 SDK 확인이 필요합니다.','スマホが近くで接続中にデータを同期します。未接続時の履歴保存はSDK検証待ちです。'):
+ dpShopL('遠端定位須有效訂閱及當地 4G／eSIM 覆蓋。海外漫遊、訊號中斷後補傳等能力，仍待實機與 SDK 驗證。','Remote GPS needs an active subscription and supported 4G/eSIM coverage. Roaming and offline backfill need hardware/SDK testing.','원격 GPS는 구독 및 4G/eSIM 통신망이 필요합니다. 로밍과 오프라인 재전송은 실기기 확인이 필요합니다.','遠隔GPSには有効な契約と対応する4G/eSIMが必要です。ローミング・圏外後の再送信は実機検証待ちです。');
+}
+function shopView(){
+ const selected=state.shopSelection==='4g'?'4g':'bt',plan=state.shopPlan==='monthly'?'monthly':'yearly';
+ const item=SHOP.find(x=>x.key===selected);const due=item.price+(selected==='4g'?shopPlanValue(plan):0);
+ const sum=cartSummary();
+ return `<div class="store-v37">
+   <div class="store-v37-heading"><h3>${tr('選擇你的 DeepPet','Choose your DeepPet','DeepPet 선택')}</h3><p>${tr('兩款均提供心率、呼吸、活動與睡眠健康監測。選擇 4G 後再決定流量方案。','Both models monitor heart rate, breathing, activity and sleep. Select 4G to choose a connectivity plan.','두 모델 모두 심박수, 호흡, 활동 및 수면을 모니터링합니다. 4G 선택 후 요금제를 고르세요.')}</p></div>
+   <div class="shop-v37-grid">${SHOP.map(x=>`<button type="button" class="shop-v37-option ${selected===x.key?'selected':''}" data-action="shop-select-product" data-type="${x.key}" aria-pressed="${selected===x.key}">
+     <span class="shop-v37-select-badge">${selected===x.key?'✓':tr('選擇','Select','선택')}</span>
+     <span class="shop-v37-img"><img src="${esc(x.img)}" alt="${esc(x.name)}"/></span>
+     <span class="shop-v37-model">${x.key==='bt'?'Bluetooth':'4G + GPS'}</span>
+     <span class="shop-v37-use">${x.key==='bt'?tr('健康監測＋藍牙近距離同步','Health monitoring + nearby Bluetooth sync','건강 측정 + 블루투스 근거리 동기화'):tr('健康監測＋遠端連線、定位與電子圍欄','Health monitoring + remote GPS & geofence','건강 측정 + 원격 위치 및 지오펜스')}</span>
+     ${dpShopFeature(x.key)}
+     <span class="shop-v37-price">US$${x.price}</span>
+     <span class="shop-v37-meta">${x.key==='bt'?tr('無訂閱費','No subscription','구독료 없음'):tr('另需 4G 服務方案','4G plan required','4G 요금제 필수')}</span>
+   </button>`).join('')}</div>
+   <details class="dp1057-shop-conditions"><summary>${dpShopL('使用條件與規格說明','Conditions & specifications','사용 조건 및 사양','利用条件と仕様')}<span aria-hidden="true">›</span></summary><p>${dpShopUseConditions(selected)}</p><p>${dpShopL('續航為設計目標，實際時間會受訊號、上傳頻率與使用情況影響，須以最終硬體測試為準。','Battery life is a design target. Actual duration depends on signal and use, pending final testing.','배터리 시간은 목표치이며 신호와 사용 환경에 따라 달라집니다. 최종 실기기 확인이 필요합니다.','電池寿命は設計目標であり、電波・使用条件に左右されます。実機での確認が必要です。')}</p></details>
+   <div class="shop-v37-plan-container">${selected==='4g'?`<div class="shop-v37-plan-heading">${tr('選擇 4G 服務方案','Choose 4G service plan','4G 요금제 선택')}</div>${planPicker()}`:`<div class="shop-v37-no-plan">${tr('Bluetooth 健康版不需要月費或年費。','Bluetooth health edition has no monthly or annual fee.','블루투스 건강형은 월간 또는 연간 요금이 없습니다.')}</div>`}</div>
+   <div class="shop-v37-checkout"><div class="shop-v37-item-title"><span>${tr('目前選擇','Current selection','현재 선택')}</span><b>${item.name}</b></div>
+   <div class="shop-v37-cost"><span>${tr('項圈售價','Collar price','목걸이 가격')}</span><span>US$${item.price}</span></div>
+   ${selected==='4g'?`<div class="shop-v37-cost"><span>${plan==='monthly'?tr('4G 首月費用','4G first month','4G 첫 달'):tr('4G 首年費用','4G first year','4G 첫해')}</span><span>US$${shopPlanValue(plan)}</span></div>`:''}
+   <div class="shop-v37-live-total"><div><span>${tr('本次預估合計','Estimated total today','예상 결제 합계')}</span><small>${selected==='4g'?(plan==='monthly'?tr('之後 US$5／月','Then US$5/month','이후 매월 US$5'):tr('之後 US$49／年','Then US$49/year','이후 매년 US$49')):tr('一次性購買','One-time purchase','1회 구매')}</small></div><strong aria-live="polite">US$${due}</strong></div>
+   <button class="shop-v37-add" data-action="shop-add" data-type="${selected}">${tr('加入購物車','Add to cart','장바구니 담기')}</button></div>
+   <div class="shop-cart shop-v37-cart"><div class="row spread"><span>${tr('購物車','Cart','장바구니')} · ${sum.items.length}</span><span class="subtitle">USD</span></div>
+   ${sum.items.map(it=>{const x=DP_DEVICE_CATALOG[it.kind];return `<div class="cart-line"><span>${x.name}${it.kind==='4g'?`<small>${shopPlanName(it.plan)}</small>`:''}</span><div class="row gap8"><span>US$${x.price+(it.kind==='4g'?shopPlanValue(it.plan):0)}</span><button data-action="shop-remove" data-index="${it.sourceIndex}" aria-label="Remove">×</button></div></div>`}).join('')||`<p>${tr('購物車目前沒有商品','Your cart is empty','장바구니가 비어 있어요')}</p>`}
+   ${sum.items.length?`<div class="cart-total"><span>${tr('購物車預估合計','Cart total','장바구니 합계')}</span><strong>US$${sum.now}</strong></div>${button(tr('查看訂單預覽','Review order','주문 확인'),'shop-checkout','cta full')}`:''}
+   <p class="notices">${tr('此為商城互動展示，不會實際扣款或建立訂單。','Store preview only; no payment or order is placed.','스토어 미리보기이며 실제 결제나 주문은 진행되지 않습니다.')}</p></div>
+ </div>`;
+}
+function shopCheckout(){const sum=cartSummary();return `<div class="order-review"><h3>${tr('訂單預覽','Order preview','주문 미리보기')}</h3>${sum.items.map(item=>{const x=SHOP.find(z=>z.key===item.kind);return `<div class="cart-line"><span>${x.name}${item.kind==='4g'?`<small>${shopPlanName(item.plan)}</small>`:''}</span><span>US$${x.price}</span></div>`}).join('')}<div class="cart-line"><span>${tr('項圈硬體','Hardware','기기')}</span><span>US$${sum.hardware}</span></div>${sum.annual?`<div class="cart-line"><span>${tr('4G 年繳服務（首年）','4G annual plans (first year)','4G 연간 요금제 (첫해)')}</span><span>US$${sum.annual}</span></div>`:''}${sum.monthly?`<div class="cart-line"><span>${tr('4G 月繳服務（首月）','4G monthly plans (first month)','4G 월간 요금제 (첫 달)')}</span><span>US$${sum.monthly}</span></div>`:''}<div class="cart-total"><span>${tr('本次合計','Initial total','합계')}</span><strong>US$${sum.now}</strong></div><p class="notices">${tr('4G 功能需要有效訂閱。月繳每月續費 US$5；年繳每年續費 US$49。本頁不會扣款。','4G features require an active plan. Monthly renews at US$5/month; annual renews at US$49/year. No payment occurs here.','4G 기능은 유효한 요금제가 필요해요. 월간 US$5/월, 연간 US$49/년으로 갱신되며 지금 결제되지 않습니다.')}</p>${button(tr('確認訂單，選擇付款方式','Confirm & choose payment','주문 확인 및 결제 방식 선택'),'shop-continue-payment','cta full')}<button class="care-outline dp-shop-secondary" data-action="shop-back">${tr('返回商城','Back to store','스토어로 돌아가기')}</button></div>`;}
+function dpPaymentPage(){const sum=cartSummary(),methods=[['visa','Visa'],['mastercard','Mastercard'],['applepay','Apple Pay'],['paypal','PayPal'],['alipay','Alipay'],['wechat','WeChat Pay']];return `<div class="dp-payment-view"><section class="card"><h2>${tr('選擇付款方式','Choose payment method','결제 수단 선택')}</h2><p>${tr('以下為不會扣款的互動結帳模擬；不需輸入真實卡號。','Interactive checkout simulation only. No real charge or card details required.','실제 결제 없이 진행되는 체험입니다. 카드 번호가 필요하지 않습니다.')}</p><div class="dp-pay-methods">${methods.map(([id,name])=>`<button class="dp-pay-method ${state.checkoutMethod===id?'active':''}" data-action="shop-pay-method" data-method="${id}" aria-pressed="${state.checkoutMethod===id}"><span class="dp-pay-branded"><span class="dp-pay-icon dp-pay-${id}">${({visa:'V',mastercard:'●●',applepay:'●',paypal:'P',alipay:'支',wechat:'微'})[id]}</span>${name}</span><span>${state.checkoutMethod===id?'●':'○'}</span></button>`).join('')}</div></section><section class="card"><h3>${tr('收件資料','Delivery details','배송 정보')}</h3><label>${tr('收件人姓名','Recipient name','수령인 이름')} <input class="form-control" id="checkoutRecipient" maxlength="70" value="${esc(state.checkoutForm?.name||'')}"/></label><label>${tr('電子郵件','Email','이메일')} <input class="form-control" type="email" id="checkoutEmail" maxlength="100" value="${esc(state.checkoutForm?.email||'')}"/></label><label>${tr('電話號碼','Phone number','전화번호')} <input class="form-control" id="checkoutPhone" type="tel" value="${esc(state.checkoutForm?.phone||'')}" required/></label><label>${tr('國家或地區','Country / region','국가 / 지역')} <select class="form-control" id="checkoutCountry"><option value="">${tr('選擇國家','Select country','국가 선택')}</option>${['Singapore','Taiwan','United States','South Korea','Japan','China','Other'].map(c=>`<option value="${c}" ${state.checkoutForm?.country===c?'selected':''}>${c}</option>`).join('')}</select></label><label>${tr('城市','City','도시')} <input class="form-control" id="checkoutCity" value="${esc(state.checkoutForm?.city||'')}" required/></label><label>${tr('州／省／地區','State / province / region','주 / 도 / 지역')} <input class="form-control" id="checkoutRegion" value="${esc(state.checkoutForm?.region||'')}"/></label><label>${tr('郵遞區號','Postal code','우편번호')} <input class="form-control" id="checkoutPostal" value="${esc(state.checkoutForm?.postal||'')}"/></label><label>${tr('送貨地址','Delivery address','배송 주소')} <textarea class="form-control" id="checkoutAddress" maxlength="250">${esc(state.checkoutForm?.address||'')}</textarea></label><label>${tr('公寓、樓層、門牌補充','Apartment, unit or building (optional)','아파트 / 호실 (선택)')} <input class="form-control" id="checkoutAddress2" maxlength="150" value="${esc(state.checkoutForm?.address2||'')}"/></label><p class="notices">${tr('請核對收件資料；本頁不建立真實訂單，也不收集卡號。','Verify delivery details. No real order is placed and no card number is collected.','배송 정보를 확인하세요. 실제 주문이나 카드 번호를 수집하지 않습니다.')}</p></section><section class="card dp-pay-total"><div class="row spread"><span>${tr('本次合計','Order total','주문 합계')}</span><strong>US$${sum.now}</strong></div><button class="cta full" data-action="shop-submit-payment">${tr('確認模擬付款','Confirm simulated payment','모의 결제 확인')}</button></section></div>`;}
+function dpShopSuccess(){const order=state.checkoutOrder;return `<div class="dp-order-success"><div class="dp-order-check">✓</div><h2>${tr('模擬付款完成','Demo payment complete','모의 결제 완료')}</h2><p>${tr('這是展示訂單，沒有實際扣款或寄送。','This is a preview order. No payment was charged or shipment arranged.','체험 주문입니다. 실제 결제와 배송은 진행되지 않습니다.')}</p><section class="card"><strong>${tr('訂單編號','Order reference','주문 번호')} · ${esc(order?.id||'DP-DEMO')}</strong><p>${tr('付款方式','Payment method','결제 방식')}：${esc(order?.method||'—')}</p><p>${tr('合計','Total','합계')}：US$${order?.total||0}</p></section><button class="cta full" data-action="shop-finish">${tr('返回我的頁面','Return to Me','마이 페이지로')}</button></div>`;}
+function shopIllustrationSVG(){return `<svg class="store-art-svg" viewBox="0 0 116 98" role="img" aria-label="DeepPet Store"><defs><linearGradient id="storeRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8779ed"/><stop offset="1" stop-color="#bd9efa"/></linearGradient><linearGradient id="storeGlass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e7f9ff"/><stop offset="1" stop-color="#c4dff5"/></linearGradient></defs><rect x="10" y="27" width="96" height="65" rx="12" fill="#ffffff" stroke="#cfc1f2" stroke-width="2"/><rect x="23" y="52" width="70" height="33" rx="7" fill="url(#storeGlass)"/><rect x="52" y="52" width="3" height="33" fill="#b5a1ed"/><path d="M15 35 27 10h63l12 25Z" fill="url(#storeRoof)"/><path d="M15 35h87v10q-3 9-13 6-9 7-18 0-9 7-18 0-9 7-19 0-9 7-19-2Z" fill="#a89af5"/><path d="M15 35h17v16q-9 7-17-2Zm35 0h18v16q-9 7-18 0Zm35 0h17v14q-8 9-17 2Z" fill="#f5d0e2"/><path d="M66 68q-2-6-7-3-4 2-1 7 3 3 8-1m7-1q2-6 6-2 4 4-2 8l-8 1-7 1" stroke="#8a65c5" fill="none" stroke-width="3" stroke-linecap="round"/><circle cx="43" cy="67" r="4" fill="#a081e4"/><circle cx="34" cy="70" r="3" fill="#a081e4"/><path d="M41 76q-7-9-12-2-2 6 7 7h10q9-2 3-8-4-4-8 3Z" fill="#a081e4"/><path d="M5 91h106" stroke="#c8bbf6" stroke-width="3" stroke-linecap="round"/></svg>`}
+
+function dpDeviceSignalText(){
+ const liveStatus=globalThis.DeepPetWear926?.statusFor?.();
+ if(liveStatus==='zero_signal_refit'||liveStatus==='possible_loose_collar')return label3('心搏與呼吸訊號同時歸零／急降，請重新佩戴項圈並檢查感測接觸。','Both signals fell to zero/near zero. Re-fit the collar and check sensor contact.','심박·호흡 신호가 동시에 0에 가까워졌습니다. 목걸이를 다시 착용하고 접촉을 확인하세요.');
+ return state.connected?label3('佩戴與波形品質：待接入工廠 SDK 驗證','Collar fit and waveform quality: pending factory SDK validation','착용·파형 품질: 제조사 SDK 연동 후 확인'):label3('尚未配對項圈','No paired collar','연결된 목걸이가 없습니다');
+}
+function dpDeviceSignalAssistant(){
+ const status=globalThis.DeepPetWear926?.statusFor?.(),refit=status==='zero_signal_refit'||status==='possible_loose_collar';
+ const explanation=refit?label3('兩路歸零屬於訊號品質問題，不代表心跳或呼吸停止，也不是健康零分。重新佩戴、確認貼合與連接，等待正常波形恢復後再量測。','Dual zero signals indicate unavailable sensor data, not stopped breathing or a zero health score. Re-fit the collar, check contact and connection, then retry after signals return.','두 신호가 0이면 센서 신호를 사용할 수 없는 상태이지 심정지나 0점이 아닙니다. 다시 착용하고 신호가 돌아오면 재측정하세요.'):
+  label3('連線成功只代表可以傳輸資料，不等於波形品質良好。未來需依工廠 SDK 的有效心搏比例、波峰清晰度、安靜狀態的連續波形品質及活動干擾共同評估；只有連續多段安靜時訊號不良，才提示人工檢查項圈貼合。單靠 BCG 波形不能證明項圈鬆動。現階段不顯示模擬的正常／異常情境與偽測量數值。','Connection confirms data transfer, not good waveforms. The future factory SDK must validate usable beat intervals, waveform peaks, quiet-window consistency and movement artefacts. Repeated poor quiet recordings may warrant a manual fit check; BCG alone cannot prove looseness. No simulated pass/fail scenarios or fabricated readings are shown.','연결 성공은 데이터 전송을 뜻할 뿐 파형 품질을 보장하지 않습니다. 제조사 SDK에서 유효 심박 간격, 파형 피크, 안정 시 연속성, 움직임 간섭을 검증해야 합니다. 안정 시 품질 저하가 반복될 때만 착용을 직접 확인하도록 안내합니다. BCG만으로 느슨함을 확정할 수 없습니다. 현재 가상 정상/오류 측정값은 표시하지 않습니다.');
+ return `<section class="dp-signal-assistant"><div class="dp-signal-head"><div><h3>${label3('佩戴與信號品質','Collar fit & signal quality','착용·신호 품질')}</h3><p>${dpDeviceSignalText()}</p></div><span class="dp-signal-status ${refit?'dp105-refit':''}">${refit?label3('請重新佩戴','Re-fit collar','다시 착용'):label3('待驗證','Pending','확인 필요')}</span></div><p class="dp-signal-explain">${explanation}</p></section>`;
+}
+
+function deviceCenter(){return `<section class="card device-center"><div class="device-center-top"><button type="button" class="dp-device-open" data-action="device-detail" aria-label="${tr('查看設備資料','Device information','기기 정보')}">${dpDevicePhoto()}</button><button type="button" class="grow dp-device-identity" data-action="device-detail"><b>${state.connected?tr('目前已配對的項圈','Paired collar','현재 페어링된 목걸이'):tr('我的設備','My device','내 기기')}</b><strong>${devName()}</strong><small>${state.connected?`${state.deviceType==='4g'?'4G LTE':'Bluetooth LE'} · ${tr('已配對','Paired','연결됨')}`:tr('搜尋附近項圈並完成配對','Search nearby and pair a collar','주변 목걸이를 찾아 연결하세요')}</small></button><span class="pill ${state.connected?'ok':'purple'}">${state.connected?tr('已配對','Paired','연결됨'):tr('未連線','Not paired','연결 안 됨')}</span></div><div class="device-center-actions">${button(tr('配對項圈','Pair collar','목걸이 연결'),'device-find','cta full')}</div></section>`;}
+function wizardTitle(){return state.pairType==='4g'?'4G + GPS':state.pairType==='bt'?'Bluetooth':tr('選擇搜尋方式','Choose a connection type','연결 방식 선택')}
+let dpVerifiedScan=[],dpScanRequest=0,dpPairCommitRequest=0;
+function dpPairSearchResults(){
+ const type=state.pairType||'bt';
+ if(dpVerifiedScan.type===type&&dpVerifiedScan.petIndex===state.dog&&dpVerifiedScan.petEpoch===state.dpPetEpoch&&Array.isArray(dpVerifiedScan.items))return dpVerifiedScan.items;
+ // No factory BLE/4G adapter connected: show no devices. Never counterfeit
+ // a scan result or silently authorize a demo device.
+ return [];
+}
+function wizardView(){let stage=state.pairStage||0,t=state.pairType;
+ if(stage===5)return `<div class="wizard-head dp-no4g"><span class="radar-circle">${vicon('device',32)}</span><h3>${tr('沒有找到可配對的4G項圈','No eligible 4G collar found','연결 가능한 4G 목걸이가 없어요')}</h3><p>${tr('如果已購買，請確認項圈已開機、eSIM啟用與裝置序號；也可以重新搜尋。尚未購買則可前往DeepPet商城。','If you already own one, check power, eSIM activation and device ID, then retry. If you do not own one, browse the DeepPet store.','이미 구매했다면 전원·eSIM·기기 ID를 확인하고 다시 시도하세요. 아직 없다면 스토어를 방문하세요.')}</p></div><div class="dp-pair-no-results-actions"><button class="cta secondary full" data-action="pair-retry">${tr('重新搜尋4G項圈','Retry 4G pairing','4G 다시 검색')}</button><button class="cta full" data-action="pair-buy-4g">${tr('前往商城查看4G項圈','View 4G collar in store','스토어에서 4G 보기')}</button></div>`;
+
+ if(stage===0)return `<div class="wizard-head"><span class="radar-circle">${vicon('device',32)}</span><h3>${tr('選擇要搜尋的項圈類型','Choose collar type to find','검색할 목걸이 종류 선택')}</h3><p>${tr('選擇後才開始搜尋。搜尋結果不會改變目前裝置，只有完成配對後才會切換。','A search never changes your active collar; only successful pairing does.','검색해도 현재 기기가 바뀌지 않으며 연결 완료 후에만 전환됩니다.')}</p></div><div class="pair-type-grid"><button class="${state.pairType==='bt'?'selected':''}" aria-pressed="${state.pairType==='bt'}" data-action="pair-method" data-type="bt"><img src="${COLLARS.bt}"/><b>Bluetooth</b><small>${tr('藍牙近距離搜尋','Nearby Bluetooth scan','주변 블루투스 검색')}</small></button><button class="${state.pairType==='4g'?'selected':''}" aria-pressed="${state.pairType==='4g'}" data-action="pair-method" data-type="4g"><img src="${COLLARS.g4}"/><b>4G + GPS</b><small>${tr('4G 裝置碼／雲端綁定','4G device ID / cloud binding','4G 기기 ID / 클라우드 연결')}</small></button></div><button class="cta full pair-start-search" data-action="pair-scan" ${!state.pairType?'disabled':''}>${tr('開始搜尋選定項圈','Search selected collar','선택한 목걸이 검색')}</button>`;
+ if(stage===1){const results=dpPairSearchResults(),missing=results.length===0;
+ return `<div class="wizard-head"><div class="pair-type-label">${wizardTitle()}</div><div class="radar-circle ${window.__dpPairScanVisualBusy?'radar-moving':''}">${vicon('device',32)}</div><h3>${window.__dpPairScanVisualBusy?(t==='bt'?tr('正在搜尋附近藍牙項圈','Searching nearby Bluetooth collars…','주변 블루투스 검색 중'):tr('正在查詢 4G 設備身分','Checking 4G device identity…','4G 기기 ID 확인 중')):missing?tr('尚未找到可配對項圈','No eligible collar found','연결 가능한 목걸이 없음'):tr('已找到可配對項圈','Available collars found','연결 가능한 목걸이 발견')}</h3><p>${t==='bt'?tr('請開啟手機藍牙、打開項圈電源並靠近裝置。','Turn on Bluetooth and power on your nearby collar.','블루투스와 목걸이 전원을 켜 주세요.'):tr('4G 項圈以 eSIM／設備 ID 和雲端身份驗證查詢；不是只靠附近 4G 訊號掃描。','4G enrollment uses device ID/eSIM and cloud verification, not proximity scanning over cellular.','4G는 기기 ID/eSIM과 클라우드 인증을 사용합니다.')}</p></div><div class="scan-result-title">${tr('搜尋結果','Devices found','검색 결과')} <span>${results.length}</span></div><div class="found-devices">${results.length?results.map((d,i)=>`<button class="found-device" data-action="pair-pick-device" data-id="${esc(d.id)}"><span class="signal-icon">${vicon('device',20)}</span><div class="grow"><b>${esc(d.name)}</b><small>${esc(d.id)} · ${esc(d.signal||'')}</small></div>${vicon('chev',18)}</button>`).join(''):`<div class="dp-pair-zero-results"><p>${tr('目前沒有找到可以綁定的項圈。請確認已購買的項圈已啟動並輸入正確設備資訊。','No eligible collar found. Check that the device is active and linked to your account.','연결 가능한 목걸이가 없습니다. 기기 활성화와 계정을 확인하세요.')}</p>${t==='4g'?button(tr('找不到4G項圈？','No 4G collar found?','4G 목걸이를 찾지 못했나요?'),'pair-none-found','cta secondary full'):''}</div>`}</div>${button(tr('返回選擇類型','Choose another type','다른 종류 선택'),'pair-back-types','cta secondary full')}`;}
+ if(stage===2)return `<div class="wizard-head"><span class="radar-circle">${vicon('shield',32)}</span><h3>${tr('確認要配對的項圈','Confirm the collar','연결할 목걸이 확인')}</h3><p>${t==='bt'?tr('使用藍牙與指定項圈建立連線。','Establish a Bluetooth connection to this collar.','이 목걸이와 블루투스로 연결합니다.'):tr('使用 4G 裝置 ID 與雲端服務完成綁定。','Bind this 4G device ID through cloud authorization.','4G 기기 ID를 클라우드로 인증해 연결합니다.')}</p></div><div class="pair-picked"><img src="${t==='4g'?COLLARS.g4:COLLARS.bt}"/><div><b>${t==='4g'?'DeepPet 4G + GPS':'DeepPet Bluetooth'}</b><small>${state.pairSelected}</small></div></div><div class="row gap8">${button(tr('開始配對','Pair now','연결 시작'),'pair-commit','cta full')}${button(tr('返回','Back','뒤로'),'pair-back-results','cta secondary')}</div>`;
+ return `<div class="wizard-head"><div class="radar-circle radar-moving">${vicon('activity',32)}</div><h3>${tr('正在驗證並配對…','Verifying and pairing…','인증 및 연결 중…')}</h3><p>${state.pairSelected}</p><div class="pair-progress"><i></i></div></div>`;
+}
+
+// V7.8: messages and unread state are isolated by the currently selected pet.
+// This browser-only conversation simulator is not a real messaging backend.
+function dpChatStore(){
+ state.gardenMessagesByPet??={};
+ const key=String(state.dog);
+ if(!state.dpChatMigrated78){
+  const old=state.gardenMessages||{};
+  if(Object.keys(old).length&&!state.gardenMessagesByPet[key])state.gardenMessagesByPet[key]=old;
+  state.dpChatMigrated78=true;
+ }
+ const store=state.gardenMessagesByPet[key]??={};
+ state.dpChatShowcaseSeeded??={};
+ if(state.dog<dogs.length&&!selectedBlank()&&!state.dpChatShowcaseSeeded[key]){
+  // Preloaded, clearly labeled showcase messages only for built-in demo pets.
+  if(!Object.keys(store).length){
+   const contact=state.dog===0||state.dog===2?'luna':'coco';
+   store[contact]=[{id:'intro-'+key,from:'other',demoKey:'welcome',date:iso(localDate()),time:'09:32',read:false,demo:true},
+                   {id:'invite-'+key,from:'other',demoKey:'walk',date:iso(localDate()),time:'09:34',read:false,demo:true}];
+  }
+  state.dpChatShowcaseSeeded[key]=true;
+ }
+ // One-time migration: old showcase messages without a date are dated on upgrade only.
+ state.dpV812ChatMigrated??={};if(!state.dpV812ChatMigrated[key]){for(const arr of Object.values(store))for(const msg of (Array.isArray(arr)?arr:[]))if(msg?.demo&&!msg.date)msg.date=iso(localDate());state.dpV812ChatMigrated[key]=true;}
+ return store;
+}
+function dpChatList(id){const store=dpChatStore();return store[String(id)]??=[]}
+function dpChatMessageText(m){
+ if(typeof m==='string')return m;
+ if(m.demoKey==='welcome')return tr('嗨！我們也在附近，想認識一下嗎？','Hi! We are nearby. Would you like to say hello?','안녕하세요! 저희도 근처에 있어요. 인사할까요?');
+ if(m.demoKey==='walk')return tr('今天傍晚會去散步，你們平常都在哪裡玩？','We are going for a walk this evening. Where do you usually play?','오늘 저녁 산책 갈 거예요. 주로 어디서 놀아요?');
+ if(m?.type==='image')return tr('📷 圖片','📷 Photo','📷 사진');
+  if(m?.type==='audio')return tr('🎤 語音訊息','🎤 Voice message','🎤 음성 메시지');
+ return String(m.text||'');
+}
+function dpUnreadCount(){return dpPendingToMe().length+Object.values(dpChatStore()).reduce((sum,arr)=>sum+(Array.isArray(arr)?arr.filter(m=>m&&typeof m==='object'&&m.from==='other'&&!m.read).length:0),0)}
+function dpThreadUnread(id){return dpChatList(id).filter(m=>m&&typeof m==='object'&&m.from==='other'&&!m.read).length}
+function dpMarkThreadRead(id){return dpRootCommit(['gardenMessagesByPet','dpChatShowcaseSeeded','dpChatMigrated78','dpV812ChatMigrated'],()=>{
+ for(const m of dpChatList(id))if(m&&typeof m==='object'&&m.from==='other')m.read=true;
+});}
+function dpOpenChat(id){
+ if(!id)return;
+ if(!dpFriendAuthorizedForThread(id)){
+  const p=dpPetFromChatKey(id);
+  if(p)dpOpenPublicPet(dpPublicPetData(p));
+  else toast(label3('需先加好友並取得對方同意才能聊天','You need to be approved friends before chatting','친구 승인 후에만 채팅할 수 있습니다'));
+  return;
+ }
+ dpStopChatVoice();
+ state.chatWith=String(id);state.chatPerspective='me';
+ dpMarkThreadRead(id);state.tab='me';state.detail='chat';state.modal='';render(true);
+}
+function dpFlagDot(label){return `<span class="dp-unread-dot" aria-label="${esc(label||tr('有新提醒','New alert','새 알림'))}" title="${esc(label||tr('有新提醒','New alert','새 알림'))}"></span>`}
+function dpDeepFlags(){
+ if(selectedBlank()||isFreePet()||!signalQuality().valid)return [];
+ const categories=dpTodayUnifiedScores();
+ return [categories.heart,categories.sleep,categories.energyActivity].flatMap((score,i)=>score!==null&&score!==undefined&&Number.isFinite(Number(score))&&Number(score)<90?[i]:[]);
+}
+function dpDueCount(){return dpTodayCareItems().length}
+
+function gardenMapIllustration(){return `<div class="map-stage"><svg class="street-map" viewBox="0 0 390 405" preserveAspectRatio="none" aria-label="${tr('模擬社區街道地圖','Illustrative neighborhood street map','예시 동네 거리 지도')}"><rect width="390" height="405" fill="#eaf1ed"/><path d="M0 2H390V405H0Z" fill="#f2f5ef"/><path d="M-10 138C90 90 166 160 242 108S364 80 410 118" fill="none" stroke="#fff" stroke-width="33"/><path d="M-10 138C90 90 166 160 242 108S364 80 410 118" fill="none" stroke="#d5ddd8" stroke-width="2"/><path d="M88-10C100 86 68 170 140 215S175 330 148 422" fill="none" stroke="#fff" stroke-width="30"/><path d="M88-10C100 86 68 170 140 215S175 330 148 422" fill="none" stroke="#d5ddd8" stroke-width="2"/><path d="M322-20C298 74 328 155 276 222S290 330 300 425" fill="none" stroke="#fff" stroke-width="26"/><path d="M322-20C298 74 328 155 276 222S290 330 300 425" fill="none" stroke="#d5ddd8" stroke-width="2"/><path d="M-30 315Q116 263 218 317T420 285" fill="none" stroke="#fff" stroke-width="27"/><path d="M-30 315Q116 263 218 317T420 285" fill="none" stroke="#d5ddd8" stroke-width="2"/><path d="M5 25Q70 50 81 5L145 20L130 95L35 96Z" fill="#cfe8d1"/><path d="M192 180Q270 134 303 202Q331 267 260 271Q200 278 174 225Z" fill="#b8e0c0"/><path d="M-20 365Q75 325 126 402L0 440Z" fill="#d0e8f2"/><path d="M355 -20Q335 69 390 107V0Z" fill="#c7e7f0"/><path d="M17 166h58v58H17zM192 18h75v53h-75zM175 349h70v38h-70zM328 328h55v45h-55z" fill="#e4e5dd" rx="8"/><path d="M13 244h61v52H13zM240 35h41v40h-41z" fill="#e3e7dd"/><g fill="#889e89" font-family="Arial,sans-serif" font-size="12" font-weight="700"><text x="22" y="68">Paw Park</text><text x="196" y="234">Green Square</text><text x="176" y="375">Pet Lane</text></g><g fill="#9ca7aa" font-size="10" font-family="Arial,sans-serif"><text x="159" y="112" transform="rotate(-9 159 112)">Central Avenue</text><text x="88" y="298" transform="rotate(-14 88 298)">South Walk</text><text x="330" y="193" transform="rotate(-77 330 193)">Garden Road</text></g></svg>${nearbyPets().map((p,i)=>`<button class="garden-map-pin ${state.gardenSelected===p.id?'selected':''}" style="left:${[22,66,44,76,30,55,13,84,41,62][i]}%;top:${[22,19,38,35,56,66,79,75,83,53][i]}%" data-action="garden-select-pet" data-id="${p.id}"><img src="${esc(p.photo)}" alt="${esc(p.name)}"/><span>${p.km} km</span></button>`).join('')}<span class="you-map-pin">●<small>${tr('我','Me','나')}</small></span><span class="map-watermark">${tr('示意地圖 · 非實際位置','Illustrative map · not real positions','예시 지도 · 실제 위치 아님')}</span></div>`}
+function gardenMember(p){const follow=(state.gardenFollow||[]).includes(p.id);return `<div class="garden-member improved"><button class="garden-member-main" data-action="garden-select-pet" data-id="${p.id}"><img src="${esc(p.photo)}"/><div><b>${esc(p.name)}</b><small>${esc(p.breed)} · ${p.km.toFixed(1)} km</small></div></button><button class="garden-follow ${follow?'following':''}" data-action="garden-follow" data-id="${p.id}">${follow?tr('已關注','Following','팔로잉'):tr('關注','Follow','팔로우')}</button><button class="garden-chat-open" data-action="garden-message" data-id="${p.id}">${vicon('message',16)}${dpThreadUnread(p.id)?dpFlagDot(tr('未讀訊息','Unread message','읽지 않은 메시지')):''}</button></div>`}
+function gardenPetProfile(){const p=nearbyPets().find(x=>x.id===state.gardenSelected);if(!p)return '';const follow=(state.gardenFollow||[]).includes(p.id);return `<div class="garden-selected"><div class="garden-selected-top"><img src="${esc(p.photo)}"/><div class="grow"><b>${esc(p.name)}</b><span>${esc(p.breed)} · ${p.km} km</span></div><button data-action="garden-close-pet">×</button></div><p>${tr('此為虛構寵物的展示檔案；正式版由主人自願公開資料。','Illustrative pet profile; real profiles require owner opt-in.','예시 반려동물 프로필입니다.')}</p><div class="row gap8"><button class="care-outline" data-action="garden-open-profile" data-id="${p.id}">${tr('公開主頁與 ID','Public profile & ID','공개 프로필과 ID')}</button><button class="garden-follow ${follow?'following':''}" data-action="garden-follow" data-id="${p.id}">${follow?tr('已關注 ✓','Following ✓','팔로잉 ✓'):tr('＋ 關注','＋ Follow','＋ 팔로우')}</button>${button(tr('發訊息','Message','메시지'),'garden-open-selected-chat','cta secondary')}</div></div>`}
+function gardenInbox(){
+ const threads=dpChatStore(),keys=Object.keys(threads).filter(k=>(threads[k]||[]).length&&dpFriendAuthorizedForThread(k)),unread=dpUnreadCount();
+ return `<div class="garden-inbox">${dpFriendRequestsContent()}<div class="row spread"><h3>${tr('訊息紀錄','Messages','메시지 기록')}</h3><span class="pill purple">${keys.length}${unread?` · ${unread} ${tr('未讀','unread','안 읽음')}`:''}</span></div>
+ ${keys.length?keys.map(id=>{const p=nearbyPets().find(x=>x.id===id)||dpPetFromChatKey(id),arr=threads[id]||[],last=arr.at(-1),n=dpThreadUnread(id);
+ return `<button class="inbox-row ${n?'dp-inbox-unread':''}" data-action="garden-message" data-id="${esc(id)}"><img src="${esc(p?.photo||dogs[0].photo)}" alt=""/><div class="grow"><b>${esc(p?.name||id)}</b><small>${esc(dpChatMessageText(last))}</small></div>${n?`<span class="dp-unread-count">${n}</span>`:vicon('chev',18)}</button>`}).join(''):
+ `<div class="empty-chat">${vicon('message',32)}<b>${tr('還沒有訊息紀錄','No conversations yet','아직 대화가 없어요')}</b><p>${tr('選擇附近的寵物，送出第一則訊息後可在此查看。','Choose a nearby pet and send a message to start a conversation.','주변 반려동물을 선택하고 메시지를 보내면 여기에 표시됩니다.')}</p></div>`}
+ <p class="dp-chat-demo-note">${tr('這是兩位主人互傳訊息的本機互動預覽，不會傳送給真實用戶。','This simulates both sides of a conversation on this device; no real user receives it.','두 보호자 간 대화의 로컬 미리보기이며 실제 사용자에게 전송되지 않습니다.')}</p></div>`;
+}
+function gardenView(){const hasLocation=(gpsForCurrentPet()&&state.gpsEnabled)||(state.gardenGpsDemo&&state.gardenDemoGpsPet===state.dog),mode=state.gardenMode||'map';return `<div class="garden-overview"><div class="garden-top"><span class="garden-kicker">DeepPet Pet Garden</span><h3>${tr('附近的毛孩，都在這裡相遇','Meet pets nearby','근처 반려동물과 만나보세요')}</h3><p>${tr('地圖與距離均為可互動示例，並不代表真的有人在附近。','Interactive example only: map positions and distances are fictional.','지도와 거리는 가상 예시이며 실제 근처 사용자가 아닙니다.')}</p></div><div class="garden-tabs">${[['map',tr('地圖','Map','지도')],['list',tr('列表','List','목록')],['messages',tr('訊息','Messages','메시지')]].map(([m,label])=>`<button class="${mode===m?'active':''}" data-action="set-garden-mode" data-mode="${m}">${label}${m==='messages'&&dpUnreadCount()?` <span class="dp-tab-unread">${dpUnreadCount()}</span>`:''}</button>`).join('')}</div>${mode==='messages'?gardenInbox():!hasLocation?`<div class="garden-locked">${vicon('shield',29)}<b>${state.connected&&state.deviceType==='4g'?tr('GPS 尚未開啟','GPS is off','GPS 꺼짐'):tr('需要已配對的 4G 項圈','Requires a paired 4G collar','연결된 4G 목걸이 필요')}</b><p>${state.connected&&state.deviceType==='4g'?tr('在「我的」開啟 GPS 後才可查看附近寵物地圖；GPS 會增加耗電。','Turn on GPS in Me to view nearby pets; this increases battery use.','마이 페이지에서 GPS를 켜야 지도 기능을 사용할 수 있으며 배터리 소모가 증가합니다.'):tr('Bluetooth 版沒有 GPS，不提供附近寵物位置。可回到我的設備連線 4G 版本。','Bluetooth has no GPS. Pair a 4G collar in My Device to use nearby pet locations.','블루투스에는 GPS가 없으며 4G 모델을 연결해야 주변 위치를 볼 수 있습니다.')}</p>${gpsForCurrentPet()?button(tr('開啟 GPS 並查看地圖','Enable GPS & view map','GPS 켜고 지도 보기'),'garden-enable-gps','cta full'):button(tr('試用 4G GPS 地圖展示','Try the 4G GPS map demo','4G GPS 지도 체험'),'garden-gps-demo','cta full')}</div>`:`<div class="garden-location-content"><div class="garden-privacy row spread"><div><b>${tr('允許其他主人看到我的大致位置','Allow others to see approximate location','다른 보호자에게 대략적인 위치 공개')}</b><small>${tr('預設關閉；可隨時停止公開','Off by default; can disable anytime','기본 꺼짐 · 언제든 중지 가능')}</small></div><button class="toggle-track ${state.gardenVisible?'on':''}" data-action="toggle-garden-visibility" aria-pressed="${!!state.gardenVisible}"><i></i></button></div><div class="garden-result-head"><b>${tr('附近寵物','Nearby pets','근처 펫')} · 10</b><span>${tr('距離 0.3–4.0 km · 示例','0.3–4.0 km · sample','0.3–4.0km · 예시')}</span></div>${state.gardenGpsDemo&&state.gardenDemoGpsPet===state.dog?`<p class="garden-demo-indicator">${label3('4G 地圖展示 · 未連接真實定位','4G map demo · no live location connected','4G 지도 데모 · 실제 위치 연결 안 됨')}</p>`:''}${mode==='map'?gardenPetProfile():''}${mode==='map'?gardenMapIllustration():`<div class="garden-list">${nearbyPets().map(p=>gardenMember(p)).join('')}</div>`}<p class="notices">${tr('只公開主人同意分享的內容；不會預設公開項圈健康數據或精確家庭地址。','Only owner-approved information should be shared; private health data and exact home addresses stay private.','동의한 정보만 공개하며 건강 데이터나 정확한 집 주소는 공유하지 않습니다.')}</p></div>`}</div>`}
+function gardenPublicProfile(){const p=nearbyPets().find(x=>x.id===state.gardenProfileId);if(!p)return `<p>${label3('未找到公開檔案','Public profile unavailable','공개 프로필이 없습니다')}</p>`; const own=dpPetFromChatKey(p.id);return dpPublicCardContent(own?dpPublicPetData(own):{id:p.publicId,name:p.name,breed:p.breed,age:p.age,weight:0});}
+
+ // The ten illustrative nearby accounts belong to the investor gallery only.
+ // Owner accounts must not interpret those fictitious people/distances as live
+ // discovery, even after they explicitly paired a real 4G collar.
+ const dpGalleryGardenView=gardenView;
+ gardenView=function(){
+  if(!selectedBlank()&&state.dog<dogs.length&&!currentDog().dpFixtureInvalidated)return dpGalleryGardenView();
+  const mode=state.gardenMode||'map';
+  return `<div class="garden-overview dp947-garden-owner"><div class="garden-top"><span class="garden-kicker">DeepPet Pet Garden</span><h3>${label3('附近的毛孩','Nearby pets','주변 반려동물')}</h3></div><div class="garden-tabs">${[['map',label3('地圖','Map','지도')],['list',label3('列表','List','목록')],['messages',label3('訊息','Messages','메시지')]].map(([id,name])=>`<button class="${mode===id?'active':''}" data-action="set-garden-mode" data-mode="${id}">${name}</button>`).join('')}</div>${mode==='messages'?gardenInbox():`<div class="garden-locked"><strong>N/A</strong><p>${label3('附近寵物服務尚未連接真實社群與位置資料；不能用展示寵物或示意距離冒充附近使用者。','Live nearby-pet discovery is not connected. Sample accounts or distances must not appear as real neighbors.','실제 주변 반려동물 서비스가 연결되지 않았습니다. 예시 계정과 거리를 실제 이웃으로 표시하지 않습니다.')}</p></div>`}</div>`;
+ };
+
+ // V8.9: lightweight chat UI. Every visible message belongs to just this thread.
+ let dpChatVoiceRecorder=null,dpChatVoiceStream=null,dpChatVoiceTimer=null,dpChatVoiceRequestId=0,dpChatImageRequestId=0;
+ function dpChatClock(){return new Date().toLocaleTimeString(state.lang==='en'?'en-US':state.lang==='ko'?'ko-KR':state.lang==='ja'?'ja-JP':state.lang==='zh'?'zh-CN':'zh-TW',{hour:'2-digit',minute:'2-digit'});}
+ function dpChatAddMessage(type,content,extras={},threadId=state.chatWith){
+  const id=threadId;if(!id||!dpFriendAuthorizedForThread(id))return;
+  const from=state.chatPerspective==='other'?'other':'me';
+  const draft=document.getElementById('gardenChatText')?.value||'';
+  // Both inboxes are one local transaction. If quota is exceeded by a photo
+  // or voice clip, do not show either side a message that was never saved.
+  if(!dpRootCommit(['gardenMessagesByPet','dpChatShowcaseSeeded','dpChatMigrated78','dpV812ChatMigrated'],()=>{
+   const messages=dpChatList(id);
+   const item={id:'chat-'+Date.now()+'-'+messages.length,type,from,read:from==='me',date:iso(localDate()),time:dpChatClock(),...extras};
+   if(type==='text')item.text=String(content||'').slice(0,240);
+   else item.data=content;
+   messages.push(item);
+   const peer=dpPetFromChatKey(id),self=dpPetDirectory()[state.dog];
+   if(peer&&self&&peer.index!==state.dog&&dpAreFriends(peer.publicId)){
+    state.gardenMessagesByPet??={};const receiver=String(peer.index);
+    state.gardenMessagesByPet[receiver]??={};const mirroredKey=dpChatKeyForPet(self);
+    state.gardenMessagesByPet[receiver][mirroredKey]??=[];
+    state.gardenMessagesByPet[receiver][mirroredKey].push({...item,id:item.id+'-mirror',from:from==='me'?'other':'me',read:from!=='me'});
+   }
+  }))return;
+  render();
+  if(type!=='text'){const field=document.getElementById('gardenChatText');if(field)field.value=draft;}
+ }
+ function dpChatBubbleContent(m){
+  const type=m?.type||'text';
+  if(type==='image'&&typeof m.data==='string'&&/^data:image\/(?:jpeg|png|webp);base64,/.test(m.data))return `<img class="dp-chat-photo" src="${esc(m.data)}" alt="${tr('已傳送圖片','Sent photo','보낸 사진')}" loading="lazy"/>`;
+  if(type==='audio'&&typeof m.data==='string'&&/^data:audio\/[a-z0-9.+-]+(?:;[a-z0-9.+_-]+=[a-z0-9.+_-]+)*;base64,/.test(m.data))return `<audio class="dp-chat-audio" controls preload="metadata" src="${esc(m.data)}" aria-label="${tr('語音訊息','Voice message','음성 메시지')}"></audio>`;
+  return `<span class="dp-chat-text">${esc(dpChatMessageText(m))}</span>`;
+ }
+ async function dpChatSendImage(file){
+  if(!file)return;const targetId=state.chatWith,targetDog=state.dog,targetEpoch=state.dpPetEpoch,requestId=++dpChatImageRequestId;
+  const stillCurrent=()=>requestId===dpChatImageRequestId&&state.dog===targetDog&&state.dpPetEpoch===targetEpoch&&state.chatWith===targetId&&state.tab==='me'&&state.detail==='chat';
+  if(!/^image\/(?:jpeg|png|webp|gif|heic|heif)$/i.test(file.type)&&!file.type.startsWith('image/')){toast(tr('請選擇圖片','Choose an image','이미지를 선택하세요'));return;}
+  if(file.size>12*1024*1024){toast(tr('圖片超過12MB，請選擇較小的圖片','Choose a photo under 12MB','12MB 이하 사진을 선택하세요'));return;}
+  try{
+   const url=URL.createObjectURL(file);let image;
+   try{image=new Image();await new Promise((res,rej)=>{image.onload=res;image.onerror=rej;image.src=url;});}
+   finally{URL.revokeObjectURL(url);}
+   const max=920,ratio=Math.min(1,max/Math.max(image.naturalWidth,image.naturalHeight));
+   const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.naturalWidth*ratio));canvas.height=Math.max(1,Math.round(image.naturalHeight*ratio));
+   canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);
+   const data=canvas.toDataURL('image/jpeg',.72);
+   if(!stillCurrent())return;
+   if(data.length>900000){toast(tr('圖片過大，請重新選擇','Photo is too large to keep locally','이미지가 너무 큽니다'));return;}
+   dpChatAddMessage('image',data,{},targetId);
+  }catch(e){if(stillCurrent())toast(tr('圖片無法讀取，請重試','Could not open photo','사진을 열 수 없습니다'));}
+ }
+ function dpStopChatVoice(){
+  dpChatVoiceRequestId++; // Also invalidates unresolved microphone permission prompts.
+  dpChatImageRequestId++; // Leaving a chat also invalidates pending image conversions.
+  if(dpChatVoiceTimer)clearTimeout(dpChatVoiceTimer);dpChatVoiceTimer=null;
+  const recorder=dpChatVoiceRecorder,stream=dpChatVoiceStream;
+  dpChatVoiceRecorder=null;dpChatVoiceStream=null;
+  try{if(recorder?.state==='recording')recorder.stop()}catch{}
+  stream?.getTracks().forEach(t=>t.stop());
+ }
+ async function dpChatVoiceToggle(){
+  if(dpChatVoiceRecorder?.state==='recording'){dpChatVoiceRecorder.stop();return;}
+  if(!navigator.mediaDevices?.getUserMedia||typeof MediaRecorder==='undefined'){
+   toast(tr('這個瀏覽器不支援錄音，請使用 HTTPS 網址或較新的瀏覽器','Voice recording needs HTTPS and a supported browser','음성 녹음은 HTTPS와 지원되는 브라우저가 필요합니다'));return;
+  }
+  const target={id:state.chatWith,dog:state.dog,epoch:state.dpPetEpoch},requestId=++dpChatVoiceRequestId;
+  const stillCurrent=()=>dpChatVoiceRequestId===requestId&&target.dog===state.dog&&target.epoch===state.dpPetEpoch&&target.id===state.chatWith&&state.tab==='me'&&state.detail==='chat';
+  let stream=null,recorder=null;
+  try{
+   stream=await navigator.mediaDevices.getUserMedia({audio:true});
+   if(!stillCurrent()){stream.getTracks().forEach(t=>t.stop());return;}
+   const mime=['audio/webm;codecs=opus','audio/mp4','audio/webm'].find(x=>MediaRecorder.isTypeSupported?.(x));
+   recorder=new MediaRecorder(stream,mime?{mimeType:mime,audioBitsPerSecond:24000}:{audioBitsPerSecond:24000});
+   const started=Date.now(),chunks=[];
+   dpChatVoiceRecorder=recorder;dpChatVoiceStream=stream;
+   recorder.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data);};
+   recorder.onerror=()=>{if(stillCurrent())toast(tr('錄音失敗','Recording failed','녹음 실패'));};
+   const timer=setTimeout(()=>{if(recorder.state==='recording')recorder.stop();},25000);
+   dpChatVoiceTimer=timer;
+   recorder.onstop=()=>{
+    clearTimeout(timer);stream.getTracks().forEach(t=>t.stop());
+    const wasCurrent=dpChatVoiceRecorder===recorder;
+    if(wasCurrent){
+     dpChatVoiceRecorder=null;dpChatVoiceStream=null;dpChatVoiceTimer=null;
+     const button=document.querySelector('#dpChatVoiceButton');
+     if(button){button.classList.remove('recording');button.innerHTML=vicon('mic',20);}
+    }
+    if(!stillCurrent())return;
+    const duration=Math.round((Date.now()-started)/1000),blob=new Blob(chunks,{type:recorder.mimeType||'audio/webm'});
+    if(duration<1||!blob.size)return;
+    if(blob.size>750000){toast(tr('語音太長，請縮短錄音','Voice message is too long','음성이 너무 깁니다'));return;}
+    const reader=new FileReader();
+    reader.onload=()=>{const data=String(reader.result||'');if(/^data:audio\//.test(data)&&stillCurrent())dpChatAddMessage('audio',data,{duration},target.id);};
+    reader.onerror=()=>{if(stillCurrent())toast(tr('語音儲存失敗','Could not save voice locally','음성 저장 실패'));};
+    reader.readAsDataURL(blob);
+   };
+   recorder.start(250);
+   const button=document.querySelector('#dpChatVoiceButton');if(button){button.classList.add('recording');button.innerHTML=vicon('square',19);}
+   toast(tr('正在錄音；再次點擊停止並傳送（最長25秒）','Recording · tap again to send (up to 25s)','녹음 중 · 다시 탭하여 전송(최대25초)'));
+  }catch(e){
+   stream?.getTracks().forEach(t=>t.stop());
+   if(dpChatVoiceRecorder===recorder){dpChatVoiceRecorder=null;dpChatVoiceStream=null;if(dpChatVoiceTimer)clearTimeout(dpChatVoiceTimer);dpChatVoiceTimer=null;}
+   if(stillCurrent())toast(tr('未取得麥克風權限，請在瀏覽器允許錄音','Allow microphone access in your browser','브라우저에서 마이크 권한을 허용하세요'));
+  }
+ }
+ function chatView(){
+  const id=state.chatWith,p=nearbyPets().find(x=>x.id===id)||dpPetFromChatKey(id),arr=dpChatList(id);
+  const otherPhoto=p?.photo||dogs[0].photo,mePhoto=currentDog().photo,otherPerspective=state.chatPerspective==='other';
+  const incomingPhoto=otherPerspective?mePhoto:otherPhoto,outgoingPhoto=otherPerspective?otherPhoto:mePhoto;
+  return `<div class="chat-screen dp-two-way-chat dp-simple-chat">
+   <div class="chat-messages dp-chat-history" aria-label="${tr('對話紀錄','Conversation','대화 내용')}">${arr.length?arr.map(m=>{
+    const mine=otherPerspective?m?.from==='other':m?.from!=='other';
+    return `<div class="dp-im-block"><time class="dp-im-time">${esc(m?.time||'')}</time><div class="dp-im-row ${mine?'outgoing':'incoming'}">${!mine?`<button class="dp-im-avatar-button" data-action="garden-open-profile" data-id="${esc(id)}" aria-label="${tr('查看對方公開主頁','View public profile','상대 공개 프로필 보기')}"><img class="dp-im-avatar" src="${esc(incomingPhoto)}" alt=""/></button>`:''}<div class="chat-bubble ${mine?'mine':'received'}">${dpChatBubbleContent(m)}</div>${mine?`<img class="dp-im-avatar" src="${esc(outgoingPhoto)}" alt="${tr('聊天頭像','Chat avatar','대화 프로필 사진')}"/>`:''}</div></div>`;
+   }).join(''):`<div class="empty-chat">${tr('從這裡開始聊天吧','Start a conversation','대화를 시작하세요')}</div>`}</div>
+   <div class="dp-chat-attachment-menu" id="dpChatAttachmentMenu" hidden><button data-action="chat-gallery">${vicon('image',19)} ${tr('相簿／上傳圖片','Choose photo','사진 선택')}</button><button data-action="chat-camera">${vicon('camera',19)} ${tr('拍照','Take photo','사진 촬영')}</button></div>
+   <div class="chat-composer dp-wechat-composer"><button class="dp-chat-icon-button" id="dpChatVoiceButton" data-action="chat-voice" aria-label="${tr('錄製語音','Record voice','음성 녹음')}">${vicon('mic',20)}</button><input class="form-control" id="gardenChatText" placeholder="${tr('傳送訊息…','Message…','메시지 입력…')}" maxlength="240" autocomplete="off"/><button class="dp-chat-icon-button dp-chat-plus" data-action="chat-attachments" aria-label="${tr('傳送圖片或拍照','Choose image or camera','사진 또는 카메라')}">${vicon('plus',21)}</button><button class="send-one-line" data-action="garden-send">${tr('傳送','Send','보내기')}</button></div>
+   <input type="file" id="dpChatGallery" accept="image/*" class="dp-chat-hidden-input"/><input type="file" id="dpChatCamera" accept="image/*" capture="environment" class="dp-chat-hidden-input"/>
+  </div>`;
+ }
+function chatFullPage(){const p=nearbyPets().find(x=>x.id===state.chatWith)||dpPetFromChatKey(state.chatWith),other=state.chatPerspective==='other';return `<div class="dp-independent-page dp-chat-page"><header class="dp-independent-head"><button data-action="chat-to-inbox" aria-label="${tr('返回訊息','Back to messages','메시지로 돌아가기')}">←</button><button class="dp-chat-header-person" data-action="garden-open-profile" data-id="${esc(state.chatWith||'')}"><img src="${esc(p?.photo||dogs[0].photo)}" alt=""/><b>${esc(p?.name||tr('聊天','Chat','채팅'))}</b></button>${other?`<span class="dp-chat-demo-indicator">${tr('展示回覆','Demo reply','답장 시연')}</span>`:''}<div class="dp-chat-more-wrap"><button class="dp-chat-more" data-action="chat-demo-menu" aria-label="${tr('更多聊天選項','More chat options','채팅 더보기')}">···</button><div class="dp-chat-more-menu" id="dpChatMoreMenu" hidden><button data-action="garden-perspective" data-mode="${other?'me':'other'}">${other?tr('返回我的聊天','Back to my chat','내 대화로 돌아가기'):tr('模擬對方回覆','Simulate recipient reply','상대방 답장 시연')}</button></div></div></header>${chatView()}</div>`;}
+function vetFullPage(){return `<div class="app-pad dp-independent-page dp-vet-page"><header class="dp-independent-head"><button data-action="vet-page-back" aria-label="${tr('返回','Back','뒤로')}">←</button><b>${tr('一鍵生成獸醫就診摘要','One-tap veterinary visit summary','한 번에 수의사 진료 요약 생성')}</b></header><div class="vet-period">${[1,7,30].map(v=>`<button class="${state.vetDays===v?'active':''}" data-action="vet-page-days" data-days="${v}">${v===1?tr('當天','Today','오늘'):`${v} ${tr('天','days','일')}`}</button>`).join('')}</div><button class="cta full" data-action="download-vet">${tr('列印／另存PDF','Print / Save PDF','인쇄 / PDF 저장')}</button>${vetReportContent(vetReportData())}</div>`;}
+function fourteenDayCard(){const b=baselineProfile(),phase=baselinePhase(b),days=Math.min(14,b.days),pct=Math.min(100,Math.round(days/14*100));return `<section class="baseline-engagement baseline-stage-${phase.key}"><div class="baseline-phase-home"><span class="baseline-phase-mark">${phase.icon}</span><span>${phase.tag}</span></div><div class="row spread"><div><h3>${phase.headline}</h3><p>${phase.desc}</p></div><button class="baseline-go" data-action="baseline-detail">${days}/14 ${vicon('chev',15)}</button></div><div class="baseline-engagement-track"><i style="width:${pct}%"></i></div>${explorationMilestones()}</section>`}
+
+function meView(){const d=currentDog();return `<div class="app-pad">${bigHeader(t('me'))}
+<section class="card profile-hero"><div class="profile-glow"></div><div class="pet-profile"><button type="button" class="pet-avatar-tap" data-action="avatar-change" aria-label="${label3('更換寵物照片','Change pet photo','반려동물 사진 변경')}"><img src="${esc(dp58FaceAsset(state.dog,d))}" class="pet-avatar" alt="${esc(d.name)}"/><span class="pet-avatar-camera">${vicon('camera',13)}</span></button><div class="grow"><div class="pet-name">${esc(d.name)}</div><div class="pet-caption">${breedText(d)} · ${d.age} ${t('years')} · ${d.weight} kg</div><div class="device-identity">${state.connected?`DeepPet ${state.deviceType==='4g'?'4G + GPS':'Bluetooth'}`:tr('尚未配對設備','No paired device','연결된 기기 없음')}</div><div class="dp-profile-id">ID · ${esc(dpCurrentPetId())}</div></div><button type="button" class="dp-profile-social-plus" data-action="dp-friend-menu" aria-label="${label3('新增好友與 QR Code','Add friends and QR code','친구 추가 및 QR 코드')}">${vicon('plus',22)}</button></div><div class="profile-actions"><button data-action="pet-switch">${vicon('users',16)} ${t('managePets')}</button><button data-action="edit-pet">${vicon('edit',16)} ${tr('編輯資料','Edit profile','프로필 편집')}</button><button data-action="avatar-change">${vicon('camera',16)} ${label3('更換頭像','Change photo','사진 변경')}</button></div></section>
+${dpOwnerBaselineMe()}
+ <div class="section-head"><h2 class="section-title">${t('myDevice')}</h2></div>${deviceCenter()}
+<button class="card store-entry" data-action="shop-open"><div class="store-icon store-icon-large">${shopIllustrationSVG()}</div><div class="grow"><b>${tr('DeepPet 商城','DeepPet Store','DeepPet 스토어')}</b><span>${tr('立即選購','Shop now','바로 구매')}</span><small>${tr('查看健康項圈、選擇版本及訂閱方案','Explore health collars, models and service plans','건강 목걸이, 모델 및 요금제 보기')}</small></div>${vicon('chev',19)}</button>
+ <button class="card garden-entry dp-garden-entry dp924-nearby-visual" data-action="garden-detail">${dpUnreadCount()?`<span class="dp-garden-notify">${dpFlagDot(tr('有新訊息','New messages','새 메시지'))} ${dpUnreadCount()} ${tr('則未讀','unread','읽지 않음')}</span>`:''}<div class="garden-entry-top"><div><div class="garden-title-big">${tr('附近寵物','Nearby pets','주변 반려동물')}</div><p>${tr('在互動地圖上認識附近的寵物，查看公開檔案並傳送訊息。','Explore the interactive map, public pet profiles and chats.','인터랙티브 지도에서 주변 반려동물을 만나고 메시지를 보내세요.')}</p></div><span class="dp924-nearby-pets-art" aria-hidden="true">${nearbyPets().slice(0,3).map((p,i)=>`<img src="${esc(p.photo)}" alt="" class="dp924-nearby-pet dp924-nearby-${i}"/>`).join('')}<span>🐾</span></span></div><div class="garden-entry-chips"><span class="pill purple">${tr('互動地圖','Interactive map','인터랙티브 지도')}</span></div></button><section class="card flat care-menu">${panel(vicon('users',22),t('family'),tr('邀請家人一起照顧','Share care with family','가족과 함께 돌보기'),'family-detail')}</section>
+<div class="section-head"><h2 class="section-title">${t('setting')}</h2></div><section class="card flat care-menu">${panel(vicon('bell',22),t('alerts'),tr('健康、用藥與接種提醒','Health, medicine and vaccine alerts','건강·투약·예방접종 알림'),'alerts')}${panel(vicon('settings',22),t('language'),state.lang==='zht'?'繁體中文':state.lang==='zh'?'简体中文':state.lang==='en'?'English':state.lang==='ja'?'日本語':'한국어','language-detail')}${panel(vicon('shield',22),t('privacy'),tr('資料來源與位置分享','Data sources and location sharing','데이터와 위치 공유'),'privacy-detail')}</section><div class="app-build-version">DeepPet Version</div><div class="footer-space"></div></div>`}
+function bottomNav(){
+ const deep=dpDeepFlags().length,health=dpDueCount(),me=dpUnreadCount();
+ return `<nav class="bottom-nav" aria-label="Primary navigation">${[['home','home'],['deep','deep'],['health','health'],['me','me']].map(([k,ic])=>{
+  const flag=k==='deep'?deep:k==='health'?health:k==='me'?me:0,reason=k==='deep'?tr('健康狀態需要留意','Health change needs attention','건강 변화 확인 필요'):k==='health'?tr('今天有待辦事項','Tasks due today','오늘 할 일 있음'):tr('有未讀訊息','Unread messages','읽지 않은 메시지');
+  return `<button class="nav-button ${state.tab===k?'active':''}" data-action="nav" data-page="${k}" aria-current="${state.tab===k?'page':'false'}" aria-label="${t(k)}${flag?' · '+reason:''}"><span class="nav-glyph dp-nav-glyph">${vicon(ic,21)}${flag?dpFlagDot(reason):''}</span><span>${t(k)}</span></button>`}).join('')}</nav>`;
+}
+function setupPetStrip(){
+ const strip=document.querySelector('.pet-top-strip'),slider=document.querySelector('.pet-strip-range');
+ if(!strip||!slider)return;
+ const maxScroll=()=>Math.max(0,strip.scrollWidth-strip.clientWidth);
+ const sync=()=>{const max=maxScroll();slider.value=String(max?Math.round(100*strip.scrollLeft/max):0);slider.disabled=max<=1;};
+ const selected=strip.querySelector('.pet-pill.active');
+ if(selected){const target=selected.offsetLeft+(selected.offsetWidth/2)-(strip.clientWidth/2);strip.scrollLeft=Math.max(0,Math.min(maxScroll(),target));}
+ slider.addEventListener('input',()=>{strip.scrollLeft=(Number(slider.value)/100)*maxScroll();sync();});
+ strip.addEventListener('scroll',sync,{passive:true});
+ // Touch screens get native pan-x. Mouse/trackpad users can drag the avatar row directly.
+ strip.addEventListener('pointerdown',event=>{
+   if(event.pointerType==='touch'||event.button!==0)return;
+   const firstX=event.clientX,startLeft=strip.scrollLeft;let dragged=false;
+   function move(ev){const dx=ev.clientX-firstX;if(Math.abs(dx)>6)dragged=true;if(dragged){strip.scrollLeft=startLeft-dx;sync();}}
+   function up(){window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',up);if(dragged){const stop=e=>{e.preventDefault();e.stopImmediatePropagation();};strip.addEventListener('click',stop,{capture:true,once:true});}}
+   window.addEventListener('pointermove',move);window.addEventListener('pointerup',up,{once:true});window.addEventListener('pointercancel',up,{once:true});
+ });
+ sync();
+}
+
+
+let dpFriendCameraStream=null,dpFriendScanLoop=0,dpFriendCameraBusy=false,dpFriendCameraSerial=0;
+function dpStopFriendCamera(){dpFriendCameraSerial++;if(dpFriendScanLoop)cancelAnimationFrame(dpFriendScanLoop);dpFriendScanLoop=0;dpFriendCameraStream?.getTracks().forEach(x=>x.stop());dpFriendCameraStream=null;dpFriendCameraBusy=false;}
+function dpScanStatus(msg){const el=document.getElementById('dpScanStatus');if(el)el.textContent=msg;}
+async function dpStartFriendCamera(){
+ if(dpFriendCameraBusy)return;
+ if(!navigator.mediaDevices?.getUserMedia||typeof window.BarcodeDetector!=='function'){
+  dpScanStatus(label3('此瀏覽器無法直接辨識 QR Code，請改用手動輸入 ID。','This browser cannot scan QR codes natively. Enter the pet ID instead.','이 브라우저는 QR 스캔을 지원하지 않습니다. ID를 입력하세요.'));return;
+ }
+ dpFriendCameraBusy=true;
+ const petIndex=state.dog,petEpoch=state.dpPetEpoch,requestId=++dpFriendCameraSerial;
+ const stillCurrent=()=>requestId===dpFriendCameraSerial&&state.dog===petIndex&&state.dpPetEpoch===petEpoch&&state.modal==='pet-friend-scan';
+ let stream=null;
+ try{
+  const detector=new BarcodeDetector({formats:['qr_code']});
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});
+  if(!stillCurrent()){stream.getTracks().forEach(x=>x.stop());return;}
+  dpFriendCameraStream=stream;const video=document.getElementById('dpFriendScanVideo');if(!video){dpStopFriendCamera();return;}video.srcObject=stream;await video.play();if(!stillCurrent()){stream.getTracks().forEach(x=>x.stop());return;}dpScanStatus(label3('正在掃描…','Scanning…','스캔 중…'));
+  let last=0;
+  const step=async(ts)=>{
+   if(!stillCurrent()||dpFriendCameraStream!==stream)return;
+   if(ts-last>320){last=ts;try{const found=await detector.detect(video);if(!stillCurrent()||dpFriendCameraStream!==stream)return;for(const c of found){const p=dpLinkProfileFromQR(c.rawValue);if(p){dpStopFriendCamera();dpOpenPublicPet(p);return;}}}catch{}}
+   if(stillCurrent()&&dpFriendCameraStream===stream)dpFriendScanLoop=requestAnimationFrame(step);
+  };
+  dpFriendScanLoop=requestAnimationFrame(step);
+ }catch{stream?.getTracks().forEach(x=>x.stop());if(stillCurrent()){dpStopFriendCamera();dpScanStatus(label3('無法開啟相機。請允許權限、改用 HTTPS 或手動輸入 ID。','Cannot start camera. Allow permission, use HTTPS or enter the ID.','카메라를 시작할 수 없습니다. 권한을 허용하거나 ID를 입력하세요.'));}}
+}
+async function dpCopySocial(value){
+ try{await navigator.clipboard.writeText(value);toast(label3('已複製','Copied','복사함'));}
+ catch{window.prompt(label3('請複製','Copy this','복사하세요'),value);}
+}
+function dpPublicStandAloneView(){if(state.dpExternalPublic?.invalid)return `<div class="dp-social-external"><div class="dp-social-external-head"><b>DeepPet</b></div><p class="notices">${label3('公開寵物連結已失效，無法查看資料。請向主人索取新的 QR Code。','This public profile link is invalid. Ask the owner for a fresh QR code.','공개 프로필 링크가 유효하지 않습니다. 보호자에게 새로운 QR 코드를 요청하세요.')}</p></div>`;return `<div class="dp-social-external"><div class="dp-social-external-head"><b>DeepPet</b><span>${label3('公開寵物檔案','Public pet profile','반려동물 공개 프로필')}</span></div>${dpPublicCardContent(state.dpExternalPublic)}<p class="dp-social-muted">${label3('這是訪客專用的公開檔案頁。查看完畢後可關閉此頁。','This is a visitor-only public profile. Close this page when finished.','방문자용 공개 프로필입니다. 확인 후 이 페이지를 닫아 주세요.')}</p><p class="notices">${label3('這是公開資料預覽，沒有任何心肺、Deep、健康、用藥或 GPS 權限。','This public view does not grant access to Deep, health, medications or GPS.','공개 프로필에는 심층, 건강, 투약, GPS 접근 권한이 없습니다.')}</p></div>`;}
+function render(reset=false){dp904RenderCache=new Map();document.documentElement.lang=state.lang==='zht'?'zh-Hant':state.lang==='zh'?'zh-Hans':state.lang==='ko'?'ko':state.lang==='ja'?'ja':'en';plotRegistry=[];persist();const app=$('#app');const sc=$('.app-main');const pos=sc?.scrollTop||0;const currentView=state.dpExternalPublic?dpPublicStandAloneView():(state.tab==='home'&&state.detail==='today-all')?dpTodayMorePage():(state.tab==='me'&&state.detail==='age-detail')?dpAgeFullPage():(state.tab==='me'&&state.detail==='baseline-page')?dpBaselineStandalonePage():(state.tab==='me'&&state.detail==='chat')?chatFullPage():(state.tab==='health'&&state.detail==='vet-report')?vetFullPage():(state.tab==='me'&&['store','store-checkout','store-payment','store-success'].includes(state.detail))?storeFullPage():selectedBlank()?(state.tab==='home'?blankHomeView():state.tab==='deep'?blankDeepView():state.tab==='health'?blankHealthView():blankMeView()):dp58FreshPet()?(state.tab==='home'?dp58FreshHome():state.tab==='health'?(['dp921-list','dp921-report'].includes(state.detail)?healthDetail():dp924FreshHealthView()):dp58FreshEmptyTab()):isFreePet()?(state.tab==='home'?freeCareHomeView():state.tab==='deep'?freeCareDeepView():state.tab==='health'?freeCareHealthView():freeCareMeView()):(state.tab==='home'?homeView():state.tab==='deep'?deepView():state.tab==='health'?healthView():meView());const enhancedView=currentView;const layout=`<main class="app-main" id="main-scroll">${enhancedView}</main>${state.dpExternalPublic?'':bottomNav()}`;app.innerHTML=state.lang==='zht'?toTraditional(layout):state.lang==='zh'?toSimplified(layout):layout;$('#main-scroll').scrollTop=reset?0:pos;setupPetStrip();renderModal();if(state.tab==='me'&&state.detail==='chat'){const log=document.querySelector('.dp-chat-history');if(log)log.scrollTop=log.scrollHeight;}mountLiveWaves();}
+function shareInviteCode(d=currentDog()){
+ if(typeof selectedBlank==='function'&&selectedBlank())return '';
+ const name=(d.name||'PET').replace(/[^a-z0-9]/ig,'').toUpperCase().slice(0,6)||'PET';
+ return 'DP-'+String(state.dog+1).padStart(2,'0')+'-'+name;
+}
+function familyShareContent(){
+ if(typeof selectedBlank==='function'&&selectedBlank())return `<div class="family-sharing-v44"><p class="notices">${label3('空白檔案沒有寵物身分或邀請碼。請先建立寵物檔案。','A blank profile has no pet identity or invitation code. Create a pet profile first.','빈 프로필에는 초대 코드가 없습니다. 먼저 반려동물 프로필을 만드세요.')}</p></div>`;
+ const code=shareInviteCode(),requests=(state.familyJoinRequests||[]).filter(r=>(r.petIndex??0)===state.dog),members=(state.familyMembers||[]).filter(r=>(r.petIndex??0)===state.dog);
+ return `<div class="family-sharing-v44"><div class="family-hero-v44"><span class="family-hero-icon">${vicon('users',28)}</span><div><h3>${label3('邀請家人一起照顧','Invite family to care together','가족과 함께 돌보기')}</h3><p>${label3('正式版連接帳號服務後，才可由飼主授權共享；目前僅供本機體驗。','Real sharing needs a future account service; this is a local preview only.','실제 공유는 계정 서비스 연결 후 가능합니다. 현재는 로컬 체험입니다.')}</p></div></div><div class="family-code-card"><span>${label3('這隻寵物的邀請 ID','Pet invitation ID','반려동물 초대 ID')}</span><div class="family-code-line"><strong>${code}</strong><button data-action="family-copy-code">${vicon('copy',16)} ${label3('複製','Copy','복사')}</button></div><small>${label3('此邀請碼只供本機流程體驗，不能跨裝置加入。','This code works locally only; it cannot invite another device.','가족에게 ID를 전달해 가입을 요청하게 하세요. 이 화면은 로컬 데모입니다.')}</small></div><div class="family-request-box"><h4>${label3('送出家人加入申請','Submit a family join request','가족 가입 요청 체험')}</h4><label class="form-label">${label3('邀請 ID','Invitation ID','초대 ID')}</label><input class="form-control" id="familyRequestCode" placeholder="DP-01-MILO" value="${code}"/><label class="form-label">${label3('家人名稱','Family member name','가족 이름')}</label><input class="form-control" id="familyRequestName" placeholder="${label3('例如：媽媽','e.g. Mom','예: 엄마')}" maxlength="28"/><button class="cta full" data-action="family-request">${label3('發送加入請求','Request access','접근 요청')}</button></div><h4 class="family-section-title">${label3('待你同意的請求','Requests awaiting approval','승인 대기 요청')} <span>${requests.length}</span></h4>${requests.length?requests.map(r=>`<div class="family-request-item"><div><b>${esc(r.name)}</b><p>${label3('希望查看','Wants access to','접근 요청')}: ${esc(currentDog().name)} · ${esc(code)}</p></div><div class="family-actions"><button class="family-approve" data-action="family-approve" data-id="${r.id}">${label3('同意授權','Approve','승인')}</button><button class="family-deny" data-action="family-deny" data-id="${r.id}">${label3('拒絕','Deny','거절')}</button></div></div>`).join(''):`<p class="family-empty">${label3('目前沒有待審核請求','No pending requests','대기 중인 요청이 없습니다.')}</p>`}<h4 class="family-section-title">${label3('本機授權示例','Local approval examples','승인된 가족')} <span>${members.length}</span></h4>${members.length?members.map(r=>`<div class="family-member-item"><div><b>${esc(r.name)}</b><p>${label3('本機模擬授權，尚未共享資料','Local preview only; no health records shared','전체 건강 정보 보기 허용')}</p></div><button data-action="family-revoke" data-id="${r.id}">${label3('撤銷','Revoke','철회')}</button></div>`).join(''):`<p class="family-empty">${label3('尚未授權任何家人','No authorized family yet','승인된 가족이 없습니다.')}</p>`}<p class="notices">${label3('家人申請與授權目前只保存在這台裝置。','Family requests currently remain on this device.','이 데모는 한 기기에서만 요청과 승인을 시뮬레이션하며 다른 휴대폰으로 데이터를 보내지 않습니다.')}</p></div>`;
+}
+function alertsContent(){
+ const geoHistory=geoAlertRows(),d=currentDog(),issues=attentionItems(d),pending=dpMedDue().filter(x=>x.status==='pending'),vx=allVaxForDog().filter(x=>x.status==='upcoming'&&x.date<=iso(localDate())),flags=dpNormalizeNotificationSettings(state.settings),
+  visibleHealthIssues=issues.filter(i=>flags.notifyHealth!==false||i.value<60),visibleMeds=flags.notifyMed!==false?pending:[],visibleVaccines=flags.notifyVax!==false?vx:[],
+ chatAlerts=Object.keys(dpChatStore()).filter(id=>dpThreadUnread(id)>0).map(id=>({id:'msg-'+id,title:tr('附近寵物傳來新訊息','New nearby-pet message','근처 반려동물 메시지'),desc:(nearbyPets().find(p=>p.id===id)?.name||id)+' · '+dpThreadUnread(id)+' '+tr('則未讀','unread','개 안 읽음'),page:'chat',chatId:id})),
+ alerts=[...dpPendingToMe().map(r=>({id:r.id,title:label3('新的好友申請','New friend request','새 친구 요청'),desc:dpPetDisplayName(dpPetFromPublicId(r.fromId)),page:'friend'})),...chatAlerts,...visibleHealthIssues.map((i,j)=>({id:'health'+j,title:i.title,desc:i.why,page:'deep',index:i.index})),...visibleMeds.map((m,j)=>({id:'med'+j,title:label3('下一次用藥','Next dose','다음 복약')+' · '+dpL10nSample(m.name),desc:m.time+' · '+label3('待服用','Due','예정'),page:'med'})),...visibleVaccines.map((v,j)=>({id:'vx'+j,title:label3('疫苗接種提醒','Vaccination reminder','예방접종 알림'),desc:dpL10nSample(v.name)+' · '+v.date,page:'vaccines'}))];
+ return `<div class="alerts-v44"><div class="alerts-hero"><span>${vicon('bell',24)}</span><div><h3>${label3('健康管理提醒','Health & care reminders','건강 및 돌봄 알림')}</h3><p>${label3('將重要變化、下次用藥和疫苗安排集中在此。','Important changes, medication and vaccines appear here.','중요 변화와 복약, 예방접종 알림을 이곳에서 확인하세요.')}</p></div></div>${geoHistory.length?`<h4>${geoLocale('電子圍欄事件紀錄','Geofence event history','전자 울타리 이벤트')}</h4>${geoHistory.map(e=>`<div class="alert-item-v44"><span class="alert-item-icon">${vicon('bell',17)}</span><span><strong>${geoLocale('已離開安全範圍（示範）','Exited safe zone (demo)','안전 구역 이탈 (데모)')}</strong><small>${esc(e.pet)} · ${new Date(e.time).toLocaleString(state.lang==='en'?'en-US':state.lang==='ko'?'ko-KR':'zh-TW')} · ${geoLocale('本機保存，非推播','Saved locally, not push','로컬 저장, 푸시 아님')}</small></span></div>`).join('')}<button type="button" class="geo-clear-history" data-action="gps-clear-alerts">${geoLocale('清除本機越界示範紀錄','Clear local demo alert history','로컬 데모 기록 삭제')}</button>`:''}<h4>${label3('目前提醒','Current reminders','현재 알림')} · ${alerts.length}</h4>${alerts.length?alerts.map(a=>`<button class="alert-item-v44" data-action="alert-open" data-page="${a.page}" data-index="${a.index??0}" data-chat="${esc(a.chatId||'')}"><span class="alert-item-icon">${vicon(a.page==='chat'?'message':a.page==='deep'?'activity':a.page==='med'?'med':'vaccine',18)}</span><span><strong>${esc(a.title)}</strong><small>${esc(a.desc)}</small></span>${vicon('chev',16)}</button>`).join(''):`<div class="family-empty">${label3('目前沒有需要處理的提醒。','No action needed right now.','현재 처리할 알림이 없습니다.')}</div>`}<h4>${label3('提醒設定','Reminder settings','알림 설정')}</h4>${[['health',label3('健康變化','Health changes','건강 변화')],['med',label3('用藥時間','Medication schedule','복약 일정')],['vaccine',label3('疫苗與體檢','Vaccines & exams','예방접종 및 검진')],['fence',label3('電子圍欄','Geofence','전자 울타리')]].map(([id,title])=>`<div class="permission-line"><div><b>${title}</b><small>${label3('本機提醒清單偏好','In-app reminder list','앱 내부 알림 목록 설정')}</small></div><button class="toggle-track ${flags[DP_NOTIFICATION_KEYS[id]]!==false?'on':''}" data-action="setting-notify" data-which="${id}"><i></i></button></div>`).join('')}<p class="notices">${label3('此設定只控制 APP 內一般提醒；紅色高風險提示與既有事件紀錄仍可查看。手機推播尚未連接。','Settings filter in-app reminders only. High-risk health warnings and event history remain. Push notifications are not connected.','앱 내부 일반 알림만 바뀝니다. 높은 위험 경고와 이벤트 기록은 유지되며 푸시는 연결되지 않았습니다.')}</p></div>`;
+}
+function privacyContent(){const gps=!selectedBlank()&&!isFreePet()&&gpsForCurrentPet()&&state.gpsEnabled;const shared=!selectedBlank()&&!isFreePet()&&!!state.gardenVisible;return `<div class="privacy-v44"><div class="privacy-hero"><span>${vicon('shield',26)}</span><div><h3>${label3('你決定哪些資訊可以被看見','You control what gets shared','공유 정보는 직접 결정해요')}</h3><p>${label3('健康資料、定位和家庭授權是不同權限。','Health records, location and family permissions are separate.','건강 정보, 위치, 가족 권한은 별도입니다.')}</p></div></div><div class="privacy-data-row"><b>${label3('日常健康紀錄','Daily health records','일상 건강 기록')}</b><span>${label3('目前儲存在本機瀏覽器','Stored in this browser','현재 브라우저에 저장됨')}</span></div><div class="privacy-data-row"><b>${label3('GPS 位置','GPS location','GPS 위치')}</b><span>${state.deviceType==='4g'?(gps?label3('目前已開啟','Currently on','켜짐'):label3('目前已關閉','Currently off','꺼짐')):label3('藍牙版不支援 GPS','Bluetooth has no GPS','블루투스는 GPS 없음')}</span></div><div class="privacy-data-row"><b>${label3('附近寵物可見性','Nearby pet visibility','주변 반려동물 공개')}</b><span>${shared?label3('已選擇開啟','Opted in','동의함'):label3('關閉','Off','꺼짐')}</span></div><div class="privacy-data-row"><b>${label3('家庭存取權限','Family access','가족 접근 권한')}</b><span>${(state.familyMembers||[]).filter(r=>(r.petIndex??0)===state.dog).length} ${label3('筆本機示例','local previews','건 로컬 체험')}</span></div><div class="privacy-action-row"><button data-action="privacy-to-device">${vicon('device',16)} ${label3('裝置與 GPS 設定','Device & GPS settings','기기 및 GPS 설정')}</button><button data-action="privacy-to-family">${vicon('users',16)} ${label3('本機家庭授權體驗','Local family access preview','가족 권한 관리')}</button></div><h4>${label3('資料處理說明','Data handling','데이터 처리 안내')}</h4><div class="privacy-bullets"><p>${label3('你為寵物編輯的資料儲存在目前瀏覽器。','Your pet record edits are saved in this browser.','데모는 샘플 데이터이며 변경 사항은 이 브라우저에 저장됩니다.')}</p><p>${label3('沒有實際連接醫療服務、雲端健康檔案或跨裝置家庭共享。','No clinical services, cloud medical records or real cross-device family sharing are connected.','실제 의료 서비스나 기기 간 가족 공유와 연결되지 않았습니다.')}</p><p>${label3('正式版上線前，須明確說明資料保存地點、加密、刪除與權限政策，並提供撤銷同意功能。','The production release needs clear policies for storage location, encryption, deletion, permissions and consent withdrawal.','정식 버전에는 저장 위치, 암호화, 삭제, 접근 권한 및 동의 철회 정책이 필요합니다.')}</p></div></div>`;}
+
+function modalUI(){const d=currentDog(),m=state.modal;if(!m)return '';const f=(name,inner)=>`<div class="modal-head"><h2>${name}</h2><button class="x-button" data-action="modal-close" aria-label="${t('close')}">×</button></div>${inner}`;
+ if(m==='fit-guide')return f(label3('正確佩戴 DeepPet 項圈','Fit the DeepPet collar','DeepPet 목걸이 착용'),`<div class="dp-fit-guide"><div class="dp-fit-visual"><svg viewBox="0 0 300 132" role="img" aria-label="Collar fit guidance"><ellipse cx="80" cy="67" rx="45" ry="36" fill="#e8d8c4"/><path d="M46 48 36 16 63 30 M101 48 119 16 96 30" fill="#d9baa0" stroke="#bc9e84" stroke-width="3"/><path d="M39 78 Q80 111 122 78" stroke="#3a9ad6" stroke-width="13" fill="none"/><rect x="70" y="88" width="22" height="17" rx="6" fill="#225e9b"/><path d="M180 57 h76" stroke="#5b8ca5" stroke-width="5" stroke-linecap="round"/><path d="M182 79 h72" stroke="#e67a69" stroke-width="5" stroke-dasharray="7 6"/><text x="180" y="45" font-size="13" fill="#277c66">✓ Contact</text><text x="180" y="108" font-size="13" fill="#be625e">✕ Loose</text></svg></div><p>${label3('將項圈調整至與狗狗或貓咪頸部毛髮穩定貼合，不要鬆垮晃動，也不要勒緊。確認不影響正常呼吸、吞嚥與活動。','Keep the collar in steady contact through the fur without wobbling. Do not overtighten: breathing, swallowing and moving must remain comfortable.','목걸이가 털과 목에 안정적으로 닿도록 하되 너무 조이지 마세요. 호흡과 움직임이 편안해야 합니다.')}</p><p class="notices">${label3('目前是配對流程模擬，尚未驗證真實 SDK 連線或佩戴品質。','This is a simulated pairing flow; real SDK connectivity and fit are not yet validated.','현재 연결 및 착용 상태는 시뮬레이션입니다.')}</p><button class="cta full" data-action="fit-guide-done">${label3('了解，開始使用','Understood · Continue','확인 · 계속')}</button></div>`);
+if(m==='empty-collar-guide')return f(label3('連接 DeepPet 項圈','Pair a DeepPet collar','DeepPet 목걸이 연결'),`<div class="empty-guide-modal"><p>${label3('首先建立寵物檔案，再選擇 Bluetooth 健康版或 4G 定位版；配對並累積有效量測後才能看到 Deep 的個體化分析。','Create a pet profile first, choose Bluetooth or 4G, then pair and collect valid readings before Deep analytics are available.','먼저 반려동물 프로필을 만들고 블루투스/4G 기기를 연결하세요.')}</p><div class="empty-guide-steps"><div>1 · ${label3('新增寵物','Add your pet','반려동물 추가')}</div><div>2 · ${label3('連接項圈','Pair the collar','목걸이 연결')}</div><div>3 · ${label3('逐步建立有效基準','Build valid baseline','기준 측정')}</div></div><p class="notices">${label3('目前尚未連線 DeepPet 項圈。','No DeepPet collar is currently connected.','실제 연결이 아닌 데모입니다.')}</p>${isFreePet()?`<p class="notices">${label3('目前這隻寵物使用免費健康管理；正式連接功能需與實際項圈 SDK 整合。','This pet uses free care; real pairing requires the collar SDK integration.','현재는 무료 건강관리이며 실제 페어링에는 기기 SDK가 필요합니다.')}</p>`:`<button class="cta full" data-action="empty-start-profile">${label3('先建立檔案','Create pet profile','프로필 만들기')}</button>`}<button class="empty-secondary-action" data-action="shop-open">${label3('查看項圈款式','See collar models','목걸이 보기')}</button></div>`);
+ if(m==='free-record')return f(label3('新增健康記錄','Add health record','건강 기록 추가'),freeRecordModal());
+ if(m==='tour')return f(label3('60 秒認識 DeepPet','Discover DeepPet in 60 seconds','60초 DeepPet 소개'),tourContent());
+ if(m==='care-plan')return f(label3('健康追蹤','Care follow-up','돌봄 추적'),carePlanModal());
+ if(m==='behavior-detail')return f(label3('健康管理習慣日誌','Care habit journal','돌봄 습관 기록'),behaviorDetail());
+ if(m==='weekly-story')return f(label3('每週健康故事','Weekly care story','주간 돌봄 이야기'),weeklyStoryContent());
+ if(m==='vet-brief')return f(label3('就診摘要','Vet visit summary','진료 요약'),vetBriefModal());
+ if(m==='record-chooser')return f(label3('新增記錄','Add record','기록 추가'),`<p class="subtitle">${label3('請選擇新增方式','Choose a method','방법을 선택하세요')}</p><div class="import-grid">${[['file',vicon('report',24),label3('本地檔案','Local file','로컬 파일')],['photo',vicon('image',24),label3('本地照片','Local photo','로컬 사진')],['camera',vicon('camera',24),label3('拍照','Take photo','촬영')],['manual',vicon('edit',24),label3('手動填寫','Manual entry','직접 입력')]].map(([key,ic,name])=>`<button class="import-method" data-action="choose-import" data-source="${key}">${ic}<b>${name}</b></button>`).join('')}</div>`);
+ if(m==='record-import')return f(label3('匯入記錄','Import record','기록 가져오기'),`<p class="subtitle">${state.importSource==='file'?label3('可選 PDF 或圖片','PDF or image','PDF 또는 이미지'):state.importSource==='camera'?label3('使用相機拍照','Take a camera photo','카메라 촬영'):label3('從相簿選擇圖片','Choose from photos','사진 선택')}</p><input class="form-control" type="file" id="importFile" accept="${state.importSource==='file'?'application/pdf,image/*':'image/*'}" ${state.importSource==='camera'?'capture="environment"':''}/><div id="importPreview" class="import-preview">${state.importName?esc(state.importName):''}</div><label for="ocrText" class="form-label">${label3('辨識內容（可自行更正）','Recognized text (editable)','인식한 텍스트(수정 가능)')}</label><textarea id="ocrText" class="form-control" rows="5" placeholder="${label3('選擇檔案後嘗試辨識文字；如未成功，可直接輸入。','Select a file to try text recognition; enter manually if needed.','파일을 선택하면 텍스트 인식을 시도합니다.') }">${esc(state.importText||'')}</textarea><p class="notices">${label3('圖片文字辨識需網路載入 OCR 模組；辨識結果不會自動當成醫療判斷，請核對再儲存。','OCR loads an online library when available. Review extracted values before saving; no automatic clinical judgement.','OCR은 온라인 라이브러리가 필요하며 저장 전에 반드시 확인하세요.')}</p>${button(label3('下一步：核對資料','Next: review fields','다음: 데이터 확인'),'import-next','cta full')}`);
+ if(m==='record-editor')return f(label3('核對並儲存資料','Review and save','확인 후 저장'),recordEditor());
+ if(m==='pet-add')return f(label3('新增寵物','Add pet','반려동물 추가'),`<p class="notices">${label3('填寫寵物資料並上傳正面照片。','Enter your pet’s details and add a front-facing photo.','반려동물 정보를 입력하고 정면 사진을 추가하세요.')}</p><label class="form-label">${label3('寵物類型','Pet type','반려동물 종류')}</label><select id="addPetSpecies" class="form-control"><option value="dog">${label3('狗','Dog','강아지')}</option><option value="cat">${label3('貓','Cat','고양이')}</option></select><label class="form-label" for="addPetName">${label3('名字','Name','이름')}</label><input id="addPetName" maxlength="24" autocomplete="off" class="form-control" placeholder=""/>${breedSelector('addPet','dog',null)}<div class="form-grid mt12"><div><label class="form-label" for="addPetAge">${t('age')} (${label3('歲','years','세')})</label><input id="addPetAge" class="form-control" type="number" inputmode="decimal" min="0" max="35" step="0.1" placeholder="" value=""/></div><div><label class="form-label" for="addPetWeight">${t('weight')} (kg)</label><input id="addPetWeight" class="form-control" type="number" inputmode="decimal" min="0.1" max="120" step="0.1" placeholder=""/></div></div><div class="mt12"><label class="form-label" for="addPetHeight">${label3('肩高（cm）','Shoulder height (cm)','어깨 높이 (cm)')}</label><input id="addPetHeight" class="form-control" type="number" min="1" max="150" step=".1" placeholder=""/></div><div class="sp16"></div><div class="pet-form-actions"><button type="button" class="cta full" data-action="pet-add-save">${label3('確定','Confirm','확인')}</button><button type="button" class="cta secondary full" data-action="modal-close">${t('cancel')}</button></div>`);
+ if(m==='edit-pet'){const species=d.species||(/cat|貓|猫/i.test(d.breed?.en||'')?'cat':'dog');return f(label3('編輯寵物檔案','Edit pet profile','반려동물 프로필 편집'),`<div class="edit-avatar"><img src="${esc(dp58FaceAsset(state.dog,d))}" alt="${esc(d.name)}"/></div><div class="pet-type-section"><label class="form-label">${label3('寵物類型','Pet type','동물 유형')}</label><select class="form-control" id="petSpeciesInput"><option value="dog" ${species==='dog'?'selected':''}>${label3('狗','Dog','강아지')}</option><option value="cat" ${species==='cat'?'selected':''}>${label3('貓','Cat','고양이')}</option></select></div>${breedSelector('pet',species,d.breed)}<label class="form-label">${label3('名字','Name','이름')}</label><input class="form-control" id="petNameInput" maxlength="24" value="${esc(d.name)}"/><div class="form-grid mt12"><div><label class="form-label" for="petAgeInput">${t('age')} (${label3('歲','years','세')})</label><input class="form-control" id="petAgeInput" type="number" inputmode="decimal" min="0" max="35" step="0.1" value="${d.age}"/></div><div><label class="form-label" for="petWeightInput">${t('weight')} (kg)</label><input class="form-control" id="petWeightInput" type="number" inputmode="decimal" min="0.1" max="120" step="0.1" value="${d.weight}"/></div></div><div class="form-grid mt12"><div><label class="form-label" for="petHeightInput">${label3('肩高（選填）cm','Shoulder height (optional) cm','어깨 높이 cm')}</label><input class="form-control" id="petHeightInput" type="number" inputmode="decimal" min="1" max="150" step=".1" value="${d.heightCm||''}"/></div><div><label class="form-label" for="petBcsInput">${label3('體況 BCS（選填）1–9','BCS (optional) 1–9','체형 점수 BCS')}</label><input class="form-control" id="petBcsInput" type="number" inputmode="numeric" min="1" max="9" step="1" value="${d.bcs||''}"/></div></div><p class="notices">${label3('品種由系統清單管理。更改動物類型後，原示範生理數據不能繼續套用到另一物種。','Breeds are catalog-managed. Changing species means existing demo sensor data cannot apply to another species.','품종은 목록에서 선택합니다. 종류 변경 시 기존 생체 시뮬레이션 데이터는 적용할 수 없습니다.')}</p><div class="pet-form-actions"><button type="button" class="cta full" data-action="save-pet">${t('save')}</button><button type="button" class="cta secondary full" data-action="modal-close">${t('cancel')}</button></div>`);}
+ if(m==='avatar-choice')return f(label3('更換寵物頭像','Change pet photo','반려동물 사진 변경'),`<div class="avatar-change-panel"><div class="avatar-image-preview"><img id="avatarPreviewImage" src="${esc(avatarDraft?.src||currentDog().photo)}" alt="${esc(currentDog().name)}"/><div class="avatar-preview-name">${esc(currentDog().name)}</div></div><p class="avatar-change-help">${label3('選擇拍照或從相簿／檔案上傳。可先預覽，確認儲存後才取代原本照片。','Take a photo or choose one from your library. Preview it before saving; your current photo stays until you confirm.','사진을 촬영하거나 앨범에서 선택하세요. 미리보기 후 저장하면 기존 사진이 교체됩니다.')}</p><div class="avatar-method-grid"><button type="button" class="avatar-method" data-action="avatar-camera">${vicon('camera',23)}<span>${label3('拍照','Take photo','사진 촬영')}</span></button><button type="button" class="avatar-method" data-action="avatar-gallery">${vicon('image',23)}<span>${label3('從相簿選擇','Choose photo','앨범에서 선택')}</span></button></div><input class="avatar-hidden-file" id="avatarCameraInput" type="file" accept="image/*" capture="environment" aria-label="${label3('拍攝新照片','Take a new photo','새 사진 촬영')}"/><input class="avatar-hidden-file" id="avatarGalleryInput" type="file" accept="image/*" aria-label="${label3('選擇既有照片','Choose an existing photo','기존 사진 선택')}"/><p class="notices">${label3('照片在本機縮放為正方形，並只儲存在目前瀏覽器；不會上傳伺服器，也不會更換其他寵物的照片。','The photo is cropped to a square and stored only in this browser. It is not uploaded or applied to other pets.','사진은 정사각형으로 편집되어 이 브라우저에만 저장되며 서버로 전송되지 않습니다.')}</p>${avatarDraft?.src?`<div class="avatar-ready">${vicon('check',16)} ${label3('照片已選好，尚未儲存','Photo ready · not saved yet','사진 선택 완료 · 저장 전')}</div>`:''}<div class="avatar-save-actions"><button type="button" class="cta full" data-action="avatar-save" ${avatarDraft?.src?'':'disabled'}>${label3('儲存新頭像','Save new photo','새 사진 저장')}</button><button type="button" class="cta secondary full" data-action="avatar-cancel">${t('cancel')}</button></div></div>`);
+ if(m==='pet-switch')return f(t('petSwitch'),`<div class="pet-switch-grid">${showcasePetOrder().map(i=>{if(i==='blank')return `<button type="button" class="pet-switch-empty ${selectedBlank()?'active':''}" data-action="select-blank"><span class="pet-blank-avatar">${vicon('plus',23)}</span><span>${label3('空白／首次使用','No pet / First visit','반려동물 없음')}</span><small>${label3('完全沒有寵物或設備資料','No pet or device data','등록된 데이터 없음')}</small></button>`;const base=allPets()[i],pet={...base,...(state.petOverrides?.[i]||{})},face=dp58FaceAsset(i,pet),name=dp58FreshDisplayName(pet);return `<button type="button" class="pet-switch-item ${!selectedBlank()&&state.dog===i?'active':''}" data-action="select-pet" data-index="${i}"><img src="${esc(face)}" alt="${esc(name)}"/><span>${esc(name)}</span></button>`}).join('')}</div>`);
+ if(m==='show-summary'){
+ if(!signalQuality().valid)return f(t('today'),`<div class="summary-quality-empty">${qualityInline()}<p>${label3('心跳、睡眠與活動分數都暫停顯示，避免將雜訊誤判為健康變化。','Heartbeat, rest and activity scores are paused rather than interpreting noise as health changes.','잡음을 건강 변화로 잘못 해석하지 않도록 점수를 숨깁니다.')}</p></div>`);
+ const n=score(d),cats=[t('heartCategory'),t('sleepCategory'),t('activeCategory')],unified=dpTodayUnifiedScores();
+ const values=[unified.heart,unified.sleep,unified.energyActivity].map((value,i)=>({i,value,label:cats[i],tone:scoreScheme(value)}));
+ const good=values.filter(v=>v.value>=80).sort((a,b)=>b.value-a.value);
+ const concerns=attentionItems(d);
+ const goodWhy=(i)=>i===0?label3(`心跳與呼吸綜合分數 ${unified.heart} 分。`,`Heart and breathing composite ${unified.heart}/100.`,`심박·호흡 종합 점수 ${unified.heart}점.`):i===1?label3(`睡眠狀態 ${unified.sleep} 分。`,`Sleep score ${unified.sleep}/100.`,`수면 점수 ${unified.sleep}점.`):label3(`精力 ${unified.energy} 分、恢復 ${unified.recovery??'—'} 分、放鬆與平穩度 ${unified.calm??'—'} 分，綜合 ${unified.energyActivity} 分。`,`Energy ${unified.energy}, recovery ${unified.recovery??'—'}, rest & steadiness ${unified.calm??'—'}; combined ${unified.energyActivity}/100.`,`활력 ${unified.energy}점, 회복 ${unified.recovery??'—'}점, 안정도 ${unified.calm??'—'}점, 종합 ${unified.energyActivity}점.`);
+ return f(label3('生理狀態評分','Physiological status score','생리 상태 점수'),`<div class="summary-detail-v44"><p class="summary-detail-lead"><strong>${label3('今日生理狀態評分','Today’s physiological status score','오늘의 생리 상태 점수')}${state.lang==='en'?':':'：'} ${score(d)} / 100</strong><br>${label3('今日身體狀態只依心肺42%、睡眠30%、精力28%加權計算；當日有效變化反映在相關子項，體檢只參與長期健康模型。','Today uses cardio 42%, sleep 30%, and energy 28%. Relevant same-day changes affect the sensor sub-scores; examinations belong to long-term wellness.','심폐 42%, 수면·휴식 30%, 활력·회복 28% 가중 지수입니다.')}</p><div class="summary-three-rings">${values.map(v=>`<button class="summary-ring-item" data-action="summary-category" data-index="${v.i}" data-hint="${esc(v.label)} · ${v.value}/100 · ${esc(scoreLabel(v.value))}"><span class="summary-ring-label">${v.label}</span>${scoreRing(v.value)}<span class="summary-ring-status" style="color:${v.tone.color}">${scoreLabel(v.value)}</span></button>`).join('')}</div><section class="summary-detail-section"><h3>${label3('表現較好的地方','What looks good','좋은 부분')}</h3>${good.length?good.map(v=>`<div class="summary-finding good"><span class="finding-mark">✓</span><div>${goodWhy(v.i)}</div></div>`).join(''):`<div class="summary-finding neutral">${label3('目前尚無明顯優於基準的項目，持續觀察近期變化。','No clear strong areas yet; continue observing recent trends.','아직 뚜렷하게 좋은 영역이 없어서 추세를 더 관찰해 주세요.')}</div>`}</section><section class="summary-detail-section"><h3>${label3('需要關注的地方','What needs attention','주의할 부분')}</h3>${concerns.length?concerns.map(item=>`<button class="summary-finding concern" data-action="summary-category" data-index="${item.index}"><span class="finding-mark">!</span><div><b>${item.title}</b><p>${item.why}</p></div>${vicon('chev',16)}</button>`).join(''):`<div class="summary-finding neutral">${label3('今天沒有明顯需要優先處理的變化，維持平常的健康管理節奏即可。','No priority changes today. Maintain the usual care routine.','오늘 우선적으로 조치할 변화는 없습니다. 평소 관리를 유지해 주세요.')}</div>`}</section><p class="notices">${label3('可查看每日健康分數與近期變化。','Review today’s score and recent health trends.','오늘의 건강 점수와 최근 변화를 확인하세요.')}</p></div>`)}
+if(m==='baseline-detail')return f(label3('14 天健康基準','14-day health baseline','14일 건강 기준'),baselineDetail());
+ if(m==='quality-day')return f(label3('每日量測品質','Daily recording quality','일일 측정 품질'),qualityDayDetail());
+ if(m==='care-detail')return f(label3('今天怎麼陪我 · 恢復進展','Today’s care & recovery','오늘의 돌봄 및 회복'),recoveryProgressDetail());
+ if(m==='dp-events')return f(label3('心肺時刻 · 7天回放','Heart & breathing · 7-day replay','심폐 순간 · 7일 다시보기'),dpEventDetail());
+ if(m==='dp-solo')return f(label3('獨處安心觀察','Time alone insights','혼자 있는 시간'),dpSoloModal());
+ if(m==='minute-inspector')return f(label3('逐分鐘趨勢明細','Minute-by-minute trends','분별 추세 상세'),minuteDetailView());
+ if(m==='live-heart'||m==='live-breath'){const heart=m==='live-heart',title=heart?label3('心跳即時波形','Live heartbeat waveform','실시간 심박 파형'):label3('呼吸即時波形','Live breathing waveform','실시간 호흡 파형'),kind=heart?'heart':'breath',accent=heart?'#d77c9c':'#c45c7c';return f(title,`<div class="deep-live-preview"><div class="deep-live-top"><span><i></i>${label3('心肺動態','Live rhythm','실시간 리듬')}</span><span>${label3('最近 8 秒','Last 8 seconds','최근 8초')}</span></div>${streamingPanel(kind,accent,heart?t('heartRate'):t('breath'),heart?d.hr:d.rr)}<button class="cta secondary full" data-action="inspect-live-minute" data-kind="${kind}">${heart?label3('查看今天心跳趨勢','View today’s heart-rate trend','오늘 심박 추세 보기'):label3('查看今天呼吸趨勢','View today’s breathing trend','오늘 호흡 추세 보기')}</button><div class="deep-live-context"><strong>${heart?label3('過去14天平均心率','Average heart rate over the last 14 days','지난 14일 평균 심박수'):label3('過去14天平均呼吸頻率','Average breathing rate over the last 14 days','지난 14일 평균 호흡수')}</strong><span>${heart?dp66Avg14('heart')+' bpm':dp66Avg14('breath')+' /min'}</span></div><p class="deep-live-disclaimer">${label3('查看最近的生理節奏。','Recent physiological rhythm.','최근 생리 리듬을 확인하세요.')}</p></div>`);}
+ if(m==='rhythm-detail')return f(label3('三項節奏狀態','Three rhythm indicators','리듬 상태 세 가지'),rhythmDetailModal());
+if(m==='age-detail')return f(t('bioAge'),`<div class="age-modal"><div class="age-modal-big"><div><span>${t('aiAge')}</span><strong>${(signalQuality().valid&&Number.isFinite(currentBioAge()))?currentBioAge().toFixed(1):'—'} <small>${t('years')}</small></strong></div><div><span>${t('actualAge')}</span><strong>${(Number.isFinite(d.age)?(Number.isFinite(d.age)?d.age.toFixed(1):'—'):'—')} <small>${t('years')}</small></strong></div></div>${signalQuality().valid?`<div class="bio-age-modal-delta">${bioAgeDeltaBadge()}</div>`:''}${signalQuality().valid?ageTrendCard(false)+dpBioAgeReasons():`<div class="bio-quality-empty">${qualityMessage()}</div>`}<div class="section-title" style="margin:16px 0 9px">${label3('多維度估算依據','Multidimensional inputs','다차원 추정 근거')}</div>${vitalAgeFactors()}</div>`);
+
+if(m==='sleep-day')return f(label3('當晚休息詳情','Nightly rest details','밤별 휴식 상세'),sleepDateDetail());
+ if(m==='night-detail'){const nightVital=dpQuietNightVitalAverages();return f(label3('昨夜睡眠狀態分析','Night Guardian · Sleep status','야간 수면과 휴식 분석'),`<div class="card blue"><div class="feature-heading"><span class="feature-icon">☾</span><b>${c('nightQuote')}</b></div><div class="metric-grid"><div class="metric"><label>${label3('昨夜安靜心率','Overnight quiet heart rate','야간 안정 심박')}</label><b>${nightVital.hr??'—'}</b> bpm</div><div class="metric"><label>${label3('昨夜安靜呼吸','Overnight quiet breathing','야간 안정 호흡')}</label><b>${nightVital.rr??'—'}</b> /min</div><div class="metric"><label>${label3('近期有效心搏佔比','Recent clean beat fraction','최근 유효 심박 비율')}</label><b>${Math.round(signalQuality().usableFraction*100)}%</b></div></div>${sleepMatrix(1)}${lastNightCard()}<div class="night-rhythm-tease"><b>${label3('近期放鬆節奏','Recent calm rhythm','최근 차분한 리듬')}</b>${rhythmMiniChart('calm',7,95)}<p>${label3('這是近期相近測量窗口的節奏參考；不是獨立計算的夜間 HRV。','This uses recent comparable windows, not separate overnight HRV.','최근 비슷한 측정 구간의 참고 추세입니다.')}</p></div>${technicalBasisNote('sleep')}${button(label3('查看深度休息分析','View rest analysis','휴식 분석 보기'),'night-to-deep','cta secondary full')}</div>`); }
+ if(m==='heart-moment')return f(t('moment'),dpHeartMomentScreen()+`<button class="dp-heart-integrated" id="dp-heart-integrated" type="button">💗 60 秒心跳時刻</button>`);
+ if(m==='heart-preview')return f(label3('心跳時刻 · 全螢幕預覽','Heart Moments · Full-screen','심장 순간 · 전체 화면'),`<div class="dp-heart-fullscreen"><div class="dp-heart-poster-frame"><img class="dp-heart-photo-backdrop" src="${esc(dpPosterPhoto(currentDog().photo))}" alt="" aria-hidden="true">${dpHeartPosterSvg()}</div><div class="dp-heart-fullscreen-actions"><button class="care-outline" data-action="heart-preview-back">${label3('返回編輯','Back','뒤로')}</button><button class="cta" data-action="save-heart-image">${label3('儲存同一張圖片','Save this exact image','같은 이미지 저장')}</button></div></div>`);
+ if(m==='food-edit')return f(label3('調整每日熱量建議','Adjust energy target','권장 열량 변경'),`<p class="notices">${label3('系統依體重、年齡與類型給出起始估計；如有獸醫提供的熱量目標，可在這裡修改。不必填寫食物熱量密度。','Starting estimate uses weight, age and pet type. You may override it with a veterinarian’s plan. No calorie density entry needed.','체중·나이·유형 기준 권장량을 수정할 수 있습니다.')}</p><label class="form-label">${label3('每天的熱量目標','Daily calorie target','일일 열량 목표')} (kcal)</label><input class="form-control" id="foodTargetInput" type="number" min="30" max="10000" value="${targetFood()}"/>${button(label3('採用 AI 建議','Use AI starting estimate','AI 권장량 사용'),'reset-food-target','care-outline full')}${button(t('save'),'save-food','cta full')}`);
+ if(m==='add-meal')return f(t('addMeal'),`<label class="form-label">kcal</label><input class="form-control" id="mealInput" type="number" min="1" max="4000" placeholder="200"/><div class="sp12"></div>${button(t('save'),'save-meal','cta full')}`);
+ if(m==='dose-confirm')return f(label3('確認用藥紀錄','Confirm medication change','복약 기록 확인'),`<div class="dp-dose-confirm"><p>${label3('要儲存這次用藥狀態變更嗎？','Save this medication status change?','복약 상태 변경을 저장할까요?')}</p><small>${label3('取消後原有紀錄不會改變。','Cancel keeps the previous record.','취소하면 기존 기록은 그대로입니다.')}</small><div class="dp-dose-actions"><button class="care-outline" data-action="dose-confirm-cancel">${label3('取消','Cancel','취소')}</button><button class="cta" data-action="dose-confirm-save">${label3('儲存變更','Save change','변경 저장')}</button></div></div>`);
+ if(m==='med-manage')return f(label3('管理用藥排程','Manage medication','복약 일정 관리'),medManageModal());
+ if(m==='med-pause-confirm')return f(label3('確認用藥療程變更','Confirm medication plan change','복약 일정 변경 확인'),`<div class="dp-dose-confirm"><p>${label3('要儲存這次暫停／恢復療程的變更嗎？','Save this pause or resume change?','일시중지/재개 변경을 저장할까요?')}</p><small>${label3('取消不會更改原本的用藥安排。','Cancel keeps the original schedule.','취소하면 원래 일정이 유지됩니다.')}</small><div class="dp-dose-actions"><button class="care-outline" data-action="med-pause-cancel">${label3('取消','Cancel','취소')}</button><button class="cta" data-action="med-pause-save">${label3('儲存變更','Save changes','변경 저장')}</button></div></div>`);
+ if(m==='med-delete-confirm')return f(label3('確認移除排程','Confirm removal','삭제 확인'),medDeleteConfirmModal());
+ if(m==='vax-reschedule')return f(label3('疫苗預約改期','Reschedule vaccination','예방접종 예약 변경'),vaxRescheduleModal());
+ if(m==='vax-complete-date')return f(label3('確認實際疫苗接種日期','Confirm actual vaccination date','실제 접종일 확인'),dpVaxCompleteDateModal());
+if(m==='report-edit')return f(label3('修改檢驗結果','Edit result','검사 결과 수정'),dpReportEditModal());
+if(m==='report-delete')return f(label3('刪除檢驗結果','Delete result','검사 결과 삭제'),dpReportDeleteModal());
+if(m==='vax-edit')return f(label3('修改疫苗紀錄','Edit vaccination','예방접종 수정'),vaxEditModal());
+if(m==='vax-delete')return f(label3('刪除疫苗紀錄','Delete vaccination','예방접종 삭제'),vaxDeleteModal());
+ if(m==='med-add')return f(t('addMedicine'),`<label class="form-label">${(state.lang==='zh'||state.lang==='zht')?(state.lang==='zht'?'藥物名稱':'药物名称'):state.lang==='ko'?'약 이름':'Medicine name'}</label><input class="form-control" id="medNameInput" placeholder="Example"/><div class="sp12"></div><label class="form-label">${(state.lang==='zh'||state.lang==='zht')?(state.lang==='zht'?'服用時間':'服用时间'):state.lang==='ko'?'복용 시각':'Dose time'}</label><input class="form-control" type="time" id="medTimeInput" value="21:00"/><p class="notices">${t('medExplain')}</p>${button(t('save'),'save-med','cta full')}`);
+ if(m==='vax-add')return f(t('addVax'),`<label class="form-label">${label3('疫苗名称','Vaccine','백신 이름')}</label><input class="form-control" id="vaxNameInput" placeholder="Vaccine"/><div class="sp12"></div><label class="form-label">${t('date')}</label><input class="form-control" type="date" id="vaxDateInput" value="${iso(dateAdd(localDate(),7))}"/><div class="sp12"></div><label class="form-label">${label3('預約時間（選填）','Appointment time (optional)','예약 시간(선택)')}</label><input class="form-control" type="time" id="vaxTimeInput"/><div class="sp12"></div><label class="form-label">${label3('记录类型','Record type','기록 유형')}</label><select class="form-control" id="vaxStatusInput"><option value="upcoming">${label3('未来预约','Scheduled appointment','예정된 예약')}</option><option value="done">${t('done')}</option></select><p class="notices">${t('vaxExplain')}</p>${button(t('save'),'save-vax','cta full')}`);
+ if(m==='gps-open'&&gpsForCurrentPet())return f(label3('定位與電子圍欄','GPS & Geofence','GPS 및 전자 울타리'),`<div class="gps-modal"><section class="card gps-setting-row"><div class="row spread"><div class="grow"><b>${label3('GPS 定位開關','GPS location','GPS 위치')}</b><div class="subtitle">${state.gpsEnabled?label3('已開啟','On','켜짐'):label3('目前關閉（預設）','Off (default)','꺼짐 (기본)')}</div></div><button class="toggle-track ${state.gpsEnabled?'on':''}" data-action="toggle-gps" aria-pressed="${!!state.gpsEnabled}"><i></i></button></div><p class="gps-energy">${vicon('activity',14)} ${label3('GPS 開啟時耗電會增加。可獨立開 GPS 而不使用電子圍欄。','GPS increases battery use. You can use location without enabling the geofence.','GPS는 배터리 소모가 늘어납니다. 전자 울타리 없이 위치만 사용할 수 있습니다.')}</p></section>
+ ${state.gpsEnabled?`<div class="gps-unified-intro"><span>${vicon('garden',17)} ${geoLocale('寵物位置與電子圍欄使用同一張地圖','One map for pet location and geofence','반려동물 위치와 안전 구역을 한 지도에서 확인')}</span><span class="geo-demo-badge">${geoLocale('模擬 GPS','GPS DEMO','GPS 데모')}</span></div>`:`<div class="gps-empty-state">${vicon('garden',28)}<b>${label3('GPS 尚未開啟','GPS is off','GPS가 꺼져 있어요')}</b><span>${label3('開啟 GPS 後，才會顯示寵物位置與可繪製的地圖。','Enable GPS to view your pet and draw on the map.','GPS를 켜면 반려동물 위치와 그리기 지도가 표시됩니다.')}</span></div>`}
+ <section class="card gps-setting-row geofence-shape"><div class="row spread"><div class="grow"><b>${label3('電子圍欄','Geofence','전자 울타리')}</b><div class="subtitle">${!state.gpsEnabled?label3('必須先開啟 GPS','Enable GPS first','먼저 GPS를 켜세요'):state.geofenceEnabled?label3('已啟用手繪安全區域','Hand-drawn zone active','그린 구역 활성화'):label3('尚未啟用','Not active','비활성화')}</div></div><button class="toggle-track ${state.geofenceEnabled&&state.gpsEnabled?'on':''}" data-action="toggle-fence" aria-pressed="${!!(state.gpsEnabled&&state.geofenceEnabled)}" ${!state.gpsEnabled?'disabled':''}><i></i></button></div>${state.gpsEnabled?`<div class="fence-draw-heading"><b>${geoLocale('查看位置／編輯安全範圍','View position / Edit safe zone','위치 보기 / 안전 구역 편집')}</b><p>${geoLocale('在地圖上點「重新描繪」後拖動手指畫新範圍；完成後按一次儲存即可。取消修改會恢復上次儲存的範圍。','Draw on this single map. Tap Redraw, trace the boundary, then save once. Cancel edit restores the previously saved zone.','이 지도에서 구역을 그리세요. 다시 그리기를 눌러 새 구역을 그린 뒤 한 번만 저장하세요. 편집 취소는 이전 구역을 복원합니다.')}</p></div>
+ <div class="fence-map-editor">${geoMapSvg(true)}<span class="fence-map-caption">${geoLocale('模擬地圖 · 非真實 GPS','Illustrative map · not live GPS','예시 지도 · 실제 GPS 아님')}</span></div>
+ <div class="geo-position-status ${geoStatus()==='outside'?'outside':geoHasActiveFence()?'inside':'inactive'}"><span class="geo-position-dot"></span><div><b>${esc(currentDog().name)} · ${geoStatus()==='outside'?geoLocale('已在圍欄外','Outside safe zone','안전 구역 밖'):geoHasActiveFence()?geoLocale('位於安全區內','Inside safe zone','안전 구역 안'):geoLocale('尚未啟用安全區','Safe zone not active','안전 구역 비활성')}</b><small>${geoLocale('位置和圍欄顯示於同一張地圖；僅限演示','Location and fence share one map · demo only','위치와 울타리를 하나의 지도에 표시 · 데모')}</small></div></div>
+  ${geoHasActiveFence()&&!state.fenceEditMode?`<div class="dp-fence-compare"><b>${geoLocale('安全區域模擬對比','Safe-zone scenario preview','안전 구역 시나리오 미리보기')}</b><p>${geoLocale('點選「範圍內」或「模擬越界」，地圖與狀態會立即切換；僅供示範，不代表真實位置，也不會推送真實警報。','Switch between Inside and Test exit to preview map states; this is not live GPS or a real notification.','구역 안과 이탈 테스트를 전환해 지도를 미리 봅니다. 실제 GPS 위치나 푸시 알림이 아닙니다.')}</p><div class="dp-fence-compare-buttons"><button type="button" data-action="gps-sim-position" data-pos="inside" class="${geoStatus()==='inside'?'is-selected':''}">${geoLocale('✓ 範圍內','✓ Inside','✓ 구역 안')}</button><button type="button" data-action="gps-sim-position" data-pos="outside" class="${geoStatus()==='outside'?'is-selected':''}">${geoLocale('! 模擬越界','! Test exit','! 이탈 테스트')}</button></div><span class="dp-fence-sim-result ${geoStatus()==='outside'?'is-outside':'is-inside'}">${geoStatus()==='outside'?geoLocale('示範：寵物超出安全範圍','Demo: pet outside safe zone','데모: 반려동물이 구역 밖에 있음'):geoLocale('示範：寵物位於安全範圍內','Demo: pet inside safe zone','데모: 반려동물이 구역 안에 있음')}</span></div>`:''}
+  <div class="fence-toolbar"><button type="button" data-action="fence-redraw">${geoLocale('重新描繪','Redraw','다시 그리기')}</button>${state.fenceEditMode?`<button type="button" data-action="fence-cancel">${geoLocale('取消修改','Cancel edit','편집 취소')}</button>`:''}</div>
+ <div class="fence-confirm"><p>${state.fenceEditMode?geoLocale('完成手繪後點「儲存並完成」，會立即套用新圍欄、儲存全部設定並返回首頁。','When done drawing, Save & finish applies the new safe zone, saves everything and returns Home.','그리기를 마친 뒤 저장하고 완료하면 울타리가 적용되고 홈으로 돌아갑니다.'):state.geofenceEnabled?geoLocale('目前圍欄已啟用。想調整範圍請點重新描繪。','Geofence is enabled. Tap Redraw to change its shape.','전자 울타리가 켜져 있습니다. 변경하려면 다시 그리세요.'):geoLocale('電子圍欄已關閉，仍可使用 GPS 查看寵物位置。','Geofence is off. GPS positioning still works.','전자 울타리가 꺼져 있어도 GPS 위치 확인이 가능합니다.')}</p>${state.fenceEditMode?`<button type="button" class="cta full" data-action="save-fence-shape" ${state.fenceDraft?.length>=3?'':'disabled'}>${geoLocale('儲存並完成','Save & finish','저장하고 완료')}</button>`:`<button class="cta full dp-save-geofence-settings" data-action="save-geofence-settings">${geoLocale('儲存並完成','Save & finish','저장하고 완료')}</button>`}</div>`:`<p class="gps-prereq">${label3('先開啟 GPS，才能畫出或啟用電子圍欄。','Turn on GPS before drawing or enabling a geofence.','GPS를 켜야 지오펜스를 설정할 수 있습니다.')}</p>`}</section>
+ </div>`);
+ if(m==='pair-wizard')return f(tr('尋找並配對項圈','Find & pair a collar','목걸이 검색 및 연결'),wizardView());
+if(m==='device-detail')return f(t('myDevice'),`<div class="device-modal-summary"><div class="pair-picked">${dpDevicePhoto()}<div><b>${devName()}</b><small>${state.connected?tr('目前已配對','Currently paired','현재 연결됨'):tr('尚未配對','Not paired','연결되지 않음')}</small></div></div><p class="notices">${state.connected&&state.deviceType==='4g'?tr('已配對 4G 項圈；可在我的頁面獨立控制 GPS 與電子圍欄。','4G collar paired; GPS and geofence can be controlled separately from Me.','4G 목걸이가 연결되었으며 GPS와 지오펜스를 별도로 설정할 수 있습니다.'):tr('裝置版本只能在完成配對後改變。','Device type changes only after pairing completes.','연결 완료 후에만 기기 종류가 변경됩니다.')}</p></div>${button(tr('配對項圈','Pair collar','목걸이 연결'),'device-find','cta full')}`);
+if(m==='shop')return f(tr('DeepPet 商城','DeepPet Store','DeepPet 스토어'),shopView());
+if(m==='language-detail')return f(t('language'),`<p class="notices">${tr('選擇介面語言。所有主頁、健康記錄、設備與商城的標籤將切換。','Select a language for the Home, Deep, Health, devices and Store screens.','홈, 심층, 건강, 기기 및 상점의 언어를 변경합니다.')}</p><div class="language-option-list">${[['zht',label3('繁體中文','Traditional Chinese','중국어 번체')],['zh',label3('簡體中文','Simplified Chinese','중국어 간체')],['en',label3('英文','English','영어')],['ko','한국어（Korean）'],['ja','日本語（Japanese）']].map(([id,name])=>`<button class="language-option ${state.lang===id?'active':''}" data-action="pick-language" data-lang="${id}"><span class="language-radio"></span><span>${name}</span>${state.lang===id?'<span class="lang-check">✓</span>':''}</button>`).join('')}</div><p class="notices">${tr('切換後會保留目前寵物與健康資料。','Your current pet and data will be preserved.','선택한 반려동물과 데이터는 유지됩니다.')}</p>`);
+if(m==='shop-checkout')return f(tr('訂購預覽','Order preview','주문 미리보기'),shopCheckout());
+if(m==='pet-friend-menu')return f(label3('新增好友','Add friends','친구 추가'),dpFriendMenuContent());
+ if(m==='pet-friend-qr')return f(label3('我的寵物 QR Code','My pet QR code','내 반려동물 QR 코드'),dpOwnQrContent());
+ if(m==='pet-friend-search')return f(label3('輸入寵物 ID','Enter pet ID','반려동물 ID 입력'),dpFriendSearchContent());
+ if(m==='pet-friend-scan')return f(label3('掃描 QR Code','Scan QR code','QR 코드 스캔'),dpFriendScanContent());
+ if(m==='pet-public-card')return f(label3('寵物公開檔案','Public pet profile','반려동물 공개 프로필'),dpPublicCardContent());
+ if(m==='garden-detail')return f(t('garden'),gardenView());
+if(m==='meal-edit')return f(label3('修改餐食紀錄','Edit meal record','식사 기록 수정'),dpMealEditContent());
+ if(m==='garden-profile')return f(tr('公開寵物主頁','Public pet profile','공개 반려동물 프로필'),gardenPublicProfile());
+if(m==='garden-chat')return f(tr('寵物私訊','Pet messages','펫 메시지'),chatView());
+if(m==='family-detail')return f(t('family'),`<p class="notices">${label3('目前僅提供本機授權流程體驗，不會讓其他手機或帳號實際查看健康資料。','Local preview only: approving a request does not give another device or account access to health records.','로컬 권한 체험입니다. 다른 기기나 계정에 실제 건강 기록 접근 권한이 주어지지 않습니다.')}</p>`+familyShareContent());
+if(m==='privacy-detail')return f(t('privacy'),selectedBlank()?`<div class="privacy-v44"><div class="privacy-hero"><span>${vicon('shield',26)}</span><div><h3>${label3('空白檔案尚無寵物健康資料','A blank profile has no pet health records','빈 프로필에는 반려동물 건강 정보가 없습니다.')}</h3><p>${label3('建立寵物檔案後，可在這裡管理各隻寵物自己的資料與權限。','Create a pet profile to manage its own records and permissions.','프로필을 만든 후 개별 기록과 권한을 관리하세요.')}</p></div></div><p class="notices">${label3('現階段所有自行輸入的紀錄僅保存在本機瀏覽器；尚未開放跨裝置家庭共享。','Pet record edits are stored in this browser. Cross-device family sharing is not available.','보호자 입력 기록은 이 브라우저에만 저장되며 기기 간 가족 공유는 지원되지 않습니다.')}</p></div>`:privacyContent());
+if(m==='alerts')return f(t('alerts'),alertsContent());
+return f(t('preview'),'');
+}
+function recordEditor(){const k=state.importKind||'meal',txt=state.importText||'',date=iso(localDate()),kindLabel=k==='meal'?t('food'):k==='med'?t('med'):k==='vax'?t('vaccines'):t('reports'),found=(regex,fallback='')=>(txt.match(regex)||[])[1]||fallback;
+let fields='';
+if(k==='meal'){const parts=state.foodDraftParts||[],photo=state.foodPhotoDraft?.data||'';fields=`<p class="subtitle">${label3('拍照或手動選食物，記錄吃了多少克。熱量會自動換算，混合餐可添加多種食材。','Take a photo or pick the foods and enter grams. Calories are estimated automatically; add multiple foods for mixed meals.','사진을 찍거나 식품을 선택하고 g을 입력하면 열량이 자동 계산됩니다.')}</p><div class="dp-food-photo-tools"><label class="dp-photo-pick">${vicon('camera',18)} ${label3('拍照／上傳食物','Photo / Choose image','사진 촬영 / 업로드')}<input id="mealPhotoInput" type="file" accept="image/*" capture="environment"/></label>${photo?`<img src="${esc(photo)}" class="dp-photo-preview" alt=""/>`:''}</div><p class="subtitle" id="mealAIStatus">${esc(state.foodPhotoDraft?.message||label3('連接影像辨識服務後可自動帶入食物品項；目前也可直接選種類及克數。','Connect food recognition to prefill items; you can select foods and grams now.','식품 인식 서비스 연결 시 자동 입력됩니다. 지금은 식품과 g을 선택할 수 있어요.'))}</p><label class="form-label">${label3('用餐日期','Meal date','식사 날짜')}</label><input class="form-control" id="importMealDate" type="date" value="${state.foodDraftDate||date}" max="${date}"/><label class="form-label">${label3('用餐時間（選填）','Meal time (optional)','식사 시간(선택)')}</label><input class="form-control" id="importTime" type="time" value="${esc(state.foodDraftTime??'')}"/><label class="form-label">${label3('食物種類','Food type','식품 종류')}</label><select class="form-control" id="importFoodType">${dpFoodChoices(state.foodRecognizedType||'dry')}</select><label class="form-label">${label3('品牌／產品名稱（可選）','Brand / Product (optional)','브랜드 / 제품명(선택)')}</label><input class="form-control" id="importFoodBrand" maxlength="80" placeholder="${label3('例如：皇家、希爾思、鮭魚','e.g. Royal Canin, Hill’s, salmon','예: 로얄캐닌, 힐스')}" value="${esc(state.foodRecognizedBrand||'')}"/><label class="form-label">${label3('吃了多少克','Grams eaten','섭취량(g)')}</label><input class="form-control" id="importFoodGrams" type="number" min="1" max="5000" step="1" placeholder="g"/><button class="care-outline dp-add-part" data-action="food-add-part">${label3('＋ 再加入一種食物','＋ Add another food','＋ 음식 하나 더 추가')}</button>${parts.length?`<div class="dp-food-draft-parts"><b>${label3('這一餐已加入','Foods in this meal','이번 식사에 추가됨')}</b>${parts.map((x,i)=>`<div class="row spread"><span>${esc(x.brand||dpFoodLabel(x.type))} · ${x.grams}g</span><span>${x.kcal} kcal <button class="dp-inline-remove" data-action="food-remove-part" data-index="${i}">×</button></span></div>`).join('')}</div>`:''}<p class="notices">${label3('熱量依食物類別的參考值估算；包裝標示不同時，以實際產品標籤或獸醫指示為準。','Calories use category reference values; product labels and veterinary advice take priority.','열량은 식품 유형별 참고값을 사용합니다. 제품 표시를 우선하세요.')}</p>`;}
+else if(k==='med'){fields=`<label class="form-label">${label3('藥物名稱','Medication name','약 이름')}</label><input class="form-control" id="importMedName" maxlength="80" value="${esc(found(/(?:藥品|药品|medicine|medication)\s*[:：]?\s*([^\n]+)/i,''))}"/><div class="form-grid"><div><label class="form-label">${label3('每次服用數量','Amount per dose','회당 용량')}</label><input class="form-control" id="importMedQty" type="number" min="0.25" step="0.25" required/></div><div><label class="form-label">${label3('單位','Unit','단위')}</label><select class="form-control" id="importMedUnit" required><option value="" selected disabled>${label3('請選擇單位','Choose unit','단위 선택')}</option><option value="顆">${label3('顆','tablet(s)','정')}</option><option value="包">${label3('包','packet(s)','포')}</option><option value="mL">mL</option><option value="滴">${label3('滴','drop(s)','방울')}</option></select></div></div><div class="form-grid"><div><label class="form-label">${label3('開始日期','Start date','시작일')}</label><input class="form-control" id="importMedStart" type="date" value="${date}"/></div><div><label class="form-label">${label3('連續服用幾天','Number of days','복용 기간(일)')}</label><input class="form-control" id="importMedDays" type="number" min="1" max="365" required/></div></div><label class="form-label">${label3('每天服用時間（最多3次）','Daily time(s), up to 3','하루 복용 시간(최대 3회)')}</label><div class="dp-med-times"><input class="form-control" id="importTime" type="time" required/><input class="form-control" id="importTime2" type="time"/><input class="form-control" id="importTime3" type="time"/></div><p class="notices">${label3('例如：7天，每天08:00、20:00各服2顆。存檔後每天自動產生待辦，依獸醫處方填寫。','Example: 7 days, 2 tablets at 08:00 and 20:00 daily. Save once for a daily checklist; follow your veterinarian’s prescription.','예: 7일간 매일 08:00, 20:00에 2정씩. 수의사 처방에 맞춰 입력하세요.')}</p>`;}
+else if(k==='vax'){fields=`<label class="form-label">${label3('疫苗名稱','Vaccine name','백신 이름')}</label><input class="form-control" id="importVaxName" value="${esc(found(/(?:疫苗|vaccine)\s*[:：]?\s*([^\n]+)/i,''))}"/><label class="form-label">${label3('預約／實際接種日期','Appointment / vaccination date','예약 / 접종 날짜')}</label><input class="form-control" id="importDate" type="date" value="${date}"/><label class="form-label">${label3('預約時間（選填）','Appointment time (optional)','예약 시간(선택)')}</label><input class="form-control" id="importVaxTime" type="time"/><label class="form-label">${label3('接種狀態','Status','상태')}</label><select class="form-control" id="importVaxStatus"><option value="upcoming">${label3('已安排，尚未接種','Scheduled, not given','예약됨')}</option><option value="done">${label3('已接種','Completed','접종 완료')}</option></select>`;}
+else {fields=`<label class="form-label">${label3('寵物醫院／檢驗機構','Clinic / Laboratory','동물병원 / 검사기관')}</label><input class="form-control" id="importReportClinic" maxlength="100" placeholder="${label3('醫院或機構名稱','Clinic name','병원 이름')}"/><div class="form-grid"><div><label class="form-label">${label3('實際就診日期','Examination date','검사 날짜')}</label><input class="form-control" id="importReportDate" type="date" max="${date}" value="${date}"/></div><div><label class="form-label">${label3('上傳日期','Upload date','등록 날짜')}</label><input class="form-control" id="importUploadDate" type="date" value="${date}" max="${date}"/></div></div><div class="form-grid"><div><label class="form-label">${label3('就診時間（選填）','Exam time (optional)','검사 시간(선택)')}</label><input class="form-control" id="importExamTime" type="time"/></div><div><label class="form-label">${label3('上傳時間','Upload time','업로드 시간')}</label><input class="form-control" id="importUploadTime" type="time" value="${new Date().toTimeString().slice(0,5)}"/></div></div><label class="form-label">${label3('檢驗項目','Test item','검사 항목')}</label><input class="form-control" id="importTestName" maxlength="80" placeholder="WBC, RBC, ALT…" value="${esc(found(/(?:檢查|检查|test|item)\s*[:：]?\s*([^\n]+)/i,''))}"/><label class="form-label">${label3('檢驗數值','Result','검사 값')}</label><input class="form-control" id="importResult" maxlength="60"/><label class="form-label">${label3('單位','Unit','단위')}</label><input class="form-control" id="importUnit" maxlength="32" placeholder="10⁹/L, g/L, U/L…"/><div class="form-grid"><div><label class="form-label">${label3('參考下限','Lower reference','참고 하한')}</label><input class="form-control" id="importReferenceLow" type="number" step="any"/></div><div><label class="form-label">${label3('參考上限','Upper reference','참고 상한')}</label><input class="form-control" id="importReferenceHigh" type="number" step="any"/></div></div><label class="form-label">${label3('結果狀態','Status','상태')}</label><select class="form-control" id="importReportClass"><option value="unknown">${label3('待確認','Needs review','검토 필요')}</option><option value="normal">${t('normal')}</option><option value="alert">${t('attentionCount')}</option></select>${txt.trim()?`<p class="notices">${label3('已讀取影像／報告文字。儲存時會嘗試整理常見檢驗代碼及數值，請先核對內容。','Text was extracted. Common test codes and numeric results can be imported after review.','검사 결과를 확인한 후 저장하세요.')}</p>`:''}`;}
+return `<p class="subtitle">${kindLabel} · ${state.importName?esc(state.importName):label3('手動輸入','Manual entry','직접 입력')}</p>${fields}<label class="form-label">${label3('備註（可選）','Notes (optional)','메모(선택)')}</label><textarea class="form-control" id="importNote" rows="2">${esc(txt.slice(0,350))}</textarea>${button(t('save'),'save-import','cta full')}`;
+}
+
+function saveImportedRecord(){const k=state.importKind,notes=$('#importNote')?.value?.trim()||'',dateToday=iso(localDate());
+ const pet=String(state.dog),dateKey=dpFoodKey($('#importMealDate')?.value||dateToday);
+ // The original import workflow mutated records, dropped its draft and announced
+ // success even when localStorage rejected the write (often because of photos).
+ const recordsBefore=dpCareSnapshot([['mealItems',dateKey],['medsByDog',pet],['vaxByDog',pet],['userReportEntries',pet]]);
+ const draftBefore={importText:state.importText,importName:state.importName,importFileId:state.importFileId,importPreview:state.importPreview,foodDraftParts:state.foodDraftParts,foodPhotoDraft:state.foodPhotoDraft,foodDraftDate:state.foodDraftDate,foodDraftTime:state.foodDraftTime,foodRecognizedType:state.foodRecognizedType,foodRecognizedBrand:state.foodRecognizedBrand,foodSelectedDate:state.foodSelectedDate,activeReport:state.activeReport};
+ const dateByKind=k==='meal'?$('#importMealDate')?.value||dateToday:k==='med'?$('#importMedStart')?.value:k==='vax'?$('#importDate')?.value:$('#importReportDate')?.value;
+ if(!dpCareDate(dateByKind,k==='med'||k==='vax')||(k==='report'&&!dpCareDate($('#importUploadDate')?.value))){toast(t('inputError'));return;}
+if(k==='meal'){const parts=[...(state.foodDraftParts||[])],grams=Number($('#importFoodGrams')?.value),type=$('#importFoodType')?.value||'dry';if(grams>0&&grams<=5000)parts.push(dpFoodPart(type,grams,$('#importFoodBrand')?.value||''));if(!parts.length){toast(label3('請填寫至少一種食物與克數','Enter at least one food and its grams','음식과 g을 입력하세요'));return;}const date=$('#importMealDate')?.value||dateToday,time=$('#importTime')?.value??'';if(!dpOptionalAppointmentTime(time)||date>dateToday){toast(t('inputError'));return;}const key=dpFoodKey(date),kcal=parts.reduce((a,b)=>a+b.kcal,0),gramsTotal=parts.reduce((a,b)=>a+b.grams,0);state.mealItems??={};state.mealItems[key]??=[];state.mealItems[key].push({id:'meal'+Date.now(),time,date,parts,kcal,grams:gramsTotal,photo:state.foodPhotoDraft?.data||'',source:state.foodPhotoDraft?.data?'photo':'manual'});state.foodSelectedDate=date;state.foodDraftDate=null;state.foodDraftTime=null;state.foodDraftParts=[];state.foodPhotoDraft=null;state.foodRecognizedType=null;state.foodRecognizedBrand=null;}
+else if(k==='med'){const name=$('#importMedName')?.value.trim(),qty=Number($('#importMedQty')?.value),days=Number($('#importMedDays')?.value),startDate=$('#importMedStart')?.value,times=[$('#importTime')?.value,$('#importTime2')?.value,$('#importTime3')?.value].filter(Boolean),unit=$('#importMedUnit')?.value||'';if(!name||!unit||!(qty>0&&qty<=100)||!Number.isInteger(days)||days<1||days>365||!startDate||!times.length||times.some(x=>!dpOptionalAppointmentTime(x))||new Set(times).size!==times.length){toast(t('inputError'));return;}if(dpMedicationSchedules().some(m=>m.name.trim().toLowerCase()===name.toLowerCase()&&m.startDate===startDate&&Number(m.days||0)===days&&JSON.stringify(m.times||[m.time])===JSON.stringify(times))){toast(label3('這個療程已存在','This plan already exists','이미 등록된 일정입니다'));return;}medsForDog().push({id:'m'+Date.now(),name,qty,unit,days,startDate,times,time:times[0],status:'pending',createdAt:new Date().toISOString()});}
+else if(k==='vax'){const name=$('#importVaxName')?.value.trim(),date=$('#importDate')?.value,status=$('#importVaxStatus')?.value,time=$('#importVaxTime')?.value??'';if(!name||!date||!dpOptionalAppointmentTime(time)||status==='done'&&date>dateToday){toast(t('inputError'));return;}if(allVaxForDog().some(v=>v.name.toLowerCase()===name.toLowerCase()&&v.date===date)){toast(label3('相同疫苗與日期的記錄已存在','That appointment already exists','같은 접종 일정이 있습니다'));return;}vaxForDog().push({id:'v'+Date.now(),name,date,time,status,doneDate:status==='done'?date:null});}
+else if(k==='report'){const date=$('#importReportDate')?.value,uploadedAt=$('#importUploadDate')?.value,examTime=$('#importExamTime')?.value||'',uploadTime=$('#importUploadTime')?.value||'',clinic=($('#importReportClinic')?.value||'').trim(),name=($('#importTestName')?.value||'').trim(),value=($('#importResult')?.value||'').trim(),unit=($('#importUnit')?.value||'').trim(),low=$('#importReferenceLow')?.value||'',high=$('#importReferenceHigh')?.value||'',status=$('#importReportClass')?.value;
+if(!date||date>dateToday||!uploadedAt||uploadedAt>dateToday||uploadedAt<date||!clinic||!/^\d{4}-\d{2}-\d{2}$/.test(date)){toast(label3('請核對醫院、就診與上傳日期','Check clinic, exam and upload dates','병원, 검사일, 등록일을 확인하세요'));return;}
+if(!dpReportBoundsValid(low,high)){toast(label3('參考範圍需要同時提供有效上下限，而且下限必須小於上限。','Provide both finite reference limits; the lower limit must be smaller.','참고 범위의 하한과 상한을 모두 입력하고 하한이 더 작아야 합니다.'));return;}
+const raw=state.importText||'';const tests=[];if(name&&value){if(!Number.isFinite(Number(value))){toast(label3('請輸入有效的檢驗數值','Enter a valid numeric test result','유효한 검사 수치를 입력하세요'));return;}tests.push({name,value,unit,status});}
+if(!tests.length&&raw){const lines=raw.split(/[\n\r]+/);for(const line of lines){const m=line.trim().match(/\b(WBC|RBC|HGB|HCT|MCV|MCH|MCHC|PLT|ALT|AST|ALP|ALB|GLOB|TP|GLU|BUN|CREA|Na|K|Cl|Ca|P|CHOL|TBIL|CK|CRP)\b\s*[:：\s]+(-?\d+(?:\.\d+)?)(?:\s+([a-zA-Zµμ%⁹⁻\/0-9]+))?/i);if(m)tests.push({name:m[1].toUpperCase(),value:m[2],unit:m[3]||'',status:'unknown'});}}
+if(!tests.length){toast(label3('請填入檢驗項目與結果，或核對已辨識的報告文字','Enter a test and result, or review recognized report text','검사 항목과 값을 입력하세요'));return;}
+// One reference interval cannot be silently assigned to multiple unrelated
+// analytes extracted from OCR. Preserve their original individual values and
+// ask the guardian to enter each analyte's own limits in Health afterwards.
+if(tests.length>1&&(low!==''||high!=='')){toast(label3('辨識到多項檢驗數值，請先清空共用參考範圍；匯入後逐項填寫各自的上下限。','Multiple tests were recognized. Clear these shared reference limits, import the tests, then enter each test’s own range.','여러 검사가 인식되었습니다. 공통 참고 범위를 비우고 가져온 뒤 항목별 범위를 입력하세요.'));return;}
+state.userReportEntries??={};const key=String(state.dog),reportId='r'+Date.now();state.userReportEntries[key]??=[];const unique=new Set();for(const t of tests){const dedup=t.name+'|'+t.unit;if(unique.has(dedup))continue;unique.add(dedup);state.userReportEntries[key].push({id:reportId+'-'+unique.size,reportId,name:t.name,value:t.value,unit:t.unit,status:t.status||'unknown',notes,date,clinic,uploadedAt,examTime,uploadTime,referenceLow:low,referenceHigh:high,source:state.importSource==='manual'?'manual':'file',sourceFile:state.importName||'',attachmentId:state.importFileId||null});}state.activeReport=reportAvailableDates().indexOf(date);
+}
+state.importText='';state.importName='';state.importFileId=null;state.importPreview='';state.foodDraftParts=[];state.foodPhotoDraft=null;
+if(!persist()){dpCareRestore(recordsBefore);Object.assign(state,draftBefore);return;}
+closeModal();render(true);toast(t('saved'));
+}
+
+function loadScript(url,key){return new Promise((resolve,reject)=>{if(window[key]){resolve();return;}const tag=document.createElement('script');tag.src=url;tag.onload=resolve;tag.onerror=()=>reject(new Error('OCR library unavailable'));document.head.appendChild(tag)})}
+async function processImportFile(file){
+ if(!file)return;
+ const pet=state.dog,epoch=state.dpPetEpoch,kind=state.importKind,serial=++dpImportSerial;
+ const stillSame=()=>state.dog===pet&&state.dpPetEpoch===epoch&&state.importKind===kind&&dpImportSerial===serial&&['record-import','record-editor'].includes(state.modal);
+ if(kind==='meal'&&file.type.startsWith('image/')){dpHandleFoodPhoto(file);return;}
+ const oldId=state.importFileId;state.importFileId=null;if(oldId)dpDiscardUncommittedReportFile(oldId);
+ state.importName=file.name;state.importText='';
+ // Clear text and preview belonging to the previous file before any IndexedDB
+ // write/OCR await; an early Next click must never reuse a stale extraction.
+ const earlyText=$('#ocrText');if(earlyText)earlyText.value='';
+ const earlyPreview=$('#importPreview');if(earlyPreview)earlyPreview.textContent=file.name;
+ if(kind==='report'){
+  try{const id=await dpSaveReportFile(file);if(!stillSame()){dpDiscardUncommittedReportFile(id);return;}state.importFileId=id;}
+  catch(e){if(!stillSame())return;state.importFileId=null;}
+ }
+ if(!stillSame())return;
+ const box=$('#importPreview');if(box)box.textContent=file.name;
+ let text='';try{
+ if(file.type.startsWith('image/')){if(box){const img=document.createElement('img');img.style.cssText='max-width:100%;max-height:150px;object-fit:contain;border-radius:10px;display:block;margin:8px auto';img.src=URL.createObjectURL(file);img.onload=()=>URL.revokeObjectURL(img.src);img.onerror=()=>URL.revokeObjectURL(img.src);box.appendChild(img)}await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js','Tesseract');const result=await Tesseract.recognize(file,'eng+chi_tra+chi_sim');text=result.data.text;}
+ else if(file.type==='application/pdf'){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js','pdfjsLib');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise;for(let i=1;i<=Math.min(2,pdf.numPages);i++){const page=await pdf.getPage(i),content=await page.getTextContent();text+=content.items.map(x=>x.str).join(' ')+'\n';}if(!text.trim())throw new Error('Scanned PDF has no extracted text');}
+ }catch(e){text='';if(stillSame()&&box)box.insertAdjacentHTML('beforeend',`<p class="notices">${label3('未能自動辨識，請在下方輸入文字，再按下一步。','Automatic recognition unavailable. Enter text below, then continue.','자동 인식 불가. 아래에 직접 입력하세요.')}</p>`);}
+ if(!stillSame())return;
+ const userEdited=$('#ocrText')?.value||'';
+ // OCR is only a suggestion; never erase text the owner typed while it ran.
+ state.importText=userEdited||text;
+ if($('#ocrText')&&!userEdited)$('#ocrText').value=text;
+}
+function renderModal(){let root=$('#overlay-root');if(!state.modal){root.innerHTML='';root.dataset.currentModal='';return}const same=root.dataset.currentModal===state.modal;const scroll=same?(root.querySelector('.modal-sheet')?.scrollTop||0):0;const modal=`<div class="overlay-backdrop ${['show-summary','age-detail','night-detail','sleep-day','heart-moment','heart-preview','dp-events','dp-solo','rhythm-detail','garden-detail','garden-chat','garden-profile','shop','shop-checkout','pair-wizard','device-detail','baseline-detail','quality-day','care-detail','family-detail','privacy-detail','alerts','live-heart','live-breath','tour','care-plan','behavior-detail','weekly-story','vet-brief','empty-collar-guide','free-record','avatar-choice'].includes(state.modal)?'center-backdrop':''}" data-action="modal-outside"><div class="modal-sheet" role="dialog" aria-modal="true">${modalUI()}</div></div>`;root.innerHTML=state.lang==='zht'?toTraditional(modal):state.lang==='zh'?toSimplified(modal):modal;root.dataset.currentModal=state.modal;const sheet=root.querySelector('.modal-sheet');if(sheet&&same)sheet.scrollTop=scroll;}
+function downloadFile(filename,content,mime){const blob=new Blob([content],{type:mime});const href=URL.createObjectURL(blob);const a=document.createElement('a');a.href=href;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),2000)}
+function downloadHeart(){dpDownloadPoster();}
+
+function downloadWeeklyStory(){
+ const d=currentDog(),m=weeklyStoryData(),pet=state.dog,epoch=state.dpPetEpoch,canvas=document.createElement('canvas');canvas.width=900;canvas.height=1120;const c=canvas.getContext('2d');
+ c.fillStyle='#eef4ff';c.fillRect(0,0,900,1120);c.fillStyle='#283957';c.font='bold 38px Arial';c.fillText('DeepPet · '+label3('本週健康故事','Weekly Story','주간 건강 이야기'),58,86);
+ c.font='bold 52px Arial';c.fillText(`${d.name} · ${label3('這一週','This week','이번 주')}`,58,815);c.font='30px Arial';
+ c.fillText(`${label3('有效量測日','Valid recording days','유효 기록 일수')}: ${m.recent}/7`,58,878);if(signalQuality().valid&&m.rest!=null)c.fillText(`${label3('平均安靜休息','Average quiet rest','평균 조용한 휴식')}: ${m.rest.toFixed(1)} h`,58,928);
+ c.fillStyle='#6f7891';c.font='25px Arial';c.fillText(label3('週回顧 · 不包含 GPS 與詳細健康資料','Weekly summary · No GPS or detailed medical data','주간 요약 · GPS·상세 의료 정보 없음'),58,1030);
+ const img=new Image(); img.onload=()=>{if(state.dog!==pet||state.dpPetEpoch!==epoch)return;const s=Math.min(img.width,img.height),sx=(img.width-s)/2,sy=(img.height-s)/2;c.drawImage(img,sx,sy,s,s,60,130,780,620);try{const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=`${d.name}_DeepPet_Weekly_Story.png`;a.click();toast(t('saved'));}catch(e){toast(t('inputError'));}};
+ img.onerror=()=>{if(state.dog===pet&&state.dpPetEpoch===epoch)toast(t('inputError'));};img.src=d.photo;
+}
+
+let avatarDraft=null,dpAvatarReadSerial=0;
+
+async function processAvatarPhoto(file){
+ if(!file)return;
+ if(!file.type.startsWith('image/')){toast(label3('請選擇圖片檔案','Please choose an image file','이미지 파일을 선택하세요'));return;}
+ if(file.size>12*1024*1024){toast(label3('照片檔案不可超過 12 MB','Photo must be under 12 MB','사진은 12MB 이하여야 합니다'));return;}
+ const petIndex=state.dog,petEpoch=state.dpPetEpoch,request=++dpAvatarReadSerial;
+ const stillCurrent=()=>state.modal==='avatar-choice'&&state.dog===petIndex&&state.dpPetEpoch===petEpoch&&request===dpAvatarReadSerial;
+ avatarDraft=null;renderModal(); // A previous preview must not be saved while a newer photo is decoding.
+ try{
+  const url=URL.createObjectURL(file),img=new Image();
+  try{await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url;});}finally{URL.revokeObjectURL(url);}
+  if(!img.naturalWidth||!img.naturalHeight)throw Error('empty');
+  const size=512,canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;
+  const ctx=canvas.getContext('2d');const side=Math.min(img.naturalWidth,img.naturalHeight);
+  ctx.drawImage(img,(img.naturalWidth-side)/2,(img.naturalHeight-side)/2,side,side,0,0,size,size);
+  const src=canvas.toDataURL('image/jpeg',0.79);
+  if(!stillCurrent())return;
+  avatarDraft={src,petIndex};renderModal();
+ }catch(err){if(stillCurrent())toast(label3('無法讀取這張照片，請換一張 JPG、PNG 或手機支援的圖片','Cannot open this photo. Try a JPG, PNG, or a phone-supported format.','이 사진을 열 수 없습니다. JPG나 PNG 파일을 선택해 주세요.'));}
+}
+function commitAvatarPhoto(){
+ if(!avatarDraft?.src||avatarDraft.petIndex!==state.dog){toast(label3('請先選取照片','Choose a photo first','먼저 사진을 선택해 주세요'));return;}
+ const key=String(state.dog),before=state.petOverrides?.[key],next={...(before||{}),photo:avatarDraft.src,dpPhotoConfirmed:true,...(state.dog<dogs.length?{dpFixtureInvalidated:false,freeCare:false,dpFreshPet:false}:{})};
+ // Keep avatar updates in the same owner-scoped save transaction as health
+ // edits. The older shortcut serialized transient and excluded state fields,
+ // which could exceed local storage while bypassing workspace persistence.
+ if(!dpCareCommit([['petOverrides',key]],()=>{state.petOverrides??={};state.petOverrides[key]=next;})){
+  toast(label3('儲存空間不足，照片未更換；請清理瀏覽器空間後重試','Browser storage is full. The old photo was kept.','브라우저 저장 공간이 부족합니다. 기존 사진을 유지했습니다.'));return;
+ }
+ avatarDraft=null;window.DeepPetSignalScoring?.invalidate?.(state.dog);closeModal();render();toast(label3('寵物照片已更新並儲存在此瀏覽器','Pet photo saved in this browser','반려동물 사진이 브라우저에 저장되었습니다'));
+}
+function openModal(name){
+ if(['record-import','record-editor','record-chooser'].includes(state.modal)&&!['record-import','record-editor','record-chooser'].includes(name))dpAbandonImportWorkflow();
+ if(state.tab==='me'&&state.detail==='chat'&&name!=='garden-chat')dpStopChatVoice();
+ if(name==='avatar-choice'){dpAvatarReadSerial++;avatarDraft=null;}
+ if(name==='pair-wizard'){dpScanRequest++;dpPairCommitRequest++;dpVerifiedScan=[];}
+ state.modal=name;renderModal();if(name==='live-heart'||name==='live-breath')mountLiveWaves();
+}
+function closeModal(){dpStopFriendCamera();if(['record-import','record-editor','record-chooser'].includes(state.modal))dpAbandonImportWorkflow();if(state.modal==='garden-chat')dpStopChatVoice();const wasLive=state.modal==='live-heart'||state.modal==='live-breath';if(state.modal==='avatar-choice'){dpAvatarReadSerial++;avatarDraft=null;}if(state.modal==='pair-wizard'){dpScanRequest++;dpPairCommitRequest++;dpVerifiedScan=[];}state.modal='';renderModal();if(wasLive)mountLiveWaves();}
+function navTo(tab,detail=null){dpStopFriendCamera();dpStopChatVoice();dpAvatarReadSerial++;dpScanRequest++;dpPairCommitRequest++;if(['record-import','record-editor','record-chooser'].includes(state.modal))dpAbandonImportWorkflow();if(tab!=='health'||detail!=='recovery-care')state.careEditDate=null;state.tab=tab;state.detail=detail;state.chartPoint=-1;state.modal='';render(true)}
+function refreshCareRecord(detail){if(state.tab==='health'&&state.detail===detail&&!state.modal)render();else renderModal();}
+function onAction(target){const action=target.dataset.action;if(!action)return;
+ if(state.emptyPreview&&/^family-(?:copy-code|request|approve|deny|revoke|permission)$/.test(action)){toast(label3('請先建立寵物檔案','Create a pet profile first','먼저 반려동물 프로필을 만드세요'));return;}
+ const destructive={
+  'behavior-demo-clear':label3('清除所有預載行為記錄？手動記錄會保留。','Clear the sample behavior history? Manual records remain.','예시 행동 기록을 지울까요? 직접 입력 기록은 유지됩니다.'),
+  'family-revoke':label3('撤銷這位家庭成員的查看權限？','Revoke this family member’s access?','가족 구성원의 접근 권한을 철회할까요?'),
+  'family-deny':label3('拒絕這個家庭查看請求？','Reject this family access request?','이 가족 요청을 거절할까요?'),
+  'gps-clear-alerts':label3('確定清除所有越界提醒記錄？','Clear all geofence alert history?','위치 이탈 알림 기록을 모두 삭제할까요?'),
+  'reset-demo':label3('確定重設整個展示APP？所有在此瀏覽器儲存的資料將被清除。','Reset the entire demo? All locally saved records will be erased.','전체 데모를 초기화할까요? 브라우저에 저장한 모든 기록이 삭제됩니다.'),
+  'reset-food-target':label3('清除自己修改的飲食目標，改回自動建議？','Reset your food target to the automatic suggestion?','식단 목표를 자동 권장값으로 초기화할까요?'),
+  'shop-remove':label3('要從購物車移除此商品嗎？','Remove this item from your cart?','장바구니에서 이 상품을 삭제할까요?'),
+  'food-remove-part':label3('移除這項尚未儲存的食物？','Remove this unsaved food item?','저장하지 않은 음식 항목을 삭제할까요?'),
+  'meal-edit-remove-part':label3('從此餐移除這項食物？','Remove this food from the meal?','이 식사에서 음식을 제거할까요?')
+ };
+ if(Object.prototype.hasOwnProperty.call(destructive,action)&&!window.confirm(destructive[action]))return;
+ switch(action){
+ case 'avatar-change':openModal('avatar-choice');break;
+ case 'avatar-camera':document.getElementById('avatarCameraInput')?.click();break;
+ case 'avatar-gallery':document.getElementById('avatarGalleryInput')?.click();break;
+ case 'avatar-save':if(window.confirm(label3('確定更換目前的寵物照片？','Replace the current pet photo?','현재 반려동물 사진을 변경할까요?')))commitAvatarPhoto();break;
+ case 'avatar-cancel':closeModal();break;
+ case 'tour-open':state.tourStep=0;openModal('tour');break;
+ case 'tour-next':state.tourStep=Math.min(3,(state.tourStep||0)+1);renderModal();break;
+ case 'tour-back':state.tourStep=Math.max(0,(state.tourStep||0)-1);renderModal();break;
+ case 'tour-enter':{closeModal();state.tab='home';state.detail=null;render(true);break;}
+  case 'dp-events':state.dpEventDate=iso(localDate());state.dpEventIndex=0;openModal('dp-events');break;
+  case 'dp-event-date':state.dpEventDate=target.dataset.date;state.dpEventIndex=0;renderModal();break;
+  case 'dp-event-pick':state.dpEventIndex=Number(target.dataset.index||0);if(state.modal!=='dp-events'){state.dpEventDate=iso(localDate());openModal('dp-events');}else renderModal();break;
+  case 'dp-event-to-moment':{const day=state.dpEventDate||iso(localDate()),e=dpEventsFor(day)[Math.max(0,Number(state.dpEventIndex||0))];if(e){const key=String(state.dog);if(!dpCareCommit([['dpMomentsByPet',key]],()=>{state.dpMomentsByPet??={};state.dpMomentsByPet[key]??=[];if(!state.dpMomentsByPet[key].some(x=>x.date===day&&x.minute===e.minute))state.dpMomentsByPet[key].push({date:day,minute:e.minute,hr:e.hr,rr:e.rr});}))break;state.dpMomentFocus={dog:state.dog,epoch:state.dpPetEpoch,date:day,minute:e.minute};openModal('heart-moment');}break;}
+  case 'dp-moment-save':{const focus=dpMomentFocusCurrent(),day=focus?.date||iso(localDate()),e=focus||dpEventsFor(day)[Math.max(0,Number(state.dpEventIndex||0))];if(e){const key=String(state.dog);if(!dpCareCommit([['dpMomentsByPet',key]],()=>{state.dpMomentsByPet??={};state.dpMomentsByPet[key]??=[];if(!state.dpMomentsByPet[key].some(x=>x.date===day&&x.minute===e.minute))state.dpMomentsByPet[key].push({date:day,minute:e.minute,hr:e.hr,rr:e.rr});}))break;renderModal();toast(t('saved'));}break;}
+  case 'dp-solo':navTo('health','solo');break;
+  case 'dp-solo-start':{const key=String(state.dog);if((state.dpSoloByPet?.[key]||[]).some(x=>!x.end))break;if(!dpCareCommit([['dpSoloByPet',key]],()=>{state.dpSoloByPet??={};state.dpSoloByPet[key]??=[];state.dpSoloByPet[key].push({start:new Date().toISOString(),end:null});}))break;refreshCareRecord('solo');break;}
+  case 'dp-solo-stop':{const key=String(state.dog),active=(state.dpSoloByPet?.[key]||[]).find(x=>!x.end);if(!active)break;if(!dpCareCommit([['dpSoloByPet',key]],()=>{active.end=new Date().toISOString();}))break;refreshCareRecord('solo');break;}
+ case 'care-plan':navTo('health','recovery-care');break;
+ case 'care-plan-start':{const key=String(state.dog),previous=carePlanForPet();if(previous.started&&!window.confirm(label3('開始新一輪觀察會把目前紀錄存入歷史，確定繼續嗎？','Archive the current care episode and start a new one?','현재 관찰을 기록 보관함에 저장하고 새로 시작할까요?')))break;const reason=$('#careReason')?.value||'activity',reasonNote=($('#careReasonNote')?.value||'').trim().slice(0,160);if(!dpCareCommit([['carePlans',key],['carePlanHistoryByPet',key]],()=>{dpArchiveCarePlan(key,previous);state.carePlans??={};state.carePlans[key]={started:iso(localDate()),reason,reasonNote,checkins:[]};}))break;refreshCareRecord('recovery-care');break;}
+ case 'care-plan-restart':{const key=String(state.dog),p=carePlanForPet();if(carePlanStatus().done&&window.confirm(label3('開始新一輪恢復觀察？已完成的本輪紀錄將保存到歷史。','Start a new recovery episode? This completed record will be archived.','새 회복 관찰을 시작할까요? 완료 기록은 이전 기록에 보관됩니다.'))){if(!dpCareCommit([['carePlans',key],['carePlanHistoryByPet',key]],()=>{dpArchiveCarePlan(key,p);state.carePlans[key]={started:iso(localDate()),reason:p.reason||'activity',reasonNote:p.reasonNote||'',checkins:[]};}))break;refreshCareRecord('recovery-care');toast(label3('新一輪觀察已開始','New care check started','새 관찰을 시작했어요'));}break;}
+ case 'care-plan-checkin':{const key=String(state.dog),p=carePlanForPet(),today=state.careEditDate||iso(localDate());if(!p.started||!dpCareDate(today)||today<p.started)break;const energy=$('#care-energy')?.value,appetite=$('#care-appetite')?.value,rest=$('#care-rest')?.value,signs=$('#care-signs')?.value||'none',note=($('#care-note')?.value||'').trim().slice(0,300);if(!['usual','lower','higher'].includes(energy)||!['usual','lower','higher'].includes(appetite)||!['usual','lower','higher'].includes(rest)||!['none','cough','breathing','movement','digestion','other'].includes(signs)){toast(label3('請完成三項觀察','Complete all three observations','세 항목을 모두 선택하세요'));break;}if(!dpCareCommit([['carePlans',key]],()=>{p.checkins=(p.checkins||[]).filter(x=>x.date!==today);p.checkins.push({date:today,energy,appetite,rest,signs,note});state.carePlans[key]=p;}))break;state.careEditDate=null;refreshCareRecord('recovery-care');toast(t('saved'));break;}
+   case 'care-plan-edit-checkin':{const date=target.dataset.date,p=carePlanForPet();if(!p.checkins?.some(x=>x.date===date))break;state.careEditDate=date;render(true);break;}
+  case 'care-plan-delete-checkin':{const date=target.dataset.date,p=carePlanForPet(),key=String(state.dog);if(!p.checkins?.some(x=>x.date===date))break;if(!window.confirm(label3(`確定刪除 ${date} 的恢復觀察？刪除後無法復原。`,`Delete the recovery observation for ${date}? This cannot be undone.`,`이 날짜(${date})의 회복 관찰을 삭제할까요? 복원할 수 없습니다.`)))break;if(!dpCareCommit([['carePlans',key]],()=>{p.checkins=p.checkins.filter(x=>x.date!==date);state.carePlans[key]=p;}))break;if(state.careEditDate===date)state.careEditDate=null;refreshCareRecord('recovery-care');toast(t('saved'));break;}
+  case 'care-timeline-more':state.recoveryTimelineAll=!state.recoveryTimelineAll;refreshCareRecord('recovery-care');persist();break;
+  case 'care-to-deep':state.deepType=2;navTo('deep');break;
+ case 'behavior-detail':openModal('behavior-detail');break;
+ case 'behavior-kind':state.behaviorKind=target.dataset.kind;renderModal();break;
+ case 'behavior-log':{const key=String(state.dog),kind=state.behaviorKind||'activity',choice=target.dataset.choice;if(!ENGAGEMENT_TYPES.some(x=>x[0]===kind)||!['yes','no'].includes(choice))break;if(!dpCareCommit([['behaviorLogs',key]],()=>logBehaviorToday(kind,choice)))break;renderModal();toast(t('saved'));break;}
+ case 'behavior-demo-load':{if(dpUsesRealMeasurements()){dpPruneOwnerShowcaseRecords();toast(label3('真實寵物請記錄實際觀察，無法加入示範記錄','Enter actual observations for a real pet; sample records are unavailable','실제 반려동물은 관찰 결과를 직접 기록해 주세요'));break;}const key=String(state.dog);if(!dpCareCommit([['dpShowcaseBehaviorClearedByPet',key],['behaviorLogs',key]],()=>{state.dpShowcaseBehaviorClearedByPet??={};delete state.dpShowcaseBehaviorClearedByPet[key];dpEnsureShowcaseBehaviorRecords(false);}))break;renderModal();toast(label3('已載入示範記錄（保留手動記錄）','Sample records loaded; manual records retained','수동 기록을 유지한 채 데모 불러옴'));break;}
+ case 'behavior-demo-clear':{const key=String(state.dog);if(!dpCareCommit([['dpShowcaseBehaviorClearedByPet',key],['behaviorLogs',key]],()=>{state.dpShowcaseBehaviorClearedByPet??={};state.dpShowcaseBehaviorClearedByPet[key]=true;state.behaviorLogs??={};state.behaviorLogs[key]=(state.behaviorLogs[key]||[]).filter(x=>!x.sample);}))break;renderModal();toast(t('saved'));break;}
+ case 'weekly-story':openModal('weekly-story');break;
+ case 'weekly-export':downloadWeeklyStory();break;
+ case 'vet-brief':state.vetBackDetail=state.detail||null;navTo('health','vet-report');break;
+ case 'vet-page-back':navTo('health',state.vetBackDetail||null);break;
+ case 'vet-page-days':state.vetDays=[1,7,30].includes(Number(target.dataset.days))?Number(target.dataset.days):7;render();break;
+ case 'vet-days':state.vetDays=[1,7,30].includes(Number(target.dataset.days))?Number(target.dataset.days):7;renderModal();break;
+ case 'download-vet':exportVet();break;
+ case 'dp924-back-home':navTo('home');break;
+ case 'empty-open-health':case 'free-open-health':navTo('health');break;
+ case 'empty-start-profile':openModal('pet-add');break;
+ case 'fit-guide-done':closeModal();state.firstRunStep='monitor';render(true);break;
+ case 'empty-collar-guide':openModal('empty-collar-guide');break;
+ case 'free-add-record':state.freeRecordKind=target.dataset.kind||'notes';openModal('free-record');break;
+ case 'free-save-record':{if(!isFreePet())break;const kind=state.freeRecordKind||'notes',date=$('#freeRecordDate')?.value,title=($('#freeRecordTitle')?.value||'').trim(),notes=($('#freeRecordNotes')?.value||'').trim();if(!dpCareDate(date)||!title||!notes){toast(label3('請填寫日期、標題與內容','Fill date, title and details','날짜, 제목, 내용을 입력하세요'));break;}const key=String(state.dog);if(!dpCareCommit([['freeCareRecords',key]],()=>{state.freeCareRecords??={};state.freeCareRecords[key]??=[];state.freeCareRecords[key].push({kind,date,title,notes});}))break;closeModal();render();toast(t('saved'));break;}
+  case 'today-more-open':navTo('home','today-all');break;
+  case 'today-more-back':navTo('home');break;
+  case 'today-open':{
+   const page=target.dataset.page;
+   if(page==='deep'){
+     state.deepType=Math.max(0,Math.min(2,Number(target.dataset.index)||0));
+     state.range=1;state.deepSelectedDate=iso(localDate());state.dp1007DayManuallyChosen=false;navTo('deep');
+   }else if(page==='chat'){
+     dpOpenChat(target.dataset.chat);
+   }else if(['med','vaccines','deworming','reports','notes','recovery-care'].includes(page)){
+     navTo('health',page);
+   }
+   break;
+ }
+
+  case 'dp-friend-menu':if(typeof selectedBlank==='function'&&selectedBlank()){toast(label3('請先新增寵物','Add a pet first','반려동물을 먼저 추가하세요'));break;}dpSocialSeedShowcase();openModal('pet-friend-menu');break;
+  case 'dp-friend-manual':dpStopFriendCamera();state.dpFoundPet=null;state.dpFriendQuery='';openModal('pet-friend-search');break;
+  case 'dp-friend-scan':dpStopFriendCamera();openModal('pet-friend-scan');break;
+  case 'dp-friend-qr':dpStopFriendCamera();openModal('pet-friend-qr');break;
+  case 'dp-copy-id':dpCopySocial(dpCurrentPetId());break;
+  case 'dp-share-public':dpCopySocial(dpPublicUrl());break;
+  case 'dp-friend-search':{const q=String($('#dpFriendSearchInput')?.value||'').trim().toUpperCase();state.dpFriendQuery=q;state.dpFoundPet=dpPetFromPublicId(q);renderModal();if(!state.dpFoundPet)toast(label3('找不到此寵物 ID。跨裝置搜尋尚需正式帳號服務。','ID not found in this demo. Cross-device search needs an account service.','이 데모에서 ID를 찾지 못했습니다.'));break;}
+  case 'dp-friend-preview':{const p=dpPetFromPublicId(target.dataset.id);if(p)dpOpenPublicPet(dpPublicPetData(p));break;}
+  case 'dp-friend-request':if(dpFriendSend(target.dataset.id)){renderModal();}break;
+  case 'dp-friend-accept':if(dpFriendAnswer(target.dataset.id,true)){renderModal();toast(label3('已同意好友申請，現在可以互傳訊息','Friend accepted; chat is now available','친구 요청을 수락했습니다'));}break;
+  case 'dp-friend-deny':if(window.confirm(label3('確定拒絕這筆好友申請？','Decline this friend request?','친구 요청을 거절할까요?'))&&dpFriendAnswer(target.dataset.id,false)){renderModal();toast(t('saved'));}break;
+  case 'dp-friend-chat':{const p=dpPetFromPublicId(target.dataset.id);if(p&&dpAreFriends(p.publicId))dpOpenChat(dpChatKeyForPet(p));break;}
+  case 'dp-scan-start':dpStartFriendCamera();break;
+  case 'dp-public-exit':{state.dpExternalPublic=null;history.replaceState(null,'',location.href.split('#')[0]);render(true);break;}
+ case 'nav':{
+  const next=target.dataset.page;
+  if(next==='deep'&&state.tab!=='deep'){
+   state.range=1;state.deepSelectedDate=iso(localDate());state.dp1007DayManuallyChosen=false;
+  }
+  navTo(next);break;
+ }
+ case 'go-deep':state.deepType=0;navTo('deep');break;
+ case 'attention-open':state.deepType=Math.max(0,Math.min(2,Number(target.dataset.deepIndex)||0));navTo('deep');break;
+ case 'attention-toggle':state.attentionExpanded=!state.attentionExpanded;render();persist();break;
+ case 'toggle-live':state.liveExpanded=!state.liveExpanded;render();persist();break;
+ case 'inspect-live-minute':state.inspectKind=target.dataset.kind==='breath'?'breath':'heart';state.inspectDate=iso(localDate());openModal('minute-inspector');break;
+ case 'sleep-matrix-toggle':state.sleepMatrixExpanded=!state.sleepMatrixExpanded;render();break;
+ case 'sleep-date-detail':state.sleepSelectedDay=Number(target.dataset.day)||29;openModal('sleep-day');break;
+ case 'sleep-slot':{dpSyncSleepSlot(target.closest('.dp-night-record, .dp-owner-sleep-timeline, .sleep-date-modal, .deep-night-selected'),Number(target.dataset.slot),true);break;}
+ case 'inspect-minute-day':{const data=plotRegistry[Number(target.dataset.plot)];if(!data)break;const holder=target.closest('.dp-chart-inspector'),selected=Number(holder?.dataset.selectedIndex??(data.values.length-1));const day=data.dates?.[selected];if(!day)break;state.inspectDate=day;state.inspectKind=({sleep:'restState',recovery:'activityIntensity',activity:'activityIntensity'})[data.kind]||data.kind;openModal('minute-inspector');break;}
+ case 'deep-live':openModal(target.dataset.kind==='breath'?'live-breath':'live-heart');break;
+ case 'record-source':{dpAbandonImportWorkflow();state.importKind=target.dataset.kind;state.importSource=target.dataset.source;if(state.importSource==='manual'){state.importText='';state.importName='';state.importPreview='';openModal('record-editor');}else{openModal('record-import');}break;}
+ case 'go-home':navTo('home');break;
+ case 'deep-activity':state.deepType=2;navTo('deep');break;
+ case 'night-to-deep':state.deepType=1;navTo('deep');break;
+ case 'open-report':navTo('health','reports');break;
+ case 'deep-category':state.deepType=+target.dataset.index;state.range=1;state.deepSelectedDate=iso(localDate());state.dp1007DayManuallyChosen=false;state.sleepMatrixExpanded=false;state.detail=null;state.chartPoint=-1;navTo('deep');break;
+ case 'range':state.sleepMatrixExpanded=false;state.range=[1,7,30].includes(+target.dataset.value)?+target.dataset.value:7;if(state.range===1)state.deepSelectedDate=deepChosenDate();state.chartPoint=-1;render();break;
+ case 'deep-select-day':state.range=1;state.deepSelectedDate=deepChosenDate();state.chartPoint=-1;render(true);break;
+ case 'deep-day-view':state.range=1;state.deepSelectedDate=String(target.dataset.date||iso(localDate()));state.dp1007DayManuallyChosen=true;state.chartPoint=-1;render(true);break;
+ case 'deep-day-jump':state.range=1;state.deepSelectedDate=iso(dateAdd(localDate(),Number(target.dataset.days)||0));state.dp1007DayManuallyChosen=true;state.chartPoint=-1;render(true);break;
+ case 'deep-day-step':{const rows=deepDateRows(),at=rows.findIndex(x=>x.date===deepChosenDate()),next=Math.max(0,Math.min(rows.length-1,at+Number(target.dataset.delta||0)));state.range=1;state.deepSelectedDate=rows[next]?.date||iso(localDate());state.dp1007DayManuallyChosen=true;state.chartPoint=-1;render();break;}
+ case 'pet-add':openModal('pet-add');break;
+ case 'pet-add-save':{
+  const name=($('#addPetName')?.value||'').trim(),species=$('#addPetSpecies')?.value||'dog',ageText=$('#addPetAge')?.value,weightText=$('#addPetWeight')?.value,age=Number(ageText),weight=Number(weightText);
+  if(!name||name.length>24||ageText===''||weightText===''||!Number.isFinite(age)||age<0||age>35||!Number.isFinite(weight)||weight<=0||weight>120){toast(t('inputError'));break;}
+  if(!breedIsSelected('addPet',species)){breedInvalid();break;}
+  const heightRaw=$('#addPetHeight')?.value.trim()||'',bcsRaw=$('#addPetBcs')?.value.trim()||'',heightCm=heightRaw?Number(heightRaw):null,bcs=bcsRaw?Number(bcsRaw):null;
+  if(heightCm!==null&&(!Number.isFinite(heightCm)||heightCm<1||heightCm>150)||bcs!==null&&(!Number.isInteger(bcs)||bcs<1||bcs>9)){toast(t('inputError'));break;}
+  const selected=breedSelected('addPet',species);
+  // New owner profiles must be constructed from the owner's inputs, never
+  // spread from Luna/Nori: that copied unseen HR, respiratory rate, recovery
+  // anchors and other showroom-only biometric values into a new identity.
+  const d={name,age,weight,heightCm,bcs,species,breed:{zh:selected.zh,zht:selected.zht,en:selected.en,ko:selected.ko},breedId:selected.id,
+   bio:null,hr:null,rr:null,rest:null,recovery:null,normalRecovery:null,target:null,score:null,
+   publicId:dpSecureId(),freeCare:true,dpFreshPet:true,dpPhotoConfirmed:false,
+   photo:petAvatar(name,species==='cat'?'🐈':'🐕','#ecebff','#c6dbfb')};
+  state.petExtras??=[];state.petExtras.push(d);
+  // Keep the add-pet form open and remove the unsaved profile if local storage
+  // rejects the first write. No fabricated new-pet ID may survive in memory.
+  if(!persist()){state.petExtras.pop();break;}
+  dpResetPetTransient();state.dog=dogs.length+state.petExtras.length-1;state.emptyPreview=false;dpLoadDevice(state.dog);dpLoadPrivacy(state.dog);dpLoadPetWorkspace(state.dog);state.tab='me';state.detail=null;state.firstRunStep='photo';closeModal();render(true);persist();openModal('avatar-choice');toast(label3('基本資料已儲存，請再上傳真實寵物照片才可連接項圈','Profile saved. Upload a real pet photo before pairing.','프로필을 저장했습니다. 연결 전에 반려동물 사진을 업로드하세요.'));break;
+ }
+ case 'demo-gallery':state.demoGallery=true;render(true);persist();toast(label3('已顯示展示用寵物，可點選體驗','Sample pets are available to explore','サンプルのペットを表示しました'));break;
+ case 'select-blank':if(state.emptyPreview&&state.tab==='home'&&!state.detail){if(state.modal)closeModal();break;}dpActivateBlank();state.tab='home';render(true);break;
+ case 'heart-blank':dp58BlankHeartSetup();break;
+ case 'pet-switch':openModal('pet-switch');break;
+ case 'select-pet':{const petIndex=Number(target.dataset.index);if(!state.emptyPreview&&state.dog===petIndex){if(state.modal)closeModal();break;}if(dpActivatePet(petIndex))render(true);break;}
+ case 'toggle-recs':state.showAllRec=!state.showAllRec;render();break;
+ case 'go-suggestion':{const id=+target.dataset.id;if(id===1){state.deepType=2;navTo('deep');}else if(id===3){state.deepType=1;navTo('deep');}else if(id===2||id===4)navTo('health','food');else if(id===5)navTo('health','med');else if(id===6)navTo('health','reports');else if(id===7){state.deepType=0;navTo('deep');}break;}
+ case 'health-detail':{const origin=state.tab==='health'&&state.detail==='summary';state.healthReturnFromSummary=origin?true:false;if(target.dataset.page==='summary'&&state.detail!=='summary')state.healthSummaryDays=7;if(target.dataset.page==='reports'&&state.detail!=='reports')state.reportListExpanded=false;navTo('health',target.dataset.page);break;}
+ case 'deworm-edit':state.dpWormEditId=target.dataset.id||null;render(true);break;
+ case 'deworm-cancel':state.dpWormEditId=null;render(true);break;
+ case 'deworm-delete':{const list=dpWormRows(),idx=list.findIndex(x=>x.id===target.dataset.id);if(idx>=0&&window.confirm(dpWormLocale().confirm)){if(!dpCareCommit([['dewormByPet',String(state.dog)]],()=>list.splice(idx,1)))break;state.dpWormEditId=null;render(true);}break;}
+ case 'health-back':if(state.healthReturnFromSummary){state.healthReturnFromSummary=false;navTo('health','summary');}else if(['report-trends','report-entry'].includes(state.detail)){navTo('health','reports');}else navTo('health');break;
+ case 'report-open-attachment':dpOpenReportFile(target.dataset.file);break;
+ case 'food-window':state.foodWindowMode=target.dataset.value==='future'?'future':'history';state.foodSelectedDate=iso(dateAdd(localDate(),state.foodWindowMode==='future'?0:-1));render();break;
+ case 'food-day':state.foodSelectedDate=target.dataset.date;render();break;
+ case 'meal-edit':{
+  state.mealEditingDate=target.dataset.date;state.mealEditingIndex=Number(target.dataset.index);state.mealEditDraft=null;state.mealEditDateDraft=null;state.mealEditTimeDraft=null;openModal('meal-edit');break;
+ }
+ case 'meal-edit-add-part':{
+  const parts=dpMealEditCapture();if(parts.length>=12){toast(t('inputError'));break;}
+  state.mealEditDateDraft=$('#dpMealEditDate')?.value;state.mealEditTimeDraft=$('#dpMealEditTime')?.value;
+  state.mealEditDraft=[...parts,{type:'other',brand:'',grams:0}];renderModal();break;
+ }
+ case 'meal-edit-remove-part':{
+  state.mealEditDateDraft=$('#dpMealEditDate')?.value;state.mealEditTimeDraft=$('#dpMealEditTime')?.value;
+  state.mealEditDraft=dpMealEditCapture().filter((_,i)=>i!==Number(target.dataset.index));renderModal();break;
+ }
+ case 'meal-edit-save':{
+  const date=state.mealEditingDate,index=state.mealEditingIndex,oldList=state.mealItems?.[dpFoodKey(date)]||[],oldMeal=oldList[index];
+  const newDate=$('#dpMealEditDate')?.value,time=$('#dpMealEditTime')?.value,raw=dpMealEditCapture();
+  if(!oldMeal||!dpCareDate(newDate)||!dpOptionalAppointmentTime(time)||!raw.length||raw.some(p=>!(p.grams>0&&p.grams<=5000))){toast(label3('請檢查日期、時間格式及每項食物重量','Check date, time format and food weights','날짜, 시간 형식과 음식 무게를 확인하세요'));break;}
+  const parts=raw.map(p=>dpFoodPart(p.type,p.grams,p.brand)),grams=parts.reduce((a,p)=>a+p.grams,0),kcal=parts.reduce((a,p)=>a+p.kcal,0);
+  const next={...oldMeal,date:newDate,time,parts,grams,kcal,sample:false};
+  if(!dpCareCommit([['mealItems',dpFoodKey(date)],['mealItems',dpFoodKey(newDate)]],()=>{oldList.splice(index,1);state.mealItems[dpFoodKey(newDate)]??=[];state.mealItems[dpFoodKey(newDate)].push(next);}))break;
+  state.foodSelectedDate=newDate;state.mealEditDraft=null;closeModal();render();toast(t('saved'));break;
+ }
+ case 'meal-delete':{
+  const date=target.dataset.date||state.mealEditingDate,index=Number(target.dataset.index??state.mealEditingIndex);
+  const list=state.mealItems?.[dpFoodKey(date)]||[];
+  if(!list[index])break;
+  if(!confirm(label3('要刪除這筆餐食紀錄嗎？','Delete this meal record?','이 식사 기록을 삭제할까요?')))break;
+  if(!dpCareCommit([['mealItems',dpFoodKey(date)]],()=>list.splice(index,1)))break;
+  state.mealEditDraft=null;closeModal();render();toast(t('saved'));break;
+ }
+ case 'food-add-part':{state.foodDraftDate=$('#importMealDate')?.value;state.foodDraftTime=$('#importTime')?.value;const grams=Number($('#importFoodGrams')?.value),type=$('#importFoodType')?.value,brand=$('#importFoodBrand')?.value;if(!(grams>0&&grams<=5000)){toast(label3('請填寫食物克數','Enter grams','g을 입력하세요'));break;}state.foodDraftParts??=[];state.foodDraftParts.push(dpFoodPart(type,grams,brand));state.foodRecognizedType=null;state.foodRecognizedBrand='';renderModal();break;}
+ case 'food-remove-part':state.foodDraftDate=$('#importMealDate')?.value;state.foodDraftTime=$('#importTime')?.value;state.foodDraftParts?.splice(Number(target.dataset.index),1);renderModal();break;
+ case 'reset-food-target':if(!dpCareCommit([['foodTarget',String(state.dog)]],()=>{state.foodTarget??={};delete state.foodTarget[state.dog];}))break;closeModal();render();toast(t('saved'));break;
+ case 'age-detail':navTo('me','age-detail');break;
+ case 'age-detail-back':navTo('me');break;
+ case 'review-care-open':{
+  const kind=target.dataset.kind,date=target.dataset.date,id=target.dataset.id;
+  state.dpCareFocus={kind,date,id};state.healthReturnFromSummary=true;
+  if(kind==='report'){
+   const key=`${id}::${date}`,exam=globalThis.DeepPetExam921;
+   if(exam?.getGroups?.().some(x=>x.key===key))exam.showReport(key);
+   else{const index=reportAvailableDates().indexOf(date);state.activeReport=Math.max(0,index);navTo('health','report-entry');}
+  }else navTo('health',kind==='vaccines'?'vaccines':'med');
+  requestAnimationFrame(()=>{const pane=document.querySelector('#main-scroll');const item=document.querySelector(`[data-demo-care-id="${CSS.escape(id)}"]`);if(item){item.classList.add('dp850-highlight');if(pane)pane.scrollTo({top:Math.max(0,item.getBoundingClientRect().top-pane.getBoundingClientRect().top+pane.scrollTop-80),behavior:'instant'});else item.scrollIntoView({block:'center'});}});
+  break;
+ }
+ case 'health-summary-range':state.healthSummaryDays=Number(target.dataset.value)===30?30:7;render();break;
+ case 'add-meal':dpAbandonImportWorkflow();state.importKind='meal';state.importSource='manual';state.foodDraftParts=[];state.foodPhotoDraft=null;state.foodRecognizedType=null;state.foodRecognizedBrand=null;state.foodDraftDate=null;state.foodDraftTime=null;openModal('record-editor');break;
+ case 'med-add':state.importKind='med';openModal('record-chooser');break;
+ case 'vax-toggle':{
+  const source=target.dataset.source,key=target.dataset.key,v=vaccineRecord(source,key);if(!v)break;
+  if(v.status!=='done'){
+   // Confirming a record today does not prove the vaccine was given today.
+   // Ask for its actual date in the existing modal system before saving.
+   state.vaxConfirmSource=source;state.vaxConfirmKey=key;
+   state.vaxConfirmOriginPet=state.dog;state.vaxConfirmOriginEpoch=state.dpPetEpoch;
+   openModal('vax-complete-date');break;
+  }
+  if(!window.confirm(label3('撤銷這筆已接種紀錄？原預約日期會保留。','Undo the completed vaccination? Its original appointment date is kept.','접종 완료를 취소할까요? 원래 예약일은 유지됩니다.')))break;
+  if(!setVaccineOverride(source,key,{status:'upcoming',doneDate:null}))break;
+  render();toast(t('saved'));break;
+ }
+ case 'vax-complete-save':{
+  if(state.modal!=='vax-complete-date'||state.dog!==state.vaxConfirmOriginPet||state.dpPetEpoch!==state.vaxConfirmOriginEpoch)break;
+  const actual=$('#vaxActualDate')?.value;
+  if(!dpCareDate(actual)){toast(label3('請填寫有效的實際接種日期，不能使用未來日期。','Enter a valid actual vaccination date, not a future date.','실제 접종일을 입력하세요. 미래 날짜는 사용할 수 없습니다.'));break;}
+  if(!dpVaxRecordCompletion(state.vaxConfirmSource,state.vaxConfirmKey,actual)){toast(label3('紀錄已變更或儲存失敗，請重新確認。','Record changed or could not be saved. Please review again.','기록이 변경되었거나 저장할 수 없습니다. 다시 확인하세요.'));break;}
+  state.vaxConfirmSource=null;state.vaxConfirmKey=null;
+  closeModal();render();toast(t('saved'));break;
+ }
+ case 'vax-add':state.importKind='vax';openModal('record-chooser');break;
+ case 'upload-report':state.importKind='report';openModal('record-chooser');break;
+ case 'summary-to-deep':state.deepType=0;navTo('deep');break;
+ case 'report-open':state.activeReport=Number(target.dataset.index)||0;navTo('health','report-entry');break;
+ case 'report-toggle-more':state.reportListExpanded=!state.reportListExpanded;render();break;
+ case 'select-report':state.activeReport=+target.dataset.index;navTo('health','report-entry');break;
+ case 'report-trends-open':navTo('health','report-trends');break;
+ case 'toggle-garden-visibility':if(!dpRootCommit(['gardenVisible','gardenVisibleByPet'],()=>{state.gardenVisible=!state.gardenVisible;dpSavePrivacy();}))break;renderModal();break;
+ case 'garden-inbox-open':state.gardenMode='messages';openModal('garden-detail');break;
+ case 'garden-message':dpOpenChat(target.dataset.id);render();break;
+ case 'set-garden-mode':state.gardenMode=target.dataset.mode;renderModal();persist();break;
+ case 'toggle-rec':state.showAllRec=!state.showAllRec;render();persist();break;
+ case 'quality-day':state.qualityDayIndex=+target.dataset.index;state.qualityDayAvailable=target.dataset.available!=='false';openModal('quality-day');break;
+  case 'chat-demo-menu':{const menu=document.getElementById('dpChatMoreMenu');if(menu)menu.hidden=!menu.hidden;break;}
+  case 'chat-attachments':{const menu=document.getElementById('dpChatAttachmentMenu');if(menu)menu.hidden=!menu.hidden;break;}
+  case 'chat-gallery':document.getElementById('dpChatGallery')?.click();{const menu=document.getElementById('dpChatAttachmentMenu');if(menu)menu.hidden=true;}break;
+  case 'chat-camera':document.getElementById('dpChatCamera')?.click();{const menu=document.getElementById('dpChatAttachmentMenu');if(menu)menu.hidden=true;}break;
+  case 'chat-voice':dpChatVoiceToggle();break;
+  case 'garden-send':{const msg=($('#gardenChatText')?.value||'').trim();if(!msg)break;dpChatAddMessage('text',msg);break;}
+ case 'garden-perspective':{
+ state.chatPerspective=target.dataset.mode==='other'?'other':'me';
+ if(state.chatPerspective==='me')dpMarkThreadRead(state.chatWith);
+ render();persist();break;
+ }
+ case 'family-copy-code':{const code=shareInviteCode();if(navigator.clipboard?.writeText)navigator.clipboard.writeText(code).then(()=>toast(label3('邀請 ID 已複製','Invite ID copied','초대 ID 복사됨'))).catch(()=>toast(code));else toast(code);break;}
+case 'family-request':{const code=($('#familyRequestCode')?.value||'').trim().toUpperCase(),name=($('#familyRequestName')?.value||'').trim();if(code!==shareInviteCode()||!name){toast(label3('請輸入正確 ID 及家人名稱','Enter a valid ID and family name','올바른 ID와 이름을 입력하세요'));break;}const id='req'+Date.now()+'-'+Math.random().toString(36).slice(2,7);if(!dpRootCommit(['familyJoinRequests'],()=>{state.familyJoinRequests??=[];state.familyJoinRequests.push({id,name:name.slice(0,28),petIndex:state.dog});}))break;renderModal();toast(label3('本機加入申請已建立，尚未傳送到其他裝置','Local request saved; not sent to another device','로컬 요청이 저장되었습니다. 다른 기기로 전송되지 않았습니다.'));break;}
+case 'family-approve':{const id=target.dataset.id;const request=(state.familyJoinRequests||[]).find(r=>r.id===id&&(r.petIndex??0)===state.dog);if(!request)break;if(!dpRootCommit(['familyMembers','familyJoinRequests'],()=>{state.familyMembers??=[];if(!state.familyMembers.some(r=>r.id===id&&(r.petIndex??0)===state.dog))state.familyMembers.push(request);state.familyJoinRequests=(state.familyJoinRequests||[]).filter(r=>r.id!==id||(r.petIndex??0)!==state.dog);}))break;renderModal();toast(label3('已記錄本機授權示例；跨裝置共享尚未開放','Local authorization saved; cross-device sharing is not active','로컬 승인 예시가 저장됐습니다. 기기 간 공유는 비활성화 상태입니다.'));break;}
+case 'family-deny':{const id=target.dataset.id;if(!(state.familyJoinRequests||[]).some(r=>r.id===id&&(r.petIndex??0)===state.dog))break;if(!dpRootCommit(['familyJoinRequests'],()=>{state.familyJoinRequests=state.familyJoinRequests.filter(r=>r.id!==id||(r.petIndex??0)!==state.dog);}))break;renderModal();toast(label3('已拒絕本機請求','Local request declined','로컬 요청을 거절했습니다.'));break;}
+case 'family-revoke':{const id=target.dataset.id;if(!(state.familyMembers||[]).some(r=>r.id===id&&(r.petIndex??0)===state.dog))break;if(!dpRootCommit(['familyMembers','familyPermissions'],()=>{const member=state.familyMembers.find(r=>r.id===id&&(r.petIndex??0)===state.dog);state.familyMembers=state.familyMembers.filter(r=>r.id!==id||(r.petIndex??0)!==state.dog);if(member&&state.familyPermissions)delete state.familyPermissions[`${state.dog}:${member.name}`];}))break;renderModal();toast(label3('已撤銷本機授權示例','Local authorization revoked','로컬 승인을 철회했습니다.'));break;}
+case 'privacy-to-family':openModal('family-detail');break;
+case 'privacy-to-device':closeModal();state.tab='me';render(true);openModal('device-detail');break;
+case 'summary-category':closeModal();state.tab='deep';state.deepType=Number(target.dataset.index)||0;render(true);break;
+ case 'rhythm-to-deep':{const k=target.dataset.key==='stable'?'stable':target.dataset.key==='load'?'load':'calm';state.modal='';state.tab='deep';state.detail=null;state.deepType=k==='stable'?0:2;state.range=1;state.deepSelectedDate=iso(localDate());state.dp1007DayManuallyChosen=false;render(true);requestAnimationFrame(()=>{const el=document.querySelector('.dp-component-entry[data-score-key="'+k+'"]')||document.querySelector('#dp-component-section');if(el){const pane=document.querySelector('#main-scroll');if(pane){pane.scrollTo({top:Math.max(0,el.getBoundingClientRect().top-pane.getBoundingClientRect().top+pane.scrollTop-28),behavior:'smooth'});}}});break;}
+case 'alert-open':{const page=target.dataset.page;if(page==='friend'){closeModal();dpOpenFriendsInbox();break;}if(page==='chat'){closeModal();state.tab='me';state.detail=null;render(true);dpOpenChat(target.dataset.chat);render();break;}closeModal();if(page==='deep'){state.tab='deep';state.deepType=Number(target.dataset.index)||0;}else{state.tab='health';state.detail=page;}render(true);break;}
+case 'family-permission':{const name=target.dataset.member,key=target.dataset.key;if(!['view','edit'].includes(key)||!(state.familyMembers||[]).some(r=>r.name===name&&(r.petIndex??0)===state.dog))break;const petMemberKey=`${state.dog}:${name}`;if(!dpRootCommit(['familyPermissions'],()=>{state.familyPermissions??={};state.familyPermissions[petMemberKey]??={view:true,edit:false};state.familyPermissions[petMemberKey][key]=!state.familyPermissions[petMemberKey][key];}))break;renderModal();break;}
+ case 'device-find':state.pairReturnContext='my-device';state.pairType=null;state.pairStage=0;state.pairSelected='';openModal('pair-wizard');break;
+case 'pair-method':state.pairType=target.dataset.type;state.pairStage=0;state.pairSelected='';dpScanRequest++;dpPairCommitRequest++;dpVerifiedScan=[];window.__dpPairScanVisualBusy=false;renderModal();break;
+case 'pair-scan':{
+ if(!state.pairType)break;
+ state.pairStage=1;const token=++dpScanRequest,type=state.pairType,index=state.dog,epoch=state.dpPetEpoch;dpVerifiedScan={type,petIndex:index,petEpoch:epoch,items:[]};
+ const stillCurrent=()=>token===dpScanRequest&&state.dog===index&&state.dpPetEpoch===epoch&&state.pairType===type&&state.pairStage===1&&state.modal==='pair-wizard';
+ const scan=window.DeepPetPairingBridge?.findResults;
+ window.__dpPairScanVisualBusy=typeof scan==='function';renderModal();
+ if(typeof scan!=='function')break;
+ Promise.resolve().then(()=>scan(type)).then(result=>{
+  if(!stillCurrent())return;
+  window.__dpPairScanVisualBusy=false;dpVerifiedScan={type,petIndex:index,petEpoch:epoch,items:Array.isArray(result)?result.filter(d=>d&&d.verified===true&&typeof d.id==='string'&&d.id.length>2):[]};renderModal();
+ }).catch(()=>{if(!stillCurrent())return;window.__dpPairScanVisualBusy=false;dpVerifiedScan={type,petIndex:index,petEpoch:epoch,items:[]};renderModal();toast(label3('項圈搜尋失敗，請檢查連線後重試','Collar search failed. Retry after checking the connection.','목걸이 검색에 실패했습니다. 다시 시도하세요.'));});
+ break;}
+case 'pair-back-types':dpScanRequest++;dpPairCommitRequest++;dpVerifiedScan=[];window.__dpPairScanVisualBusy=false;state.pairStage=0;state.pairType=null;renderModal();break;
+case 'pair-pick-device':state.pairSelected=target.dataset.id;state.pairStage=2;renderModal();break;
+case 'pair-back-results':dpPairCommitRequest++;state.pairStage=1;renderModal();break;
+case 'owner-all-nights-open':state.detail='sleep-all-nights';render(true);break;
+case 'owner-all-nights-back':state.detail=null;render(true);break;
+case 'pair-none-found':if(state.pairType==='4g'&&dpPairSearchResults().length===0){state.pairStage=5;renderModal();}break;
+case 'pair-retry':if(state.pairType)onAction({dataset:{action:'pair-scan'}});break;
+case 'pair-buy-4g':state.modal='';state.shopSelection='4g';navTo('me','store');break;
+case 'pair-commit':{
+ if(!state.pairType||!state.pairSelected)break;
+ if(!window.DeepPetPersonalization941?.profileComplete(currentDog(),true)){toast(label3('請先完成照片、姓名、品種、年齡與體重','Complete the pet profile first','먼저 프로필을 작성하세요'));openModal('edit-pet');break;}
+ const pickedType=state.pairType,pickedId=state.pairSelected,pairPetIndex=state.dog,pairPetEpoch=state.dpPetEpoch,commitId=++dpPairCommitRequest;
+ const stillCurrent=()=>commitId===dpPairCommitRequest&&state.dpPetEpoch===pairPetEpoch&&state.dog===pairPetIndex&&state.pairType===pickedType&&state.pairSelected===pickedId&&state.pairStage===3&&state.modal==='pair-wizard'&&!selectedBlank();
+ const selectedDevice=dpPairSearchResults().find(d=>d.id===pickedId);
+ const bridge=window.DeepPetPairingBridge;
+ if(!selectedDevice||typeof bridge?.pair!=='function'){toast(label3('目前尚未連接工廠的真實配對服務','Real collar pairing is not yet available','실제 기기 연결을 사용할 수 없습니다'));state.pairStage=1;renderModal();break;}
+ const otherOwner=Object.keys(state.devicesByPet||{}).find(k=>Number(k)!==pairPetIndex&&state.devicesByPet[k]?.connected&&state.devicesByPet[k]?.connectedId===pickedId);
+ if(otherOwner!==undefined&&!window.confirm(label3('這個項圈已連接另一隻寵物。要轉移配對並解除上一隻寵物的連線嗎？','This collar is paired to another pet. Transfer it and disconnect the previous pet?','이 목걸이는 다른 반려동물에 연결되어 있습니다. 이전 연결을 해제하고 옮길까요?')))break;
+ state.pairStage=3;renderModal();Promise.resolve().then(()=>bridge.pair({type:pickedType,deviceId:pickedId,petId:String(pairPetIndex)})).then(verified=>{
+ if(!stillCurrent())return;
+ if(verified?.verified!==true||verified.deviceId!==pickedId||verified.type!==pickedType)throw new Error('device_pair_not_verified');
+ if(otherOwner!==undefined&&state.devicesByPet?.[otherOwner]?.connectedId===pickedId){
+   state.devicesByPet[otherOwner]={connected:false,deviceType:null,connectedName:'',connectedId:'',gpsEnabled:false,geofenceEnabled:false};
+   if(state.gpsDeviceOwner===Number(otherOwner))state.gpsDeviceOwner=null;
+ }
+ state.deviceType=pickedType;state.connected=true;state.emptyPreview=false;if(state.dog>=dogs.length&&state.petExtras?.[state.dog-dogs.length])state.petExtras[state.dog-dogs.length].freeCare=false;state.gpsDeviceOwner=state.dog;state.connectedName=pickedType==='4g'?'DeepPet 4G + GPS':'DeepPet Bluetooth';state.connectedId=pickedId;state.gpsEnabled=false;state.geofenceEnabled=false;state.gardenMode='map';state.pairStage=4;
+ const fromHomeGps=state.pairReturnContext==='home-gps';
+ state.pairReturnContext=null;
+ state.tab=fromHomeGps?'home':'me';state.detail=null;
+ // Show the visual success ceremony only after an independently verified
+ // device-ID + model match. The next existing screen is still the fit guide.
+ state.modal='pair-success';
+ dpRememberDevice();
+ window.DeepPetConnectionFX?.beginVerified({petIndex:pairPetIndex,petEpoch:pairPetEpoch,type:pickedType,deviceId:pickedId,fromHomeGps});
+ render(true);
+ }).catch(()=>{if(!stillCurrent())return;state.pairStage=1;renderModal();toast(label3('配對未通過設備驗證，請重試','Pairing was not verified. Please retry.','연결 인증에 실패했습니다. 다시 시도하세요.'));});break;}
+case 'shop-open':state.shopSelection=state.shopSelection==='4g'?'4g':'bt';navTo('me','store');break;
+case 'shop-close':navTo('me');break;
+case 'shop-select-product':{const kind=target.dataset.type==='4g'?'4g':'bt';if(!dpRootCommit(['shopSelection','dpPetWorkspaceByPet'],()=>{state.shopSelection=kind;}))break;render();break;}
+case 'shop-plan':{const plan=target.dataset.plan==='monthly'?'monthly':'yearly';if(!dpRootCommit(['shopPlan','dpPetWorkspaceByPet'],()=>{state.shopPlan=plan;}))break;render();break;}
+ case 'shop-add':{const kind=state.shopSelection==='4g'?'4g':'bt';if(!dpRootCommit(['shopCart','dpPetWorkspaceByPet'],()=>{if(!Array.isArray(state.shopCart))state.shopCart=[];state.shopCart.push({kind,plan:kind==='4g'?(state.shopPlan==='monthly'?'monthly':'yearly'):null});}))break;render();toast(tr('已加入購物車','Added to cart','장바구니에 추가했어요'));break;}
+ case 'shop-remove':{const index=Number(target.dataset.index);if(!Array.isArray(state.shopCart)||!Number.isInteger(index)||index<0||index>=state.shopCart.length)break;if(!dpRootCommit(['shopCart','dpPetWorkspaceByPet'],()=>{state.shopCart.splice(index,1);}))break;render();break;}
+ case 'shop-checkout':if(cartSummary().items.length)navTo('me','store-checkout');break;
+case 'shop-back':navTo('me','store');break;
+ case 'shop-continue-payment':if(cartSummary().items.length)navTo('me','store-payment');break;
+ case 'shop-payment-back':state.checkoutForm={name:($('#checkoutRecipient')?.value||'').trim(),email:($('#checkoutEmail')?.value||'').trim(),address:($('#checkoutAddress')?.value||'').trim(),phone:($('#checkoutPhone')?.value||'').trim(),country:($('#checkoutCountry')?.value||'').trim(),city:($('#checkoutCity')?.value||'').trim(),postal:($('#checkoutPostal')?.value||'').trim(),region:($('#checkoutRegion')?.value||'').trim(),address2:($('#checkoutAddress2')?.value||'').trim()};navTo('me','store-checkout');break;
+ case 'shop-pay-method':state.checkoutForm={name:($('#checkoutRecipient')?.value||'').trim(),email:($('#checkoutEmail')?.value||'').trim(),address:($('#checkoutAddress')?.value||'').trim(),phone:($('#checkoutPhone')?.value||'').trim(),country:($('#checkoutCountry')?.value||'').trim(),city:($('#checkoutCity')?.value||'').trim(),postal:($('#checkoutPostal')?.value||'').trim(),region:($('#checkoutRegion')?.value||'').trim(),address2:($('#checkoutAddress2')?.value||'').trim()};state.checkoutMethod=target.dataset.method;render();break;
+ case 'shop-submit-payment':{const name=($('#checkoutRecipient')?.value||'').trim(),email=($('#checkoutEmail')?.value||'').trim(),address=($('#checkoutAddress')?.value||'').trim();if(!state.checkoutMethod){toast(tr('請選擇付款方式','Select a payment method','결제 수단을 선택하세요'));break;}if(!name||!address||!($('#checkoutPhone')?.value||'').trim()||!($('#checkoutCountry')?.value||'').trim()||!($('#checkoutCity')?.value||'').trim()||!/^\S+@\S+\.\S+$/.test(email)){toast(tr('請填寫收件人、有效電子郵件及地址','Enter recipient, valid email and address','수령인, 이메일, 주소를 입력하세요'));break;}const summary=cartSummary();if(!summary.items.length){navTo('me','store');break;}state.checkoutForm={name,email,address,phone:($('#checkoutPhone')?.value||'').trim(),country:($('#checkoutCountry')?.value||'').trim(),city:($('#checkoutCity')?.value||'').trim(),postal:($('#checkoutPostal')?.value||'').trim(),region:($('#checkoutRegion')?.value||'').trim(),address2:($('#checkoutAddress2')?.value||'').trim()};state.checkoutOrder={id:'DP-DEMO-'+String(Date.now()).slice(-7),method:state.checkoutMethod,total:summary.now};state.shopCart=[];navTo('me','store-success');break;}
+ case 'shop-finish':state.checkoutOrder=null;navTo('me');break;
+case 'pick-language':if(['zh','zht','en','ko','ja'].includes(target.dataset.lang)){const lang=target.dataset.lang;if(!dpRootCommit(['lang','dpLanguageUserOverride'],()=>{state.dpLanguageUserOverride=true;state.lang=lang;}))break;document.documentElement.lang=lang==='zht'?'zh-Hant':lang==='zh'?'zh-Hans':lang;closeModal();render(true);toast(t('saved'));}break;
+ case 'garden-open-profile':{state.gardenProfileId=target.dataset.id||state.chatWith;state.gardenProfileOrigin=state.detail==='chat'||state.modal==='garden-chat'?'chat':'garden';openModal('garden-profile');break;}
+ case 'garden-profile-back':if(state.gardenProfileOrigin==='chat'){closeModal();state.tab='me';state.detail='chat';render(true);}else openModal('garden-detail');break;
+ case 'garden-profile-message':dpOpenChat(target.dataset.id||state.gardenProfileId);render();break;
+case 'garden-select-pet':state.gardenSelected=target.dataset.id;renderModal();break;
+case 'garden-close-pet':state.gardenSelected=null;renderModal();break;
+case 'garden-open-selected-chat':dpOpenChat(state.gardenSelected);render();break;
+case 'chat-to-inbox':dpStopChatVoice();state.gardenMode='messages';state.detail=null;render(true);openModal('garden-detail');break;
+case 'garden-to-device':closeModal();state.tab='me';render(true);break;
+case 'baseline-detail':state.modal='';state.tab='me';state.detail='baseline-page';render(true);break;
+ case 'baseline-page-back':state.detail=null;render(true);break;
+ case 'heart-moment':state.dpMomentFocus=null;state.dpEventIndex=0;openModal(action);break;
+ case 'care-detail':case 'rhythm-detail':case 'show-summary':case 'night-detail':case 'food-edit':case 'device-detail':case 'garden-detail':case 'language-detail':case 'privacy-detail':case 'alerts':case 'family-detail':case 'edit-pet':openModal(action);break;
+ case 'modal-close':if(['record-editor','med-edit','vax-edit','report-edit','meal-edit','pet-add','edit-pet','med-manage','care-plan','report-import'].includes(state.modal)&&!window.confirm(label3('取消本次編輯？尚未儲存的內容將會捨棄。','Discard unsaved edits and close?','저장하지 않은 내용을 취소하고 닫을까요?')))break;closeModal();break;
+ case 'modal-outside':if(target.classList.contains('overlay-backdrop')&&!['pet-add','edit-pet','avatar-choice','record-editor','med-edit','vax-edit','report-edit','meal-edit'].includes(state.modal))closeModal();break;
+ case 'save-food':{const v=Number($('#foodTargetInput')?.value);if(!Number.isFinite(v)||v<30||v>10000){toast(t('inputError'));break;}if(!dpCareCommit([['foodTarget',String(state.dog)]],()=>{state.foodTarget??={};state.foodTarget[state.dog]=v;}))break;closeModal();render();toast(t('saved'));break;}
+ case 'save-meal':{const v=+$('#mealInput')?.value;if(!Number.isFinite(v)||v<1||v>4000){toast(t('inputError'));break;}const key=String(state.dog)+'-'+iso(localDate());if(!dpCareCommit([['foodLog',key],['mealItems',key]],()=>{state.foodLog??={};state.foodLog[key]=Number(state.foodLog[key]||0)+v;state.mealItems??={};state.mealItems[key]??=[];state.mealItems[key].push({time:new Date().toTimeString().slice(0,5),kcal:v});}))break;closeModal();render();toast(t('saved'));break;}
+ case 'med-edit':state.medEditingId=target.dataset.id;openModal('med-manage');break;
+ case 'med-edit-save':{const m=dpMedicationSchedules().find(x=>x.id===state.medEditingId),name=$('#medEditName')?.value.trim(),qty=Number($('#medEditQty')?.value),unit=$('#medEditUnit')?.value||'',days=Number($('#medEditDays')?.value),startDate=$('#medEditStart')?.value,times=[0,1,2].map(i=>$('#medEditTime'+i)?.value).filter(Boolean);if(!m||!name||!(qty>0&&qty<=100)||!['顆','包','mL','滴'].includes(unit)||!Number.isInteger(days)||days<1||days>365||!dpCareDate(startDate,true)||!times.length||times.some(x=>!dpOptionalAppointmentTime(x))||new Set(times).size!==times.length){toast(label3('請補齊並核對所有處方資訊','Complete and verify the dosing plan','처방 정보를 모두 확인하세요'));break;}if(!dpCareCommit([['medsByDog',String(state.dog)]],()=>Object.assign(m,{name,qty,unit,days,startDate,times,time:times[0]})))break;closeModal();render();toast(t('saved'));break;}
+ case 'med-pause':openModal('med-pause-confirm');break;
+ case 'med-pause-cancel':openModal('med-manage');break;
+ case 'med-pause-save':{const m=medsForDog().find(x=>x.id===state.medEditingId&&!x.deleted);if(!m||!dpCareCommit([['medsByDog',String(state.dog)]],()=>{m.paused=!m.paused;m.status='pending';}))break;closeModal();render();toast(t('saved'));break;}
+ case 'med-delete-ask':state.medDeleteId=target.dataset.id;openModal('med-delete-confirm');break;
+ case 'med-delete-cancel':state.medDeleteId=null;openModal('med-manage');break;
+ case 'med-delete-confirm':{const m=medsForDog().find(x=>x.id===state.medDeleteId);if(!m||!dpCareCommit([['medsByDog',String(state.dog)]],()=>{m.deleted=true;m.paused=true;m.status='pending';}))break;state.medDeleteId=null;state.medEditingId=null;closeModal();render();toast(t('saved'));break;}
+ case 'vax-reschedule':state.vaxEditingSource=target.dataset.source;state.vaxEditingKey=target.dataset.key;openModal('vax-reschedule');break;
+ case 'vax-reschedule-save':{const v=vaccineRecord(state.vaxEditingSource,state.vaxEditingKey),date=$('#vaxNewDate')?.value,time=$('#vaxNewTime')?.value??'';if(!v||v.status==='done'||!dpCareDate(date,true)||date<iso(localDate())||!dpOptionalAppointmentTime(time)){toast(t('inputError'));break;}if(!setVaccineOverride(state.vaxEditingSource,state.vaxEditingKey,{date,time}))break;closeModal();render();toast(t('saved'));break;}
+ case 'dose-mark':state.doseChangeDraft={id:target.dataset.id,slot:Number(target.dataset.slot||0),status:target.dataset.status};openModal('dose-confirm');break;
+ case 'dose-confirm-cancel':state.doseChangeDraft=null;closeModal();break;
+ case 'dose-confirm-save':{const d=state.doseChangeDraft;if(!d||!dpMedMark(d.id,d.slot,d.status))break;state.doseChangeDraft=null;closeModal();render();toast(t('saved'));break;}
+ case 'med-toggle':{const m=medsForDog().find(x=>x.id===target.dataset.id&&!x.paused&&!x.deleted);if(!m)break;const old=m.status;m.status=m.status==='taken'?'pending':'taken';if(!recordMedDecision(m)){m.status=old;break;}render();toast(t('saved'));break;}
+ case 'med-skip':{const m=medsForDog().find(x=>x.id===target.dataset.id&&!x.paused&&!x.deleted);if(!m)break;const old=m.status;m.status=m.status==='skipped'?'pending':'skipped';if(!recordMedDecision(m)){m.status=old;break;}render();toast(t('saved'));break;}
+ case 'save-med':{state.importKind='med';state.importSource='manual';state.importText='';state.importName='';openModal('record-editor');toast(label3('請填寫完整的藥物劑量與療程後儲存','Complete the medication dose and course before saving','약물 용량과 복용 기간을 입력하세요'));break;}
+ case 'save-vax':{const name=$('#vaxNameInput')?.value.trim(),date=$('#vaxDateInput')?.value,time=$('#vaxTimeInput')?.value??'';if(!name||!dpCareDate(date,true)||!dpOptionalAppointmentTime(time)){toast(t('inputError'));break;}const stat=$('#vaxStatusInput')?.value==='done'?'done':'upcoming';if(stat==='done'&&date>iso(localDate())){toast(label3('未来日期不能标记为已接种','A future visit cannot be marked completed','미래 날짜를 완료로 표시할 수 없어요'));break;}if(allVaxForDog().some(v=>v.name.toLowerCase()===name.toLowerCase()&&v.date===date)){toast(label3('同一天的疫苗紀錄已存在','Duplicate vaccination on this date','같은 날짜의 백신 기록이 있습니다'));break;}if(!dpCareCommit([['vaxByDog',String(state.dog)]],()=>vaxForDog().push({id:'v'+Date.now(),name,date,time,status:stat,doneDate:stat==='done'?date:null})))break;closeModal();render();toast(t('saved'));break;}
+
+ case 'overlay-point':{const area=target.closest('.dp-heart-breath-overlay');if(area){area.querySelector('.dp-overlay-reading').innerHTML=esc(target.dataset.time)+' · <b>'+esc(target.dataset.heart)+' / '+esc(target.dataset.breath)+'</b>';}break;}
+ case 'lab-point':{const wrap=target.closest('.dp-lab-chart');if(wrap){wrap.querySelector('.dp-lab-date').textContent=target.dataset.date;wrap.querySelector('.dp-lab-value').textContent=target.dataset.value;wrap.querySelectorAll('.dp-lab-date-btn').forEach(b=>b.classList.toggle('active',b.dataset.date===target.dataset.date&&b.dataset.value===target.dataset.value));}break;}
+ case 'vax-edit':state.vaxEditingKey=target.dataset.key;openModal('vax-edit');break;
+ case 'vax-edit-save':{
+  const x=vaxForDog().find(v=>v.id===state.vaxEditingKey),name=$('#vaxEditName')?.value.trim(),date=$('#vaxEditDate')?.value,time=$('#vaxEditTime')?.value,status=$('#vaxEditStatus')?.value,actual=$('#vaxEditActualDate')?.value;
+  if(!x||!name||!dpCareDate(date,true)||!dpOptionalAppointmentTime(time)||!['done','upcoming'].includes(status)){toast(t('inputError'));break;}
+  if(status==='done'&&!dpCareDate(actual)){toast(label3('已接種的疫苗需要填寫真實接種日期，不能使用未來日期。','A completed vaccine requires its actual administration date, not a future date.','접종 완료 시 실제 접종일을 입력해야 합니다.'));break;}
+  // Changing the scheduled appointment must not erase the separately saved
+  // actual administration date; undoing given status clears that date only.
+  if(!dpCareCommit([['vaxByDog',String(state.dog)]],()=>Object.assign(x,{name,date,time,status,doneDate:status==='done'?actual:null})))break;
+  closeModal();render();toast(t('saved'));break;
+ }
+ case 'vax-delete':state.vaxDeleteId=target.dataset.key;openModal('vax-delete');break;
+ case 'vax-delete-confirm':{const list=vaxForDog(),idx=list.findIndex(v=>v.id===state.vaxDeleteId);if(idx<0||!dpCareCommit([['vaxByDog',String(state.dog)]],()=>list.splice(idx,1)))break;state.vaxDeleteId=null;closeModal();render();toast(t('saved'));break;}
+ case 'report-delete-day':{
+ // Date-level deletion once erased every independently uploaded visit on the
+ // same day. Use the report-ID workflow to delete only one chosen report.
+ if(window.DeepPetExam921?.showList)window.DeepPetExam921.showList();
+ else navTo('health','reports');
+ toast(label3('請從清單選擇單份體檢報告刪除；同日其他報告會保留。','Choose one specific exam; other reports on that date are kept.','목록에서 보고서 한 건을 선택해 주세요.'));
+ break;
+}
+ case 'report-edit':state.reportEditId=target.dataset.id;openModal('report-edit');break;
+ case 'report-edit-save':{
+ const id=state.reportEditId,sourceSample=String(id).startsWith('sample:');
+ const x=(state.userReportEntries?.[String(state.dog)]||[]).find(r=>r.id===id)||reportEntriesForDate().find(r=>r.id===id),date=$('#repEditDate')?.value,clinic=$('#repEditClinic')?.value.trim(),name=$('#repEditName')?.value.trim(),value=$('#repEditValue')?.value,unit=$('#repEditUnit')?.value.trim(),status=$('#repEditStatus')?.value;
+ if(!x||!dpCareDate(date)||!name||value===''||!Number.isFinite(Number(value))||(!sourceSample&&!clinic)){toast(t('inputError'));break;}
+ const referenceLow=$('#repEditLow')?.value??'',referenceHigh=$('#repEditHigh')?.value??'';if(!dpReportBoundsValid(referenceLow,referenceHigh)){toast(label3('請確認參考上下限','Check reference limits','참고 범위 확인'));break;}
+ const update={date,clinic,name,value,unit,status:status||'unknown',referenceLow,referenceHigh};
+ if(sourceSample&&date!==id.split(':')[1]){toast(label3('展示報告的檢查日期固定；可修改每項數值與單位。','The sample exam date is fixed; you can edit each result.','예시 검진 날짜는 유지되며 수치와 단위를 수정할 수 있습니다.'));break;}
+ const bucket=sourceSample?'reportOverridesByDog':'userReportEntries',pet=String(state.dog);
+ if(!dpCareCommit([[bucket,pet]],()=>{
+  if(sourceSample){state.reportOverridesByDog??={};(state.reportOverridesByDog[pet]??={})[id]=update;}
+  else Object.assign(x,update);
+ }))break;
+ state.activeReport=Math.max(0,reportAvailableDates().indexOf(date));window.DeepPetSignalScoring?.invalidate?.(state.dog);closeModal();render();toast(t('saved'));break;
+}
+ case 'report-delete':state.reportDeleteId=target.dataset.id;openModal('report-delete');break;
+ case 'report-delete-confirm':{
+ const id=state.reportDeleteId,key=String(state.dog);
+ const isSample=String(id).startsWith('sample:'),bucket=isSample?'reportOverridesByDog':'userReportEntries';
+ if(!dpCareCommit([[bucket,key]],()=>{
+  if(isSample){state.reportOverridesByDog??={};(state.reportOverridesByDog[key]??={})[id]=null;}
+  else {state.userReportEntries??={};state.userReportEntries[key]=(state.userReportEntries[key]||[]).filter(r=>r.id!==id);}
+ }))break;
+ state.reportDeleteId=null;window.DeepPetSignalScoring?.invalidate?.(state.dog);state.activeReport=Math.min(state.activeReport||0,Math.max(0,reportAvailableDates().length-1));closeModal();render();toast(t('saved'));break;
+}
+ case 'note-edit':{const list=notesForDog(),n=list[Number(target.dataset.index)];if(!n)break;if(!n.id){const newId='n'+Date.now()+'-'+target.dataset.index;if(!dpCareCommit([['notesByDog',String(state.dog)]],()=>{n.id=newId;}))break;}state.noteEditId=n.id;state.noteDraft=n.text;state.selectedNote=null;render(true);break;}
+ case 'note-cancel':state.noteEditId=null;state.noteDraft='';render();break;
+ case 'note-delete':{const list=notesForDog(),n=list[Number(target.dataset.index)];if(!n)break;const ok=confirm(label3('確定刪除此筆額外紀錄？','Delete this note?','이 기록을 삭제할까요?'));if(!ok||!dpCareCommit([['notesByDog',String(state.dog)]],()=>list.splice(Number(target.dataset.index),1)))break;if(n.id===state.noteEditId)state.noteEditId=null;render();toast(t('saved'));break;}
+ case 'note-chip':state.noteDraft=$('#noteText')?.value||state.noteDraft||'';state.selectedNote=Number(target.dataset.index);document.querySelectorAll('.note-chip').forEach((el,i)=>el.classList.toggle('active',i===state.selectedNote));break;
+ case 'note-add':{const text=($('#noteText')?.value||state.noteDraft||'').trim(),cat=state.selectedNote==null?(notesForDog().find(n=>n.id===state.noteEditId)?.cat||t('noteChips')[5]):t('noteChips')[state.selectedNote],date=$('#noteDate')?.value,time=$('#noteTime')?.value??'';if(!text||!dpCareDate(date)||!dpOptionalAppointmentTime(time)){toast(t('inputError'));break;}const list=notesForDog(),old=list.find(n=>n.id===state.noteEditId);if(!dpCareCommit([['notesByDog',String(state.dog)]],()=>{if(old)Object.assign(old,{date,time,cat,text});else list.push({id:'n'+Date.now(),date,time,cat,text});}))break;state.noteEditId=null;state.noteDraft='';state.selectedNote=null;render();toast(t('saved'));break;}
+ case 'choose-import':dpAbandonImportWorkflow();state.importSource=target.dataset.source;if(state.importSource==='manual'){state.importText='';state.importName='';state.importPreview='';openModal('record-editor');}else openModal('record-import');break;
+ case 'import-next':state.importText=$('#ocrText')?.value||state.importText||'';state.importName=$('#importFile')?.files?.[0]?.name||state.importName;openModal('record-editor');break;
+ case 'save-import':saveImportedRecord();break;
+ case 'upload-report':state.importKind='report';openModal('record-chooser');break;
+ case 'export-vet':state.vetBackDetail=state.detail||null;navTo('health','vet-report');break;
+ case 'pick-collar':state.connectChoice=target.dataset.type==='4g'?'4g':'bt';state.connectStage=0;renderModal();persist();break;
+case 'gps-quick-demo':{if(selectedBlank()||state.dog>=dogs.length||currentDog().dpFixtureInvalidated){toast(label3('真實寵物需要配對 4G 項圈後才能使用定位','Pair a real 4G collar before using GPS','실제 4G 목걸이 연결 후 GPS를 사용하세요'));break;}state.connected=true;state.deviceType='4g';state.connectedName='DeepPet 4G + GPS（模擬裝置）';state.connectedId='DP-4G-DEMO-'+String(state.dog).padStart(2,'0');state.gpsDeviceOwner=state.dog;state.gpsEnabled=true;state.geoFencesByPet??={};if(!(String(state.dog) in state.geoFencesByPet))saveGeoFence(DEFAULT_GEO_FENCE);state.geofenceEnabled=savedGeoFence().length>=3;state.geoPositionsByPet??={};if(!state.geoPositionsByPet[String(state.dog)])state.geoPositionsByPet[String(state.dog)]={point:[179,124],time:Date.now(),sample:'inside'};dpRememberDevice();render();toast(geoLocale('已進入 4G GPS 模擬體驗，非真實連線','4G GPS demo is active — not a real connection','실제 연결이 아닌 4G GPS 데모입니다'));break;}
+ case 'gps-sim-position':{const result=geoMoveScenario(target.dataset.pos);if(!result)break;render();if(result.exit)toast(geoLocale('示範警告：寵物已離開安全區！','Demo alert: pet exited the safe zone!','데모 알림: 안전 구역을 벗어났습니다!'));else if(result.returned)toast(geoLocale('已返回安全區域','Returned to safe zone','안전 구역에 돌아왔습니다'));break;}
+ case 'gps-clear-alerts':{if(!dpCareCommit([['geoAlertsByPet',String(state.dog)]],()=>{state.geoAlertsByPet??={};state.geoAlertsByPet[String(state.dog)]=[];}))break;renderModal();toast(geoLocale('示範越界紀錄已清除','Demo exit history cleared','데모 기록 삭제됨'));break;}
+ case 'gps-upgrade-4g':state.pairReturnContext='home-gps';state.pairType='4g';state.pairStage=0;state.pairSelected='';openModal('pair-wizard');break;
+case 'gps-home-enable':{if(!gpsForCurrentPet())break;if(!dpGpsCommit(()=>{state.gpsEnabled=true;state.gpsDeviceOwner=state.dog;}))break;
+ // Enabling GPS is only a permission toggle. It cannot invent a position.
+ // The actual location must arrive from the authorized 4G SDK telemetry.
+ render();requestAnimationFrame(()=>document.querySelector('#dp-owner-gps-card')?.scrollIntoView({block:'center',behavior:'smooth'}));break;}
+ case 'gps-open':if(gpsForCurrentPet()){state.fenceDraft=[];state.fenceEditMode=false;openModal('gps-open');}break;
+ case 'toggle-gps':{if(!gpsForCurrentPet())break;if(!dpGpsCommit(()=>{state.gpsEnabled=!state.gpsEnabled;if(state.gpsEnabled)state.gpsDeviceOwner=state.dog;if(!state.gpsEnabled){state.geofenceEnabled=false;state.gardenGpsDemo=false;}}))break;render();toast(state.gpsEnabled?label3('GPS 已開啟：耗電會增加','GPS on · battery usage increases','GPS 켜짐 · 배터리 사용량 증가'):label3('GPS 已關閉，電子圍欄已同步關閉','GPS and geofence are off','GPS 및 전자 울타리 꺼짐'));break;}
+ case 'toggle-fence':{if(!state.gpsEnabled||!gpsForCurrentPet()){toast(geoLocale('請先開啟 4G GPS','Enable 4G GPS first','먼저 4G GPS를 켜세요'));break;}if(!state.geofenceEnabled&&savedGeoFence().length<3){state.fenceEditMode=true;state.fenceDraft=[];render();toast(geoLocale('請手繪範圍，再按一次儲存並完成','Draw the boundary, then tap Save & finish once','범위를 그린 뒤 저장하고 완료를 누르세요'));break;}if(!dpGpsCommit(()=>{state.geofenceEnabled=!state.geofenceEnabled;}))break;render();toast(state.geofenceEnabled?geoLocale('示範安全區已啟用，可測試越界','Demo safe zone enabled; test an exit','데모 안전 구역을 켰습니다'):geoLocale('電子圍欄已停用','Geofence turned off','전자 울타리를 껐습니다'));break;}
+ case 'save-geofence-settings':{if(!state.gpsEnabled||!gpsForCurrentPet())break;if(state.geofenceEnabled&&savedGeoFence().length<3){toast(geoLocale('請先繪製有效的安全範圍','Draw a valid boundary before enabling the fence','유효한 안전 구역을 먼저 그려 주세요'));break;}if(state.fenceEditMode){toast(geoLocale('請先保存新繪製的圍欄','Save your new drawn boundary first','새 구역을 먼저 저장하세요'));break;}if(!persist())break;closeModal();render();toast(state.geofenceEnabled?geoLocale('已保存：定位與圍欄均開啟','Saved: GPS & geofence enabled','GPS와 울타리 저장 완료'):geoLocale('已保存：GPS定位開啟，電子圍欄關閉','Saved: GPS on, geofence off','GPS 켜짐 · 울타리 꺼짐 저장 완료'));break;}
+ case 'fence-redraw':state.fenceDraft=[];state.fenceEditMode=true;renderModal();toast(geoLocale('可在原地圖直接描繪；保存後才取代舊圍欄','Draw on this map; save to replace the old fence','이 지도에서 새 구역을 그리고 저장하세요'));break;
+ case 'fence-cancel':state.fenceDraft=[];state.fenceEditMode=false;renderModal();break;
+ case 'save-fence-shape':{const pts=state.fenceEditMode?state.fenceDraft:null;if(!Array.isArray(pts)||pts.length<3){toast(label3('請先手繪新的安全範圍','Draw a new safe zone first','먼저 새 구역을 그려 주세요'));break;}if(!dpGpsCommit(()=>{saveGeoFence(pts);state.geofenceEnabled=true;},[['geoFencesByPet',String(state.dog)]]))break;state.fenceDraft=[];state.fenceEditMode=false;closeModal();navTo('home');requestAnimationFrame(()=>document.querySelector('#dp-owner-gps-card')?.scrollIntoView({block:'center',behavior:'smooth'}));toast(state.geofenceEnabled?label3('安全區已保存，電子圍欄保持開啟','Safe zone saved; fence remains on','구역 저장, 울타리 켜짐 유지'):label3('安全區已保存，電子圍欄保持關閉；GPS可正常定位','Safe zone saved with fence off; GPS positioning remains available','구역 저장, 울타리 꺼짐 · GPS 사용 가능'));break;}
+
+  case 'garden-enable-gps':{if(!gpsForCurrentPet()){toast(label3('請先選擇 4G 項圈或開啟 4G 展示','Pair a 4G collar or try the demo','4G 목걸이를 연결하거나 데모를 체험하세요'));break;}if(!dpGpsCommit(()=>{state.gpsEnabled=true;}))break;state.gardenMode='map';state.gardenSelected=null;render();toast(label3('GPS 地圖已開啟','GPS map enabled','GPS 지도를 켰어요'));break;}
+ case 'garden-gps-demo':{if(selectedBlank()||state.dog>=dogs.length||currentDog().dpFixtureInvalidated){toast(label3('真實寵物附近地圖須等待正式4G社群與定位服務','Live 4G discovery is not yet connected for real pets','실제 반려동물용 4G 주변 서비스는 아직 연결되지 않았습니다.'));break;}state.gardenGpsDemo=true;state.gardenDemoGpsPet=state.dog;state.gardenMode='map';state.gardenSelected=null;persist();render();toast(label3('已開啟地圖展示，原本配對的項圈不會改變','Map preview enabled; your paired device is unchanged','지도 체험을 시작했어요. 연결 기기는 변경되지 않아요.'));break;}
+
+ case 'save-fence':{const r=Number($('#fenceRadius')?.value);if(!Number.isFinite(r)||r<100||r>2000){toast(t('inputError'));break;}const previous=state.fenceRadius;state.fenceRadius=r;if(!persist()){state.fenceRadius=previous;break;}closeModal();toast(t('saved'));break;}
+ case 'garden-toggle':state.garden=!state.garden;renderModal();persist();toast(t('saved'));break;
+ case 'save-pet':{
+  const name=$('#petNameInput')?.value.trim(),ageText=$('#petAgeInput')?.value,weightText=$('#petWeightInput')?.value,weight=Number(weightText),age=Number(ageText);
+  if(!name||name.length>24||!ageText||!weightText||!Number.isFinite(weight)||weight<=0||weight>120||!Number.isFinite(age)||age<0||age>35){toast(t('inputError'));break;}
+  const heightRaw=$('#petHeightInput')?.value.trim()||'',bcsRaw=$('#petBcsInput')?.value.trim()||'';const heightCm=heightRaw?Number(heightRaw):null,bcs=bcsRaw?Number(bcsRaw):null;
+  if(heightCm!==null&&(!Number.isFinite(heightCm)||heightCm<1||heightCm>150)||bcs!==null&&(!Number.isInteger(bcs)||bcs<1||bcs>9)){toast(t('inputError'));break;}
+  const species=$('#petSpeciesInput')?.value||'dog';
+  if(!breedIsSelected('pet',species)){breedInvalid();break;}
+  const selected=breedSelected('pet',species),previous=currentDog(),speciesChanged=previous.species!==species;
+  const oldPhoto=String(previous.photo||''),personalPhoto=/^data:image\/(?:jpeg|png|webp);base64,/i.test(oldPhoto),autoPhoto=oldPhoto.startsWith('data:image/svg+xml;utf8,');
+  const updateGenerated=(speciesChanged&&!personalPhoto)||(autoPhoto&&previous.name!==name);
+  const isBuiltInGallery=state.dog>=0&&state.dog<dogs.length;
+  // A gallery slot is an editable EXHIBITION fixture, never a blank owner pet.
+  if(!dpCareCommit([['petOverrides',String(state.dog)]],()=>{
+   state.petOverrides??={};state.petOverrides[state.dog]={...(state.petOverrides?.[state.dog]||{}),name,weight,age,heightCm,bcs,species,breed:{zh:selected.zh,zht:selected.zht,en:selected.en,ko:selected.ko},breedId:selected.id,dpUserProfileSaved:true,...(!isBuiltInGallery&&speciesChanged?{freeCare:true,score:[0,0,0],bio:null}:{}),...(isBuiltInGallery?{dpFixtureInvalidated:false,freeCare:false,dpFreshPet:false}:{}),...(updateGenerated?{photo:petAvatar(name,species==='cat'?'🐈':'🐕','#ecebff','#c6dbfb'),dpPhotoConfirmed:false}:{})};
+  }))break;
+  window.DeepPetSignalScoring?.invalidate?.(state.dog);closeModal();render(true);toast(t('saved'));break;
+ }
+ case 'setting-notify':{const key=DP_NOTIFICATION_KEYS[target.dataset.which];if(!key)break;if(!dpRootCommit(['settings','dpPetWorkspaceByPet'],()=>{state.settings=dpNormalizeNotificationSettings(state.settings);state.settings[key]=!state.settings[key];}))break;renderModal();break;}
+ case 'garden-follow':{const id=target.dataset.id;if(!id)break;if(!dpRootCommit(['gardenFollow','dpPetWorkspaceByPet'],()=>{state.gardenFollow??=[];state.gardenFollow=state.gardenFollow.includes(id)?state.gardenFollow.filter(x=>x!==id):[...state.gardenFollow,id];}))break;renderModal();toast(t('saved'));break;}
+ case 'garden-wave':if(!dpRootCommit(['gardenWaves','dpPetWorkspaceByPet'],()=>{state.gardenWaves=(state.gardenWaves||0)+1;}))break;renderModal();toast(label3('已送出一声问候（仅本机演示）','Demo greeting sent locally','데모 인사를 표시했어요'));break;
+ case 'family-add':openModal('family-detail');break;
+ case 'reset-demo':localStorage.removeItem('deeppet-v36-local');localStorage.removeItem('deeppet-v35-local');location.reload();break;
+ case 'save-language':{const lang=$('#languageInput')?.value||'zht';if(!['zh','zht','en','ko','ja'].includes(lang))break;if(!dpRootCommit(['lang','dpLanguageUserOverride'],()=>{state.lang=lang;state.dpLanguageUserOverride=true;}))break;document.documentElement.lang=lang==='zht'?'zh-Hant':lang==='zh'?'zh-Hans':lang;closeModal();render(true);toast(t('saved'));break;}
+ case 'save-heart-image':downloadHeart();break;
+case 'heart-fullscreen':openModal('heart-preview');break;
+case 'heart-preview-back':openModal('heart-moment');break;
+ default:break;}}
+// Freehand polygon input: pointer events cover mouse, touch, pen; everything is kept within the illustrative map.
+let fenceDrawing=null;
+function downFence(e){const svg=e.target.closest?.('#fenceCanvas');if(!svg||state.modal!=='gps-open'||!state.gpsEnabled)return;const box=svg.getBoundingClientRect();if(!box.width||!box.height)return;const getPoint=ev=>[Math.max(2,Math.min(358,(ev.clientX-box.left)*360/box.width)),Math.max(2,Math.min(238,(ev.clientY-box.top)*240/box.height))];state.fenceEditMode=true;state.fenceDraft=[];fenceDrawing={svg,id:e.pointerId,points:[getPoint(e)]};svg.setPointerCapture?.(e.pointerId);const saved=svg.querySelector('#fenceSavedGeometry');if(saved)saved.innerHTML='';const g=svg.querySelector('#fenceDraftGeometry');if(g)g.innerHTML='';e.preventDefault();}
+function moveFence(e){if(!fenceDrawing||e.pointerId!==fenceDrawing.id)return;const {svg,points}=fenceDrawing,box=svg.getBoundingClientRect();const p=[Math.max(2,Math.min(358,(e.clientX-box.left)*360/box.width)),Math.max(2,Math.min(238,(e.clientY-box.top)*240/box.height))],last=points.at(-1);if(Math.hypot(p[0]-last[0],p[1]-last[1])<3)return;points.push(p);const path=svg.querySelector('#fenceDraftGeometry');if(path)path.innerHTML=`<polyline points="${points.map(x=>x.join(',')).join(' ')}" fill="none" stroke="#684fd8" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`;e.preventDefault();}
+function endFence(e){if(!fenceDrawing||e.pointerId!==fenceDrawing.id)return;const {points}=fenceDrawing;fenceDrawing=null;if(e.type==='pointercancel'){state.fenceDraft=[];renderModal();return;}const area=points.reduce((acc,p,i)=>{const q=points[(i+1)%points.length];return acc+p[0]*q[1]-q[0]*p[1]},0)/2;if(points.length<8||Math.abs(area)<260){toast(label3('請畫出更完整的區域','Draw a larger closed shape','더 큰 구역을 그려 주세요'));renderModal();return;}state.fenceDraft=points.filter((p,i)=>i%Math.max(1,Math.ceil(points.length/100))===0).slice(0,140);renderModal();}
+document.addEventListener('pointerover',e=>{const pt=e.target.closest?.('[data-action=overlay-point]');if(pt){const area=pt.closest('.dp-heart-breath-overlay');if(area)area.querySelector('.dp-overlay-reading').innerHTML=esc(pt.dataset.time)+' · <b>'+esc(pt.dataset.heart)+' / '+esc(pt.dataset.breath)+'</b>';}const p=e.target.closest?.('.dp-lab-point');if(!p)return;const wrap=p.closest('.dp-lab-chart'),b=wrap?.querySelectorAll('.dp-lab-date-btn')[Number(p.dataset.labI)];if(b){wrap.querySelector('.dp-lab-date').textContent=b.dataset.date;wrap.querySelector('.dp-lab-value').textContent=b.dataset.value;}});
+
+document.addEventListener('keydown',e=>{if(e.target.matches?.('.dp-owner-chart-hit')&&['Enter',' '].includes(e.key)){e.preventDefault();e.target.click();}});
+document.addEventListener('keydown',e=>{const p=e.target.closest?.('.dp-lab-point');if(p&&['Enter',' '].includes(e.key)){e.preventDefault();onAction(p);}});
+document.addEventListener('pointerdown',downFence);
+document.addEventListener('pointermove',moveFence);
+document.addEventListener('pointerup',endFence);
+document.addEventListener('pointercancel',endFence);
+// Keep breed autocomplete local to the modal; typing never rerenders/loses field focus.
+document.addEventListener('input',e=>{
+ if(!e.target?.id?.endsWith('BreedSearch'))return;
+ const prefix=e.target.id.replace(/BreedSearch$/,'');const hidden=document.getElementById(prefix+'BreedKey');if(hidden)hidden.value='';
+ breedRenderOptions(prefix,e.target.value);
+});
+document.addEventListener('focusin',e=>{
+ if(e.target?.id?.endsWith('BreedSearch'))breedRenderOptions(e.target.id.replace(/BreedSearch$/,''),e.target.value);
+});
+document.addEventListener('change',e=>{
+ if(e.target?.id!=='foodHistoryDate')return;
+ const date=String(e.target.value||'');if(!/^\d{4}-\d{2}-\d{2}$/.test(date))return;
+ state.foodSelectedDate=date;render();
+});
+document.addEventListener('change',e=>{
+ if(e.target?.id!=='deepDayDate')return;
+ const date=e.target.value,{min,max}=deepDateBounds();
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||date<min||date>max){toast(label3('請選擇最近 30 天內的日期','Choose a date within the last 30 days','최근 30일 이내의 날짜를 선택하세요'));e.target.value=deepChosenDate();return;}
+ state.range=1;state.deepSelectedDate=date;state.dp1007DayManuallyChosen=true;state.chartPoint=-1;render();
+});
+document.addEventListener('change',e=>{
+ if(!['addPetSpecies','petSpeciesInput'].includes(e.target?.id))return;
+ const prefix=e.target.id==='addPetSpecies'?'addPet':'pet';
+ const field=document.getElementById(prefix+'BreedSearch'),hidden=document.getElementById(prefix+'BreedKey');
+ if(field)field.value='';if(hidden)hidden.value='';breedRenderOptions(prefix,'');
+});
+document.addEventListener('keydown',e=>{
+ if(!e.target?.id?.endsWith('BreedSearch'))return;
+ const prefix=e.target.id.replace(/BreedSearch$/,''),list=document.getElementById(prefix+'BreedOptions');
+ if(e.key==='Escape'&&list&&!list.hidden){e.preventDefault();e.stopImmediatePropagation();breedCloseOptions(prefix);return;}
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+  e.preventDefault();if(!list||list.hidden)breedRenderOptions(prefix,e.target.value);
+  const items=Array.from(list.querySelectorAll('[data-breed-choice]'));if(!items.length)return;
+  const idx=items.findIndex(x=>x.classList.contains('active'));const next=e.key==='ArrowDown'?Math.min(items.length-1,idx+1):Math.max(0,idx<0?0:idx-1);
+  items.forEach(x=>x.classList.remove('active'));items[next].classList.add('active');items[next].scrollIntoView({block:'nearest'});
+ }
+ if(e.key==='Enter'&&list&&!list.hidden){const pick=list.querySelector('.breed-option.active')||list.querySelector('.breed-option');if(pick){e.preventDefault();breedPick(prefix,pick.dataset.breedChoice);}}
+});
+
+document.addEventListener('click',e=>{if(e.target.closest?.('.dp-chart-inspector')&&!e.target.closest?.('[data-action]'))e.stopImmediatePropagation();},true);
+document.addEventListener('pointerover',e=>{const slot=e.target.closest?.('.sleep-date-timeline button[data-slot]');if(slot)dpSyncSleepSlot(slot.closest('.dp-night-record, .dp-owner-sleep-timeline, .sleep-date-modal, .deep-night-selected'),Number(slot.dataset.slot),true);});
+document.addEventListener('pointerdown',e=>{if(e.target.closest?.('.dp-chart-inspector svg'))pointerInspect(e);});
+document.addEventListener('pointerover',e=>{if(e.target.closest?.('.dp-chart-inspector svg'))pointerInspect(e);});
+document.addEventListener('pointermove',e=>{if(e.target.closest?.('.dp-chart-inspector svg')||e.target.closest?.('.dp-chart-inspector')?.hasPointerCapture?.(e.pointerId))pointerInspect(e);});
+document.addEventListener('pointerup',e=>{const holder=e.target.closest?.('.dp-chart-inspector');if(holder?.hasPointerCapture?.(e.pointerId))holder.releasePointerCapture(e.pointerId);});
+document.addEventListener('keydown',e=>{const h=e.target.closest?.('.dp-chart-inspector');if(!h||!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const data=plotRegistry[Number(h.dataset.inspectorId)];if(data)inspectPoint(h,Math.max(0,Math.min(data.values.length-1,Number(h.dataset.selectedIndex??(data.values.length-1))+(e.key==='ArrowRight'?1:-1))));});
+document.addEventListener('click',event=>{const choice=event.target.closest?.('[data-breed-choice]');if(choice){breedPick(choice.dataset.prefix,choice.dataset.breedChoice);return;}const w=event.target.closest('[data-week-index]');if(w){state.weekFocus=+w.dataset.weekIndex;render();return}const p=event.target.closest('[data-chart-index]');if(p){state.chartPoint=+p.dataset.chartIndex;render();return}const elem=event.target.closest('[data-action]');if(!elem){if(!event.target.closest?.('.breed-selector')){breedCloseOptions('pet');breedCloseOptions('addPet');}return;}if(elem.dataset.action==='modal-outside' && elem!==event.target)return;onAction(elem)});
+document.addEventListener('change',event=>{if(['dpChatGallery','dpChatCamera'].includes(event.target?.id)){dpChatSendImage(event.target.files?.[0]);return;}if(['avatarGalleryInput','avatarCameraInput'].includes(event.target.id)){processAvatarPhoto(event.target.files?.[0]);return;}if(event.target.id==='mealPhotoInput'){dpHandleFoodPhoto(event.target.files?.[0]);return;}if(event.target.id==='importFile'){processImportFile(event.target.files?.[0]);return;}if(event.target.id==='reportFile'){const f=event.target.files?.[0];if(!f)return;state.reportUploads.push({dog:state.dog,name:f.name.slice(0,100)});render();toast(t('uploadHint'));}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target?.id==='gardenChatText'&&!e.isComposing){e.preventDefault();const msg=e.target.value.trim();if(msg)dpChatAddMessage('text',msg);}});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.modal){e.preventDefault();onAction({dataset:{action:'modal-close'}});}});
+
+// Open a QR link as a privacy-limited public-only page, even on the first visit.
+function dpExternalPublicFromHash(){
+ if(!location.hash.startsWith('#dpPublic='))return null;
+ const m=location.hash.match(/^#dpPublic=([A-Za-z0-9_-]+)$/);
+ return (m&&dpPublicDecode(m[1]))||{invalid:true};
+}
+state.dpExternalPublic=dpExternalPublicFromHash();
+window.addEventListener('hashchange',()=>{state.dpExternalPublic=dpExternalPublicFromHash();render(true);});
+dpSocialSeedShowcase();
+// Deferred until final UI patch layer is installed (V9.07).

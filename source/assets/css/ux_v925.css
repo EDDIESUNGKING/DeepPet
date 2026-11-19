@@ -1,0 +1,32 @@
+/* DeepPet V9.25 -- quiet but discoverable 30-day wellness in Me, not Home */
+.dp925-wellness-card{width:100%;text-align:left;border:1px solid #e7e9f3;background:linear-gradient(135deg,#fff 0%,#f6f9ff 100%);display:block;margin:12px 0;padding:17px;border-radius:22px;color:#29344a}
+.dp925-model-head{display:flex;align-items:center;gap:12px}
+.dp925-model-head div{flex:1;min-width:0}
+.dp925-model-head strong{font-size:17px;display:block}
+.dp925-model-head small{display:block;font-size:12px;color:#737f93;margin-top:3px}
+.dp925-model-icon{font-size:22px;line-height:1;color:#7468b4;border-radius:13px;background:#eeeafb;padding:11px}
+.dp925-chevron{font-size:23px;color:#8994aa}
+.dp925-model-metrics{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
+.dp925-model-metrics>div{border:1px solid #ebedf3;border-radius:17px;padding:12px 9px;background:#fff;display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;min-width:0}
+.dp925-model-metrics small{font-size:11px;color:#7b8699;line-height:1.35}
+.dp925-model-metrics strong{font-size:31px;font-weight:780;line-height:1.3;font-variant-numeric:tabular-nums}
+.dp925-model-metrics strong em{font-size:12px;font-weight:600;color:#9099a8;font-style:normal;padding-left:3px}
+.dp925-model-metrics span{font-size:11px;color:#627088}
+.dp925-wellness-card>p{font-size:12px;color:#67758b;margin:12px 0 8px;line-height:1.6}
+.dp925-model-more{font-size:12px;font-weight:700;color:#675db4;display:block;text-align:right}
+.dp925-home-link{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border-radius:15px;padding:12px 15px;color:#475569;background:#fbfcff;margin:13px 0}
+.dp925-home-link>span:first-child{font-size:23px;color:#7769bd}
+.dp925-home-link>span:nth-child(2){flex:1;min-width:0}
+.dp925-home-link b,.dp925-home-link small{display:block}
+.dp925-home-link b{font-size:13px}.dp925-home-link small{font-size:11px;color:#748197;margin-top:2px}
+.dp925-wellness-page .dp-independent-head{margin-bottom:14px}
+.dp925-wellness-detail{border-radius:19px;padding:16px;margin-bottom:14px}
+.dp925-wellness-detail h2{font-size:19px;margin:0 0 4px}.dp925-wellness-detail h3{font-size:15px;margin:0 0 10px}
+.dp925-wellness-detail p{color:#69778c;font-size:12px;line-height:1.65;margin:10px 0}
+.dp925-factor{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #eef0f4;font-size:12px}
+.dp925-factor strong{font-variant-numeric:tabular-nums}.dp925-breakdown{padding:12px;background:#faf8f3;border-radius:12px;margin-top:8px}
+.dp925-breakdown small{font-size:11px;color:#8a785c}
+.dp925-formula{font-weight:600;color:#4d5a70!important;font-size:12px!important}
+.dp925-mini-trend{display:flex;align-items:end;gap:3px;height:100px;background:linear-gradient(0deg,#f0f2f7,white);border-bottom:1px solid #d7dce6;border-radius:5px;padding:8px 4px 0}
+.dp925-mini-trend span{min-width:3px;flex:1;border-radius:4px 4px 0 0;opacity:.75}
+.dp925-urgent-note{font-size:12px;line-height:1.65;color:#864e42;background:#fff7f1;border-radius:12px;padding:10px;margin:9px 0 0}

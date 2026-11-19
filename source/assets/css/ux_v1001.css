@@ -1,0 +1,18 @@
+/* V10.01: reuses original focus and More components; no new page sections. */
+.dp-today-focus .dp-today-more-button{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:max-content!important;max-width:100%!important;min-width:136px;
+ margin:14px auto 0!important;padding:10px 17px!important;
+ border-radius:999px!important;border:1px solid #d9e8f4!important;
+ background:#f0f7fc!important;color:#3777ab!important;
+ text-align:center!important;font-size:12px!important;font-weight:650!important;
+}
+.dp-today-focus .dp-today-list{display:grid;gap:9px}
+.dp1001-empty-todos{padding:17px 15px!important}
+.dp1001-empty-todos>p{margin:10px 0 0;color:#64748b;font-size:12px;line-height:1.6}
+.dp1001-profile-metadata{
+ position:absolute;left:17px;bottom:14px;right:17px;max-width:calc(100% - 34px);
+ color:#fff;font-size:12px;font-weight:600;line-height:1.5;
+ text-shadow:0 1px 4px rgba(15,23,42,.7);overflow-wrap:anywhere;
+}
+@media(max-width:360px){.dp-today-focus .dp-today-more-button{min-width:120px;padding:9px 13px!important}}

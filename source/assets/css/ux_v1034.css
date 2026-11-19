@@ -1,0 +1,12 @@
+/* V10.34: a readable, deliberately quiet version signature at the very end
+   of the existing Me page. No new menu, card, route or animation. */
+#app .app-build-version{
+  margin:23px auto 7px;
+  text-align:center;
+  font-size:12px;
+  font-weight:500;
+  line-height:1.5;
+  letter-spacing:.018em;
+  color:#6b6e82;
+  user-select:text;
+}

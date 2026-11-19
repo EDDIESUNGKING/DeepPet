@@ -1,0 +1,24 @@
+/* V10.13 — keep evidence subordinate to the original two scores. */
+.dp-summary-lane .dp1013-score-evidence{grid-column:1/-1;width:100%;padding:8px 0 0;margin-top:7px;border-top:1px solid rgba(102,118,147,.15);text-align:left;pointer-events:none}
+.dp1013-score-evidence{display:flex;flex-wrap:wrap;gap:3px 10px;color:#687892;font-weight:500;line-height:1.45}
+.dp1013-score-evidence small{font-size:11px;color:inherit;display:block}
+.dp1013-score-evidence .dp1013-personal-change{color:#386b85}
+.dp850-score-panel>.dp1013-score-evidence{margin-top:10px;border-top:1px solid #edf1f6;padding-top:9px}
+.dp1013-deep-evidence{font-size:11px;color:#72819b;margin:4px 0 12px;line-height:1.5}
+.dp1013-event-card{padding:0;overflow:hidden;margin:12px 0}
+.dp1013-event-card>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;list-style:none}
+.dp1013-event-card>summary::-webkit-details-marker{display:none}
+.dp1013-event-card>summary>span:first-child{display:grid;gap:4px}
+.dp1013-event-card>summary strong{font-size:15px;color:#253451;font-weight:700}
+.dp1013-event-card>summary small{font-size:11px;color:#718098}
+.dp1013-event-card[open]>summary>span:last-child{transform:rotate(180deg)}
+.dp1013-event-content{padding:0 18px 17px}
+.dp1013-event-content>p{margin:3px 0 12px;color:#697891;font-size:12px;line-height:1.65}
+.dp1013-event-content ol{list-style:none;margin:0;padding:0;display:grid;gap:7px;max-height:380px;overflow:auto}
+.dp1013-event-content li{padding:11px 12px;background:#f8faff;border:1px solid #edf1f7;border-radius:11px;display:grid;grid-template-columns:auto 1fr;column-gap:9px;row-gap:4px}
+.dp1013-event-content li time{font-size:11px;color:#67758f}
+.dp1013-event-content .dp1013-kind{font-size:10px;justify-self:end;color:#486b97;background:#eaf2ff;border-radius:10px;padding:1px 7px}
+.dp1013-event-content li strong{grid-column:1/-1;color:#23334c;font-size:12px;font-weight:600}
+.dp1013-event-content li small{grid-column:1/-1;color:#61738c;font-size:11px}
+.dp1013-event-content>p.dp1013-caution{margin:13px 0 0;background:#fffaf0;padding:9px 11px;border-radius:9px;color:#806b42}
+@media (max-width:360px){.dp1013-score-evidence small{font-size:10px}.dp1013-event-card>summary{padding:13px 12px}}

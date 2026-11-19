@@ -1,0 +1,107 @@
+/* DeepPet V10.48 — stabilize the Day sleep heading and remove surplus UI. */
+/* Day, 7-day and 30-day sleep titles share one horizontal typography system. */
+#app .dp-owner-deep .dp-owner-sleep .dp-owner-status-heading.dp1048-sleep-day-head,
+#app .dp-owner-deep .dp905-sleep-summary .dp905-sleep-head.dp1048-sleep-period-head{
+ display:grid!important;grid-template-columns:minmax(112px,1fr) 116px!important;
+ align-items:start!important;column-gap:7px!important;row-gap:0!important;
+ min-width:0!important;min-height:0!important;max-width:100%!important;
+ overflow:visible!important;
+}
+#app .dp-owner-deep .dp1048-sleep-day-head>div:first-child,
+#app .dp-owner-deep .dp1048-sleep-period-head>div:first-child{
+ grid-column:1!important;grid-row:1!important;min-width:112px!important;
+ width:auto!important;max-width:none!important;flex:1 1 auto!important;
+ writing-mode:horizontal-tb!important;
+}
+#app .dp-owner-deep .dp1048-sleep-day-head h2,
+#app .dp-owner-deep .dp1048-sleep-period-head h2{
+ display:block!important;font-size:21px!important;line-height:1.35!important;
+ font-weight:800!important;margin:0 0 9px!important;letter-spacing:0!important;
+ white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important;
+ writing-mode:horizontal-tb!important;text-orientation:mixed!important;
+ color:#28774f!important;
+}
+#app .dp-owner-deep .dp1048-sleep-day-head>.dp1046-primary-stack,
+#app .dp-owner-deep .dp1048-sleep-period-head>.dp1046-primary-stack{
+ grid-column:2!important;grid-row:1!important;justify-self:end!important;
+ min-width:116px!important;max-width:116px!important;width:116px!important;
+ margin:0!important;
+}
+#app .dp-owner-deep .dp1048-sleep-period-head>div:first-child>p{
+ margin:0!important;font-size:12px!important;line-height:1.5!important;
+ color:#527564!important;font-weight:400!important;
+}
+#app .dp-owner-deep .dp1048-sleep-period-head .dp1048-sleep-conclusion{
+ margin:9px 0 0!important;font-size:12px!important;line-height:1.68!important;
+ font-weight:460!important;color:#627487!important;
+}
+#app .dp-owner-deep .dp905-sleep-summary{min-height:0!important;}
+#app .dp-owner-deep .dp905-sleep-summary>.dp905-sleep-head.dp1048-sleep-period-head{
+ padding-bottom:8px!important;
+}
+/* Device battery: a battery icon and green percentage only, no outlined pill. */
+#app .device-center .dp1046-device-battery-row.dp1048-battery-inline{
+ display:inline-flex!important;align-items:center!important;flex-wrap:nowrap!important;
+ width:auto!important;max-width:100%!important;margin:8px 0 0!important;
+ padding:0!important;border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;gap:5px!important;
+ line-height:1.1!important;color:#15995d!important;
+}
+#app .device-center .dp1048-battery-inline .dp1035-battery-icon{
+ display:inline-block!important;position:relative!important;flex:none!important;
+ width:25px!important;height:13px!important;border:2px solid #15995d!important;
+ border-radius:3px!important;background:transparent!important;overflow:visible!important;
+}
+#app .device-center .dp1048-battery-inline .dp1035-battery-icon::after{
+ content:''!important;display:block!important;position:absolute!important;right:-5px!important;
+ top:3px!important;width:3px!important;height:5px!important;background:#15995d!important;
+ border-radius:0 2px 2px 0!important;
+}
+#app .device-center .dp1048-battery-inline .dp1035-battery-icon i{
+ display:block!important;position:absolute!important;left:1px!important;top:1px!important;
+ height:7px!important;background:#15995d!important;border-radius:1px!important;
+}
+#app .device-center .dp1048-battery-inline .dp1048-battery-value{
+ font-size:16px!important;font-weight:850!important;color:#15995d!important;
+ letter-spacing:0!important;font-variant-numeric:tabular-nums!important;
+}
+/* V10.93: the fourteen-day entry keeps the real dated evidence curve. */
+#app .dp70-baseline-hero.dp-owner-baseline-me{min-height:120px!important;height:auto!important;}
+#app .dp70-baseline-hero .grow>.dp1046-baseline-spark{
+ display:block!important;width:119px!important;height:42px!important;max-width:100%!important;
+ min-height:42px!important;margin:8px 0 0!important;overflow:visible!important;
+}
+/* A single approachable period conclusion replaces three technical paragraphs. */
+#app .dp-owner-deep .dp901-health-score .dp901-period-notes{
+ padding:8px 0 12px!important;margin:0 0 9px!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;
+}
+#app .dp-owner-deep .dp901-period-notes>b{display:block;font-size:13px;color:#315f9e;margin-bottom:5px;}
+#app .dp-owner-deep .dp901-period-notes>p{margin:0!important;line-height:1.7!important;
+ font-size:12px!important;font-weight:450!important;color:#5e6d83!important;}
+#app .dp-owner-deep .dp903-heart .dp903-overview-copy>p{
+ line-height:1.7!important;font-size:12px!important;color:#657186!important;
+}
+/* Pairing confirmation: leave the Back label enough width on small screens. */
+#app .pair-picked+.row.gap8{display:flex!important;gap:10px!important;align-items:stretch!important;}
+#app .pair-picked+.row.gap8>[data-action="pair-commit"]{
+ flex:1 1 auto!important;width:auto!important;max-width:68%!important;min-width:0!important;
+ white-space:nowrap!important;padding:12px 8px!important;
+}
+#app .pair-picked+.row.gap8>[data-action="pair-back-results"]{
+ flex:0 0 83px!important;width:83px!important;min-width:83px!important;
+ white-space:nowrap!important;word-break:keep-all!important;
+ writing-mode:horizontal-tb!important;padding:12px 6px!important;
+}
+@media(max-width:359px){
+ #app .dp-owner-deep .dp-owner-sleep .dp-owner-status-heading.dp1048-sleep-day-head,
+ #app .dp-owner-deep .dp905-sleep-summary .dp905-sleep-head.dp1048-sleep-period-head{
+  grid-template-columns:minmax(108px,1fr) 108px!important;column-gap:4px!important;
+ }
+ #app .dp-owner-deep .dp1048-sleep-day-head>.dp1046-primary-stack,
+ #app .dp-owner-deep .dp1048-sleep-period-head>.dp1046-primary-stack{
+  min-width:108px!important;max-width:108px!important;width:108px!important;
+ }
+ #app .dp-owner-deep .dp1048-sleep-day-head h2,
+ #app .dp-owner-deep .dp1048-sleep-period-head h2{font-size:19px!important;}
+}

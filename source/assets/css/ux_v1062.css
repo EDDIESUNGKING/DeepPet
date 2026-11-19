@@ -1,0 +1,6 @@
+/* Critical, verified seconds-level changes have a stronger visual priority
+   than the existing slower sustained-change rows. No layout columns change. */
+.dp1062-acute-item{border-color:#f5b7c8!important;background:linear-gradient(120deg,#fff6f8,#fff)!important;}
+.dp1062-acute-item .dp1059-alert-symbol{background:#fce6ec!important;color:#c52b53!important;}
+.dp1062-acute-item .dp1059-alert-copy strong{color:#9d1745;}
+.dp1059-focus-precision{display:block;margin-top:5px;color:#7f6a7b;font-size:11px;line-height:1.5;font-weight:400;}

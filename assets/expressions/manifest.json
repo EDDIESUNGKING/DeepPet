@@ -52,18 +52,18 @@
   },
   "3": {
     "name": "Leo",
-    "original": "assets/expressions/03_Leo_original.jpg",
+    "original": "assets/expressions/03_Leo_original_v1002.jpg",
     "variants": {
-      "happy": "assets/expressions/03_Leo_happy.jpg",
-      "calm": "assets/expressions/03_Leo_calm.jpg",
-      "soft": "assets/expressions/03_Leo_soft.jpg",
-      "sad": "assets/expressions/03_Leo_sad.jpg"
+      "happy": "assets/expressions/03_Leo_happy_v1002.jpg",
+      "calm": "assets/expressions/03_Leo_calm_v1002.jpg",
+      "soft": "assets/expressions/03_Leo_soft_v1002.jpg",
+      "sad": "assets/expressions/03_Leo_sad_v1002.jpg"
     },
     "demo_score": 22,
     "demo_grade": "sad",
-    "demo_photo": "assets/demo_score_portraits/03_Leo_22_sad.jpg",
-    "source_collage": "A",
-    "provenance": "score-matched still cropped from clean generated contact sheet",
+    "demo_photo": "assets/demo_score_portraits/03_Leo_Pug_v1002.jpg",
+    "source_collage": "V10.02 Pug portrait",
+    "provenance": "same Pug identity with four emotion-specific portraits; earlier French Bulldog mismatch corrected",
     "no_baked_labels": true,
     "full_frame_no_blur_bands": true
   },
@@ -222,18 +222,18 @@
   },
   "13": {
     "name": "Snowy",
-    "original": "assets/expressions/13_Snowy_original.jpg",
+    "original": "assets/expressions/13_Snowy_original_v1002.jpg",
     "variants": {
-      "happy": "assets/expressions/13_Snowy_happy.jpg",
-      "calm": "assets/expressions/13_Snowy_calm.jpg",
-      "soft": "assets/expressions/13_Snowy_soft.jpg",
-      "sad": "assets/expressions/13_Snowy_sad.jpg"
+      "happy": "assets/expressions/13_Snowy_happy_v1002.jpg",
+      "calm": "assets/expressions/13_Snowy_calm_v1002.jpg",
+      "soft": "assets/expressions/13_Snowy_soft_v1002.jpg",
+      "sad": "assets/expressions/13_Snowy_sad_v1002.jpg"
     },
     "demo_score": 84,
     "demo_grade": "calm",
-    "demo_photo": "assets/demo_score_portraits/13_Snowy_84_calm.jpg",
-    "source_collage": "A",
-    "provenance": "score-matched still cropped from clean generated contact sheet",
+    "demo_photo": "assets/demo_score_portraits/13_Snowy_Golden_v1002.jpg",
+    "source_collage": "V10.02 Golden Retriever portrait",
+    "provenance": "same Golden Retriever identity with four emotion-specific portraits; earlier Cocker Spaniel mismatch corrected",
     "no_baked_labels": true,
     "full_frame_no_blur_bands": true
   },
@@ -254,5 +254,5 @@
     "no_baked_labels": true,
     "full_frame_no_blur_bands": true
   },
-  "_source": "Demo-only reassignment from pre-existing generated pet photo collage images; not identity-preserving edits. Fixed pet scores. Four grades currently same demo image per pet, not four authentic expression images."
+  "_source": "15 fictional demonstration pets. V10.02 visually reviewed breed-photo matches, and corrected Leo and Snowy original plus all four mood portraits. Other expression variants retain their prior assets pending individual identity validation. User photos must never be replaced by stock photos."
 }

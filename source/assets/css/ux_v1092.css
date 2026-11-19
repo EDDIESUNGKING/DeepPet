@@ -1,0 +1,24 @@
+/* Health: the sole overview score ring is for scored examinations. */
+#app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col>.dp1092-exam-ring{
+ /* V10.58 already inserts one 54-dot proportional SVG for a scored exam.
+    Adding a second dotted CSS border produced TWO circles around the number. */
+ border:0 none!important;
+ border-radius:50%!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ box-sizing:border-box!important;
+}
+#app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col>.dp1092-exam-ring.healthy{color:#24a56c!important}
+#app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col>.dp1092-exam-ring.mild{color:#2f6fe4!important}
+#app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col>.dp1092-exam-ring.moderate{color:#d58b2d!important}
+#app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col>.dp1092-exam-ring.risk{color:#d9534f!important}
+/* No report score: same column and alignment, without a misleading ring. */
+#app .dp1075-health-page .dp1075-exam .dp1071-exam-score-col>.dp1071-no-exam-score{
+ border:0 none!important;
+ border-radius:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ font-size:23px!important;
+}
+/* An older completion card is not a part of the four-section Health design. */
+#app .dp1075-health-page>.dp916-care-card{display:none!important}

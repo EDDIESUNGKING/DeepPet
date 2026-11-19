@@ -1,0 +1,58 @@
+/* DeepPet V9.90 — iPhone 15 (393 CSS px) four-stage tour, no image/chart stretching. */
+#overlay-root .modal-sheet:has(.dp990-tour){
+ width:min(393px,calc(100vw - 14px))!important;max-width:393px!important;
+ max-height:calc(100dvh - 14px)!important;box-sizing:border-box!important;
+ padding:14px 12px 20px!important;border-radius:20px!important;
+ overflow-y:auto!important;overflow-x:hidden!important;scrollbar-gutter:auto!important;
+}
+.dp990-tour{box-sizing:border-box;width:100%;max-width:100%;min-width:0;padding:0!important;}
+.dp990-tour .dp928-tour-progress{margin:2px 0 12px!important;}
+.dp990-tour .dp928-tour-art{
+ width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ justify-content:flex-start!important;gap:10px!important;padding:0!important;
+ overflow:visible!important;background:transparent!important;isolation:auto!important;
+ border-radius:0!important;
+}
+.dp990-tour .dp928-tour-general::before,.dp990-tour .dp928-tour-general::after{content:none!important;display:none!important;}
+.dp990-four-dogs{width:100%;max-width:100%;margin:0;overflow:hidden;border-radius:15px;background:#e2eef4;line-height:0;}
+.dp990-four-dogs img{
+ display:block!important;width:100%!important;max-width:100%!important;
+ height:auto!important;max-height:none!important;aspect-ratio:940/988;
+ object-fit:contain!important;object-position:center!important;
+ position:static!important;transform:none!important;filter:none!important;
+}
+.dp990-chart-wrap{width:100%;min-width:0;box-sizing:border-box;padding:10px 9px 7px;
+ background:#f7fbff;border:1px solid #dce9f6;border-radius:15px;overflow:hidden;}
+.dp990-chart-heading{display:flex;justify-content:space-between;gap:8px;align-items:baseline;
+ padding:3px 3px 0;color:#264a72;font-family:Arial,sans-serif;}
+.dp990-chart-heading b{font-size:12.5px;line-height:1.4;letter-spacing:0;white-space:normal;}
+.dp990-chart-heading small{font-size:10.5px;white-space:nowrap;color:#657c99;flex:none;}
+.dp990-axis-chart{
+ display:block!important;width:100%!important;max-width:100%!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ aspect-ratio:360/224;object-fit:contain!important;
+ overflow:visible!important;flex:none!important;
+}
+.dp990-metrics{width:100%;box-sizing:border-box;display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+.dp990-metrics>div{min-width:0;box-sizing:border-box;padding:13px 12px;
+ background:#edf5fc;color:#1e5576;border:1px solid #dce9f5;border-radius:13px;
+ display:flex;flex-direction:column;gap:8px;justify-content:center;}
+.dp990-metrics>div:nth-child(2){background:#f3effd;color:#5b518c;border-color:#e5def9;}
+.dp990-metrics small{font-size:10.5px;line-height:1.35;font-weight:750;letter-spacing:.01em;}
+.dp990-metrics strong{font-size:21px;line-height:1.15;font-weight:800;word-break:normal;overflow-wrap:break-word;}
+.dp990-tour h2{margin:14px 0 8px!important;font-size:18px!important;line-height:1.43!important;overflow-wrap:anywhere;}
+.dp990-tour .dp928-tour-desc{font-size:13px!important;line-height:1.7!important;
+ min-height:0!important;max-width:100%!important;margin:0 0 13px!important;overflow-wrap:anywhere;}
+.dp990-tour .dp928-tour-tags{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:8px!important;width:100%;max-width:100%;}
+.dp990-tour .dp928-tour-tags>span{box-sizing:border-box;min-width:0;min-height:37px;
+ font-size:11px!important;line-height:1.35!important;white-space:normal!important;padding:8px 7px!important;}
+.dp990-tour .dp928-tour-buttons{margin-top:13px!important;display:flex;gap:9px;}
+.dp990-tour .dp928-tour-buttons button{font-size:13px!important;min-height:45px;}
+@media(max-width:360px){
+ #overlay-root .modal-sheet:has(.dp990-tour){padding:12px 9px 17px!important;}
+ .dp990-chart-heading b{font-size:11.5px}.dp990-chart-heading small{font-size:10px}
+ .dp990-metrics strong{font-size:18px}.dp990-tour h2{font-size:17px!important}
+}

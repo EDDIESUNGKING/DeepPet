@@ -1,0 +1,72 @@
+/* DeepPet V10.32 — premium but quiet, one-off interaction feedback.
+   No navigation, scores, measurements, chart geometry or touch targets change. */
+
+/* Action affordance is brief and local: no repetitive flashing or bounce. */
+.app-shell :is(.cta,.nav-button,.seg-btn,.deep-day-arrow,.deep-date-shortcut,.pet-pill,.dp-today-action,.dp1031-success-next,.dp1031-preview-button){
+  transition-property:background-color,border-color,box-shadow,opacity,transform;
+  transition-duration:160ms;
+  transition-timing-function:ease-out;
+}
+.app-shell :is(.cta,.nav-button,.seg-btn,.deep-day-arrow,.deep-date-shortcut,.pet-pill,.dp-today-action,.dp1031-success-next,.dp1031-preview-button):active:not(:disabled){
+  transform:scale(.986);
+}
+.app-shell button:disabled{cursor:default}
+
+/* Clearly show the current pet and selected dates without adding labels. */
+.pet-top-strip .pet-pill.active img{
+  box-shadow:0 0 0 2px #ffffff,0 0 0 4px #9077d6,0 4px 14px #7969bb25;
+}
+.deep-themed .segment .seg-btn.active{
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--deep-accent) 23%,transparent);
+}
+.deep-themed .deep-date-shortcut.chosen{
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--deep-accent) 33%,transparent);
+}
+
+/* The first existing Today priority is easier to locate, but never pulses. */
+.dp-today-focus .dp-today-list>.dp-today-action:first-child{
+  box-shadow:inset 3px 0 0 var(--tone),0 3px 13px #1b355b08;
+}
+
+/* In-place transitions only; source/target data is swapped synchronously. */
+.app-main.dp1032-pet-enter>.app-pad{
+  animation:dp1032-new-pet 210ms ease-out both;
+}
+.app-main.dp1032-date-focus .dp-owner-deep :is(.deep-day-picker,.deep-date-compact,.segment){
+  animation:dp1032-date-change 190ms ease-out both;
+}
+@keyframes dp1032-new-pet{
+  from{opacity:.92;transform:translateY(3px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes dp1032-date-change{
+  from{opacity:.76}
+  to{opacity:1}
+}
+
+/* Old toasts used nowrap; translated instructions could clip on small phones. */
+.app-shell .toast{
+  width:max-content;
+  max-width:calc(100% - 32px);
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  line-height:1.48;
+  animation:dp1032-toast-enter 170ms ease-out both;
+}
+@keyframes dp1032-toast-enter{
+  from{opacity:0;transform:translate(-50%,5px)}
+  to{opacity:1;transform:translate(-50%,0)}
+}
+
+@media (hover:hover) and (pointer:fine){
+ .app-shell :is(.cta,.dp1031-preview-button,.dp1031-success-next):hover:not(:disabled){filter:brightness(1.035)}
+ .app-shell .pet-pill:hover:not(.active){opacity:.87}
+}
+@media (prefers-reduced-motion:reduce){
+ .app-shell :is(.cta,.nav-button,.seg-btn,.deep-day-arrow,.deep-date-shortcut,.pet-pill,.dp-today-action,.dp1031-success-next,.dp1031-preview-button){transition:none!important}
+ .app-shell :is(.cta,.nav-button,.seg-btn,.deep-day-arrow,.deep-date-shortcut,.pet-pill,.dp-today-action,.dp1031-success-next,.dp1031-preview-button):active:not(:disabled){transform:none!important}
+ .app-main.dp1032-pet-enter>.app-pad,
+ .app-main.dp1032-date-focus .dp-owner-deep :is(.deep-day-picker,.deep-date-compact,.segment),
+ .app-shell .toast{animation:none!important}
+}

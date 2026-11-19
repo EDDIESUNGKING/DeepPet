@@ -1,0 +1,168 @@
+/* V10.58 — Main Deep scores share exactly one 96px ring / 30px number.
+ * The status stays beneath the ring; the narrative stays in a separate,
+ * independently wrapping left column (including long English translations). */
+#app .dp-owner-deep .dp903-overview-head,
+#app .dp-owner-deep .dp901-overall-head{
+ display:grid!important;grid-template-columns:minmax(0,1fr) 108px!important;
+ gap:10px!important;align-items:start!important;min-width:0!important;
+}
+#app .dp-owner-deep .dp903-overview-head>.dp903-overview-copy,
+#app .dp-owner-deep .dp901-overall-head>.dp901-overall-copy{
+ min-width:0!important;max-width:100%!important;grid-column:1!important;
+ overflow-wrap:break-word!important;word-break:normal!important;
+}
+#app .dp-owner-deep .dp903-overview-head>.dp903-score-col,
+#app .dp-owner-deep .dp901-overall-head>.dp901-score-col,
+#app .dp-owner-deep .dp901-overall-head>.dp903-score-col{
+ grid-column:2!important;width:108px!important;min-width:108px!important;
+ max-width:108px!important;justify-self:center!important;margin:0!important;
+}
+#app .dp-owner-deep .dp903-overview-head .dp-status-score,
+#app .dp-owner-deep .dp901-overall-head .dp-status-score{
+ width:96px!important;height:96px!important;min-width:96px!important;min-height:96px!important;
+ max-width:96px!important;max-height:96px!important;flex:0 0 96px!important;
+ margin:0 auto!important;position:relative!important;inset:auto!important;transform:none!important;
+}
+#app .dp-owner-deep .dp903-overview-head .dp-status-score .stat-inner,
+#app .dp-owner-deep .dp901-overall-head .dp-status-score .stat-inner{
+ display:flex!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;align-items:center!important;justify-content:center!important;
+ flex-direction:column!important;margin:0!important;padding:0!important;transform:none!important;
+}
+#app .dp-owner-deep .dp903-overview-head .dp-status-score .stat-inner b,
+#app .dp-owner-deep .dp901-overall-head .dp-status-score .stat-inner b{font-size:30px!important;line-height:1!important;letter-spacing:-.6px!important;}
+#app .dp-owner-deep .dp903-overview-head .dp-status-score .stat-inner small,
+#app .dp-owner-deep .dp901-overall-head .dp-status-score .stat-inner small{font-size:10px!important;line-height:1.2!important;}
+/* Sleep day/week/month uses exactly the same size and fixed right rail. */
+#app .dp-owner-deep .dp1048-sleep-day-head.dp1052-sleep-flow,
+#app .dp-owner-deep .dp1048-sleep-period-head.dp1052-sleep-flow,
+#app .dp-owner-deep .dp905-sleep-summary>.dp905-sleep-head.dp1046-primary-head,
+#app .dp905-sleep-day>.dp905-sleep-head.dp1046-primary-head{
+ display:grid!important;grid-template-columns:minmax(0,1fr) 108px!important;
+ gap:0 10px!important;align-items:start!important;min-width:0!important;
+}
+#app .dp-owner-deep .dp1052-sleep-flow>.dp1054-sleep-copy,
+#app .dp-owner-deep .dp905-sleep-head>div:first-child:not(.dp1046-primary-stack),
+#app .dp905-sleep-day .dp905-sleep-head>div:first-child:not(.dp1046-primary-stack){
+ grid-column:1!important;min-width:0!important;max-width:100%!important;white-space:normal!important;
+}
+#app .dp-owner-deep .dp1052-sleep-flow>.dp1054-sleep-copy>h2,
+#app .dp-owner-deep .dp905-sleep-head h2,
+#app .dp905-sleep-day .dp905-sleep-head h2{
+ max-width:100%!important;white-space:normal!important;overflow-wrap:break-word!important;
+ word-break:normal!important;line-height:1.34!important;
+}
+#app .dp-owner-deep .dp1052-sleep-flow>.dp1054-sleep-meter,
+#app .dp-owner-deep .dp905-sleep-head>.dp1046-primary-stack,
+#app .dp905-sleep-day .dp905-sleep-head>.dp1046-primary-stack{
+ grid-column:2!important;grid-row:1!important;justify-self:center!important;
+ width:108px!important;min-width:108px!important;max-width:108px!important;
+ flex:0 0 108px!important;align-items:center!important;order:0!important;margin:0!important;
+}
+#app .dp-owner-deep .dp1042-score-stack{width:108px!important;min-width:108px!important;max-width:108px!important;flex-basis:108px!important;}
+#app .dp-owner-deep .dp1054-sleep-meter>.dp-status-score,
+#app .dp-owner-deep .dp1042-score-stack>.dp-status-score,
+#app .dp-owner-deep .dp1046-primary-stack>.dp-status-score,
+#app .dp905-sleep-day .dp1046-primary-stack>.dp-status-score{
+ width:96px!important;height:96px!important;min-width:96px!important;min-height:96px!important;
+ max-width:96px!important;max-height:96px!important;flex:0 0 96px!important;margin:0 auto!important;
+}
+#app .dp-owner-deep .dp1046-primary-stack>.dp-status-score .stat-inner b,
+#app .dp-owner-deep .dp1042-score-stack>.dp-status-score .stat-inner b,
+#app .dp-owner-deep .dp1054-sleep-meter>.dp-status-score .stat-inner b,
+#app .dp905-sleep-day .dp1046-primary-stack>.dp-status-score .stat-inner b{
+ font-size:30px!important;line-height:1!important;letter-spacing:-.6px!important;
+}
+#app .dp-owner-deep .dp1054-sleep-meter>.dp1040-status,
+#app .dp-owner-deep .dp1046-primary-stack>.dp1040-status{
+ max-width:108px!important;white-space:normal!important;text-align:center!important;
+ margin:4px auto 0!important;
+}
+/* Theme only the action controls, NEVER the risk-based score colors. */
+#app .dp903-heart .dp1055-details>summary,
+#app .dp903-heart .dp903-open-wave,
+#app .dp903-heart .dp903-expand>summary{
+ background:#fff1f6!important;border-color:#f0cfdd!important;color:#a54067!important;
+}
+#app .dp903-heart .dp1055-details .dp1055-chevron,
+#app .dp903-heart .dp1055-evidence section>b{color:#a54067!important;}
+#app .dp901-health-score .dp1055-details>summary,
+#app .dp901-health-score .dp905-day-detail-link,
+#app .dp901-health-score .dp901-expand>summary{
+ background:#edf5ff!important;border-color:#cbdff8!important;color:#2f6fae!important;
+}
+#app .dp901-health-score .dp1055-details .dp1055-chevron,
+#app .dp901-health-score .dp1055-evidence section>b{color:#2f6fae!important;}
+/* Cardio and Energy metric data buttons get the same dimensions. */
+#app .dp903-metric-card>.dp903-open-wave,
+#app .dp901-metric-card>.dp905-day-detail-link{
+ box-sizing:border-box!important;width:100%!important;min-height:40px!important;height:auto!important;
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ border-radius:11px!important;padding:10px 13px!important;margin:7px 0 0!important;
+ font-size:12px!important;font-weight:730!important;line-height:1.5!important;
+ grid-column:1/-1!important;text-align:left!important;
+}
+#app .dp1058-detail-evidence{
+ position:relative!important;display:grid!important;gap:5px!important;width:100%!important;
+ box-sizing:border-box!important;min-width:0!important;margin:11px 0 14px!important;
+ padding:12px 13px!important;border-radius:12px!important;border:1px solid #dbe6f2!important;
+ background:#f8fbff!important;color:#455b72!important;overflow-wrap:anywhere!important;
+}
+#app .dp1058-heart,#app .dp1058-breath{border-color:#f1d8e1!important;background:#fff8fb!important;}
+#app .dp1058-detail-evidence>.dp1058-insight-title{font-size:12px!important;line-height:1.5!important;color:#385675!important;}
+#app .dp1058-detail-evidence>.dp1058-insight-lead{font-size:12px!important;font-weight:700!important;line-height:1.6!important;margin:0!important;}
+#app .dp1058-detail-evidence>.dp1058-insight-next{font-size:11.5px!important;color:#346b99!important;line-height:1.6!important;margin:0 0 3px!important;}
+#app .dp1058-evidence-row{font-size:11px!important;line-height:1.7!important;margin:0!important;color:#5a6c7b!important;}
+#app .dp1058-evidence-row>strong{font-size:11px!important;color:#40596d!important;margin-right:3px!important;}
+/* Exam scores: true transparent SVG rings (54 dots, lit proportional to score). */
+#app .dp1058-exam-dots{
+ position:relative!important;isolation:isolate!important;border:0!important;
+ background:transparent!important;background-color:transparent!important;
+ box-shadow:none!important;display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;text-align:center!important;
+ box-sizing:border-box!important;overflow:visible!important;line-height:1.04!important;
+}
+#app .dp1058-exam-dots>.dp1058-exam-svg{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ display:block!important;overflow:visible!important;pointer-events:none!important;
+}
+#app .dp1058-exam-dots>small{display:block!important;position:relative!important;
+ text-align:center!important;align-self:center!important;margin:3px auto 0!important;
+ max-width:82%!important;line-height:1.2!important;white-space:normal!important;
+}
+#app .dp921-page .dp921-score,#app .dp916-health-card .dp916-large-score,
+#app .dp916-detail .dp916-large-score{font-variant-numeric:tabular-nums!important;}
+/* Plan completion is kept in each correct health row, never in a standalone card. */
+#app .dp916-care-card{display:none!important;}
+#app .dp1058-care-meter{display:flex;align-items:center;gap:8px;margin-top:6px;width:100%;max-width:230px;}
+#app .dp1058-care-percent{flex:0 0 auto;min-width:39px;text-align:left;color:#51718b;font-size:10px;font-weight:780;}
+#app .dp1058-care-track{display:block;flex:1;height:5px;border-radius:6px;overflow:hidden;background:#e6edf4;}
+#app .dp1058-care-track>i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#67b4ae,#4486ce);}
+/* A modest nutrition note and a denser medication history — no hidden rows. */
+#app .care-record-page .dp1058-nutrition{border-radius:15px!important;background:#f7fafc!important;border:1px solid #e1eaf2!important;padding:13px 15px!important;}
+#app .dp1058-nutrition h2,#app .dp1058-nutrition h3{font-size:14px!important;line-height:1.45!important;color:#426479!important;letter-spacing:.01em!important;}
+#app .dp1058-nutrition p{font-size:11.5px!important;line-height:1.85!important;color:#617283!important;max-width:55ch!important;margin:8px 0 1px!important;}
+#app .dp1058-med-page .app-title{font-size:20px!important;line-height:1.35!important;}
+#app .dp1058-med-page .card{padding:13px 14px!important;border-radius:15px!important;}
+#app .dp1058-med-page .card h2,#app .dp1058-med-page .card h3{font-size:14px!important;line-height:1.45!important;}
+#app .dp1058-med-page .subtitle,#app .dp1058-med-page .notices{font-size:11px!important;line-height:1.6!important;}
+#app .dp1058-med-page .history-row{display:flex!important;align-items:center!important;gap:8px!important;padding:9px 4px!important;min-height:0!important;}
+#app .dp1058-med-page .history-row .grow{min-width:0!important;flex:1!important;}
+#app .dp1058-med-page .history-row .grow>b{font-size:12px!important;line-height:1.45!important;overflow-wrap:anywhere!important;}
+#app .dp1058-med-page .history-row .grow>.subtitle{margin:4px 0 0!important;color:#77869a!important;font-size:10.5px!important;}
+#app .dp1058-med-page .history-row .dose-status{flex:0 0 auto!important;}
+#app .dp1058-med-page .dp-main-create .dp-large-add{font-size:13px!important;min-height:38px!important;padding:9px 12px!important;}
+/* The value belongs inside its actual point; no bottom-left output. */
+#app .dp850-score-panel .dp1011-curve-tip,
+#app .dp850-score-panel .dp905-point-reading{display:none!important;}
+#app .dp850-score-panel .dp1058-chart-marker{pointer-events:none!important;}
+@media(max-width:359px){
+ #app .dp-owner-deep .dp1048-sleep-day-head.dp1052-sleep-flow,
+ #app .dp-owner-deep .dp1048-sleep-period-head.dp1052-sleep-flow{
+  grid-template-columns:minmax(0,1fr) 108px!important;gap:0 6px!important;
+ }
+ #app .dp-owner-deep .dp903-overview-head,#app .dp-owner-deep .dp901-overall-head{
+  grid-template-columns:minmax(0,1fr) 108px!important;gap:7px!important;
+ }
+ #app .dp-owner-deep .dp1052-sleep-flow>.dp1054-sleep-copy>h2{font-size:18px!important;}
+}

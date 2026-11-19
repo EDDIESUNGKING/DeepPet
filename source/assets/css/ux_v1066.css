@@ -1,0 +1,11 @@
+/* Event history is collapsed by default so the existing Deep review remains
+   visually unchanged unless an owner deliberately inspects prior events. */
+.dp1066-history{margin:14px 0 12px;padding:0;border-color:#f1d6dd!important;overflow:hidden}
+.dp1066-history>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;padding:16px 18px;color:#b34c68;font-weight:700}
+.dp1066-history>summary::-webkit-details-marker{display:none}
+.dp1066-history>summary:before{content:'!';display:inline-grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;background:#fff0f2;color:#c6536f}
+.dp1066-history>summary>span{margin-right:auto}
+.dp1066-history>summary>small{font-size:12px;font-weight:600;color:#7c848e;white-space:nowrap}
+.dp1066-history[open]>summary{border-bottom:1px solid #f4e4e8}
+.dp1066-history-list{padding:6px 12px 12px}
+.dp1066-history-list .dp936-alert-item{width:100%;margin-top:8px;text-align:left}

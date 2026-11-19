@@ -1,0 +1,5 @@
+/* V10.03: only inline clarification; keep all existing cards and grid positions. */
+.dp-summary-lane .dp1003-evidence-inline{display:block;margin-top:5px;font-size:11px;font-weight:500;line-height:1.4;color:#64758a}
+.dp-summary-lane .dp1003-alert-inline{display:block;margin-top:5px;font-size:11px;font-weight:600;line-height:1.45;color:#ae5362}
+.dp941-prevention .dp1003-reference-note{display:block;margin-top:7px;color:#657388;font-size:11px;line-height:1.55}
+.quality-audit-label i.na{background:#f2f4f8;color:#7e8da1;border-color:#e2e7ee}

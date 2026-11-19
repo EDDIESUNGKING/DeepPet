@@ -1,0 +1,31 @@
+/* V10.00: preserve the original waveform page backdrop; avoid nesting pale
+   grey/white rectangular chart panels over that same background. */
+.dp932-wave-page .dp932-wave-section,
+.dp904-wave-page .dp904-wave-card,
+.dp90-wave-page .dp90-wave-plot-card,
+.dp90-wave-page .dp90-wave-overview{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  padding:10px 1px!important;
+}
+.dp932-wave-page .dp932-wave-section .mini-live-card,
+.dp904-wave-page .dp904-wave-card .mini-live-card,
+.dp932-wave-page .dp908-inspect-chart,
+.dp904-wave-page .dp908-inspect-chart{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.dp932-wave-page .dp932-wave-section + .dp932-wave-section,
+.dp904-wave-page .dp904-wave-card + .dp904-wave-card{
+  border-top:1px solid rgba(107,129,164,.16)!important;
+  padding-top:17px!important;
+}
+.dp1000-profile-only .pet-avatar{display:block;object-fit:cover;object-position:center;width:100%;height:100%}
+.dp1000-totally-blank{padding:21px 18px;text-align:center}
+.dp1000-totally-blank h2{margin:0 0 9px;font-size:18px;color:#45517a}
+.dp1000-totally-blank p{font-size:12px;line-height:1.7;color:#75809b;margin:0 0 15px}

@@ -1,0 +1,7 @@
+/* 9.18 audit adjustments: do not create oversized blank cards. */
+.dp918-quality{font-size:11px;line-height:1.6;color:#788292;border-top:1px solid #e9edf3;margin:10px 0 0;padding-top:8px;font-weight:400}
+.dp918-pending-notice{background:#fff7e8;border:1px solid #ecd7af;border-radius:11px;padding:10px 12px;font-size:12px;line-height:1.65;color:#8c6228;margin:10px 0}
+.dp903-metric-left>p,.dp901-metric-desc{font-weight:400;line-height:1.72}
+.dp901-overall-head,.dp903-overview-head{align-items:start}
+
+.dp918-age-basis{padding:14px 0 9px;color:#526178;font-size:12px;line-height:1.6}.dp918-age-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}.dp918-age-grid>div{background:#f8fafc;border:1px solid #e7eaf1;padding:10px;border-radius:12px;display:flex;justify-content:space-between;gap:8px}.dp918-age-grid strong{font-size:15px;color:#344f71}.dp918-age-basis p{margin:8px 0;font-size:12px}

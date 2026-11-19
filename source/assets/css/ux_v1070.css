@@ -1,0 +1,24 @@
+/* DeepPet V10.70: one calm empty state, one Health design system. */
+#app .dp1070-empty-deep>.dp1063-calendar{display:none!important}
+#app .dp1070-empty-summary{width:100%;min-height:178px;display:flex!important;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:28px 23px!important;border-radius:20px!important;box-sizing:border-box;overflow:visible!important}
+#app .dp1070-empty-summary .dp1070-empty-icon{width:45px;height:45px;border-radius:14px;background:var(--deep-soft,#eff7ff);display:grid;place-items:center;color:var(--deep-accent,#4387dc)}
+#app .dp1070-empty-summary h2{font-size:17px!important;line-height:1.4!important;margin:0!important;font-weight:760;color:#26384c}
+#app .dp1070-empty-summary p{max-width:330px;margin:0!important;font-size:13px!important;line-height:1.75!important;color:#68788d;white-space:normal!important;overflow-wrap:break-word}
+#app .dp1070-empty-deep .tabs,#app .dp1070-empty-deep .segment,#app .dp1070-empty-deep .deep-day-picker,#app .dp1070-empty-deep .deep-date-compact{position:relative;z-index:1}
+#app .dp1070-empty-deep .deep-date-shortcut.dp1070-today{background:var(--deep-soft,#eff7ff);color:var(--deep-accent,#4387dc);border-color:var(--deep-accent,#4387dc)}
+#app .dp1070-health-page .view-header{display:block!important;margin-bottom:8px}
+#app .dp1070-health-page .view-header .app-title{display:block!important;text-align:left!important}
+#app .dp1070-health-page>.dp941-prevention{margin-top:12px!important}
+#app .dp1070-health-page>.dp1070-exam{margin-top:0!important;margin-bottom:14px!important}
+#app .dp1070-health-page>.dp-upcoming-care{margin-bottom:13px}
+#app .dp1070-health-page .dp1063-care-list .health-item .grow{min-width:0;display:flex!important;flex-direction:column!important;justify-content:center;align-items:flex-start;gap:4px}
+#app .dp1070-health-page .dp1063-care-list .health-item .lbl{display:block!important;width:100%;font-size:13px;line-height:1.35}
+#app .dp1070-health-page .dp1063-care-list .health-item .hint{display:block!important;width:100%;font-size:11px;line-height:1.35;white-space:normal}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food{background:linear-gradient(120deg,#fff5c5,#fffaf0 76%)!important;border:1px solid #f1dd83!important;border-radius:18px!important;padding:13px 15px!important;min-height:0!important;width:100%!important;color:#544c2e!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-illustration{width:38px!important;height:38px!important;background:#fff0a0!important;color:#a37d21!important;border-radius:12px!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-feature-main{margin-top:9px!important;display:flex!important;align-items:center!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-feature-main strong{font-size:20px!important;line-height:1.3!important;letter-spacing:0!important;color:#665021!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-pct{background:#fff0b4!important;color:#8d6f2a!important;font-size:12px!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-feature-sub,#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-feature-foot{color:#927b49!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-progress{background:#f0e4b7!important;height:6px!important;margin-top:7px!important}
+#app .dp1070-health-page .dp1063-care-list>.dp1070-food .food-progress i{background:linear-gradient(90deg,#e8b94c,#edd782)!important}

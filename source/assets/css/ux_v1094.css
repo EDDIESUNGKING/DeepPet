@@ -1,0 +1,15 @@
+/* V10.95: the remaining N/A styling is for the shared sleep-day timeline.
+ * Heart and Energy use their own measured production metric-card styles. */
+.dp1094-canonical-deep .dp1094-score-slot {
+  display:flex;align-items:center;justify-content:center;
+  box-sizing:border-box;width:96px;height:96px;max-width:96px;max-height:96px;
+  flex:0 0 96px;min-width:96px;min-height:96px;margin:0 auto;
+  color:#8994a6;background:#f5f7fa;border:1px solid #e6eaf1;
+  border-radius:50%;font-size:17px;font-weight:750;line-height:1.1;
+}
+.dp1094-canonical-deep .dp1094-no-value {color:#818da0;font-size:16px;font-weight:750;letter-spacing:0}
+.dp1094-canonical-deep .dp1094-data-message {color:#637087;font-size:13px;line-height:1.6;margin:9px 0 16px}
+.dp1094-canonical-deep .dp1094-no-chart {display:flex;align-items:center;justify-content:center;min-height:124px;background:#f8fafc;border:1px dashed #e1e7ef;border-radius:12px;margin-top:12px}
+.dp1094-canonical-deep .dp1094-no-chart .dp936-chart-na {color:#94a0b1;font-size:15px;font-weight:650}
+.dp1094-canonical-deep .dp-owner-sleep-timeline .dp1094-no-chart {margin:0}
+@media (max-width:380px){.dp1094-canonical-deep .dp1094-score-slot{width:96px;height:96px;min-width:96px;min-height:96px;flex-basis:96px}}

@@ -1,0 +1,9 @@
+/* DeepPet V10.15: opt-in evidence details, never a new full-screen route. */
+.dp1015-evidence-card{margin:10px 0 16px;border:1px solid #dce5ef;border-radius:15px;background:#f8fafc;overflow:hidden;color:#34435a}
+.dp1015-evidence-card>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;cursor:pointer;list-style:none;font-size:13px;font-weight:650}
+.dp1015-evidence-card>summary::-webkit-details-marker{display:none}
+.dp1015-evidence-card>summary span{font-size:15px;color:#7890a7;transition:transform .2s}
+.dp1015-evidence-card[open]>summary span{transform:rotate(180deg)}
+.dp1015-evidence-content{border-top:1px solid #e4eaf1;padding:9px 16px 13px;display:grid;gap:7px}
+.dp1015-evidence-content p{margin:0;font-size:12px;line-height:1.6;color:#52657a;overflow-wrap:anywhere}
+.dp1015-evidence-content p:first-child{font-weight:600;color:#30465d}

@@ -1,0 +1,8 @@
+/* V9.11 — audit corrections, no alteration of four score-level colors */
+.dp911-calendar-flag{position:absolute;right:3px;top:3px;background:#fff;color:#ba4554;border-radius:50%;font-size:10px;font-weight:800;line-height:15px;width:15px;height:15px;box-shadow:0 2px 4px #0002;text-align:center;pointer-events:none}
+.dp905-cal-day{position:relative}
+.dp911-alert-context,.dp911-sleep-period,.dp911-recovery-label{font-size:11.5px;line-height:1.65;color:#647184;margin:9px 0}
+.dp911-valid-period{font-size:11px;border:1px solid #dfe7f4;background:#f7faff;border-radius:11px;padding:9px 12px;color:#536a83;margin-bottom:9px}
+.dp911-valid-period p{margin:0}
+.dp911-sleep-period{background:#f2f8f4;border-left:3px solid #5aa27d;border-radius:6px;padding:9px}
+.dp911-recovery-label{background:#f6f9fd;border-radius:9px;padding:8px 10px}
