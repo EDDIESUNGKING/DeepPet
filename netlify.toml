@@ -1,7 +1,5 @@
-# Upload these four entries to the root of the GitHub repository.
-# Static assets are already built; future version numbers do not change paths.
 [build]
-  command = "echo DeepPet static site ready"
+  command = "echo DeepPet V10.139 static site"
   publish = "."
 
 [[headers]]

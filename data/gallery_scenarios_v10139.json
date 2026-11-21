@@ -1,0 +1,417 @@
+{
+  "version": "10.139",
+  "note": "Only gallery indices 15-29 change; 0 is Milo real-data profile; 1-14 unchanged.",
+  "scenarios": [
+    {
+      "index": 15,
+      "name": "Atlas",
+      "scenario": "穩定健康",
+      "scenario_en": "stable wellness",
+      "physiology": {
+        "hr": 0,
+        "rr": 0,
+        "rest": 0,
+        "move": 1.02,
+        "hrv": 1.0,
+        "recover": 0
+      },
+      "baseCase": {
+        "a": 1.05,
+        "h": 2,
+        "b": 1,
+        "r": 0.6,
+        "rm": 63,
+        "sd": 82,
+        "v": 1.0,
+        "phase": 12.1
+      },
+      "signalGapIndices": []
+    },
+    {
+      "index": 16,
+      "name": "Sunny",
+      "scenario": "安靜時心跳與呼吸同時偏高",
+      "scenario_en": "concurrent high resting heart and breathing rates",
+      "physiology": {
+        "hr": 35,
+        "rr": 14,
+        "rest": 4.4,
+        "move": 0.7,
+        "hrv": 0.83,
+        "recover": 6
+      },
+      "baseCase": {
+        "a": 0.95,
+        "h": 2,
+        "b": 2,
+        "r": 0.8,
+        "rm": 62,
+        "sd": 80,
+        "v": 1.0,
+        "phase": 12.9
+      },
+      "signalGapIndices": [
+        8,
+        9,
+        21
+      ]
+    },
+    {
+      "index": 17,
+      "name": "Taro",
+      "scenario": "心肺接近平常但睡眠不足",
+      "scenario_en": "poor rest with otherwise stable heart and breathing",
+      "physiology": {
+        "hr": 1,
+        "rr": 0,
+        "rest": 5.9,
+        "move": 0.7,
+        "hrv": 0.94,
+        "recover": 5
+      },
+      "baseCase": {
+        "a": 1.0,
+        "h": 3,
+        "b": 2,
+        "r": 1.1,
+        "rm": 58,
+        "sd": 78,
+        "v": 1.0,
+        "phase": 13.7
+      },
+      "signalGapIndices": [
+        11,
+        12
+      ]
+    },
+    {
+      "index": 18,
+      "name": "Bobo",
+      "scenario": "睡眠穩定但活動與運動後恢復下降",
+      "scenario_en": "low activity and slow recovery despite adequate rest",
+      "physiology": {
+        "hr": 0,
+        "rr": 0,
+        "rest": 0.2,
+        "move": 0.27,
+        "hrv": 0.98,
+        "recover": 48
+      },
+      "baseCase": {
+        "a": 1.03,
+        "h": 2,
+        "b": 1,
+        "r": 0.8,
+        "rm": 62,
+        "sd": 80,
+        "v": 1.0,
+        "phase": 14.1
+      },
+      "signalGapIndices": [
+        10
+      ]
+    },
+    {
+      "index": 19,
+      "name": "Bruno",
+      "scenario": "高齡且HRV偏低、恢復較慢",
+      "scenario_en": "senior low HRV with slow recovery",
+      "physiology": {
+        "hr": 6,
+        "rr": 2,
+        "rest": 1.2,
+        "move": 0.75,
+        "hrv": 0.22,
+        "recover": 38
+      },
+      "baseCase": {
+        "a": 1.0,
+        "h": 3,
+        "b": 1,
+        "r": 0.8,
+        "rm": 66,
+        "sd": 87,
+        "v": 1.1,
+        "phase": 15.1
+      },
+      "signalGapIndices": [
+        25,
+        26
+      ]
+    },
+    {
+      "index": 20,
+      "name": "North",
+      "scenario": "心跳與呼吸偏慢、需區分安靜休息",
+      "scenario_en": "lower resting rates needing sleep-context checks",
+      "physiology": {
+        "hr": -24,
+        "rr": -7,
+        "rest": 0.7,
+        "move": 0.9,
+        "hrv": 0.92,
+        "recover": 4
+      },
+      "baseCase": {
+        "a": 1.0,
+        "h": 2,
+        "b": 1,
+        "r": 0.7,
+        "rm": 62,
+        "sd": 80,
+        "v": 1.0,
+        "phase": 16.1
+      },
+      "signalGapIndices": [
+        18
+      ]
+    },
+    {
+      "index": 21,
+      "name": "Goldie",
+      "scenario": "心跳單項升高、呼吸接近平常",
+      "scenario_en": "isolated high heart rate",
+      "physiology": {
+        "hr": 55,
+        "rr": 1,
+        "rest": 0.6,
+        "move": 0.93,
+        "hrv": 0.9,
+        "recover": 3
+      },
+      "baseCase": {
+        "a": 1.02,
+        "h": 3,
+        "b": 1,
+        "r": 0.7,
+        "rm": 60,
+        "sd": 78,
+        "v": 1.0,
+        "phase": 17
+      },
+      "signalGapIndices": [
+        13,
+        14
+      ]
+    },
+    {
+      "index": 22,
+      "name": "Kumo",
+      "scenario": "呼吸單項升高、心跳接近平常",
+      "scenario_en": "isolated high breathing rate",
+      "physiology": {
+        "hr": 2,
+        "rr": 20,
+        "rest": 2.7,
+        "move": 0.84,
+        "hrv": 0.89,
+        "recover": 4
+      },
+      "baseCase": {
+        "a": 0.97,
+        "h": 2,
+        "b": 1,
+        "r": 0.8,
+        "rm": 60,
+        "sd": 80,
+        "v": 1.0,
+        "phase": 18
+      },
+      "signalGapIndices": [
+        6,
+        7
+      ]
+    },
+    {
+      "index": 23,
+      "name": "Percy",
+      "scenario": "活動不少但夜間休息不足",
+      "scenario_en": "inadequate rest despite high activity",
+      "physiology": {
+        "hr": 2,
+        "rr": 0,
+        "rest": 5.2,
+        "move": 1.16,
+        "hrv": 0.96,
+        "recover": 0
+      },
+      "baseCase": {
+        "a": 1.13,
+        "h": 2,
+        "b": 1,
+        "r": 1.0,
+        "rm": 63,
+        "sd": 83,
+        "v": 1.0,
+        "phase": 18.6
+      },
+      "signalGapIndices": [
+        22
+      ]
+    },
+    {
+      "index": 24,
+      "name": "Everest",
+      "scenario": "心肺接近平常但活動後恢復慢",
+      "scenario_en": "slow recovery with relatively stable heart and breathing",
+      "physiology": {
+        "hr": 1,
+        "rr": 0,
+        "rest": 0.5,
+        "move": 0.93,
+        "hrv": 0.96,
+        "recover": 58
+      },
+      "baseCase": {
+        "a": 1.02,
+        "h": 2,
+        "b": 1,
+        "r": 0.7,
+        "rm": 64,
+        "sd": 84,
+        "v": 1.0,
+        "phase": 19.3
+      },
+      "signalGapIndices": [
+        14,
+        15
+      ]
+    },
+    {
+      "index": 25,
+      "name": "Willow",
+      "scenario": "多項輕中度變化",
+      "scenario_en": "mixed mild-to-moderate changes",
+      "physiology": {
+        "hr": 7,
+        "rr": 2,
+        "rest": 1.0,
+        "move": 0.87,
+        "hrv": 0.88,
+        "recover": 7
+      },
+      "baseCase": {
+        "a": 1.06,
+        "h": 3,
+        "b": 2,
+        "r": 1.0,
+        "rm": 55,
+        "sd": 78,
+        "v": 1.0,
+        "phase": 20.1
+      },
+      "signalGapIndices": []
+    },
+    {
+      "index": 26,
+      "name": "Yuki",
+      "scenario": "貓咪整體穩定",
+      "scenario_en": "healthy feline reference",
+      "physiology": {
+        "hr": 0,
+        "rr": 0,
+        "rest": 0.1,
+        "move": 1.03,
+        "hrv": 1.0,
+        "recover": 0
+      },
+      "baseCase": {
+        "a": 1.07,
+        "h": 2,
+        "b": 1,
+        "r": 0.6,
+        "rm": 65,
+        "sd": 80,
+        "v": 0.95,
+        "phase": 21
+      },
+      "signalGapIndices": [
+        5,
+        6
+      ]
+    },
+    {
+      "index": 27,
+      "name": "Ash",
+      "scenario": "貓咪心肺與睡眠多項異常",
+      "scenario_en": "combined feline cardio and poor rest",
+      "physiology": {
+        "hr": 38,
+        "rr": 18,
+        "rest": 4.5,
+        "move": 0.36,
+        "hrv": 0.56,
+        "recover": 15
+      },
+      "baseCase": {
+        "a": 1.02,
+        "h": 3,
+        "b": 2,
+        "r": 0.8,
+        "rm": 61,
+        "sd": 81,
+        "v": 1.1,
+        "phase": 21.8
+      },
+      "signalGapIndices": [
+        23,
+        24
+      ]
+    },
+    {
+      "index": 28,
+      "name": "Tiger",
+      "scenario": "心肺速率穩定但HRV下降",
+      "scenario_en": "isolated HRV decline",
+      "physiology": {
+        "hr": 1,
+        "rr": 1,
+        "rest": 0.4,
+        "move": 0.92,
+        "hrv": 0.19,
+        "recover": 1
+      },
+      "baseCase": {
+        "a": 1.01,
+        "h": 2,
+        "b": 1,
+        "r": 0.8,
+        "rm": 66,
+        "sd": 83,
+        "v": 1.0,
+        "phase": 22.3
+      },
+      "signalGapIndices": [
+        12
+      ]
+    },
+    {
+      "index": 29,
+      "name": "Cloud",
+      "scenario": "間歇性項圈訊號缺失",
+      "scenario_en": "intermittent signal loss",
+      "physiology": {
+        "hr": 9,
+        "rr": 4,
+        "rest": 1.9,
+        "move": 0.69,
+        "hrv": 0.7,
+        "recover": 9
+      },
+      "baseCase": {
+        "a": 0.96,
+        "h": 3,
+        "b": 2,
+        "r": 0.9,
+        "rm": 62,
+        "sd": 80,
+        "v": 1.1,
+        "phase": 23.1
+      },
+      "signalGapIndices": [
+        28,
+        29
+      ]
+    }
+  ]
+}

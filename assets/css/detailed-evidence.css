@@ -30,7 +30,7 @@
 #app .dp-owner-deep:has(.seg-btn[data-value="30"].active) .dp901-period-notes *,
 #app .dp-owner-deep:has(.seg-btn[data-value="7"].active) .dp1054-period-kicker,
 #app .dp-owner-deep:has(.seg-btn[data-value="30"].active) .dp1054-period-kicker{font-weight:400!important}
-#app .dp-owner-deep:has(.seg-btn:is([data-value="7"],[data-value="30"]).active) :is(.dp903-overview-copy,.dp903-metric-left,.dp901-overall-copy,.dp901-card-copy,.dp1054-sleep-copy,.dp905-sleep-head,.dp901-period-notes) :is(h2,h3,p,b,strong,small,li,summary){font-weight:400!important}
+#app .dp-owner-deep:has(.seg-btn:is([data-value="7"],[data-value="30"]).active) :is(.dp903-overview-copy,.dp903-metric-left,.dp901-overall-copy,.dp901-card-copy,.dp1054-sleep-copy,.dp905-sleep-head,.dp901-period-notes) :is(p,small,li){font-weight:400!important}
 #app .dp-owner-deep:has(.seg-btn:is([data-value="7"],[data-value="30"]).active) :is(.dp116-evidence-copy,.dp116-evidence-copy *){font-weight:400!important}
 @media(max-width:480px){#app .dp-owner-deep .dp116-evidence-copy p,#app .dp-owner-deep .dp116-evidence-copy .dp117-risk-reasons li{font-size:13.5px!important;line-height:1.7!important}}
 /* Nested waveform / dated sleep / dated energy detail pages now use the same
@@ -48,7 +48,7 @@
 #app .dp1068-detail-why .dp117-risk-medium{background:#fffaf0;border-left:3px solid #e8a44f;border-radius:0 9px 9px 0;padding:10px 12px!important}
 #app .dp1068-detail-why .dp117-risk-low .dp117-risk-lead{color:#536e86!important}
 #app .dp122-detail-extreme>.dp1068-detail-score-head .dp1068-detail-ring{box-shadow:0 0 0 4px #f7b6c5!important}
-#app .dp122-detail-period :is(h2,h3,p,b,strong,small,li,span){font-weight:400!important}
+#app .dp122-detail-period :is(p,small,li,span){font-weight:400!important}
 @media(max-width:480px){#app .dp1068-detail-why>.dp116-evidence-copy p,#app .dp1068-detail-why>.dp116-evidence-copy li{font-size:13.5px!important}}
 
 /* V10.126: highlight simple, measured reasons ahead of technical evidence without bold 7/30-day copy. */

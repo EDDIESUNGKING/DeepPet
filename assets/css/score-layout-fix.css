@@ -1,0 +1,136 @@
+/* DeepPet V10.139 — left copy + fixed score rail, 1/7/30 day. */
+#app .dp-owner-deep .dp903-overview-head,
+#app .dp-owner-deep .dp903-metric-card{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) 108px!important;
+ column-gap:10px!important;
+ align-items:start!important;
+ grid-auto-rows:auto!important;
+ height:auto!important;min-height:0!important;
+ overflow:visible!important;
+}
+#app .dp-owner-deep .dp903-overview-head>.dp903-overview-copy,
+#app .dp-owner-deep .dp903-metric-card>.dp903-metric-left{
+ grid-column:1!important;grid-row:1!important;
+ min-width:0!important;min-height:0!important;
+ height:auto!important;max-height:none!important;
+ overflow:visible!important;
+ display:flex!important;flex-direction:column!important;
+ align-items:stretch!important;justify-content:flex-start!important;
+}
+#app .dp-owner-deep .dp903-overview-head>.dp903-score-col,
+#app .dp-owner-deep .dp903-metric-card>.dp903-score-col{
+ grid-column:2!important;grid-row:1!important;
+ justify-self:center!important;align-self:start!important;
+ width:108px!important;min-width:108px!important;max-width:108px!important;
+ height:auto!important;min-height:96px!important;
+ flex:none!important;overflow:visible!important;
+ position:relative!important;transform:none!important;
+}
+#app .dp-owner-deep .dp903-metric-card>.dp903-score-col{
+ min-height:84px!important;
+}
+#app .dp-owner-deep .dp903-metric-card>.dp903-open-wave,
+#app .dp-owner-deep .dp903-metric-card>.dp903-expand,
+#app .dp-owner-deep .dp903-metric-card>.dp903-beat-help{
+ grid-column:1 / -1!important;
+ grid-row:auto!important;
+ margin-top:8px!important;
+ order:10!important;
+ position:relative!important;
+}
+#app .dp-owner-deep .dp903-overview-copy>.dp131-linked,
+#app .dp-owner-deep .dp903-metric-left>.dp131-linked,
+#app .dp-owner-deep .dp1054-sleep-copy>.dp131-linked{
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ margin:7px 0 4px!important;padding:0!important;
+ overflow:visible!important;word-break:normal!important;
+ display:flex!important;flex-direction:column!important;
+ align-items:stretch!important;gap:6px!important;
+}
+#app .dp-owner-deep .dp903-overview-copy>.dp131-linked>p,
+#app .dp-owner-deep .dp903-metric-left>.dp131-linked>p,
+#app .dp-owner-deep .dp1054-sleep-copy>.dp131-linked>p{
+ display:block!important;white-space:normal!important;
+ width:100%!important;height:auto!important;
+ margin:0!important;padding:0!important;
+ font-size:12.5px!important;line-height:1.52!important;
+ overflow:visible!important;overflow-wrap:break-word!important;
+}
+#app .dp-owner-deep .dp131-linked .dp131-lead{
+ font-weight:670!important;
+}
+#app .dp-owner-deep .dp903-overview-copy .dp131-linked-button,
+#app .dp-owner-deep .dp903-metric-left .dp131-linked-button,
+#app .dp-owner-deep .dp1054-sleep-copy .dp131-linked-button{
+ max-width:100%!important;
+ align-self:stretch!important;text-align:left!important;
+ white-space:normal!important;overflow-wrap:break-word!important;
+}
+#app .dp-owner-deep .dp1052-sleep-flow{
+ grid-template-rows:auto!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ overflow:visible!important;align-items:start!important;
+}
+#app .dp-owner-deep .dp1052-sleep-flow>.dp1054-sleep-copy{
+ grid-column:1!important;grid-row:1!important;
+ min-width:0!important;height:auto!important;max-height:none!important;
+ overflow:visible!important;
+}
+#app .dp-owner-deep .dp905-sleep-head>.dp140-restored-period-ring{
+ grid-column:2!important;grid-row:1!important;
+ align-self:start!important;justify-self:center!important;
+ width:108px!important;min-width:108px!important;max-width:108px!important;
+ display:flex!important;align-items:center!important;
+ position:relative!important;transform:none!important;
+}
+#app .dp-owner-deep .dp905-sleep-head>.dp140-restored-period-ring>.dp-status-score{
+ width:96px!important;height:96px!important;
+ min-width:96px!important;min-height:96px!important;
+ max-width:96px!important;max-height:96px!important;
+ flex:0 0 96px!important;margin:0 auto!important;
+}
+@media(max-width:359px){
+ #app .dp-owner-deep .dp903-overview-head,
+ #app .dp-owner-deep .dp903-metric-card{
+  grid-template-columns:minmax(0,1fr) 99px!important;column-gap:7px!important;
+ }
+ #app .dp-owner-deep .dp903-overview-head>.dp903-score-col,
+ #app .dp-owner-deep .dp903-metric-card>.dp903-score-col{
+  width:99px!important;min-width:99px!important;max-width:99px!important;
+ }
+ #app .dp-owner-deep .dp131-linked>p{
+  font-size:12px!important;line-height:1.49!important;
+ }
+}
+
+/* V10.139 typography parity: severity, cause & advice below each status
+   use the cardio overview's 12.5px style. Earlier V10.116 risk text had
+   a stronger selector than V10.139's ordinary paragraph rule, resulting
+   in 13.5–14px sub-metric copy and 14px sleep copy. No heading or ring touched. */
+#app .dp-owner-deep .dp116-evidence-copy.dp127-compact.dp131-linked > p,
+#app .dp-owner-deep .dp903-metric-left .dp116-evidence-copy.dp127-compact.dp131-linked > p,
+#app .dp-owner-deep .dp1052-sleep-flow .dp116-evidence-copy.dp127-compact.dp131-linked > p,
+#app .dp-owner-deep .dp901-health-score .dp116-evidence-copy.dp127-compact.dp131-linked > p,
+#app .dp-owner-deep .dp901-card-copy .dp116-evidence-copy.dp127-compact.dp131-linked > p,
+#app .dp-owner-deep .dp901-overall-copy .dp116-evidence-copy.dp127-compact.dp131-linked > p {
+ font-size:var(--dp139-explanation-font,12.5px)!important;
+ line-height:var(--dp139-explanation-line,1.52)!important;
+ margin:0!important;
+ letter-spacing:normal!important;
+ font-weight:400!important;
+ overflow-wrap:break-word!important;
+}
+/* Let the severity label remain legible but never enlarge it above causes. */
+#app .dp-owner-deep .dp116-evidence-copy.dp131-linked > p.dp131-lead {
+ font-size:var(--dp139-explanation-font,12.5px)!important;
+ line-height:var(--dp139-explanation-line,1.52)!important;
+ font-weight:670!important;
+}
+@media (max-width:359px) {
+ #app .dp-owner-deep {
+  --dp139-explanation-font:12px;
+  --dp139-explanation-line:1.49;
+ }
+}

@@ -1,0 +1,25 @@
+/* DeepPet V10.128 — Typography consistency only.
+   Single-day Deep cards are the canonical appearance. Match their heading weights
+   in 7-day / 30-day views without affecting scores, text, graphs or navigation.
+   Font sizes and responsive adjustments remain driven by the existing day styles. */
+
+/* Cardio: overall title and four monitored metrics. */
+#app .dp-owner-deep .dp903-overview-copy > h2 {
+  font-weight:700!important;
+}
+#app .dp-owner-deep .dp903-metric-left > h3 {
+  font-weight:750!important;
+}
+
+/* Sleep: main status title for single-day and period summaries. */
+#app .dp-owner-deep .dp74-overview-copy > h2,
+#app .dp-owner-deep .dp1054-sleep-copy > h2 {
+  font-weight:800!important;
+}
+
+/* Energy/recovery: main status and its three indicator titles. */
+#app .dp-owner-deep .dp901-overall-copy > h2,
+#app .dp-owner-deep .dp901-card-copy > h3,
+#app .dp-owner-deep .dp901-rhythm-copy > h3 {
+  font-weight:760!important;
+}

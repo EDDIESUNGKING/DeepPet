@@ -67,7 +67,7 @@
    lang('這是歷史低分；先看最新呼吸與精神。若現在呼吸困難、虛脫或牙齦發藍，立即送獸醫急診。','This is a dated result. Check the latest readings and your pet now; breathing distress, collapse or blue gums needs emergency veterinary care.','과거 기록입니다. 최신 수치와 현재 호흡·활력을 확인하고 호흡곤란·쓰러짐·푸른 잇몸이면 즉시 응급진료를 받으세요.','過去の記録です。最新値と現在の呼吸・元気を確認し、呼吸困難・虚脱・歯ぐきの青変があれば救急受診を。'):
    lang('立即停下運動、安靜休息並核對讀數；若呼吸困難、虛脫或牙齦發藍，立即送獸醫急診。','Stop extra exercise, allow quiet rest and verify readings. Breathing distress, collapse or blue gums needs emergency veterinary care.','지금 운동을 멈추고 쉬게 하며 측정값을 확인하세요. 호흡곤란·쓰러짐·푸른 잇몸이면 즉시 응급진료를 받으세요.','今すぐ運動を止めて安静にし、装着と測定値を確認。呼吸困難・虚脱・歯ぐきの青変は救急受診を。');}
   if(t===2)return lang('持續變差請聯絡獸醫。','Reduce activity; ask a vet if it worsens.','활동을 줄이세요. 계속 나빠지면 수의사와 상담하세요.','運動を控え、悪化が続く場合は獣医師に相談。');
-  if(t===1)return lang('留意下一次量測與精神、食慾變化。','Check the next reading, energy and appetite.','다음 측정값과 활력·식욕을 지켜보세요.','次の測定と元気・食欲の変化を確認。');
+  if(t===1)return lang('下次再看數值、精神和食慾。','Recheck readings, energy and appetite.','다음 측정값·활력·식욕을 확인하세요.','次回は数値と元気・食欲を確認。');
   return lang('目前大致穩定，持續日常觀察。','Generally stable; continue routine observation.','대체로 안정적입니다. 평소처럼 관찰하세요.','おおむね安定。普段どおり観察を。');
  }
  function heading(score,t,k,historical){
@@ -114,7 +114,7 @@
   }
   if(count===0&&t>=1){roles.push('fact');lines.push(lang('目前缺少足夠可比的原始值，不能猜測低分原因；請檢查資料與配戴。','Comparable measurements are missing; review data and collar fit instead of guessing.','비교 자료가 부족하므로 원인을 추측하지 말고 측정과 착용을 확인하세요.','比較測定が不足しています。原因を推測せずデータと装着を確認してください。'));}
   if(t>=2||t===1){roles.push('action');lines.push(advice(t,historical));}
-  if(t===0&&!comp[key]){lines.splice(1);roles.splice(1);} // one line for healthy sub-items
+  if(t===0){lines.splice(1);roles.splice(1);} // healthy composite and sub-items both stay short
   return {key,score:shown,tier:t,lines,roles,date:source.date,limit:limit(t),historical};
  }
  function paragraphs(node,data,home=false){
@@ -221,9 +221,11 @@
     body.replaceChildren();const p=document.createElement('p');p.className='dp127-home-reason';
     p.textContent=(f.find(x=>/%|比參考|比参考|vs \d+|보다 약|より約/.test(x))||f[0]||'').slice(0,140);
     body.append(p);
-    if(sub)sub.textContent=s.tier>=3?lang('高度警戒 · 點擊查看主要原因','High alert · tap for causes','높은 경계 · 원인 보기','高度警戒・原因を見る'):
-     s.tier===2?lang('中風險 · 點擊查看','Moderate risk · tap to review','중위험 · 자세히 보기','中リスク・詳しく見る'):
-     lang('點擊查看','Tap to review','확인하기','詳しく見る');
+    // V10.139: users already know the entire task card is clickable.
+    // Retain severity; remove "tap / click for causes" in all locales.
+    if(sub)sub.textContent=s.tier>=3?lang('高度警戒','High alert','높은 경계','高度警戒'):
+     s.tier===2?lang('中風險','Moderate risk','중위험','中リスク'):
+     lang('今日提醒','Today’s reminder','오늘 알림','今日の通知');
    }else if(body){
     const first=body.querySelector('p')?.textContent||'';
     body.replaceChildren();const p=document.createElement('p');p.className='dp127-home-reason';p.textContent=first.slice(0,120);body.append(p);
@@ -266,8 +268,8 @@
   });
  }
  function renderCompact(){applyDeep();applyDetail();homeBrief();fixDeepLabels();
-  root.DeepPetBuildVersion='10.127';
-  document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.12[0-6]/g,'10.127');});
+  root.DeepPetBuildVersion='10.128';
+  document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.12[0-7]/g,'10.128');});
 }
  const previous=render;
  render=function(...args){const result=previous.apply(this,args);renderCompact();return result;};

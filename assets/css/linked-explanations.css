@@ -1,0 +1,12 @@
+/* V10.131 measured-cause-first, concise and legible, no changes to score rings */
+#app .dp131-linked{display:flex!important;flex-direction:column!important;gap:5px!important;align-items:stretch!important}
+#app .dp131-linked>p{margin:0!important;padding:0!important;font-size:13px!important;line-height:1.42!important;font-weight:400!important;overflow-wrap:anywhere!important;word-break:normal!important}
+#app .dp131-linked>.dp131-lead{font-weight:680!important;color:#ad2d48!important}
+#app .dp131-linked[data-dp127-max="6"]>.dp131-lead{color:#ad6627!important}
+#app .dp131-linked[data-dp127-max="5"]>.dp131-lead{color:#477b9a!important}
+#app .dp131-linked[data-dp127-max="2"]>.dp131-lead{color:#2f8663!important}
+#app .dp131-linked-button{align-self:flex-end;display:inline-flex;align-items:center;border:0;background:transparent;color:#6154b1;font-size:12.5px;font-weight:700;padding:4px 1px;cursor:pointer}
+#app .dp131-observation{font-size:13px;line-height:1.43;margin:0}
+@media(max-width:359px){#app .dp131-linked>p{font-size:12.4px!important;line-height:1.32!important;letter-spacing:-.1px}}
+
+#app .dp903-metric-card>.dp131-linked,#app .dp903-overview-head>.dp131-linked,#app .dp905-sleep-head>.dp131-linked{grid-column:1/-1!important;width:100%!important;min-width:0!important;margin-top:2px!important}

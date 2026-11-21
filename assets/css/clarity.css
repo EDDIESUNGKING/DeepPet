@@ -1,0 +1,7 @@
+/* DeepPet V10.129 — calm, accessible terminology and expandable help. */
+#app .dp-owner-deep .dp129-hrv-details{margin:8px 0 4px;padding:8px 11px;border-radius:11px;border:1px solid #e4dfef;background:#f9f8ff;color:#56516b}
+#app .dp-owner-deep .dp129-hrv-details>summary{font-size:12.5px;font-weight:700;line-height:1.45;cursor:pointer;list-style:revert;min-height:24px}
+#app .dp-owner-deep .dp129-hrv-details>p{font-size:12.5px;line-height:1.55;margin:6px 0 0;color:#555d70;font-weight:400}
+#app .dp941-prevention .dp1041-prevention-intro{line-height:1.53;max-width:100%}
+#app .dp941-prevention-heading>div>h2{line-height:1.25}
+@media (max-width:359px){#app .dp-owner-deep .dp129-hrv-details>p{font-size:12px;line-height:1.46}}
