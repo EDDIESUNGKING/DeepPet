@@ -1,0 +1,56 @@
+/* V10.122: severe risk evidence must be prominent, with regular 7/30-day type. */
+#app .dp-owner-deep .dp116-evidence-copy{display:block;margin:8px 0 12px;width:100%;min-width:0;overflow-wrap:anywhere}
+#app .dp-owner-deep .dp116-evidence-copy p{font-size:14px!important;line-height:1.72!important;font-weight:400!important;letter-spacing:0!important;color:#314258;margin:0 0 9px!important;white-space:normal!important}
+#app .dp-owner-deep .dp116-evidence-copy p:last-child{margin-bottom:0!important}
+#app .dp-owner-deep .dp116-evidence-copy .dp117-risk-reasons{list-style:decimal outside!important;padding:0 0 0 24px!important;margin:9px 0 12px!important;display:block!important}
+#app .dp-owner-deep .dp116-evidence-copy .dp117-risk-reasons li{display:list-item!important;margin:0 0 11px!important;padding:0 0 0 4px!important;font-size:14px!important;line-height:1.78!important;font-weight:400!important;letter-spacing:0!important;white-space:normal!important;color:#314258!important;overflow-wrap:anywhere!important}
+#app .dp-owner-deep .dp117-risk-high{border-left:5px solid #c52543;padding:14px 14px 10px!important;background:#fff1f1;border-radius:0 12px 12px 0}
+#app .dp-owner-deep .dp120-risk-extreme{border-left:6px solid #a30025;background:#ffe5e9;box-shadow:0 0 0 1px #f7bec8 inset;padding:15px 14px 12px!important}
+#app .dp-owner-deep .dp120-risk-extreme .dp117-risk-lead{color:#78001c!important;font-size:16px!important;line-height:1.82!important}
+#app .dp-owner-deep .dp120-risk-extreme .dp117-risk-reasons li::marker{color:#9d0027!important}
+#app .dp-owner-deep .dp117-risk-medium{border-left:3px solid #e8a44f;padding:10px 12px!important;background:#fffaf0;border-radius:0 9px 9px 0}
+#app .dp-owner-deep .dp117-risk-high .dp117-risk-lead{color:#87132b!important;font-size:15px!important;line-height:1.8!important}
+#app .dp-owner-deep .dp117-risk-high .dp117-risk-reasons li::marker{color:#c52543!important}
+#app .dp-owner-deep .dp117-risk-low .dp117-risk-lead{color:#536e86!important}
+#app .dp-owner-deep .dp903-overview-copy .dp116-evidence-copy p:first-child,
+#app .dp-owner-deep .dp901-health-score .dp116-evidence-copy p:first-child{font-weight:400!important;color:#8d3048}
+#app .dp-owner-deep .dp901-period-notes .dp116-evidence-copy p,
+#app .dp-owner-deep .dp903-metric-left .dp116-evidence-copy p,
+#app .dp-owner-deep .dp1052-sleep-flow .dp116-evidence-copy p{font-weight:400!important;font-size:14px!important;line-height:1.72!important}
+#app .dp921-priority{background:#fff6f5;border:1px solid #edcaca;border-radius:14px;padding:14px 15px;margin:14px 0 16px}
+#app .dp921-priority h3{font-size:17px;line-height:1.4;color:#8a303c;margin:0 0 10px}
+#app .dp921-priority p{font-size:14px;line-height:1.7;color:#4d3640;margin:0 0 12px;overflow-wrap:anywhere}
+#app .dp921-priority p:last-child{margin-bottom:0}
+#app .dp916-health-card,#app .dp916-home-card{cursor:pointer}
+#app .dp1015-evidence-card>summary{cursor:pointer;position:relative;z-index:2;touch-action:manipulation}
+/* The seven/thirty-day descriptions, scores and period headings use regular type. */
+#app .dp-owner-deep:has(.seg-btn[data-value="7"].active) .dp116-evidence-copy *,
+#app .dp-owner-deep:has(.seg-btn[data-value="30"].active) .dp116-evidence-copy *,
+#app .dp-owner-deep:has(.seg-btn[data-value="7"].active) .dp901-period-notes *,
+#app .dp-owner-deep:has(.seg-btn[data-value="30"].active) .dp901-period-notes *,
+#app .dp-owner-deep:has(.seg-btn[data-value="7"].active) .dp1054-period-kicker,
+#app .dp-owner-deep:has(.seg-btn[data-value="30"].active) .dp1054-period-kicker{font-weight:400!important}
+#app .dp-owner-deep:has(.seg-btn:is([data-value="7"],[data-value="30"]).active) :is(.dp903-overview-copy,.dp903-metric-left,.dp901-overall-copy,.dp901-card-copy,.dp1054-sleep-copy,.dp905-sleep-head,.dp901-period-notes) :is(h2,h3,p,b,strong,small,li,summary){font-weight:400!important}
+#app .dp-owner-deep:has(.seg-btn:is([data-value="7"],[data-value="30"]).active) :is(.dp116-evidence-copy,.dp116-evidence-copy *){font-weight:400!important}
+@media(max-width:480px){#app .dp-owner-deep .dp116-evidence-copy p,#app .dp-owner-deep .dp116-evidence-copy .dp117-risk-reasons li{font-size:13.5px!important;line-height:1.7!important}}
+/* Nested waveform / dated sleep / dated energy detail pages now use the same
+   multi-point evidence as their parent Deep overview, not a legacy one-liner. */
+#app .dp1068-detail-why>.dp116-evidence-copy{margin:12px 0 0;width:100%;overflow-wrap:anywhere}
+#app .dp1068-detail-why>.dp116-evidence-copy p,
+#app .dp1068-detail-why>.dp116-evidence-copy li{font-size:14px!important;line-height:1.72!important;font-weight:400!important;letter-spacing:0!important;color:#35455a!important;white-space:normal!important;overflow-wrap:anywhere}
+#app .dp1068-detail-why .dp117-risk-reasons{list-style:decimal outside!important;padding-left:23px!important;margin:12px 0!important;display:block!important}
+#app .dp1068-detail-why .dp117-risk-reasons li{display:list-item!important;margin:0 0 10px!important;padding-left:3px!important}
+#app .dp1068-detail-why .dp117-risk-high{background:#fff1f1;border-left:5px solid #c52543;border-radius:0 12px 12px 0;padding:14px!important}
+#app .dp1068-detail-why .dp120-risk-extreme{background:#ffe7eb;border-left:6px solid #a30025;box-shadow:inset 0 0 0 1px #f7bec8}
+#app .dp1068-detail-why .dp117-risk-high .dp117-risk-lead{color:#87132b!important;font-size:15px!important;line-height:1.8!important}
+#app .dp1068-detail-why .dp120-risk-extreme .dp117-risk-lead{color:#78001c!important;font-size:16px!important;line-height:1.82!important}
+#app .dp1068-detail-why .dp117-risk-reasons li::marker{color:#a30025!important}
+#app .dp1068-detail-why .dp117-risk-medium{background:#fffaf0;border-left:3px solid #e8a44f;border-radius:0 9px 9px 0;padding:10px 12px!important}
+#app .dp1068-detail-why .dp117-risk-low .dp117-risk-lead{color:#536e86!important}
+#app .dp122-detail-extreme>.dp1068-detail-score-head .dp1068-detail-ring{box-shadow:0 0 0 4px #f7b6c5!important}
+#app .dp122-detail-period :is(h2,h3,p,b,strong,small,li,span){font-weight:400!important}
+@media(max-width:480px){#app .dp1068-detail-why>.dp116-evidence-copy p,#app .dp1068-detail-why>.dp116-evidence-copy li{font-size:13.5px!important}}
+
+/* V10.126: highlight simple, measured reasons ahead of technical evidence without bold 7/30-day copy. */
+#app .dp116-evidence-copy li.dp126-owner-core{padding:9px 11px!important;margin-left:-7px!important;border-left:3px solid #ae3148;background:rgba(255,255,255,.84);border-radius:6px;color:#55283a!important;font-weight:400!important}
+#app .dp122-detail-period li.dp126-owner-core{font-weight:400!important}

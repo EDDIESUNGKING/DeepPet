@@ -1,0 +1,182 @@
+[
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 0,
+    "band": "E01",
+    "rules": 5,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 3,
+    "band": "E01",
+    "rules": 5,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 8,
+    "band": "E01",
+    "rules": 5,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 12,
+    "band": "E02",
+    "rules": 5,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 19,
+    "band": "E02",
+    "rules": 5,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 21,
+    "band": "H01",
+    "rules": 4,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 33,
+    "band": "H02",
+    "rules": 4,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 48,
+    "band": "H03",
+    "rules": 4,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 59,
+    "band": "H04",
+    "rules": 4,
+    "plain": 13,
+    "evidence": 33
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 60,
+    "band": "M01",
+    "rules": 0,
+    "plain": 11,
+    "evidence": 31
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 66,
+    "band": "M02",
+    "rules": 0,
+    "plain": 11,
+    "evidence": 31
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 72,
+    "band": "M03",
+    "rules": 0,
+    "plain": 11,
+    "evidence": 31
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 78,
+    "band": "M04",
+    "rules": 0,
+    "plain": 11,
+    "evidence": 31
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 80,
+    "band": "L01",
+    "rules": 0,
+    "plain": 11,
+    "evidence": 0
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 85,
+    "band": "L02",
+    "rules": 0,
+    "plain": 11,
+    "evidence": 0
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 89,
+    "band": "L03",
+    "rules": 0,
+    "plain": 11,
+    "evidence": 0
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 90,
+    "band": "N01",
+    "rules": 0,
+    "plain": 0,
+    "evidence": 0
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 94,
+    "band": "N01",
+    "rules": 0,
+    "plain": 0,
+    "evidence": 0
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 98,
+    "band": "N03",
+    "rules": 0,
+    "plain": 0,
+    "evidence": 0
+  },
+  {
+    "lang": "zht",
+    "key": "cardio",
+    "score": 100,
+    "band": "N03",
+    "rules": 0,
+    "plain": 0,
+    "evidence": 0
+  }
+]
