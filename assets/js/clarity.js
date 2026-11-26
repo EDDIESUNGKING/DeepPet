@@ -129,7 +129,7 @@
   }
   function finish(){
    try{compactDeepReference();tidyHealth();tidyMe();localizeVisible();
-     root.DeepPetBuildVersion='10.130';
+     root.DeepPetBuildVersion='10.204';
      document.querySelectorAll('#app .app-build-version').forEach(el=>{
       el.textContent=el.textContent.replace(/10\.12[0-9]/g,'10.130');
      });

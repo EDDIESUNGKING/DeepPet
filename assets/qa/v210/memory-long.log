@@ -1,0 +1,52 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 1.91 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PETS 25 heap {'step': 25, 'used': 53905464, 'total': 141422592, 'documents': 2, 'nodes': 3932, 'jsEventListeners': 199} max 0.24572162100048445
+PETS 50 heap {'step': 50, 'used': 115185396, 'total': 161529856, 'documents': 2, 'nodes': 35750, 'jsEventListeners': 297} max 0.24572162100048445
+PETS 75 heap {'step': 75, 'used': 132981160, 'total': 179449856, 'documents': 2, 'nodes': 31807, 'jsEventListeners': 291} max 0.24572162100048445
+PETS 100 heap {'step': 100, 'used': 149906756, 'total': 212557824, 'documents': 2, 'nodes': 77796, 'jsEventListeners': 423} max 0.24572162100048445
+PETS 125 heap {'step': 125, 'used': 146639732, 'total': 214925312, 'documents': 2, 'nodes': 20458, 'jsEventListeners': 255} max 0.2892343610001262
+PETS 150 heap {'step': 150, 'used': 160804272, 'total': 234860544, 'documents': 2, 'nodes': 64915, 'jsEventListeners': 381} max 0.2892343610001262
+PETS 175 heap {'step': 175, 'used': 200468208, 'total': 264617984, 'documents': 2, 'nodes': 110302, 'jsEventListeners': 510} max 0.2892343610001262
+PETS 200 heap {'step': 200, 'used': 190461120, 'total': 272830464, 'documents': 2, 'nodes': 6886, 'jsEventListeners': 216} max 0.2892343610001262
+PETS 225 heap {'step': 225, 'used': 227368240, 'total': 295374848, 'documents': 2, 'nodes': 54260, 'jsEventListeners': 351} max 0.2892343610001262
+PETS 250 heap {'step': 250, 'used': 219243560, 'total': 307134464, 'documents': 2, 'nodes': 23586, 'jsEventListeners': 264} max 0.2892343610001262
+PETS 275 heap {'step': 275, 'used': 256017400, 'total': 330104832, 'documents': 2, 'nodes': 72167, 'jsEventListeners': 402} max 0.29536515600011626
+PETS 300 heap {'step': 300, 'used': 289644908, 'total': 359182336, 'documents': 2, 'nodes': 119166, 'jsEventListeners': 534} max 0.29536515600011626
+PETS 325 heap {'step': 325, 'used': 334095124, 'total': 397705216, 'documents': 2, 'nodes': 166203, 'jsEventListeners': 669} max 0.29536515600011626
+PETS 350 heap {'step': 350, 'used': 384934096, 'total': 438001664, 'documents': 2, 'nodes': 214280, 'jsEventListeners': 813} max 0.29536515600011626
+PETS 375 heap {'step': 375, 'used': 405774240, 'total': 472739840, 'documents': 2, 'nodes': 259859, 'jsEventListeners': 945} max 0.2974485109998568
+PETS 400 heap {'step': 400, 'used': 347442544, 'total': 435732480, 'documents': 2, 'nodes': 48698, 'jsEventListeners': 339} max 0.2974485109998568
+PETS 425 heap {'step': 425, 'used': 361036008, 'total': 456126464, 'documents': 2, 'nodes': 93129, 'jsEventListeners': 465} max 0.2974485109998568
+PETS 450 heap {'step': 450, 'used': 428547364, 'total': 483680256, 'documents': 2, 'nodes': 143204, 'jsEventListeners': 612} max 0.2974485109998568
+PETS 475 heap {'step': 475, 'used': 446677484, 'total': 512520192, 'documents': 2, 'nodes': 190045, 'jsEventListeners': 750} max 0.2974485109998568
+PETS 500 heap {'step': 500, 'used': 488129460, 'total': 558379008, 'documents': 2, 'nodes': 240346, 'jsEventListeners': 894} max 0.2974485109998568
+PETS 525 heap {'step': 525, 'used': 519721816, 'total': 589824000, 'documents': 2, 'nodes': 285487, 'jsEventListeners': 1020} max 0.2974485109998568
+PETS 550 heap {'step': 550, 'used': 572427192, 'total': 622940160, 'documents': 2, 'nodes': 332810, 'jsEventListeners': 1155} max 0.2974485109998568
+PETS 575 heap {'step': 575, 'used': 466764524, 'total': 598028288, 'documents': 2, 'nodes': 9613, 'jsEventListeners': 216} max 0.42651127699991775
+PETS 600 heap {'step': 600, 'used': 509919224, 'total': 625422336, 'documents': 2, 'nodes': 56595, 'jsEventListeners': 363} max 0.42651127699991775
+PETS 625 heap {'step': 625, 'used': 523858536, 'total': 645668864, 'documents': 2, 'nodes': 99574, 'jsEventListeners': 486} max 0.42651127699991775
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:570:12)
+    at _write (node:internal/streams/writable:499:10)
+    at Writable.write (node:internal/streams/writable:508:10)
+    at PipeTransport.send (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/utils/pipeTransport.js:52:21)
+    at dispatcherConnection.onmessage (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/cli/driver.js:60:59)
+    at DispatcherConnection.dispatch (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/dispatchers/dispatcher.js:354:10)
+Emitted 'error' event on Socket instance at:
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+  errno: -32,
+  code: 'EPIPE',
+  syscall: 'write'
+}
+
+Node.js v24.11.1

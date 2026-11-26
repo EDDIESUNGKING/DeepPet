@@ -1,0 +1,19 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 2.225 {'date': '2026-11-25', 'version': '10.209', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PETS 25 heap {'step': 25, 'used': 69229020, 'total': 140165120, 'documents': 2, 'nodes': 26808, 'jsEventListeners': 246} max 0.20333044199969663
+PETS 50 heap {'step': 50, 'used': 124646872, 'total': 181542912, 'documents': 2, 'nodes': 69926, 'jsEventListeners': 369} max 0.20333044199969663
+PETS 75 heap {'step': 75, 'used': 123782012, 'total': 183037952, 'documents': 2, 'nodes': 66483, 'jsEventListeners': 303} max 0.20333044199969663
+PETS 100 heap {'step': 100, 'used': 151054352, 'total': 213737472, 'documents': 2, 'nodes': 112568, 'jsEventListeners': 435} max 0.20333044199969663
+POST_PETS {'step': 100, 'used': 151054352, 'total': 213737472, 'documents': 2, 'nodes': 112568, 'jsEventListeners': 435}
+PAGES 25 heap {'step': 125, 'used': 156223548, 'total': 219836416, 'documents': 6, 'nodes': 177404, 'jsEventListeners': 459} max 0.13763053200000286
+PAGES 50 heap {'step': 150, 'used': 118635084, 'total': 207204352, 'documents': 6, 'nodes': 105666, 'jsEventListeners': 210} max 0.13763053200000286
+PAGES 75 heap {'step': 175, 'used': 130712660, 'total': 208433152, 'documents': 6, 'nodes': 165719, 'jsEventListeners': 228} max 0.13763053200000286
+PAGES 100 heap {'step': 200, 'used': 145362192, 'total': 210071552, 'documents': 6, 'nodes': 224955, 'jsEventListeners': 249} max 0.13763053200000286
+POST_PAGES {'step': 200, 'used': 145362192, 'total': 210071552, 'documents': 6, 'nodes': 224955, 'jsEventListeners': 249}
+POINTER home 0.12651247400026477
+POINTER deep 0.09533255099995586
+POINTER health 0.04619351899964386
+POINTER me 0.07624896500010436
+POINTER home 0.08517015200004607
+STRESS_SUMMARY {"pet": {"n": 101, "median": 0.09557775299981586, "p95": 0.1558329889999186, "p99": 0.1751470130002417, "max": 0.20333044199969663, "above_0.3s": 0, "above_1s": 0}, "page": {"n": 100, "median": 0.04741050200004793, "p95": 0.06004334299996117, "p99": 0.12075697000000218, "max": 0.13763053200000286, "above_0.3s": 0, "above_1s": 0}}
+ERRORS 2026-11-25 []

@@ -1,0 +1,44 @@
+PASS dom/en/30/select 
+PASS detail/en/30/health/food 
+PASS detail/en/30/health/med 
+PASS detail/en/30/health/vaccines 
+PASS detail/en/30/health/deworming 
+PASS detail/en/30/health/summary 
+PASS detail/en/30/health/recovery-care 
+PASS detail/en/30/health/notes 
+PASS detail/en/30/me/dp204-wellness-open 
+PASS detail/en/30/me/baseline-detail 
+PASS detail/en/30/me/device-detail 
+PASS dom/en/30/deep/0/1 
+PASS detail/en/30/deep/0/1/heart 
+PASS detail/en/30/deep/0/1/breath 
+PASS detail/en/30/deep/0/1/help/0 
+PASS dom/en/30/deep/0/7 
+PASS detail/en/30/deep/0/7/heart/2026-11-19 
+PASS detail/en/30/deep/0/7/heart/2026-11-25 
+PASS detail/en/30/deep/0/7/heart 
+PASS detail/en/30/deep/0/7/breath/2026-11-19 
+PASS detail/en/30/deep/0/7/breath/2026-11-25 
+PASS detail/en/30/deep/0/7/breath 
+PASS detail/en/30/deep/0/7/help/0 
+PASS dom/en/30/deep/0/30 
+PASS detail/en/30/deep/0/30/heart/2026-10-27 
+PASS detail/en/30/deep/0/30/heart/2026-11-25 
+PASS detail/en/30/deep/0/30/heart 
+PASS detail/en/30/deep/0/30/breath/2026-10-27 
+PASS detail/en/30/deep/0/30/breath/2026-11-25 
+PASS detail/en/30/deep/0/30/breath 
+PASS detail/en/30/deep/0/30/help/0 
+PASS dom/en/30/deep/1/1 
+PASS dom/en/30/deep/1/7 
+PASS detail/en/30/deep/1/7/sleep/2026-11-19 
+PASS detail/en/30/deep/1/7/sleep/2026-11-25 
+PASS detail/en/30/deep/1/7/sleep 
+PASS dom/en/30/deep/1/30 
+PASS detail/en/30/deep/1/30/sleep/2026-10-27 
+PASS detail/en/30/deep/1/30/sleep/2026-11-25 
+PASS detail/en/30/deep/1/30/sleep 
+PASS dom/en/30/deep/2/1 
+FAIL detail/en/30/deep/2/1/energy Page.wait_for_function: Timeout 6000ms exceeded.
+FATAL TimeoutError('Locator.evaluate: Timeout 2500ms exceeded.\nCall log:\n  - waiting for locator(".bottom-nav [data-action=\\"nav\\"][data-page=\\"deep\\"]").first\n')
+SUMMARY 42 41 1 1

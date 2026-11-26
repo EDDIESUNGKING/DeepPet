@@ -1,0 +1,36 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 1.982 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PASS pet 1 0.252
+PASS nav me 0.229
+PASS wellness entry 0.173
+PASS wellness source score 0.067
+PASS wellness source age 0.039
+PASS nav me 0.104
+PASS baseline 0.076
+PASS baseline back 0.093
+PASS language open zht 0.055
+PASS language choose zht 0.498
+PASS language open zh 0.061
+PASS language choose zh 0.345
+PASS language open ko 0.048
+PASS language choose ko 2.351
+PASS language open en 0.065
+PASS language choose en 0.341
+PASS nav health 0.097
+HEALTH_KEYS ['med', 'food', 'vaccines', 'deworming', 'summary', 'recovery-care', 'notes']
+PASS health detail med 0.058
+PASS nav health 0.059
+PASS health detail food 0.065
+PASS nav health 0.068
+PASS health detail vaccines 0.055
+PASS nav health 0.062
+PASS health detail deworming 0.067
+PASS nav health 0.064
+PASS health detail summary 0.104
+PASS nav health 0.061
+PASS health detail recovery-care 0.057
+PASS nav health 0.067
+PASS health detail notes 0.053
+PASS nav health 0.06
+PASS nav home 0.104
+UI_SUMMARY {"passed": 32, "failed": [], "pageErrors": []}

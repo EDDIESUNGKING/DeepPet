@@ -1,0 +1,2 @@
+FATAL Error('Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:45189/index.html\nCall log:\n  - navigating to "http://127.0.0.1:45189/index.html", waiting until "domcontentloaded"\n')
+SUMMARY 0 0 0 1

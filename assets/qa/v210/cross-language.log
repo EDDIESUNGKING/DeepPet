@@ -1,0 +1,48 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 2.167 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PASS nav me 0.179
+PASS language open zht 0.081
+PASS language choose zht 0.524
+FAIL pet 1 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"1\"]").first
+
+FAIL pet 30 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"30\"]").first
+
+PASS nav me 0.091
+PASS language open zh 0.084
+PASS language choose zh 0.351
+FAIL pet 1 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"1\"]").first
+
+FAIL pet 30 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"30\"]").first
+
+PASS nav me 0.088
+PASS language open ko 0.056
+PASS language choose ko 0.337
+FAIL pet 1 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"1\"]").first
+
+FAIL pet 30 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"30\"]").first
+
+PASS nav me 0.079
+PASS language open en 0.05
+PASS language choose en 0.319
+FAIL pet 1 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"1\"]").first
+
+FAIL pet 30 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"30\"]").first
+
+PASS nav home 0.115
+UI_SUMMARY {"passed": 13, "failed": ["pet 1", "pet 30", "pet 1", "pet 30", "pet 1", "pet 30", "pet 1", "pet 30"], "pageErrors": []}

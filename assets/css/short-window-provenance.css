@@ -1,0 +1,17 @@
+/* These labels attach to existing cards; no layout or navigation is replaced. */
+.dp-observation-note{display:flex;align-items:flex-start;gap:5px;color:#758198;font:500 10.5px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:5px 0 1px!important;letter-spacing:0;min-width:0;overflow-wrap:anywhere}
+.dp-observation-note span:last-child{min-width:0;flex:1}
+.dp-observation-note small{display:block;margin-top:1px;color:#8994a7;font-size:10px;line-height:1.45;font-weight:400}
+.dp-observation-main{border-top:1px solid rgba(130,145,165,.10);padding-top:6px;margin-top:7px!important}
+.dp-observation-clock{font-size:11px;color:#8c9aac;line-height:1.6;flex:0 0 auto}
+.dp903-metric-left>.dp-observation-note,.dp901-card-copy>.dp-observation-note{margin-top:5px!important}
+.dp-observation-grade{font-size:10px;display:block;color:#78849b;text-align:center}
+.dp-observation-scored .dp-uniform-dotted{margin:auto}
+.dp-observation-night-track{display:flex;gap:0;width:100%;height:25px;border-radius:5px;overflow:hidden;background:#e7ebef}
+.dp-observation-night-track>span{flex:1;min-width:0;background:#d8dfe7}
+.dp-observation-night-track>span.rest{background:#63ad89}
+.dp-observation-night-track>span.move{background:#81a9db}
+.dp-observation-night-ends{display:flex;justify-content:space-between;color:#8190a0;font-size:10px;margin-top:5px}
+.dp-observation-legend{color:#6d7a8c;font-size:10px;margin-top:3px}
+.dp-owner-sleep-facts .dp-observation-note{font-size:10px}
+@media(max-width:360px){.dp-observation-note{font-size:10px}.dp-observation-note small{font-size:9.5px}}

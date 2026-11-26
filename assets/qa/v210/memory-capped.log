@@ -1,0 +1,95 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 1.722 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PETS 25 heap {'step': 25, 'used': 54833792, 'total': 101470208, 'documents': 2, 'nodes': 2972, 'jsEventListeners': 204} max 0.23412326000016037
+PETS 50 heap {'step': 50, 'used': 54760752, 'total': 108040192, 'documents': 2, 'nodes': 2775, 'jsEventListeners': 204} max 0.23412326000016037
+PETS 75 heap {'step': 75, 'used': 57889136, 'total': 104714240, 'documents': 2, 'nodes': 4684, 'jsEventListeners': 216} max 0.23412326000016037
+PETS 100 heap {'step': 100, 'used': 34687428, 'total': 103870464, 'documents': 2, 'nodes': 870, 'jsEventListeners': 198} max 0.23412326000016037
+PETS 125 heap {'step': 125, 'used': 57228732, 'total': 113811456, 'documents': 2, 'nodes': 2797, 'jsEventListeners': 204} max 0.23412326000016037
+PETS 150 heap {'step': 150, 'used': 38772764, 'total': 106037248, 'documents': 2, 'nodes': 893, 'jsEventListeners': 198} max 0.23412326000016037
+PETS 175 heap {'step': 175, 'used': 63581428, 'total': 111390720, 'documents': 2, 'nodes': 2965, 'jsEventListeners': 204} max 0.23412326000016037
+PETS 200 heap {'step': 200, 'used': 41306424, 'total': 107483136, 'documents': 2, 'nodes': 4802, 'jsEventListeners': 210} max 0.23412326000016037
+PETS 225 heap {'step': 225, 'used': 64919512, 'total': 108908544, 'documents': 2, 'nodes': 4377, 'jsEventListeners': 207} max 0.25710586799959856
+PETS 250 heap {'step': 250, 'used': 46089268, 'total': 108941312, 'documents': 2, 'nodes': 5974, 'jsEventListeners': 213} max 0.25710586799959856
+PETS 275 heap {'step': 275, 'used': 38176668, 'total': 108900352, 'documents': 2, 'nodes': 883, 'jsEventListeners': 198} max 0.25710586799959856
+PETS 300 heap {'step': 300, 'used': 38911048, 'total': 109699072, 'documents': 2, 'nodes': 885, 'jsEventListeners': 198} max 0.25710586799959856
+PETS 325 heap {'step': 325, 'used': 61768996, 'total': 113078272, 'documents': 2, 'nodes': 4114, 'jsEventListeners': 207} max 0.25710586799959856
+PETS 350 heap {'step': 350, 'used': 58427596, 'total': 101642240, 'documents': 2, 'nodes': 2792, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 375 heap {'step': 375, 'used': 63005540, 'total': 113385472, 'documents': 2, 'nodes': 6711, 'jsEventListeners': 216} max 0.25710586799959856
+PETS 400 heap {'step': 400, 'used': 62249812, 'total': 115732480, 'documents': 2, 'nodes': 2864, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 425 heap {'step': 425, 'used': 39339456, 'total': 111693824, 'documents': 2, 'nodes': 852, 'jsEventListeners': 198} max 0.25710586799959856
+PETS 450 heap {'step': 450, 'used': 64265788, 'total': 113872896, 'documents': 2, 'nodes': 2829, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 475 heap {'step': 475, 'used': 52313860, 'total': 116998144, 'documents': 2, 'nodes': 4881, 'jsEventListeners': 210} max 0.25710586799959856
+PETS 500 heap {'step': 500, 'used': 68871604, 'total': 115367936, 'documents': 2, 'nodes': 3074, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 525 heap {'step': 525, 'used': 38445900, 'total': 109375488, 'documents': 2, 'nodes': 4886, 'jsEventListeners': 198} max 0.25710586799959856
+PETS 550 heap {'step': 550, 'used': 49195068, 'total': 116404224, 'documents': 2, 'nodes': 4850, 'jsEventListeners': 210} max 0.25710586799959856
+PETS 575 heap {'step': 575, 'used': 58640792, 'total': 112402432, 'documents': 2, 'nodes': 2869, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 600 heap {'step': 600, 'used': 59948480, 'total': 120745984, 'documents': 2, 'nodes': 5134, 'jsEventListeners': 210} max 0.25710586799959856
+PETS 625 heap {'step': 625, 'used': 62172192, 'total': 110653440, 'documents': 2, 'nodes': 2577, 'jsEventListeners': 201} max 0.25710586799959856
+PETS 650 heap {'step': 650, 'used': 48308504, 'total': 115740672, 'documents': 2, 'nodes': 4854, 'jsEventListeners': 210} max 0.25710586799959856
+PETS 675 heap {'step': 675, 'used': 71933536, 'total': 117735424, 'documents': 2, 'nodes': 6815, 'jsEventListeners': 216} max 0.25710586799959856
+PETS 700 heap {'step': 700, 'used': 60683644, 'total': 114515968, 'documents': 2, 'nodes': 2765, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 725 heap {'step': 725, 'used': 47182820, 'total': 116215808, 'documents': 2, 'nodes': 4810, 'jsEventListeners': 210} max 0.25710586799959856
+PETS 750 heap {'step': 750, 'used': 46887772, 'total': 116637696, 'documents': 2, 'nodes': 4496, 'jsEventListeners': 207} max 0.25710586799959856
+PETS 775 heap {'step': 775, 'used': 49825532, 'total': 114941952, 'documents': 2, 'nodes': 4432, 'jsEventListeners': 207} max 0.25710586799959856
+PETS 800 heap {'step': 800, 'used': 72502960, 'total': 115044352, 'documents': 2, 'nodes': 6449, 'jsEventListeners': 213} max 0.25710586799959856
+PETS 825 heap {'step': 825, 'used': 39409308, 'total': 108576768, 'documents': 2, 'nodes': 856, 'jsEventListeners': 198} max 0.25710586799959856
+PETS 850 heap {'step': 850, 'used': 80015164, 'total': 120758272, 'documents': 2, 'nodes': 7267, 'jsEventListeners': 216} max 0.25710586799959856
+PETS 875 heap {'step': 875, 'used': 44212488, 'total': 115838976, 'documents': 2, 'nodes': 882, 'jsEventListeners': 198} max 0.25710586799959856
+PETS 900 heap {'step': 900, 'used': 62442776, 'total': 114618368, 'documents': 2, 'nodes': 2865, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 925 heap {'step': 925, 'used': 42472172, 'total': 113143808, 'documents': 2, 'nodes': 4555, 'jsEventListeners': 207} max 0.25710586799959856
+PETS 950 heap {'step': 950, 'used': 38230408, 'total': 107540480, 'documents': 2, 'nodes': 885, 'jsEventListeners': 198} max 0.25710586799959856
+PETS 975 heap {'step': 975, 'used': 67451236, 'total': 112840704, 'documents': 2, 'nodes': 2999, 'jsEventListeners': 204} max 0.25710586799959856
+PETS 1000 heap {'step': 1000, 'used': 39632400, 'total': 109912064, 'documents': 2, 'nodes': 4013, 'jsEventListeners': 210} max 0.25710586799959856
+POST_PETS {'step': 1000, 'used': 39632400, 'total': 109912064, 'documents': 2, 'nodes': 854, 'jsEventListeners': 198}
+PAGES 25 heap {'step': 1025, 'used': 48092776, 'total': 106287104, 'documents': 6, 'nodes': 16897, 'jsEventListeners': 201} max 0.14613107700006367
+PAGES 50 heap {'step': 1050, 'used': 31928252, 'total': 98721792, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 75 heap {'step': 1075, 'used': 45316384, 'total': 99188736, 'documents': 6, 'nodes': 3598, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 100 heap {'step': 1100, 'used': 29244548, 'total': 99393536, 'documents': 6, 'nodes': 5234, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 125 heap {'step': 1125, 'used': 42086956, 'total': 100179968, 'documents': 4, 'nodes': 17076, 'jsEventListeners': 201} max 0.17691935900074895
+PAGES 150 heap {'step': 1150, 'used': 31897448, 'total': 99508224, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 175 heap {'step': 1175, 'used': 46118116, 'total': 100179968, 'documents': 6, 'nodes': 3598, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 200 heap {'step': 1200, 'used': 29263800, 'total': 100704256, 'documents': 6, 'nodes': 5234, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 225 heap {'step': 1225, 'used': 36039980, 'total': 99917824, 'documents': 6, 'nodes': 10429, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 250 heap {'step': 1250, 'used': 32400932, 'total': 98983936, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 275 heap {'step': 1275, 'used': 49125976, 'total': 98607104, 'documents': 6, 'nodes': 3599, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 300 heap {'step': 1300, 'used': 32148200, 'total': 99131392, 'documents': 6, 'nodes': 5235, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 325 heap {'step': 1325, 'used': 26694572, 'total': 98721792, 'documents': 4, 'nodes': 783, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 350 heap {'step': 1350, 'used': 32370196, 'total': 99246080, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 375 heap {'step': 1375, 'used': 49149232, 'total': 99131392, 'documents': 6, 'nodes': 3599, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 400 heap {'step': 1400, 'used': 31928728, 'total': 99393536, 'documents': 6, 'nodes': 5235, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 425 heap {'step': 1425, 'used': 26851224, 'total': 98983936, 'documents': 6, 'nodes': 5662, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 450 heap {'step': 1450, 'used': 32821704, 'total': 98721792, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 475 heap {'step': 1475, 'used': 46145768, 'total': 100237312, 'documents': 6, 'nodes': 3598, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 500 heap {'step': 1500, 'used': 26940396, 'total': 100294656, 'documents': 4, 'nodes': 940, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 525 heap {'step': 1525, 'used': 50826448, 'total': 100032512, 'documents': 4, 'nodes': 7529, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 550 heap {'step': 1550, 'used': 36255732, 'total': 100556800, 'documents': 4, 'nodes': 6801, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 575 heap {'step': 1575, 'used': 49302776, 'total': 99917824, 'documents': 6, 'nodes': 3599, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 600 heap {'step': 1600, 'used': 32941508, 'total': 100179968, 'documents': 6, 'nodes': 5235, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 625 heap {'step': 1625, 'used': 27058556, 'total': 99770368, 'documents': 4, 'nodes': 783, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 650 heap {'step': 1650, 'used': 32798420, 'total': 99713024, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 675 heap {'step': 1675, 'used': 49493160, 'total': 100442112, 'documents': 6, 'nodes': 3599, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 700 heap {'step': 1700, 'used': 33270932, 'total': 100442112, 'documents': 6, 'nodes': 5235, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 725 heap {'step': 1725, 'used': 27117412, 'total': 100032512, 'documents': 6, 'nodes': 5033, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 750 heap {'step': 1750, 'used': 32735468, 'total': 99508224, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 775 heap {'step': 1775, 'used': 48994524, 'total': 100237312, 'documents': 6, 'nodes': 3599, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 800 heap {'step': 1800, 'used': 33293552, 'total': 100442112, 'documents': 6, 'nodes': 5235, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 825 heap {'step': 1825, 'used': 27235656, 'total': 99770368, 'documents': 4, 'nodes': 783, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 850 heap {'step': 1850, 'used': 32870308, 'total': 100032512, 'documents': 4, 'nodes': 1099, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 875 heap {'step': 1875, 'used': 48871936, 'total': 100237312, 'documents': 6, 'nodes': 3599, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 900 heap {'step': 1900, 'used': 33262680, 'total': 100179968, 'documents': 6, 'nodes': 5235, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 925 heap {'step': 1925, 'used': 57471668, 'total': 105103360, 'documents': 4, 'nodes': 19079, 'jsEventListeners': 207} max 0.17691935900074895
+PAGES 950 heap {'step': 1950, 'used': 29477268, 'total': 101605376, 'documents': 4, 'nodes': 1098, 'jsEventListeners': 195} max 0.17691935900074895
+PAGES 975 heap {'step': 1975, 'used': 27769604, 'total': 101023744, 'documents': 6, 'nodes': 8951, 'jsEventListeners': 198} max 0.17691935900074895
+PAGES 1000 heap {'step': 2000, 'used': 45428588, 'total': 100237312, 'documents': 4, 'nodes': 2334, 'jsEventListeners': 198} max 0.17691935900074895
+POST_PAGES {'step': 2000, 'used': 45428588, 'total': 100237312, 'documents': 4, 'nodes': 2334, 'jsEventListeners': 198}
+POINTER home 0.10910146700007317
+POINTER deep 0.09002699800021219
+POINTER health 0.058750088999659056
+POINTER me 0.1001786839997294
+POINTER home 0.09529077100069117
+STRESS_SUMMARY {"pet": {"n": 1001, "median": 0.11681110300014552, "p95": 0.17303234599967254, "p99": 0.20225386699985393, "max": 0.25710586799959856, "above_0.3s": 0, "above_1s": 0}, "page": {"n": 1000, "median": 0.060322606999761774, "p95": 0.08464493500014214, "p99": 0.10508319600012328, "max": 0.17691935900074895, "above_0.3s": 0, "above_1s": 0}}
+ERRORS 2026-11-25 []
+DIAGNOSTIC_IDLE {'step': 2001, 'used': 33688576, 'total': 100966400, 'documents': 6, 'nodes': 5284, 'jsEventListeners': 198}
+DIAGNOSTIC_FORCED_GC {'step': 2002, 'used': 26291644, 'total': 28467200, 'documents': 3, 'nodes': 931, 'jsEventListeners': 198}
+DETACHED_COUNT 2
+DETACHED_SUMMARY {"counts": {"NAV": 1, "BUTTON": 10, "SPAN": 20, "svg": 4, "path": 5, "#text": 15, "circle": 1, "DIV": 5, "FIGURE": 5, "IMG": 10, "#document-fragment": 5}, "samples": [{"root": "NAV", "attrs": ["class", "bottom-nav", "aria-label", "Primary navigation"], "nodes": 29, "retained": 3}, {"root": "DIV", "attrs": ["aria-label", "DeepPet onboarding", "aria-modal", "true", "id", "dp-intro-root", "role", "dialog"], "nodes": 52, "retained": 42}]}

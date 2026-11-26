@@ -1,0 +1,7 @@
+PASS physical-isolated-alert-fixture/heart-high 
+PASS physical-isolated-alert-fixture/breath-low 
+PASS physical-isolated-alert-fixture/paired 
+PASS physical-isolated-alert-fixture/missing-reading 
+PASS physical-isolated-alert-fixture/invalid-date 
+PASS physical-isolated-alert-fixture/missing-minute 
+SUMMARY 6 6 0 0

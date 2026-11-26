@@ -1,0 +1,195 @@
+NORMAL {
+  heart: 100,
+  breath: 100,
+  hrv: null,
+  stable: null,
+  cardio: null,
+  sleep: null,
+  energy: null,
+  recovery: null,
+  calm: null,
+  activityRecovery: null,
+  physiol: null,
+  rhythm: null
+} ABNORMAL {
+  heart: 60,
+  breath: 63,
+  hrv: null,
+  stable: null,
+  cardio: null,
+  sleep: null,
+  energy: null,
+  recovery: null,
+  calm: null,
+  activityRecovery: null,
+  physiol: null,
+  rhythm: null
+} PARTIAL {
+  heart: 100,
+  breath: 100,
+  hrv: null,
+  stable: null,
+  cardio: null,
+  sleep: null,
+  energy: null,
+  recovery: null,
+  calm: null,
+  activityRecovery: null,
+  physiol: null,
+  rhythm: null
+} DEVIATION {
+  level: 73,
+  stability: 22,
+  score: 60,
+  burden: 0.1078231555684466,
+  anchorDrift: 0,
+  secondsOutside: 200,
+  severeRunSeconds: 10,
+  severeBurden: 0,
+  severeDoseSeconds: 129.38778668213592,
+  repeatedBurden: 0.01037666118384617,
+  acuteBurden: 0.06803254021685003,
+  transitionBurden: 0.5699999999999996,
+  largestTransition: 0.5700000000000001,
+  meanFit: 83.23438880735026,
+  median: 65,
+  restEquivalentSeconds: 1200,
+  contextObservedSeconds: 1200
+} {
+  level: 74,
+  stability: 28,
+  score: 63,
+  burden: 0.10535342647142631,
+  anchorDrift: 0,
+  secondsOutside: 200,
+  severeRunSeconds: 10,
+  severeBurden: 0,
+  severeDoseSeconds: 126.42411176571157,
+  repeatedBurden: 0.0071124876439471185,
+  acuteBurden: 0.06647422982209347,
+  transitionBurden: 0.4666666666666665,
+  largestTransition: 0.4666666666666667,
+  meanFit: 83.27146751461594,
+  median: 17,
+  restEquivalentSeconds: 1200,
+  contextObservedSeconds: 1200
+}
+PASS repeated 10s excursions retained, no 100 score
+PASS 30 minute not a daily score
+PASS unqualified HRV never enters shared score
+PASS qualified HRV summary alone is not waveform evidence
+PASS empty data null, no invented health
+PASS short severe event still recorded even below score gate
+PASS continuity across boundary and break on gap
+PASS same-priority conflicts excluded; higher priority can resolve
+PASS motion aligned to corresponding vital seconds
+PASS no false rest interruption on missing time; real wake counts
+PASS partial night cannot imply all-day rest
+FULL {
+  heart: 99,
+  breath: 99,
+  hrv: null,
+  stable: null,
+  cardio: null,
+  sleep: 95,
+  energy: null,
+  recovery: null,
+  calm: null,
+  activityRecovery: null,
+  physiol: null,
+  rhythm: null
+} {
+  heart: true,
+  breath: true,
+  hrv: false,
+  stable: false,
+  cardio: false,
+  energy: false,
+  calm: false,
+  recovery: false,
+  recoveryExact: false,
+  sleep: true,
+  activityRecovery: false,
+  physiol: false,
+  rhythm: false
+}
+PASS full-day summary computes supported rest and vital indices, not HRV-dependent composite
+PASS no recovery event is unavailable, not zero
+PASS 14 short snapshots cannot establish a baseline
+PASS 14 adequately sampled days calibrate; severe mixed minutes excluded
+PASS period mean preserves low-day evidence
+PASS monotonic abnormal duration
+PASS species and age parameters differ, no unsafe widening with age
+PASS finite bounded outputs across profiles
+PASS sparse period never presents a full-period mean
+PASS missing HRV never yields a full fixed-weight cardio result
+PASS exercise burst is retained in following context
+PASS full-day absent recovery remains unavailable
+PASS one second jolt cannot relax next minute; sustained effort retains transient load
+PASS joint high rates retained concurrently
+PASS HRV implausible rate, interval scale, inconsistent SDNN rejected
+PASS one second in third block does not qualify 14-day baseline
+PASS partial days and duplicate calendar entries cannot qualify period
+PASS period anchor includes dates with no score; stale scores cannot move window
+RECOVERY 89 71 24 155 65
+PASS actual 120s aligned recovery, faster near baseline scores higher than slow or residual tachycardia
+PASS zero, renewed activity or a long gap cannot be scored as precise successful recovery
+PASS too low nonzero endpoint is worse than normal baseline
+PASS misaligned 45s minute segments cannot score as 120s recovery
+PASS high heart rate while still may have a recovery event, not classified as exercise
+PASS motion zero is valid; zero vital is not
+LONGITUDINAL 95 74
+PASS longitudinal coverage 7 days insufficient; recent decline lowers current score
+PASS owner real long-term days enter shared model only when canonical coverage and HRV are verified
+PASS age estimate life stage dependent and consistent with score
+PASS rest alert after isolated motion no eight minute suppression; true simultaneous extreme high/low
+PASS minute alert requires abnormal selected sample and joint valid channels
+PASS 14-day self-calibration changes actual personal vital centers and routine targets
+INDIVIDUAL 62.88315659890139 72.11407522184149 16.764274465691788 18.87228908886389 0.2805466662193159 0.30296229930282603 93 99
+PASS actual common score uses the individual model for identical current input
+PASS 13 days or duplicated/current/future days cannot activate personalization
+PASS immobility cannot train a low activity goal even with 14 valid dates
+PASS repeated abnormal physiology cannot calibrate its own normal
+PASS group parameters are size, age and species aware; explicit dog cannot be misclassified by breed name
+PASS 24h rest is primary; night only slightly weighted and no stages inferred
+PASS quiet stillness all day is not rewarded as ideal sleep and activity
+PASS breed adult mass prior: puppy of giant breed vs small breed, adult weight remains measured, cats not scaled by breed mass
+PASS unbacked HRV summary cannot train personal model even after fourteen clean days
+PASS unqualified or mismatched HRV history cannot calibrate
+RECOVERY HISTORY { 'estimated|high': { days: 14, center: 100, weight: 0.3 } }
+PASS recovery learning is separated by evidence level and intensity and cannot normalize repeated poor recovery
+REC PERSONAL 0 14 14
+PASS same recovery input is evaluated against comparable healthy history, slower cannot be rewarded
+PASS sustained resting respiratory review independent of 14 days and short-nose observation is earlier; no future lookahead
+PASS activity alone and zero RR cannot generate resting respiratory review
+LONG TERM 95 69 4 23.57142857142857
+PASS long-term persistent deterioration, sparse and fixture/real separation
+PASS native independently verified sustained resting rate with no historical baseline, exact 120 second evidence
+PASS identity and manual health entries cannot alter physiological scores
+PASS manual reports do not change long term waveform scores
+PASS sustained respiratory safety review starts after two actual minutes even at beginning of day
+PASS 90-day historical decline only changes longitudinal score when enough comparable history exists
+PASS minute summary extreme screen is activity independent and does not invent exact confirmation seconds
+PASS native rapid stream retains continuous extreme events during verified activity, not short or interrupted ones
+PASS explicit calendar anchor never shifts to older sparse days or accepts future days
+PASS real and synthetic period evidence is never blended
+PASS latest real partial observation prevents older fixture from appearing as a current period score
+PASS period qualified dates match exact scores used, not partial summaries
+PASS longitudinal score does not fall back to older synthetic days after a real partial day
+PASS longitudinal same-day source conflict does not depend on input order
+PASS rest slot coverage uses supported high-resolution pieces rather than stale minute totals
+PASS older same-day source conflict excluded from period regardless of order
+PASS older real partial observation excludes conflicting fixture day from long-term score
+PASS future foreign pet record does not change earlier date health score; invalid cutoff rejected
+PASS negative age cannot crash or fabricate a wellness age
+PASS latest partial same-source observation anchors implicit longitudinal date rather than last complete day
+PASS second evidence controls day coverage and minute representatives even with contradictory summaries
+PASS rest uses valid high-resolution evidence even if minute summary absent
+PASS alert activity context at any observed second is unchanged by extension of same-value waveform
+PASS invalid second availability cannot confirm a timestamp or a continuous emergency
+PASS no valid recent score does not imply numerical deterioration
+PASS new partial synthetic observation anchors fixture trend rather than older real history
+PASS period never averages identified different pets or internally conflicting owner claims
+PASS longitudinal requires matching canonical daily date and scores
+PASS contradictory real and fixture claims rejected in both period and longitudinal
+TOTAL 84

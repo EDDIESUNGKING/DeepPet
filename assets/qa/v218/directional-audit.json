@@ -1,0 +1,764 @@
+{
+  "archiveDays": 595,
+  "changedDays": 15,
+  "changedMetrics": {
+    "cardio": 0,
+    "heart": 0,
+    "breath": 0,
+    "hrv": 0,
+    "stable": 0,
+    "sleep": 15,
+    "activityRecovery": 0,
+    "energy": 9,
+    "recovery": 0,
+    "calm": 0
+  },
+  "projectionCases": 90,
+  "periods": 270,
+  "wordings": 3600,
+  "edgeCases": 520,
+  "periodIssues": [],
+  "changes": [
+    {
+      "pet": 7,
+      "date": "2026-11-21",
+      "before": {
+        "heart": 86,
+        "breath": 19,
+        "hrv": 82,
+        "stable": 87,
+        "cardio": 47,
+        "sleep": 63,
+        "energy": 62,
+        "recovery": 3,
+        "calm": 50,
+        "activityRecovery": 26,
+        "physiol": 56,
+        "rhythm": 64
+      },
+      "after": {
+        "heart": 86,
+        "breath": 19,
+        "hrv": 82,
+        "stable": 87,
+        "cardio": 47,
+        "sleep": 59,
+        "energy": 61,
+        "recovery": 3,
+        "calm": 50,
+        "activityRecovery": 26,
+        "physiol": 56,
+        "rhythm": 64
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 63,
+          "to": 59,
+          "inputs": {
+            "heart": 86,
+            "breath": 19
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 62,
+          "to": 61,
+          "inputs": {
+            "sleep": 59
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 7,
+      "date": "2026-11-22",
+      "before": {
+        "heart": 85,
+        "breath": 18,
+        "hrv": 84,
+        "stable": 86,
+        "cardio": 46,
+        "sleep": 60,
+        "energy": 60,
+        "recovery": 3,
+        "calm": 49,
+        "activityRecovery": 25,
+        "physiol": 54,
+        "rhythm": 64
+      },
+      "after": {
+        "heart": 85,
+        "breath": 18,
+        "hrv": 84,
+        "stable": 86,
+        "cardio": 46,
+        "sleep": 59,
+        "energy": 60,
+        "recovery": 3,
+        "calm": 49,
+        "activityRecovery": 25,
+        "physiol": 54,
+        "rhythm": 64
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 60,
+          "to": 59,
+          "inputs": {
+            "heart": 85,
+            "breath": 18
+          },
+          "rule": "directional-wellness-ceiling"
+        }
+      ]
+    },
+    {
+      "pet": 14,
+      "date": "2026-11-18",
+      "before": {
+        "heart": 79,
+        "breath": 18,
+        "hrv": 78,
+        "stable": 90,
+        "cardio": 45,
+        "sleep": 66,
+        "energy": 62,
+        "recovery": 4,
+        "calm": 48,
+        "activityRecovery": 26,
+        "physiol": 57,
+        "rhythm": 63
+      },
+      "after": {
+        "heart": 79,
+        "breath": 18,
+        "hrv": 78,
+        "stable": 90,
+        "cardio": 45,
+        "sleep": 59,
+        "energy": 60,
+        "recovery": 4,
+        "calm": 48,
+        "activityRecovery": 26,
+        "physiol": 57,
+        "rhythm": 63
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 66,
+          "to": 59,
+          "inputs": {
+            "heart": 79,
+            "breath": 18
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 62,
+          "to": 60,
+          "inputs": {
+            "sleep": 59
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 14,
+      "date": "2026-11-19",
+      "before": {
+        "heart": 79,
+        "breath": 18,
+        "hrv": 79,
+        "stable": 90,
+        "cardio": 45,
+        "sleep": 66,
+        "energy": 61,
+        "recovery": 2,
+        "calm": 48,
+        "activityRecovery": 25,
+        "physiol": 57,
+        "rhythm": 63
+      },
+      "after": {
+        "heart": 79,
+        "breath": 18,
+        "hrv": 79,
+        "stable": 90,
+        "cardio": 45,
+        "sleep": 59,
+        "energy": 60,
+        "recovery": 2,
+        "calm": 48,
+        "activityRecovery": 25,
+        "physiol": 57,
+        "rhythm": 63
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 66,
+          "to": 59,
+          "inputs": {
+            "heart": 79,
+            "breath": 18
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 61,
+          "to": 60,
+          "inputs": {
+            "sleep": 59
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 14,
+      "date": "2026-11-20",
+      "before": {
+        "heart": 79,
+        "breath": 18,
+        "hrv": 80,
+        "stable": 90,
+        "cardio": 45,
+        "sleep": 66,
+        "energy": 61,
+        "recovery": 2,
+        "calm": 48,
+        "activityRecovery": 25,
+        "physiol": 56,
+        "rhythm": 64
+      },
+      "after": {
+        "heart": 79,
+        "breath": 18,
+        "hrv": 80,
+        "stable": 90,
+        "cardio": 45,
+        "sleep": 59,
+        "energy": 60,
+        "recovery": 2,
+        "calm": 48,
+        "activityRecovery": 25,
+        "physiol": 56,
+        "rhythm": 64
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 66,
+          "to": 59,
+          "inputs": {
+            "heart": 79,
+            "breath": 18
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 61,
+          "to": 60,
+          "inputs": {
+            "sleep": 59
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 14,
+      "date": "2026-11-22",
+      "before": {
+        "heart": 64,
+        "breath": 16,
+        "hrv": 80,
+        "stable": 90,
+        "cardio": 38,
+        "sleep": 60,
+        "energy": 56,
+        "recovery": 1,
+        "calm": 43,
+        "activityRecovery": 22,
+        "physiol": 51,
+        "rhythm": 62
+      },
+      "after": {
+        "heart": 64,
+        "breath": 16,
+        "hrv": 80,
+        "stable": 90,
+        "cardio": 38,
+        "sleep": 59,
+        "energy": 56,
+        "recovery": 1,
+        "calm": 43,
+        "activityRecovery": 22,
+        "physiol": 51,
+        "rhythm": 62
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 60,
+          "to": 59,
+          "inputs": {
+            "heart": 64,
+            "breath": 16
+          },
+          "rule": "directional-wellness-ceiling"
+        }
+      ]
+    },
+    {
+      "pet": 21,
+      "date": "2026-11-19",
+      "before": {
+        "heart": 57,
+        "breath": 99,
+        "hrv": 91,
+        "stable": 78,
+        "cardio": 72,
+        "sleep": 91,
+        "energy": 84,
+        "recovery": 12,
+        "calm": 74,
+        "activityRecovery": 41,
+        "physiol": 77,
+        "rhythm": 83
+      },
+      "after": {
+        "heart": 57,
+        "breath": 99,
+        "hrv": 91,
+        "stable": 78,
+        "cardio": 72,
+        "sleep": 89,
+        "energy": 84,
+        "recovery": 12,
+        "calm": 74,
+        "activityRecovery": 41,
+        "physiol": 77,
+        "rhythm": 83
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 91,
+          "to": 89,
+          "inputs": {
+            "heart": 57,
+            "breath": 99
+          },
+          "rule": "directional-wellness-ceiling"
+        }
+      ]
+    },
+    {
+      "pet": 21,
+      "date": "2026-11-23",
+      "before": {
+        "heart": 37,
+        "breath": 99,
+        "hrv": 93,
+        "stable": 75,
+        "cardio": 61,
+        "sleep": 89,
+        "energy": 78,
+        "recovery": 8,
+        "calm": 64,
+        "activityRecovery": 35,
+        "physiol": 69,
+        "rhythm": 81
+      },
+      "after": {
+        "heart": 37,
+        "breath": 99,
+        "hrv": 93,
+        "stable": 75,
+        "cardio": 61,
+        "sleep": 79,
+        "energy": 76,
+        "recovery": 8,
+        "calm": 64,
+        "activityRecovery": 35,
+        "physiol": 69,
+        "rhythm": 81
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 89,
+          "to": 79,
+          "inputs": {
+            "heart": 37,
+            "breath": 99
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 78,
+          "to": 76,
+          "inputs": {
+            "sleep": 79
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 21,
+      "date": "2026-11-24",
+      "before": {
+        "heart": 37,
+        "breath": 99,
+        "hrv": 94,
+        "stable": 75,
+        "cardio": 61,
+        "sleep": 90,
+        "energy": 78,
+        "recovery": 11,
+        "calm": 64,
+        "activityRecovery": 37,
+        "physiol": 70,
+        "rhythm": 81
+      },
+      "after": {
+        "heart": 37,
+        "breath": 99,
+        "hrv": 94,
+        "stable": 75,
+        "cardio": 61,
+        "sleep": 79,
+        "energy": 76,
+        "recovery": 11,
+        "calm": 64,
+        "activityRecovery": 37,
+        "physiol": 70,
+        "rhythm": 81
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 90,
+          "to": 79,
+          "inputs": {
+            "heart": 37,
+            "breath": 99
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 78,
+          "to": 76,
+          "inputs": {
+            "sleep": 79
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 21,
+      "date": "2026-11-25",
+      "before": {
+        "heart": 36,
+        "breath": 99,
+        "hrv": 92,
+        "stable": 76,
+        "cardio": 61,
+        "sleep": 88,
+        "energy": 77,
+        "recovery": 3,
+        "calm": 63,
+        "activityRecovery": 32,
+        "physiol": 69,
+        "rhythm": 81
+      },
+      "after": {
+        "heart": 36,
+        "breath": 99,
+        "hrv": 92,
+        "stable": 76,
+        "cardio": 61,
+        "sleep": 79,
+        "energy": 76,
+        "recovery": 3,
+        "calm": 63,
+        "activityRecovery": 32,
+        "physiol": 69,
+        "rhythm": 81
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 88,
+          "to": 79,
+          "inputs": {
+            "heart": 36,
+            "breath": 99
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 77,
+          "to": 76,
+          "inputs": {
+            "sleep": 79
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 22,
+      "date": "2026-11-23",
+      "before": {
+        "heart": 95,
+        "breath": 11,
+        "hrv": 94,
+        "stable": 72,
+        "cardio": 46,
+        "sleep": 64,
+        "energy": 62,
+        "recovery": 6,
+        "calm": 51,
+        "activityRecovery": 28,
+        "physiol": 57,
+        "rhythm": 60
+      },
+      "after": {
+        "heart": 95,
+        "breath": 11,
+        "hrv": 94,
+        "stable": 72,
+        "cardio": 46,
+        "sleep": 59,
+        "energy": 61,
+        "recovery": 6,
+        "calm": 51,
+        "activityRecovery": 28,
+        "physiol": 57,
+        "rhythm": 60
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 64,
+          "to": 59,
+          "inputs": {
+            "heart": 95,
+            "breath": 11
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 62,
+          "to": 61,
+          "inputs": {
+            "sleep": 59
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 22,
+      "date": "2026-11-24",
+      "before": {
+        "heart": 95,
+        "breath": 16,
+        "hrv": 95,
+        "stable": 68,
+        "cardio": 48,
+        "sleep": 62,
+        "energy": 62,
+        "recovery": 4,
+        "calm": 53,
+        "activityRecovery": 27,
+        "physiol": 57,
+        "rhythm": 59
+      },
+      "after": {
+        "heart": 95,
+        "breath": 16,
+        "hrv": 95,
+        "stable": 68,
+        "cardio": 48,
+        "sleep": 59,
+        "energy": 62,
+        "recovery": 4,
+        "calm": 53,
+        "activityRecovery": 27,
+        "physiol": 57,
+        "rhythm": 59
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 62,
+          "to": 59,
+          "inputs": {
+            "heart": 95,
+            "breath": 16
+          },
+          "rule": "directional-wellness-ceiling"
+        }
+      ]
+    },
+    {
+      "pet": 22,
+      "date": "2026-11-25",
+      "before": {
+        "heart": 95,
+        "breath": 16,
+        "hrv": 94,
+        "stable": 72,
+        "cardio": 48,
+        "sleep": 63,
+        "energy": 62,
+        "recovery": 1,
+        "calm": 53,
+        "activityRecovery": 25,
+        "physiol": 58,
+        "rhythm": 60
+      },
+      "after": {
+        "heart": 95,
+        "breath": 16,
+        "hrv": 94,
+        "stable": 72,
+        "cardio": 48,
+        "sleep": 59,
+        "energy": 62,
+        "recovery": 1,
+        "calm": 53,
+        "activityRecovery": 25,
+        "physiol": 58,
+        "rhythm": 60
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 63,
+          "to": 59,
+          "inputs": {
+            "heart": 95,
+            "breath": 16
+          },
+          "rule": "directional-wellness-ceiling"
+        }
+      ]
+    },
+    {
+      "pet": 27,
+      "date": "2026-11-21",
+      "before": {
+        "heart": 84,
+        "breath": 14,
+        "hrv": 88,
+        "stable": 85,
+        "cardio": 45,
+        "sleep": 65,
+        "energy": 61,
+        "recovery": 3,
+        "calm": 48,
+        "activityRecovery": 25,
+        "physiol": 56,
+        "rhythm": 63
+      },
+      "after": {
+        "heart": 84,
+        "breath": 14,
+        "hrv": 88,
+        "stable": 85,
+        "cardio": 45,
+        "sleep": 59,
+        "energy": 60,
+        "recovery": 3,
+        "calm": 48,
+        "activityRecovery": 25,
+        "physiol": 56,
+        "rhythm": 63
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 65,
+          "to": 59,
+          "inputs": {
+            "heart": 84,
+            "breath": 14
+          },
+          "rule": "directional-wellness-ceiling"
+        },
+        {
+          "metric": "energy",
+          "from": 61,
+          "to": 60,
+          "inputs": {
+            "sleep": 59
+          },
+          "rule": "linked-rest-recalculation"
+        }
+      ]
+    },
+    {
+      "pet": 27,
+      "date": "2026-11-25",
+      "before": {
+        "heart": 71,
+        "breath": 13,
+        "hrv": 90,
+        "stable": 83,
+        "cardio": 38,
+        "sleep": 60,
+        "energy": 54,
+        "recovery": 1,
+        "calm": 45,
+        "activityRecovery": 22,
+        "physiol": 51,
+        "rhythm": 60
+      },
+      "after": {
+        "heart": 71,
+        "breath": 13,
+        "hrv": 90,
+        "stable": 83,
+        "cardio": 38,
+        "sleep": 59,
+        "energy": 54,
+        "recovery": 1,
+        "calm": 45,
+        "activityRecovery": 22,
+        "physiol": 51,
+        "rhythm": 60
+      },
+      "reason": [
+        {
+          "metric": "sleep",
+          "from": 60,
+          "to": 59,
+          "inputs": {
+            "heart": 71,
+            "breath": 13
+          },
+          "rule": "directional-wellness-ceiling"
+        }
+      ]
+    }
+  ]
+}

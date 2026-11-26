@@ -1,0 +1,4 @@
+{"n": 50, "heap": {"usedSize": 83433128, "totalSize": 151904256, "embedderHeapUsedSize": 45196176, "backingStorageSize": 37280828}, "dom": {"documents": 2, "nodes": 25359, "jsEventListeners": 258}}
+{"n": 100, "heap": {"usedSize": 156672200, "totalSize": 203341824, "embedderHeapUsedSize": 177239392, "backingStorageSize": 55384606}, "dom": {"documents": 2, "nodes": 108801, "jsEventListeners": 459}}
+{"n": 50, "phase": "nav", "heap": {"usedSize": 123405708, "totalSize": 196468736, "embedderHeapUsedSize": 138172312, "backingStorageSize": 32348495}, "dom": {"documents": 4, "nodes": 108177, "jsEventListeners": 228}}
+{"n": 100, "phase": "nav", "heap": {"usedSize": 114650488, "totalSize": 200417280, "embedderHeapUsedSize": 286548144, "backingStorageSize": 32348495}, "dom": {"documents": 4, "nodes": 231181, "jsEventListeners": 264}}

@@ -1,0 +1,108 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 2.03 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PASS pet 0 0.057
+PASS nav me 0.16
+PASS heart open 0 0.11
+PASS heart identity 0
+HEART_RESULT 0 拉菲
+82
+/100
+Calm & comfortable
+Daily health score, not measured emotion
+HRV
+92.9
+Recorded
+
+2026-11-25 · Example daily record · not a 60-second reading or emotion test
+
+66
+BPM
+16
+/min
+Tap to upload a pet photo
+PASS dated nonemotion 0
+PASS heart exit 0 0.077
+PASS heart releases DOM 0
+PASS nav home 0.115
+PASS pet 1 0.272
+PASS nav me 0.146
+PASS heart open 1 0.064
+PASS heart identity 1
+HEART_RESULT 1 Luna
+75
+/100
+Needs attention
+Daily health score, not measured emotion
+HRV
+104.0
+Recorded
+
+2026-11-25 · Example daily record · not a 60-second reading or emotion test
+
+75
+BPM
+22
+/min
+Tap to upload a pet photo
+PASS dated nonemotion 1
+PASS heart exit 1 0.131
+PASS heart releases DOM 1
+PASS nav home 0.121
+PASS pet 30 0.07
+PASS nav me 0.082
+PASS heart open 30 0.056
+PASS heart identity 30
+HEART_RESULT 30 Lucky
+
+Waiting for valid readings
+
+—
+BPM
+Daily summary only · no live waveform
+—
+/min
+Daily summary only · no live waveform
+Tap to upload a pet photo
+PASS no fake score 30
+PASS heart exit 30 0.064
+PASS heart releases DOM 30
+PASS nav home 0.063
+PASS pet 31 0.074
+PASS nav me 0.075
+PASS heart open 31 0.06
+PASS heart identity 31
+HEART_RESULT 31 New Pet
+
+Waiting for valid readings
+
+—
+BPM
+Daily summary only · no live waveform
+—
+/min
+Daily summary only · no live waveform
+Tap to upload a pet photo
+PASS no fake score 31
+PASS heart exit 31 0.068
+PASS heart releases DOM 31
+PASS nav home 0.072
+PASS pet 1 0.118
+PASS nav health 0.106
+PASS exam list 0.079
+PASS existing report 0.294
+PASS exam edit 0.073
+PASS exam cancel 0.052
+PASS exam list back 0.074
+PASS exam choose add 0.039
+PASS exam manual 0.067
+PASS exam save 0.077
+PASS exam create persisted
+PASS open newly saved report 0.274
+PASS edit saved report 0.092
+PASS save edit 0.076
+PASS edited report persisted
+PASS open edited report 0.275
+PASS delete new test report 0.103
+PASS deleted report isolated
+PASS nav home 0.104
+UI_SUMMARY {"passed": 51, "failed": [], "pageErrors": []}

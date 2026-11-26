@@ -1,0 +1,1418 @@
+{
+  "cases": 210,
+  "days": 6300,
+  "overlap": 2610,
+  "points": 907200,
+  "results": [
+    {
+      "pet": 1,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 75,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 77,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 78,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 77,
+          "rhythm": 88
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 78,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 76,
+          "rhythm": 83
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 76,
+          "rhythm": 83
+        }
+      ]
+    },
+    {
+      "pet": 2,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 62,
+          "rhythm": 82
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 74,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 69,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 67,
+          "rhythm": 84
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 69,
+          "rhythm": 83
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 59,
+          "rhythm": 83
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 59,
+          "rhythm": 83
+        }
+      ]
+    },
+    {
+      "pet": 3,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 35,
+          "rhythm": 57
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 45,
+          "rhythm": 63
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 42,
+          "rhythm": 60
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 41,
+          "rhythm": 60
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 42,
+          "rhythm": 60
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 36,
+          "rhythm": 56
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 36,
+          "rhythm": 56
+        }
+      ]
+    },
+    {
+      "pet": 4,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 75,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 44,
+          "rhythm": 60
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 74,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 73,
+          "rhythm": 86
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 74,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 74,
+          "rhythm": 84
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 74,
+          "rhythm": 84
+        }
+      ]
+    },
+    {
+      "pet": 5,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 83,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 83,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 82,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 82,
+          "rhythm": 85
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 82,
+          "rhythm": 84
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 81,
+          "rhythm": 84
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 81,
+          "rhythm": 84
+        }
+      ]
+    },
+    {
+      "pet": 6,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 77,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 76,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 77,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 75,
+          "rhythm": 82
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 77,
+          "rhythm": 84
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 78,
+          "rhythm": 84
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 78,
+          "rhythm": 84
+        }
+      ]
+    },
+    {
+      "pet": 7,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 47,
+          "rhythm": 62
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 66,
+          "rhythm": 76
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 61,
+          "rhythm": 69
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 56,
+          "rhythm": 64
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 61,
+          "rhythm": 69
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 50,
+          "rhythm": 61
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 50,
+          "rhythm": 61
+        }
+      ]
+    },
+    {
+      "pet": 8,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 32,
+          "rhythm": 51
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-16",
+          "physiol": 49,
+          "rhythm": 62
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-18",
+          "physiol": 45,
+          "rhythm": 61
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-19",
+          "physiol": 41,
+          "rhythm": 58
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-18",
+          "physiol": 45,
+          "rhythm": 61
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 34,
+          "rhythm": 52
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 34,
+          "rhythm": 52
+        }
+      ]
+    },
+    {
+      "pet": 9,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 79,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 79,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 78,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 81,
+          "rhythm": 85
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 78,
+          "rhythm": 84
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 83
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 83
+        }
+      ]
+    },
+    {
+      "pet": 10,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 45,
+          "rhythm": 60
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 66,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 55,
+          "rhythm": 72
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 53,
+          "rhythm": 68
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 55,
+          "rhythm": 72
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 44,
+          "rhythm": 60
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 44,
+          "rhythm": 60
+        }
+      ]
+    },
+    {
+      "pet": 11,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 80,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 80,
+          "rhythm": 88
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 81,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 82,
+          "rhythm": 87
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 81,
+          "rhythm": 87
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 86
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 86
+        }
+      ]
+    },
+    {
+      "pet": 12,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 71,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 73,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 71,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 70,
+          "rhythm": 83
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 71,
+          "rhythm": 83
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 71,
+          "rhythm": 83
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 71,
+          "rhythm": 83
+        }
+      ]
+    },
+    {
+      "pet": 13,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 75,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-15",
+          "physiol": 81,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-17",
+          "physiol": 78,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-19",
+          "physiol": 77,
+          "rhythm": 83
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-17",
+          "physiol": 78,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 77,
+          "rhythm": 83
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 77,
+          "rhythm": 83
+        }
+      ]
+    },
+    {
+      "pet": 14,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 45,
+          "rhythm": 57
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 57,
+          "rhythm": 63
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 57,
+          "rhythm": 63
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-20",
+          "physiol": 56,
+          "rhythm": 64
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 57,
+          "rhythm": 63
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 45,
+          "rhythm": 57
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 45,
+          "rhythm": 57
+        }
+      ]
+    },
+    {
+      "pet": 15,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 82,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-16",
+          "physiol": 81,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-17",
+          "physiol": 82,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-19",
+          "physiol": 82,
+          "rhythm": 87
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-17",
+          "physiol": 82,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 81,
+          "rhythm": 87
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 81,
+          "rhythm": 87
+        }
+      ]
+    },
+    {
+      "pet": 16,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 55,
+          "rhythm": 79
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-16",
+          "physiol": 75,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-18",
+          "physiol": 74,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-20",
+          "physiol": 70,
+          "rhythm": 84
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-18",
+          "physiol": 74,
+          "rhythm": 84
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 53,
+          "rhythm": 79
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 53,
+          "rhythm": 79
+        }
+      ]
+    },
+    {
+      "pet": 17,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 58,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-17",
+          "physiol": 74,
+          "rhythm": 88
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 67,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 59,
+          "rhythm": 86
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 67,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 59,
+          "rhythm": 86
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 59,
+          "rhythm": 86
+        }
+      ]
+    },
+    {
+      "pet": 18,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 69,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 72,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 72,
+          "rhythm": 88
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 72,
+          "rhythm": 84
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 72,
+          "rhythm": 88
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 71,
+          "rhythm": 87
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 71,
+          "rhythm": 87
+        }
+      ]
+    },
+    {
+      "pet": 19,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 78,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-15",
+          "physiol": 79,
+          "rhythm": 88
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 78,
+          "rhythm": 89
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-20",
+          "physiol": 78,
+          "rhythm": 87
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 78,
+          "rhythm": 89
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 88
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 88
+        }
+      ]
+    },
+    {
+      "pet": 20,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 82,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 83,
+          "rhythm": 90
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 83,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-20",
+          "physiol": 82,
+          "rhythm": 84
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 83,
+          "rhythm": 84
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 83,
+          "rhythm": 87
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 83,
+          "rhythm": 87
+        }
+      ]
+    },
+    {
+      "pet": 21,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 69,
+          "rhythm": 81
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 79,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 77,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 72,
+          "rhythm": 82
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 77,
+          "rhythm": 83
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 70,
+          "rhythm": 81
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 70,
+          "rhythm": 81
+        }
+      ]
+    },
+    {
+      "pet": 22,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 58,
+          "rhythm": 60
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-16",
+          "physiol": 77,
+          "rhythm": 83
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-17",
+          "physiol": 76,
+          "rhythm": 82
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-18",
+          "physiol": 75,
+          "rhythm": 81
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-17",
+          "physiol": 76,
+          "rhythm": 82
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 57,
+          "rhythm": 59
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 57,
+          "rhythm": 59
+        }
+      ]
+    },
+    {
+      "pet": 23,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 63,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-17",
+          "physiol": 79,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 78,
+          "rhythm": 88
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-20",
+          "physiol": 79,
+          "rhythm": 87
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 78,
+          "rhythm": 88
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 64,
+          "rhythm": 88
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 64,
+          "rhythm": 88
+        }
+      ]
+    },
+    {
+      "pet": 24,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 79,
+          "rhythm": 89
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 79,
+          "rhythm": 88
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 79,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 80,
+          "rhythm": 87
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 79,
+          "rhythm": 84
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 78,
+          "rhythm": 84
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 78,
+          "rhythm": 84
+        }
+      ]
+    },
+    {
+      "pet": 25,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 79,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-17",
+          "physiol": 78,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-18",
+          "physiol": 81,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-20",
+          "physiol": 78,
+          "rhythm": 84
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-18",
+          "physiol": 81,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 78,
+          "rhythm": 83
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 78,
+          "rhythm": 83
+        }
+      ]
+    },
+    {
+      "pet": 26,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 80,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-17",
+          "physiol": 82,
+          "rhythm": 84
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 82,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-20",
+          "physiol": 82,
+          "rhythm": 85
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 82,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 83,
+          "rhythm": 85
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 83,
+          "rhythm": 85
+        }
+      ]
+    },
+    {
+      "pet": 27,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 51,
+          "rhythm": 60
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 73,
+          "rhythm": 81
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-19",
+          "physiol": 66,
+          "rhythm": 72
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 56,
+          "rhythm": 63
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-19",
+          "physiol": 66,
+          "rhythm": 72
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 51,
+          "rhythm": 59
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 51,
+          "rhythm": 59
+        }
+      ]
+    },
+    {
+      "pet": 28,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 80,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-18",
+          "physiol": 82,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 81,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 81,
+          "rhythm": 86
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 81,
+          "rhythm": 85
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 84
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 84
+        }
+      ]
+    },
+    {
+      "pet": 29,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 79,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-16",
+          "physiol": 81,
+          "rhythm": 85
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-17",
+          "physiol": 80,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-19",
+          "physiol": 79,
+          "rhythm": 84
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-17",
+          "physiol": 80,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 80,
+          "rhythm": 85
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 80,
+          "rhythm": 85
+        }
+      ]
+    },
+    {
+      "pet": 30,
+      "samples": [
+        {
+          "date": "2026-11-25",
+          "template": "2026-11-25",
+          "physiol": 79,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-26",
+          "template": "2026-11-19",
+          "physiol": 80,
+          "rhythm": 87
+        },
+        {
+          "date": "2026-11-27",
+          "template": "2026-11-20",
+          "physiol": 80,
+          "rhythm": 86
+        },
+        {
+          "date": "2026-11-28",
+          "template": "2026-11-21",
+          "physiol": 81,
+          "rhythm": 85
+        },
+        {
+          "date": "2027-01-01",
+          "template": "2026-11-20",
+          "physiol": 80,
+          "rhythm": 86
+        },
+        {
+          "date": "2028-02-29",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 87
+        },
+        {
+          "date": "2030-01-01",
+          "template": "2026-11-24",
+          "physiol": 79,
+          "rhythm": 87
+        }
+      ]
+    }
+  ]
+}

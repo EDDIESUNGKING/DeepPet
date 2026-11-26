@@ -1,0 +1,16 @@
+{
+  "mode": "embedded",
+  "suite": "stress",
+  "fixture_date": "2026-11-25",
+  "results": [
+    {
+      "case": "stress/100-pets-100-nav",
+      "status": "PASS",
+      "detail": "Completed navigation; memory samples recorded, not proof of no leaks."
+    }
+  ],
+  "errors": [],
+  "console": [],
+  "physical_override": false,
+  "scope": "Only listed cases were run. Matrix uses DOM events unless --physical is set; individual alert/help DOM events remain labelled. Clinical/semantic validity is not implied. Date scope: all"
+}

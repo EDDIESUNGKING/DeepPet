@@ -1,0 +1,5 @@
+{
+  "completed": 625,
+  "reason": "Stopped before 4 GiB shared container memory limit; default Chromium heap growth, no manual GC in test",
+  "cgroupMemoryBytes": 2752073728
+}

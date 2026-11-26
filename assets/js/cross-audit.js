@@ -54,12 +54,12 @@ root.DeepPetCrossAudit133=Object.freeze({version:'10.134',period,minuteOverlap})
 // the footer with stale V10.132 metadata; does not change scores or records.
 if(typeof render==='function'){
  const priorRender=render;
- render=function(...args){const out=priorRender.apply(this,args);root.DeepPetBuildVersion='10.139';
-  document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.13[0-8]/g,'10.139');});
+ render=function(...args){const out=priorRender.apply(this,args);root.DeepPetBuildVersion='10.204';
+  document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.13[0-8]/g,'10.199');});
   return out;};
 }
-root.DeepPetBuildVersion='10.139';
-function showBuild134(){root.DeepPetBuildVersion='10.139';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.(?:12[89]|13[0-8])/g,'10.139');});}
+root.DeepPetBuildVersion='10.204';
+function showBuild134(){root.DeepPetBuildVersion='10.204';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.(?:12[89]|13[0-8])/g,'10.199');});}
 if(document.readyState==='complete')showBuild134();
 else root.addEventListener('load',()=>setTimeout(showBuild134,0),{once:true});
 })(window);

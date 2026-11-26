@@ -1,0 +1,23 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 2.099 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PETS 25 heap {'step': 25, 'used': 94972532, 'total': 141553664, 'documents': 2, 'nodes': 16810, 'jsEventListeners': 246} max 0.23819611500039173
+PETS 50 heap {'step': 50, 'used': 100838136, 'total': 165003264, 'documents': 2, 'nodes': 39938, 'jsEventListeners': 309} max 0.23819611500039173
+PETS 75 heap {'step': 75, 'used': 109956924, 'total': 181473280, 'documents': 2, 'nodes': 18626, 'jsEventListeners': 252} max 0.23819611500039173
+PETS 100 heap {'step': 100, 'used': 128435828, 'total': 188194816, 'documents': 2, 'nodes': 4521, 'jsEventListeners': 207} max 0.23819611500039173
+POST_PETS {'step': 100, 'used': 128684480, 'total': 188399616, 'documents': 2, 'nodes': 4521, 'jsEventListeners': 207}
+PAGES 25 heap {'step': 125, 'used': 123756316, 'total': 193802240, 'documents': 6, 'nodes': 69353, 'jsEventListeners': 231} max 0.11895923699921696
+PAGES 50 heap {'step': 150, 'used': 130514372, 'total': 195702784, 'documents': 6, 'nodes': 127269, 'jsEventListeners': 249} max 0.11895923699921696
+PAGES 75 heap {'step': 175, 'used': 114849740, 'total': 197808128, 'documents': 6, 'nodes': 187322, 'jsEventListeners': 267} max 0.11895923699921696
+PAGES 100 heap {'step': 200, 'used': 133003764, 'total': 199913472, 'documents': 6, 'nodes': 246558, 'jsEventListeners': 288} max 0.11895923699921696
+POST_PAGES {'step': 200, 'used': 133003764, 'total': 199913472, 'documents': 6, 'nodes': 246558, 'jsEventListeners': 288}
+POINTER home 0.09306724700036284
+POINTER deep 0.10961108499941474
+POINTER health 0.07956243400076346
+POINTER me 0.1350332129995877
+POINTER home 0.09505176200036658
+STRESS_SUMMARY {"pet": {"n": 101, "median": 0.11533943199992791, "p95": 0.17433523500039882, "p99": 0.23411743700035004, "max": 0.23819611500039173, "above_0.3s": 0, "above_1s": 0}, "page": {"n": 100, "median": 0.058624496000447834, "p95": 0.07466945299984218, "p99": 0.11853005699958885, "max": 0.11895923699921696, "above_0.3s": 0, "above_1s": 0}}
+ERRORS 2026-11-25 []
+DIAGNOSTIC_IDLE {'step': 201, 'used': 105980292, 'total': 172568576, 'documents': 6, 'nodes': 5284, 'jsEventListeners': 198}
+DIAGNOSTIC_FORCED_GC {'step': 202, 'used': 24199888, 'total': 26632192, 'documents': 3, 'nodes': 931, 'jsEventListeners': 198}
+DETACHED_COUNT 2
+DETACHED_SUMMARY {"counts": {"NAV": 1, "BUTTON": 10, "SPAN": 20, "svg": 4, "path": 5, "#text": 15, "circle": 1, "DIV": 5, "FIGURE": 5, "IMG": 10, "#document-fragment": 5}, "samples": [{"root": "NAV", "attrs": ["class", "bottom-nav", "aria-label", "Primary navigation"], "nodes": 29, "retained": 3}, {"root": "DIV", "attrs": ["aria-label", "DeepPet onboarding", "aria-modal", "true", "id", "dp-intro-root", "role", "dialog"], "nodes": 52, "retained": 19}]}

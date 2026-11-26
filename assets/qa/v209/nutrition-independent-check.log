@@ -1,0 +1,5 @@
+{
+  "cases": 363,
+  "failures": 0,
+  "note": "RER arithmetic and input boundary validation only; MER multipliers not clinically individualized or independently validated."
+}

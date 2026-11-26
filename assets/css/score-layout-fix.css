@@ -134,3 +134,8 @@
   --dp139-explanation-line:1.49;
  }
 }
+
+/* Accessible navigation when an onboarding image cannot be decoded. */
+#dp-intro-root .dp-intro-dot-target.dp-intro-fallback-visible,#dp-intro-root .dp-intro-start-zone.dp-intro-fallback-visible{background:#6856ce!important;color:#fff!important;opacity:1!important;border-radius:12px!important;font:600 14px system-ui,sans-serif!important;}
+
+#dp-intro-root .dp-intro-dot-target.dp-intro-fallback-visible::before{display:none;}

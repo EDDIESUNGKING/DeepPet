@@ -1,0 +1,13 @@
+PASS wrong pet
+PASS wrong date
+PASS wrong owner in day
+PASS missing score keys
+PASS out of range
+PASS duplicate model vs record disagreement
+PASS partial model
+PASS missing row marked valid
+PASS absent quality
+PASS malformed baseline
+PASS invalid array length
+PASS invalid alert list
+TOTAL 12

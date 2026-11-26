@@ -1,0 +1,83 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 2.187 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PASS pet 0 0.056
+PASS nav me 0.165
+PASS heart open 0 0.093
+PASS heart identity 0
+HEART_RESULT 0 拉菲
+82
+/100
+Calm & comfortable
+Daily health score, not measured emotion
+HRV
+92.9
+Recorded
+
+2026-11-25 · Daily record · not a 60-second reading or emotion test
+
+66
+BPM
+16
+/min
+Tap to upload a pet photo
+PASS dated nonemotion 0
+PASS heart exit 0 0.078
+PASS heart releases DOM 0
+PASS nav home 0.134
+PASS pet 1 0.215
+PASS nav me 0.118
+PASS heart open 1 0.058
+PASS heart identity 1
+HEART_RESULT 1 Luna
+75
+/100
+Needs attention
+Daily health score, not measured emotion
+HRV
+104.0
+Recorded
+
+2026-11-25 · Daily record · not a 60-second reading or emotion test
+
+75
+BPM
+22
+/min
+Tap to upload a pet photo
+PASS dated nonemotion 1
+PASS heart exit 1 0.128
+PASS heart releases DOM 1
+PASS nav home 0.12
+PASS pet 30 0.075
+PASS nav me 0.089
+PASS heart open 30 0.065
+PASS heart identity 30
+HEART_RESULT 30 Lucky
+
+Waiting for valid readings
+
+—
+BPM
+Daily summary only · no live waveform
+—
+/min
+Daily summary only · no live waveform
+Tap to upload a pet photo
+PASS no fake score 30
+FAIL heart exit 30 Page.wait_for_function: Timeout 5000ms exceeded.
+FAIL heart releases DOM 30 heart releases DOM 30
+FAIL nav home Page.wait_for_function: Timeout 2000ms exceeded.
+FAIL pet 31 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"31\"]").first
+
+FAIL pet 1 Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator("[data-action=\"select-pet\"][data-index=\"1\"]").first
+
+FAIL nav health Page.wait_for_function: Timeout 2000ms exceeded.
+FAIL exam list Locator.scroll_into_view_if_needed: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator(".dp1075-exam [data-dp916=\"open\"]").first
+
+UI_SUMMARY {"passed": 21, "failed": ["heart exit 30", "heart releases DOM 30", "nav home", "pet 31", "pet 1", "nav health", "exam list"], "pageErrors": []}

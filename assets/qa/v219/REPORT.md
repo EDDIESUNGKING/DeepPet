@@ -1,0 +1,3 @@
+# V10.219 main-ring alignment
+Only presentation changed: primary numeric group shifted up 8px; number remains 44px and denominator 12px. Their combined bounding-box center is 0.5px from the ring center, horizontal offset 0px. N/A without denominator retains prior center. Secondary cards and all score and waveform logic unchanged. Build label 10.219.
+Embedded Chromium: Kiki, simplified Chinese, all 3 deep tabs x 3 ranges, 9/9 passed, no JS exceptions. This is a targeted UI regression, not a full multi-pet, multi-language, raw-waveform or clinical verification. Previous V10.218 audit remains applicable to unchanged algorithms and has its stated limitations.

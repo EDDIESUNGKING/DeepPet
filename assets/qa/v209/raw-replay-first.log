@@ -1,0 +1,80 @@
+{
+  "records": 11544,
+  "channels": 2,
+  "samplesPerChannel": 20,
+  "rawDates": [
+    "2026-11-22",
+    "2026-11-23"
+  ],
+  "runtimeMs": 2191,
+  "compare": [
+    {
+      "key": "totalFrames",
+      "match": true
+    },
+    {
+      "key": "testedWindows",
+      "match": true
+    },
+    {
+      "key": "qualifiedWindows",
+      "match": true
+    },
+    {
+      "key": "rawCoverageByDay",
+      "match": true
+    },
+    {
+      "key": "coverageByDay",
+      "match": true
+    },
+    {
+      "key": "lastConnectedHRV",
+      "match": true
+    },
+    {
+      "key": "minimumFiveMinuteResearch",
+      "match": true
+    },
+    {
+      "key": "segmentLedger",
+      "match": false
+    },
+    {
+      "key": "attempts",
+      "match": true
+    },
+    {
+      "key": "summary",
+      "match": true
+    }
+  ],
+  "qualifiedWindows": 0,
+  "windows": 64,
+  "note": "Actual captured 20 Hz B0 decode with cached QC disabled; not ECG ground truth or independent peak detector."
+}
+node:internal/assert/utils:281
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(compare.every(v=>v.match))
+
+    at Object.<anonymous> (/mnt/data/dp209/assets/qa/raw-replay-209.cjs:10:451)
+    at Module._compile (node:internal/modules/cjs/loader:1730:14)
+    at Object..js (node:internal/modules/cjs/loader:1895:10)
+    at Module.load (node:internal/modules/cjs/loader:1465:32)
+    at Function._load (node:internal/modules/cjs/loader:1282:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '=='
+}
+
+Node.js v22.16.0

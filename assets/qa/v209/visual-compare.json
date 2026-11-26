@@ -1,0 +1,38 @@
+[
+  {
+    "tab": "home",
+    "structuralMatch": true,
+    "headingsMatch": true,
+    "navMatch": true,
+    "cardsMatch": true,
+    "changedPixels": 0,
+    "totalPixels": 329160
+  },
+  {
+    "tab": "deep",
+    "structuralMatch": true,
+    "headingsMatch": true,
+    "navMatch": true,
+    "cardsMatch": true,
+    "changedPixels": 0,
+    "totalPixels": 329160
+  },
+  {
+    "tab": "health",
+    "structuralMatch": true,
+    "headingsMatch": true,
+    "navMatch": true,
+    "cardsMatch": true,
+    "changedPixels": 0,
+    "totalPixels": 329160
+  },
+  {
+    "tab": "me",
+    "structuralMatch": true,
+    "headingsMatch": true,
+    "navMatch": true,
+    "cardsMatch": true,
+    "changedPixels": 0,
+    "totalPixels": 329160
+  }
+]

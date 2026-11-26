@@ -1,0 +1,20 @@
+{
+  "changedNonQA": [
+    "index.html",
+    "VERSION.txt",
+    "assets/js/release-206.js",
+    "assets/js/lafa-source-label.js",
+    "assets/js/verified.js",
+    "assets/js/gallery-async.js",
+    "assets/js/cause-ledger.js",
+    "assets/js/gallery-worker-source.js",
+    "assets/js/milo-adaptive-scores.js",
+    "assets/js/plain-reasons.js",
+    "assets/js/milo-wave-hrv-qc.js"
+  ],
+  "missing": [],
+  "cssIdentical": 12,
+  "imagesIdentical": 246,
+  "dataIdentical": 749,
+  "entryResources": 51
+}

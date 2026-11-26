@@ -1,0 +1,342 @@
+{
+  "cases": [
+    {
+      "detail": "dp90-waveform",
+      "blocks": [
+        [
+          "heart",
+          "17",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nHeart rate median is about 96% above the reference. The model also assesses deviations and stability in activity a"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp90-waveform",
+      "blocks": [
+        [
+          "breath",
+          "5",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nBreathing rate median is about 172% above the reference. The model also assesses deviations and stability in activ"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp90-waveform",
+      "blocks": [
+        [
+          "heart",
+          "17",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nHeart rate median is about 96% above the reference. The model also assesses deviations and stability in activity a"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp90-waveform",
+      "blocks": [
+        [
+          "breath",
+          "5",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nBreathing rate median is about 172% above the reference. The model also assesses deviations and stability in activ"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp90-waveform",
+      "blocks": [
+        [
+          "heart",
+          "17",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nHeart rate median is about 96% above the reference. The model also assesses deviations and stability in activity a"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp90-waveform",
+      "blocks": [
+        [
+          "breath",
+          "5",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nBreathing rate median is about 172% above the reference. The model also assesses deviations and stability in activ"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp905-sleep-day",
+      "blocks": [
+        [
+          "sleep",
+          "35",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nWeaker rest factors: Rest quality 27/100, Rest duration 35/100; these are rest estimates from heart rate, breathin"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp905-sleep-day",
+      "blocks": [
+        [
+          "sleep",
+          "47",
+          "1",
+          "2026-11-20",
+          "High risk · Priority review\nReasons\nWeaker rest factors: Rest duration 42/100, Rest quality 46/100; these are rest estimates from heart rate, breathin"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp905-sleep-day",
+      "blocks": [
+        [
+          "sleep",
+          "50",
+          "1",
+          "2026-11-19",
+          "High risk · Priority review\nReasons\nWeaker rest factors: Rest duration 45/100, Rest quality 54/100; these are rest estimates from heart rate, breathin"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": "dp936-energy-detail",
+      "blocks": [
+        [
+          "energy",
+          "36",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nThe main weaker scoring inputs are Cardio status 23/100, Sleep and rest 35/100, Activity and quiet rest 61/100; th"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": null,
+      "blocks": [
+        [
+          "activityRecovery",
+          "14",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nThe main weaker scoring inputs are Recovery 0/100, Rest and steadiness 28/100, Energy 36/100; these contribute to "
+        ],
+        [
+          "energy",
+          "36",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nThe main weaker scoring inputs are Cardio status 23/100, Sleep and rest 35/100, Activity and quiet rest 61/100; th"
+        ],
+        [
+          "recovery",
+          "0",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nHeart rate did not fall by the end of two minutes; check the effort level, resting reference and breathing recover"
+        ],
+        [
+          "calm",
+          "28",
+          "1",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\nThe main weaker scoring inputs are Breathing 5/100, Quiet-rest quality 16/100, Heart rate 17/100; these contribute"
+        ]
+      ],
+      "details": [
+        "View detailed data\n›\nMain findings and next step\n\nMeasured evidence The clearest measured change: Today: two-minute heart-rate drop -6.1 /min, 163% below its comparable reference of 9.6 /min. Today: resting heart rate 147.4 /min, 21% above its comparable reference of 122.1 /min.These are scoring inputs, not a confirmed medical cause.\n\nHow longEarlier valid days averaged 1/100; the result for Today"
+      ]
+    },
+    {
+      "detail": "dp908-energy-calendar",
+      "blocks": [
+        [
+          "energy",
+          "67",
+          "7",
+          "2026-11-19",
+          "Moderate risk\n⚠ 2 high-risk day(s) in this period; review the dated records.\nReasons\n6/7 valid scored days; 2 high-risk, 2 moderate and 2 low-risk day"
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": null,
+      "blocks": [
+        [
+          "activityRecovery",
+          "16",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 14 (2026-11-23).\nOn the lowest-scoring "
+        ],
+        [
+          "energy",
+          "41",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 36 (2026-11-23).\nOn the lowest-scoring "
+        ],
+        [
+          "recovery",
+          "1",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 0 (2026-11-23).\nOn the lowest-scoring d"
+        ],
+        [
+          "calm",
+          "33",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 28 (2026-11-23).\nOn the lowest-scoring "
+        ]
+      ],
+      "details": [
+        "View detailed data\n›\n1\n1\n0\n11/20\n11/22\n11/24\n11/26\nDrag or tap for a value\nView selected day by minute ›\nDaily trend"
+      ]
+    },
+    {
+      "detail": null,
+      "blocks": [
+        [
+          "activityRecovery",
+          "16",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 14 (2026-11-23).\nOn the lowest-scoring "
+        ],
+        [
+          "energy",
+          "41",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 36 (2026-11-23).\nOn the lowest-scoring "
+        ],
+        [
+          "recovery",
+          "1",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 0 (2026-11-23).\nOn the lowest-scoring d"
+        ],
+        [
+          "calm",
+          "33",
+          "7",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n7/7 valid scored days; 7 high-risk, 0 moderate and 0 low-risk days. Lowest 28 (2026-11-23).\nOn the lowest-scoring "
+        ]
+      ],
+      "details": [
+        "View detailed data\n›\n41\n34\n26\n11/20\n11/22\n11/24\n11/26\nDrag or tap for a value\nDaily trend"
+      ]
+    },
+    {
+      "detail": "dp908-energy-calendar",
+      "blocks": [
+        [
+          "energy",
+          "77",
+          "30",
+          "2026-11-19",
+          "Moderate risk\n⚠ 2 high-risk day(s) in this period; review the dated records.\nReasons\n20/30 valid scored days; 2 high-risk, 5 moderate and 13 low-risk "
+        ]
+      ],
+      "details": []
+    },
+    {
+      "detail": null,
+      "blocks": [
+        [
+          "activityRecovery",
+          "35",
+          "30",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n27/30 valid scored days; 27 high-risk, 0 moderate and 0 low-risk days. Lowest 14 (2026-11-23).\nOn the lowest-scori"
+        ],
+        [
+          "energy",
+          "67",
+          "30",
+          "2026-11-26",
+          "Moderate risk\n⚠ 9 high-risk day(s) in this period; review the dated records.\nReasons\n27/30 valid scored days; 9 high-risk, 5 moderate and 13 low-risk "
+        ],
+        [
+          "recovery",
+          "11",
+          "30",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n27/30 valid scored days; 27 high-risk, 0 moderate and 0 low-risk days. Lowest 0 (2026-11-23).\nOn the lowest-scorin"
+        ],
+        [
+          "calm",
+          "66",
+          "30",
+          "2026-11-26",
+          "Moderate risk\n⚠ 10 high-risk day(s) in this period; review the dated records.\nReasons\n27/30 valid scored days; 10 high-risk, 1 moderate and 16 low-ris"
+        ]
+      ],
+      "details": [
+        "View detailed data\n›\n30\n13\n-5\n10/28\n11/02\n11/06\n11/11\n11/15\n11/20\n11/24\n11/26\nMissing valid days leave breaks in this chart; no values are invented."
+      ]
+    },
+    {
+      "detail": null,
+      "blocks": [
+        [
+          "activityRecovery",
+          "35",
+          "30",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n27/30 valid scored days; 27 high-risk, 0 moderate and 0 low-risk days. Lowest 14 (2026-11-23).\nOn the lowest-scori"
+        ],
+        [
+          "energy",
+          "67",
+          "30",
+          "2026-11-26",
+          "Moderate risk\n⚠ 9 high-risk day(s) in this period; review the dated records.\nReasons\n27/30 valid scored days; 9 high-risk, 5 moderate and 13 low-risk "
+        ],
+        [
+          "recovery",
+          "11",
+          "30",
+          "2026-11-26",
+          "High risk · Priority review\nReasons\n27/30 valid scored days; 27 high-risk, 0 moderate and 0 low-risk days. Lowest 0 (2026-11-23).\nOn the lowest-scorin"
+        ],
+        [
+          "calm",
+          "66",
+          "30",
+          "2026-11-26",
+          "Moderate risk\n⚠ 10 high-risk day(s) in this period; review the dated records.\nReasons\n27/30 valid scored days; 10 high-risk, 1 moderate and 16 low-ris"
+        ]
+      ],
+      "details": [
+        "View detailed data\n›\n96\n57\n17\n10/28\n11/02\n11/06\n11/11\n11/15\n11/20\n11/24\n11/26\nMissing valid days leave breaks in this chart; no values are invented."
+      ]
+    }
+  ],
+  "errors": [],
+  "console": []
+}

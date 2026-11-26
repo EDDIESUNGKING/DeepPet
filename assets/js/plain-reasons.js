@@ -8,7 +8,7 @@
  const number=x=>Math.round(x*10)/10;
  const subs=['heart','breath','hrv','stable','sleep','energy','recovery','calm'];
  const names={heart:['心跳','heart rate','심박','心拍'],breath:['呼吸','breathing','호흡','呼吸'],hrv:['心跳間隔變化（HRV）','heart-rate variation (HRV)','심박 간격 변화(HRV)','心拍間隔の変化（HRV）'],stable:['心搏節奏穩定度','heartbeat stability','심박 안정도','心拍の安定度'],sleep:['睡眠休息','rest and sleep','수면과 휴식','睡眠と休息'],energy:['精力與活動','energy and movement','활력과 활동','元気と活動'],recovery:['活動後恢復','recovery after activity','활동 후 회복','活動後の回復'],calm:['放鬆與平穩度','calm and rest','안정과 휴식','落ち着きと安静']};
- const direct={cardio:['heart','breath','hrv','stable'],activityRecovery:['energy','recovery','calm'],rhythm:['stable','calm'],calm:['calm','heart','breath','hrv','sleep'],energy:['energy','sleep'],heart:['heart'],breath:['breath'],hrv:['hrv'],stable:['stable'],sleep:['sleep'],recovery:['recovery']};
+ const direct={cardio:['heart','breath','hrv','stable'],activityRecovery:['energy','recovery','calm'],rhythm:['stable','hrv'],calm:['calm','heart','breath','hrv'],energy:['energy','sleep'],heart:['heart'],breath:['breath'],hrv:['hrv'],stable:['stable'],sleep:['sleep'],recovery:['recovery']};
  const formatChange=(c,field,unit,labels)=>{
   const value=c.features?.[field],base=c.references?.[field];
   if(!good(value))return null;
@@ -27,18 +27,18 @@
    `${title}は${v}${u}で、比較値の${number(base)}${u}に近い状態です。`);
   const up=value>base;
   return txt(c,
-   `${title}是 ${v}${u}，平常可比記錄約 ${number(base)}${u}，${up?'高':'低'}了約 ${change}%。`,
-   `${title}: ${v}${u} versus usual ${number(base)}${u} — about ${change}% ${up?'higher':'lower'}.`,
-   `${title} ${v}${u}, 평소 비교값 ${number(base)}${u}보다 약 ${change}% ${up?'높습니다':'낮습니다'}.`,
-   `${title}は${v}${u}、普段の比較値${number(base)}${u}より約${change}%${up?'高く':'低く'}なっています。`);
+   `${title}是 ${v}${u}，可比參考約 ${number(base)}${u}，${up?'高':'低'}了約 ${change}%。`,
+   `${title}: ${v}${u} versus reference ${number(base)}${u} — about ${change}% ${up?'higher':'lower'}.`,
+   `${title} ${v}${u}, 비교 기준값 ${number(base)}${u}보다 약 ${change}% ${up?'높습니다':'낮습니다'}.`,
+   `${title}は${v}${u}、比較基準値${number(base)}${u}より約${change}%${up?'高く':'低く'}なっています。`);
  };
  function evidence(c,k){
   const wave=c.source==='20hz-waveform';
   const a={
-   heart:[['quietHeartRate',' bpm',['安靜時心跳','heart rate at rest','쉬는 동안 심박','安静時の心拍']],['heartRate',' bpm',['全天平均心跳','average heart rate today','오늘 평균 심박','一日の平均心拍']]],
-   breath:[['quietBreathRate',' 次／分',['安靜時呼吸','breaths at rest','쉬는 동안 호흡','安静時の呼吸']],['breathRate',' 次／分',['全天平均呼吸','average breaths today','오늘 평균 호흡','一日の平均呼吸']]],
+   heart:[['quietHeartRate',' bpm',['安靜時心跳','heart rate at rest','쉬는 동안 심박','安静時の心拍']],['heartRate',' bpm',['有效時段平均心跳','mean heart rate during valid observations','유효 측정 구간 평균 심박','有効測定区間の平均心拍']]],
+   breath:[['quietBreathRate',' 次／分',['安靜時呼吸','breaths at rest','쉬는 동안 호흡','安静時の呼吸']],['breathRate',' 次／分',['有效時段平均呼吸','mean breathing rate during valid observations','유효 측정 구간 평균 호흡','有効測定区間の平均呼吸']]],
    hrv:[['rmssd',' ms',['短時間心跳間隔變化（RMSSD）','short-term beat variation (RMSSD)','짧은 시간 심박 간격 변화(RMSSD)','短時間の心拍間隔変化（RMSSD）']],['sdnn',' ms',['整段心跳間隔變化（SDNN）','overall beat variation (SDNN)','전체 심박 간격 변화(SDNN)','全体の心拍間隔変化（SDNN）']]],
-   stable:wave?[['quietRhythm','',['安靜時心搏節奏指標','resting heartbeat pattern','안정 시 심박 패턴','安静時の心拍パターン']]]:[['sdnn',' ms',['心跳間隔變化（SDNN）','beat-to-beat variation (SDNN)','박동 간격 변화(SDNN)','心拍間隔の変化（SDNN）']]],
+   stable:wave?[['quietRhythm','',['安靜時心搏節奏指標','resting heartbeat pattern','안정 시 심박 패턴','安静時の心拍パターン']]]:[['sdnn',' ms',['心跳間隔變化（SDNN）','overall interval variability (SDNN)','박동 간격 변화(SDNN)','心拍間隔の変化（SDNN）']]],
    sleep:[['restHours',' 小時',['記錄到的休息時間','recorded rest','기록된 휴식','記録された休息']]],
    energy:wave?[['motionMean','',['活動強度','movement level','활동 강도','活動量']]]:[['activity','',['每日活動量','daily movement','하루 활동량','一日の活動量']]],
    recovery:[['recoveryDrop',' bpm',['活動後兩分鐘心跳下降幅度','heart-rate fall two minutes after activity','활동 후 2분간 심박 감소','活動後2分間の心拍低下']]],
@@ -72,10 +72,12 @@
    const label=txt(c,...(names[k]||[k,k,k,k]));
    const list=evidence(c,k);
    const description=val<20?txt(c,'這一項非常低，不能當成小幅變動。','This is extremely low; do not dismiss it as a small change.','매우 낮은 점수이며 작은 변화로 보면 안 됩니다.','非常に低い点数で、軽い変化として見逃せません。'):
-    val<60?txt(c,'這一項明顯偏離平常，需要優先查明。','This differs greatly from usual and needs attention.','평소와 차이가 커 우선 확인해야 합니다.','普段との違いが大きく、優先して確認が必要です。'):
+    val<60?txt(c,'此項分數偏低，先核對有效量測及參考範圍。','This score is low; check valid readings and their reference range.','점수가 낮습니다. 유효 측정값과 기준 범위를 확인하세요.','普段との違いが大きく、優先して確認が必要です。'):
     val<80?txt(c,'這一項已有值得追蹤的差距。','This change is worth following up.','추적할 만한 변화가 있습니다.','追跡が必要な変化があります。'):
-    txt(c,'這一項只是輕度變化。','Only a mild change here.','가벼운 변화입니다.','軽い変化です。');
-   out.push(txt(c,`【${label} ${val}/100】${description}`,`${label} ${val}/100: ${description}`,`${label} ${val}/100: ${description}`,`${label} ${val}/100：${description}`));
+    txt(c,'此項分數略低；查看量測值及近期趨勢。','Slightly lower score; review the readings and recent trend.','점수가 약간 낮습니다. 측정값과 최근 추세를 확인하세요.','軽い変化です。');
+   const advice={heart:['留意安靜時心跳是否持續偏離，並觀察精神與活動意願。','Check whether the resting heart rate stays unusual; observe alertness and willingness to move.','안정 시 심박 변화가 지속되는지, 활력과 움직임을 확인하세요.','安静時の心拍の変化と元気を確認してください。'],breath:['留意休息時呼吸是否持續偏快或費力。','Observe whether breathing remains fast or laboured at rest.','휴식 중 호흡이 계속 빠르거나 힘든지 확인하세요.','安静時の呼吸の速さや苦しさを確認してください。'],hrv:['在相近的安靜時段及量測長度下比較，先排除動作干擾。','Compare quiet recordings of similar duration after checking motion interference.','움직임 영향을 확인하고 비슷한 길이의 안정 시 기록을 비교하세요.','同じ長さの安静時記録を比較し、体動の影響を確認してください。'],stable:['核對安靜時波形品質，觀察節奏異常是否反覆。','Check resting waveform quality and whether unusual rhythm recurs.','안정 시 파형 품질과 불규칙한 패턴의 반복 여부를 확인하세요.','安静時の波形品質と変化の繰り返しを確認してください。'],sleep:['留意休息時間是否充足，以及夜間是否頻繁醒來或移動。','Observe rest duration and repeated waking or movement overnight.','휴식 시간과 밤중에 자주 깨거나 움직이는지 확인하세요.','休息時間と夜間の覚醒や体動を確認してください。'],energy:['觀察日常活動意願、精神及食慾是否較平時改變。','Observe changes in usual movement, alertness and appetite.','평소 대비 활동 의욕, 활력과 식욕 변화를 확인하세요.','普段の活動意欲や食欲の変化を確認してください。'],recovery:['比較相近活動後的休息時段，留意喘氣或心跳偏快是否持續。','Compare rest after similar activity; watch for persistent panting or fast heartbeat.','비슷한 활동 후 휴식 기록에서 헐떡임이나 빠른 심박이 지속되는지 확인하세요.','同程度の活動後に呼吸や心拍が落ち着くか確認してください。'],calm:['在安靜環境觀察呼吸、姿勢及是否容易安定下來。','Observe breathing, posture and settling in a quiet environment.','조용한 환경에서 호흡, 자세와 안정되는 모습을 확인하세요.','静かな環境で呼吸や姿勢、落ち着き方を確認してください。']};
+   const detail=advice[k]&&list.length?txt(c,...advice[k]):description;
+   out.push(txt(c,`【${label} ${val}/100】${detail}`,`${label} ${val}/100: ${detail}`,`${label} ${val}/100: ${detail}`,`${label} ${val}/100：${detail}`));
    if(list.length)out.push(...list);
    else out.push(txt(c,
     `目前未取得能解釋這項分數的原始量測值；必須先核對資料與佩戴品質，不能猜原因。`,

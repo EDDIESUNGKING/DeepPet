@@ -1,0 +1,12 @@
+{
+  "screen_count": 1188,
+  "metric_counts": {
+    "low": 936,
+    "healthy": 1040,
+    "medium": 552,
+    "unknown": 200,
+    "high": 992
+  },
+  "score_or_method_mismatches": [],
+  "page_errors": []
+}

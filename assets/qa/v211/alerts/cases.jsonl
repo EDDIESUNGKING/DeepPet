@@ -1,0 +1,6 @@
+{"case": "physical-isolated-alert-fixture/heart-high", "status": "PASS", "detail": ""}
+{"case": "physical-isolated-alert-fixture/breath-low", "status": "PASS", "detail": ""}
+{"case": "physical-isolated-alert-fixture/paired", "status": "PASS", "detail": ""}
+{"case": "physical-isolated-alert-fixture/missing-reading", "status": "PASS", "detail": ""}
+{"case": "physical-isolated-alert-fixture/invalid-date", "status": "PASS", "detail": ""}
+{"case": "physical-isolated-alert-fixture/missing-minute", "status": "PASS", "detail": ""}

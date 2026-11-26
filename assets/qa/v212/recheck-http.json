@@ -1,0 +1,12 @@
+{
+  "mode": "http",
+  "suite": "recheck",
+  "fixture_date": "2026-11-25",
+  "results": [],
+  "errors": [
+    "Error('Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:45189/index.html\\nCall log:\\n  - navigating to \"http://127.0.0.1:45189/index.html\", waiting until \"domcontentloaded\"\\n')"
+  ],
+  "console": [],
+  "physical_override": true,
+  "scope": "Only listed cases were run. Matrix uses DOM events unless --physical is set; individual alert/help DOM events remain labelled. Clinical/semantic validity is not implied. Date scope: all"
+}

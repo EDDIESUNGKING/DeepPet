@@ -1,0 +1,117 @@
+{
+  "matches": 6,
+  "dates": 6,
+  "points": 25920,
+  "results": [
+    {
+      "pet": 1,
+      "date": "2026-11-11",
+      "fields": {
+        "heart": {
+          "diffs": 0,
+          "max": 0
+        },
+        "breath": {
+          "diffs": 0,
+          "max": 0
+        },
+        "activity": {
+          "diffs": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "pet": 2,
+      "date": "2026-11-11",
+      "fields": {
+        "heart": {
+          "diffs": 0,
+          "max": 0
+        },
+        "breath": {
+          "diffs": 0,
+          "max": 0
+        },
+        "activity": {
+          "diffs": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "pet": 10,
+      "date": "2026-11-19",
+      "fields": {
+        "heart": {
+          "diffs": 0,
+          "max": 0
+        },
+        "breath": {
+          "diffs": 0,
+          "max": 0
+        },
+        "activity": {
+          "diffs": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "pet": 19,
+      "date": "2026-11-11",
+      "fields": {
+        "heart": {
+          "diffs": 0,
+          "max": 0
+        },
+        "breath": {
+          "diffs": 0,
+          "max": 0
+        },
+        "activity": {
+          "diffs": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "pet": 20,
+      "date": "2026-11-12",
+      "fields": {
+        "heart": {
+          "diffs": 0,
+          "max": 0
+        },
+        "breath": {
+          "diffs": 0,
+          "max": 0
+        },
+        "activity": {
+          "diffs": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "pet": 29,
+      "date": "2026-11-11",
+      "fields": {
+        "heart": {
+          "diffs": 0,
+          "max": 0
+        },
+        "breath": {
+          "diffs": 0,
+          "max": 0
+        },
+        "activity": {
+          "diffs": 0,
+          "max": 0
+        }
+      }
+    }
+  ],
+  "tolerance": "archive rounds to 3 decimals; 0.000501 numeric tolerance",
+  "note": "Only generated waveform minute-level replay, no clinical or raw B0 claim."
+}

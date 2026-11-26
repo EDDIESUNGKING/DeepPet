@@ -1,0 +1,1 @@
+{"idle": {"step": 101, "used": 101534956, "total": 166080512, "documents": 4, "nodes": 153987, "jsEventListeners": 237}, "forcedGC": {"step": 102, "used": 23989704, "total": 25526272, "documents": 3, "nodes": 29878, "jsEventListeners": 198}, "naturalFinal": {"step": 100, "used": 104510500, "total": 165728256, "documents": 4, "nodes": 142726, "jsEventListeners": 231}}

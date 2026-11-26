@@ -1,0 +1,295 @@
+{
+  "source": "QA_RESULTS_211_20261126-121518.zip",
+  "sha256": "0aa61c0abecfd47d1c7bd8a0eae8b8c7af5f812cbb2c30a12d3d72e0a9350f97",
+  "totals": {
+    "PASS": 26257,
+    "FAIL": 4,
+    "N/A": 24
+  },
+  "suites": {
+    "alerts": {
+      "counts": {
+        "PASS": 6
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": []
+    },
+    "details-en": {
+      "counts": {
+        "PASS": 6097,
+        "FAIL": 2,
+        "N/A": 6
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:59672/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:59672/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": [
+        {
+          "case": "detail/en/9/deep/2/7/energy/2026-11-25",
+          "status": "FAIL",
+          "detail": "Locator.scroll_into_view_if_needed: Element is not attached to the DOM\nCall log:\n  - attempting scroll into view action\n    - waiting for element to be stable\n"
+        },
+        {
+          "case": "detail/en/24/deep/2/7/energy/2026-11-22",
+          "status": "FAIL",
+          "detail": "Locator.scroll_into_view_if_needed: Element is not attached to the DOM\nCall log:\n  - attempting scroll into view action\n    - waiting for element to be stable\n"
+        },
+        {
+          "case": "detail/en/30/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/en/30/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/en/31/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/en/31/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/en/blank/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/en/blank/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        }
+      ]
+    },
+    "details-ko": {
+      "counts": {
+        "PASS": 6099,
+        "N/A": 6
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:58384/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:58384/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": [
+        {
+          "case": "detail/ko/30/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/ko/30/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/ko/31/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/ko/31/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/ko/blank/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/ko/blank/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        }
+      ]
+    },
+    "details-zh": {
+      "counts": {
+        "PASS": 6099,
+        "FAIL": 1,
+        "N/A": 6
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:54872/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:54872/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": [
+        {
+          "case": "detail/zh/24/home/alert/0",
+          "status": "FAIL",
+          "detail": "Locator.scroll_into_view_if_needed: Element is not attached to the DOM\nCall log:\n  - attempting scroll into view action\n    - waiting for element to be stable\n"
+        },
+        {
+          "case": "detail/zh/30/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zh/30/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zh/31/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zh/31/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zh/blank/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zh/blank/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        }
+      ]
+    },
+    "details-zht": {
+      "counts": {
+        "PASS": 6099,
+        "N/A": 6
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:52559/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:52559/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": [
+        {
+          "case": "detail/zht/30/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zht/30/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zht/31/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zht/31/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zht/blank/deep/2/7/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        },
+        {
+          "case": "detail/zht/blank/deep/2/30/energy/dates",
+          "status": "N/A",
+          "detail": "No historical data calendar in the existing unmeasured detail; empty-state view checked."
+        }
+      ]
+    },
+    "forms": {
+      "counts": {
+        "PASS": 9,
+        "FAIL": 1
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": [
+        {
+          "case": "physical-form/persistence-http",
+          "status": "FAIL",
+          "detail": "Pointer target obstructed .bottom-nav [data-action=\"nav\"][data-page=\"home\"]"
+        }
+      ]
+    },
+    "matrix-en": {
+      "counts": {
+        "PASS": 462
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:49354/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:49354/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": []
+    },
+    "matrix-ko": {
+      "counts": {
+        "PASS": 462
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:54646/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:54646/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": []
+    },
+    "matrix-zh": {
+      "counts": {
+        "PASS": 462
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:59812/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:59812/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": []
+    },
+    "matrix-zht": {
+      "counts": {
+        "PASS": 462
+      },
+      "errors": [],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:62517/assets/demo_score_portraits/03_Leo_Pug_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "HTTP 404 http://127.0.0.1:62517/assets/demo_score_portraits/13_Snowy_Golden_v1002_thumb.webp",
+        "Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "nonpass": []
+    }
+  }
+}

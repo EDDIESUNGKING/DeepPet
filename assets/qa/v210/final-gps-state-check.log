@@ -1,0 +1,14 @@
+PASS fresh authenticated location
+PASS missing coordinate
+PASS invalid coordinate
+PASS outside map bounds
+PASS expired location
+PASS future location
+PASS other device
+PASS unverified source
+PASS other pet
+PASS disconnected
+PASS wrong product
+PASS blank
+PASS preview isolated from authenticated fresh location
+TOTAL 13; isolated state transitions, not real radio or geographic lat/lon.

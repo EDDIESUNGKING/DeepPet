@@ -1,0 +1,63 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 1.893 {'date': '2026-11-25', 'version': '10.209', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PETS 25 heap {'step': 25, 'used': 69223800, 'total': 139902976, 'documents': 2, 'nodes': 26808, 'jsEventListeners': 247} max 0.16265932699980112
+PETS 50 heap {'step': 50, 'used': 124573688, 'total': 180690944, 'documents': 2, 'nodes': 69926, 'jsEventListeners': 370} max 0.16265932699980112
+PETS 75 heap {'step': 75, 'used': 123768440, 'total': 183402496, 'documents': 2, 'nodes': 66483, 'jsEventListeners': 304} max 0.16265932699980112
+PETS 100 heap {'step': 100, 'used': 151111288, 'total': 212856832, 'documents': 2, 'nodes': 112568, 'jsEventListeners': 436} max 0.16265932699980112
+POST_PETS {'step': 100, 'used': 151111288, 'total': 212856832, 'documents': 2, 'nodes': 112568, 'jsEventListeners': 436}
+PAGES 25 heap {'step': 125, 'used': 155944804, 'total': 219742208, 'documents': 6, 'nodes': 177404, 'jsEventListeners': 460} max 0.12924930300005144
+PAGES 50 heap {'step': 150, 'used': 117310772, 'total': 205893632, 'documents': 6, 'nodes': 105667, 'jsEventListeners': 211} max 0.12924930300005144
+PAGES 75 heap {'step': 175, 'used': 129632288, 'total': 207327232, 'documents': 6, 'nodes': 165720, 'jsEventListeners': 229} max 0.12924930300005144
+PAGES 100 heap {'step': 200, 'used': 143847148, 'total': 208818176, 'documents': 6, 'nodes': 224956, 'jsEventListeners': 250} max 0.12924930300005144
+POST_PAGES {'step': 200, 'used': 143847172, 'total': 208818176, 'documents': 6, 'nodes': 224956, 'jsEventListeners': 250}
+POINTER_FAIL home Locator.click: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator(".bottom-nav [data-action=\"nav\"][data-page=\"home\"]").first
+    7 × locator resolved to <button data-page="home" data-action="nav" aria-label="Home" aria-current="page" class="nav-button active">…</button>
+    - attempting click action
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - performin
+POINTER_FAIL deep Locator.click: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator(".bottom-nav [data-action=\"nav\"][data-page=\"deep\"]").first
+    - locator resolved to <button data-page="deep" data-action="nav" class="nav-button " aria-current="false" aria-label="Deep · Health change needs attention">…</button>
+  6 × attempting click action
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done sc
+POINTER_FAIL health Locator.click: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator(".bottom-nav [data-action=\"nav\"][data-page=\"health\"]").first
+    - locator resolved to <button data-action="nav" data-page="health" class="nav-button " aria-current="false" aria-label="Health · Tasks due today">…</button>
+  7 × attempting click action
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+
+POINTER_FAIL me Locator.click: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator(".bottom-nav [data-action=\"nav\"][data-page=\"me\"]").first
+    - locator resolved to <button data-page="me" aria-label="Me" data-action="nav" class="nav-button " aria-current="false">…</button>
+  6 × attempting click action
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - performing click actio
+POINTER_FAIL home Locator.click: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator(".bottom-nav [data-action=\"nav\"][data-page=\"home\"]").first
+    - locator resolved to <button data-page="home" data-action="nav" aria-label="Home" class="nav-button " aria-current="false">…</button>
+  6 × attempting click action
+      - waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - performing click
+STRESS_SUMMARY {"pet": {"n": 101, "median": 0.09462973199970293, "p95": 0.1462055329998293, "p99": 0.16265932699980112, "max": 0.17815978599992377, "above_0.3s": 0, "above_1s": 0}, "page": {"n": 100, "median": 0.04536431699989407, "p95": 0.06453860999999961, "p99": 0.10515489999988858, "max": 0.12924930300005144, "above_0.3s": 0, "above_1s": 0}}
+ERRORS 2026-11-25 []

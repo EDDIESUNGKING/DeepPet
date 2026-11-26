@@ -34,7 +34,7 @@
   deep.querySelectorAll('.dp905-calendar-panel .dp905-sim-note').forEach(el=>{el.textContent=l.notice;});
  }
  const previous=render;
- render=function(...args){const result=previous.apply(this,args);update();root.DeepPetBuildVersion='10.128';return result;};
+ render=function(...args){const result=previous.apply(this,args);update();root.DeepPetBuildVersion='10.204';return result;};
  root.DeepPetDeepPolish128=Object.freeze({version:'10.128',update});
  if(document.querySelector('#app .app-main'))update();
 })(window);

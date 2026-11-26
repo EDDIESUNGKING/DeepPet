@@ -1,0 +1,45 @@
+{
+  "mode": "embedded",
+  "suite": "forms",
+  "fixture_date": "2026-11-25",
+  "results": [
+    {
+      "case": "physical-form/food",
+      "status": "FAIL",
+      "detail": "Pointer target obstructed [data-action=\"meal-edit-save\"]"
+    },
+    {
+      "case": "physical-form/medication",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/vaccination",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/deworming",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/extra-notes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/recovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/vet-preview",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "console": [],
+  "scope": "Only listed cases were run; DOM event cases are not physical clicks; full detailed/date/semantic coverage is not implied."
+}

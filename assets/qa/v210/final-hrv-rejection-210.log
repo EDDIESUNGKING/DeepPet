@@ -1,0 +1,29 @@
+{
+  "windows": 64,
+  "qualified": 0,
+  "byChannel": {
+    "channelA": {
+      "windows": 32,
+      "technicalPass": 0,
+      "qualified": 0
+    },
+    "channelB": {
+      "windows": 32,
+      "technicalPass": 0,
+      "qualified": 0
+    }
+  },
+  "byDay": {
+    "2026-11-22": {
+      "windows": 64,
+      "technicalPass": 0,
+      "qualified": 0
+    }
+  },
+  "reasons": {
+    "peak_count_vs_vendor_HR": 64,
+    "out_of_range_IBI": 60,
+    "sensor_channel_identity_not_vendor_verified": 64
+  },
+  "note": "Multiple rejection reasons per window. Technical agreement with SDK heart rate does not validate channel identity or NN timing; no gate lowered."
+}

@@ -16,11 +16,11 @@ const finite=n=>typeof n==='number'&&Number.isFinite(n);
 // Explicit per-channel acquisition flags are not synonymous with numeric 0:
 // motion=0 means correctly observed stillness when motionPresent=true.
 function evalOne(x){
- const hr=Number(x.hr),rr=Number(x.rr),motion=Number(x.motion),q=x.quality!==false;
+ x=x||{};const hr=x.hr,rr=x.rr,motion=x.motion,q=x.quality!==false;
  if(hr===0&&rr===0&&motion===0&&x.motionPresent!==true)return {kind:'signal-lost',severity:'unknown',score:null,missing:3,valid:false};
- const hrPresent=x.heartPresent===false?false:x.heartPresent===true?true:finite(hr)&&hr>0;
- const rrPresent=x.breathPresent===false?false:x.breathPresent===true?true:finite(rr)&&rr>0;
- const moPresent=x.motionPresent===false?false:x.motionPresent===true?true:x.motion!==null&&x.motion!==undefined&&finite(motion)&&motion>=0;
+ const hrPresent=x.heartPresent!==false&&finite(hr)&&hr>0&&hr<=350;
+ const rrPresent=x.breathPresent!==false&&finite(rr)&&rr>0&&rr<=120;
+ const moPresent=x.motionPresent!==false&&finite(motion)&&motion>=0;
  const missing=[!hrPresent,!rrPresent,!moPresent].filter(Boolean).length;
  if(missing===3)return {kind:'signal-lost',severity:'unknown',score:null,missing:3,valid:false};
  if(missing>0)return {kind:'partial-signal',severity:'urgent-check',score:null,missing,valid:false};
@@ -29,29 +29,40 @@ function evalOne(x){
 }
 function classify(samples,context={}){
  const xs=(Array.isArray(samples)?samples:[]).slice(-600);
- if(!xs.length)return {kind:'no-record',severity:'unknown',score:null,valid:false};
  if(context.observedDistress===true||context.collapse===true||context.blueGums===true||context.unresponsive===true){return {kind:'symptom-emergency',severity:'critical',score:null,valid:false};}
+ if(!xs.length)return {kind:'no-record',severity:'unknown',score:null,valid:false};
+ // The verified live B0 path carries two vital channels, not a validated motion channel.
+ // Unknown motion is not contact loss. Check actual vitals first; never infer rest.
+ if(context.motionValidated===false){
+  const x=xs[xs.length-1],present=(v,flag,max)=>flag!==false&&typeof v==='number'&&Number.isFinite(v)&&v>0&&v<=max;
+  if(x.quality===false||x.contactGood===false)return {kind:'poor-quality',severity:'unknown',score:null,valid:false};
+  const h=present(x.hr,x.heartPresent,350),r=present(x.rr,x.breathPresent,120);
+  if(!h&&!r)return {kind:'signal-lost',severity:'unknown',score:null,missing:2,valid:false};
+  if(!h||!r)return {kind:'partial-signal',severity:'urgent-check',score:null,missing:1,valid:false};
+  return {kind:'insufficient-context',severity:'unknown',score:null,valid:true};
+ }
  const latest=evalOne(xs[xs.length-1]);
  if(latest.kind!=='valid')return latest;
  const valid=xs.map(evalOne).filter(x=>x.valid);
  if(valid.length<3)return {kind:'insufficient',severity:'unknown',score:null,valid:true};
  const base=context.baseline||{};
  if(!finite(base.hr)||base.hr<=0||!finite(base.rr)||base.rr<=0||context.motionValidated!==true)return {kind:'insufficient-context',severity:'unknown',score:null,valid:true};
- const last=valid.slice(-120);const window=last.filter(v=>v.at&&Number.isFinite(Date.parse(v.at)));
- const elapsed=window.length?Date.parse(window.at(-1).at)-Date.parse(window[0].at):0;
- const continuous=window.length>=8&&window.every((v,i)=>i===0||(Date.parse(v.at)-Date.parse(window[i-1].at)>=0&&Date.parse(v.at)-Date.parse(window[i-1].at)<=5000));
+ // Work backwards from the most recent packet. Invalid samples, duplicate timestamps,
+ // missing seconds, normal readings, and motion interrupt a sustained event.
  const high=(v)=>v.hr>=Math.max(base.hr*1.38,base.hr+25)&&v.rr>=Math.max(base.rr*1.55,base.rr+10)&&v.motion<=Math.max(0.08,Number(context.quietMotionMax)||0.12);
- const recent=last.slice(-Math.min(last.length,30));
- if((context.resting===true||context.sleepWindow===true)&&continuous&&elapsed>=20000&&recent.filter(high).length>=Math.ceil(recent.length*.8)&&recent.length>=8){
-  return {kind:'sustained-cardiorespiratory-rest',severity:'critical',valid:true,score:null,seconds:Math.floor(elapsed/1000),samples:recent.length};
+ const run=[];for(let i=xs.length-1;i>=0;i--){const v=evalOne(xs[i]),t=Date.parse(v.at||'');if(!v.valid||!Number.isFinite(t)||!high(v))break;
+  if(run.length){const dt=run.at(-1)-t;if(dt<=0||dt>1500)break;}run.push(t);}
+ const elapsed=run.length?run[0]-run.at(-1):0;
+ if((context.resting===true||context.sleepWindow===true)&&elapsed>=20000&&run.length>=8){
+  return {kind:'sustained-cardiorespiratory-rest',severity:'critical',valid:true,score:null,seconds:Math.floor(elapsed/1000),samples:run.length};
  }
  return {kind:'valid',severity:'normal',valid:true,score:null};
 }
-function message(result){const l=lang();switch(result?.kind){case 'signal-lost':return {title:l.missing,detail:l.missingNote};case 'partial-signal':return {title:l.uncertain,detail:l.uncertainNote};case 'sustained-cardiorespiratory-rest':return {title:l.rest,detail:l.restNote};case 'symptom-emergency':return {title:l.emergency,detail:l.emergencyNote};case 'poor-quality':return {title:l.warn,detail:l.missingNote};case 'no-record':return {title:'',detail:''};default:return {title:'',detail:''};}}
+function message(result){const l=lang();switch(result?.kind){case 'signal-lost':return {title:l.missing,detail:result.missing===2?({zht:'心率與呼吸訊號均未取得；可能是項圈移位或接觸不足。動靜通道尚未確認，請調整佩戴後再同步。',zh:'心率与呼吸信号均未取得；可能是项圈移位或接触不足。动静通道尚未确认，请调整佩戴后再同步。',en:'Neither heart nor breathing readings are available. Refit the collar and sync again; movement is not verified.',ja:'心拍・呼吸信号が取得できません。首輪を調整して再同期してください。動きの信号は未確認です。',ko:'심박과 호흡 신호를 받지 못했습니다. 목걸이를 조정한 후 다시 동기화하세요. 움직임 신호는 확인되지 않았습니다.'}[state.lang]||l.missingNote):l.missingNote};case 'partial-signal':return {title:l.uncertain,detail:l.uncertainNote};case 'sustained-cardiorespiratory-rest':return {title:l.rest,detail:l.restNote};case 'symptom-emergency':return {title:l.emergency,detail:l.emergencyNote};case 'poor-quality':return {title:l.warn,detail:l.missingNote};case 'no-record':return {title:'',detail:''};default:return {title:'',detail:''};}}
 // Shared time-window correlation. Input timestamps, NOT labels or day averages,
 // establish overlap. A chronological association does NOT prove causation.
 function timeLinked(heart=[],breath=[],sleep=[],energy=[],options={}){
- const bucket=Number(options.bucketMs)||60000;
+ const proposed=Number(options.bucketMs);const bucket=Number.isFinite(proposed)&&proposed>=1000&&proposed<=86400000?proposed:60000;
  const byTime=items=>{const m=new Map();for(const x of items){
   const t=Date.parse(x?.at||x?.time||'');if(!Number.isFinite(t)||x.valid===false||x.quality===false)continue;
   const bin=Math.floor(t/bucket),prev=m.get(bin)||[];prev.push(x);m.set(bin,prev);
@@ -61,10 +72,11 @@ function timeLinked(heart=[],breath=[],sleep=[],energy=[],options={}){
  const overlapping=bins.filter(k=>h.has(k)&&b.has(k)&&sl.has(k));
  return {observedBins:bins.length,cardioSleepBins:overlapping.length,
   cardioSleepPeriods:overlapping.map(x=>new Date(x*bucket).toISOString()),
-  nextDayEnergyAvailable:[...en.keys()].some(k=>[...sl.keys()].some(s=>k>s&&k-s<=(86400000/bucket))),
+  nextDayEnergyAvailable:[...en.keys()].some(k=>[...sl.keys()].some(s=>{const delta=(k-s)*bucket;return delta>0&&delta<=86400000&&Math.floor((k*bucket+28800000)/86400000)>Math.floor((s*bucket+28800000)/86400000); })),
   causationEstablished:false,missingTimeSeries:!h.size||!b.size||!sl.size};
 }
 const live=[];let latest=null;
+root.addEventListener('dp169-ble-ended',()=>{live.length=0;latest=null;update();});
 root.addEventListener('dp132-reading',ev=>{
  const d=ev.detail;if(!d||state.dog!==0||state.emptyPreview)return;
  live.push({...d,motionPresent:false});if(live.length>600)live.shift();
@@ -94,6 +106,6 @@ function update(){
  if(anchor?.parentElement===rootEl)anchor.insertAdjacentElement('afterend',el);else rootEl.insertBefore(el,rootEl.firstElementChild);
 }
 const originalRender=render;
-render=function(...args){const ret=originalRender.apply(this,args);try{update();root.DeepPetBuildVersion='10.139';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.13[0-8]/g,'10.139')});}catch(e){console.warn('DP132 UI',e);}return ret;};
+render=function(...args){const ret=originalRender.apply(this,args);try{update();root.DeepPetBuildVersion='10.204';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.13[0-8]/g,'10.199')});}catch(e){console.warn('DP132 UI',e);}return ret;};
 root.DeepPetSignalGuard132=Object.freeze({version:'10.132',evalOne,classify,message,recentGaps,timeLinked,liveSnapshot:()=>({count:live.length,latest})});
 })(window);

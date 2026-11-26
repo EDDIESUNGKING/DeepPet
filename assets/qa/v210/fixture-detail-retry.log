@@ -1,0 +1,32 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 2.16 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+FIXTURE_REPLAY [{"date": "2026-11-24", "source": true, "captureSource": "synthetic-waveform-lafa", "rawFs": 20, "minuteCount": 1440, "actual": {"heart": 98, "breath": 99, "hrv": 78, "stable": 96, "cardio": 88, "sleep": 96, "energy": 93, "recovery": 21, "calm": 87, "activityRecovery": 50, "physiol": 83, "rhythm": 87}, "expected": {"heart": 98, "breath": 99, "hrv": 78, "stable": 96, "cardio": 88, "sleep": 96, "energy": 93, "recovery": 21, "calm": 87, "activityRecovery": 50, "physiol": 83, "rhythm": 87}, "differences": []}, {"date": "2026-11-25", "source": true, "captureSource": "synthetic-waveform-lafa", "rawFs": 20, "minuteCount": 1440, "actual": {"heart": 97, "breath": 98, "hrv": 78, "stable": 96, "cardio": 88, "sleep": 96, "energy": 93, "recovery": 16, "calm": 86, "activityRecovery": 47, "physiol": 82, "rhythm": 87}, "expected": {"heart": 97, "breath": 98, "hrv": 78, "stable": 96, "cardio": 88, "sleep": 96, "energy": 93, "recovery": 16, "calm": 86, "activityRecovery": 47, "physiol": 82, "rhythm": 87}, "differences": []}]
+PASS pet 1 0.303
+PASS nav deep 0.184
+PASS category 1 0.154
+PASS range 1 0.085
+PASS category 2 0.152
+PASS range 1 0.097
+PASS energy day 0.073
+PASS energy return 0.102
+PASS category 1 0.088
+PASS range 7 0.083
+PASS sleep day 7 0.076
+PASS sleep return 0.073
+PASS category 2 0.1
+PASS range 7 0.109
+PASS energy calendar 7 0.078
+PASS energy date 0.084
+PASS energy date back 0.083
+PASS energy calendar back 0.093
+PASS category 1 0.063
+PASS range 30 0.086
+PASS sleep day 30 0.074
+PASS sleep return 0.089
+PASS category 2 0.12
+PASS range 30 0.113
+PASS energy calendar 30 0.088
+PASS energy date 0.058
+PASS energy date back 0.081
+PASS energy calendar back 0.112
+UI_SUMMARY {"passed": 28, "failed": [], "pageErrors": []}

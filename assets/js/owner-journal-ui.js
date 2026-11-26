@@ -1,0 +1,20 @@
+/* Latest release: explicit user-controlled backup for LAFA's SDK journal. */
+(function(){'use strict';
+const translations={en:['Measurement backup','Export / import local SDK measurements and HRV for this pet. Keep the file private.','Export JSON','Import JSON','Storage','No saved measurements','Saved locally','Restored','Not saved — export before closing','Import complete','Invalid backup or file too large','records','HRV','rejected'],zh:['测量资料备份','导出或导入此宠物的本机 SDK 测量与 HRV，请妥善保管备份。','导出 JSON','导入 JSON','储存状态','尚无储存资料','已储存于本机','已恢复','未储存，请先导出再关闭','导入完成','备份无效或档案过大','笔测量','笔 HRV','拒绝'],zht:['量測資料備份','匯出或匯入此寵物的本機 SDK 量測與 HRV，請妥善保管備份。','匯出 JSON','匯入 JSON','儲存狀態','尚無儲存資料','已儲存於本機','已恢復','未儲存，請先匯出再關閉','匯入完成','備份無效或檔案過大','筆量測','筆 HRV','拒絕'],ja:['測定データのバックアップ','このペットの端末内 SDK 測定と HRV を保存・復元します。ファイルは安全に保管してください。','JSON を保存','JSON を読み込む','保存状態','保存データなし','端末に保存済み','復元済み','未保存：閉じる前に書き出してください','読み込み完了','無効なバックアップまたは容量超過','測定','HRV','拒否'],ko:['측정 데이터 백업','이 반려동물의 로컬 SDK 측정 및 HRV를 내보내거나 가져옵니다. 파일을 안전하게 보관하세요.','JSON 내보내기','JSON 가져오기','저장 상태','저장 데이터 없음','로컬 저장 완료','복원됨','미저장: 종료 전 내보내기','가져오기 완료','잘못된 백업 또는 용량 초과','측정','HRV','거부']};
+let message='';const t=()=>translations[state.lang]||translations.zht;
+const api=()=>window.DeepPetMiloAdaptiveScores;
+const owner=()=>!state.emptyPreview&&state.dog===0&&!(typeof selectedBlank==='function'&&selectedBlank());
+function status(){const a=api(),v=a.storageStatus(),l=t();return v==='saved'?l[6]:v==='restored'?l[7]:v==='empty'?l[5]:l[8];}
+function mount(){if(state.tab!=='me'||state.detail||!owner()||!api())return;const root=document.querySelector('#app .app-main');if(!root||root.querySelector('#dp174-journal'))return;
+ const l=t(),section=document.createElement('section');section.id='dp174-journal';section.className='card';section.style.cssText='margin:12px 16px;padding:16px;';
+ const heading=document.createElement('h3');heading.textContent=l[0];heading.style.margin='0 0 8px';section.append(heading);const p=document.createElement('p');p.textContent=l[1];p.style.cssText='font-size:13px;line-height:1.5;margin:0 0 10px;';section.append(p);
+ const feedback=document.createElement('p');feedback.setAttribute('role','status');feedback.style.cssText='font-size:12px;line-height:1.5;overflow-wrap:anywhere;';feedback.textContent=l[4]+': '+status()+(message?' · '+message:'');section.append(feedback);
+ const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.hidden=true;section.append(input);
+ const row=document.createElement('div');row.style.cssText='display:flex;gap:8px;flex-wrap:wrap;';section.append(row);
+ function button(name,fn){const b=document.createElement('button');b.type='button';b.textContent=name;b.style.cssText='border:1px solid #d9d2eb;color:#6552a5;background:transparent;border-radius:10px;padding:9px 12px;font-weight:600;';b.addEventListener('click',fn);row.append(b);return b;}
+ button(l[2],()=>{if(!owner())return;const blob=new Blob([JSON.stringify(api().exportJournal())],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='DeepPet-LAFA-measurements-'+new Date().toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+ button(l[3],()=>{if(owner())input.click();});input.addEventListener('change',async()=>{const file=input.files?.[0];input.value='';if(!file||!owner())return;try{if(file.size>12000000)throw Error('too large');const data=JSON.parse(await file.text());if(!owner())return;const r=api().importJournal(data);if(r.reason==='invalid-backup')throw Error('invalid');message=`${t()[9]}: ${r.accepted} ${t()[11]}, ${r.hrvAccepted} ${t()[12]}, ${(r.rejected||0)+(r.hrvRejected||0)+(r.anchorRejected?1:0)} ${t()[13]}`;}catch(e){message=t()[10];}render(false);});
+ const pad=root.querySelector('.app-pad');(pad||root).append(section);
+}
+const prior=render;render=function(){const ret=prior.apply(this,arguments);mount();return ret;};mount();
+})();

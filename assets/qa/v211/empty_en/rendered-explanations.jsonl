@@ -1,0 +1,53 @@
+{"lang": "en", "pet": 30, "tab": "health", "detail": "food", "text": "Starting estimate based on 9 kg, 2 years and Medium dog. Adjust for condition and veterinary advice."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "food", "text": "Suggested grams depend on the food. The app converts from food-category nutrition data; no manual calorie calculation needed."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "food", "text": "No meals logged this day."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "food", "text": "Shows the last seven days of recorded foods, brands and grams. Meal records remain separate for each pet."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "food", "text": "Log what was eaten, the brand and grams. Calories are estimated from reference kcal per 100g; mixed meals are summed. Use product-label values when available."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "med", "text": "Enter medication, dose, daily time and duration once for a daily checklist."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "med", "text": "No verified doses scheduled today. Once a plan is complete, its daily checklist will appear here."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "med", "text": "No medication plans yet."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "med", "text": "No confirmed doses yet."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "vaccines", "text": "Schedule first, then mark as given, edit or delete."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "vaccines", "text": "No upcoming vaccinations."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "vaccines", "text": "No completed vaccinations."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "deworming", "text": "Choose the weight-appropriate product size; follow the package directions."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "summary", "text": "Two perspectives on your pet’s wellbeing."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "summary", "text": "No valid readings in these 7 days yet, so there is no health score to show."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "summary", "text": "No records this period"}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "Choose surgery, illness, anesthesia, medication or activity recovery—or enter a custom reason. Track appetite, energy and rest daily."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "Not enough heart and breathing data yet. You can still log energy, appetite and rest."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "Observe energy, appetite, rest and recovery after similar activity. Do not infer improvement from insufficient new data."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "Choose a reason and press Start recovery observation to create the first day."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "Contact a veterinarian if changes persist for days or occur with reduced energy, appetite or coughing. Breathing distress, collapse or inability to stand needs urgent care."}
+{"lang": "en", "pet": 30, "tab": "health", "detail": "notes", "text": "No notes yet."}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "Daily wellness changes and the overall period result"}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "A wellness-age estimate, not biological age or lifespan prediction"}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "The information sources for each result are listed separately"}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "Recent heart rate, breathing, HRV, beat regularity, sleep, activity, post-exercise recovery, calm/steadiness and eligible checkup records."}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "Chronological age and the recent overall wellness result above; the relevant cardio, sleep, energy/recovery, rhythm and checkup evidence feeds the overall wellness result."}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "The pet profile is available, but no monitoring history exists yet. No baseline is shown."}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "No valid measurements yet · Unmeasured is not a failed or zero score"}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "Both previews leave device pairing, health scores and emergency alerts unchanged."}
+{"lang": "en", "pet": 30, "tab": "me", "detail": null, "text": "Device type changes only after pairing completes."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "The overall score uses the readings below. Open each item to see why."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "No reliable readings for this period yet, so there is no score to show."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "What do HRV, RMSSD & SDNN tell you?HRVCompare recovery at similar rest conditions; higher is not always better.RMSSDShort-term changes between adjacent beats; compare during quiet rest.SDNNVariation across valid beat intervals; compare equal recording lengths."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "HRVCompare recovery at similar rest conditions; higher is not always better."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "RMSSDShort-term changes between adjacent beats; compare during quiet rest."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "SDNNVariation across valid beat intervals; compare equal recording lengths."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "Heartbeat timing has not been confirmed accurate enough, so RMSSD / SDNN results are not shown yet."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "Overall cardio combines heart, breathing, HRV and rhythm trends; insufficient signal means no score."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "Connect your 4G + GPS wearable"}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "No valid monitoring data has been received for this pet yet. The corresponding analysis will appear here when data arrives."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "Scored 0/7 days; 0 meet coverage criteria."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "View detailed data›N/A"}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "Select a date to view its waveform"}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "Grey: no valid score"}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "Live waveform is not shown for a historical date"}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "Scored 0/30 days; 0 meet coverage criteria."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "No valid recordings for this pet yet. Pair a collar and collect valid readings to see the analysis in these same sections."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "No valid sleep or rest readings yet. The same period analysis will appear here."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "Valid nights: N/A/7; average rest N/A, mean interruptions N/A."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "Each date uses its full grade color. Select any day to open detailed readings."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "Valid nights: N/A/30; average rest N/A, mean interruptions N/A."}
+{"lang": "en", "pet": 30, "tab": "deep", "detail": null, "text": "No valid 2-minute recovery record today."}

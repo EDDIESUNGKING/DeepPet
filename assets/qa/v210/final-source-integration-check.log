@@ -1,0 +1,29 @@
+PASS continuous event can escalate from relative warning to independent extreme without endless repeats
+PASS summary and exact proof must not silently merge when equal rates
+PASS same second conflicting provenance cannot inherit exact proof
+PASS anchor restore validates date span, physiology, immutable same-owner baseline
+PASS corrupted storage can be repaired by valid baseline
+OWNER HRV 32 98
+PASS owner SDK journal retains actual verified second provenance and beat evidence; formal HRV is computable
+PASS newer unbound aggregate does not mask an eligible waveform HRV
+PASS existing journal backup exports/restores owner anchor without replacing a different saved anchor
+PASS rate summaries cannot create exact-second emergency evidence
+PASS baseline rejects repeated variable-rate extreme run even when daily median is normal
+PASS native extreme candidate passes actual in-app capture with ten auditable seconds; tampered evidence rejected
+PASS longer summaries cannot acquire exact-second provenance or trigger exact alerts
+PASS impossible availability time cannot qualify as exact evidence
+PASS conflicting arrival times cannot merge into a verified exact observation
+PASS one-second summary is not a precise recovery; explicit second evidence is
+PASS blank optional age/weight fields do not conceal actual profile, and species constrains breed
+ACTIVE EXTREME 100 89
+PASS independent extreme threshold is also retained in activity-conditioned scoring
+PASS a saved anchor incompatible with corrected species is not applied
+PASS respiratory escalation remains independent of continuous low-level warning
+PASS translated species and invalid primary age/weight fall back consistently
+PASS coarse motion cannot inherit exact vital provenance
+PASS separate synchronized exact motion and vital evidence respects latest arrival
+PASS sustained severe non-extreme resting deviation cannot train healthy baseline
+PASS rejected low-rise exercise does not block later valid quiet-elevation recovery
+PASS owner journal rejects invalid explicit arrival instead of rewriting as immediate observation
+PASS cosmetic LAFA profile changes preserve daily cache; physical changes invalidate
+TOTAL 26

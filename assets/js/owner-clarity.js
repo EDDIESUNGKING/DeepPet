@@ -38,11 +38,11 @@
  }
  // Short, nontechnical, on-demand help. The main score is never hidden.
  const glossary={
-  zht:{title:'HRV、RMSSD、SDNN 看什麼？',hrv:'幫助看放鬆和恢復的整體趨勢。',rmssd:'比較偏向看短時間的放鬆反應。',sdnn:'比較偏向看整段時間的整體起伏。'},
-  zh:{title:'HRV、RMSSD、SDNN 看什么？',hrv:'帮助看放松和恢复的整体趋势。',rmssd:'比较偏向看短时间的放松反应。',sdnn:'比较偏向看整段时间的整体起伏。'},
-  en:{title:'What do HRV, RMSSD & SDNN tell you?',hrv:'Helps track overall rest and recovery trends.',rmssd:'Focuses more on short-term relaxation.',sdnn:'Focuses more on overall variation across a period.'},
+  zht:{title:'HRV、RMSSD、SDNN 看什麼？',hrv:'比較相同休息情境的恢復趨勢；數值越高不一定越好。',rmssd:'反映相鄰心搏間隔的短期變化，宜在安靜時比較。',sdnn:'反映整段有效心搏間隔的變化，宜比較相同量測時長。'},
+  zh:{title:'HRV、RMSSD、SDNN 看什么？',hrv:'比较相同休息情境的恢复趋势；数值越高不一定越好。',rmssd:'反映相邻心搏间隔的短期变化，宜在安静时比较。',sdnn:'反映整段有效心搏间隔的变化，宜比较相同测量时长。'},
+  en:{title:'What do HRV, RMSSD & SDNN tell you?',hrv:'Compare recovery at similar rest conditions; higher is not always better.',rmssd:'Short-term changes between adjacent beats; compare during quiet rest.',sdnn:'Variation across valid beat intervals; compare equal recording lengths.'},
   ja:{title:'HRV・RMSSD・SDNN は何を見る？',hrv:'休息・回復の全体的な傾向を見る目安。',rmssd:'短時間のリラックス状態を見る目安。',sdnn:'一定時間の全体的な変化を見る目安。'},
-  ko:{title:'HRV·RMSSD·SDNN은 무엇을 볼까요?',hrv:'휴식과 회복의 전반적인 흐름을 살펴봅니다.',rmssd:'짧은 시간의 이완 반응을 살펴봅니다.',sdnn:'일정 시간 동안의 전반적인 변화를 살펴봅니다.'}
+  ko:{title:'HRV·RMSSD·SDNN은 무엇을 볼까요?',hrv:'비슷한 휴식 상태에서 회복 추세를 비교하세요. 높다고 항상 좋은 것은 아닙니다.',rmssd:'인접한 심박 간격의 단기 변화로, 안정 시 비교하세요.',sdnn:'유효 심박 간격의 전체 변화로, 같은 측정 길이를 비교하세요.'}
  };
  function explainHRV(){
   if(state.tab!=='deep'||state.detail)return;
@@ -98,6 +98,7 @@
     button.dataset.action='dp1059-alert-open';
     for(const name of ['date','minute','second','eventType'])if(old.dataset[name]!==undefined)button.dataset[name]=old.dataset[name];
     const isPrimary=metric===k;
+    if(!isPrimary&&old.dataset.peerEventType)button.dataset.eventType=old.dataset.peerEventType;
     button.dataset.kind=metric;
     button.dataset.value=old.dataset[isPrimary?'value':'peerValue'];
     button.dataset.peer=isPrimary?peer:k;

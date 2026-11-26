@@ -1,0 +1,7 @@
+{"case": "physical-form/food", "status": "FAIL", "detail": "Pointer target obstructed [data-action=\"meal-edit-save\"]"}
+{"case": "physical-form/medication", "status": "PASS", "detail": ""}
+{"case": "physical-form/vaccination", "status": "PASS", "detail": ""}
+{"case": "physical-form/deworming", "status": "PASS", "detail": ""}
+{"case": "physical-form/extra-notes", "status": "PASS", "detail": ""}
+{"case": "physical-form/recovery", "status": "PASS", "detail": ""}
+{"case": "physical-form/vet-preview", "status": "PASS", "detail": ""}

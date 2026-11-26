@@ -1,0 +1,1833 @@
+{
+  "cases": [
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 0,
+      "days": 1,
+      "actual": {
+        "blocks": [
+          {
+            "k": "cardio",
+            "s": "25",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\nThe main weaker scoring inputs are Breathing 6/100, Heart rate 20/100, Heartbeat stability 86/100, HRV 89/100; these contribute to this score.\nData for this day: Lower-scoring inputs: Breathing 6/100, Heart rate 20/100, Heartbeat stability 86/100, HRV 89/100; Breathing：Median breathing rate 53.7 /min (reference 22 /min); Rate-fit score 1/100.\nHeart rate：Median heart rate 211.8 bpm (reference 132 bpm); Rate-fit score 15/100.\nReview individual severe inputs on the lowest-scoring day: Heart rate 20 (Prompt action), Breathing 6 (Immediate action).",
+            "advice": "Recommendations\nPromptly recheck the lowest cardio indicators at rest; contact a vet today if still abnormal.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "heart",
+            "s": "20",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\nHeart rate median is about 60% above the reference. The model also assesses deviations and stability in activity and rest contexts.\nData for this day: Median heart rate 211.8 bpm (reference 132 bpm); Rate-fit score 15/100.\nStability score 33/100; Time outside reference band 1355.8 min.",
+            "advice": "Recommendations\nPromptly reduce stimulation and recheck resting pulse and duration of deviations; contact a vet today if markedly abnormal.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "breath",
+            "s": "6",
+            "r": "high",
+            "u": "immediate",
+            "label": "High risk · Immediate action",
+            "reason": "Reasons\nBreathing rate median is about 144% above the reference. The model also assesses deviations and stability in activity and rest contexts.\nData for this day: Median breathing rate 53.7 /min (reference 22 /min); Rate-fit score 1/100.\nStability score 19/100; Time outside reference band 1327.2 min.",
+            "advice": "Recommendations\nCheck now for laboured breathing, open-mouth breathing (especially in cats) or gum discoloration; avoid exertion and unnecessary handling. Contact a vet immediately if severe abnormalities persist at rest.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "hrv",
+            "s": "89",
+            "r": "low",
+            "u": "watch",
+            "label": "Low risk · Monitor",
+            "reason": "Reasons\nValid beat-interval variability scores below the model reference; without a sufficient personal baseline, no individual decline is inferred.\nData for this day: RMSSD 50.6 ms; SDNN 35.5 ms.",
+            "advice": "Recommendations\n\nCheck fit and signal quality; compare RMSSD and SDNN in similarly quiet, equally long recordings. Review pulse, breathing and alertness too.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "stable",
+            "s": "86",
+            "r": "low",
+            "u": "watch",
+            "label": "Low risk · Monitor",
+            "reason": "Reasons\nValid beat regularity is 86/100, below the reference range; distinguish normal physiological variation, artifacts and persistent irregularity.\nData for this day: Beat regularity 86/100; Valid window 29.2 min.",
+            "advice": "Recommendations\n\nReview quiet beat intervals and waveform quality for recurring changes; do not equate the score with an arrhythmia diagnosis.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp903-overview-head dp1046-primary-head dp217-primary",
+            "25"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "20"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "6"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "89"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "86"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          1,
+          0
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "25",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "heart",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "breath",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "hrv",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "stable",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 0,
+      "days": 7,
+      "actual": {
+        "blocks": [
+          {
+            "k": "cardio",
+            "s": "25",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\n6/7 valid scored days; 6 high-risk, 0 moderate and 0 low-risk days. Lowest 23 (2026-11-23).\nOn the lowest-scoring day: The main weaker scoring inputs are Breathing 4/100, Heart rate 14/100, Heartbeat stability 86/100, HRV 89/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Breathing 4/100, Heart rate 14/100, Heartbeat stability 86/100, HRV 89/100; Breathing：Median breathing rate 53.8 /min (reference 22 /min); Rate-fit score 1/100.\nHeart rate：Median heart rate 212.2 bpm (reference 132 bpm); Rate-fit score 11/100.\nReview individual severe inputs on the lowest-scoring day: Heart rate 14 (Immediate action), Breathing 4 (Immediate action).\nImmediate-action 0 day(s), prompt-action 6, priority-review 0; end-date score 25.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nPromptly recheck the lowest cardio indicators at rest; contact a vet today if still abnormal.",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "heart",
+            "s": "22",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\n6/7 valid scored days; 6 high-risk, 0 moderate and 0 low-risk days. Lowest 14 (2026-11-23).\nOn the lowest-scoring day: Heart rate median is about 61% above the reference. The model also assesses deviations and stability in activity and rest contexts.\nLowest day’s data: Median heart rate 212.2 bpm (reference 132 bpm); Rate-fit score 11/100.\nStability score 22/100; Time outside reference band 1389.9 min.\nImmediate-action 1 day(s), prompt-action 5, priority-review 0; end-date score 20.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nPromptly reduce stimulation and recheck resting pulse and duration of deviations; contact a vet today if markedly abnormal.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "breath",
+            "s": "6",
+            "r": "high",
+            "u": "immediate",
+            "label": "High risk · Immediate action",
+            "reason": "Reasons\n6/7 valid scored days; 6 high-risk, 0 moderate and 0 low-risk days. Lowest 4 (2026-11-23).\nOn the lowest-scoring day: Breathing rate median is about 144% above the reference. The model also assesses deviations and stability in activity and rest contexts.\nLowest day’s data: Median breathing rate 53.8 /min (reference 22 /min); Rate-fit score 1/100.\nStability score 14/100; Time outside reference band 1369.3 min.\nImmediate-action 6 day(s), prompt-action 0, priority-review 0; end-date score 6.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nCheck now for laboured breathing, open-mouth breathing (especially in cats) or gum discoloration; avoid exertion and unnecessary handling. Contact a vet immediately if severe abnormalities persist at rest.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "hrv",
+            "s": "88",
+            "r": "low",
+            "u": "watch",
+            "label": "Low risk · Monitor",
+            "reason": "Reasons\n6/7 valid scored days; 0 high-risk, 0 moderate and 5 low-risk days. Lowest 83 (2026-11-20).\nOn the lowest-scoring day: Valid beat-interval variability scores below the model reference; without a sufficient personal baseline, no individual decline is inferred.\nLowest day’s data: RMSSD 41.8 ms; SDNN 29.7 ms.",
+            "advice": "Recommendations\n\nCheck fit and signal quality; compare RMSSD and SDNN in similarly quiet, equally long recordings. Review pulse, breathing and alertness too.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "stable",
+            "s": "86",
+            "r": "low",
+            "u": "watch",
+            "label": "Low risk · Monitor",
+            "reason": "Reasons\n6/7 valid scored days; 0 high-risk, 0 moderate and 6 low-risk days. Lowest 85 (2026-11-25).\nOn the lowest-scoring day: Valid beat regularity is 85/100, below the reference range; distinguish normal physiological variation, artifacts and persistent irregularity.\nLowest day’s data: Beat regularity 85/100; Valid window 9.7 min.",
+            "advice": "Recommendations\n\nReview quiet beat intervals and waveform quality for recurring changes; do not equate the score with an arrhythmia diagnosis.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp903-overview-head dp1046-primary-head dp217-primary",
+            "25"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "22"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "6"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "88"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "86"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          7,
+          0
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "25",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "heart",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "breath",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "hrv",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "stable",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 0,
+      "days": 30,
+      "actual": {
+        "blocks": [
+          {
+            "k": "cardio",
+            "s": "49",
+            "r": "high",
+            "u": "priority",
+            "label": "High risk · Priority review",
+            "reason": "Reasons\n16/30 valid scored days; 11 high-risk, 0 moderate and 5 low-risk days. Lowest 23 (2026-11-23).\nOn the lowest-scoring day: The main weaker scoring inputs are Breathing 4/100, Heart rate 14/100, Heartbeat stability 86/100, HRV 89/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Breathing 4/100, Heart rate 14/100, Heartbeat stability 86/100, HRV 89/100; Breathing：Median breathing rate 53.8 /min (reference 22 /min); Rate-fit score 1/100.\nHeart rate：Median heart rate 212.2 bpm (reference 132 bpm); Rate-fit score 11/100.\nReview individual severe inputs on the lowest-scoring day: Heart rate 14 (Immediate action), Breathing 4 (Immediate action).\nImmediate-action 0 day(s), prompt-action 8, priority-review 3; end-date score 25.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Compare weekly trends and collect repeated low-score records.\nPromptly recheck the lowest cardio indicators at rest; contact a vet today if still abnormal.",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "heart",
+            "s": "63",
+            "r": "medium",
+            "u": "improve",
+            "label": "Moderate risk · Needs improvement",
+            "reason": "Reasons\n16/30 valid scored days; 7 high-risk, 2 moderate and 1 low-risk days. Lowest 14 (2026-11-23).\nOn the lowest-scoring day: Heart rate median is about 61% above the reference. The model also assesses deviations and stability in activity and rest contexts.\nLowest day’s data: Median heart rate 212.2 bpm (reference 132 bpm); Rate-fit score 11/100.\nStability score 22/100; Time outside reference band 1389.9 min.\nImmediate-action 1 day(s), prompt-action 5, priority-review 1; end-date score 20.",
+            "advice": "Recommendations\nRecheck pulse while calm and comfortable, and observe alertness, ability to stand and willingness to move. Do not force exercise.\nReview the high-risk dates and their waveforms; if recovered today, past low scores do not establish a current emergency.\nPromptly reduce stimulation and recheck resting pulse and duration of deviations; contact a vet today if markedly abnormal.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 249, 238)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "breath",
+            "s": "35",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\n16/30 valid scored days; 11 high-risk, 0 moderate and 4 low-risk days. Lowest 4 (2026-11-23).\nOn the lowest-scoring day: Breathing rate median is about 144% above the reference. The model also assesses deviations and stability in activity and rest contexts.\nLowest day’s data: Median breathing rate 53.8 /min (reference 22 /min); Rate-fit score 1/100.\nStability score 14/100; Time outside reference band 1369.3 min.\nImmediate-action 10 day(s), prompt-action 1, priority-review 0; end-date score 6.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Compare weekly trends and collect repeated low-score records.\nCheck now for laboured breathing, open-mouth breathing (especially in cats) or gum discoloration; avoid exertion and unnecessary handling. Contact a vet immediately if severe abnormalities persist at rest.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "hrv",
+            "s": "81",
+            "r": "low",
+            "u": "watch",
+            "label": "Low risk · Monitor",
+            "reason": "Reasons\n16/30 valid scored days; 0 high-risk, 9 moderate and 6 low-risk days. Lowest 74 (2026-11-14).\nOn the lowest-scoring day: Valid beat-interval variability scores below the model reference; without a sufficient personal baseline, no individual decline is inferred.\nLowest day’s data: RMSSD 36.7 ms; SDNN 26.9 ms.",
+            "advice": "Recommendations\nCheck fit and signal quality; compare RMSSD and SDNN in similarly quiet, equally long recordings. Review pulse, breathing and alertness too.\nTrack under similar conditions; arrange a veterinary consultation if deviations persist or recur.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "stable",
+            "s": "89",
+            "r": "low",
+            "u": "watch",
+            "label": "Low risk · Monitor",
+            "reason": "Reasons\n16/30 valid scored days; 0 high-risk, 0 moderate and 8 low-risk days. Lowest 85 (2026-11-25).\nOn the lowest-scoring day: Valid beat regularity is 85/100, below the reference range; distinguish normal physiological variation, artifacts and persistent irregularity.\nLowest day’s data: Beat regularity 85/100; Valid window 9.7 min.",
+            "advice": "Recommendations\n\nReview quiet beat intervals and waveform quality for recurring changes; do not equate the score with an arrhythmia diagnosis.",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp903-overview-head dp1046-primary-head dp217-primary",
+            "49"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "63"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "35"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "81"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "89"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          30,
+          0
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "49",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "heart",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "breath",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "hrv",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "stable",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 1,
+      "days": 1,
+      "actual": {
+        "blocks": [
+          {
+            "k": "sleep",
+            "s": "22",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\nWeaker rest factors: Rest quality 10/100, Rest duration 26/100; these are rest estimates from heart rate, breathing and movement.\nData for this day: Total estimated rest 3.8 h; Duration score 26/100.\nRest quality score 10/100; Continuity score 98/100; Rest interruptions 6 times.",
+            "advice": "Recommendations\n\nPromptly improve the rest environment and record interruptions, duration and alertness after rest; arrange veterinary assessment if not improving or unwell.",
+            "method": false,
+            "rect": 322,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp-owner-status-heading dp-heart-overall-heading dp71-paired-score dp74-overview-head dp1048-sleep-day-head dp1046-primary-head dp1052-sleep-flow dp217-primary",
+            "22"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          1,
+          1
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "22",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 1,
+      "days": 7,
+      "actual": {
+        "blocks": [
+          {
+            "k": "sleep",
+            "s": "24",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\n6/7 valid scored days; 6 high-risk, 0 moderate and 0 low-risk days. Lowest 18 (2026-11-25).\nOn the lowest-scoring day: Weaker rest factors: Rest quality 8/100, Rest duration 18/100; these are rest estimates from heart rate, breathing and movement.\nLowest day’s data: Total estimated rest 2.6 h; Duration score 18/100.\nRest quality score 8/100; Continuity score 97/100; Rest interruptions 6 times.\nImmediate-action 1 day(s), prompt-action 5, priority-review 0; end-date score 22.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nPromptly improve the rest environment and record interruptions, duration and alertness after rest; arrange veterinary assessment if not improving or unwell.",
+            "method": false,
+            "rect": 322,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp1046-primary-head dp1052-sleep-flow dp217-primary",
+            "24"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          7,
+          1
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "24",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 1,
+      "days": 30,
+      "actual": {
+        "blocks": [
+          {
+            "k": "sleep",
+            "s": "50",
+            "r": "high",
+            "u": "priority",
+            "label": "High risk · Priority review",
+            "reason": "Reasons\n16/30 valid scored days; 10 high-risk, 1 moderate and 5 low-risk days. Lowest 18 (2026-11-25).\nOn the lowest-scoring day: Weaker rest factors: Rest quality 8/100, Rest duration 18/100; these are rest estimates from heart rate, breathing and movement.\nLowest day’s data: Total estimated rest 2.6 h; Duration score 18/100.\nRest quality score 8/100; Continuity score 97/100.\nImmediate-action 1 day(s), prompt-action 5, priority-review 4; end-date score 22.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Compare weekly trends and collect repeated low-score records.\nPromptly improve the rest environment and record interruptions, duration and alertness after rest; arrange veterinary assessment if not improving or unwell.",
+            "method": false,
+            "rect": 322,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp1046-primary-head dp1052-sleep-flow dp217-primary",
+            "50"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          30,
+          1
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "50",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 2,
+      "days": 1,
+      "actual": {
+        "blocks": [
+          {
+            "k": "activityRecovery",
+            "s": "14",
+            "r": "high",
+            "u": "immediate",
+            "label": "High risk · Immediate action",
+            "reason": "Reasons\nThe main weaker scoring inputs are Recovery 0/100, Rest and steadiness 27/100, Energy 37/100; these contribute to this score.\nData for this day: Lower-scoring inputs: Recovery 0/100, Rest and steadiness 27/100, Energy 37/100; Recovery：Two minutes after activity; Pulse 236.4 → 244 bpm.\nRest and steadiness：Lower-scoring inputs: Quiet-rest quality 4/100, Breathing 6/100, Heart rate 20/100, HRV 89/100.\nReview individual severe inputs on the lowest-scoring day: Energy 37 (Prompt action), Recovery 0 (Immediate action), Rest and steadiness 27 (Prompt action).",
+            "advice": "Recommendations\nStop extra activity now; check cardio and alertness and review the weakest recovery input. Contact a vet immediately if severe valid cardio abnormalities persist.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "energy",
+            "s": "37",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\nThe main weaker scoring inputs are Sleep and rest 22/100, Cardio status 25/100, Activity and quiet rest 71/100; these contribute to this score.\nData for this day: Lower-scoring inputs: Sleep and rest 22/100, Cardio status 25/100, Activity and quiet rest 71/100; Movement intensity score 100/100.",
+            "advice": "Recommendations\n\nPromptly reduce exertion; observe appetite and willingness to move, and review whether rest, cardio or activity contributed.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "recovery",
+            "s": "0",
+            "r": "high",
+            "u": "immediate",
+            "label": "High risk · Immediate action",
+            "reason": "Reasons\nHeart rate did not fall by the end of two minutes; check the effort level, resting reference and breathing recovery as well.\nData for this day: Two minutes after activity; Pulse 236.4 → 244 bpm.\nPulse fall -7.5 bpm; Pulse at 120s 244 bpm (reference 132 bpm); Breathing recovery score 0/100.",
+            "advice": "Recommendations\nStop extra exercise now and check pulse and breathing after rest; do not exercise to retest. Contact a vet immediately if severe valid abnormalities persist.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "calm",
+            "s": "27",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\nThe main weaker scoring inputs are Quiet-rest quality 4/100, Breathing 6/100, Heart rate 20/100, HRV 89/100; these contribute to this score.\nData for this day: Lower-scoring inputs: Quiet-rest quality 4/100, Breathing 6/100, Heart rate 20/100, HRV 89/100.",
+            "advice": "Recommendations\n\nPromptly reduce environmental stimulation, allow settling and recheck resting pulse, breathing and rest quality.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp901-overall-head dp1046-primary-head dp217-primary",
+            "14"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "37"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "0"
+          ],
+          [
+            "dp901-metric-card dp902-calm-target dp217-child",
+            "27"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          1,
+          2
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "14",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "energy",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "recovery",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "calm",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 2,
+      "days": 7,
+      "actual": {
+        "blocks": [
+          {
+            "k": "activityRecovery",
+            "s": "14",
+            "r": "high",
+            "u": "immediate",
+            "label": "High risk · Immediate action",
+            "reason": "Reasons\n5/7 valid scored days; 5 high-risk, 0 moderate and 0 low-risk days. Lowest 14 (2026-11-22).\nOn the lowest-scoring day: The main weaker scoring inputs are Recovery 0/100, Rest and steadiness 27/100, Energy 38/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Recovery 0/100, Rest and steadiness 27/100, Energy 38/100; Recovery：Two minutes after activity; Pulse 221 → 234.8 bpm.\nRest and steadiness：Lower-scoring inputs: Quiet-rest quality 5/100, Breathing 6/100, Heart rate 24/100, HRV 87/100.\nReview individual severe inputs on the lowest-scoring day: Energy 38 (Prompt action), Recovery 0 (Immediate action), Rest and steadiness 27 (Prompt action).\nImmediate-action 5 day(s), prompt-action 0, priority-review 0; end-date score 14.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nStop extra activity now; check cardio and alertness and review the weakest recovery input. Contact a vet immediately if severe valid cardio abnormalities persist.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "energy",
+            "s": "38",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\n6/7 valid scored days; 6 high-risk, 0 moderate and 0 low-risk days. Lowest 35 (2026-11-25).\nOn the lowest-scoring day: The main weaker scoring inputs are Sleep and rest 18/100, Cardio status 25/100, Activity and quiet rest 71/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Sleep and rest 18/100, Cardio status 25/100, Activity and quiet rest 71/100; Movement intensity score 100/100.\nImmediate-action 0 day(s), prompt-action 5, priority-review 1; end-date score 37.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nPromptly reduce exertion; observe appetite and willingness to move, and review whether rest, cardio or activity contributed.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "recovery",
+            "s": "0",
+            "r": "high",
+            "u": "immediate",
+            "label": "High risk · Immediate action",
+            "reason": "Reasons\n5/7 valid scored days; 5 high-risk, 0 moderate and 0 low-risk days. Lowest 0 (2026-11-22).\nOn the lowest-scoring day: Heart rate did not fall by the end of two minutes; check the effort level, resting reference and breathing recovery as well.\nLowest day’s data: Two minutes after activity; Pulse 221 → 234.8 bpm.\nPulse fall -13.8 bpm; Pulse at 120s 234.8 bpm (reference 132 bpm); Breathing recovery score 0/100.\nImmediate-action 5 day(s), prompt-action 0, priority-review 0; end-date score 0.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nStop extra exercise now and check pulse and breathing after rest; do not exercise to retest. Contact a vet immediately if severe valid abnormalities persist.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "calm",
+            "s": "27",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\n6/7 valid scored days; 6 high-risk, 0 moderate and 0 low-risk days. Lowest 25 (2026-11-23).\nOn the lowest-scoring day: The main weaker scoring inputs are Breathing 4/100, Quiet-rest quality 5/100, Heart rate 14/100, HRV 89/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Breathing 4/100, Quiet-rest quality 5/100, Heart rate 14/100, HRV 89/100.\nImmediate-action 0 day(s), prompt-action 6, priority-review 0; end-date score 27.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Review low-score dates and recent changes.\nPromptly reduce environmental stimulation, allow settling and recheck resting pulse, breathing and rest quality.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp901-overall-head dp1046-primary-head dp217-primary",
+            "14"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "38"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "0"
+          ],
+          [
+            "dp901-metric-card dp902-calm-target dp217-child",
+            "27"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          7,
+          2
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "14",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "energy",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "recovery",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "calm",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 2,
+      "days": 30,
+      "actual": {
+        "blocks": [
+          {
+            "k": "activityRecovery",
+            "s": "28",
+            "r": "high",
+            "u": "prompt",
+            "label": "High risk · Prompt action",
+            "reason": "Reasons\n15/30 valid scored days; 15 high-risk, 0 moderate and 0 low-risk days. Lowest 14 (2026-11-22).\nOn the lowest-scoring day: The main weaker scoring inputs are Recovery 0/100, Rest and steadiness 27/100, Energy 38/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Recovery 0/100, Rest and steadiness 27/100, Energy 38/100; Recovery：Two minutes after activity; Pulse 221 → 234.8 bpm.\nRest and steadiness：Lower-scoring inputs: Quiet-rest quality 5/100, Breathing 6/100, Heart rate 24/100, HRV 87/100.\nReview individual severe inputs on the lowest-scoring day: Energy 38 (Prompt action), Recovery 0 (Immediate action), Rest and steadiness 27 (Prompt action).\nImmediate-action 6 day(s), prompt-action 4, priority-review 5; end-date score 14.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Compare weekly trends and collect repeated low-score records.\nStop extra activity now; check cardio and alertness and review the weakest recovery input. Contact a vet immediately if severe valid cardio abnormalities persist.",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "energy",
+            "s": "57",
+            "r": "high",
+            "u": "priority",
+            "label": "High risk · Priority review",
+            "reason": "Reasons\n16/30 valid scored days; 10 high-risk, 1 moderate and 5 low-risk days. Lowest 35 (2026-11-25).\nOn the lowest-scoring day: The main weaker scoring inputs are Sleep and rest 18/100, Cardio status 25/100, Activity and quiet rest 71/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Sleep and rest 18/100, Cardio status 25/100, Activity and quiet rest 71/100; Movement intensity score 100/100.\nImmediate-action 0 day(s), prompt-action 5, priority-review 5; end-date score 37.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Compare weekly trends and collect repeated low-score records.\nPromptly reduce exertion; observe appetite and willingness to move, and review whether rest, cardio or activity contributed.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "recovery",
+            "s": "7",
+            "r": "high",
+            "u": "immediate",
+            "label": "High risk · Immediate action",
+            "reason": "Reasons\n15/30 valid scored days; 15 high-risk, 0 moderate and 0 low-risk days. Lowest 0 (2026-11-22).\nOn the lowest-scoring day: Heart rate did not fall by the end of two minutes; check the effort level, resting reference and breathing recovery as well.\nLowest day’s data: Two minutes after activity; Pulse 221 → 234.8 bpm.\nPulse fall -13.8 bpm; Pulse at 120s 234.8 bpm (reference 132 bpm); Breathing recovery score 0/100.\nImmediate-action 12 day(s), prompt-action 3, priority-review 0; end-date score 0.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Compare weekly trends and collect repeated low-score records.\nStop extra exercise now and check pulse and breathing after rest; do not exercise to retest. Contact a vet immediately if severe valid abnormalities persist.\nIf your pet now has laboured breathing, blue or pale gums, collapse or inability to stand, seek emergency veterinary care immediately; do not wait for another reading.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "calm",
+            "s": "50",
+            "r": "high",
+            "u": "priority",
+            "label": "High risk · Priority review",
+            "reason": "Reasons\n16/30 valid scored days; 11 high-risk, 0 moderate and 5 low-risk days. Lowest 25 (2026-11-23).\nOn the lowest-scoring day: The main weaker scoring inputs are Breathing 4/100, Quiet-rest quality 5/100, Heart rate 14/100, HRV 89/100; these contribute to this score.\nLowest day’s data: Lower-scoring inputs: Breathing 4/100, Quiet-rest quality 5/100, Heart rate 14/100, HRV 89/100.\nImmediate-action 0 day(s), prompt-action 7, priority-review 4; end-date score 27.",
+            "advice": "Recommendations\nReview this period at the indicated urgency; check the current condition first. Compare weekly trends and collect repeated low-score records.\nPromptly reduce environmental stimulation, allow settling and recheck resting pulse, breathing and rest quality.",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp901-overall-head dp1046-primary-head dp217-primary",
+            "28"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "57"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "7"
+          ],
+          [
+            "dp901-metric-card dp902-calm-target dp217-child",
+            "50"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "en",
+          30,
+          2
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "28",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "energy",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "recovery",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "calm",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "Includes sample data"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 0,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          1,
+          0
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 0,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          7,
+          0
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 0,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          30,
+          0
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 1,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp-owner-status-heading dp-heart-overall-heading dp1048-sleep-day-head dp1052-sleep-flow dp1046-primary-head dp217-primary",
+            ""
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          1,
+          1
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 1,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          7,
+          1
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 1,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          30,
+          1
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 2,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          1,
+          2
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 2,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          7,
+          2
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 2,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "en",
+          30,
+          2
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 0,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          1,
+          0
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 0,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          7,
+          0
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 0,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          30,
+          0
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 1,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp-owner-status-heading dp-heart-overall-heading dp1048-sleep-day-head dp1052-sleep-flow dp1046-primary-head dp217-primary",
+            ""
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          1,
+          1
+        ],
+        "layout": {
+          "numberDx": 0,
+          "numberDy": 0,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 1,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          7,
+          1
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 1,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          30,
+          1
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 2,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          1,
+          2
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 2,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          7,
+          2
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 2,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "en",
+          30,
+          2
+        ],
+        "layout": {
+          "numberDx": null,
+          "numberDy": null,
+          "number": "N/A",
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "console": []
+}

@@ -11,12 +11,51 @@
  const currentDate=()=>iso(localDate());
  const all=()=>root.DeepPetSignalScoring?.getDaily?.(state.dog)||[];
  const today=()=>all().find(x=>x?.date===currentDate())||null;
- function period(days){
-  // A selected historical day must show THAT day's reasons, not today's.
-  const chosen=days===1&&/^\d{4}-\d{2}-\d{2}$/.test(state.deepSelectedDate||'')?state.deepSelectedDate:currentDate();
+ // V10.166: narrative and detailed charts share an explicit calendar anchor.
+ const validDate=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&Number.isFinite(Date.parse(x+'T12:00:00Z'))&&new Date(x+'T12:00:00Z').toISOString().slice(0,10)===x;
+ function narrativeAnchor(explicit){
+  if(explicit!==undefined)return validDate(explicit)?explicit:null;
+  if(state.tab!=='deep')return currentDate();
+  const d=state.detail;
+  const detailDate=d==='dp90-waveform'?(state.dp905WaveMode==='day'?(state.dp905ChosenDate||state.dp90WaveDate):state.dp90WaveDate):
+   d==='dp905-sleep-day'?state.dp905ChosenDate:
+   d==='dp936-energy-detail'?(state.dp936EnergyDate||state.dp905ChosenDate):
+   d==='dp905-energy-day'?state.dp905ChosenDate:null;
+  const selected=detailDate||state.deepSelectedDate||currentDate();
+  return validDate(selected)?selected:null;
+ }
+ function period(days,asOf){
+  const chosen=narrativeAnchor(asOf),n=[1,7,30].includes(Number(days))?Number(days):1;
+  if(!chosen)return [];
   const t=Date.parse(chosen+'T12:00:00Z');
-  return all().filter(x=>x&&x.date&&Date.parse(x.date+'T12:00:00Z')>t-days*86400000&&
+  return all().filter(x=>x&&x.date&&Date.parse(x.date+'T12:00:00Z')>t-n*86400000&&
    Date.parse(x.date+'T12:00:00Z')<=t&&finite(x.scores?.physiol)).sort((a,b)=>a.date.localeCompare(b.date));}
+ // Read narrative measurements from the same unified day used by the rings.
+ // Do not backfill unavailable features with gallery fixture values.
+ function canonicalFeature(row){
+  const u=row?.unified;if(!u)return {date:row?.date};
+  const d=u.details||{},full=u.rest?.all?.observedSeconds>=.75*86400;
+  const h=d.heart?.medianBpm??null,r=d.breath?.medianPerMin??null;
+  const hrv=u.hrv||{},motion=d.energy?.avgMotion??null;
+  return {date:row.date,source:row.dataProvenance||u.dataProvenance||row.source,
+   heart:h,breath:r,quietHeartRate:h,quietBreathRate:r,
+   heartRate:u.vitals?.hrMedian??null,breathRate:u.vitals?.rrMedian??null,
+   heartSpread:d.heart?.observedSd??null,breathSpread:d.breath?.observedSd??null,
+   rmssd:hrv.rmssd??null,sdnn:hrv.sdnn??null,activity:motion,motionMean:motion,
+   restHours:full?u.rest.all.restSeconds/3600:null,
+   restFraction:full&&u.rest.all.observedSeconds>0?u.rest.all.restSeconds/u.rest.all.observedSeconds:null,
+   recoveryDrop:d.recovery?.primary?.drop??d.recovery?.drop??null,
+   recoveryEvents:d.recovery?.events||[]};
+ }
+ function priorComparable(samples,limit=14){
+  const first=samples.map(x=>x?.row?.date).filter(validDate).sort()[0];
+  const sources=new Set(samples.map(x=>x?.row?.source).filter(Boolean));
+  // Never compare an actual record with an illustrative date or unlike signal provenance.
+  if(!first||sources.size!==1)return [];
+  const source=[...sources][0];
+  return all().filter(x=>x?.unified&&validDate(x.date)&&x.date<first)
+   .map(canonicalFeature).filter(x=>x.source===source).sort((a,b)=>a.date.localeCompare(b.date)).slice(-limit);
+ }
  const average=(rows,key)=>{const v=rows.map(x=>x.scores?.[key]).filter(finite);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):null;};
  const latest=(rows)=>rows.at(-1)||null;
  const evidence=(row)=>row?.fixtureEvidence?.references?row.fixtureEvidence:null;
@@ -134,7 +173,7 @@
   return (m[key]?.()||[]).filter(Boolean);
  }
  const components={cardio:['heart','breath','hrv','stable'],activityRecovery:['energy','recovery','calm'],
-  calm:['heart','breath','hrv','sleep'],rhythm:['stable','calm']};
+  calm:['heart','breath','hrv'],rhythm:['stable','hrv']};
  function contributingScores(key,rows){
   const fields=components[key];if(!fields)return null;
   const entries=fields.map(k=>({k,n:average(rows,k)})).filter(x=>finite(x.n)).sort((a,b)=>a.n-b.n);
@@ -458,7 +497,7 @@
   if(risk===0)return [...lines,...adaptiveLines(key,low||anchor,days,rows)];
   const row=low||anchor,s=row.scores||{},input=realInputs[key]||[],f=feature(row);
   if(risk>=3)lines.push(allIndicatorBurden(row));
-  const scoredComponents={cardio:['heart','breath'],activityRecovery:['energy','recovery','calm'],rhythm:['stable','calm'],calm:['heart','breath','hrv','sleep']};
+  const scoredComponents={cardio:['heart','breath'],activityRecovery:['energy','recovery','calm'],rhythm:['stable','hrv'],calm:['heart','breath','hrv']};
   const components=scoredComponents[key]||[];
   if(components.length){const comps=components.filter(k=>finite(s[k]));
    lines.push(L(`在 ${row.date} 可核對的子項：${comps.map(k=>`${label[k]?.()||k} ${s[k]}/100`).join('、')}。其中高風險子項須優先查看；不能把缺測或健康項目當成同樣嚴重。`,
@@ -611,7 +650,7 @@
    state.dp905WaveMode==='day'?(state.dp905ChosenDate||state.dp90WaveDate):state.dp90WaveDate;
   const rows=days===1&&/^\d{4}-\d{2}-\d{2}$/.test(date||'')?
    all().filter(x=>x?.date===date&&finite(x.scores?.physiol)):
-   period(days);
+   period(days,date||undefined);
   if(!rows.length||!(evidence(latest(rows))||latest(rows)?.source==='20hz-waveform'))return;
   const shown=days===1?latest(rows).scores?.[key]:average(rows,key);
   const oldRing=Number(card.querySelector('.dp1068-detail-ring')?.textContent?.trim());
@@ -630,26 +669,12 @@
  // measured pet could show N/A or borrow a gallery date in detailed views.
  // Keep the gallery calendar path intact; isolate the real source completely.
  if(root.DeepPetUX1050&&typeof root.DeepPetUX1050.scope==='function'){
-  const legacyScope=root.DeepPetUX1050.scope;
-  root.DeepPetUX1050.scope=function(days=1){
-   if(typeof dpUsesRealMeasurements!=='function'||!dpUsesRealMeasurements(state.dog))return legacyScope.apply(this,arguments);
-   const range=[1,7,30].includes(Number(days))?Number(days):1;
-   const detail=state.detail;
-   const detailDate=detail==='dp90-waveform'&&state.dp905WaveMode==='day'?
-    (state.dp905ChosenDate||state.dp90WaveDate):
-    detail==='dp905-sleep-day'?state.dp905ChosenDate:
-    ['dp905-energy-day','dp936-energy-detail'].includes(detail)?
-     (state.dp936EnergyDate||state.dp905ChosenDate):null;
-   const selected=detailDate||state.deepSelectedDate;
-   const chosen=range===1&&/^\d{4}-\d{2}-\d{2}$/.test(selected||'')?selected:currentDate();
-   const end=Date.parse(chosen+'T12:00:00Z');
-   const features=new Map((root.DeepPetSignalScoring?.getFeatures?.(state.dog)||[])
-    .filter(x=>x?.date).map(x=>[x.date,x]));
-   return (root.DeepPetSignalScoring?.getDaily?.(state.dog)||[])
-    .filter(x=>x?.source==='20hz-waveform'&&finite(x?.scores?.physiol)&&
-     Date.parse(x.date+'T12:00:00Z')<=end&&Date.parse(x.date+'T12:00:00Z')>end-range*86400000)
-    .sort((a,b)=>a.date.localeCompare(b.date))
-    .map(x=>({row:{date:x.date,...(features.get(x.date)||{}),source:'20hz-waveform'},scores:x.scores}));
+  root.DeepPetUX1050.scope=function(days=1,asOf){
+   const real=typeof dpUsesRealMeasurements==='function'&&dpUsesRealMeasurements(state.dog);
+   const gallery=new Map((typeof demoRecords==='function'?demoRecords(state.dog):[]).map((r,idx)=>[r.date,{idx}]));
+   return period(days,asOf).filter(x=>x.unified&&(!real||x.source==='20hz-waveform'||(state.dog===0&&!!x.dataProvenance))).map(x=>({
+    row:{...(gallery.get(x.date)||{}),...canonicalFeature(x),date:x.date},scores:x.scores
+   }));
   };
  }
  const oldDeepItems=dpTodayDeepItems;
@@ -692,9 +717,9 @@
   const card=e.target?.closest?.('.dp916-health-card,.dp916-home-card');
   if(card&&!e.target.closest('button,a,input,select,details')){e.preventDefault();root.DeepPetExam921?.showList?.();}
  },true);
- root.DeepPetEvidenceNarrative124=Object.freeze({version:'10.126',period,explanation,quantified,updateDeep,updateDetail,allIndicatorBurden,adaptiveLines});
+ root.DeepPetEvidenceNarrative124=Object.freeze({version:'10.166',period,canonicalFeature,priorComparable,explanation,quantified,updateDeep,updateDetail,allIndicatorBurden,adaptiveLines});
  root.DeepPetEvidenceNarrative125=root.DeepPetEvidenceNarrative124;
- root.DeepPetBuildVersion='10.126';
+ root.DeepPetBuildVersion='10.204';
  document.querySelectorAll?.('#app .app-build-version')?.forEach(el=>{el.textContent='DeepPet Version 10.126';});
  root.DeepPetRelease={...root.DeepPetRelease,version:'10.126',integrity:[...(root.DeepPetRelease?.integrity||[]),
   'evidence-first-four-language-low-score-copy','score-tiered-today-action-labels','all-pet-longitudinal-eligibility',
@@ -709,6 +734,6 @@
  // one-line language until its owner changes tabs for the first time.
  if(typeof setTimeout==='function'&&typeof render==='function'&&
     document.querySelector?.('#app .app-main')){
-  setTimeout(()=>{try{render(false);}catch(error){console.error('DeepPet initial evidence refresh',error);}},0);
+  if(!window.__dpBooting)setTimeout(()=>{try{render(false);}catch(error){console.error('DeepPet initial evidence refresh',error);}},0);
  }
 })(window);

@@ -1,0 +1,337 @@
+{
+  "pages": 1188,
+  "passed": 1188,
+  "profiles": 33,
+  "data_profiles": 31,
+  "daily_metrics_zht": 310,
+  "daily_NA": 0,
+  "guidance_blocks": 3720,
+  "total_severity": {
+    "watch": 936,
+    "maintain": 1040,
+    "improve": 544,
+    "unknown": 200,
+    "priority": 404,
+    "prompt": 264,
+    "immediate": 332
+  },
+  "per_language": {
+    "zht": {
+      "pages": 297,
+      "blocks": 930,
+      "severity": {
+        "watch": 234,
+        "maintain": 260,
+        "improve": 136,
+        "unknown": 50,
+        "priority": 101,
+        "prompt": 66,
+        "immediate": 83
+      },
+      "javascript_exceptions": 0,
+      "console_errors": 0,
+      "score_label_mismatch": 0
+    },
+    "zh": {
+      "pages": 297,
+      "blocks": 930,
+      "severity": {
+        "watch": 234,
+        "maintain": 260,
+        "improve": 136,
+        "unknown": 50,
+        "priority": 101,
+        "prompt": 66,
+        "immediate": 83
+      },
+      "javascript_exceptions": 0,
+      "console_errors": 0,
+      "score_label_mismatch": 0
+    },
+    "en": {
+      "pages": 297,
+      "blocks": 930,
+      "severity": {
+        "watch": 234,
+        "maintain": 260,
+        "improve": 136,
+        "unknown": 50,
+        "priority": 101,
+        "prompt": 66,
+        "immediate": 83
+      },
+      "javascript_exceptions": 0,
+      "console_errors": 0,
+      "score_label_mismatch": 0
+    },
+    "ko": {
+      "pages": 297,
+      "blocks": 930,
+      "severity": {
+        "watch": 234,
+        "maintain": 260,
+        "improve": 136,
+        "unknown": 50,
+        "priority": 101,
+        "prompt": 66,
+        "immediate": 83
+      },
+      "javascript_exceptions": 0,
+      "console_errors": 0,
+      "score_label_mismatch": 0
+    }
+  },
+  "unavailable_periods_zht": [
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "cardio"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "heart"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "breath"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "hrv"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "stable"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "cardio"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "heart"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "breath"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "hrv"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "stable"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "sleep"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "sleep"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "activityRecovery"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "energy"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "recovery"
+    },
+    {
+      "pet": "拉菲",
+      "days": 7,
+      "metric": "calm"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "activityRecovery"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "energy"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "recovery"
+    },
+    {
+      "pet": "拉菲",
+      "days": 30,
+      "metric": "calm"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "cardio"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "heart"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "breath"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "hrv"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "stable"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "sleep"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "activityRecovery"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "energy"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "recovery"
+    },
+    {
+      "pet": "Max",
+      "days": 30,
+      "metric": "calm"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "cardio"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "heart"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "breath"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "hrv"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "stable"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "sleep"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "activityRecovery"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "energy"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "recovery"
+    },
+    {
+      "pet": "Dodo",
+      "days": 30,
+      "metric": "calm"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "cardio"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "heart"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "breath"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "hrv"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "stable"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "sleep"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "activityRecovery"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "energy"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "recovery"
+    },
+    {
+      "pet": "Snowy",
+      "days": 30,
+      "metric": "calm"
+    }
+  ],
+  "source": "Actual embedded Chromium DOM capture; 2026-11-26; independent synthetic/replay records not live sensor data."
+}

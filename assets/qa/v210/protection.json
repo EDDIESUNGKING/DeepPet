@@ -1,0 +1,24 @@
+{
+  "nonQAChanged": [
+    "index.html",
+    "VERSION.txt",
+    "assets/js/release-206.js",
+    "assets/js/verified.js",
+    "assets/js/gallery-async.js"
+  ],
+  "missing": [],
+  "new": [],
+  "data": {
+    "total": 747,
+    "same": 747
+  },
+  "images": {
+    "total": 246,
+    "same": 246
+  },
+  "CSS": {
+    "total": 12,
+    "same": 12
+  },
+  "coreSame": true
+}

@@ -1,0 +1,8 @@
+FAIL physical-form/food Pointer target obstructed [data-action="meal-edit-save"]
+PASS physical-form/medication 
+PASS physical-form/vaccination 
+PASS physical-form/deworming 
+PASS physical-form/extra-notes 
+PASS physical-form/recovery 
+PASS physical-form/vet-preview 
+SUMMARY 7 6 1 0

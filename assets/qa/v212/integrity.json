@@ -1,0 +1,16 @@
+{
+  "originals": 1546,
+  "unchanged": 1539,
+  "changed": [
+    "index.html",
+    "assets/js/release-206.js",
+    "assets/js/verified.js",
+    "assets/qa/remaining-211.py",
+    "RUN_BROWSER_AUDIT.bat",
+    "VERSION.txt",
+    "README.md"
+  ],
+  "missing": [],
+  "protected": 789,
+  "all_protected_unchanged": true
+}

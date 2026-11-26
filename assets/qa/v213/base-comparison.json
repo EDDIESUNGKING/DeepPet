@@ -1,0 +1,21 @@
+{
+  "original": 1568,
+  "unchanged": 1557,
+  "changed": [
+    "VERSION.txt",
+    "assets/js/dated-summary.js",
+    "assets/js/gallery-async.js",
+    "assets/js/gallery-worker-source.js",
+    "assets/js/lafa-precomputed.js",
+    "assets/js/lafa-source-label.js",
+    "assets/js/lafa-wave-23.js",
+    "assets/js/milo-adaptive-scores.js",
+    "assets/js/release-206.js",
+    "assets/js/verified.js",
+    "index.html"
+  ],
+  "missing": [],
+  "coreUnchanged": true,
+  "allOriginalLazyUnchanged": true,
+  "allCSSUnchanged": true
+}

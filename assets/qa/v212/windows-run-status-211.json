@@ -1,0 +1,56 @@
+{
+  "requested": [
+    "forms",
+    "alerts",
+    "matrix-zht",
+    "matrix-zh",
+    "matrix-en",
+    "matrix-ko",
+    "details-zht",
+    "details-zh",
+    "details-en",
+    "details-ko"
+  ],
+  "finished": [
+    {
+      "suite": "forms",
+      "exit_code": 1
+    },
+    {
+      "suite": "alerts",
+      "exit_code": 0
+    },
+    {
+      "suite": "matrix-zht",
+      "exit_code": 0
+    },
+    {
+      "suite": "matrix-zh",
+      "exit_code": 0
+    },
+    {
+      "suite": "matrix-en",
+      "exit_code": 0
+    },
+    {
+      "suite": "matrix-ko",
+      "exit_code": 0
+    },
+    {
+      "suite": "details-zht",
+      "exit_code": 0
+    },
+    {
+      "suite": "details-zh",
+      "exit_code": 1
+    },
+    {
+      "suite": "details-en",
+      "exit_code": 1
+    },
+    {
+      "suite": "details-ko",
+      "exit_code": 0
+    }
+  ]
+}

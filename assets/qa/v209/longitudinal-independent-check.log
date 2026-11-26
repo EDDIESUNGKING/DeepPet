@@ -1,0 +1,9 @@
+{
+  "assertions": 47023,
+  "period": 21600,
+  "wellness": 900,
+  "longitudinalDays": 1825,
+  "elapsedMs": 3981.6087000000007,
+  "errors": 0,
+  "firstFailures": []
+}

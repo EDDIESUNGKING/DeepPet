@@ -1,0 +1,208 @@
+DEBUG ['function', 'object', 'object', True, 46, '1\n2\n3\n4\n5\n拉菲\nNo pet yet\nNew Pet\nLuna\nCoco\nLeo\nPoppy\nNori\nMiso\nMochi\nKiki\nMax\nRex\nBella\nDodo\nSnowy\nNana\nAtlas\nSunny\nTaro\nBobo\nBruno\nNorth\nGoldie\nKumo\nPercy\nEverest\nWillow\nYuki\nAsh\nTiger\nCloud\nLucky\n＋\nAdd pet\nBattery 87%\n拉菲\nAlaskan Malamute · 6 yr · 55.0 kg\nUrgent alerts\n\nNo qualifying anomaly events\n']
+BOOT 2026-11-25 2.221 {'date': '2026-11-25', 'version': '10.210', 'pet': 0, 'empty': False, 'dates': ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25'], 'scores': [['2026-11-25', 82, 87]]}
+PASS nav me 0.192
+PASS language open zht 0.077
+PASS language choose zht 0.551
+PASS nav home 0.148
+PASS pet 1 0.26
+PASS nav deep 0.19
+PASS zht 1 category 0 0.101
+PASS zht 1 0 range 1 0.087
+STATE zht 1 0 1 {"bad": false, "title": ["深入分析", "心肺綜合狀態"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zht 1 0 range 7 0.118
+STATE zht 1 0 7 {"bad": false, "title": ["深入分析", "心肺綜合狀態"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zht 1 0 range 30 0.094
+STATE zht 1 0 30 {"bad": false, "title": ["深入分析", "心肺綜合狀態"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zht 1 category 1 0.098
+PASS zht 1 1 range 1 0.154
+STATE zht 1 1 1 {"bad": false, "title": ["深入分析", "睡眠情況"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS zht 1 1 range 7 0.069
+STATE zht 1 1 7 {"bad": false, "title": ["深入分析", "睡眠情況"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zht 1 1 range 30 0.073
+STATE zht 1 1 30 {"bad": false, "title": ["深入分析", "睡眠情況"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zht 1 category 2 0.102
+PASS zht 1 2 range 1 0.179
+STATE zht 1 2 1 {"bad": false, "title": ["深入分析", "精力與恢復狀態"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS zht 1 2 range 7 0.107
+STATE zht 1 2 7 {"bad": false, "title": ["深入分析", "精力與恢復狀態"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS zht 1 2 range 30 0.113
+STATE zht 1 2 30 {"bad": false, "title": ["深入分析", "精力與恢復狀態"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS nav home 0.135
+PASS pet 30 0.083
+PASS nav deep 0.073
+PASS zht 30 category 0 0.054
+PASS zht 30 0 range 1 0.055
+STATE zht 30 0 1 {"bad": false, "title": ["深入分析", "心肺綜合狀態"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zht 30 0 range 7 0.044
+STATE zht 30 0 7 {"bad": false, "title": ["深入分析", "心肺綜合狀態"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zht 30 0 range 30 0.066
+STATE zht 30 0 30 {"bad": false, "title": ["深入分析", "心肺綜合狀態"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zht 30 category 1 0.08
+PASS zht 30 1 range 1 0.07
+STATE zht 30 1 1 {"bad": false, "title": ["深入分析", "睡眠情況"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS zht 30 1 range 7 0.058
+STATE zht 30 1 7 {"bad": false, "title": ["深入分析", "睡眠情況"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zht 30 1 range 30 0.051
+STATE zht 30 1 30 {"bad": false, "title": ["深入分析", "睡眠情況"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zht 30 category 2 0.067
+PASS zht 30 2 range 1 0.062
+STATE zht 30 2 1 {"bad": false, "title": ["深入分析", "精力與恢復狀態"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS zht 30 2 range 7 0.076
+STATE zht 30 2 7 {"bad": false, "title": ["深入分析", "精力與恢復狀態"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS zht 30 2 range 30 0.056
+STATE zht 30 2 30 {"bad": false, "title": ["深入分析", "精力與恢復狀態"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS nav me 0.09
+PASS language open zh 0.048
+PASS language choose zh 0.313
+PASS nav home 0.073
+PASS pet 1 0.132
+PASS nav deep 0.115
+PASS zh 1 category 0 0.094
+PASS zh 1 0 range 1 0.091
+STATE zh 1 0 1 {"bad": false, "title": ["深入分析", "心肺综合状态"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zh 1 0 range 7 0.088
+STATE zh 1 0 7 {"bad": false, "title": ["深入分析", "心肺综合状态"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zh 1 0 range 30 0.114
+STATE zh 1 0 30 {"bad": false, "title": ["深入分析", "心肺综合状态"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zh 1 category 1 0.091
+PASS zh 1 1 range 1 0.108
+STATE zh 1 1 1 {"bad": false, "title": ["深入分析", "睡眠情况"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS zh 1 1 range 7 0.068
+STATE zh 1 1 7 {"bad": false, "title": ["深入分析", "睡眠情况"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zh 1 1 range 30 0.077
+STATE zh 1 1 30 {"bad": false, "title": ["深入分析", "睡眠情况"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zh 1 category 2 0.091
+PASS zh 1 2 range 1 0.168
+STATE zh 1 2 1 {"bad": false, "title": ["深入分析", "精力与恢复状态"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS zh 1 2 range 7 0.1
+STATE zh 1 2 7 {"bad": false, "title": ["深入分析", "精力与恢复状态"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS zh 1 2 range 30 0.111
+STATE zh 1 2 30 {"bad": false, "title": ["深入分析", "精力与恢复状态"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS nav home 0.114
+PASS pet 30 0.078
+PASS nav deep 0.062
+PASS zh 30 category 0 0.06
+PASS zh 30 0 range 1 0.05
+STATE zh 30 0 1 {"bad": false, "title": ["深入分析", "心肺综合状态"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zh 30 0 range 7 0.065
+STATE zh 30 0 7 {"bad": false, "title": ["深入分析", "心肺综合状态"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zh 30 0 range 30 0.063
+STATE zh 30 0 30 {"bad": false, "title": ["深入分析", "心肺综合状态"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS zh 30 category 1 0.109
+PASS zh 30 1 range 1 0.059
+STATE zh 30 1 1 {"bad": false, "title": ["深入分析", "睡眠情况"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS zh 30 1 range 7 0.057
+STATE zh 30 1 7 {"bad": false, "title": ["深入分析", "睡眠情况"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zh 30 1 range 30 0.052
+STATE zh 30 1 30 {"bad": false, "title": ["深入分析", "睡眠情况"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS zh 30 category 2 0.063
+PASS zh 30 2 range 1 0.052
+STATE zh 30 2 1 {"bad": false, "title": ["深入分析", "精力与恢复状态"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS zh 30 2 range 7 0.062
+STATE zh 30 2 7 {"bad": false, "title": ["深入分析", "精力与恢复状态"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS zh 30 2 range 30 0.067
+STATE zh 30 2 30 {"bad": false, "title": ["深入分析", "精力与恢复状态"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS nav me 0.102
+PASS language open ko 0.05
+PASS language choose ko 0.302
+PASS nav home 0.075
+PASS pet 1 0.124
+PASS nav deep 0.115
+PASS ko 1 category 0 0.099
+PASS ko 1 0 range 1 0.088
+STATE ko 1 0 1 {"bad": false, "title": ["심층 분석", "심폐 종합 상태"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS ko 1 0 range 7 0.079
+STATE ko 1 0 7 {"bad": false, "title": ["심층 분석", "심폐 종합 상태"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS ko 1 0 range 30 0.089
+STATE ko 1 0 30 {"bad": false, "title": ["심층 분석", "심폐 종합 상태"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS ko 1 category 1 0.086
+PASS ko 1 1 range 1 0.091
+STATE ko 1 1 1 {"bad": false, "title": ["심층 분석", "수면 상태"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS ko 1 1 range 7 0.062
+STATE ko 1 1 7 {"bad": false, "title": ["심층 분석", "수면 상태"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS ko 1 1 range 30 0.074
+STATE ko 1 1 30 {"bad": false, "title": ["심층 분석", "수면 상태"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS ko 1 category 2 0.126
+PASS ko 1 2 range 1 0.152
+STATE ko 1 2 1 {"bad": false, "title": ["심층 분석", "활력과 회복 상태"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS ko 1 2 range 7 0.107
+STATE ko 1 2 7 {"bad": false, "title": ["심층 분석", "활력과 회복 상태"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS ko 1 2 range 30 0.121
+STATE ko 1 2 30 {"bad": false, "title": ["심층 분석", "활력과 회복 상태"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS nav home 0.115
+PASS pet 30 0.081
+PASS nav deep 0.064
+PASS ko 30 category 0 0.065
+PASS ko 30 0 range 1 0.06
+STATE ko 30 0 1 {"bad": false, "title": ["심층 분석", "심폐 종합 상태"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS ko 30 0 range 7 0.051
+STATE ko 30 0 7 {"bad": false, "title": ["심층 분석", "심폐 종합 상태"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS ko 30 0 range 30 0.069
+STATE ko 30 0 30 {"bad": false, "title": ["심층 분석", "심폐 종합 상태"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS ko 30 category 1 0.061
+PASS ko 30 1 range 1 0.077
+STATE ko 30 1 1 {"bad": false, "title": ["심층 분석", "수면 상태"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS ko 30 1 range 7 0.082
+STATE ko 30 1 7 {"bad": false, "title": ["심층 분석", "수면"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS ko 30 1 range 30 0.056
+STATE ko 30 1 30 {"bad": false, "title": ["심층 분석", "수면"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS ko 30 category 2 0.068
+PASS ko 30 2 range 1 0.072
+STATE ko 30 2 1 {"bad": false, "title": ["심층 분석", "활력과 회복 상태"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS ko 30 2 range 7 0.056
+STATE ko 30 2 7 {"bad": false, "title": ["심층 분석", "활력과 회복 상태"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS ko 30 2 range 30 0.067
+STATE ko 30 2 30 {"bad": false, "title": ["심층 분석", "활력과 회복 상태"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS nav me 0.094
+PASS language open en 0.059
+PASS language choose en 0.306
+PASS nav home 0.082
+PASS pet 1 0.162
+PASS nav deep 0.114
+PASS en 1 category 0 0.114
+PASS en 1 0 range 1 0.069
+STATE en 1 0 1 {"bad": false, "title": ["Deep", "Overall heart & breathing"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS en 1 0 range 7 0.082
+STATE en 1 0 7 {"bad": false, "title": ["Deep", "Overall heart & breathing"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS en 1 0 range 30 0.117
+STATE en 1 0 30 {"bad": false, "title": ["Deep", "Overall heart & breathing"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS en 1 category 1 0.114
+PASS en 1 1 range 1 0.097
+STATE en 1 1 1 {"bad": false, "title": ["Deep", "Sleep & rest"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS en 1 1 range 7 0.073
+STATE en 1 1 7 {"bad": false, "title": ["Deep", "Sleep & rest"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS en 1 1 range 30 0.063
+STATE en 1 1 30 {"bad": false, "title": ["Deep", "Sleep & rest"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS en 1 category 2 0.126
+PASS en 1 2 range 1 0.182
+STATE en 1 2 1 {"bad": false, "title": ["Deep", "Energy & Recovery"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS en 1 2 range 7 0.093
+STATE en 1 2 7 {"bad": false, "title": ["Deep", "Energy & Recovery"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS en 1 2 range 30 0.095
+STATE en 1 2 30 {"bad": false, "title": ["Deep", "Energy & Recovery"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null], ["inspect-minute-day", null, null]]}
+PASS nav home 0.1
+PASS pet 30 0.08
+PASS nav deep 0.084
+PASS en 30 category 0 0.059
+PASS en 30 0 range 1 0.055
+STATE en 30 0 1 {"bad": false, "title": ["Deep", "Overall heart & breathing"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS en 30 0 range 7 0.055
+STATE en 30 0 7 {"bad": false, "title": ["Deep", "Overall heart & breathing"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS en 30 0 range 30 0.07
+STATE en 30 0 30 {"bad": false, "title": ["Deep", "Overall heart & breathing"], "actions": [["deep-select-day", null, null], ["dp90-wave-open", "heart", null], ["dp90-wave-open", "breath", null]]}
+PASS en 30 category 1 0.08
+PASS en 30 1 range 1 0.064
+STATE en 30 1 1 {"bad": false, "title": ["Deep", "Sleep & rest"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["sleep-slot", null, null], ["dp905-date-open", "sleep", null]]}
+PASS en 30 1 range 7 0.057
+STATE en 30 1 7 {"bad": false, "title": ["Deep", "Sleep & rest"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS en 30 1 range 30 0.05
+STATE en 30 1 30 {"bad": false, "title": ["Deep", "Sleep & rest"], "actions": [["deep-select-day", null, null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null], ["dp905-date-open", "sleep", null]]}
+PASS en 30 category 2 0.067
+PASS en 30 2 range 1 0.066
+STATE en 30 2 1 {"bad": false, "title": ["Deep", "Energy & Recovery"], "actions": [["deep-day-step", null, null], ["deep-day-step", null, null], ["deep-day-jump", null, null], ["deep-day-jump", null, null], ["dp905-energy-day-link", null, null]]}
+PASS en 30 2 range 7 0.07
+STATE en 30 2 7 {"bad": false, "title": ["Deep", "Energy & Recovery"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS en 30 2 range 30 0.054
+STATE en 30 2 30 {"bad": false, "title": ["Deep", "Energy & Recovery"], "actions": [["deep-select-day", null, null], ["dp908-energy-period-open", null, null]]}
+PASS nav home 0.075
+UI_SUMMARY {"passed": 133, "failed": [], "pageErrors": []}

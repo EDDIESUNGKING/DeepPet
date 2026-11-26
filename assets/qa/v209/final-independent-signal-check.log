@@ -1,0 +1,38 @@
+PASS constant 800ms IBI exact zero RMSSD SDNN
+PASS alternating 700/900ms exact 200ms RMSSD
+PASS missing intervals cannot bridge successive difference
+PASS duplicate or backward times rejected
+{
+  "checks": 8,
+  "quantizationExample": [
+    {
+      "samplingHz": 20,
+      "gridMs": 50,
+      "constantTrueIBIms": 803,
+      "RMSSDfromQuantizedPeaks": 17.3421993904824,
+      "SDNNfromQuantizedPeaks": 11.889212903243285
+    },
+    {
+      "samplingHz": 50,
+      "gridMs": 20,
+      "constantTrueIBIms": 803,
+      "RMSSDfromQuantizedPeaks": 10.968169942141635,
+      "SDNNfromQuantizedPeaks": 7.150371986748115
+    },
+    {
+      "samplingHz": 100,
+      "gridMs": 10,
+      "constantTrueIBIms": 803,
+      "RMSSDfromQuantizedPeaks": 7.755667343294813,
+      "SDNNfromQuantizedPeaks": 4.588314677411235
+    },
+    {
+      "samplingHz": 255,
+      "gridMs": 3.9215686274509802,
+      "constantTrueIBIms": 803,
+      "RMSSDfromQuantizedPeaks": 2.6918589294657465,
+      "SDNNfromQuantizedPeaks": 1.6648228043179523
+    }
+  ],
+  "note": "Ideal constant IBI with nearest-grid quantization. Illustrative only, not actual device error or clinical validation; interpolated peaks may differ."
+}

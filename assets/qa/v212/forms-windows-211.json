@@ -1,0 +1,63 @@
+{
+  "mode": "http",
+  "suite": "forms",
+  "fixture_date": "2026-11-25",
+  "results": [
+    {
+      "case": "physical-form/food",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/medication",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/vaccination",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/deworming",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/extra-notes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/recovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/vet-preview",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/summary-ranges",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/pet-profile",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/persistence-http",
+      "status": "FAIL",
+      "detail": "Pointer target obstructed .bottom-nav [data-action=\"nav\"][data-page=\"home\"]"
+    }
+  ],
+  "errors": [],
+  "console": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "physical_override": true,
+  "scope": "Only listed cases were run. Matrix uses DOM events unless --physical is set; individual alert/help DOM events remain labelled. Clinical/semantic validity is not implied. Date scope: all"
+}

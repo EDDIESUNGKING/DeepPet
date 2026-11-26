@@ -1,0 +1,37 @@
+{
+  "zh": {
+    "passed": 76,
+    "review": 0,
+    "planned": 297,
+    "completed": false
+  },
+  "zht": {
+    "passed": 81,
+    "review": 0,
+    "planned": 297,
+    "completed": false
+  },
+  "en": {
+    "passed": 90,
+    "review": 0,
+    "planned": 297,
+    "completed": false
+  },
+  "ko": {
+    "passed": 80,
+    "review": 0,
+    "planned": 297,
+    "completed": false
+  },
+  "targeted": {
+    "passed": 27,
+    "planned": 27,
+    "javascript_errors": 0,
+    "profiles": [
+      "Kiki",
+      "New Pet",
+      "blank"
+    ],
+    "language": "zh"
+  }
+}

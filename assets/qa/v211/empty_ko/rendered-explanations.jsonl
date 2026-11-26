@@ -1,0 +1,56 @@
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "food", "text": "9kg, 2세, 체형을 바탕으로 한 시작 권장량입니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "food", "text": "사료 종류에 따라 권장 g이 달라집니다. 열량은 식품 기준표로 환산합니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "food", "text": "이 날은 식사 기록이 없어요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "food", "text": "최근 7일간 기록한 음식·브랜드·g을 표시합니다. 반려동물별 식사 기록은 서로 섞이지 않습니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "food", "text": "음식 종류, 브랜드, g만 기록하세요. 식품별 100g당 기준 열량으로 계산합니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "med", "text": "약물·용량·시간·기간을 한 번 입력하면 매일 일정에 표시됩니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "med", "text": "오늘 확정된 투약 일정이 없습니다. 전체 처방을 확인하세요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "med", "text": "등록된 복약 일정이 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "med", "text": "확인된 기록이 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "vaccines", "text": "접종 일정을 정한 후 완료 표시, 수정, 삭제할 수 있어요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "vaccines", "text": "예정된 접종이 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "vaccines", "text": "완료된 기록이 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "deworming", "text": "체중에 맞는 규격을 선택하고 제품 포장 지침을 따르세요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "summary", "text": "두 가지 점수로 건강을 살펴봐요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "summary", "text": "최근 7일 동안 유효한 측정이 없어 건강 점수를 표시할 수 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "summary", "text": "이번 기간 기록 없음"}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "수술·질병·마취·복약·활동 후 회복 이유를 정하고 매일 활력·식욕·휴식을 기록하세요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "심폐 데이터가 아직 충분하지 않지만 활력·식욕·휴식을 기록할 수 있어요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "활력·식욕·휴식·비슷한 활동 후 회복 시간을 관찰하세요. 새 데이터가 부족하면 호전 여부를 단정하지 마세요."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "사유를 선택하고 회복 관찰 시작을 누르세요. 시작 전에는 14일 기록이 생성되지 않습니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "며칠 지속되거나 기력·식욕 저하, 기침 등이 동반되면 수의사와 상담하세요. 호흡곤란, 실신 등은 즉시 진료가 필요합니다."}
+{"lang": "ko", "pet": 30, "tab": "health", "detail": "notes", "text": "아직 기록이 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "일별 건강 변화와 기간 전체 결과"}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "건강 추세 추정치이며 실제 생물학적 나이는 아닙니다."}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "두 결과의 자료 출처를 구분했습니다."}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "심박, 호흡, HRV, 심박 리듬, 수면, 활동·회복 및 유효 검진 기록."}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "실제 나이와 최근 종합 건강 점수 및 그 근거 자료."}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "기본 정보는 있으나 측정 기록이 없어 기준을 표시하지 않습니다."}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "아직 유효한 측정 기록 없음 · 미측정은 실패나 0점이 아닙니다"}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "두 테스트 모두 연결 상태·건강 점수·긴급 알림에 영향을 주지 않습니다."}
+{"lang": "ko", "pet": 30, "tab": "me", "detail": null, "text": "연결 완료 후에만 기기 종류가 변경됩니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "전체 점수는 아래 측정값을 바탕으로 합니다. 각 항목에서 이유를 확인하세요."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "이 기간에는 믿을 만한 측정값이 없어 아직 점수를 표시할 수 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "HRV·RMSSD·SDNN은 무엇을 볼까요?HRV비슷한 휴식 상태에서 회복 추세를 비교하세요. 높다고 항상 좋은 것은 아닙니다.RMSSD인접한 심박 간격의 단기 변화로, 안정 시 비교하세요.SDNN유효 심박 간격의 전체 변화로, 같은 측정 길이를 비교하세요."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "HRV비슷한 휴식 상태에서 회복 추세를 비교하세요. 높다고 항상 좋은 것은 아닙니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "RMSSD인접한 심박 간격의 단기 변화로, 안정 시 비교하세요."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "SDNN유효 심박 간격의 전체 변화로, 같은 측정 길이를 비교하세요."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "심장 박동 시점이 충분히 정확한지 확인되지 않아 RMSSD / SDNN 결과를 아직 표시하지 않습니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "심박·호흡·HRV·리듬 추세를 종합합니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "4G + GPS 착용 기기를 연결하세요"}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "이 반려동물의 유효한 측정 데이터가 아직 없습니다. 데이터가 수신되면 분석 결과가 표시됩니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "점수 0/7일 · 관측 기준 충족 0일"}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "상세 데이터 보기›N/A"}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "날짜를 선택해 파형을 확인하세요"}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "회색: 유효 점수 없음"}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "과거 날짜에는 실시간 파형이 표시되지 않습니다"}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "점수 0/30일 · 관측 기준 충족 0일"}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "이 반려동물의 유효한 측정 기록이 없습니다. 목걸이 연결 및 측정 후 같은 위치에 분석을 표시합니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "아직 유효한 수면·휴식 기록이 없습니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "최근 7일 유효 수면 기록 N/A, 평균 휴식 N/A."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "각 날짜의 색상은 상태를 표시합니다."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "최근 30일 유효 수면 기록 N/A, 평균 휴식 N/A."}
+{"lang": "ko", "pet": 30, "tab": "deep", "detail": null, "text": "기간 요약: 활력 자료 부족 · 회복 자료 부족 · 휴식 자료 부족。"}
+{"lang": "ko", "pet": "blank", "tab": "health", "detail": "food", "text": "N/Akg, N/A세, 체형을 바탕으로 한 시작 권장량입니다."}
+{"lang": "ko", "pet": "blank", "tab": "me", "detail": null, "text": "이름·품종·나이·체중을 먼저 등록하세요."}
+{"lang": "ko", "pet": "blank", "tab": "deep", "detail": null, "text": "N/A · 측정 전"}

@@ -1,0 +1,41 @@
+{
+  "mode": "embedded",
+  "suite": "recheck",
+  "fixture_date": "2026-11-25",
+  "results": [
+    {
+      "case": "physical-form/persistence-http",
+      "status": "N/A",
+      "detail": "HTTP reload requires localhost; not substituted by embedded storage."
+    },
+    {
+      "case": "detail/en/9/deep/2/7/energy/2026-11-25",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "detail/en/24/deep/2/7/energy/2026-11-22",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "detail/zh/24/home/alert/0",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "thumbnail/03_Leo_Pug_v1002",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "thumbnail/13_Snowy_Golden_v1002",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "console": [],
+  "physical_override": true,
+  "scope": "Only listed cases were run. Matrix uses DOM events unless --physical is set; individual alert/help DOM events remain labelled. Clinical/semantic validity is not implied. Date scope: all"
+}

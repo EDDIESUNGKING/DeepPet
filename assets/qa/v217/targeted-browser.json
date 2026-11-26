@@ -1,0 +1,1752 @@
+{
+  "cases": [
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 0,
+      "days": 1,
+      "actual": {
+        "blocks": [
+          {
+            "k": "cardio",
+            "s": "25",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n主要较弱的计分因素为 呼吸情况 6/100、心跳情况 20/100、心搏节奏稳定度 86/100、HRV 89/100，共同影响本项分数。\n本日数据：较低计分项：呼吸情况 6/100、心跳情况 20/100、心搏节奏稳定度 86/100、HRV 89/100；呼吸情况：呼吸率中位数 53.7 次/分（参考 22 次/分）；速率符合度 1/100。\n心跳情况：心率中位数 211.8 bpm（参考 132 bpm）；速率符合度 15/100。\n最低分日须另看：心跳情况 20分（尽快处理）、呼吸情况 6分（立即处理）。",
+            "advice": "改善建议\n尽快核对最低分的心肺指标，在安静时复核，若仍异常请今天联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "heart",
+            "s": "20",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n心率中位数比参考值高约 60%；模型也评估不同活动／休息情境下的速率偏离和稳定程度。\n本日数据：心率中位数 211.8 bpm（参考 132 bpm）；速率符合度 15/100。\n稳定度分 33/100；偏离参考范围累计 1355.8 分钟。",
+            "advice": "改善建议\n尽快減少刺激，复核安静时心率及异常持续时间；若仍明显偏离，今天联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "breath",
+            "s": "6",
+            "r": "high",
+            "u": "immediate",
+            "label": "高风险 · 立即处理",
+            "reason": "原因\n呼吸率中位数比参考值高约 144%；模型也评估不同活动／休息情境下的速率偏离和稳定程度。\n本日数据：呼吸率中位数 53.7 次/分（参考 22 次/分）；速率符合度 1/100。\n稳定度分 19/100；偏离参考范围累计 1327.2 分钟。",
+            "advice": "改善建议\n立即确认是否呼吸费力、张口呼吸（尤其猫）或牙龈变色；避免运动及不必要搬动。安静时仍嚴重异常请立即联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "hrv",
+            "s": "89",
+            "r": "low",
+            "u": "watch",
+            "label": "低风险 · 建议关注",
+            "reason": "原因\n有效心搏间隔变异性评分低于模型参考水平；尚无足够个体基准时不推定个体下降幅度。\n本日数据：RMSSD 50.6 ms；SDNN 35.5 ms。",
+            "advice": "改善建议\n\n确认佩戴与讯号品质，在相同安静条件和相近量测长度下重新比较 RMSSD、SDNN；同时查看心跳、呼吸与精神。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "stable",
+            "s": "86",
+            "r": "low",
+            "u": "watch",
+            "label": "低风险 · 建议关注",
+            "reason": "原因\n有效心搏规律度为 86/100，节奏稳定性低于参考水平；须区分正常生理变异、讯号干扰与持续异常。\n本日数据：逐搏节奏规律度 86/100；有效片段 29.2 分钟。",
+            "advice": "改善建议\n\n核对安静时逐搏间隔与波形品质，观察节奏变化是否反覆；不要把分数直接当成心律不整。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp903-overview-head dp1046-primary-head dp217-primary",
+            "25"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "20"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "6"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "89"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "86"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          1,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "heart",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "breath",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "hrv",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "stable",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 0,
+      "days": 7,
+      "actual": {
+        "blocks": [
+          {
+            "k": "cardio",
+            "s": "25",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n6/7 个有效评分日；高风险 6 日、中风险 0 日、低风险 0 日。最低 23 分（2026-11-23）。\n最低分日：主要较弱的计分因素为 呼吸情况 4/100、心跳情况 14/100、心搏节奏稳定度 86/100、HRV 89/100，共同影响本项分数。\n最低分日数据：较低计分项：呼吸情况 4/100、心跳情况 14/100、心搏节奏稳定度 86/100、HRV 89/100；呼吸情况：呼吸率中位数 53.8 次/分（参考 22 次/分）；速率符合度 1/100。\n心跳情况：心率中位数 212.2 bpm（参考 132 bpm）；速率符合度 11/100。\n最低分日须另看：心跳情况 14分（立即处理）、呼吸情况 4分（立即处理）。\n立即处理 0 日、尽快处理 6 日、优先处理 0 日；期末 25 分。",
+            "advice": "改善建议\n请尽快处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n尽快核对最低分的心肺指标，在安静时复核，若仍异常请今天联络兽医。",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "heart",
+            "s": "22",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n6/7 个有效评分日；高风险 6 日、中风险 0 日、低风险 0 日。最低 14 分（2026-11-23）。\n最低分日：心率中位数比参考值高约 61%；模型也评估不同活动／休息情境下的速率偏离和稳定程度。\n最低分日数据：心率中位数 212.2 bpm（参考 132 bpm）；速率符合度 11/100。\n稳定度分 22/100；偏离参考范围累计 1389.9 分钟。\n立即处理 1 日、尽快处理 5 日、优先处理 0 日；期末 20 分。",
+            "advice": "改善建议\n请尽快处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n尽快減少刺激，复核安静时心率及异常持续时间；若仍明显偏离，今天联络兽医。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "breath",
+            "s": "6",
+            "r": "high",
+            "u": "immediate",
+            "label": "高风险 · 立即处理",
+            "reason": "原因\n6/7 个有效评分日；高风险 6 日、中风险 0 日、低风险 0 日。最低 4 分（2026-11-23）。\n最低分日：呼吸率中位数比参考值高约 144%；模型也评估不同活动／休息情境下的速率偏离和稳定程度。\n最低分日数据：呼吸率中位数 53.8 次/分（参考 22 次/分）；速率符合度 1/100。\n稳定度分 14/100；偏离参考范围累计 1369.3 分钟。\n立即处理 6 日、尽快处理 0 日、优先处理 0 日；期末 6 分。",
+            "advice": "改善建议\n请立即处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n立即确认是否呼吸费力、张口呼吸（尤其猫）或牙龈变色；避免运动及不必要搬动。安静时仍嚴重异常请立即联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "hrv",
+            "s": "88",
+            "r": "low",
+            "u": "watch",
+            "label": "低风险 · 建议关注",
+            "reason": "原因\n6/7 个有效评分日；高风险 0 日、中风险 0 日、低风险 5 日。最低 83 分（2026-11-20）。\n最低分日：有效心搏间隔变异性评分低于模型参考水平；尚无足够个体基准时不推定个体下降幅度。\n最低分日数据：RMSSD 41.8 ms；SDNN 29.7 ms。",
+            "advice": "改善建议\n\n确认佩戴与讯号品质，在相同安静条件和相近量测长度下重新比较 RMSSD、SDNN；同时查看心跳、呼吸与精神。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "stable",
+            "s": "86",
+            "r": "low",
+            "u": "watch",
+            "label": "低风险 · 建议关注",
+            "reason": "原因\n6/7 个有效评分日；高风险 0 日、中风险 0 日、低风险 6 日。最低 85 分（2026-11-25）。\n最低分日：有效心搏规律度为 85/100，节奏稳定性低于参考水平；须区分正常生理变异、讯号干扰与持续异常。\n最低分日数据：逐搏节奏规律度 85/100；有效片段 9.7 分钟。",
+            "advice": "改善建议\n\n核对安静时逐搏间隔与波形品质，观察节奏变化是否反覆；不要把分数直接当成心律不整。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp903-overview-head dp1046-primary-head dp217-primary",
+            "25"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "22"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "6"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "88"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "86"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          7,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "heart",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "breath",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "hrv",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "stable",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 0,
+      "days": 30,
+      "actual": {
+        "blocks": [
+          {
+            "k": "cardio",
+            "s": "49",
+            "r": "high",
+            "u": "priority",
+            "label": "高风险 · 优先处理",
+            "reason": "原因\n16/30 个有效评分日；高风险 11 日、中风险 0 日、低风险 5 日。最低 23 分（2026-11-23）。\n最低分日：主要较弱的计分因素为 呼吸情况 4/100、心跳情况 14/100、心搏节奏稳定度 86/100、HRV 89/100，共同影响本项分数。\n最低分日数据：较低计分项：呼吸情况 4/100、心跳情况 14/100、心搏节奏稳定度 86/100、HRV 89/100；呼吸情况：呼吸率中位数 53.8 次/分（参考 22 次/分）；速率符合度 1/100。\n心跳情况：心率中位数 212.2 bpm（参考 132 bpm）；速率符合度 11/100。\n最低分日须另看：心跳情况 14分（立即处理）、呼吸情况 4分（立即处理）。\n立即处理 0 日、尽快处理 8 日、优先处理 3 日；期末 25 分。",
+            "advice": "改善建议\n请优先处理此期间的持续偏离，先确认目前状态；比较各周趋势并整理反覆低分纪录。\n尽快核对最低分的心肺指标，在安静时复核，若仍异常请今天联络兽医。",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "heart",
+            "s": "63",
+            "r": "medium",
+            "u": "improve",
+            "label": "中风险 · 需要改善",
+            "reason": "原因\n16/30 个有效评分日；高风险 7 日、中风险 2 日、低风险 1 日。最低 14 分（2026-11-23）。\n最低分日：心率中位数比参考值高约 61%；模型也评估不同活动／休息情境下的速率偏离和稳定程度。\n最低分日数据：心率中位数 212.2 bpm（参考 132 bpm）；速率符合度 11/100。\n稳定度分 22/100；偏离参考范围累计 1389.9 分钟。\n立即处理 1 日、尽快处理 5 日、优先处理 1 日；期末 20 分。",
+            "advice": "改善建议\n在安静且舒适的状态下确认心跳，观察精神、站立能力及活动意愿；不要强迫运动。\n期间曾出现高风险日，请查看日期及当时波形；如果今天已恢复，不代表当前急症。\n尽快減少刺激，复核安静时心率及异常持续时间；若仍明显偏离，今天联络兽医。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 249, 238)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "breath",
+            "s": "35",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n16/30 个有效评分日；高风险 11 日、中风险 0 日、低风险 4 日。最低 4 分（2026-11-23）。\n最低分日：呼吸率中位数比参考值高约 144%；模型也评估不同活动／休息情境下的速率偏离和稳定程度。\n最低分日数据：呼吸率中位数 53.8 次/分（参考 22 次/分）；速率符合度 1/100。\n稳定度分 14/100；偏离参考范围累计 1369.3 分钟。\n立即处理 10 日、尽快处理 1 日、优先处理 0 日；期末 6 分。",
+            "advice": "改善建议\n请尽快处理此期间的持续偏离，先确认目前状态；比较各周趋势并整理反覆低分纪录。\n立即确认是否呼吸费力、张口呼吸（尤其猫）或牙龈变色；避免运动及不必要搬动。安静时仍嚴重异常请立即联络兽医。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "hrv",
+            "s": "81",
+            "r": "low",
+            "u": "watch",
+            "label": "低风险 · 建议关注",
+            "reason": "原因\n16/30 个有效评分日；高风险 0 日、中风险 9 日、低风险 6 日。最低 74 分（2026-11-14）。\n最低分日：有效心搏间隔变异性评分低于模型参考水平；尚无足够个体基准时不推定个体下降幅度。\n最低分日数据：RMSSD 36.7 ms；SDNN 26.9 ms。",
+            "advice": "改善建议\n确认佩戴与讯号品质，在相同安静条件和相近量测长度下重新比较 RMSSD、SDNN；同时查看心跳、呼吸与精神。\n在相同条件下追踪，若持续或反覆出现偏离，安排兽医谘询。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "stable",
+            "s": "89",
+            "r": "low",
+            "u": "watch",
+            "label": "低风险 · 建议关注",
+            "reason": "原因\n16/30 个有效评分日；高风险 0 日、中风险 0 日、低风险 8 日。最低 85 分（2026-11-25）。\n最低分日：有效心搏规律度为 85/100，节奏稳定性低于参考水平；须区分正常生理变异、讯号干扰与持续异常。\n最低分日数据：逐搏节奏规律度 85/100；有效片段 9.7 分钟。",
+            "advice": "改善建议\n\n核对安静时逐搏间隔与波形品质，观察节奏变化是否反覆；不要把分数直接当成心律不整。",
+            "method": false,
+            "rect": 182,
+            "css": "rgb(244, 249, 255)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp903-overview-head dp1046-primary-head dp217-primary",
+            "49"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "63"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "35"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "81"
+          ],
+          [
+            "dp903-metric-card dp217-child",
+            "89"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          30,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "heart",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "breath",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "hrv",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            },
+            {
+              "key": "stable",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 182,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 1,
+      "days": 1,
+      "actual": {
+        "blocks": [
+          {
+            "k": "sleep",
+            "s": "22",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n较弱的休息因素为 休息品质 10/100、休息时长 26/100；这些是由心跳、呼吸与动静推估的休息指标。\n本日数据：全天休息 3.8 小时；休息时长分 26/100。\n休息品质分 10/100；连续性分 98/100；休息中断 6 次。",
+            "advice": "改善建议\n\n尽快改善休息环境，记录中断、休息时长与醒后精神；若无法改善或伴随不适，安排兽医评估。",
+            "method": false,
+            "rect": 322,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp-owner-status-heading dp-heart-overall-heading dp71-paired-score dp74-overview-head dp1048-sleep-day-head dp1046-primary-head dp1052-sleep-flow dp217-primary",
+            "22"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          1,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 1,
+      "days": 7,
+      "actual": {
+        "blocks": [
+          {
+            "k": "sleep",
+            "s": "24",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n6/7 个有效评分日；高风险 6 日、中风险 0 日、低风险 0 日。最低 18 分（2026-11-25）。\n最低分日：较弱的休息因素为 休息品质 8/100、休息时长 18/100；这些是由心跳、呼吸与动静推估的休息指标。\n最低分日数据：全天休息 2.6 小时；休息时长分 18/100。\n休息品质分 8/100；连续性分 97/100；休息中断 6 次。\n立即处理 1 日、尽快处理 5 日、优先处理 0 日；期末 22 分。",
+            "advice": "改善建议\n请尽快处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n尽快改善休息环境，记录中断、休息时长与醒后精神；若无法改善或伴随不适，安排兽医评估。",
+            "method": false,
+            "rect": 322,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp1046-primary-head dp1052-sleep-flow dp217-primary",
+            "24"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          7,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 1,
+      "days": 30,
+      "actual": {
+        "blocks": [
+          {
+            "k": "sleep",
+            "s": "50",
+            "r": "high",
+            "u": "priority",
+            "label": "高风险 · 优先处理",
+            "reason": "原因\n16/30 个有效评分日；高风险 10 日、中风险 1 日、低风险 5 日。最低 18 分（2026-11-25）。\n最低分日：较弱的休息因素为 休息品质 8/100、休息时长 18/100；这些是由心跳、呼吸与动静推估的休息指标。\n最低分日数据：全天休息 2.6 小时；休息时长分 18/100。\n休息品质分 8/100；连续性分 97/100。\n立即处理 1 日、尽快处理 5 日、优先处理 4 日；期末 22 分。",
+            "advice": "改善建议\n请优先处理此期间的持续偏离，先确认目前状态；比较各周趋势并整理反覆低分纪录。\n尽快改善休息环境，记录中断、休息时长与醒后精神；若无法改善或伴随不适，安排兽医评估。",
+            "method": false,
+            "rect": 322,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp1046-primary-head dp1052-sleep-flow dp217-primary",
+            "50"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          30,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 2,
+      "days": 1,
+      "actual": {
+        "blocks": [
+          {
+            "k": "activityRecovery",
+            "s": "14",
+            "r": "high",
+            "u": "immediate",
+            "label": "高风险 · 立即处理",
+            "reason": "原因\n主要较弱的计分因素为 恢复情况 0/100、放松与平稳度 27/100、精力情况 37/100，共同影响本项分数。\n本日数据：较低计分项：恢复情况 0/100、放松与平稳度 27/100、精力情况 37/100；恢复情况：活动后两分钟；心率 236.4 → 244 bpm。\n放松与平稳度：较低计分项：安静休息品质 4/100、呼吸情况 6/100、心跳情况 20/100、HRV 89/100。\n最低分日须另看：精力情况 37分（尽快处理）、恢复情况 0分（立即处理）、放松与平稳度 27分（尽快处理）。",
+            "advice": "改善建议\n立即停止额外活动，确认心肺及精神状态，查看恢复最差项；若有效心肺读数嚴重异常持续，立即联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "energy",
+            "s": "37",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n主要较弱的计分因素为 睡眠休息 22/100、心肺综合状态 25/100、活动与安静休息 71/100，共同影响本项分数。\n本日数据：较低计分项：睡眠休息 22/100、心肺综合状态 25/100、活动与安静休息 71/100；活动强度分 100/100。",
+            "advice": "改善建议\n\n尽快減少活动消耗，观察食欲与日常活动意愿，核对低分来自休息、心肺或活动因素。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "recovery",
+            "s": "0",
+            "r": "high",
+            "u": "immediate",
+            "label": "高风险 · 立即处理",
+            "reason": "原因\n两分钟末心率没有下降；需同时核对活动强度、休息参考值及呼吸回复。\n本日数据：活动后两分钟；心率 236.4 → 244 bpm。\n心率回落 -7.5 bpm；两分钟末心率 244 bpm（参考 132 bpm）；呼吸恢复分 0/100。",
+            "advice": "改善建议\n立即停止额外运动，确认休息后心率与呼吸；不要为重测而增加运动。若有效读数持续嚴重异常，立即联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "calm",
+            "s": "27",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n主要较弱的计分因素为 安静休息品质 4/100、呼吸情况 6/100、心跳情况 20/100、HRV 89/100，共同影响本项分数。\n本日数据：较低计分项：安静休息品质 4/100、呼吸情况 6/100、心跳情况 20/100、HRV 89/100。",
+            "advice": "改善建议\n\n尽快減少环境刺激，让宠物自然安定，复核安静时心率、呼吸及休息品质。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp901-overall-head dp1046-primary-head dp217-primary",
+            "14"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "37"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "0"
+          ],
+          [
+            "dp901-metric-card dp902-calm-target dp217-child",
+            "27"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          1,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "energy",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "recovery",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "calm",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 2,
+      "days": 7,
+      "actual": {
+        "blocks": [
+          {
+            "k": "activityRecovery",
+            "s": "14",
+            "r": "high",
+            "u": "immediate",
+            "label": "高风险 · 立即处理",
+            "reason": "原因\n5/7 个有效评分日；高风险 5 日、中风险 0 日、低风险 0 日。最低 14 分（2026-11-22）。\n最低分日：主要较弱的计分因素为 恢复情况 0/100、放松与平稳度 27/100、精力情况 38/100，共同影响本项分数。\n最低分日数据：较低计分项：恢复情况 0/100、放松与平稳度 27/100、精力情况 38/100；恢复情况：活动后两分钟；心率 221 → 234.8 bpm。\n放松与平稳度：较低计分项：安静休息品质 5/100、呼吸情况 6/100、心跳情况 24/100、HRV 87/100。\n最低分日须另看：精力情况 38分（尽快处理）、恢复情况 0分（立即处理）、放松与平稳度 27分（尽快处理）。\n立即处理 5 日、尽快处理 0 日、优先处理 0 日；期末 14 分。",
+            "advice": "改善建议\n请立即处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n立即停止额外活动，确认心肺及精神状态，查看恢复最差项；若有效心肺读数嚴重异常持续，立即联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "energy",
+            "s": "38",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n6/7 个有效评分日；高风险 6 日、中风险 0 日、低风险 0 日。最低 35 分（2026-11-25）。\n最低分日：主要较弱的计分因素为 睡眠休息 18/100、心肺综合状态 25/100、活动与安静休息 71/100，共同影响本项分数。\n最低分日数据：较低计分项：睡眠休息 18/100、心肺综合状态 25/100、活动与安静休息 71/100；活动强度分 100/100。\n立即处理 0 日、尽快处理 5 日、优先处理 1 日；期末 37 分。",
+            "advice": "改善建议\n请尽快处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n尽快減少活动消耗，观察食欲与日常活动意愿，核对低分来自休息、心肺或活动因素。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "recovery",
+            "s": "0",
+            "r": "high",
+            "u": "immediate",
+            "label": "高风险 · 立即处理",
+            "reason": "原因\n5/7 个有效评分日；高风险 5 日、中风险 0 日、低风险 0 日。最低 0 分（2026-11-22）。\n最低分日：两分钟末心率没有下降；需同时核对活动强度、休息参考值及呼吸回复。\n最低分日数据：活动后两分钟；心率 221 → 234.8 bpm。\n心率回落 -13.8 bpm；两分钟末心率 234.8 bpm（参考 132 bpm）；呼吸恢复分 0/100。\n立即处理 5 日、尽快处理 0 日、优先处理 0 日；期末 0 分。",
+            "advice": "改善建议\n请立即处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n立即停止额外运动，确认休息后心率与呼吸；不要为重测而增加运动。若有效读数持续嚴重异常，立即联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "calm",
+            "s": "27",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n6/7 个有效评分日；高风险 6 日、中风险 0 日、低风险 0 日。最低 25 分（2026-11-23）。\n最低分日：主要较弱的计分因素为 呼吸情况 4/100、安静休息品质 5/100、心跳情况 14/100、HRV 89/100，共同影响本项分数。\n最低分日数据：较低计分项：呼吸情况 4/100、安静休息品质 5/100、心跳情况 14/100、HRV 89/100。\n立即处理 0 日、尽快处理 6 日、优先处理 0 日；期末 27 分。",
+            "advice": "改善建议\n请尽快处理此期间的持续偏离，先确认目前状态；整理本周低分日期及近期变化。\n尽快減少环境刺激，让宠物自然安定，复核安静时心率、呼吸及休息品质。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp901-overall-head dp1046-primary-head dp217-primary",
+            "14"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "38"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "0"
+          ],
+          [
+            "dp901-metric-card dp902-calm-target dp217-child",
+            "27"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          7,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "energy",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "recovery",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "calm",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "typ": 2,
+      "days": 30,
+      "actual": {
+        "blocks": [
+          {
+            "k": "activityRecovery",
+            "s": "28",
+            "r": "high",
+            "u": "prompt",
+            "label": "高风险 · 尽快处理",
+            "reason": "原因\n15/30 个有效评分日；高风险 15 日、中风险 0 日、低风险 0 日。最低 14 分（2026-11-22）。\n最低分日：主要较弱的计分因素为 恢复情况 0/100、放松与平稳度 27/100、精力情况 38/100，共同影响本项分数。\n最低分日数据：较低计分项：恢复情况 0/100、放松与平稳度 27/100、精力情况 38/100；恢复情况：活动后两分钟；心率 221 → 234.8 bpm。\n放松与平稳度：较低计分项：安静休息品质 5/100、呼吸情况 6/100、心跳情况 24/100、HRV 87/100。\n最低分日须另看：精力情况 38分（尽快处理）、恢复情况 0分（立即处理）、放松与平稳度 27分（尽快处理）。\n立即处理 6 日、尽快处理 4 日、优先处理 5 日；期末 14 分。",
+            "advice": "改善建议\n请尽快处理此期间的持续偏离，先确认目前状态；比较各周趋势并整理反覆低分纪录。\n立即停止额外活动，确认心肺及精神状态，查看恢复最差项；若有效心肺读数嚴重异常持续，立即联络兽医。",
+            "method": false,
+            "rect": 326,
+            "css": "rgb(255, 240, 241)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "energy",
+            "s": "57",
+            "r": "high",
+            "u": "priority",
+            "label": "高风险 · 优先处理",
+            "reason": "原因\n16/30 个有效评分日；高风险 10 日、中风险 1 日、低风险 5 日。最低 35 分（2026-11-25）。\n最低分日：主要较弱的计分因素为 睡眠休息 18/100、心肺综合状态 25/100、活动与安静休息 71/100，共同影响本项分数。\n最低分日数据：较低计分项：睡眠休息 18/100、心肺综合状态 25/100、活动与安静休息 71/100；活动强度分 100/100。\n立即处理 0 日、尽快处理 5 日、优先处理 5 日；期末 37 分。",
+            "advice": "改善建议\n请优先处理此期间的持续偏离，先确认目前状态；比较各周趋势并整理反覆低分纪录。\n尽快減少活动消耗，观察食欲与日常活动意愿，核对低分来自休息、心肺或活动因素。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "recovery",
+            "s": "7",
+            "r": "high",
+            "u": "immediate",
+            "label": "高风险 · 立即处理",
+            "reason": "原因\n15/30 个有效评分日；高风险 15 日、中风险 0 日、低风险 0 日。最低 0 分（2026-11-22）。\n最低分日：两分钟末心率没有下降；需同时核对活动强度、休息参考值及呼吸回复。\n最低分日数据：活动后两分钟；心率 221 → 234.8 bpm。\n心率回落 -13.8 bpm；两分钟末心率 234.8 bpm（参考 132 bpm）；呼吸恢复分 0/100。\n立即处理 12 日、尽快处理 3 日、优先处理 0 日；期末 0 分。",
+            "advice": "改善建议\n请立即处理此期间的持续偏离，先确认目前状态；比较各周趋势并整理反覆低分纪录。\n立即停止额外运动，确认休息后心率与呼吸；不要为重测而增加运动。若有效读数持续嚴重异常，立即联络兽医。\n若现在有呼吸费力、牙龈发蓝或蒼白、倒下或无法站立，立即联络兽医急诊；不要等待下一次量测。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 233, 235)",
+            "font": "13px",
+            "display": "block"
+          },
+          {
+            "k": "calm",
+            "s": "50",
+            "r": "high",
+            "u": "priority",
+            "label": "高风险 · 优先处理",
+            "reason": "原因\n16/30 个有效评分日；高风险 11 日、中风险 0 日、低风险 5 日。最低 25 分（2026-11-23）。\n最低分日：主要较弱的计分因素为 呼吸情况 4/100、安静休息品质 5/100、心跳情况 14/100、HRV 89/100，共同影响本项分数。\n最低分日数据：较低计分项：呼吸情况 4/100、安静休息品质 5/100、心跳情况 14/100、HRV 89/100。\n立即处理 0 日、尽快处理 7 日、优先处理 4 日；期末 27 分。",
+            "advice": "改善建议\n请优先处理此期间的持续偏离，先确认目前状态；比较各周趋势并整理反覆低分纪录。\n尽快減少环境刺激，让宠物自然安定，复核安静时心率、呼吸及休息品质。",
+            "method": true,
+            "rect": 180,
+            "css": "rgb(255, 245, 246)",
+            "font": "13px",
+            "display": "block"
+          }
+        ],
+        "heads": [
+          [
+            "dp901-overall-head dp1046-primary-head dp217-primary",
+            "28"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "57"
+          ],
+          [
+            "dp901-metric-card dp217-child",
+            "7"
+          ],
+          [
+            "dp901-metric-card dp902-calm-target dp217-child",
+            "50"
+          ]
+        ],
+        "state": [
+          8,
+          false,
+          "zh",
+          30,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "44px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [
+            {
+              "key": "energy",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "recovery",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            },
+            {
+              "key": "calm",
+              "gap": 9,
+              "contained": true,
+              "scoreSize": "22px",
+              "guideWidth": 180,
+              "overlap": false
+            }
+          ],
+          "overflow": false,
+          "chip": "含示例数据"
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 0,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          1,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 0,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          7,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 0,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          30,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 1,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp-owner-status-heading dp-heart-overall-heading dp1048-sleep-day-head dp1052-sleep-flow dp1046-primary-head dp217-primary",
+            ""
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          1,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 1,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          7,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 1,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          30,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 2,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          1,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 2,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          7,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "typ": 2,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          false,
+          "zh",
+          30,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 0,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          1,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 0,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          7,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 0,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp903-overview-head dp217-primary",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ],
+          [
+            "dp903-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          30,
+          0
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 1,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp-owner-status-heading dp-heart-overall-heading dp1048-sleep-day-head dp1052-sleep-flow dp1046-primary-head dp217-primary",
+            ""
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          1,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 1,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          7,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 1,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp905-sleep-head dp1048-sleep-period-head dp217-primary",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          30,
+          1
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "28px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 2,
+      "days": 1,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          1,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 2,
+      "days": 7,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          7,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "typ": 2,
+      "days": 30,
+      "actual": {
+        "blocks": [],
+        "heads": [
+          [
+            "dp901-overall-head dp217-primary",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ],
+          [
+            "dp901-metric-card",
+            null
+          ]
+        ],
+        "state": [
+          31,
+          true,
+          "zh",
+          30,
+          2
+        ],
+        "layout": {
+          "head": true,
+          "center": 0,
+          "titleAbove": true,
+          "primaryFont": "16px",
+          "primaryWidth": 132,
+          "dup": 0,
+          "children": [],
+          "overflow": false,
+          "chip": null
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "console": []
+}

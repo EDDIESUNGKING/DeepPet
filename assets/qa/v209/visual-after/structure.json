@@ -1,0 +1,365 @@
+{
+  "home": {
+    "headings": [],
+    "nav": [
+      {
+        "text": "Home",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "Deep",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Health",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Me",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      }
+    ],
+    "cards": [
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "19px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "21px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "19px"
+      }
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "pet": 0
+  },
+  "deep": {
+    "headings": [
+      {
+        "text": "Deep",
+        "tag": "H1",
+        "color": "rgb(163, 64, 98)",
+        "font": "23px"
+      },
+      {
+        "text": "Overall heart & breathing",
+        "tag": "H2",
+        "color": "rgb(168, 68, 104)",
+        "font": "20px"
+      },
+      {
+        "text": "Heart rate",
+        "tag": "H3",
+        "color": "rgb(166, 71, 103)",
+        "font": "15px"
+      },
+      {
+        "text": "Breathing",
+        "tag": "H3",
+        "color": "rgb(166, 71, 103)",
+        "font": "15px"
+      },
+      {
+        "text": "HRV",
+        "tag": "H3",
+        "color": "rgb(166, 71, 103)",
+        "font": "15px"
+      },
+      {
+        "text": "Heartbeat rhythm stability",
+        "tag": "H3",
+        "color": "rgb(166, 71, 103)",
+        "font": "15px"
+      }
+    ],
+    "nav": [
+      {
+        "text": "Home",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Deep",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "Health",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Me",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      }
+    ],
+    "cards": [
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgb(255, 250, 251)",
+        "radius": "19px"
+      }
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "pet": 0
+  },
+  "health": {
+    "headings": [
+      {
+        "text": "Health",
+        "tag": "H1",
+        "color": "rgb(36, 36, 60)",
+        "font": "23px"
+      },
+      {
+        "text": "Everyday care priorities",
+        "tag": "H2",
+        "color": "rgb(36, 65, 91)",
+        "font": "19px"
+      },
+      {
+        "text": "What matters now",
+        "tag": "H3",
+        "color": "rgb(44, 70, 97)",
+        "font": "14px"
+      },
+      {
+        "text": "Exam analysis",
+        "tag": "H3",
+        "color": "rgb(39, 62, 97)",
+        "font": "18px"
+      },
+      {
+        "text": "Upcoming care",
+        "tag": "H2",
+        "color": "rgb(36, 36, 60)",
+        "font": "17px"
+      },
+      {
+        "text": "Health management",
+        "tag": "H2",
+        "color": "rgb(36, 36, 60)",
+        "font": "17px"
+      }
+    ],
+    "nav": [
+      {
+        "text": "Home",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Deep",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Health",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "text": "Me",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      }
+    ],
+    "cards": [
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "20px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgb(255, 250, 240)",
+        "radius": "19px"
+      },
+      {
+        "tag": "BUTTON",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "18px"
+      },
+      {
+        "tag": "DIV",
+        "width": 356,
+        "bg": "rgb(255, 255, 255)",
+        "radius": "19px"
+      },
+      {
+        "tag": "DIV",
+        "width": 356,
+        "bg": "rgb(255, 255, 255)",
+        "radius": "19px"
+      }
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "pet": 0
+  },
+  "me": {
+    "headings": [
+      {
+        "text": "Me",
+        "tag": "H1",
+        "color": "rgb(36, 36, 60)",
+        "font": "23px"
+      },
+      {
+        "text": "My device",
+        "tag": "H2",
+        "color": "rgb(36, 36, 60)",
+        "font": "17px"
+      },
+      {
+        "text": "App settings",
+        "tag": "H2",
+        "color": "rgb(36, 36, 60)",
+        "font": "17px"
+      },
+      {
+        "text": "Measurement backup",
+        "tag": "H3",
+        "color": "rgb(36, 36, 60)",
+        "font": "18.72px"
+      }
+    ],
+    "nav": [
+      {
+        "text": "Home",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Deep",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Health",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(102, 103, 125)"
+      },
+      {
+        "text": "Me",
+        "width": 89.53125,
+        "height": 64,
+        "color": "rgb(255, 255, 255)"
+      }
+    ],
+    "cards": [
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "19px"
+      },
+      {
+        "tag": "BUTTON",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "24px"
+      },
+      {
+        "tag": "BUTTON",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "20px"
+      },
+      {
+        "tag": "BUTTON",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "20px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "19px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgb(255, 255, 255)",
+        "radius": "20px"
+      },
+      {
+        "tag": "BUTTON",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "19px"
+      },
+      {
+        "tag": "BUTTON",
+        "width": 356,
+        "bg": "rgba(0, 0, 0, 0)",
+        "radius": "24px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgb(255, 255, 255)",
+        "radius": "19px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 356,
+        "bg": "rgb(255, 255, 255)",
+        "radius": "19px"
+      },
+      {
+        "tag": "SECTION",
+        "width": 324,
+        "bg": "rgb(255, 255, 255)",
+        "radius": "19px"
+      }
+    ],
+    "viewport": [
+      390,
+      844
+    ],
+    "pet": 0
+  }
+}

@@ -1,0 +1,49 @@
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "food", "text": "以 9 kg、2 岁、中型犬 的基本需求为起始建议。可按体况与兽医建议自行调整。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "food", "text": "建议食量会因选择的食物不同而改变；每100克热量由食物资料库估算，不必自己计算。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "food", "text": "这一天尚未记录餐食。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "food", "text": "显示最近七天记录的食物、品牌和克数。每只宠物的餐食记录彼此独立。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "food", "text": "日常只需要记录「吃了什么、品牌和克数」。系统按相应食物的每100克参考热量换算，混合餐会加总各种食物。品牌包装上的热量若不同，应以该产品标签为准。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "med", "text": "只需设定一次药物、份量、每天时间及疗程天数，系统会按日期列出待办。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "med", "text": "今天没有有效的已安排用药。确认完整疗程后，系统会每天列出应服用的药与数量。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "med", "text": "目前尚无用药疗程。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "med", "text": "尚无确认的历史记录。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "vaccines", "text": "先预约接种日期；完成后可标记已接种，也能修改或删除。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "vaccines", "text": "目前没有安排接种。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "deworming", "text": "按体重选择对应规格，用量以产品包装为准。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "summary", "text": "一段时间，两个角度，读懂它的健康。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "summary", "text": "这7天还没有足够的有效量测，暂时不显示健康分数。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "可选择手术、疾病、麻醉、用药后或运动后恢复，也可自行填写原因。每天记录精神、食欲、休息与恢复进度，方便持续照顾。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "目前尚无足够的心肺数据，仍可以先记录精神、食欲与休息。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "接下来留意精神、食欲、休息和相近活动后的恢复时间；新资料不足时不要硬判改善。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "请先选择恢复观察原因，主动按「开始恢复观察」；开始前不会建立14天记录。"}
+{"lang": "zh", "pet": 30, "tab": "health", "detail": "recovery-care", "text": "如变化持续数天，或伴随精神下降、食欲变差、咳嗽等症状，请谘询兽医。若呼吸困难、昏倒或无法站立，应立即就医。"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "查看每日的健康变化；上方为整段期间的健康结果"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "追踪健康状态对应的年龄估计，并非实际生物年龄或壽命预测"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "分别查看两项结果所使用的资讯类别"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "近期心跳、呼吸、HRV、心搏节奏、睡眠休息、精力与恢复后恢复、放松与平稳度，以及符合适用条件的体检记录。"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "宠物实际年龄，以及上述整体健康评分的近期有效结果；心肺、睡眠、精力恢复、身体节奏及适用体检资讯经由整体健康结果反映。"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "可保留宠物基本资料，但尚无健康监测记录；目前不显示健康基准。"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "尚未有有效量测记录 · 未测量不视为零分或失敗"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "两种测试只预览提醒样式，不会断开配对、修改健康分数或关闭紧急提醒。"}
+{"lang": "zh", "pet": 30, "tab": "me", "detail": null, "text": "装置版本只能在完成配对后改变。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "整體分數參考下方有資料的項目；你可以逐項查看原因。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "這段期間還沒有可靠的測量資料，暫時無法評分。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "HRV、RMSSD、SDNN 看什么？HRV比较相同休息情境的恢复趋势；数值越高不一定越好。RMSSD反映相邻心搏间隔的短期变化，宜在安静时比较。SDNN反映整段有效心搏间隔的变化，宜比较相同测量时长。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "HRV比较相同休息情境的恢复趋势；数值越高不一定越好。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "RMSSD反映相邻心搏间隔的短期变化，宜在安静时比较。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "SDNN反映整段有效心搏间隔的变化，宜比较相同测量时长。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "目前還無法確認心跳記錄是否足夠準確，因此暫時不顯示 RMSSD／SDNN 結果。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "心肺综合分综合心跳、呼吸、HRV 和心搏节奏趋势，缺少必要有效信号时不计分。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "请连接 4G + GPS 穿戴装置"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "目前尚未收到这只宠物的有效监测数据。收到有效数据后，这里会显示相应的分析。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "有分数 0/7 日；达观测门槛 0 日。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "查看详细数据›N/A"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "选择日期查看当天波形"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": "dp90-waveform", "text": "历史日期不显示即时波形"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "有分数 0/30 日；达观测门槛 0 日。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "尚无这只宠物的有效监测记录；配对项圈并累积有效量测后，将在相同位置显示分析。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "尚无有效睡眠与休息记录，这里将显示相同的期间分析。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "最近 7 天有效记录 N/A 晚；平均休息 N/A，平均每晚中断 N/A 次。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "整格颜色代表健康等级，点击日期查看当天详情。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "最近 30 天有效记录 N/A 晚；平均休息 N/A，平均每晚中断 N/A 次。"}
+{"lang": "zh", "pet": 30, "tab": "deep", "detail": null, "text": "今天没有足够的两分钟恢复记录。"}

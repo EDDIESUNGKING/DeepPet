@@ -268,8 +268,8 @@
   });
  }
  function renderCompact(){applyDeep();applyDetail();homeBrief();fixDeepLabels();
-  root.DeepPetBuildVersion='10.128';
-  document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.12[0-7]/g,'10.128');});
+  root.DeepPetBuildVersion='10.204';
+  document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.12[0-7]/g,'10.199');});
 }
  const previous=render;
  render=function(...args){const result=previous.apply(this,args);renderCompact();return result;};

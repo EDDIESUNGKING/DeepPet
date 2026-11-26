@@ -1,0 +1,6526 @@
+{
+  "cases": [
+    {
+      "status": "PASS",
+      "pet": 0,
+      "offset": 0,
+      "actual": {
+        "p": 0,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "拉菲",
+          "age": 6,
+          "weight": 55,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/owner/lafa_avatar.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 99,
+          "hrv": 78,
+          "stable": 96,
+          "cardio": 88,
+          "sleep": 96,
+          "energy": 93,
+          "recovery": 21,
+          "calm": 87,
+          "activityRecovery": 50,
+          "physiol": 83,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 3,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 0,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 0,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 1,
+      "offset": 0,
+      "actual": {
+        "p": 1,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Luna",
+          "age": 4,
+          "weight": 28,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/01_Luna_84_calm.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 91,
+          "cardio": 89,
+          "sleep": 98,
+          "energy": 90,
+          "recovery": 16,
+          "calm": 88,
+          "activityRecovery": 47,
+          "physiol": 77,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 1,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 1,
+          "source": "archive",
+          "summaryCache": 1,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 2,
+      "offset": 0,
+      "actual": {
+        "p": 2,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Coco",
+          "age": 3,
+          "weight": 10.3,
+          "breed": "Beagle",
+          "photo": "assets/demo_score_portraits/02_Coco_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 89,
+          "breath": 84,
+          "hrv": 78,
+          "stable": 83,
+          "cardio": 82,
+          "sleep": 84,
+          "energy": 85,
+          "recovery": 3,
+          "calm": 82,
+          "activityRecovery": 37,
+          "physiol": 74,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 26,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 2,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 2,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 3,
+      "offset": 0,
+      "actual": {
+        "p": 3,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Leo",
+          "age": 4,
+          "weight": 5.8,
+          "breed": "Pug",
+          "photo": "assets/demo_score_portraits/03_Leo_Pug_v1002.jpg"
+        },
+        "scores": {
+          "heart": 60,
+          "breath": 16,
+          "hrv": 84,
+          "stable": 82,
+          "cardio": 41,
+          "sleep": 50,
+          "energy": 49,
+          "recovery": 3,
+          "calm": 42,
+          "activityRecovery": 21,
+          "physiol": 45,
+          "rhythm": 63
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 3,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 3,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 4,
+      "offset": 0,
+      "actual": {
+        "p": 4,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Poppy",
+          "age": 6,
+          "weight": 48,
+          "breed": "German Shepherd",
+          "photo": "assets/demo_score_portraits/04_Poppy_80_calm.jpg"
+        },
+        "scores": {
+          "heart": 31,
+          "breath": 23,
+          "hrv": 86,
+          "stable": 79,
+          "cardio": 34,
+          "sleep": 55,
+          "energy": 53,
+          "recovery": 4,
+          "calm": 42,
+          "activityRecovery": 23,
+          "physiol": 44,
+          "rhythm": 60
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 4,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 4,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 5,
+      "offset": 0,
+      "actual": {
+        "p": 5,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Nori",
+          "age": 2,
+          "weight": 4.6,
+          "breed": "Ragdoll",
+          "photo": "assets/demo_score_portraits/05_Nori_98_happy.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 73,
+          "stable": 94,
+          "cardio": 86,
+          "sleep": 99,
+          "energy": 93,
+          "recovery": 22,
+          "calm": 84,
+          "activityRecovery": 51,
+          "physiol": 83,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 25,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 5,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 5,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 6,
+      "offset": 0,
+      "actual": {
+        "p": 6,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Miso",
+          "age": 5,
+          "weight": 4.8,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/06_Miso_77_soft.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 72,
+          "stable": 92,
+          "cardio": 86,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 11,
+          "calm": 84,
+          "activityRecovery": 43,
+          "physiol": 76,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 23,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 6,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 6,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 7,
+      "offset": 0,
+      "actual": {
+        "p": 7,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Mochi",
+          "age": 3,
+          "weight": 5.5,
+          "breed": "Bengal",
+          "photo": "assets/demo_score_portraits/07_Mochi_35_sad.jpg"
+        },
+        "scores": {
+          "heart": 92,
+          "breath": 44,
+          "hrv": 77,
+          "stable": 88,
+          "cardio": 63,
+          "sleep": 71,
+          "energy": 72,
+          "recovery": 5,
+          "calm": 63,
+          "activityRecovery": 32,
+          "physiol": 66,
+          "rhythm": 76
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 7,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 7,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "offset": 0,
+      "actual": {
+        "p": 8,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Kiki",
+          "age": 4,
+          "weight": 3.9,
+          "breed": "Scottish Fold",
+          "photo": "assets/demo_score_portraits/08_Kiki_17_sad.jpg"
+        },
+        "scores": {
+          "heart": 79,
+          "breath": 15,
+          "hrv": 78,
+          "stable": 89,
+          "cardio": 43,
+          "sleep": 50,
+          "energy": 55,
+          "recovery": 3,
+          "calm": 43,
+          "activityRecovery": 23,
+          "physiol": 49,
+          "rhythm": 62
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 16,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 8,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 8,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 9,
+      "offset": 0,
+      "actual": {
+        "p": 9,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Max",
+          "age": 4,
+          "weight": 4.5,
+          "breed": "Persian",
+          "photo": "assets/demo_score_portraits/09_Max_87_calm.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 72,
+          "stable": 97,
+          "cardio": 86,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 24,
+          "calm": 84,
+          "activityRecovery": 51,
+          "physiol": 79,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 14,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 9,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 9,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 10,
+      "offset": 0,
+      "actual": {
+        "p": 10,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Rex",
+          "age": 10,
+          "weight": 38.5,
+          "breed": "Rottweiler",
+          "photo": "assets/demo_score_portraits/10_Rex_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 84,
+          "breath": 71,
+          "hrv": 82,
+          "stable": 83,
+          "cardio": 76,
+          "sleep": 65,
+          "energy": 74,
+          "recovery": 1,
+          "calm": 72,
+          "activityRecovery": 32,
+          "physiol": 66,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 15,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 10,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 10,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 11,
+      "offset": 0,
+      "actual": {
+        "p": 11,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Bella",
+          "age": 2,
+          "weight": 23.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/11_Bella_97_happy.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 78,
+          "stable": 97,
+          "cardio": 89,
+          "sleep": 99,
+          "energy": 92,
+          "recovery": 22,
+          "calm": 87,
+          "activityRecovery": 51,
+          "physiol": 80,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 11,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 11,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 12,
+      "offset": 0,
+      "actual": {
+        "p": 12,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Dodo",
+          "age": 8,
+          "weight": 11.5,
+          "breed": "Shiba Inu",
+          "photo": "assets/demo_score_portraits/12_Dodo_61_soft.jpg"
+        },
+        "scores": {
+          "heart": 88,
+          "breath": 86,
+          "hrv": 79,
+          "stable": 82,
+          "cardio": 83,
+          "sleep": 75,
+          "energy": 82,
+          "recovery": 3,
+          "calm": 80,
+          "activityRecovery": 36,
+          "physiol": 73,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 13,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 12,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 12,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 13,
+      "offset": 0,
+      "actual": {
+        "p": 13,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Snowy",
+          "age": 1,
+          "weight": 24.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/13_Snowy_Golden_v1002.jpg"
+        },
+        "scores": {
+          "heart": 92,
+          "breath": 90,
+          "hrv": 79,
+          "stable": 89,
+          "cardio": 85,
+          "sleep": 91,
+          "energy": 91,
+          "recovery": 17,
+          "calm": 85,
+          "activityRecovery": 47,
+          "physiol": 81,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 8,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 13,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 13,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 14,
+      "offset": 0,
+      "actual": {
+        "p": 14,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Nana",
+          "age": 12,
+          "weight": 4.2,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/14_Nana_53_sad.jpg"
+        },
+        "scores": {
+          "heart": 79,
+          "breath": 18,
+          "hrv": 78,
+          "stable": 90,
+          "cardio": 45,
+          "sleep": 66,
+          "energy": 62,
+          "recovery": 4,
+          "calm": 48,
+          "activityRecovery": 26,
+          "physiol": 57,
+          "rhythm": 63
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 14,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 14,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 15,
+      "offset": 0,
+      "actual": {
+        "p": 15,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Atlas",
+          "age": 5,
+          "weight": 42,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_025.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 96,
+          "hrv": 79,
+          "stable": 94,
+          "cardio": 88,
+          "sleep": 95,
+          "energy": 93,
+          "recovery": 14,
+          "calm": 87,
+          "activityRecovery": 46,
+          "physiol": 81,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 15,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 15,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 16,
+      "offset": 0,
+      "actual": {
+        "p": 16,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Sunny",
+          "age": 8,
+          "weight": 30,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_026.jpg"
+        },
+        "scores": {
+          "heart": 91,
+          "breath": 87,
+          "hrv": 79,
+          "stable": 83,
+          "cardio": 84,
+          "sleep": 77,
+          "energy": 83,
+          "recovery": 5,
+          "calm": 83,
+          "activityRecovery": 38,
+          "physiol": 75,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 16,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 16,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 17,
+      "offset": 0,
+      "actual": {
+        "p": 17,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Taro",
+          "age": 3,
+          "weight": 12,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_027.jpg"
+        },
+        "scores": {
+          "heart": 93,
+          "breath": 92,
+          "hrv": 79,
+          "stable": 97,
+          "cardio": 86,
+          "sleep": 74,
+          "energy": 81,
+          "recovery": 20,
+          "calm": 83,
+          "activityRecovery": 46,
+          "physiol": 74,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 17,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 17,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 18,
+      "offset": 0,
+      "actual": {
+        "p": 18,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Bobo",
+          "age": 2,
+          "weight": 27,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_028.jpg"
+        },
+        "scores": {
+          "heart": 97,
+          "breath": 96,
+          "hrv": 79,
+          "stable": 89,
+          "cardio": 87,
+          "sleep": 96,
+          "energy": 82,
+          "recovery": 10,
+          "calm": 87,
+          "activityRecovery": 41,
+          "physiol": 72,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 18,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 18,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 19,
+      "offset": 0,
+      "actual": {
+        "p": 19,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Bruno",
+          "age": 10,
+          "weight": 66,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_013.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 96,
+          "hrv": 82,
+          "stable": 92,
+          "cardio": 89,
+          "sleep": 87,
+          "energy": 91,
+          "recovery": 10,
+          "calm": 89,
+          "activityRecovery": 44,
+          "physiol": 79,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 19,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 19,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 20,
+      "offset": 0,
+      "actual": {
+        "p": 20,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "North",
+          "age": 9,
+          "weight": 44,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_005.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 97,
+          "hrv": 83,
+          "stable": 96,
+          "cardio": 91,
+          "sleep": 92,
+          "energy": 94,
+          "recovery": 22,
+          "calm": 90,
+          "activityRecovery": 52,
+          "physiol": 83,
+          "rhythm": 90
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 20,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 20,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 21,
+      "offset": 0,
+      "actual": {
+        "p": 21,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Goldie",
+          "age": 7,
+          "weight": 32,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_007.jpg"
+        },
+        "scores": {
+          "heart": 65,
+          "breath": 99,
+          "hrv": 88,
+          "stable": 81,
+          "cardio": 77,
+          "sleep": 93,
+          "energy": 87,
+          "recovery": 12,
+          "calm": 78,
+          "activityRecovery": 42,
+          "physiol": 79,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 22,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 21,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 21,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 22,
+      "offset": 0,
+      "actual": {
+        "p": 22,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Kumo",
+          "age": 6,
+          "weight": 11,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_009.jpg"
+        },
+        "scores": {
+          "heart": 93,
+          "breath": 86,
+          "hrv": 82,
+          "stable": 80,
+          "cardio": 84,
+          "sleep": 85,
+          "energy": 88,
+          "recovery": 8,
+          "calm": 86,
+          "activityRecovery": 41,
+          "physiol": 77,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 22,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 22,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 23,
+      "offset": 0,
+      "actual": {
+        "p": 23,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Percy",
+          "age": 1,
+          "weight": 26,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_011.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 92,
+          "cardio": 89,
+          "sleep": 86,
+          "energy": 91,
+          "recovery": 13,
+          "calm": 88,
+          "activityRecovery": 45,
+          "physiol": 79,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 23,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 23,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 24,
+      "offset": 0,
+      "actual": {
+        "p": 24,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Everest",
+          "age": 11,
+          "weight": 71,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_014.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 92,
+          "hrv": 83,
+          "stable": 93,
+          "cardio": 89,
+          "sleep": 88,
+          "energy": 92,
+          "recovery": 6,
+          "calm": 89,
+          "activityRecovery": 42,
+          "physiol": 79,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 24,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 24,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 25,
+      "offset": 0,
+      "actual": {
+        "p": 25,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Willow",
+          "age": 4,
+          "weight": 27,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_008.jpg"
+        },
+        "scores": {
+          "heart": 95,
+          "breath": 96,
+          "hrv": 77,
+          "stable": 94,
+          "cardio": 86,
+          "sleep": 94,
+          "energy": 89,
+          "recovery": 16,
+          "calm": 85,
+          "activityRecovery": 46,
+          "physiol": 78,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 25,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 25,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 26,
+      "offset": 0,
+      "actual": {
+        "p": 26,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Yuki",
+          "age": 2,
+          "weight": 4.2,
+          "breed": "Ragdoll",
+          "photo": "assets/images/pet_asset_015.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 74,
+          "stable": 91,
+          "cardio": 86,
+          "sleep": 98,
+          "energy": 91,
+          "recovery": 26,
+          "calm": 85,
+          "activityRecovery": 52,
+          "physiol": 82,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 26,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 26,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 27,
+      "offset": 0,
+      "actual": {
+        "p": 27,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Ash",
+          "age": 9,
+          "weight": 5.3,
+          "breed": "British Shorthair",
+          "photo": "assets/images/pet_asset_017.jpg"
+        },
+        "scores": {
+          "heart": 92,
+          "breath": 54,
+          "hrv": 83,
+          "stable": 87,
+          "cardio": 69,
+          "sleep": 80,
+          "energy": 79,
+          "recovery": 4,
+          "calm": 71,
+          "activityRecovery": 34,
+          "physiol": 73,
+          "rhythm": 81
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 27,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 27,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 28,
+      "offset": 0,
+      "actual": {
+        "p": 28,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Tiger",
+          "age": 3,
+          "weight": 5.1,
+          "breed": "Bengal",
+          "photo": "assets/images/pet_asset_019.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 94,
+          "hrv": 74,
+          "stable": 96,
+          "cardio": 86,
+          "sleep": 95,
+          "energy": 92,
+          "recovery": 19,
+          "calm": 84,
+          "activityRecovery": 49,
+          "physiol": 82,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 28,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 28,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 29,
+      "offset": 0,
+      "actual": {
+        "p": 29,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Cloud",
+          "age": 12,
+          "weight": 4,
+          "breed": "Persian",
+          "photo": "assets/images/pet_asset_023.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 96,
+          "hrv": 74,
+          "stable": 93,
+          "cardio": 86,
+          "sleep": 93,
+          "energy": 91,
+          "recovery": 18,
+          "calm": 84,
+          "activityRecovery": 48,
+          "physiol": 81,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 29,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 29,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 30,
+      "offset": 0,
+      "actual": {
+        "p": 30,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "Lucky",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 77,
+          "stable": 95,
+          "cardio": 88,
+          "sleep": 97,
+          "energy": 91,
+          "recovery": 24,
+          "calm": 87,
+          "activityRecovery": 52,
+          "physiol": 80,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 22,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 30,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 30,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "offset": 0,
+      "actual": {
+        "p": 31,
+        "d": "2026-11-26",
+        "blank": false,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 30,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "offset": 0,
+      "actual": {
+        "p": 31,
+        "d": "2026-11-26",
+        "blank": true,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 30,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 0,
+      "offset": 1,
+      "actual": {
+        "p": 0,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "拉菲",
+          "age": 6,
+          "weight": 55,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/owner/lafa_avatar.jpg"
+        },
+        "scores": {
+          "heart": 97,
+          "breath": 98,
+          "hrv": 78,
+          "stable": 96,
+          "cardio": 88,
+          "sleep": 96,
+          "energy": 93,
+          "recovery": 16,
+          "calm": 86,
+          "activityRecovery": 47,
+          "physiol": 82,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 4,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 30,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 1,
+      "offset": 1,
+      "actual": {
+        "p": 1,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Luna",
+          "age": 4,
+          "weight": 28,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/01_Luna_84_calm.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 80,
+          "stable": 87,
+          "cardio": 89,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 20,
+          "calm": 88,
+          "activityRecovery": 49,
+          "physiol": 78,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 31,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 1,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 2,
+      "offset": 1,
+      "actual": {
+        "p": 2,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Coco",
+          "age": 3,
+          "weight": 10.3,
+          "breed": "Beagle",
+          "photo": "assets/demo_score_portraits/02_Coco_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 80,
+          "breath": 73,
+          "hrv": 77,
+          "stable": 89,
+          "cardio": 77,
+          "sleep": 79,
+          "energy": 79,
+          "recovery": 6,
+          "calm": 76,
+          "activityRecovery": 36,
+          "physiol": 69,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 26,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 32,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 2,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 3,
+      "offset": 1,
+      "actual": {
+        "p": 3,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Leo",
+          "age": 4,
+          "weight": 5.8,
+          "breed": "Pug",
+          "photo": "assets/demo_score_portraits/03_Leo_Pug_v1002.jpg"
+        },
+        "scores": {
+          "heart": 54,
+          "breath": 12,
+          "hrv": 88,
+          "stable": 78,
+          "cardio": 36,
+          "sleep": 47,
+          "energy": 47,
+          "recovery": 1,
+          "calm": 39,
+          "activityRecovery": 19,
+          "physiol": 42,
+          "rhythm": 60
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 33,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 3,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 4,
+      "offset": 1,
+      "actual": {
+        "p": 4,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Poppy",
+          "age": 6,
+          "weight": 48,
+          "breed": "German Shepherd",
+          "photo": "assets/demo_score_portraits/04_Poppy_80_calm.jpg"
+        },
+        "scores": {
+          "heart": 96,
+          "breath": 94,
+          "hrv": 79,
+          "stable": 90,
+          "cardio": 87,
+          "sleep": 93,
+          "energy": 86,
+          "recovery": 8,
+          "calm": 86,
+          "activityRecovery": 41,
+          "physiol": 74,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 28,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 34,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 4,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 5,
+      "offset": 1,
+      "actual": {
+        "p": 5,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Nori",
+          "age": 2,
+          "weight": 4.6,
+          "breed": "Ragdoll",
+          "photo": "assets/demo_score_portraits/05_Nori_98_happy.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 73,
+          "stable": 92,
+          "cardio": 86,
+          "sleep": 99,
+          "energy": 92,
+          "recovery": 19,
+          "calm": 84,
+          "activityRecovery": 49,
+          "physiol": 82,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 26,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 35,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 5,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 6,
+      "offset": 1,
+      "actual": {
+        "p": 6,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Miso",
+          "age": 5,
+          "weight": 4.8,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/06_Miso_77_soft.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 71,
+          "stable": 96,
+          "cardio": 85,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 15,
+          "calm": 83,
+          "activityRecovery": 45,
+          "physiol": 77,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 24,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 36,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 6,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 7,
+      "offset": 1,
+      "actual": {
+        "p": 7,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Mochi",
+          "age": 3,
+          "weight": 5.5,
+          "breed": "Bengal",
+          "photo": "assets/demo_score_portraits/07_Mochi_35_sad.jpg"
+        },
+        "scores": {
+          "heart": 91,
+          "breath": 29,
+          "hrv": 79,
+          "stable": 88,
+          "cardio": 55,
+          "sleep": 68,
+          "energy": 67,
+          "recovery": 3,
+          "calm": 56,
+          "activityRecovery": 28,
+          "physiol": 61,
+          "rhythm": 69
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 37,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 7,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "offset": 1,
+      "actual": {
+        "p": 8,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Kiki",
+          "age": 4,
+          "weight": 3.9,
+          "breed": "Scottish Fold",
+          "photo": "assets/demo_score_portraits/08_Kiki_17_sad.jpg"
+        },
+        "scores": {
+          "heart": 68,
+          "breath": 14,
+          "hrv": 77,
+          "stable": 90,
+          "cardio": 38,
+          "sleep": 45,
+          "energy": 51,
+          "recovery": 2,
+          "calm": 40,
+          "activityRecovery": 21,
+          "physiol": 45,
+          "rhythm": 61
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 17,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 38,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 8,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 9,
+      "offset": 1,
+      "actual": {
+        "p": 9,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Max",
+          "age": 4,
+          "weight": 4.5,
+          "breed": "Persian",
+          "photo": "assets/demo_score_portraits/09_Max_87_calm.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 72,
+          "stable": 96,
+          "cardio": 86,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 18,
+          "calm": 84,
+          "activityRecovery": 47,
+          "physiol": 78,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 15,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 39,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 9,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 10,
+      "offset": 1,
+      "actual": {
+        "p": 10,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Rex",
+          "age": 10,
+          "weight": 38.5,
+          "breed": "Rottweiler",
+          "photo": "assets/demo_score_portraits/10_Rex_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 81,
+          "breath": 39,
+          "hrv": 88,
+          "stable": 80,
+          "cardio": 58,
+          "sleep": 53,
+          "energy": 63,
+          "recovery": 1,
+          "calm": 59,
+          "activityRecovery": 27,
+          "physiol": 55,
+          "rhythm": 72
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 16,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 40,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 10,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 11,
+      "offset": 1,
+      "actual": {
+        "p": 11,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Bella",
+          "age": 2,
+          "weight": 23.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/11_Bella_97_happy.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 78,
+          "stable": 95,
+          "cardio": 89,
+          "sleep": 99,
+          "energy": 93,
+          "recovery": 18,
+          "calm": 87,
+          "activityRecovery": 49,
+          "physiol": 81,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 41,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 11,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 12,
+      "offset": 1,
+      "actual": {
+        "p": 12,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Dodo",
+          "age": 8,
+          "weight": 11.5,
+          "breed": "Shiba Inu",
+          "photo": "assets/demo_score_portraits/12_Dodo_61_soft.jpg"
+        },
+        "scores": {
+          "heart": 87,
+          "breath": 85,
+          "hrv": 79,
+          "stable": 83,
+          "cardio": 82,
+          "sleep": 72,
+          "energy": 79,
+          "recovery": 6,
+          "calm": 78,
+          "activityRecovery": 37,
+          "physiol": 71,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 14,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 42,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 12,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 13,
+      "offset": 1,
+      "actual": {
+        "p": 13,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Snowy",
+          "age": 1,
+          "weight": 24.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/13_Snowy_Golden_v1002.jpg"
+        },
+        "scores": {
+          "heart": 90,
+          "breath": 88,
+          "hrv": 77,
+          "stable": 93,
+          "cardio": 84,
+          "sleep": 87,
+          "energy": 89,
+          "recovery": 11,
+          "calm": 83,
+          "activityRecovery": 43,
+          "physiol": 78,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 9,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 43,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 13,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 14,
+      "offset": 1,
+      "actual": {
+        "p": 14,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Nana",
+          "age": 12,
+          "weight": 4.2,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/14_Nana_53_sad.jpg"
+        },
+        "scores": {
+          "heart": 79,
+          "breath": 18,
+          "hrv": 79,
+          "stable": 90,
+          "cardio": 45,
+          "sleep": 66,
+          "energy": 61,
+          "recovery": 2,
+          "calm": 48,
+          "activityRecovery": 25,
+          "physiol": 57,
+          "rhythm": 63
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 22,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 44,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 14,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 15,
+      "offset": 1,
+      "actual": {
+        "p": 15,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Atlas",
+          "age": 5,
+          "weight": 42,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_025.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 79,
+          "stable": 89,
+          "cardio": 89,
+          "sleep": 97,
+          "energy": 94,
+          "recovery": 14,
+          "calm": 88,
+          "activityRecovery": 47,
+          "physiol": 82,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 45,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 15,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 16,
+      "offset": 1,
+      "actual": {
+        "p": 16,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Sunny",
+          "age": 8,
+          "weight": 30,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_026.jpg"
+        },
+        "scores": {
+          "heart": 89,
+          "breath": 87,
+          "hrv": 81,
+          "stable": 82,
+          "cardio": 84,
+          "sleep": 76,
+          "energy": 82,
+          "recovery": 6,
+          "calm": 82,
+          "activityRecovery": 38,
+          "physiol": 74,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 46,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 16,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 17,
+      "offset": 1,
+      "actual": {
+        "p": 17,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Taro",
+          "age": 3,
+          "weight": 12,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_027.jpg"
+        },
+        "scores": {
+          "heart": 94,
+          "breath": 93,
+          "hrv": 79,
+          "stable": 90,
+          "cardio": 86,
+          "sleep": 65,
+          "energy": 75,
+          "recovery": 18,
+          "calm": 77,
+          "activityRecovery": 42,
+          "physiol": 67,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 47,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 17,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 18,
+      "offset": 1,
+      "actual": {
+        "p": 18,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Bobo",
+          "age": 2,
+          "weight": 27,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_028.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 97,
+          "cardio": 89,
+          "sleep": 98,
+          "energy": 84,
+          "recovery": 8,
+          "calm": 88,
+          "activityRecovery": 41,
+          "physiol": 72,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 48,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 18,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 19,
+      "offset": 1,
+      "actual": {
+        "p": 19,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Bruno",
+          "age": 10,
+          "weight": 66,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_013.jpg"
+        },
+        "scores": {
+          "heart": 97,
+          "breath": 96,
+          "hrv": 81,
+          "stable": 96,
+          "cardio": 89,
+          "sleep": 86,
+          "energy": 91,
+          "recovery": 6,
+          "calm": 88,
+          "activityRecovery": 41,
+          "physiol": 78,
+          "rhythm": 89
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 49,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 19,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 20,
+      "offset": 1,
+      "actual": {
+        "p": 20,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "North",
+          "age": 9,
+          "weight": 44,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_005.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 100,
+          "hrv": 83,
+          "stable": 79,
+          "cardio": 88,
+          "sleep": 94,
+          "energy": 93,
+          "recovery": 24,
+          "calm": 90,
+          "activityRecovery": 53,
+          "physiol": 83,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 50,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 20,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 21,
+      "offset": 1,
+      "actual": {
+        "p": 21,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Goldie",
+          "age": 7,
+          "weight": 32,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_007.jpg"
+        },
+        "scores": {
+          "heart": 57,
+          "breath": 99,
+          "hrv": 91,
+          "stable": 78,
+          "cardio": 72,
+          "sleep": 91,
+          "energy": 84,
+          "recovery": 12,
+          "calm": 74,
+          "activityRecovery": 41,
+          "physiol": 77,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 22,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 51,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 21,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 22,
+      "offset": 1,
+      "actual": {
+        "p": 22,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Kumo",
+          "age": 6,
+          "weight": 11,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_009.jpg"
+        },
+        "scores": {
+          "heart": 93,
+          "breath": 82,
+          "hrv": 85,
+          "stable": 79,
+          "cardio": 83,
+          "sleep": 84,
+          "energy": 88,
+          "recovery": 4,
+          "calm": 86,
+          "activityRecovery": 39,
+          "physiol": 76,
+          "rhythm": 82
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 52,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 22,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 23,
+      "offset": 1,
+      "actual": {
+        "p": 23,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Percy",
+          "age": 1,
+          "weight": 26,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_011.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 97,
+          "cardio": 89,
+          "sleep": 82,
+          "energy": 88,
+          "recovery": 14,
+          "calm": 87,
+          "activityRecovery": 45,
+          "physiol": 78,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 53,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 23,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 24,
+      "offset": 1,
+      "actual": {
+        "p": 24,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Everest",
+          "age": 11,
+          "weight": 71,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_014.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 92,
+          "hrv": 83,
+          "stable": 80,
+          "cardio": 87,
+          "sleep": 90,
+          "energy": 91,
+          "recovery": 10,
+          "calm": 89,
+          "activityRecovery": 44,
+          "physiol": 79,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 54,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 24,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 25,
+      "offset": 1,
+      "actual": {
+        "p": 25,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Willow",
+          "age": 4,
+          "weight": 27,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_008.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 78,
+          "stable": 93,
+          "cardio": 88,
+          "sleep": 97,
+          "energy": 92,
+          "recovery": 13,
+          "calm": 87,
+          "activityRecovery": 46,
+          "physiol": 81,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 55,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 25,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 26,
+      "offset": 1,
+      "actual": {
+        "p": 26,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Yuki",
+          "age": 2,
+          "weight": 4.2,
+          "breed": "Ragdoll",
+          "photo": "assets/images/pet_asset_015.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 74,
+          "stable": 96,
+          "cardio": 87,
+          "sleep": 99,
+          "energy": 92,
+          "recovery": 25,
+          "calm": 85,
+          "activityRecovery": 52,
+          "physiol": 82,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 56,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 26,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 27,
+      "offset": 1,
+      "actual": {
+        "p": 27,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Ash",
+          "age": 9,
+          "weight": 5.3,
+          "breed": "British Shorthair",
+          "photo": "assets/images/pet_asset_017.jpg"
+        },
+        "scores": {
+          "heart": 89,
+          "breath": 34,
+          "hrv": 82,
+          "stable": 88,
+          "cardio": 57,
+          "sleep": 76,
+          "energy": 71,
+          "recovery": 4,
+          "calm": 60,
+          "activityRecovery": 31,
+          "physiol": 66,
+          "rhythm": 72
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 57,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 27,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 28,
+      "offset": 1,
+      "actual": {
+        "p": 28,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Tiger",
+          "age": 3,
+          "weight": 5.1,
+          "breed": "Bengal",
+          "photo": "assets/images/pet_asset_019.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 74,
+          "stable": 94,
+          "cardio": 87,
+          "sleep": 94,
+          "energy": 92,
+          "recovery": 18,
+          "calm": 85,
+          "activityRecovery": 48,
+          "physiol": 81,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 58,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 28,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 29,
+      "offset": 1,
+      "actual": {
+        "p": 29,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Cloud",
+          "age": 12,
+          "weight": 4,
+          "breed": "Persian",
+          "photo": "assets/images/pet_asset_023.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 96,
+          "hrv": 74,
+          "stable": 96,
+          "cardio": 86,
+          "sleep": 91,
+          "energy": 91,
+          "recovery": 12,
+          "calm": 84,
+          "activityRecovery": 44,
+          "physiol": 80,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 59,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 29,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 30,
+      "offset": 1,
+      "actual": {
+        "p": 30,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "Lucky",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 77,
+          "stable": 95,
+          "cardio": 88,
+          "sleep": 97,
+          "energy": 92,
+          "recovery": 19,
+          "calm": 87,
+          "activityRecovery": 49,
+          "physiol": 80,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 23,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 60,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 30,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "offset": 1,
+      "actual": {
+        "p": 31,
+        "d": "2026-11-27",
+        "blank": false,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 60,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "offset": 1,
+      "actual": {
+        "p": 31,
+        "d": "2026-11-27",
+        "blank": true,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 60,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 0,
+      "offset": 2,
+      "actual": {
+        "p": 0,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "拉菲",
+          "age": 6,
+          "weight": 55,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/owner/lafa_avatar.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 99,
+          "hrv": 78,
+          "stable": 96,
+          "cardio": 88,
+          "sleep": 96,
+          "energy": 93,
+          "recovery": 21,
+          "calm": 87,
+          "activityRecovery": 50,
+          "physiol": 83,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 5,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 60,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 1,
+      "offset": 2,
+      "actual": {
+        "p": 1,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Luna",
+          "age": 4,
+          "weight": 28,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/01_Luna_84_calm.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 96,
+          "cardio": 89,
+          "sleep": 95,
+          "energy": 90,
+          "recovery": 12,
+          "calm": 88,
+          "activityRecovery": 45,
+          "physiol": 77,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 61,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 1,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 2,
+      "offset": 2,
+      "actual": {
+        "p": 2,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Coco",
+          "age": 3,
+          "weight": 10.3,
+          "breed": "Beagle",
+          "photo": "assets/demo_score_portraits/02_Coco_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 79,
+          "breath": 67,
+          "hrv": 81,
+          "stable": 83,
+          "cardio": 73,
+          "sleep": 81,
+          "energy": 77,
+          "recovery": 4,
+          "calm": 74,
+          "activityRecovery": 34,
+          "physiol": 67,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 62,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 2,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 3,
+      "offset": 2,
+      "actual": {
+        "p": 3,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Leo",
+          "age": 4,
+          "weight": 5.8,
+          "breed": "Pug",
+          "photo": "assets/demo_score_portraits/03_Leo_Pug_v1002.jpg"
+        },
+        "scores": {
+          "heart": 48,
+          "breath": 11,
+          "hrv": 88,
+          "stable": 79,
+          "cardio": 34,
+          "sleep": 48,
+          "energy": 46,
+          "recovery": 1,
+          "calm": 38,
+          "activityRecovery": 19,
+          "physiol": 41,
+          "rhythm": 60
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 63,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 3,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 4,
+      "offset": 2,
+      "actual": {
+        "p": 4,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Poppy",
+          "age": 6,
+          "weight": 48,
+          "breed": "German Shepherd",
+          "photo": "assets/demo_score_portraits/04_Poppy_80_calm.jpg"
+        },
+        "scores": {
+          "heart": 95,
+          "breath": 91,
+          "hrv": 79,
+          "stable": 92,
+          "cardio": 86,
+          "sleep": 91,
+          "energy": 87,
+          "recovery": 7,
+          "calm": 86,
+          "activityRecovery": 41,
+          "physiol": 73,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 28,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 64,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 4,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 5,
+      "offset": 2,
+      "actual": {
+        "p": 5,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Nori",
+          "age": 2,
+          "weight": 4.6,
+          "breed": "Ragdoll",
+          "photo": "assets/demo_score_portraits/05_Nori_98_happy.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 72,
+          "stable": 97,
+          "cardio": 86,
+          "sleep": 99,
+          "energy": 92,
+          "recovery": 21,
+          "calm": 84,
+          "activityRecovery": 50,
+          "physiol": 82,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 65,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 5,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 6,
+      "offset": 2,
+      "actual": {
+        "p": 6,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Miso",
+          "age": 5,
+          "weight": 4.8,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/06_Miso_77_soft.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 71,
+          "stable": 92,
+          "cardio": 85,
+          "sleep": 98,
+          "energy": 88,
+          "recovery": 11,
+          "calm": 83,
+          "activityRecovery": 43,
+          "physiol": 75,
+          "rhythm": 82
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 25,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 66,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 6,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 7,
+      "offset": 2,
+      "actual": {
+        "p": 7,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Mochi",
+          "age": 3,
+          "weight": 5.5,
+          "breed": "Bengal",
+          "photo": "assets/demo_score_portraits/07_Mochi_35_sad.jpg"
+        },
+        "scores": {
+          "heart": 86,
+          "breath": 19,
+          "hrv": 82,
+          "stable": 87,
+          "cardio": 47,
+          "sleep": 63,
+          "energy": 62,
+          "recovery": 3,
+          "calm": 50,
+          "activityRecovery": 26,
+          "physiol": 56,
+          "rhythm": 64
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 67,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 7,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "offset": 2,
+      "actual": {
+        "p": 8,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Kiki",
+          "age": 4,
+          "weight": 3.9,
+          "breed": "Scottish Fold",
+          "photo": "assets/demo_score_portraits/08_Kiki_17_sad.jpg"
+        },
+        "scores": {
+          "heart": 51,
+          "breath": 11,
+          "hrv": 81,
+          "stable": 89,
+          "cardio": 33,
+          "sleep": 41,
+          "energy": 47,
+          "recovery": 1,
+          "calm": 36,
+          "activityRecovery": 19,
+          "physiol": 41,
+          "rhythm": 58
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 18,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 68,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 8,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 9,
+      "offset": 2,
+      "actual": {
+        "p": 9,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Max",
+          "age": 4,
+          "weight": 4.5,
+          "breed": "Persian",
+          "photo": "assets/demo_score_portraits/09_Max_87_calm.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 72,
+          "stable": 97,
+          "cardio": 86,
+          "sleep": 97,
+          "energy": 92,
+          "recovery": 16,
+          "calm": 84,
+          "activityRecovery": 47,
+          "physiol": 81,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 16,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 69,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 9,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 10,
+      "offset": 2,
+      "actual": {
+        "p": 10,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Rex",
+          "age": 10,
+          "weight": 38.5,
+          "breed": "Rottweiler",
+          "photo": "assets/demo_score_portraits/10_Rex_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 77,
+          "breath": 30,
+          "hrv": 89,
+          "stable": 79,
+          "cardio": 52,
+          "sleep": 52,
+          "energy": 61,
+          "recovery": 0,
+          "calm": 54,
+          "activityRecovery": 25,
+          "physiol": 53,
+          "rhythm": 68
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 17,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 70,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 10,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 11,
+      "offset": 2,
+      "actual": {
+        "p": 11,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Bella",
+          "age": 2,
+          "weight": 23.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/11_Bella_97_happy.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 78,
+          "stable": 94,
+          "cardio": 89,
+          "sleep": 99,
+          "energy": 93,
+          "recovery": 20,
+          "calm": 87,
+          "activityRecovery": 50,
+          "physiol": 82,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 27,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 71,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 11,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 12,
+      "offset": 2,
+      "actual": {
+        "p": 12,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Dodo",
+          "age": 8,
+          "weight": 11.5,
+          "breed": "Shiba Inu",
+          "photo": "assets/demo_score_portraits/12_Dodo_61_soft.jpg"
+        },
+        "scores": {
+          "heart": 87,
+          "breath": 85,
+          "hrv": 78,
+          "stable": 83,
+          "cardio": 82,
+          "sleep": 69,
+          "energy": 77,
+          "recovery": 4,
+          "calm": 76,
+          "activityRecovery": 35,
+          "physiol": 70,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 15,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 72,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 12,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 13,
+      "offset": 2,
+      "actual": {
+        "p": 13,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Snowy",
+          "age": 1,
+          "weight": 24.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/13_Snowy_Golden_v1002.jpg"
+        },
+        "scores": {
+          "heart": 89,
+          "breath": 87,
+          "hrv": 77,
+          "stable": 83,
+          "cardio": 82,
+          "sleep": 84,
+          "energy": 87,
+          "recovery": 11,
+          "calm": 82,
+          "activityRecovery": 42,
+          "physiol": 77,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 10,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 73,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 13,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 14,
+      "offset": 2,
+      "actual": {
+        "p": 14,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Nana",
+          "age": 12,
+          "weight": 4.2,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/14_Nana_53_sad.jpg"
+        },
+        "scores": {
+          "heart": 79,
+          "breath": 18,
+          "hrv": 80,
+          "stable": 90,
+          "cardio": 45,
+          "sleep": 66,
+          "energy": 61,
+          "recovery": 2,
+          "calm": 48,
+          "activityRecovery": 25,
+          "physiol": 56,
+          "rhythm": 64
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 23,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 74,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 14,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 15,
+      "offset": 2,
+      "actual": {
+        "p": 15,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Atlas",
+          "age": 5,
+          "weight": 42,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_025.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 79,
+          "stable": 94,
+          "cardio": 89,
+          "sleep": 95,
+          "energy": 93,
+          "recovery": 22,
+          "calm": 88,
+          "activityRecovery": 51,
+          "physiol": 82,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 75,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 15,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 16,
+      "offset": 2,
+      "actual": {
+        "p": 16,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Sunny",
+          "age": 8,
+          "weight": 30,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_026.jpg"
+        },
+        "scores": {
+          "heart": 78,
+          "breath": 61,
+          "hrv": 85,
+          "stable": 81,
+          "cardio": 70,
+          "sleep": 76,
+          "energy": 78,
+          "recovery": 6,
+          "calm": 71,
+          "activityRecovery": 35,
+          "physiol": 70,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 76,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 16,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 17,
+      "offset": 2,
+      "actual": {
+        "p": 17,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Taro",
+          "age": 3,
+          "weight": 12,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_027.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 98,
+          "hrv": 79,
+          "stable": 89,
+          "cardio": 88,
+          "sleep": 54,
+          "energy": 68,
+          "recovery": 16,
+          "calm": 70,
+          "activityRecovery": 38,
+          "physiol": 59,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 77,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 17,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 18,
+      "offset": 2,
+      "actual": {
+        "p": 18,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Bobo",
+          "age": 2,
+          "weight": 27,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_028.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 83,
+          "cardio": 88,
+          "sleep": 98,
+          "energy": 84,
+          "recovery": 7,
+          "calm": 88,
+          "activityRecovery": 40,
+          "physiol": 72,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 78,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 18,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 19,
+      "offset": 2,
+      "actual": {
+        "p": 19,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Bruno",
+          "age": 10,
+          "weight": 66,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_013.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 98,
+          "hrv": 80,
+          "stable": 93,
+          "cardio": 89,
+          "sleep": 86,
+          "energy": 90,
+          "recovery": 7,
+          "calm": 88,
+          "activityRecovery": 42,
+          "physiol": 78,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 79,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 19,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 20,
+      "offset": 2,
+      "actual": {
+        "p": 20,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "North",
+          "age": 9,
+          "weight": 44,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_005.jpg"
+        },
+        "scores": {
+          "heart": 96,
+          "breath": 99,
+          "hrv": 82,
+          "stable": 80,
+          "cardio": 88,
+          "sleep": 93,
+          "energy": 92,
+          "recovery": 21,
+          "calm": 89,
+          "activityRecovery": 51,
+          "physiol": 82,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 80,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 20,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 21,
+      "offset": 2,
+      "actual": {
+        "p": 21,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Goldie",
+          "age": 7,
+          "weight": 32,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_007.jpg"
+        },
+        "scores": {
+          "heart": 45,
+          "breath": 99,
+          "hrv": 94,
+          "stable": 76,
+          "cardio": 66,
+          "sleep": 88,
+          "energy": 80,
+          "recovery": 4,
+          "calm": 68,
+          "activityRecovery": 34,
+          "physiol": 72,
+          "rhythm": 82
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 22,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 81,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 21,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 22,
+      "offset": 2,
+      "actual": {
+        "p": 22,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Kumo",
+          "age": 6,
+          "weight": 11,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_009.jpg"
+        },
+        "scores": {
+          "heart": 91,
+          "breath": 71,
+          "hrv": 88,
+          "stable": 77,
+          "cardio": 78,
+          "sleep": 81,
+          "energy": 84,
+          "recovery": 3,
+          "calm": 80,
+          "activityRecovery": 37,
+          "physiol": 75,
+          "rhythm": 81
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 82,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 22,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 23,
+      "offset": 2,
+      "actual": {
+        "p": 23,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Percy",
+          "age": 1,
+          "weight": 26,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_011.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 93,
+          "cardio": 89,
+          "sleep": 82,
+          "energy": 88,
+          "recovery": 22,
+          "calm": 87,
+          "activityRecovery": 50,
+          "physiol": 79,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 83,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 23,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 24,
+      "offset": 2,
+      "actual": {
+        "p": 24,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Everest",
+          "age": 11,
+          "weight": 71,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_014.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 98,
+          "hrv": 83,
+          "stable": 86,
+          "cardio": 90,
+          "sleep": 91,
+          "energy": 93,
+          "recovery": 6,
+          "calm": 90,
+          "activityRecovery": 42,
+          "physiol": 80,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 20,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 84,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 24,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 25,
+      "offset": 2,
+      "actual": {
+        "p": 25,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Willow",
+          "age": 4,
+          "weight": 27,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_008.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 99,
+          "hrv": 77,
+          "stable": 86,
+          "cardio": 87,
+          "sleep": 98,
+          "energy": 90,
+          "recovery": 15,
+          "calm": 86,
+          "activityRecovery": 46,
+          "physiol": 78,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 85,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 25,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 26,
+      "offset": 2,
+      "actual": {
+        "p": 26,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Yuki",
+          "age": 2,
+          "weight": 4.2,
+          "breed": "Ragdoll",
+          "photo": "assets/images/pet_asset_015.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 74,
+          "stable": 95,
+          "cardio": 87,
+          "sleep": 99,
+          "energy": 92,
+          "recovery": 23,
+          "calm": 85,
+          "activityRecovery": 51,
+          "physiol": 82,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 86,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 26,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 27,
+      "offset": 2,
+      "actual": {
+        "p": 27,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Ash",
+          "age": 9,
+          "weight": 5.3,
+          "breed": "British Shorthair",
+          "photo": "assets/images/pet_asset_017.jpg"
+        },
+        "scores": {
+          "heart": 84,
+          "breath": 14,
+          "hrv": 88,
+          "stable": 85,
+          "cardio": 45,
+          "sleep": 65,
+          "energy": 61,
+          "recovery": 3,
+          "calm": 48,
+          "activityRecovery": 25,
+          "physiol": 56,
+          "rhythm": 63
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 19,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 87,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 27,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 28,
+      "offset": 2,
+      "actual": {
+        "p": 28,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Tiger",
+          "age": 3,
+          "weight": 5.1,
+          "breed": "Bengal",
+          "photo": "assets/images/pet_asset_019.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 74,
+          "stable": 96,
+          "cardio": 87,
+          "sleep": 94,
+          "energy": 92,
+          "recovery": 17,
+          "calm": 85,
+          "activityRecovery": 48,
+          "physiol": 81,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 88,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 28,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 29,
+      "offset": 2,
+      "actual": {
+        "p": 29,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Cloud",
+          "age": 12,
+          "weight": 4,
+          "breed": "Persian",
+          "photo": "assets/images/pet_asset_023.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 98,
+          "hrv": 74,
+          "stable": 92,
+          "cardio": 86,
+          "sleep": 92,
+          "energy": 91,
+          "recovery": 10,
+          "calm": 85,
+          "activityRecovery": 43,
+          "physiol": 79,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 21,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 89,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 29,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 30,
+      "offset": 2,
+      "actual": {
+        "p": 30,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "Lucky",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 77,
+          "stable": 91,
+          "cardio": 88,
+          "sleep": 97,
+          "energy": 92,
+          "recovery": 20,
+          "calm": 86,
+          "activityRecovery": 49,
+          "physiol": 81,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 24,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 90,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 30,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "offset": 2,
+      "actual": {
+        "p": 31,
+        "d": "2026-11-28",
+        "blank": false,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 90,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "offset": 2,
+      "actual": {
+        "p": 31,
+        "d": "2026-11-28",
+        "blank": true,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 90,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 0,
+      "offset": 36,
+      "actual": {
+        "p": 0,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "拉菲",
+          "age": 6,
+          "weight": 55,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/owner/lafa_avatar.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 99,
+          "hrv": 78,
+          "stable": 96,
+          "cardio": 88,
+          "sleep": 96,
+          "energy": 93,
+          "recovery": 21,
+          "calm": 87,
+          "activityRecovery": 50,
+          "physiol": 83,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 39,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 90,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 1,
+      "offset": 36,
+      "actual": {
+        "p": 1,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Luna",
+          "age": 4,
+          "weight": 28,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/01_Luna_84_calm.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 80,
+          "stable": 87,
+          "cardio": 89,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 20,
+          "calm": 88,
+          "activityRecovery": 49,
+          "physiol": 78,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 91,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 1,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 2,
+      "offset": 36,
+      "actual": {
+        "p": 2,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Coco",
+          "age": 3,
+          "weight": 10.3,
+          "breed": "Beagle",
+          "photo": "assets/demo_score_portraits/02_Coco_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 80,
+          "breath": 73,
+          "hrv": 77,
+          "stable": 89,
+          "cardio": 77,
+          "sleep": 79,
+          "energy": 79,
+          "recovery": 6,
+          "calm": 76,
+          "activityRecovery": 36,
+          "physiol": 69,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 92,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 2,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 3,
+      "offset": 36,
+      "actual": {
+        "p": 3,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Leo",
+          "age": 4,
+          "weight": 5.8,
+          "breed": "Pug",
+          "photo": "assets/demo_score_portraits/03_Leo_Pug_v1002.jpg"
+        },
+        "scores": {
+          "heart": 54,
+          "breath": 12,
+          "hrv": 88,
+          "stable": 78,
+          "cardio": 36,
+          "sleep": 47,
+          "energy": 47,
+          "recovery": 1,
+          "calm": 39,
+          "activityRecovery": 19,
+          "physiol": 42,
+          "rhythm": 60
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 93,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 3,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 4,
+      "offset": 36,
+      "actual": {
+        "p": 4,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Poppy",
+          "age": 6,
+          "weight": 48,
+          "breed": "German Shepherd",
+          "photo": "assets/demo_score_portraits/04_Poppy_80_calm.jpg"
+        },
+        "scores": {
+          "heart": 96,
+          "breath": 94,
+          "hrv": 79,
+          "stable": 90,
+          "cardio": 87,
+          "sleep": 93,
+          "energy": 86,
+          "recovery": 8,
+          "calm": 86,
+          "activityRecovery": 41,
+          "physiol": 74,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 94,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 4,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 5,
+      "offset": 36,
+      "actual": {
+        "p": 5,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Nori",
+          "age": 2,
+          "weight": 4.6,
+          "breed": "Ragdoll",
+          "photo": "assets/demo_score_portraits/05_Nori_98_happy.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 73,
+          "stable": 92,
+          "cardio": 86,
+          "sleep": 99,
+          "energy": 92,
+          "recovery": 19,
+          "calm": 84,
+          "activityRecovery": 49,
+          "physiol": 82,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 95,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 5,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 6,
+      "offset": 36,
+      "actual": {
+        "p": 6,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Miso",
+          "age": 5,
+          "weight": 4.8,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/06_Miso_77_soft.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 71,
+          "stable": 96,
+          "cardio": 85,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 15,
+          "calm": 83,
+          "activityRecovery": 45,
+          "physiol": 77,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 96,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 6,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 7,
+      "offset": 36,
+      "actual": {
+        "p": 7,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Mochi",
+          "age": 3,
+          "weight": 5.5,
+          "breed": "Bengal",
+          "photo": "assets/demo_score_portraits/07_Mochi_35_sad.jpg"
+        },
+        "scores": {
+          "heart": 91,
+          "breath": 29,
+          "hrv": 79,
+          "stable": 88,
+          "cardio": 55,
+          "sleep": 68,
+          "energy": 67,
+          "recovery": 3,
+          "calm": 56,
+          "activityRecovery": 28,
+          "physiol": 61,
+          "rhythm": 69
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 97,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 7,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 8,
+      "offset": 36,
+      "actual": {
+        "p": 8,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Kiki",
+          "age": 4,
+          "weight": 3.9,
+          "breed": "Scottish Fold",
+          "photo": "assets/demo_score_portraits/08_Kiki_17_sad.jpg"
+        },
+        "scores": {
+          "heart": 68,
+          "breath": 14,
+          "hrv": 77,
+          "stable": 90,
+          "cardio": 38,
+          "sleep": 45,
+          "energy": 51,
+          "recovery": 2,
+          "calm": 40,
+          "activityRecovery": 21,
+          "physiol": 45,
+          "rhythm": 61
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 98,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 8,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 9,
+      "offset": 36,
+      "actual": {
+        "p": 9,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Max",
+          "age": 4,
+          "weight": 4.5,
+          "breed": "Persian",
+          "photo": "assets/demo_score_portraits/09_Max_87_calm.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 72,
+          "stable": 96,
+          "cardio": 86,
+          "sleep": 97,
+          "energy": 89,
+          "recovery": 18,
+          "calm": 84,
+          "activityRecovery": 47,
+          "physiol": 78,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 99,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 9,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 10,
+      "offset": 36,
+      "actual": {
+        "p": 10,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Rex",
+          "age": 10,
+          "weight": 38.5,
+          "breed": "Rottweiler",
+          "photo": "assets/demo_score_portraits/10_Rex_38_sad.jpg"
+        },
+        "scores": {
+          "heart": 81,
+          "breath": 39,
+          "hrv": 88,
+          "stable": 80,
+          "cardio": 58,
+          "sleep": 53,
+          "energy": 63,
+          "recovery": 1,
+          "calm": 59,
+          "activityRecovery": 27,
+          "physiol": 55,
+          "rhythm": 72
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 100,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 10,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 11,
+      "offset": 36,
+      "actual": {
+        "p": 11,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Bella",
+          "age": 2,
+          "weight": 23.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/11_Bella_97_happy.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 78,
+          "stable": 95,
+          "cardio": 89,
+          "sleep": 99,
+          "energy": 93,
+          "recovery": 18,
+          "calm": 87,
+          "activityRecovery": 49,
+          "physiol": 81,
+          "rhythm": 87
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 101,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 11,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 12,
+      "offset": 36,
+      "actual": {
+        "p": 12,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Dodo",
+          "age": 8,
+          "weight": 11.5,
+          "breed": "Shiba Inu",
+          "photo": "assets/demo_score_portraits/12_Dodo_61_soft.jpg"
+        },
+        "scores": {
+          "heart": 87,
+          "breath": 85,
+          "hrv": 79,
+          "stable": 83,
+          "cardio": 82,
+          "sleep": 72,
+          "energy": 79,
+          "recovery": 6,
+          "calm": 78,
+          "activityRecovery": 37,
+          "physiol": 71,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 102,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 12,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 13,
+      "offset": 36,
+      "actual": {
+        "p": 13,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Snowy",
+          "age": 1,
+          "weight": 24.8,
+          "breed": "Golden Retriever",
+          "photo": "assets/demo_score_portraits/13_Snowy_Golden_v1002.jpg"
+        },
+        "scores": {
+          "heart": 90,
+          "breath": 88,
+          "hrv": 77,
+          "stable": 93,
+          "cardio": 84,
+          "sleep": 87,
+          "energy": 89,
+          "recovery": 11,
+          "calm": 83,
+          "activityRecovery": 43,
+          "physiol": 78,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 103,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 13,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 14,
+      "offset": 36,
+      "actual": {
+        "p": 14,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Nana",
+          "age": 12,
+          "weight": 4.2,
+          "breed": "British Shorthair",
+          "photo": "assets/demo_score_portraits/14_Nana_53_sad.jpg"
+        },
+        "scores": {
+          "heart": 79,
+          "breath": 18,
+          "hrv": 79,
+          "stable": 90,
+          "cardio": 45,
+          "sleep": 66,
+          "energy": 61,
+          "recovery": 2,
+          "calm": 48,
+          "activityRecovery": 25,
+          "physiol": 57,
+          "rhythm": 63
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 104,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 14,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 15,
+      "offset": 36,
+      "actual": {
+        "p": 15,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Atlas",
+          "age": 5,
+          "weight": 42,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_025.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 100,
+          "hrv": 79,
+          "stable": 89,
+          "cardio": 89,
+          "sleep": 97,
+          "energy": 94,
+          "recovery": 14,
+          "calm": 88,
+          "activityRecovery": 47,
+          "physiol": 82,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 105,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 15,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 16,
+      "offset": 36,
+      "actual": {
+        "p": 16,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Sunny",
+          "age": 8,
+          "weight": 30,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_026.jpg"
+        },
+        "scores": {
+          "heart": 89,
+          "breath": 87,
+          "hrv": 81,
+          "stable": 82,
+          "cardio": 84,
+          "sleep": 76,
+          "energy": 82,
+          "recovery": 6,
+          "calm": 82,
+          "activityRecovery": 38,
+          "physiol": 74,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 106,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 16,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 17,
+      "offset": 36,
+      "actual": {
+        "p": 17,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Taro",
+          "age": 3,
+          "weight": 12,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_027.jpg"
+        },
+        "scores": {
+          "heart": 94,
+          "breath": 93,
+          "hrv": 79,
+          "stable": 90,
+          "cardio": 86,
+          "sleep": 65,
+          "energy": 75,
+          "recovery": 18,
+          "calm": 77,
+          "activityRecovery": 42,
+          "physiol": 67,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 107,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 17,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 18,
+      "offset": 36,
+      "actual": {
+        "p": 18,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Bobo",
+          "age": 2,
+          "weight": 27,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_028.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 97,
+          "cardio": 89,
+          "sleep": 98,
+          "energy": 84,
+          "recovery": 8,
+          "calm": 88,
+          "activityRecovery": 41,
+          "physiol": 72,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 108,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 18,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 19,
+      "offset": 36,
+      "actual": {
+        "p": 19,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Bruno",
+          "age": 10,
+          "weight": 66,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_013.jpg"
+        },
+        "scores": {
+          "heart": 97,
+          "breath": 96,
+          "hrv": 81,
+          "stable": 96,
+          "cardio": 89,
+          "sleep": 86,
+          "energy": 91,
+          "recovery": 6,
+          "calm": 88,
+          "activityRecovery": 41,
+          "physiol": 78,
+          "rhythm": 89
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 109,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 19,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 20,
+      "offset": 36,
+      "actual": {
+        "p": 20,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "North",
+          "age": 9,
+          "weight": 44,
+          "breed": "Alaskan Malamute",
+          "photo": "assets/images/pet_asset_005.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 100,
+          "hrv": 83,
+          "stable": 79,
+          "cardio": 88,
+          "sleep": 94,
+          "energy": 93,
+          "recovery": 24,
+          "calm": 90,
+          "activityRecovery": 53,
+          "physiol": 83,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 110,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 20,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 21,
+      "offset": 36,
+      "actual": {
+        "p": 21,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Goldie",
+          "age": 7,
+          "weight": 32,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_007.jpg"
+        },
+        "scores": {
+          "heart": 57,
+          "breath": 99,
+          "hrv": 91,
+          "stable": 78,
+          "cardio": 72,
+          "sleep": 91,
+          "energy": 84,
+          "recovery": 12,
+          "calm": 74,
+          "activityRecovery": 41,
+          "physiol": 77,
+          "rhythm": 83
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 111,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 21,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 22,
+      "offset": 36,
+      "actual": {
+        "p": 22,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Kumo",
+          "age": 6,
+          "weight": 11,
+          "breed": "Shiba Inu",
+          "photo": "assets/images/pet_asset_009.jpg"
+        },
+        "scores": {
+          "heart": 93,
+          "breath": 82,
+          "hrv": 85,
+          "stable": 79,
+          "cardio": 83,
+          "sleep": 84,
+          "energy": 88,
+          "recovery": 4,
+          "calm": 86,
+          "activityRecovery": 39,
+          "physiol": 76,
+          "rhythm": 82
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 112,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 22,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 23,
+      "offset": 36,
+      "actual": {
+        "p": 23,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Percy",
+          "age": 1,
+          "weight": 26,
+          "breed": "Standard Poodle",
+          "photo": "assets/images/pet_asset_011.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 79,
+          "stable": 97,
+          "cardio": 89,
+          "sleep": 82,
+          "energy": 88,
+          "recovery": 14,
+          "calm": 87,
+          "activityRecovery": 45,
+          "physiol": 78,
+          "rhythm": 88
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 113,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 23,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 24,
+      "offset": 36,
+      "actual": {
+        "p": 24,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Everest",
+          "age": 11,
+          "weight": 71,
+          "breed": "Saint Bernard",
+          "photo": "assets/images/pet_asset_014.jpg"
+        },
+        "scores": {
+          "heart": 98,
+          "breath": 92,
+          "hrv": 83,
+          "stable": 80,
+          "cardio": 87,
+          "sleep": 90,
+          "energy": 91,
+          "recovery": 10,
+          "calm": 89,
+          "activityRecovery": 44,
+          "physiol": 79,
+          "rhythm": 84
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 114,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 24,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 25,
+      "offset": 36,
+      "actual": {
+        "p": 25,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Willow",
+          "age": 4,
+          "weight": 27,
+          "breed": "Golden Retriever",
+          "photo": "assets/images/pet_asset_008.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 99,
+          "hrv": 78,
+          "stable": 93,
+          "cardio": 88,
+          "sleep": 97,
+          "energy": 92,
+          "recovery": 13,
+          "calm": 87,
+          "activityRecovery": 46,
+          "physiol": 81,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 115,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 25,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 26,
+      "offset": 36,
+      "actual": {
+        "p": 26,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Yuki",
+          "age": 2,
+          "weight": 4.2,
+          "breed": "Ragdoll",
+          "photo": "assets/images/pet_asset_015.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 74,
+          "stable": 96,
+          "cardio": 87,
+          "sleep": 99,
+          "energy": 92,
+          "recovery": 25,
+          "calm": 85,
+          "activityRecovery": 52,
+          "physiol": 82,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 116,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 26,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 27,
+      "offset": 36,
+      "actual": {
+        "p": 27,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Ash",
+          "age": 9,
+          "weight": 5.3,
+          "breed": "British Shorthair",
+          "photo": "assets/images/pet_asset_017.jpg"
+        },
+        "scores": {
+          "heart": 89,
+          "breath": 34,
+          "hrv": 82,
+          "stable": 88,
+          "cardio": 57,
+          "sleep": 76,
+          "energy": 71,
+          "recovery": 4,
+          "calm": 60,
+          "activityRecovery": 31,
+          "physiol": 66,
+          "rhythm": 72
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 117,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 27,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 28,
+      "offset": 36,
+      "actual": {
+        "p": 28,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Tiger",
+          "age": 3,
+          "weight": 5.1,
+          "breed": "Bengal",
+          "photo": "assets/images/pet_asset_019.jpg"
+        },
+        "scores": {
+          "heart": 100,
+          "breath": 99,
+          "hrv": 74,
+          "stable": 94,
+          "cardio": 87,
+          "sleep": 94,
+          "energy": 92,
+          "recovery": 18,
+          "calm": 85,
+          "activityRecovery": 48,
+          "physiol": 81,
+          "rhythm": 85
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 118,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 28,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 29,
+      "offset": 36,
+      "actual": {
+        "p": 29,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Cloud",
+          "age": 12,
+          "weight": 4,
+          "breed": "Persian",
+          "photo": "assets/images/pet_asset_023.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 96,
+          "hrv": 74,
+          "stable": 96,
+          "cardio": 86,
+          "sleep": 91,
+          "energy": 91,
+          "recovery": 12,
+          "calm": 84,
+          "activityRecovery": 44,
+          "physiol": 80,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 119,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 29,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 30,
+      "offset": 36,
+      "actual": {
+        "p": 30,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "Lucky",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": {
+          "heart": 99,
+          "breath": 100,
+          "hrv": 77,
+          "stable": 95,
+          "cardio": 88,
+          "sleep": 97,
+          "energy": 92,
+          "recovery": 19,
+          "calm": 87,
+          "activityRecovery": 49,
+          "physiol": 80,
+          "rhythm": 86
+        },
+        "source": "synthetic-demo-fixture",
+        "history": 30,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 120,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 30,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": 31,
+      "offset": 36,
+      "actual": {
+        "p": 31,
+        "d": "2027-01-01",
+        "blank": false,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 120,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "pet": "blank",
+      "offset": 36,
+      "actual": {
+        "p": 31,
+        "d": "2027-01-01",
+        "blank": true,
+        "profile": {
+          "name": "New Pet",
+          "age": 2,
+          "weight": 9,
+          "breed": "Shiba Inu",
+          "photo": "assets/new_pet_shiba_v1002.jpg"
+        },
+        "scores": null,
+        "source": null,
+        "history": 0,
+        "disclosure": "Product preview | data, not live measurements",
+        "loading": null,
+        "stats": {
+          "summariesLoaded": 120,
+          "daysLoaded": 0,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": null,
+          "source": null,
+          "summaryCache": 2,
+          "dayCache": 0,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": []
+        }
+      }
+    },
+    {
+      "status": "PASS",
+      "detail": {
+        "date": "2027-01-01",
+        "points": 1440,
+        "stats": {
+          "summariesLoaded": 121,
+          "daysLoaded": 1,
+          "workersStarted": 0,
+          "staleRejected": 0,
+          "rawCapturesTransferred": 0,
+          "active": 1,
+          "source": "archive",
+          "summaryCache": 2,
+          "dayCache": 1,
+          "dayJobs": 0,
+          "dayErrors": 0,
+          "rawCache": 0,
+          "dates": [
+            "2027-01-01"
+          ]
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "console": []
+}

@@ -1,0 +1,158 @@
+{
+  "futureDatesPerPet": 730,
+  "cases": 21900,
+  "consecutiveIdenticalFullScores": 0,
+  "consecutiveEqualHeadlinePairs": 54,
+  "result": [
+    {
+      "pet": 1,
+      "uniqueSourceDays": 30,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 2,
+      "uniqueSourceDays": 10,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 3,
+      "uniqueSourceDays": 8,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 4,
+      "uniqueSourceDays": 25,
+      "consecutiveEqualHeadlinePairs": 1
+    },
+    {
+      "pet": 5,
+      "uniqueSourceDays": 22,
+      "consecutiveEqualHeadlinePairs": 5
+    },
+    {
+      "pet": 6,
+      "uniqueSourceDays": 22,
+      "consecutiveEqualHeadlinePairs": 3
+    },
+    {
+      "pet": 7,
+      "uniqueSourceDays": 7,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 8,
+      "uniqueSourceDays": 7,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 9,
+      "uniqueSourceDays": 13,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 10,
+      "uniqueSourceDays": 14,
+      "consecutiveEqualHeadlinePairs": 13
+    },
+    {
+      "pet": 11,
+      "uniqueSourceDays": 27,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 12,
+      "uniqueSourceDays": 11,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 13,
+      "uniqueSourceDays": 7,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 14,
+      "uniqueSourceDays": 8,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 15,
+      "uniqueSourceDays": 20,
+      "consecutiveEqualHeadlinePairs": 10
+    },
+    {
+      "pet": 16,
+      "uniqueSourceDays": 19,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 17,
+      "uniqueSourceDays": 7,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 18,
+      "uniqueSourceDays": 20,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 19,
+      "uniqueSourceDays": 19,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 20,
+      "uniqueSourceDays": 20,
+      "consecutiveEqualHeadlinePairs": 2
+    },
+    {
+      "pet": 21,
+      "uniqueSourceDays": 21,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 22,
+      "uniqueSourceDays": 7,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 23,
+      "uniqueSourceDays": 21,
+      "consecutiveEqualHeadlinePairs": 2
+    },
+    {
+      "pet": 24,
+      "uniqueSourceDays": 19,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 25,
+      "uniqueSourceDays": 20,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 26,
+      "uniqueSourceDays": 18,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 27,
+      "uniqueSourceDays": 18,
+      "consecutiveEqualHeadlinePairs": 12
+    },
+    {
+      "pet": 28,
+      "uniqueSourceDays": 20,
+      "consecutiveEqualHeadlinePairs": 0
+    },
+    {
+      "pet": 29,
+      "uniqueSourceDays": 19,
+      "consecutiveEqualHeadlinePairs": 1
+    },
+    {
+      "pet": 30,
+      "uniqueSourceDays": 21,
+      "consecutiveEqualHeadlinePairs": 5
+    }
+  ]
+}

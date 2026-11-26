@@ -1,0 +1,17 @@
+{
+  "counts": {
+    "dates": 900,
+    "numeric": 6910,
+    "numericDays": 580,
+    "missingDays": 320,
+    "flag:slow-observed-recovery": 571,
+    "flag:cardio-load": 80,
+    "flag:rest-load": 92,
+    "flag:energy-load": 93,
+    "flag:concurrent-cardiorespiratory-deviation": 42,
+    "flag:brief-resting-vital-deviation": 60,
+    "flag:sustained-resting-vital-deviation": 53
+  },
+  "highCompositeWithSevereComponent": [],
+  "note": "Targeted contradictory score screen, no clinical truth."
+}

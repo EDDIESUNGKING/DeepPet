@@ -1,0 +1,6 @@
+{
+  "assertions": 1878,
+  "failures": 0,
+  "lab": "independent engineering curve, units, group and weighted score; no clinical calibration",
+  "heart": "same-day selection/blank/invalid values; no live 60s hardware"
+}

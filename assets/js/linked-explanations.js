@@ -626,7 +626,7 @@ function periodCopy(key,days,xs,average){
 }
 function desc(key,days=1,override=null){
  const rs=days===1&&override?rowsFor().filter(x=>x?.date===override):list(days);
- const xs=rs.filter(x=>valid(x?.scores?.[key])&&x.scores[key]>0&&x.scores[key]<=100).sort((a,b)=>a.date.localeCompare(b.date));
+ const xs=rs.filter(x=>valid(x?.scores?.[key])&&x.scores[key]>=0&&x.scores[key]<=100).sort((a,b)=>a.date.localeCompare(b.date));
  if(!xs.length)return {key,score:null,rows:[],lines:[L('尚無有效量測，無法評分。','暂无有效测量，无法评分。','No valid reading to score yet.','有効な測定がありません。','유효한 측정 자료가 없습니다.')],max:2,to:null};
  const score=days===1?xs.at(-1).scores[key]:Math.round(xs.reduce((a,b)=>a+b.scores[key],0)/xs.length);
  const worst=xs.reduce((a,b)=>a.scores[key]<=b.scores[key]?a:b),source=days===1?xs.at(-1):worst;
@@ -652,7 +652,13 @@ function desc(key,days=1,override=null){
  if(isHealthy){if(days===1)lines.push(advice(key,score,1));return {key,score,days,rows:xs,lines,max:2,to:days>1&&links?.score<60?links.to:null,link:days>1&&links?.score<60?links:null};}
  // All subcards show both the actual reason and the action, not a risk label alone.
  // In 7/30-day views a dated worst-day example is NOT asserted to be today's state.
- const reason=gradedCause(key,source,days>1?Math.min(score,worst.scores[key]):score,days,xs);
+ const reason=key==='hrv'&&score===0?L(
+  'HRV逐搏波形計算為極低分；仍有量測資料，請對照RMSSD、SDNN及佩戴狀態。',
+  'HRV逐搏波形计算为极低分；仍有测量数据，请对照RMSSD、SDNN及佩戴状态。',
+  'Beat-derived HRV score is extremely low; measurement exists. Compare RMSSD, SDNN, and fit.',
+  '逐拍HRV推定値が非常に低いです。RMSSD、SDNNと装着状態を確認してください。',
+  'HRV 점수가 매우 낮습니다. RMSSD, SDNN 및 착용 상태를 확인하세요.'):
+  gradedCause(key,source,days>1?Math.min(score,worst.scores[key]):score,days,xs);
  const dated=days>1?L(`最低分當天（${source.date}）：`,`最低分当天（${source.date}）：`,`Worst day (${source.date}): `,`最低日（${source.date}）：`,`최저일(${source.date}): `):'';
  if(reason)lines.push(dated+reason);
  // Cross-domain note is supplemental and must not replace the metric's own cause.
@@ -897,7 +903,7 @@ function updateOpenDetail(explicitKey=null){const x=document.querySelector('#app
  if(known)mount(x,desc(known,[1,7,30].includes(Number(state.range))?Number(state.range):1));
 }
 const original=render;
-render=function(...args){const out=original.apply(this,args);try{update();root.DeepPetBuildVersion='10.139';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.1(?:3[0-8]|2[0-9])/g,'10.139');});}catch(e){console.warn('DeepPet linked explanations:',e);}return out;};
+render=function(...args){const out=original.apply(this,args);try{update();root.DeepPetBuildVersion='10.204';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.1(?:3[0-8]|2[0-9])/g,'10.199');});}catch(e){console.warn('DeepPet linked explanations:',e);}return out;};
 document.addEventListener('click',e=>{
  const b=e.target?.closest?.('[data-dp131-goto]');if(b){e.preventDefault();e.stopImmediatePropagation();state.tab='deep';state.deepType=Number(b.dataset.dp131Goto);state.detail=null;render(true);return;}
  const open=e.target?.closest?.('[data-dp127-open]');if(open){const k=open.dataset.dp127Open;queueMicrotask(()=>{try{updateOpenDetail(k);}catch(e){console.warn(e);}});}

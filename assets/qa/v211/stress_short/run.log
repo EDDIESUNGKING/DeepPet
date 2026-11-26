@@ -1,0 +1,5 @@
+STRESS 50 {'usedSize': 83433128, 'totalSize': 151904256, 'embedderHeapUsedSize': 45196176, 'backingStorageSize': 37280828} {'documents': 2, 'nodes': 25359, 'jsEventListeners': 258}
+STRESS 100 {'usedSize': 156672200, 'totalSize': 203341824, 'embedderHeapUsedSize': 177239392, 'backingStorageSize': 55384606} {'documents': 2, 'nodes': 108801, 'jsEventListeners': 459}
+STRESS_NAV 50 {'usedSize': 123405708, 'totalSize': 196468736, 'embedderHeapUsedSize': 138172312, 'backingStorageSize': 32348495} {'documents': 4, 'nodes': 108177, 'jsEventListeners': 228}
+STRESS_NAV 100 {'usedSize': 114650488, 'totalSize': 200417280, 'embedderHeapUsedSize': 286548144, 'backingStorageSize': 32348495} {'documents': 4, 'nodes': 231181, 'jsEventListeners': 264}
+SUMMARY 1 1 0 0

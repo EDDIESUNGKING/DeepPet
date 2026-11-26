@@ -1,0 +1,633 @@
+{
+  "records": 11544,
+  "channels": 2,
+  "samplesPerChannel": 20,
+  "rawDates": [
+    "2026-11-22",
+    "2026-11-23"
+  ],
+  "runtimeMs": 2234,
+  "compare": [
+    {
+      "key": "totalFrames",
+      "match": true
+    },
+    {
+      "key": "testedWindows",
+      "match": true
+    },
+    {
+      "key": "qualifiedWindows",
+      "match": true
+    },
+    {
+      "key": "rawCoverageByDay",
+      "match": true
+    },
+    {
+      "key": "coverageByDay",
+      "match": true
+    },
+    {
+      "key": "lastConnectedHRV",
+      "match": true
+    },
+    {
+      "key": "minimumFiveMinuteResearch",
+      "match": true
+    },
+    {
+      "key": "segmentLedger",
+      "match": false
+    },
+    {
+      "key": "attempts",
+      "match": true
+    },
+    {
+      "key": "summary",
+      "match": true
+    }
+  ],
+  "segmentDiffCount": 3088,
+  "segmentDiffTypes": [
+    "t:undefined:null",
+    "q:undefined:null"
+  ],
+  "segmentDiff": [
+    {
+      "path": "/0/blocks/0/t",
+      "expected": null
+    },
+    {
+      "path": "/0/blocks/0/q",
+      "expected": null
+    },
+    {
+      "path": "/0/blocks/1/t",
+      "expected": null
+    },
+    {
+      "path": "/0/blocks/1/q",
+      "expected": null
+    },
+    {
+      "path": "/0/blocks/2/t",
+      "expected": null
+    },
+    {
+      "path": "/0/blocks/2/q",
+      "expected": null
+    },
+    {
+      "path": "/0/blocks/3/t",
+      "expected": null
+    },
+    {
+      "path": "/0/blocks/3/q",
+      "expected": null
+    }
+  ],
+  "qualifiedWindows": 0,
+  "windows": 64,
+  "note": "Actual captured 20 Hz B0 decode with cached QC disabled; not ECG ground truth or independent peak detector."
+}
+PASS numeric and semantic replay; packed archive explicitly stores optional missing t/q fields as null
+{
+  "ownerRecompute": [
+    {
+      "date": "2026-10-27",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-10-28",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-10-29",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-10-30",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-10-31",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-01",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-02",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-03",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-04",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-05",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-06",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-07",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-08",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-09",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-10",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-11",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-12",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-13",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-14",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-15",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-16",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-17",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-18",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-19",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": 96,
+        "breath": 96,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-20",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": 99,
+        "breath": 97,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-21",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": 96,
+        "breath": 98,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-22",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": 95,
+        "breath": 96,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    },
+    {
+      "date": "2026-11-23",
+      "source": "owner-A2-B0-SDK",
+      "scores": {
+        "heart": null,
+        "breath": null,
+        "hrv": null,
+        "stable": null,
+        "cardio": null,
+        "sleep": null,
+        "energy": null,
+        "recovery": null,
+        "calm": null,
+        "activityRecovery": null,
+        "physiol": null,
+        "rhythm": null
+      },
+      "differences": []
+    }
+  ],
+  "dates": 28,
+  "differences": 0
+}

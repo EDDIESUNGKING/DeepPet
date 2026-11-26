@@ -1,0 +1,56 @@
+{
+  "mode": "embedded",
+  "suite": "forms",
+  "fixture_date": "2026-11-25",
+  "results": [
+    {
+      "case": "physical-form/food",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/medication",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/vaccination",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/deworming",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/extra-notes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/recovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/vet-preview",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/summary-ranges",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "physical-form/pet-profile",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "console": [],
+  "physical_override": false,
+  "scope": "Only listed cases were run. Matrix uses DOM events unless --physical is set; individual alert/help DOM events remain labelled. Clinical/semantic validity is not implied. Date scope: all"
+}

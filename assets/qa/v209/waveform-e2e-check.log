@@ -1,0 +1,88 @@
+EXACT 179 154
+RAW E2E 100 68 100 72 179 154
+PASS raw three-wave 20-minute repeated 10s anomaly survives decoding
+ALERT [
+  {
+    date: '2026-11-25',
+    kind: 'heart',
+    type: 'high',
+    minute: 1,
+    second: 12,
+    localSecond: 72,
+    startSecond: 61,
+    evidenceEndSecond: 70,
+    secondsConfirmed: 10,
+    value: 260,
+    reference: 250,
+    relative: 0.04,
+    source: 'activity-independent-extreme-review',
+    escalated: false,
+    level: 'high',
+    durationClass: 'sudden',
+    baselinePhase: 'provisional',
+    baselineDays: 0
+  },
+  {
+    date: '2026-11-25',
+    kind: 'breath',
+    type: 'high',
+    minute: 1,
+    second: 12,
+    localSecond: 72,
+    startSecond: 61,
+    evidenceEndSecond: 70,
+    secondsConfirmed: 10,
+    value: 60,
+    reference: 16.4,
+    relative: 2.6561542521471506,
+    source: 'waveform-severe-review',
+    escalated: false,
+    level: 'high',
+    durationClass: 'sudden',
+    baselinePhase: 'provisional',
+    baselineDays: 0
+  }
+]
+PASS no anomaly on normal waveform, high-res alert detects sustained pulse/breath extremes
+PASS motion spike is not spread across an entire minute
+PASS all motion invalid prevents invented joint coverage
+PASS raw input identity and derived source HRV cannot be replaced by caller values
+PASS active-only raw signal cannot produce a resting HRV window
+RECOVERY 93 39 15 2026-11-25T00:16:59 2026-11-25T00:18:59
+PASS 120-second waveform recovery rewards return speed, not zero or excessive undershoot
+ANCHOR {
+  days: 14,
+  hr: 65,
+  rr: 17,
+  firstDate: '2026-10-28',
+  lastDate: '2026-11-10'
+} 68.76315659890139 18.294274465691785
+PASS initial clean history bounds rolling reference drift and never uses future data
+SDK DENSE 232 232
+PASS dense SDK raw input produces aligned one-second windows with calibrated motion
+PASS five-second pulse never inflated to ten confirmed seconds at any window phase
+PASS sustained extreme heart and breath events survive any phase and normal activity
+PASS separate same-direction incidents are retained, one notification per continuous event
+REBOUND 93 8
+PASS full recovery trajectory penalizes a severe rebound between displayed checkpoints
+PASS initial 14-day anchor persists after history eviction and is isolated by key
+PASS full synthetic three-wave day generates complete scores from decoded HRV, not provided aggregate
+PASS SDK verified beat intervals are recomputed and bound to matching second evidence; forged aggregate rejected
+PERSONAL RAW HRV {
+  weight: 0.4,
+  days: 14,
+  rmRatio: 0.06064192141308581,
+  sdRatio: 0.08488308603706264,
+  drop: 0.5417017497739757
+} 34 40
+PASS individual HRV compares decoder-supported lower variability against comparable 14-day history
+PASS dense fast cycles are not divided by two at any tested sample phase
+PASS slow coherent cardiac and respiratory cycles qualify rate evidence without qualifying HRV
+PASS 300 bpm coherence must not decimate away alternate-phase energy
+PASS single verified dense chunk retains partial observation but not daily coverage
+PASS unconfirmed wear or signal never contributes to dense observation or coverage
+PASS missing dense heart samples invalidate crossing cycle support outside missing second
+PASS dense whole-block review confirmation cannot predate final dependent samples
+PASS flat dense waveforms never become zero-rate physiology or accepted HRV
+PASS sparse low-rate cycles survive without inventing data at waveform boundary
+TOTAL 26

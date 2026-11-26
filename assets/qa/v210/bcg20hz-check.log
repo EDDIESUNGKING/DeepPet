@@ -1,0 +1,85 @@
+{ bpm: 45, polarity: -1 } {
+  bpm: 44.99926380626358,
+  detected: 22,
+  truth: 23,
+  matched: 22,
+  mae: 5.786580403644982,
+  plausible: true,
+  agree: 1,
+  presence: 1
+}
+{ bpm: 70, polarity: -1 } {
+  bpm: 69.99562780791919,
+  detected: 34,
+  truth: 35,
+  matched: 34,
+  mae: 5.452665441179427,
+  plausible: true,
+  agree: 1,
+  presence: 1
+}
+{ bpm: 100, polarity: 1 } {
+  bpm: 99.99579329945671,
+  detected: 49,
+  truth: 50,
+  matched: 49,
+  mae: 4.415701729914983,
+  plausible: true,
+  agree: 1,
+  presence: 1
+}
+{ bpm: 150, polarity: 1 } {
+  bpm: 149.99554157337823,
+  detected: 73,
+  truth: 74,
+  matched: 73,
+  mae: 3.3467064426331645,
+  plausible: true,
+  agree: 1,
+  presence: 1
+}
+{ bpm: 200, polarity: -1 } {
+  bpm: 199.97954862291422,
+  detected: 98,
+  truth: 99,
+  matched: 98,
+  mae: 2.2996875996659387,
+  plausible: false,
+  agree: 0.5816326530612245,
+  presence: 1
+}
+{ bpm: 70, polarity: -1, jitter: 0.08, noise: 2 } {
+  bpm: 69.96425165117466,
+  detected: 34,
+  truth: 35,
+  matched: 34,
+  mae: 5.401236783846143,
+  plausible: true,
+  agree: 1,
+  presence: 1
+}
+flat {
+  bpm: null,
+  detected: 0,
+  truth: 35,
+  matched: 0,
+  mae: null,
+  plausible: false,
+  agree: 0,
+  presence: 0
+}
+dropout {
+  bpm: 69.98742849799181,
+  detected: 24,
+  truth: 35,
+  matched: 24,
+  mae: 5.553257533486715,
+  plausible: false,
+  agree: 1,
+  presence: 0.7
+}
+TOTAL 8
+PASS 19+21 invalid lengths cannot hide shifted time axis
+PASS nonmonotonic timestamps rejected
+PASS drifting nominal packet clock rejected
+TOTAL 11
