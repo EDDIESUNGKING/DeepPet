@@ -13993,7 +13993,7 @@ function ageFromScore(actualAge,wellnessScore,pet={}){if(!valid(actualAge)||actu
  const scale=.08*(span/13)*stage,delta=Math.max(-actualAge,Math.min(span*.20,(85-wellnessScore)*scale));
  const ageYears=Math.round(Math.max(0,actualAge+delta)*100)/100;
  return {ageYears,deltaYears:Math.round((ageYears-actualAge)*100)/100,unit:'years',pointsPerYear:1/scale,isClinicallyValidated:false};}
-function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null){
+function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null, options={}){
  if(asOfDate!==null&&!exactDate(asOfDate))return {available:false,reason:'invalid_as_of_date',date:null,score:null,ageYears:null,reportWeight:0,days:0};
  const sourceKind=x=>globalThis.DeepPetUnifiedDeep.sourceKind(x);
  const inWindow=(Array.isArray(records)?records:[]).filter(x=>x&&exactDate(x.date)&&(!exactDate(asOfDate)||x.date<=asOfDate));
@@ -14043,7 +14043,10 @@ function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null
  const lastObservedDate=distinct.filter(x=>dateNumber(x.date)<=anchor).at(-1)?.date||null;
  const daysSinceLast=lastObservedDate===null?null:Math.round((anchor-dateNumber(lastObservedDate))/86400000);
  const stale=daysSinceLast===null||daysSinceLast>7;
- const recent=last30.filter(x=>dateNumber(x.date)>anchor-7*86400000),enough=last30.length>=15&&recent.length>=3&&!stale;
+ const recent=last30.filter(x=>dateNumber(x.date)>anchor-7*86400000),fullEnough=last30.length>=15&&recent.length>=3&&!stale;
+ // Only LAFA's strictly QC-eligible synthetic waveform history may expose a provisional estimate. Never lower the production evidence gate or mix sources.
+ const provisional=options?.allowProvisional===true&&target==='0'&&!fullEnough&&!stale&&last30.length>=3&&recent.length>=3&&modes.size===1&&last30.every(x=>x.dataProvenance==='synthetic-demo-fixture'&&x.source==='sdk-demo-fixture'&&x.unified?.evidence?.complete?.physiol===true);
+ const enough=fullEnough||provisional;
  const physical=enough?mean('physiol'):null,rhythmValues=last30.filter(x=>validScore(x.scores.rhythm)),rhythm=enough&&rhythmValues.length>=15?rhythmValues.reduce((n,x)=>n+x.scores.rhythm,0)/rhythmValues.length:null;
  // Unified physical already fuses independent cardio, rest and motion domains.
  // Do not add the same HR/HRV information again through rhythm.
@@ -14075,13 +14078,13 @@ function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null
  // evidence. Older versions called a separate age engine and could show both
  // curves rising together. This is a reversible demonstration index, not a
  // clinically validated biological age or predicted lifespan.
- const ageValid=enough&&last30.length>=14&&valid(score)&&valid(pet?.age)&&pet.age>=0;
+ const ageValid=enough&&(last30.length>=14||provisional)&&valid(score)&&valid(pet?.age)&&pet.age>=0;
  let ageYears=null,ageAdjustment=0;
  if(ageValid){
   const age=ageFromScore(pet.age,score,pet);ageAdjustment=age.deltaYears;ageYears=age.ageYears;
  }
  const history=last30.map(x=>({date:x.date,body:x.scores.physiol,rhythm:x.scores.rhythm}));
- return {available:enough,reason:enough?null:stale?'stale_monitoring':'insufficient_longitudinal_days',date:latest,score,sensorScore,longMean,recentMean,recentWorst,earlierMean,lowDays,recentLowDays,lowStreak,deterioration,longDrift,priorLongDays:priorLong.length,recentValidDays:recent.length,physiology:valid(physical)?round(physical):null,
+ return {available:enough,provisional,reason:enough?null:stale?'stale_monitoring':'insufficient_longitudinal_days',date:latest,score,sensorScore,longMean,recentMean,recentWorst,earlierMean,lowDays,recentLowDays,lowStreak,deterioration,longDrift,priorLongDays:priorLong.length,recentValidDays:recent.length,physiology:valid(physical)?round(physical):null,
   rhythm:valid(rhythm)?round(rhythm):null,days:last30.length,windowDays:30,history,reportScore:examUsable?report.score:null,
   reportDate:examUsable?testedAt:null,reportId:examUsable?report.reportId:null,reportWeight:weight,reportDaysOld:examUsable?daysOld:null,
   ageYears,actualAge:valid(pet?.age)?pet.age:null,ageAdjustment,ageAvailable:ageValid,
@@ -14119,7 +14122,7 @@ return {version:'9.44',evaluate,ageFromScore,triage};
   const pet={...base,...(state.petOverrides?.[index]||{})};
   const records=typeof root.dp914ReportRecords==='function'?root.dp914ReportRecords(index):[];
   const exam=root.DeepPetLabEvidence?.assess(records,{...pet,petId:String(index)},asOf)||null;
-  return root.DeepPetWellness925.evaluate(days,exam,petData(pet,index),(age,_,r)=>root.DeepPetBCG?.biologicalAge(age,[],r),asOf);
+  return root.DeepPetWellness925.evaluate(days,exam,petData(pet,index),(age,_,r)=>root.DeepPetBCG?.biologicalAge(age,[],r),asOf,{allowProvisional:index===0});
  };
  const color=s=>!finite(s)?'#94a3b8':s>=90?'#249c70':s>=80?'#3c91cc':s>=60?'#e89a32':'#de5b65';
  const grade=s=>!finite(s)?t('尚無長期結果','Long-term result pending','장기 결과 없음','長期結果を準備中'):s>=90?t('健康','Healthy','양호','良好'):s>=80?t('低風險','Mild','낮은 위험','軽度'):s>=60?t('中風險','Moderate','보통 위험','中程度'):t('需要留意','Needs attention','주의 필요','要注意');
@@ -14149,7 +14152,7 @@ return {version:'9.44',evaluate,ageFromScore,triage};
    }).join('');
    return `<div class="dp928-ring" role="img" aria-label="${h(t('整體健康評分','Overall wellness score','전체 점수','総合スコア'))}: ${scoreText(v)}"><svg viewBox="0 0 136 136" aria-hidden="true">${dots}</svg><span class="dp928-ring-center" style="color:${c}">${scoreText(v)}<small>${finite(v)?'/100':''}</small></span></div>`;
  }
- const modelNote=m=>m.stale&&m.lastObservedDate?t(`最近一次有效監測：${m.lastObservedDate}。近期沒有新資料。`,`Last valid reading: ${m.lastObservedDate}. No recent data.`,`최근 측정: ${m.lastObservedDate}`,`最終測定：${m.lastObservedDate}`):!m.available?t('累積有效監測後顯示長期結果','Long-term results appear after sufficient monitoring','측정이 쌓이면 결과가 나타납니다','記録が増えると結果を表示'):
+ const modelNote=m=>m.provisional?t(`初步估計 · 近30天內有 ${m.days} 個有效合成波形日；非實測長期結果。`,`Preliminary estimate · ${m.days} valid generated-waveform days in the last 30 days; not a measured long-term result.`,`초기 추정 · 최근 30일 중 유효 생성 파형 ${m.days}일, 실측 장기 결과 아님.`,`暫定推定 · 直近30日中の有効生成波形 ${m.days}日`):m.stale&&m.lastObservedDate?t(`最近一次有效監測：${m.lastObservedDate}。近期沒有新資料。`,`Last valid reading: ${m.lastObservedDate}. No recent data.`,`최근 측정: ${m.lastObservedDate}`,`最終測定：${m.lastObservedDate}`):!m.available?t('累積有效監測後顯示長期結果','Long-term results appear after sufficient monitoring','측정이 쌓이면 결과가 나타납니다','記録が増えると結果を表示'):
   t('這是最近 30 天的整體評分，不是今天的分數；今天的異常請看首頁提醒。',
    'This reflects the last 30 days, not just today. Check Home for today’s alerts.',
    '최근 30일 전체 점수이며 오늘 점수는 아닙니다. 오늘의 이상은 홈 알림을 확인하세요.',
@@ -14177,7 +14180,7 @@ return {version:'9.44',evaluate,ageFromScore,triage};
      const exam=root.DeepPetLabEvidence?.assess(reports,{...samePet,petId:String(index)},date)||null;
      // Compare 30-day wellness age at one fixed chronological age so the two
      // trend curves have exactly inverse directions (no day-to-day age drift).
-     return root.DeepPetWellness925.evaluate(rows,exam,{petId:String(index),age:currentAge,weight:pet.weight,species:pet.species,breed:pet.breed,adultWeightKg:pet.adultWeightKg},null,date);
+     return root.DeepPetWellness925.evaluate(rows,exam,{petId:String(index),age:currentAge,weight:pet.weight,species:pet.species,breed:pet.breed,adultWeightKg:pet.adultWeightKg},null,date,{allowProvisional:index===0});
    };
    const gallery=index>=0&&index<dogs.length&&typeof dpUsesRealMeasurements==='function'&&!dpUsesRealMeasurements(index)&&!pet.dpFixtureInvalidated;
    return recent.map(r=>{

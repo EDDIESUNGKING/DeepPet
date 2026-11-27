@@ -1,0 +1,2514 @@
+{
+  "cases": [
+    {
+      "name": "home-zh-0-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "今日总结",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身体状态评分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身体节奏评分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zh-0",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "model-zh",
+      "status": "PASS",
+      "data": {
+        "score": 82,
+        "age": 6.21,
+        "provisional": true,
+        "days": 4,
+        "strict": null,
+        "health": "整体健康评分\n82\n/100\n近期状态平稳\n整体健康评分来源\n\n近期心跳、呼吸、HRV、心搏节奏、睡眠休息、精力与活动后恢复及放松平稳度。体检记录另行管理。\n\n初步估计 · 近30天内有 4 个有效合成波形日；非实测长期结果。",
+        "ageCard": "AI 推算生理年龄\n✧\n+0.2 岁\n6.2岁\n实际年龄 6.0 岁\n推算年龄较年长\nAI 推算生理年龄来源\n\n实际年龄与近期整体健康评分。年龄为健康状态估计，不代表实际生物年龄或寿命。",
+        "trend": 2,
+        "ageTrend": 2
+      }
+    },
+    {
+      "name": "deep-zh-0-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳状况",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸状况",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 18.328125,
+          "ringBottom": 49.328125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏节奏稳定度",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-0-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳状况",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸状况",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏节奏稳定度",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-0-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏节奏稳定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-0-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情况",
+          "delta": 0,
+          "ringTop": 26.3125,
+          "ringBottom": 56.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢复情况",
+          "delta": 0,
+          "ringTop": 37.15625,
+          "ringBottom": 67.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放松与平稳度",
+          "delta": 0,
+          "ringTop": 26.3125,
+          "ringBottom": 56.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-0-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情况",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢复情况",
+          "delta": 0,
+          "ringTop": 52.15625,
+          "ringBottom": 52.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放松与平稳度",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-0-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情况",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢复情况",
+          "delta": 0,
+          "ringTop": 52.15625,
+          "ringBottom": 52.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放松与平稳度",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-zh-8-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "今日总结",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身体状态评分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身体节奏评分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zh-8",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "deep-zh-8-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV （末段58分钟／趋势60分钟）",
+          "delta": 0,
+          "ringTop": 45.296875,
+          "ringBottom": 45.296875,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏节奏稳定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-8-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏节奏稳定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-8-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸状况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏节奏稳定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-8-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢复情况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放松与平稳度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-8-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢复情况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放松与平稳度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zh-8-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢复情况",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放松与平稳度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-zh-31-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "今日总结",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身体状态评分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身体节奏评分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zh-31",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "home-zh-blank-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "今日总结",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身体状态评分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身体节奏评分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zh-blank",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "home-zht-0-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "今日總結",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身體狀態評分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身體節奏評分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zht-0",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "model-zht",
+      "status": "PASS",
+      "data": {
+        "score": 82,
+        "age": 6.21,
+        "provisional": true,
+        "days": 4,
+        "strict": null,
+        "health": "整體健康評分\n82\n/100\n近期狀態平穩\n整體健康評分來源\n\n近期心跳、呼吸、HRV、心搏節奏、睡眠休息、精力與活動後恢復及放鬆平穩度。體檢紀錄另行管理。\n\n初步估計 · 近30天內有 4 個有效合成波形日；非實測長期結果。",
+        "ageCard": "AI 推算生理年齡\n✧\n+0.2 歲\n6.2歲\n實際年齡 6.0 歲\n推算年齡較年長\nAI 推算生理年齡來源\n\n實際年齡與近期整體健康評分。年齡為健康狀態估計，不代表實際生物年齡或壽命。",
+        "trend": 2,
+        "ageTrend": 2
+      }
+    },
+    {
+      "name": "deep-zht-0-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳狀況",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸狀況",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 18.328125,
+          "ringBottom": 49.328125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏節奏穩定度",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-0-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳狀況",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸狀況",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏節奏穩定度",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-0-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏節奏穩定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-0-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情況",
+          "delta": 0,
+          "ringTop": 26.3125,
+          "ringBottom": 56.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢復情況",
+          "delta": 0,
+          "ringTop": 37.15625,
+          "ringBottom": 67.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放鬆與平穩度",
+          "delta": 0,
+          "ringTop": 26.3125,
+          "ringBottom": 56.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-0-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情況",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢復情況",
+          "delta": 0,
+          "ringTop": 52.15625,
+          "ringBottom": 52.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放鬆與平穩度",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-0-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情況",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢復情況",
+          "delta": 0,
+          "ringTop": 52.15625,
+          "ringBottom": 52.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放鬆與平穩度",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-zht-8-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "今日總結",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身體狀態評分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身體節奏評分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zht-8",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "deep-zht-8-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV （末段58分鐘／趨勢60分鐘）",
+          "delta": 0,
+          "ringTop": 45.296875,
+          "ringBottom": 45.296875,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏節奏穩定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-8-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏節奏穩定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-8-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "心跳狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "呼吸狀況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "心搏節奏穩定度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-8-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢復情況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放鬆與平穩度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-8-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢復情況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放鬆與平穩度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-zht-8-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "精力情況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "恢復情況",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "放鬆與平穩度",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-zht-31-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "今日總結",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身體狀態評分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身體節奏評分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zht-31",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "home-zht-blank-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "今日總結",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "身體狀態評分",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "身體節奏評分",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-zht-blank",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "home-en-0-320",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-0-360",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-0-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-0-430",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-en-0",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "model-en",
+      "status": "PASS",
+      "data": {
+        "score": 82,
+        "age": 6.21,
+        "provisional": true,
+        "days": 4,
+        "strict": null,
+        "health": "Overall wellness score\n82\n/100\nLooking steady\nOverall wellness score sources\n\nRecent heart rate, breathing, HRV, beat regularity, sleep, activity, recovery and calmness. Checkup records are managed separately.\n\nPreliminary estimate · 4 valid generated-waveform days in the last 30 days; not a measured long-term result.",
+        "ageCard": "AI-estimated wellness age\n✧\n+0.2 yr\n6.2years\nActual age 6.0 years\nEstimated older\nAI-estimated wellness age sources\n\nChronological age and recent wellness results. This estimate does not measure biological age or predict lifespan.",
+        "trend": 2,
+        "ageTrend": 2
+      }
+    },
+    {
+      "name": "deep-en-0-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Heart rate",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 39,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Breathing",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 39,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 21.171875,
+          "ringBottom": 68.171875,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Heartbeat rhythm stability",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 39,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-0-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Heart rate",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 39,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Breathing",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 39,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 39,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Heartbeat rhythm stability",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 39,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-0-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Heart rate",
+          "delta": 0,
+          "ringTop": 24.15625,
+          "ringBottom": 24.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Breathing",
+          "delta": 0,
+          "ringTop": 24.15625,
+          "ringBottom": 24.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Heartbeat rhythm stability",
+          "delta": 0,
+          "ringTop": 22.125,
+          "ringBottom": 22.125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-0-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Energy status",
+          "delta": 0,
+          "ringTop": 26.3125,
+          "ringBottom": 52.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Recovery status",
+          "delta": 0,
+          "ringTop": 48,
+          "ringBottom": 74,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Rest & steadiness",
+          "delta": 0,
+          "ringTop": 37.15625,
+          "ringBottom": 63.15625,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-0-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Energy status",
+          "delta": 0,
+          "ringTop": 39.3125,
+          "ringBottom": 39.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Recovery status",
+          "delta": 0,
+          "ringTop": 61,
+          "ringBottom": 61,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Rest & steadiness",
+          "delta": 0,
+          "ringTop": 50.15625,
+          "ringBottom": 50.15625,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-0-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Energy status",
+          "delta": 0,
+          "ringTop": 39.3125,
+          "ringBottom": 39.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Recovery status",
+          "delta": 0,
+          "ringTop": 61,
+          "ringBottom": 61,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Rest & steadiness",
+          "delta": 0,
+          "ringTop": 50.15625,
+          "ringBottom": 50.15625,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-en-8-320",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-8-360",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-8-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-8-430",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-en-8",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "deep-en-8-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Heart rate",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Breathing",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV （last58min／trend60min）",
+          "delta": 0,
+          "ringTop": 56.140625,
+          "ringBottom": 56.140625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Heartbeat rhythm stability",
+          "delta": 0,
+          "ringTop": 22.125,
+          "ringBottom": 22.125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-8-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Heart rate",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Breathing",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Heartbeat rhythm stability",
+          "delta": 0,
+          "ringTop": 22.125,
+          "ringBottom": 22.125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-8-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Heart rate",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Breathing",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Heartbeat rhythm stability",
+          "delta": 0,
+          "ringTop": 22.125,
+          "ringBottom": 22.125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-8-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Energy status",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Recovery status",
+          "delta": 0,
+          "ringTop": 21.5,
+          "ringBottom": 21.5,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Rest & steadiness",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-8-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Energy status",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Recovery status",
+          "delta": 0,
+          "ringTop": 21.5,
+          "ringBottom": 21.5,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Rest & steadiness",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-en-8-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "Energy status",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Recovery status",
+          "delta": 0,
+          "ringTop": 21.5,
+          "ringBottom": 21.5,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "Rest & steadiness",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-en-31-320",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-31-360",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-31-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-31-430",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-en-31",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "home-en-blank-320",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-blank-360",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-blank-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "home-en-blank-430",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "Daily summary",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "Body Status",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "Body Rhythm",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-en-blank",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "home-ko-0-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "오늘의 요약",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "신체 상태 점수",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "신체 리듬 점수",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-ko-0",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "model-ko",
+      "status": "PASS",
+      "data": {
+        "score": 82,
+        "age": 6.21,
+        "provisional": true,
+        "days": 4,
+        "strict": null,
+        "health": "전체 건강 점수\n82\n/100\n안정적\n종합 건강 점수 출처\n\n최근 심박수, 호흡, HRV, 심박 리듬, 수면, 활동, 회복 및 안정도. 검진 기록은 별도로 관리합니다.\n\n초기 추정 · 최근 30일 중 유효 생성 파형 4일, 실측 장기 결과 아님.",
+        "ageCard": "AI 추정 나이\n✧\n+0.2 세\n6.2세\n실제 나이 6.0 세\n높게 추정\nAI 추정 나이 출처\n\n실제 나이와 최근 종합 건강 점수. 추정치이며 실제 생물학적 나이나 수명을 예측하지 않습니다.",
+        "trend": 2,
+        "ageTrend": 2
+      }
+    },
+    {
+      "name": "deep-ko-0-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "심박 상태",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "호흡 상태",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 18.328125,
+          "ringBottom": 49.328125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "심박 리듬 안정도",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-0-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "심박 상태",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "호흡 상태",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "심박 리듬 안정도",
+          "delta": 0,
+          "ringTop": 12,
+          "ringBottom": 43,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-0-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "심박 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "호흡 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "심박 리듬 안정도",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-0-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "활력 상태",
+          "delta": 0,
+          "ringTop": 26.3125,
+          "ringBottom": 56.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "회복 상태",
+          "delta": 0,
+          "ringTop": 37.15625,
+          "ringBottom": 67.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "휴식과 안정도",
+          "delta": 0,
+          "ringTop": 26.3125,
+          "ringBottom": 56.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-0-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "활력 상태",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "회복 상태",
+          "delta": 0,
+          "ringTop": 52.15625,
+          "ringBottom": 52.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "휴식과 안정도",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-0-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "활력 상태",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "회복 상태",
+          "delta": 0,
+          "ringTop": 52.15625,
+          "ringBottom": 52.15625,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "휴식과 안정도",
+          "delta": 0,
+          "ringTop": 41.3125,
+          "ringBottom": 41.3125,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-ko-8-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": true,
+        "backup": false,
+        "title": "오늘의 요약",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "신체 상태 점수",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "신체 리듬 점수",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-ko-8",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "deep-ko-8-0-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "심박 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "호흡 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV （마지막58분／추세60분）",
+          "delta": 0,
+          "ringTop": 45.296875,
+          "ringBottom": 45.296875,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "심박 리듬 안정도",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-8-0-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "심박 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "호흡 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "심박 리듬 안정도",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-8-0-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "심박 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "호흡 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "HRV",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "심박 리듬 안정도",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-8-2-1",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "활력 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "회복 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "휴식과 안정도",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-8-2-7",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "활력 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "회복 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "휴식과 안정도",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "deep-ko-8-2-30",
+      "status": "PASS",
+      "data": [
+        {
+          "title": "활력 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "회복 상태",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        },
+        {
+          "title": "휴식과 안정도",
+          "delta": 0,
+          "ringTop": 16,
+          "ringBottom": 16,
+          "iconInCopy": true,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "name": "home-ko-31-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "오늘의 요약",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "신체 상태 점수",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "신체 리듬 점수",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-ko-31",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    },
+    {
+      "name": "home-ko-blank-390",
+      "status": "PASS",
+      "data": {
+        "chip": false,
+        "source": false,
+        "backup": false,
+        "title": "오늘의 요약",
+        "titleFits": true,
+        "lanes": [
+          {
+            "label": "신체 상태 점수",
+            "oneLine": true,
+            "fit": true
+          },
+          {
+            "label": "신체 리듬 점수",
+            "oneLine": true,
+            "fit": true
+          }
+        ],
+        "badText": []
+      }
+    },
+    {
+      "name": "me-ko-blank",
+      "status": "PASS",
+      "data": {
+        "backup": false,
+        "chip": false,
+        "text": []
+      }
+    }
+  ],
+  "errors": [],
+  "console": []
+}
