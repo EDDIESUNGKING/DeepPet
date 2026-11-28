@@ -35,11 +35,13 @@ const band=n=>!valid(n)?-1:n<60?3:n<80?2:n<90?1:0;
 const maxlines=n=>!valid(n)?2:band(n)===3?10:band(n)===2?6:band(n)===1?5:2;
 const round=n=>Math.round(n*10)/10;
 const today=()=>typeof iso==='function'&&typeof localDate==='function'?iso(localDate()):new Date().toISOString().slice(0,10);
-const rowsFor=()=>root.DeepPetSignalScoring?.getDaily?.(state.dog)||[];
+const noProfileData=()=>state.emptyPreview===true||state.dog===31;
+const rowsFor=()=>noProfileData()?[]:(root.DeepPetSignalScoring?.getDaily?.(state.dog)||[]);
 const featuresFor=r=>(root.DeepPetSignalScoring?.getFeatures?.(state.dog)||[]).find(x=>x?.date===r?.date)||{};
 const rawFor=r=>typeof demoRecords==='function'?(demoRecords(state.dog)||[]).find(x=>x?.date===r?.date)||{}:{};
 const get=n=>valid(n)?n:null;
 function list(days){
+ if(noProfileData())return [];
  if(days===1){const sum=root.DeepPetCompactUI127?.summary?.('cardio',1);const selected=state.deepSelectedDate||sum?.date||today();return rowsFor().filter(x=>x&&x.date===selected);}
  const ext=root.DeepPetEvidenceNarrative124?.period?.(days);
  if(Array.isArray(ext))return ext.filter(x=>x&&x.scores);
@@ -794,7 +796,7 @@ function mount(node,data,options={}){
  }
 }
 function update(){
- if(state.tab!=='deep')return;
+ if(state.tab!=='deep'||noProfileData())return;
  const days=[1,7,30].includes(Number(state.range))?Number(state.range):1;
  if(!state.detail){
   const main=document.querySelector('#app .dp-owner-deep');if(!main)return;
@@ -898,7 +900,7 @@ function update(){
   const selected=state.dp905ChosenDate||state.dp90WaveDate||state.dp936EnergyDate||state.deepSelectedDate;
   mount(target,desc(k,rng,rng===1?selected:null));}}
 }
-function updateOpenDetail(explicitKey=null){const x=document.querySelector('#app .dp127-detail-page .dp127-detail-article');if(!x)return;
+function updateOpenDetail(explicitKey=null){if(noProfileData())return;const x=document.querySelector('#app .dp127-detail-page .dp127-detail-article');if(!x)return;
  const key= x.parentElement?.getAttribute('aria-label');const known=(explicitKey&&labels[explicitKey]?explicitKey:null)||Object.keys(labels).find(k=>key===keyName(k));
  if(known)mount(x,desc(known,[1,7,30].includes(Number(state.range))?Number(state.range):1));
 }

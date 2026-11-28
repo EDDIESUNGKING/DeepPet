@@ -2465,7 +2465,7 @@ function allPets(){return [...dogs,...(state.petExtras||[])]}
 // share the same name; preserve the selected index without persisting or
 // exposing a new property in the guardian's records.
 const DP_SELECTED_PET_MARK=Symbol('DeepPet selected pet');
-function currentDog(){const saved=allPets()[state.dog],pet={...(saved||{}),...(state.petOverrides?.[state.dog]||{})};Object.defineProperty(pet,DP_SELECTED_PET_MARK,{value:state.dog});return pet;}
+function currentDog(){const saved=allPets()[state.dog],raw={...(saved||{}),...(state.petOverrides?.[state.dog]||{})},pet=window.DeepPetUnifiedDeep?.profileAtDate(raw,iso(localDate()))||raw;if(pet.birthDate&&Number.isFinite(pet.age))pet.age=+pet.age.toFixed(1);Object.defineProperty(pet,DP_SELECTED_PET_MARK,{value:state.dog});return pet;}
 function medsForDog(){if(typeof selectedBlank==='function'&&selectedBlank())return [];dpPruneOwnerShowcaseRecords();const key=String(state.dog);state.medsByDog??={};state.medsByDog[key]??=[];return state.medsByDog[key];}
 
 function notesForDog(){if(typeof selectedBlank==='function'&&selectedBlank())return [];dpPruneOwnerShowcaseRecords();const key=String(state.dog);state.notesByDog??={};state.notesByDog[key]??=[];return state.notesByDog[key];}
@@ -3285,8 +3285,8 @@ function dp143WaveParameters(dogIndex){
   const hr=Math.round(d.hr+wave*Math.min(3.4,demo.h*.46)+exposure*physical.hr);
   const breath=Math.round(d.rr+wave*Math.min(1.6,demo.b*.35)+exposure*physical.rr);
   const rest=+Math.max(4,Math.min(16,d.rest-wave*.48-shift*.3-exposure*physical.rest)).toFixed(1);
-  const food=Math.round(d.target*(.9+Math.sin(i*.38+dogIndex)*.08));
-  const weight=+(d.weight+(calendarCode-Math.floor(Date.parse('2026-11-23T12:00:00Z')/86400000))*-.005+Math.sin(calendarCode*.2+dogIndex)*.04).toFixed(2);
+  const food=Math.round(d.target*(.9+Math.sin((date>'2026-11-25'?calendarCode:i)*.38+dogIndex)*.08));
+  const weight=+(date>'2026-11-25'?Math.max(.1,d.weight*(1+.015*Math.sin(calendarCode*.04+dogIndex))):d.weight+(calendarCode-Math.floor(Date.parse('2026-11-23T12:00:00Z')/86400000))*-.005+Math.sin(calendarCode*.2+dogIndex)*.04).toFixed(2);
   
   out.push({date,heart:hr,breath,activity,recovery,sleep:rest,food,weight});
  }
@@ -3421,7 +3421,7 @@ function dp143WaveTargets(kind,date){
 let dpFrameBundles=null,dpFrameLafaDaily=null;
 const dpGalleryPreparedBaseline=new Map();
 const dp143Days=new Map(),dp143Records=new Map(),dp143HRVCache=new WeakMap(),dp143QualityCache=new WeakMap(),dpCaptureInputs=new WeakMap(),dpCanonicalGalleryRows=new WeakMap();
-function dpScoreProfileOverrides(pet){const cosmetic=new Set(["name","nameEn","photo","dpPhotoConfirmed"]);return Object.fromEntries(Object.entries(state.petOverrides?.[pet]||{}).filter(([k])=>!cosmetic.has(k)).sort(([a],[b])=>a.localeCompare(b)));}
+function dpScoreProfileOverrides(pet){const cosmetic=new Set(["name","nameEn","photo","dpPhotoConfirmed","chestCm","neckCm","agePrecision"]);return Object.fromEntries(Object.entries(state.petOverrides?.[pet]||{}).filter(([k])=>!cosmetic.has(k)).sort(([a],[b])=>a.localeCompare(b)));}
 function dpGalleryRevision(pet){return iso(localDate())+"|"+String(state.baselineDaysByPet?.[pet]??"default")+"|"+JSON.stringify(dpScoreProfileOverrides(pet));}
 function dp143Capture(pet,date,keepRaw=false){
  if(window.DeepPetLazyData?.isReady(pet)&&window.DeepPetLazyData?.isRendering()&&!keepRaw)return null;
@@ -7004,6 +7004,15 @@ function alertsContent(){
 }
 function privacyContent(){const gps=!selectedBlank()&&!isFreePet()&&gpsForCurrentPet()&&state.gpsEnabled;const shared=!selectedBlank()&&!isFreePet()&&!!state.gardenVisible;return `<div class="privacy-v44"><div class="privacy-hero"><span>${vicon('shield',26)}</span><div><h3>${label3('你決定哪些資訊可以被看見','You control what gets shared','공유 정보는 직접 결정해요')}</h3><p>${label3('健康資料、定位和家庭授權是不同權限。','Health records, location and family permissions are separate.','건강 정보, 위치, 가족 권한은 별도입니다.')}</p></div></div><div class="privacy-data-row"><b>${label3('日常健康紀錄','Daily health records','일상 건강 기록')}</b><span>${label3('目前儲存在本機瀏覽器','Stored in this browser','현재 브라우저에 저장됨')}</span></div><div class="privacy-data-row"><b>${label3('GPS 位置','GPS location','GPS 위치')}</b><span>${state.deviceType==='4g'?(gps?label3('目前已開啟','Currently on','켜짐'):label3('目前已關閉','Currently off','꺼짐')):label3('尚未取得 GPS 定位','No GPS fix','GPS 위치 없음')}</span></div><div class="privacy-data-row"><b>${label3('附近寵物可見性','Nearby pet visibility','주변 반려동물 공개')}</b><span>${shared?label3('已選擇開啟','Opted in','동의함'):label3('關閉','Off','꺼짐')}</span></div><div class="privacy-data-row"><b>${label3('家庭存取權限','Family access','가족 접근 권한')}</b><span>${(state.familyMembers||[]).filter(r=>(r.petIndex??0)===state.dog).length} ${label3('筆本機示例','local previews','건 로컬 체험')}</span></div><div class="privacy-action-row"><button data-action="privacy-to-device">${vicon('device',16)} ${label3('裝置與 GPS 設定','Device & GPS settings','기기 및 GPS 설정')}</button><button data-action="privacy-to-family">${vicon('users',16)} ${label3('本機家庭授權體驗','Local family access preview','가족 권한 관리')}</button></div><h4>${label3('資料處理說明','Data handling','데이터 처리 안내')}</h4><div class="privacy-bullets"><p>${label3('你為寵物編輯的資料儲存在目前瀏覽器。','Your pet record edits are saved in this browser.','데모는 샘플 데이터이며 변경 사항은 이 브라우저에 저장됩니다.')}</p><p>${label3('沒有實際連接醫療服務、雲端健康檔案或跨裝置家庭共享。','No clinical services, cloud medical records or real cross-device family sharing are connected.','실제 의료 서비스나 기기 간 가족 공유와 연결되지 않았습니다.')}</p><p>${label3('正式版上線前，須明確說明資料保存地點、加密、刪除與權限政策，並提供撤銷同意功能。','The production release needs clear policies for storage location, encryption, deletion, permissions and consent withdrawal.','정식 버전에는 저장 위치, 암호화, 삭제, 접근 권한 및 동의 철회 정책이 필요합니다.')}</p></div></div>`;}
 
+// Local preview ownership: LAFA (slot 0) and profiles added on this browser.
+// Gallery slots are read-only. This is a UI/local persistence guard, not server authentication.
+function dp227CanEditProfile(index=state.dog){return !state.emptyPreview&&!state.dpExternalPublic&&state.modal!=='pet-public-card'&&!(state.tab==='me'&&['dp903-profile','dp903-garden','chat'].includes(state.detail))&&Number.isInteger(index)&&index===state.dog&&(index===0||(index>=dogs.length&&!!state.petExtras?.[index-dogs.length]));}
+function dp227ProfileReadOnly(){toast(label3('只能編輯自己的寵物資料','Only your own pet profile can be edited','내 반려동물 정보만 수정할 수 있어요'));}
+function dp224ProfileFields(prefix,d={}){const U=window.DeepPetUnifiedDeep,now=iso(localDate()),birth=U.validBirthDate(d.birthDate)&&d.birthDate<=now?d.birthDate:'';const num=(k)=>Number.isFinite(d[k])?d[k]:'';
+return `<div class="mt12"><label class="form-label" for="${prefix}BirthDate">${label3('出生日期（年／月／日）','Date of birth','생년월일')}</label><input class="form-control" id="${prefix}BirthDate" type="date" max="${now}" value="${esc(birth)}"/><p class="notices">${label3('知道確切生日請填寫；不確定時可保留估計年齡。','Enter the exact birth date if known; otherwise keep an approximate age.','정확한 생일을 알면 입력하고, 모르면 추정 나이를 유지하세요.')}</p></div><div class="form-grid mt12"><div><label class="form-label" for="${prefix}Chest">${label3('胸圍（選填）','Chest circumference (optional)','가슴둘레 (선택)')} cm</label><input class="form-control" id="${prefix}Chest" type="number" inputmode="decimal" min="0.1" max="300" step="0.1" value="${num('chestCm')}"/></div><div><label class="form-label" for="${prefix}Neck">${label3('頸圍（選填）','Neck circumference (optional)','목둘레 (선택)')} cm</label><input class="form-control" id="${prefix}Neck" type="number" inputmode="decimal" min="0.1" max="300" step="0.1" value="${num('neckCm')}"/></div></div>`;}
+function dp224ReadProfile(prefix,oldAge){const U=window.DeepPetUnifiedDeep,birthDate=document.getElementById(prefix+'BirthDate')?.value||'',today=iso(localDate()),actual=birthDate?U.ageOnDate(birthDate,today):null;const read=k=>{const raw=document.getElementById(prefix+k)?.value?.trim()||'';return raw===''?null:Number(raw);},chestCm=read('Chest'),neckCm=read('Neck');const age=birthDate?actual:oldAge;
+if((birthDate&&(!Number.isFinite(actual)||actual<0||actual>35))||[chestCm,neckCm].some(x=>x!==null&&(!Number.isFinite(x)||x<.1||x>300)))return null;
+return {birthDate:birthDate||null,chestCm,neckCm,age,agePrecision:birthDate?'date':'estimated'};}
 function modalUI(){const d=currentDog(),m=state.modal;if(!m)return '';const f=(name,inner)=>`<div class="modal-head"><h2>${name}</h2><button class="x-button" data-action="modal-close" aria-label="${t('close')}">×</button></div>${inner}`;
  if(m==='fit-guide')return f(label3('正確佩戴 DeepPet 項圈','Fit the DeepPet collar','DeepPet 목걸이 착용'),`<div class="dp-fit-guide"><div class="dp-fit-visual"><svg viewBox="0 0 300 132" role="img" aria-label="Collar fit guidance"><ellipse cx="80" cy="67" rx="45" ry="36" fill="#e8d8c4"/><path d="M46 48 36 16 63 30 M101 48 119 16 96 30" fill="#d9baa0" stroke="#bc9e84" stroke-width="3"/><path d="M39 78 Q80 111 122 78" stroke="#3a9ad6" stroke-width="13" fill="none"/><rect x="70" y="88" width="22" height="17" rx="6" fill="#225e9b"/><path d="M180 57 h76" stroke="#5b8ca5" stroke-width="5" stroke-linecap="round"/><path d="M182 79 h72" stroke="#e67a69" stroke-width="5" stroke-dasharray="7 6"/><text x="180" y="45" font-size="13" fill="#277c66">✓ Contact</text><text x="180" y="108" font-size="13" fill="#be625e">✕ Loose</text></svg></div><p>${label3('將項圈調整至與狗狗或貓咪頸部毛髮穩定貼合，不要鬆垮晃動，也不要勒緊。確認不影響正常呼吸、吞嚥與活動。','Keep the collar in steady contact through the fur without wobbling. Do not overtighten: breathing, swallowing and moving must remain comfortable.','목걸이가 털과 목에 안정적으로 닿도록 하되 너무 조이지 마세요. 호흡과 움직임이 편안해야 합니다.')}</p><p class="notices">${label3('目前是配對流程模擬，尚未驗證真實 SDK 連線或佩戴品質。','This is a simulated pairing flow; real SDK connectivity and fit are not yet validated.','현재 연결 및 착용 상태는 시뮬레이션입니다.')}</p><button class="cta full" data-action="fit-guide-done">${label3('了解，開始使用','Understood · Continue','확인 · 계속')}</button></div>`);
 if(m==='empty-collar-guide')return f(label3('連接 DeepPet 項圈','Pair a DeepPet collar','DeepPet 목걸이 연결'),`<div class="empty-guide-modal"><p>${label3('首先建立寵物檔案，再配對 4G + GPS 項圈；累積有效量測後即可查看個體化分析。','Create a pet profile, pair a 4G + GPS collar and collect valid readings for personalized analysis.','반려동물 프로필을 만들고 4G + GPS 기기를 연결하세요.')}</p><div class="empty-guide-steps"><div>1 · ${label3('新增寵物','Add your pet','반려동물 추가')}</div><div>2 · ${label3('連接項圈','Pair the collar','목걸이 연결')}</div><div>3 · ${label3('逐步建立有效基準','Build valid baseline','기준 측정')}</div></div><p class="notices">${label3('目前尚未連線 DeepPet 項圈。','No DeepPet collar is currently connected.','실제 연결이 아닌 데모입니다.')}</p>${isFreePet()?`<p class="notices">${label3('目前這隻寵物使用免費健康管理；正式連接功能需與實際項圈 SDK 整合。','This pet uses free care; real pairing requires the collar SDK integration.','현재는 무료 건강관리이며 실제 페어링에는 기기 SDK가 필요합니다.')}</p>`:`<button class="cta full" data-action="empty-start-profile">${label3('先建立檔案','Create pet profile','프로필 만들기')}</button>`}<button class="empty-secondary-action" data-action="shop-open">${label3('查看項圈款式','See collar models','목걸이 보기')}</button></div>`);
@@ -7016,8 +7025,8 @@ if(m==='empty-collar-guide')return f(label3('連接 DeepPet 項圈','Pair a Deep
  if(m==='record-chooser')return f(label3('新增記錄','Add record','기록 추가'),`<p class="subtitle">${label3('請選擇新增方式','Choose a method','방법을 선택하세요')}</p><div class="import-grid">${[['file',vicon('report',24),label3('本地檔案','Local file','로컬 파일')],['photo',vicon('image',24),label3('本地照片','Local photo','로컬 사진')],['camera',vicon('camera',24),label3('拍照','Take photo','촬영')],['manual',vicon('edit',24),label3('手動填寫','Manual entry','직접 입력')]].map(([key,ic,name])=>`<button class="import-method" data-action="choose-import" data-source="${key}">${ic}<b>${name}</b></button>`).join('')}</div>`);
  if(m==='record-import')return f(label3('匯入記錄','Import record','기록 가져오기'),`<p class="subtitle">${state.importSource==='file'?label3('可選 PDF 或圖片','PDF or image','PDF 또는 이미지'):state.importSource==='camera'?label3('使用相機拍照','Take a camera photo','카메라 촬영'):label3('從相簿選擇圖片','Choose from photos','사진 선택')}</p><input class="form-control" type="file" id="importFile" accept="${state.importSource==='file'?'application/pdf,image/*':'image/*'}" ${state.importSource==='camera'?'capture="environment"':''}/><div id="importPreview" class="import-preview">${state.importName?esc(state.importName):''}</div><label for="ocrText" class="form-label">${label3('辨識內容（可自行更正）','Recognized text (editable)','인식한 텍스트(수정 가능)')}</label><textarea id="ocrText" class="form-control" rows="5" placeholder="${label3('選擇檔案後嘗試辨識文字；如未成功，可直接輸入。','Select a file to try text recognition; enter manually if needed.','파일을 선택하면 텍스트 인식을 시도합니다.') }">${esc(state.importText||'')}</textarea><p class="notices">${label3('圖片文字辨識需網路載入 OCR 模組；辨識結果不會自動當成醫療判斷，請核對再儲存。','OCR loads an online library when available. Review extracted values before saving; no automatic clinical judgement.','OCR은 온라인 라이브러리가 필요하며 저장 전에 반드시 확인하세요.')}</p>${button(label3('下一步：核對資料','Next: review fields','다음: 데이터 확인'),'import-next','cta full')}`);
  if(m==='record-editor')return f(label3('核對並儲存資料','Review and save','확인 후 저장'),recordEditor());
- if(m==='pet-add')return f(label3('新增寵物','Add pet','반려동물 추가'),`<p class="notices">${label3('填寫寵物資料並上傳正面照片。','Enter your pet’s details and add a front-facing photo.','반려동물 정보를 입력하고 정면 사진을 추가하세요.')}</p><label class="form-label">${label3('寵物類型','Pet type','반려동물 종류')}</label><select id="addPetSpecies" class="form-control"><option value="dog">${label3('狗','Dog','강아지')}</option><option value="cat">${label3('貓','Cat','고양이')}</option></select><label class="form-label" for="addPetName">${label3('名字','Name','이름')}</label><input id="addPetName" maxlength="24" autocomplete="off" class="form-control" placeholder=""/>${breedSelector('addPet','dog',null)}<div class="form-grid mt12"><div><label class="form-label" for="addPetAge">${t('age')} (${label3('歲','years','세')})</label><input id="addPetAge" class="form-control" type="number" inputmode="decimal" min="0" max="35" step="0.1" placeholder="" value=""/></div><div><label class="form-label" for="addPetWeight">${t('weight')} (kg)</label><input id="addPetWeight" class="form-control" type="number" inputmode="decimal" min="0.1" max="120" step="0.1" placeholder=""/></div></div><div class="mt12"><label class="form-label" for="addPetHeight">${label3('肩高（cm）','Shoulder height (cm)','어깨 높이 (cm)')}</label><input id="addPetHeight" class="form-control" type="number" min="1" max="150" step=".1" placeholder=""/></div><div class="sp16"></div><div class="pet-form-actions"><button type="button" class="cta full" data-action="pet-add-save">${label3('確定','Confirm','확인')}</button><button type="button" class="cta secondary full" data-action="modal-close">${t('cancel')}</button></div>`);
- if(m==='edit-pet'){const species=d.species||(/cat|貓|猫/i.test(d.breed?.en||'')?'cat':'dog');return f(label3('編輯寵物檔案','Edit pet profile','반려동물 프로필 편집'),`<div class="edit-avatar"><img src="${esc(dp58FaceAsset(state.dog,d))}" alt="${esc(d.name)}"/></div><div class="pet-type-section"><label class="form-label">${label3('寵物類型','Pet type','동물 유형')}</label><select class="form-control" id="petSpeciesInput"><option value="dog" ${species==='dog'?'selected':''}>${label3('狗','Dog','강아지')}</option><option value="cat" ${species==='cat'?'selected':''}>${label3('貓','Cat','고양이')}</option></select></div>${breedSelector('pet',species,d.breed)}<label class="form-label">${label3('名字','Name','이름')}</label><input class="form-control" id="petNameInput" maxlength="24" value="${esc(d.name)}"/><div class="form-grid mt12"><div><label class="form-label" for="petAgeInput">${t('age')} (${label3('歲','years','세')})</label><input class="form-control" id="petAgeInput" type="number" inputmode="decimal" min="0" max="35" step="0.1" value="${d.age}"/></div><div><label class="form-label" for="petWeightInput">${t('weight')} (kg)</label><input class="form-control" id="petWeightInput" type="number" inputmode="decimal" min="0.1" max="120" step="0.1" value="${d.weight}"/></div></div><div class="form-grid mt12"><div><label class="form-label" for="petHeightInput">${label3('肩高（選填）cm','Shoulder height (optional) cm','어깨 높이 cm')}</label><input class="form-control" id="petHeightInput" type="number" inputmode="decimal" min="1" max="150" step=".1" value="${d.heightCm||''}"/></div><div><label class="form-label" for="petBcsInput">${label3('體況 BCS（選填）1–9','BCS (optional) 1–9','체형 점수 BCS')}</label><input class="form-control" id="petBcsInput" type="number" inputmode="numeric" min="1" max="9" step="1" value="${d.bcs||''}"/></div></div><p class="notices">${label3('品種由系統清單管理。更改動物類型後，原示範生理數據不能繼續套用到另一物種。','Breeds are catalog-managed. Changing species means existing demo sensor data cannot apply to another species.','품종은 목록에서 선택합니다. 종류 변경 시 기존 생체 시뮬레이션 데이터는 적용할 수 없습니다.')}</p><div class="pet-form-actions"><button type="button" class="cta full" data-action="save-pet">${t('save')}</button><button type="button" class="cta secondary full" data-action="modal-close">${t('cancel')}</button></div>`);}
+ if(m==='pet-add')return f(label3('新增寵物','Add pet','반려동물 추가'),`<p class="notices">${label3('填寫寵物資料並上傳正面照片。','Enter your pet’s details and add a front-facing photo.','반려동물 정보를 입력하고 정면 사진을 추가하세요.')}</p><label class="form-label">${label3('寵物類型','Pet type','반려동물 종류')}</label><select id="addPetSpecies" class="form-control"><option value="dog">${label3('狗','Dog','강아지')}</option><option value="cat">${label3('貓','Cat','고양이')}</option></select><label class="form-label" for="addPetName">${label3('名字','Name','이름')}</label><input id="addPetName" maxlength="24" autocomplete="off" class="form-control" placeholder=""/>${breedSelector('addPet','dog',null)}<div class="form-grid mt12"><div><label class="form-label" for="addPetAge">${t('age')} (${label3('歲','years','세')})</label><input id="addPetAge" class="form-control" type="number" inputmode="decimal" min="0" max="35" step="0.1" placeholder="" value=""/></div><div><label class="form-label" for="addPetWeight">${t('weight')} (kg)</label><input id="addPetWeight" class="form-control" type="number" inputmode="decimal" min="0.1" max="120" step="0.1" placeholder=""/></div></div><div class="mt12"><label class="form-label" for="addPetHeight">${label3('肩高（cm）','Shoulder height (cm)','어깨 높이 (cm)')}</label><input id="addPetHeight" class="form-control" type="number" min="1" max="150" step=".1" placeholder=""/></div>${dp224ProfileFields('addPet')}<div class="sp16"></div><div class="pet-form-actions"><button type="button" class="cta full" data-action="pet-add-save">${label3('確定','Confirm','확인')}</button><button type="button" class="cta secondary full" data-action="modal-close">${t('cancel')}</button></div>`);
+ if(m==='edit-pet'){const species=d.species||(/cat|貓|猫/i.test(d.breed?.en||'')?'cat':'dog');return f(label3('編輯寵物檔案','Edit pet profile','반려동물 프로필 편집'),`<div class="edit-avatar"><img src="${esc(dp58FaceAsset(state.dog,d))}" alt="${esc(d.name)}"/></div><div class="pet-type-section"><label class="form-label">${label3('寵物類型','Pet type','동물 유형')}</label><select class="form-control" id="petSpeciesInput"><option value="dog" ${species==='dog'?'selected':''}>${label3('狗','Dog','강아지')}</option><option value="cat" ${species==='cat'?'selected':''}>${label3('貓','Cat','고양이')}</option></select></div>${breedSelector('pet',species,d.breed)}<label class="form-label">${label3('名字','Name','이름')}</label><input class="form-control" id="petNameInput" maxlength="24" value="${esc(d.name)}"/><div class="form-grid mt12"><div><label class="form-label" for="petAgeInput">${t('age')} (${label3('歲','years','세')})</label><input class="form-control" id="petAgeInput" type="number" inputmode="decimal" min="0" max="35" step="0.1" value="${d.age}"/></div><div><label class="form-label" for="petWeightInput">${t('weight')} (kg)</label><input class="form-control" id="petWeightInput" type="number" inputmode="decimal" min="0.1" max="120" step="0.1" value="${d.weight}"/></div></div><div class="form-grid mt12"><div><label class="form-label" for="petHeightInput">${label3('肩高（選填）cm','Shoulder height (optional) cm','어깨 높이 cm')}</label><input class="form-control" id="petHeightInput" type="number" inputmode="decimal" min="1" max="150" step=".1" value="${d.heightCm||''}"/></div><div><label class="form-label" for="petBcsInput">${label3('體況 BCS（選填）1–9','BCS (optional) 1–9','체형 점수 BCS')}</label><input class="form-control" id="petBcsInput" type="number" inputmode="numeric" min="1" max="9" step="1" value="${d.bcs||''}"/></div></div>${dp224ProfileFields('pet',d)}<p class="notices">${label3('品種由系統清單管理。更改動物類型後，原示範生理數據不能繼續套用到另一物種。','Breeds are catalog-managed. Changing species means existing demo sensor data cannot apply to another species.','품종은 목록에서 선택합니다. 종류 변경 시 기존 생체 시뮬레이션 데이터는 적용할 수 없습니다.')}</p><div class="pet-form-actions"><button type="button" class="cta full" data-action="save-pet">${t('save')}</button><button type="button" class="cta secondary full" data-action="modal-close">${t('cancel')}</button></div>`);}
  if(m==='avatar-choice')return f(label3('更換寵物頭像','Change pet photo','반려동물 사진 변경'),`<div class="avatar-change-panel"><div class="avatar-image-preview"><img id="avatarPreviewImage" src="${esc(avatarDraft?.src||currentDog().photo)}" alt="${esc(currentDog().name)}"/><div class="avatar-preview-name">${esc(currentDog().name)}</div></div><p class="avatar-change-help">${label3('選擇拍照或從相簿／檔案上傳。可先預覽，確認儲存後才取代原本照片。','Take a photo or choose one from your library. Preview it before saving; your current photo stays until you confirm.','사진을 촬영하거나 앨범에서 선택하세요. 미리보기 후 저장하면 기존 사진이 교체됩니다.')}</p><div class="avatar-method-grid"><button type="button" class="avatar-method" data-action="avatar-camera">${vicon('camera',23)}<span>${label3('拍照','Take photo','사진 촬영')}</span></button><button type="button" class="avatar-method" data-action="avatar-gallery">${vicon('image',23)}<span>${label3('從相簿選擇','Choose photo','앨범에서 선택')}</span></button></div><input class="avatar-hidden-file" id="avatarCameraInput" type="file" accept="image/*" capture="environment" aria-label="${label3('拍攝新照片','Take a new photo','새 사진 촬영')}"/><input class="avatar-hidden-file" id="avatarGalleryInput" type="file" accept="image/*" aria-label="${label3('選擇既有照片','Choose an existing photo','기존 사진 선택')}"/><p class="notices">${label3('照片在本機縮放為正方形，並只儲存在目前瀏覽器；不會上傳伺服器，也不會更換其他寵物的照片。','The photo is cropped to a square and stored only in this browser. It is not uploaded or applied to other pets.','사진은 정사각형으로 편집되어 이 브라우저에만 저장되며 서버로 전송되지 않습니다.')}</p>${avatarDraft?.src?`<div class="avatar-ready">${vicon('check',16)} ${label3('照片已選好，尚未儲存','Photo ready · not saved yet','사진 선택 완료 · 저장 전')}</div>`:''}<div class="avatar-save-actions"><button type="button" class="cta full" data-action="avatar-save" ${avatarDraft?.src?'':'disabled'}>${label3('儲存新頭像','Save new photo','새 사진 저장')}</button><button type="button" class="cta secondary full" data-action="avatar-cancel">${t('cancel')}</button></div></div>`);
  if(m==='pet-switch')return f(t('petSwitch'),`<div class="pet-switch-grid">${showcasePetOrder().map(i=>{if(i==='blank')return `<button type="button" class="pet-switch-empty ${selectedBlank()?'active':''}" data-action="select-blank"><span class="pet-blank-avatar">${vicon('plus',23)}</span><span>${label3('空白／首次使用','No pet / First visit','반려동물 없음')}</span><small>${label3('完全沒有寵物或設備資料','No pet or device data','등록된 데이터 없음')}</small></button>`;const base=allPets()[i],pet={...base,...(state.petOverrides?.[i]||{})},face=dp58FaceAsset(i,pet),name=dp58FreshDisplayName(pet);return `<button type="button" class="pet-switch-item ${!selectedBlank()&&state.dog===i?'active':''}" data-action="select-pet" data-index="${i}"><img src="${esc(face)}" alt="${esc(name)}"/><span>${esc(name)}</span></button>`}).join('')}</div>`);
  if(m==='show-summary'){
@@ -7185,6 +7194,7 @@ async function processAvatarPhoto(file){
  }catch(err){if(stillCurrent())toast(label3('無法讀取這張照片，請換一張 JPG、PNG 或手機支援的圖片','Cannot open this photo. Try a JPG, PNG, or a phone-supported format.','이 사진을 열 수 없습니다. JPG나 PNG 파일을 선택해 주세요.'));}
 }
 function commitAvatarPhoto(){
+ if(!dp227CanEditProfile()){dp227ProfileReadOnly();return;}
  if(!avatarDraft?.src||avatarDraft.petIndex!==state.dog){toast(label3('請先選取照片','Choose a photo first','먼저 사진을 선택해 주세요'));return;}
  const key=String(state.dog),before=state.petOverrides?.[key],next={...(before||{}),photo:avatarDraft.src,dpPhotoConfirmed:true,...(state.dog<dogs.length&&state.dog!==0?{dpFixtureInvalidated:false,freeCare:false,dpFreshPet:false}:{})};
  // Keep avatar updates in the same owner-scoped save transaction as health
@@ -7196,6 +7206,8 @@ function commitAvatarPhoto(){
  avatarDraft=null;window.DeepPetSignalScoring?.invalidate?.(state.dog);closeModal();render();toast(label3('寵物照片已更新並儲存在此瀏覽器','Pet photo saved in this browser','반려동물 사진이 브라우저에 저장되었습니다'));
 }
 function openModal(name){
+ if(['edit-pet','avatar-choice'].includes(name)&&!dp227CanEditProfile()){dp227ProfileReadOnly();return;}
+ if(name==='pet-add'&&(state.dpExternalPublic||state.modal==='pet-public-card'||(state.tab==='me'&&['dp903-profile','dp903-garden','chat'].includes(state.detail))))return;
  if(['record-import','record-editor','record-chooser'].includes(state.modal)&&!['record-import','record-editor','record-chooser'].includes(name))dpAbandonImportWorkflow();
  if(state.tab==='me'&&state.detail==='chat'&&name!=='garden-chat')dpStopChatVoice();
  if(name==='avatar-choice'){dpAvatarReadSerial++;avatarDraft=null;}
@@ -7332,8 +7344,10 @@ function onAction(target){const action=target.dataset.action;if(!action)return;
  case 'deep-day-step':{const rows=deepDateRows(),at=rows.findIndex(x=>x.date===deepChosenDate()),next=Math.max(0,Math.min(rows.length-1,at+Number(target.dataset.delta||0)));state.range=1;state.deepSelectedDate=rows[next]?.date||iso(localDate());state.dp1007DayManuallyChosen=true;state.chartPoint=-1;render();break;}
  case 'pet-add':openModal('pet-add');break;
  case 'pet-add-save':{
+  if(state.dpExternalPublic||state.modal!=='pet-add')break;
   const name=($('#addPetName')?.value||'').trim(),species=$('#addPetSpecies')?.value||'dog',ageText=$('#addPetAge')?.value,weightText=$('#addPetWeight')?.value,age=Number(ageText),weight=Number(weightText);
-  if(!name||name.length>24||ageText===''||weightText===''||!Number.isFinite(age)||age<0||age>35||!Number.isFinite(weight)||weight<=0||weight>120){toast(t('inputError'));break;}
+  const profileExtra=dp224ReadProfile('addPet',ageText===''?null:age);
+  if(!profileExtra||!name||name.length>24||(!profileExtra.birthDate&&ageText==='')||weightText===''||!Number.isFinite(profileExtra.age)||profileExtra.age<0||profileExtra.age>35||!Number.isFinite(weight)||weight<=0||weight>120){toast(t('inputError'));break;}
   if(!breedIsSelected('addPet',species)){breedInvalid();break;}
   const heightRaw=$('#addPetHeight')?.value.trim()||'',bcsRaw=$('#addPetBcs')?.value.trim()||'',heightCm=heightRaw?Number(heightRaw):null,bcs=bcsRaw?Number(bcsRaw):null;
   if(heightCm!==null&&(!Number.isFinite(heightCm)||heightCm<1||heightCm>150)||bcs!==null&&(!Number.isInteger(bcs)||bcs<1||bcs>9)){toast(t('inputError'));break;}
@@ -7341,7 +7355,7 @@ function onAction(target){const action=target.dataset.action;if(!action)return;
   // New owner profiles must be constructed from the owner's inputs, never
   // spread from Luna/Nori: that copied unseen HR, respiratory rate, recovery
   // anchors and other showroom-only biometric values into a new identity.
-  const d={name,age,weight,heightCm,bcs,species,breed:{zh:selected.zh,zht:selected.zht,en:selected.en,ko:selected.ko},breedId:selected.id,
+  const d={name,weight,heightCm,bcs,...profileExtra,species,breed:{zh:selected.zh,zht:selected.zht,en:selected.en,ko:selected.ko},breedId:selected.id,
    bio:null,hr:null,rr:null,rest:null,recovery:null,normalRecovery:null,target:null,score:null,
    publicId:dpSecureId(),freeCare:true,dpFreshPet:true,dpPhotoConfirmed:false,
    photo:petAvatar(name,species==='cat'?'🐈':'🐕','#ecebff','#c6dbfb')};
@@ -7647,8 +7661,10 @@ case 'gps-home-enable':{if(!gpsForCurrentPet())break;if(!dpGpsCommit(()=>{state.
  case 'save-fence':{const r=Number($('#fenceRadius')?.value);if(!Number.isFinite(r)||r<100||r>2000){toast(t('inputError'));break;}const previous=state.fenceRadius;state.fenceRadius=r;if(!persist()){state.fenceRadius=previous;break;}closeModal();toast(t('saved'));break;}
  case 'garden-toggle':state.garden=!state.garden;renderModal();persist();toast(t('saved'));break;
  case 'save-pet':{
+  if(!dp227CanEditProfile()||state.modal!=='edit-pet'||!window.DeepPetProfilePermissions227?.matchesEditTarget()){dp227ProfileReadOnly();break;}
   const name=$('#petNameInput')?.value.trim(),ageText=$('#petAgeInput')?.value,weightText=$('#petWeightInput')?.value,weight=Number(weightText),age=Number(ageText);
-  if(!name||name.length>24||!ageText||!weightText||!Number.isFinite(weight)||weight<=0||weight>120||!Number.isFinite(age)||age<0||age>35){toast(t('inputError'));break;}
+  const profileExtra=dp224ReadProfile('pet',ageText===''?null:age);
+  if(!profileExtra||!name||name.length>24||(!profileExtra.birthDate&&!ageText)||!weightText||!Number.isFinite(weight)||weight<=0||weight>120||!Number.isFinite(profileExtra.age)||profileExtra.age<0||profileExtra.age>35){toast(t('inputError'));break;}
   const heightRaw=$('#petHeightInput')?.value.trim()||'',bcsRaw=$('#petBcsInput')?.value.trim()||'';const heightCm=heightRaw?Number(heightRaw):null,bcs=bcsRaw?Number(bcsRaw):null;
   if(heightCm!==null&&(!Number.isFinite(heightCm)||heightCm<1||heightCm>150)||bcs!==null&&(!Number.isInteger(bcs)||bcs<1||bcs>9)){toast(t('inputError'));break;}
   const species=$('#petSpeciesInput')?.value||'dog';
@@ -7659,7 +7675,7 @@ case 'gps-home-enable':{if(!gpsForCurrentPet())break;if(!dpGpsCommit(()=>{state.
   const isBuiltInGallery=state.dog>=0&&state.dog<dogs.length;
   // A gallery slot is an editable EXHIBITION fixture, never a blank owner pet.
   if(!dpCareCommit([['petOverrides',String(state.dog)]],()=>{
-   state.petOverrides??={};state.petOverrides[state.dog]={...(state.petOverrides?.[state.dog]||{}),name,weight,age,heightCm,bcs,species,breed:{zh:selected.zh,zht:selected.zht,en:selected.en,ko:selected.ko},breedId:selected.id,dpUserProfileSaved:true,...(!isBuiltInGallery&&speciesChanged?{freeCare:true,score:[0,0,0],bio:null}:{}),...(isBuiltInGallery&&state.dog!==0?{dpFixtureInvalidated:false,freeCare:false,dpFreshPet:false}:{}),...(updateGenerated?{photo:petAvatar(name,species==='cat'?'🐈':'🐕','#ecebff','#c6dbfb'),dpPhotoConfirmed:false}:{})};
+   state.petOverrides??={};state.petOverrides[state.dog]={...(state.petOverrides?.[state.dog]||{}),name,weight,heightCm,bcs,...profileExtra,species,breed:{zh:selected.zh,zht:selected.zht,en:selected.en,ko:selected.ko},breedId:selected.id,dpUserProfileSaved:true,...(!isBuiltInGallery&&speciesChanged?{freeCare:true,score:[0,0,0],bio:null}:{}),...(isBuiltInGallery&&state.dog!==0?{dpFixtureInvalidated:false,freeCare:false,dpFreshPet:false}:{}),...(updateGenerated?{photo:petAvatar(name,species==='cat'?'🐈':'🐕','#ecebff','#c6dbfb'),dpPhotoConfirmed:false}:{})};
   }))break;
   window.DeepPetSignalScoring?.invalidate?.(state.dog);closeModal();render(true);toast(t('saved'));break;
  }
@@ -12259,6 +12275,7 @@ function context(profile={},day){profile=profile&&typeof profile==='object'?prof
 }
 function reference(row,profile={},date){profile=profile&&typeof profile==='object'?profile:{};
  if(!row||typeof row!=='object'||!strictDate(date))return {ok:false,reason:'invalid_date_or_record'};
+ if(strictDate(profile.birthDate)&&date<profile.birthDate)return {ok:false,reason:'before_birth'};
  const provided=v=>v!==null&&v!==undefined&&!(typeof v==='string'&&!v.trim());
  const fields=['referenceLow','referenceHigh','refLow','refHigh','ageAtExamYears','weightAtExamKg','referenceAgeMinYears','referenceAgeMaxYears','referenceWeightMinKg','referenceWeightMaxKg','referenceHeightMinCm','referenceHeightMaxCm'];
  if(fields.some(k=>provided(row[k])&&num(row[k])===null))return {ok:false,reason:'invalid_reference_input'};
@@ -12341,7 +12358,8 @@ function item(row,profile={},date){row=row&&typeof row==='object'?row:{};const r
 function assess(entries=[],profile={},date=localToday()){
  profile=profile&&typeof profile==='object'?profile:{};
  const ref=Date.parse(date+'T12:00:00Z');if(!strictDate(date))return empty('invalid_date');
- const eligible=(Array.isArray(entries)?entries:[]).filter(x=>x&&strictDate(x.date)&&Date.parse(x.date+'T12:00:00Z')<=ref);
+ if(strictDate(profile.birthDate)&&date<profile.birthDate)return empty('before_birth');
+ const eligible=(Array.isArray(entries)?entries:[]).filter(x=>x&&strictDate(x.date)&&Date.parse(x.date+'T12:00:00Z')<=ref&&(!strictDate(profile.birthDate)||x.date>=profile.birthDate));
  if(!eligible.length)return empty('no_current_report');
  // A mixed-owner input must not become a plausible single examination after
  // same-date/report-ID grouping. Untagged legacy records are accepted only
@@ -12777,7 +12795,7 @@ rhythmData=function(){
   data.values[i].calm=Number.isFinite(s?.calm)?s.calm:null;
   data.values[i].stable=Number.isFinite(s?.stable)?s.stable:null;
   data.values[i].recover=Number.isFinite(s?.recovery)?s.recovery:null;
-  data.values[i].load=Number.isFinite(s?.calm)?100-s.calm:null;
+  data.values[i].load=list.find(x=>x?.date===date)?.unified?.details?.rhythm?.load??null;
  }
  data.today=data.values.find(v=>v.__dpDate===iso(localDate()))||null;
  return data;
@@ -13993,10 +14011,41 @@ function ageFromScore(actualAge,wellnessScore,pet={}){if(!valid(actualAge)||actu
  const scale=.08*(span/13)*stage,delta=Math.max(-actualAge,Math.min(span*.20,(85-wellnessScore)*scale));
  const ageYears=Math.round(Math.max(0,actualAge+delta)*100)/100;
  return {ageYears,deltaYears:Math.round((ageYears-actualAge)*100)/100,unit:'years',pointsPerYear:1/scale,isClinicallyValidated:false};}
-function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null, options={}){
+// V10.226: explicit long-term laboratory calibration contract. The supplied
+// coefficient must come from a reviewed independent paired-dataset calibration.
+// No default weight and no modification to a waveform-derived daily score.
+// Release-controlled registry: only independently reviewed calibration packages may be listed.
+// Empty by design: no paired real-world calibration dataset was supplied.
+const APPROVED_LAB_CALIBRATIONS=Object.freeze([]);
+function labCalibration(report,pet,asOf,sensorScore,source,config=null){
+ const no=(reason,eligible=false)=>({eligible,applied:false,reason,weight:0,score:sensorScore,reportScore:null,reportDate:null,calibrationId:null});
+ const target=ownerKey(pet),date=report?.latest,ageDays=exactDate(asOf)&&exactDate(date)?(dateNumber(asOf)-dateNumber(date))/86400000:null;
+ if(!validScore(sensorScore))return no('sensor_model_unavailable');
+ if(!target||ownerConflict(report)||ownerKey(report)!==target)return no('report_owner_unverified');
+ if(!exactDate(date)||!valid(ageDays)||ageDays<0||ageDays>365||exactDate(pet.birthDate)&&date<pet.birthDate)return no('report_date_ineligible');
+ if(report?.reason!=='scored'||!validScore(report.score)||!report.reportId)return no('report_not_scored');
+ const rows=Array.isArray(report.records)?report.records:[],domains=Array.isArray(report.domains)?report.domains:[];
+ const numeric=rows.filter(x=>x.kind==='numeric'&&validScore(x.score));
+ const observed=domains.filter(x=>validScore(x.score)&&x.count>0);
+ if(numeric.length<2||observed.length<2||numeric.length!==Number(report.count)||numeric.some(x=>ownerConflict(x)||ownerKey(x)!==target||x.date!==date))return no('report_numeric_evidence_insufficient');
+ const provenance=numeric.map(x=>x.sample===true||['sample','showcase'].includes(x.source)?'synthetic':['manual','import','uploaded','clinical','vet'].includes(x.source)?'real':null);
+ if(!['real','synthetic'].includes(source)||provenance.some(x=>x!==source))return no('report_source_mismatch');
+ // Only a versioned, reviewed calibration package can activate the final blend.
+ // The program validates the contract, not the truth of external evidence. No
+ // such package is shipped with this build; this keeps unvalidated inputs out.
+ if(!config)return no('paired_calibration_missing',true);
+ const species=String(pet.species||'').toLowerCase();
+ if(config.status!=='approved' || config.sourceKind!==source || config.species!==species || config.algorithmVersion!=='10.226-lab-contract' || typeof config.calibrationId!=='string'||!config.calibrationId.trim()||typeof config.datasetDigest!=='string'||!/^[a-f0-9]{64}$/i.test(config.datasetDigest)||typeof config.reviewId!=='string'||!config.reviewId.trim()||!valid(config.holdoutPets)||!Number.isInteger(config.holdoutPets)||config.holdoutPets<1||!valid(config.weight)||config.weight<=0||config.weight>1||!valid(config.maxAgeDays)||!Number.isInteger(config.maxAgeDays)||config.maxAgeDays<1||config.maxAgeDays>365||!valid(config.halfLifeDays)||config.halfLifeDays<=0||config.halfLifeDays>365)return no('calibration_contract_invalid',true);
+ if(ageDays>config.maxAgeDays)return no('calibrated_recency_exceeded',true);
+ // Scope and recency are explicit engineering safeguards; do not interpret as clinical probability.
+ const coverage=clamp(numeric.length/8,0,1)*clamp(observed.length/4,0,1),weight=config.weight*coverage*Math.pow(.5,ageDays/config.halfLifeDays);
+ const score=round(clamp((1-weight)*sensorScore+weight*Math.min(sensorScore,report.score),0,100));
+ return {eligible:true,applied:true,reason:'approved_calibration',weight,score,reportScore:report.score,reportDate:date,calibrationId:config.calibrationId,reportId:report.reportId,daysOld:ageDays};
+}
+function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null, options={}){if(asOfDate&&window.DeepPetUnifiedDeep?.profileAtDate)pet=window.DeepPetUnifiedDeep.profileAtDate(pet,asOfDate);
  if(asOfDate!==null&&!exactDate(asOfDate))return {available:false,reason:'invalid_as_of_date',date:null,score:null,ageYears:null,reportWeight:0,days:0};
  const sourceKind=x=>globalThis.DeepPetUnifiedDeep.sourceKind(x);
- const inWindow=(Array.isArray(records)?records:[]).filter(x=>x&&exactDate(x.date)&&(!exactDate(asOfDate)||x.date<=asOfDate));
+ const inWindow=(Array.isArray(records)?records:[]).filter(x=>x&&exactDate(x.date)&&(!exactDate(asOfDate)||x.date<=asOfDate)&&(!exactDate(pet.birthDate)||x.date>=pet.birthDate));
  const conflictDates=new Set(inWindow.filter(x=>sourceKind(x)==='conflict').map(x=>x.date));
  const inconsistent=x=>x.unified&&(x.unified.date!==x.date||!x.unified.scores||x.unified.scores.physiol!==x.scores?.physiol||validScore(x.scores?.rhythm)&&x.unified.scores.rhythm!==x.scores.rhythm);
  const all=inWindow.filter(x=>{
@@ -14028,7 +14077,7 @@ function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null
   return {available:false,reason:'pet_identity_unverified',date:null,score:null,ageYears:null,reportWeight:0,days:0};
  const anchorRows=exactDate(asOfDate)?all.filter(x=>x.date<=asOfDate):all;
  // A new, genuine partial observation can change the source of the current period without itself qualifying for a complete health score.
- const observed=(Array.isArray(records)?records:[]).filter(x=>x&&exactDate(x.date)&&(!exactDate(asOfDate)||x.date<=asOfDate)&&!ownerConflict(x)&&(!target||identity(x)===target)&&((x.source==='owner-A2-B0-SDK'&&x.dataProvenance==='owner-A2-B0-SDK'&&x.unified?.date===x.date&&valid(x.unified?.evidence?.coverage)&&x.unified.evidence.coverage>0&&x.unified.evidence.coverage<=1)||(x.source==='20hz-waveform'&&valid(x.quality?.observedSeconds)&&x.quality.observedSeconds>0&&x.quality.observedSeconds<=86400&&x.quality.signalValid===true&&x.quality.wearValid===true)||(['sdk-demo-fixture','minute-demo-no-interbeat'].includes(x.source)&&['synthetic-demo-fixture','synthetic-extreme-showcase-v973','synthetic-measurement-derived-v10115'].includes(x.dataProvenance)&&x.unified?.date===x.date&&valid(x.unified?.evidence?.coverage)&&x.unified.evidence.coverage>0&&x.unified.evidence.coverage<=1&&x.quality?.signalValid!==false&&x.quality?.wearValid!==false)));
+ const observed=inWindow.filter(x=>x&&exactDate(x.date)&&(!exactDate(asOfDate)||x.date<=asOfDate)&&!ownerConflict(x)&&(!target||identity(x)===target)&&((x.source==='owner-A2-B0-SDK'&&x.dataProvenance==='owner-A2-B0-SDK'&&x.unified?.date===x.date&&valid(x.unified?.evidence?.coverage)&&x.unified.evidence.coverage>0&&x.unified.evidence.coverage<=1)||(x.source==='20hz-waveform'&&valid(x.quality?.observedSeconds)&&x.quality.observedSeconds>0&&x.quality.observedSeconds<=86400&&x.quality.signalValid===true&&x.quality.wearValid===true)||(['sdk-demo-fixture','minute-demo-no-interbeat'].includes(x.source)&&['synthetic-demo-fixture','synthetic-extreme-showcase-v973','synthetic-measurement-derived-v10115'].includes(x.dataProvenance)&&x.unified?.date===x.date&&valid(x.unified?.evidence?.coverage)&&x.unified.evidence.coverage>0&&x.unified.evidence.coverage<=1&&x.quality?.signalValid!==false&&x.quality?.wearValid!==false)));
  const modeRows=[...anchorRows,...observed,...inWindow.filter(x=>conflictDates.has(x.date))],lastModeDate=modeRows.map(x=>x.date).sort().at(-1),modes=new Set(modeRows.filter(x=>x.date===lastModeDate).map(sourceKind));
  const dateSources=new Map();for(const x of modeRows){if(!dateSources.has(x.date))dateSources.set(x.date,new Set());dateSources.get(x.date).add(sourceKind(x));}const sourceConflicts=new Set([...dateSources].filter(([,v])=>v.size>1||v.has('conflict')).map(([d])=>d));
  const canonical=canonicalDays(modes.size===1&&!modes.has('conflict')?anchorRows.filter(x=>sourceKind(x)===[...modes][0]&&!sourceConflicts.has(x.date)):[]),distinct=canonical.days;canonical.excluded=[...new Set([...canonical.excluded,...sourceConflicts])].sort();
@@ -14060,20 +14109,11 @@ function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null
  // are deliberately NEVER accepted as arguments to this function.
  const testedAt=report?.latest,detected=dateNumber(testedAt),daysOld=detected!==null?round((anchor-detected)/86400000):null;
  const examOwner=identity(report),examAligned=!ownerConflict(report)&&(!target||examOwner===target);
- const examUsable=false; // health management is independent of waveform-derived scores
- const testedDomains=(Array.isArray(report?.domains)?report.domains:[]).filter(x=>x&&x.count>0).length;
- const numericCount=(Array.isArray(report?.records)?report.records:[]).filter(x=>x&&x.kind==='numeric').length;
- const count=Number(report?.count)||0;
- // Coverage limits a one- or two-domain report from dominating all of health.
- const scope=clamp(count/8,0,1)*clamp(testedDomains/4,0,1);
- const numerics=count?clamp(numericCount/count,0,1):0;
- const recency=examUsable?Math.exp(-Math.log(20)*daysOld/365):0;
- const weight=examUsable?Math.min(.60,.60*scope*numerics*recency):0;
- // A normal lab panel cannot erase an independently low physiological trend.
- // Laboratory evidence may lower this long-term composite, but never boost
- // a concerning sensor trend into a reassuring green score.
- const candidate=examUsable?round((1-weight)*sensorScore+weight*Math.min(sensorScore,report.score)):sensorScore;
- const score=enough?clamp(candidate,0,100):null;
+ const sensorSource=modes.size===1?[...modes][0]:null;
+ const calibration=options?.labCalibration??APPROVED_LAB_CALIBRATIONS.find(c=>c.species===String(pet.species||'').toLowerCase()&&c.sourceKind===sensorSource)??null;
+ const calibrated=labCalibration(report,pet,latest,sensorScore,sensorSource,calibration);
+ const examUsable=calibrated.applied,weight=calibrated.weight;
+ const score=enough?calibrated.score:null;
  // Score and estimated wellness age MUST come from the SAME longitudinal
  // evidence. Older versions called a separate age engine and could show both
  // curves rising together. This is a reversible demonstration index, not a
@@ -14086,10 +14126,10 @@ function evaluate(records=[], report=null, pet={}, ageEngine=null, asOfDate=null
  const history=last30.map(x=>({date:x.date,body:x.scores.physiol,rhythm:x.scores.rhythm}));
  return {available:enough,provisional,reason:enough?null:stale?'stale_monitoring':'insufficient_longitudinal_days',date:latest,score,sensorScore,longMean,recentMean,recentWorst,earlierMean,lowDays,recentLowDays,lowStreak,deterioration,longDrift,priorLongDays:priorLong.length,recentValidDays:recent.length,physiology:valid(physical)?round(physical):null,
   rhythm:valid(rhythm)?round(rhythm):null,days:last30.length,windowDays:30,history,reportScore:examUsable?report.score:null,
-  reportDate:examUsable?testedAt:null,reportId:examUsable?report.reportId:null,reportWeight:weight,reportDaysOld:examUsable?daysOld:null,
+  reportDate:examUsable?testedAt:null,reportId:examUsable?report.reportId:null,reportWeight:weight,reportDaysOld:examUsable?daysOld:null,reportCalibration:calibrated,
   ageYears,actualAge:valid(pet?.age)?pet.age:null,ageAdjustment,ageAvailable:ageValid,
   lastObservedDate,daysSinceLast,stale,grade:!valid(score)?'unavailable':score>=90?'healthy':score>=80?'mild':score>=60?'moderate':'risk',
-  excludedAmbiguousDays:canonical.excluded,modelVersion:'10.199-longitudinal-research',isClinicallyValidated:false};
+  excludedAmbiguousDays:canonical.excluded,modelVersion:'10.226-longitudinal-calibration-contract',isClinicallyValidated:false};
 }
 function triage(s={}){
  // Missing waves, low confidence or an offline collar cannot identify cardiac
@@ -14099,7 +14139,7 @@ function triage(s={}){
  if(s.deviationConfirmed===true)return {kind:'review',emergency:false,reason:'persistent_change'};
  return {kind:'normal',emergency:false,reason:'no_valid_event'};
 }
-return {version:'9.44',evaluate,ageFromScore,triage};
+return {version:'10.226',evaluate,labCalibration,ageFromScore,triage};
 });
 
 
@@ -14111,7 +14151,7 @@ return {version:'9.44',evaluate,ageFromScore,triage};
  const t=(zh,en,ko,ja)=>state.lang==='en'?en:state.lang==='ko'?ko:state.lang==='ja'?(ja||en):state.lang==='zh'&&typeof toSimplified==='function'?toSimplified(zh):zh;
  const n=x=>finite(x)?String(Math.round(x)):'—';
  const pct=x=>`${(x*100).toFixed(1)}%`;
- const petData=(pet,index)=>({petId:String(index),age:pet.age,weight:pet.weight,species:pet.species,breed:pet.breed,adultWeightKg:pet.adultWeightKg});
+ const petData=(pet,index)=>({petId:String(index),age:pet.age,birthDate:pet.birthDate,weight:pet.weight,species:pet.species,breed:pet.breed,adultWeightKg:pet.adultWeightKg});
  const model=(index=state.dog)=>{
   const asOf=typeof iso==='function'?iso(localDate()):new Date().toISOString().slice(0,10);
   // Never silently use Milo when a stale/invalid pet ID is requested.
@@ -14173,14 +14213,14 @@ return {version:'9.44',evaluate,ageFromScore,triage};
    const list=all.filter(r=>r&&/^\d{4}-\d{2}-\d{2}$/.test(r.date||'')&&Number.isFinite(r.scores?.physiol)&&(r.unified||Number.isFinite(r.scores?.rhythm))&&r.date<=today).sort((a,b)=>a.date.localeCompare(b.date));
    const recent=list.filter(r=>dateMs(today)-dateMs(r.date)<30*86400000);
    const reports=typeof root.dp914ReportRecords==='function'?root.dp914ReportRecords(index):[];
-   const currentAge=Number(pet.age),todayMs=dateMs(today);
+   const currentAge=Number(root.DeepPetUnifiedDeep.profileAtDate(pet,today).age),todayMs=dateMs(today);
    const compute=(rows,date)=>{
      const pastAge=Math.max(0.05,currentAge-(todayMs-dateMs(date))/(365.25*86400000));
      const samePet={...pet,age:pastAge};
      const exam=root.DeepPetLabEvidence?.assess(reports,{...samePet,petId:String(index)},date)||null;
      // Compare 30-day wellness age at one fixed chronological age so the two
      // trend curves have exactly inverse directions (no day-to-day age drift).
-     return root.DeepPetWellness925.evaluate(rows,exam,{petId:String(index),age:currentAge,weight:pet.weight,species:pet.species,breed:pet.breed,adultWeightKg:pet.adultWeightKg},null,date,{allowProvisional:index===0});
+     return root.DeepPetWellness925.evaluate(rows,exam,{petId:String(index),age:currentAge,birthDate:pet.birthDate,weight:pet.weight,species:pet.species,breed:pet.breed,adultWeightKg:pet.adultWeightKg},null,date,{allowProvisional:index===0});
    };
    const gallery=index>=0&&index<dogs.length&&typeof dpUsesRealMeasurements==='function'&&!dpUsesRealMeasurements(index)&&!pet.dpFixtureInvalidated;
    return recent.map(r=>{
@@ -14192,7 +14232,7 @@ return {version:'9.44',evaluate,ageFromScore,triage};
      // Keep the shared 75/25 weighting and derive age from this same score,
      // ensuring higher daily wellness always maps to lower estimated age.
      const daily=r.unified?r.scores.physiol:Math.round(.75*r.scores.physiol+.25*r.scores.rhythm);
-     const age=root.DeepPetWellness925.ageFromScore(currentAge,daily,pet);
+     const age=root.DeepPetWellness925.ageFromScore(root.DeepPetUnifiedDeep.profileAtDate({...pet,age:currentAge},r.date).age,daily,pet);
      return {date:r.date,...observed,available:true,score:daily,ageYears:age?.ageYears??null,dailyGallerySignal:true};
    });
  }
@@ -16061,7 +16101,7 @@ const allowBeforeProfile=new Set(['nav','select-pet','select-blank','pet-switch'
 // Actual measurements, alerts, pairing and record-writing remain gated.
 const inspectionActions=new Set(['dp204-wave-date','dp204-wellness-open','dp204-wellness-factor','dp204-pair','device-find','show-summary','rhythm-detail','summary-category','dp90-rhythm-nav','dp90-wave-open','dp90-wave-back','dp905-date-open','dp905-energy-day-link','dp905-detail-back','dp904-wave-day','dp904-wave-event','dp905-event-pick','dp905-review-point','dp908-energy-period-open','deep-detail','deep-drill','health-detail','health-back','deep-category','range','deep-day-view','deep-select-day','deep-day-step','deep-day-jump','food-day','food-window','health-summary-range','baseline-detail','baseline-page-back','age-detail-back','owner-all-nights-open','owner-all-nights-back','dp924-back-home','empty-open-health','free-open-health','dp70-watch-open','dp905-watch-more']);
 const inspectionSubActions=new Set(['back-health','open-report','back','wave-back','wave-date','day','day-select','energy-date','back-energy','range','open-list','list','details','detail','close','expand','collapse']);
-function inspectionBrowse(el,action){return inspectionActions.has(action)||['dp916','dp921','dp932','dp936'].some(prefix=>inspectionSubActions.has(el?.dataset?.[prefix]));}
+function inspectionBrowse(el,action){return action==='dp928-model-back'||el?.dataset?.dp931==='model-back'||inspectionActions.has(action)||['dp916','dp921','dp932','dp936'].some(prefix=>inspectionSubActions.has(el?.dataset?.[prefix]));}
 function isStore(el){const val=String([el?.dataset?.action,el?.dataset?.page,el?.dataset?.detail,el?.dataset?.kind,el?.getAttribute?.('href')].join(' '));return /(?:shop|store|product|cart|checkout|purchase)/i.test(val);}
 function mustGateAction(action,el){if(!fresh())return false;
  // The existing New Pet Heart Moments entry is explicitly a 60-second local

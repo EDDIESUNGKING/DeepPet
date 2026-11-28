@@ -15,7 +15,7 @@
    return v;}
   return walk(value);
  }
- function lafaTemplate(d){if(!dateOK(d)||d<=archiveDate)return d;return add(start,((diff(d,start)%2)+2)%2);}
+ function lafaTemplate(d){return d;}
  // All eligible historical example days, selected independently for each pet.
  // Keep the future calendar deterministic, not Math.random() or refresh dependent.
  // A shuffled block uses each eligible pattern once; alternate block orders.

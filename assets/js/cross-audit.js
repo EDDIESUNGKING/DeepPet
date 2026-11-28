@@ -59,7 +59,7 @@ if(typeof render==='function'){
   return out;};
 }
 root.DeepPetBuildVersion='10.204';
-function showBuild134(){root.DeepPetBuildVersion='10.204';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.(?:12[89]|13[0-8])/g,'10.199');});}
+function showBuild134(){if(root.DeepPetReleaseVersion)return;root.DeepPetBuildVersion='10.204';document.querySelectorAll('#app .app-build-version').forEach(el=>{el.textContent=el.textContent.replace(/10\.(?:12[89]|13[0-8])/g,'10.199');});}
 if(document.readyState==='complete')showBuild134();
 else root.addEventListener('load',()=>setTimeout(showBuild134,0),{once:true});
 })(window);

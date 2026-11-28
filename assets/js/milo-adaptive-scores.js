@@ -86,7 +86,7 @@ const MILO_PROFILE=Object.freeze({species:'dog',weightKg:55,ageYears:6,breed:'Al
 const profileForLafa=()=>typeof allPets==='function'?{...MILO_PROFILE,...(allPets()[0]||{}),...(typeof state==='object'?state.petOverrides?.[0]||{}:{})}:MILO_PROFILE;
 
 // Cosmetic profile fields cannot change physiology or invalidate a numerical snapshot.
-const scoreProfileFingerprint=p=>JSON.stringify(Object.entries(p).filter(([k])=>!['name','nameEn','photo','dpPhotoConfirmed'].includes(k)).sort(([a],[b])=>a.localeCompare(b)));
+const scoreProfileFingerprint=p=>JSON.stringify(Object.entries(p).filter(([k])=>!['name','nameEn','photo','dpPhotoConfirmed','chestCm','neckCm','agePrecision'].includes(k)).sort(([a],[b])=>a.localeCompare(b)));
 // EARLY OBSERVATION CONTRACT (NOT veterinary health percentiles):
 // 14 valid days upgrades personalization, NEVER unlocks the first score.
 // These group-stage *engineering* motion/recovery scales are documented as
@@ -305,10 +305,7 @@ function dayScores(d){
  // profile, stored baseline anchors and owner journal still match the inputs.
  // SDK/HRV updates or profile changes bypass the snapshot and use the same engine.
  const snapshot=root.DeepPetLafaPrecomputed;
- // Replay precomputed showcase days only, never copy real records into new dates.
- if(usesFixture(d)&&d>snapshot?.date&&snapshot.matchesSource?.()&&scoreProfileFingerprint(profileForLafa())===scoreProfileFingerprint(snapshot.scoreProfile)){
-  const demo=snapshot.previewDay?.(d);if(demo)return cacheValue(demo);
- }
+ // Future dates use their own date-seeded waveforms; never replay a snapshot.
 
  if(snapshot?.matchesSource?.()&&today()>=snapshot.date&&!rows.some(r=>r.source==='sdk'&&r.day<=d)&&!inputHRV.some(r=>r.date<=d)&&root.DeepPetMiloWaveQC?.version===snapshot.qc.version&&scoreProfileFingerprint(profileForLafa())===scoreProfileFingerprint(snapshot.scoreProfile)){
   let anchorsMatch=false;try{anchorsMatch=root.localStorage.getItem('dp-initial-anchor-v1:lafa-real')===snapshot.rawAnchor&&root.localStorage.getItem('dp-initial-anchor-v1:synthetic:0')===snapshot.fixtureAnchor;}catch{}
@@ -322,7 +319,7 @@ function dayScores(d){
  const q=ownerWaveHrvForDay(d,get(d));
  const inferred=estimate&&estimate.measurementDate===d?{rmssd:estimate.rmssdMs,sdnn:estimate.sdnnMs,confidence:estimate.qualified?1:estimate.signalConfidence,qualified:estimate.qualified===true,regularity:estimate.regularity??null,nvgr:estimate.nvgr,minutes:estimate.minutes,validMinutes:estimate.validMinutes,excludedMinutes:estimate.excludedMinutes,segmented:estimate.segmented,source:estimate.source,start:estimate.start,end:estimate.end}:null;
  const selectedHrv=synthetic?root.DeepPetLafaWave23.hrv(d):q;
- const profile=profileForLafa(),priorDates=dates.filter(date=>usesFixture(date)===synthetic);
+ const profile=profileForLafa(),priorDates=synthetic?Array.from({length:29},(_,i)=>U.dateAdd(d,i-29)).filter(date=>usesFixture(date)):dates.filter(date=>!usesFixture(date));
  const model=synthetic?root.DeepPetRawGallery143.scoreDay(0,d,priorDates,profile):U.scoreDay({date:d,profile,get,priorDates,anchorKey:"lafa-real",hrv:selectedHrv,getHrv:date=>{if(usesFixture(date))return null;return ownerWaveHrvForDay(date,get(date));}});
  model.petId="0";model.dataProvenance=synthetic?root.DeepPetLafaWave23.source:"owner-A2-B0-SDK";
  const a=get(d),valid=a.filter(sampleGood),motion=valid.filter(x=>finite(x.motion)&&x.motion>=0&&x.motion<119&&x.motionSeconds>0).map(x=>({...x,seconds:x.motionSeconds,...(Array.isArray(x.validOffsets)?{secondOffsets:x.validOffsets}:{})})),quiet=motion.filter(x=>x.motion<=25),r=model.rest;
